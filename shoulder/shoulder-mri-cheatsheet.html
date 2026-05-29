@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shoulder MRI Dictation Cheat Sheet - Expanded Findings &amp; Impressions</title>
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#0b3a52">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MSK MRI">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<style>
+:root{
+  --bg:#0c0f15; --panel:#141925; --panel2:#1a2030; --bdr:#27303f;
+  --tx:#e6eaf2; --tx2:#aab4c5; --tx3:#7c8699;
+  --h1bg:#0b3a52; --h2bg:#11556f; --h3tx:#6cc6e6;
+  --findings:#f4a86a; --impression:#7fd29a;
+  --ph-bg:rgba(244,168,106,0.16); --ph-tx:#f4c89a; --ph-bd:rgba(244,168,106,0.4);
+  --th-bg:#16384a; --th-tx:#cfe7f2;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);color-scheme:dark;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
+  background:var(--bg); color:var(--tx);
+  font-size:18px; line-height:1.62;
+  max-width:1120px; margin:0 auto; padding:0 32px 64px;
+  -webkit-font-smoothing:antialiased;
+}
+
+.topbar{
+  position:sticky; top:0; z-index:10;
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  margin:0 -32px 22px; padding:11px 32px;
+  background:rgba(12,15,21,0.92); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--bdr);
+}
+.topbar .crumb{font-weight:700;color:#fff;font-size:15px;margin-right:auto}
+.topbar a{
+  display:inline-flex; align-items:center;
+  border:1px solid var(--bdr); border-radius:999px;
+  padding:5px 12px; color:#9fdcf0; text-decoration:none;
+  font-size:13px; font-weight:600; background:#0d1a26;
+}
+.topbar a:hover{border-color:var(--h3tx); color:#fff}
+.topbar a.tmpl{border-color:rgba(244,168,106,0.55);background:rgba(244,168,106,0.12);color:#ffe0c8}
+
+.fontctl{
+  display:inline-flex; align-items:center; gap:4px;
+  margin-left:6px; padding-left:10px; border-left:1px solid var(--bdr);
+}
+.fontctl button{
+  cursor:pointer; border:1px solid var(--bdr); border-radius:6px;
+  background:#0d1a26; color:#9fdcf0; font-weight:700;
+  font-family:inherit; line-height:1; padding:5px 9px;
+}
+.fontctl button:hover{border-color:var(--h3tx); color:#fff}
+.fontctl #fs-dec{font-size:12px}
+.fontctl #fs-rst{font-size:13px; min-width:30px}
+.fontctl #fs-inc{font-size:16px}
+
+h1{
+  margin:6px 0 8px; padding:16px 22px;
+  background:linear-gradient(135deg,var(--h1bg),#0a2c40);
+  color:#fff; border-radius:10px; border-left:5px solid var(--h3tx);
+  font-size:30px; line-height:1.18; letter-spacing:0.2px;
+}
+.subtitle{color:var(--tx2); font-size:16px; margin:0 0 22px; line-height:1.5}
+
+h2.group{
+  margin:40px 0 16px; padding:13px 18px;
+  background:linear-gradient(135deg,#241a3a,#1a2030);
+  color:#fff; border-radius:9px; border-left:5px solid #a78bfa;
+  font-size:24px; line-height:1.2; letter-spacing:0.6px;
+  text-transform:uppercase; scroll-margin-top:64px;
+}
+h2{
+  margin:34px 0 14px; padding:11px 16px;
+  background:var(--h2bg); color:#fff; border-radius:8px;
+  font-size:21px; line-height:1.25; letter-spacing:0.2px;
+  scroll-margin-top:64px;
+}
+h3{
+  margin:22px 0 9px; color:var(--h3tx);
+  font-size:18.5px; line-height:1.3; font-weight:700;
+  border-bottom:1px solid #2c3a48; padding-bottom:5px;
+}
+
+p{margin:9px 0}
+.dx{
+  margin:18px 0 4px; font-weight:800; color:#fff;
+  font-size:18.5px; line-height:1.3;
+}
+.f, .i{margin:5px 0; padding-left:14px; border-left:2px solid #25303e}
+.f b{color:var(--findings)}
+.i b{color:var(--impression)}
+
+ul{margin:10px 0 14px 26px}
+li{margin:6px 0}
+
+table{
+  width:100%; border-collapse:collapse; margin:14px 0 18px;
+  font-size:16px; line-height:1.45; background:var(--panel);
+  border-radius:8px; overflow:hidden;
+}
+th{
+  background:var(--th-bg); color:var(--th-tx);
+  text-align:left; font-weight:700; padding:9px 12px;
+  border-bottom:1px solid #2c3a48;
+}
+td{padding:8px 12px; border-bottom:1px solid #232c39; color:var(--tx2); vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
+
+.to-top{
+  position:fixed; right:22px; bottom:22px; z-index:20;
+  width:46px; height:46px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid var(--bdr); background:rgba(17,85,111,0.92);
+  color:#fff; font-size:22px; line-height:1; cursor:pointer;
+  box-shadow:0 6px 20px rgba(0,0,0,0.45); backdrop-filter:blur(6px);
+  opacity:0; visibility:hidden; transform:translateY(8px);
+  transition:opacity .18s, transform .18s, visibility .18s;
+}
+.to-top.show{opacity:1; visibility:visible; transform:translateY(0)}
+.to-top:hover{background:#16638a; border-color:var(--h3tx)}
+@media print{ .to-top{display:none} }
+
+.ph{
+  background:var(--ph-bg); color:var(--ph-tx);
+  border:1px solid var(--ph-bd); border-radius:4px;
+  padding:0 4px; font-size:0.92em; white-space:nowrap;
+}
+
+.section-card{
+  background:var(--panel); border:1px solid var(--bdr);
+  border-radius:10px; padding:4px 20px 16px; margin:0 0 18px;
+}
+
+@media (max-width:680px){
+  body{font-size:17px; padding:0 16px 48px}
+  .topbar{margin:0 -16px 18px; padding:10px 16px}
+  h1{font-size:24px;padding:13px 16px}
+  h2{font-size:19px}
+}
+
+/* Dark-mode PDF (Chrome --print-to-pdf). Backgrounds preserved via
+   print-color-adjust:exact on html above. */
+@page{ size:Letter; margin:0.5in; }
+@media print{
+  body{ background:var(--bg); max-width:none; margin:0; padding:0; font-size:13px; line-height:1.5; }
+  .topbar{ display:none; }
+  h1{ font-size:21px; padding:11px 14px; }
+  h2,h2.group{ font-size:15px; break-after:avoid; }
+  h3,.dx{ break-after:avoid; }
+  .f,.i{ break-inside:avoid; }
+  table,tr{ break-inside:avoid; }
+  table{ font-size:11.5px; }
+}
+</style>
+</head>
+<body>
+<div class="topbar"><span class="crumb">Shoulder MRI Dictation Cheat Sheet</span><a href="../index.html">← All regions</a><a class="tmpl" href="../templates/shoulder.html">📋 Dictation template</a><a href="shoulder-mri-cheatsheet.pdf">PDF (print)</a><a href="shoulder-mri-cheatsheet-dark.pdf">PDF (dark)</a><a href="shoulder-mri-cheatsheet.md">Markdown</a><span class="fontctl" title="Font size — shortcuts: -, +, 0 to reset"><button id="fs-dec" aria-label="Decrease font size">A−</button><button id="fs-rst" aria-label="Reset font size">A</button><button id="fs-inc" aria-label="Increase font size">A+</button></span></div>
+<h1>Shoulder MRI Dictation Cheat Sheet - Expanded Findings &amp; Impressions</h1>
+<p class="subtitle">Copy-ready language. Replace bracketed text. Use as a workstation reference, not a substitute for surgical correlation or local report style.</p>
+<h2>Core Measurements</h2>
+<table><thead><tr><th>System</th><th>Use</th></tr></thead><tbody><tr><td>Ellman</td><td>PT cuff depth: 1 &lt;25%, 2 = 25-50%, 3 &gt;50%.</td></tr><tr><td>DeOrio</td><td>FT tear size: small &lt;1 cm, medium 1-3 cm, large 3-5 cm, massive &gt;5 cm.</td></tr><tr><td>Patte</td><td>Retraction: 1 lateral to head, 2 humeral dome, 3 glenoid/medial.</td></tr><tr><td>Goutallier</td><td>0 none, 1 streaks, 2 muscle&gt;fat, 3 muscle=fat, 4 fat&gt;muscle.</td></tr><tr><td>AHI</td><td>Normal 7-14 mm; cuff arthropathy often &lt;6 mm.</td></tr></tbody></table>
+<h3>Glenoid Track</h3>
+<p>D = expected inferior glenoid diameter; d = anterior glenoid bone loss. GT = 0.83D - d . HSI = Hill-Sachs width + intact medial bone bridge. Off-track if HSI &gt;= GT.</p>
+<h2>Modified Outerbridge Chondromalacia Grading - Copy-Ready</h2>
+<p>Use this for any articular surface. Replace <span class="ph">[surface/compartment]</span> with the specific location: patellar median ridge, medial femoral condyle weightbearing surface, anterosuperior acetabulum, radiocapitellar joint, tibiotalar dome, first MTP joint, etc.</p>
+<table><thead><tr><th>Grade</th><th>MRI shorthand</th></tr></thead><tbody><tr><td>0</td><td>Normal cartilage.</td></tr><tr><td>1</td><td>Signal heterogeneity/softening or swelling; surface intact.</td></tr><tr><td>2</td><td>Superficial fissuring/fraying/partial-thickness defect &lt;50% cartilage depth.</td></tr><tr><td>3</td><td>Deep fissuring/partial-thickness defect &gt;50% cartilage depth, not exposing bone.</td></tr><tr><td>4</td><td>Full-thickness cartilage loss with exposed subchondral bone, often edema/cysts.</td></tr></tbody></table>
+<div class="dx">Grade 0 - normal cartilage</div>
+<p class="f"><b>F:</b> Articular cartilage of the <span class="ph">[surface/compartment]</span> is preserved in thickness and signal without focal fissuring, delamination, or subchondral marrow abnormality.</p>
+<p class="i"><b>I:</b> No chondral defect of the <span class="ph">[surface/compartment]</span>.</p>
+<div class="dx">Grade 1 - chondral signal change / softening</div>
+<p class="f"><b>F:</b> Mild focal cartilage signal heterogeneity/softening of the <span class="ph">[surface/compartment]</span> with preserved cartilage thickness and intact articular surface. No subchondral marrow edema.</p>
+<p class="i"><b>I:</b> Grade 1 chondromalacia of the <span class="ph">[surface/compartment]</span>.</p>
+<div class="dx">Grade 2 - superficial partial-thickness chondral loss</div>
+<p class="f"><b>F:</b> Superficial chondral fissuring/fraying of the <span class="ph">[surface/compartment]</span> involving less than 50% of cartilage thickness. No full-thickness defect or subchondral marrow edema.</p>
+<p class="i"><b>I:</b> Grade 2 chondromalacia of the <span class="ph">[surface/compartment]</span>.</p>
+<div class="dx">Grade 3 - deep partial-thickness chondral loss</div>
+<p class="f"><b>F:</b> Deep partial-thickness chondral fissuring/defect of the <span class="ph">[surface/compartment]</span> involving greater than 50% of cartilage thickness without exposed subchondral bone. <span class="ph">[Mild adjacent subchondral marrow edema.]</span></p>
+<p class="i"><b>I:</b> Grade 3 chondromalacia of the <span class="ph">[surface/compartment]</span>.</p>
+<div class="dx">Grade 4 - full-thickness chondral loss</div>
+<p class="f"><b>F:</b> Full-thickness cartilage loss/fissuring of the <span class="ph">[surface/compartment]</span> measuring <span class="ph">[X]</span> x <span class="ph">[Y]</span> mm with exposed subchondral bone and <span class="ph">[subchondral marrow edema/cystic change]</span>. <span class="ph">[Small unstable chondral flap/loose body if present.]</span></p>
+<p class="i"><b>I:</b> Grade 4 chondromalacia/full-thickness chondral defect of the <span class="ph">[surface/compartment]</span>.</p>
+<h2>Rotator Cuff Tells</h2>
+<ul><li>Tendinosis: thickened/intermediate signal, no fluid cleft.</li><li>Tear: fluid-equivalent cleft or tendon discontinuity.</li><li>Subcortical GT cyst: search adjacent articular-sided cuff tear.</li><li>Delamination: longitudinal fluid cleft paralleling fibers.</li><li>Cable intact in large tear: potentially compensated mechanics.</li><li>Tangent sign: supraspinatus belly below coracoid-spine line = atrophy.</li></ul>
+<h3>Subscap/Biceps Pulley</h3>
+<ul><li>LHBT centered in groove: superior subscap/pulley usually intact.</li><li>Medial LHBT subluxation: superior subscap + pulley injury until proven otherwise.</li><li>Comma sign: retracted SGHL/CHL/superior subscap band medial to joint/coracoid.</li><li>Lesser tuberosity cyst/uncovering: indirect subscap tear sign.</li></ul>
+<h2>Instability Tells</h2>
+<ul><li>Bankart: anteroinferior labroligamentous detachment.</li><li>Perthes: torn labrum but periosteum intact; may look nondisplaced.</li><li>ALPSA: labrum displaced medially/inferiorly along glenoid neck.</li><li>GLAD: superficial labral tear + adjacent glenoid cartilage defect; pain more than instability.</li><li>HAGL: IGHL avulsed from humerus, J-shaped axillary pouch, medial humeral neck fluid/contrast.</li><li>Internal impingement: articular posterior cuff tear + posterosuperior labral tear in overhead athlete.</li></ul>
+<h2>Normal / Negative Templates</h2>
+<div class="dx">Normal rotator cuff</div>
+<p class="f"><b>F:</b> Rotator cuff tendons are intact without tendinosis, partial-thickness tear, or full-thickness tear. Muscle bulk and signal are preserved without fatty atrophy.</p>
+<p class="i"><b>I:</b> Intact rotator cuff. No muscle atrophy.</p>
+<div class="dx">Negative labrum on nonarthrogram</div>
+<p class="f"><b>F:</b> No displaced labral tear or paralabral cyst identified on this nonarthrographic examination.</p>
+<p class="i"><b>I:</b> No discrete labral tear identified by nonarthrographic MRI.</p>
+<h2>Useful Caveats</h2>
+<p>Labrum: If no joint distention, avoid overcalling subtle labral signal unless displaced tear/cyst/chondral injury.</p>
+<p>Post-op cuff: Tendon thickening and heterogeneous signal can persist after repair; diagnose retear when there is fluid signal traversing tendon to both articular and bursal surfaces or clear tendon gap.</p>
+<p>Subcoracoid: Narrow coracohumeral interval alone is weak; report compression/tendinosis/tear of subscapularis and clinical correlation.</p>
+<h2 class="group">Rotator Cuff - Tendinosis, Partial Tears, Full-Thickness Tears</h2>
+<h2>Tendinopathy / Calcific</h2>
+<div class="dx">Mild tendinosis</div>
+<p class="f"><b>F:</b> Mild intermediate intrasubstance signal of the distal <span class="ph">[supraspinatus]</span> tendon without discrete fluid-equivalent cleft. Tendon thickness is preserved.</p>
+<p class="i"><b>I:</b> Mild <span class="ph">[supraspinatus]</span> tendinosis. No tear.</p>
+<div class="dx">Moderate tendinosis</div>
+<p class="f"><b>F:</b> Heterogeneous intermediate-to-mildly hyperintense signal and mild thickening of the distal <span class="ph">[tendon]</span>. No fluid-signal tendon defect.</p>
+<p class="i"><b>I:</b> Moderate <span class="ph">[tendon]</span> tendinosis without tear.</p>
+<div class="dx">Severe tendinosis</div>
+<p class="f"><b>F:</b> Marked globular thickening and diffuse intermediate intrasubstance signal of the distal <span class="ph">[tendon]</span> with loss of normal fibrillar architecture. No definite fluid-equivalent cleft.</p>
+<p class="i"><b>I:</b> Severe <span class="ph">[tendon]</span> tendinosis. Superimposed low-grade interstitial tearing is difficult to exclude.</p>
+<div class="dx">Calcific tendinitis</div>
+<p class="f"><b>F:</b> Globular T1/T2 hypointense focus within the distal <span class="ph">[supraspinatus]</span> tendon measuring <span class="ph">[X]</span> mm with blooming susceptibility. Adjacent reactive tendinopathy and <span class="ph">[mild]</span> subacromial-subdeltoid bursal edema.</p>
+<p class="i"><b>I:</b> Calcific tendinitis of the <span class="ph">[supraspinatus]</span> with reactive <span class="ph">[subacromial-subdeltoid bursitis]</span>.</p>
+<h2>Partial Thickness</h2>
+<div class="dx">Low-grade articular-sided tear</div>
+<p class="f"><b>F:</b> Focal fluid-signal cleft at the articular surface of the distal <span class="ph">[supraspinatus]</span> footprint involving less than 25% of tendon thickness. Bursal surface fibers remain intact.</p>
+<p class="i"><b>I:</b> Low-grade (&lt;25%) partial-thickness articular surface tear of the <span class="ph">[supraspinatus]</span>.</p>
+<div class="dx">Intermediate articular-sided tear</div>
+<p class="f"><b>F:</b> Articular-surface fluid cleft at the <span class="ph">[supraspinatus]</span> footprint measuring <span class="ph">[X]</span> mm AP by <span class="ph">[Y]</span> mm mediolateral and involving 25-50% of tendon thickness. Bursal surface remains intact.</p>
+<p class="i"><b>I:</b> Intermediate-grade (25-50%) partial-thickness articular surface tear of the <span class="ph">[supraspinatus]</span>.</p>
+<div class="dx">High-grade PASTA</div>
+<p class="f"><b>F:</b> High-grade articular-sided fluid defect at the <span class="ph">[supraspinatus]</span> footprint extending greater than 50% through tendon thickness with adjacent greater tuberosity cortical irregularity/cystic change. Thin bursal fibers remain intact.</p>
+<p class="i"><b>I:</b> High-grade (&gt;50%) partial articular surface tendon avulsion (PASTA) of the <span class="ph">[supraspinatus]</span>, near full-thickness.</p>
+<div class="dx">Bursal-sided partial tear</div>
+<p class="f"><b>F:</b> Bursal-sided fluid-signal cleft of the distal <span class="ph">[supraspinatus]</span> tendon involving approximately <span class="ph">[X]</span>% of tendon thickness with adjacent subacromial-subdeltoid bursal fluid.</p>
+<p class="i"><b>I:</b> <span class="ph">[Low/intermediate/high]</span>-grade partial-thickness bursal surface tear of the <span class="ph">[supraspinatus]</span> with reactive bursitis.</p>
+<div class="dx">Interstitial / delaminating tear</div>
+<p class="f"><b>F:</b> Longitudinal fluid-signal cleft within the substance of the distal <span class="ph">[tendon]</span>, paralleling the tendon fibers and not clearly extending to either articular or bursal surface.</p>
+<p class="i"><b>I:</b> Intrasubstance delaminating tear of the <span class="ph">[tendon]</span>.</p>
+<h2>Full-Thickness Tears</h2>
+<div class="dx">Small full-thickness tear</div>
+<p class="f"><b>F:</b> Full-thickness fluid-signal defect of the distal <span class="ph">[supraspinatus]</span> footprint measuring <span class="ph">[X]</span> mm AP by <span class="ph">[Y]</span> mm mediolateral. Minimal medial tendon retraction. Fluid communicates with the subacromial-subdeltoid bursa.</p>
+<p class="i"><b>I:</b> Small (&lt;1 cm) full-thickness <span class="ph">[supraspinatus]</span> tear without significant retraction.</p>
+<div class="dx">Medium full-thickness tear</div>
+<p class="f"><b>F:</b> Full-thickness <span class="ph">[supraspinatus]</span> tear measuring <span class="ph">[X]</span> cm AP by <span class="ph">[Y]</span> cm mediolateral with tendon stump retracted to the humeral head dome (Patte 2). Muscle bulk is preserved with Goutallier <span class="ph">[0-1]</span> fatty infiltration.</p>
+<p class="i"><b>I:</b> Medium (1-3 cm) full-thickness <span class="ph">[supraspinatus]</span> tear with mild retraction and no significant muscle atrophy.</p>
+<div class="dx">Massive chronic tear</div>
+<p class="f"><b>F:</b> Full-thickness, full-width tear of the <span class="ph">[supraspinatus and infraspinatus]</span> measuring <span class="ph">[X]</span> cm with tendon stump retracted to the glenoid/medial glenoid (Patte 3). Moderate-to-severe muscle volume loss with Goutallier <span class="ph">[3/4]</span> fatty infiltration. Acromiohumeral interval measures <span class="ph">[X]</span> mm.</p>
+<p class="i"><b>I:</b> Chronic massive full-thickness <span class="ph">[supraspinatus/infraspinatus]</span> tear with advanced retraction and fatty atrophy, likely irreparable.</p>
+<h2>Cuff Arthropathy</h2>
+<div class="dx">Cuff tear arthropathy</div>
+<p class="f"><b>F:</b> Chronic massive rotator cuff tear with superior humeral head migration, acromiohumeral interval <span class="ph">[X]</span> mm, acetabularization of the undersurface of the acromion, femoralization of the humeral head, and glenohumeral chondral loss/subchondral cystic change.</p>
+<p class="i"><b>I:</b> Rotator cuff tear arthropathy, Hamada grade <span class="ph">[3/4/5]</span>.</p>
+<div class="dx">Subacromial-subdeltoid bursitis</div>
+<p class="f"><b>F:</b> Small/moderate fluid and synovial thickening in the subacromial-subdeltoid bursa. <span class="ph">[No full-thickness cuff tear identified.]</span></p>
+<p class="i"><b>I:</b> Subacromial-subdeltoid bursitis <span class="ph">[with/without rotator cuff tear]</span>.</p>
+<h2 class="group">Subscapularis, Biceps Pulley, and Long Head Biceps</h2>
+<h2>Subscapularis Tears</h2>
+<div class="dx">Superior-facet low-grade subscap tear</div>
+<p class="f"><b>F:</b> Focal fluid-signal cleft at the superolateral subscapularis insertion on the lesser tuberosity involving the cephalad fibers/first facet. Remaining inferior subscapularis fibers are intact. Long head biceps tendon remains normally seated in the bicipital groove.</p>
+<p class="i"><b>I:</b> Low-grade partial-thickness tear of the cephalad subscapularis tendon. Biceps pulley remains intact.</p>
+<div class="dx">High-grade cephalad subscap + medial LHBT subluxation</div>
+<p class="f"><b>F:</b> High-grade tear of the cephalad subscapularis tendon with fluid gap/uncovering of the superior lesser tuberosity. The long head biceps tendon is medially subluxed from the bicipital groove, compatible with biceps reflection pulley disruption.</p>
+<p class="i"><b>I:</b> High-grade cephalad subscapularis tear with biceps pulley disruption and medial subluxation of the long head biceps tendon.</p>
+<div class="dx">Full-thickness retracted subscap + comma sign</div>
+<p class="f"><b>F:</b> Full-thickness tear of the superior <span class="ph">[and mid]</span> subscapularis tendon with medial/superomedial tendon retraction. A curvilinear low-signal soft tissue band in the rotator interval medial to the joint/coracoid is compatible with a comma sign, representing retracted superior subscapularis fibers and torn SGHL/CHL. The long head biceps tendon is medially dislocated with an empty bicipital groove.</p>
+<p class="i"><b>I:</b> Full-thickness retracted subscapularis tendon tear with comma sign, biceps pulley disruption, and medial dislocation of the long head biceps tendon.</p>
+<div class="dx">Chronic subscap tear</div>
+<p class="f"><b>F:</b> Chronic full-thickness subscapularis tendon tear with medial retraction, lesser tuberosity uncovering/cystic change, and <span class="ph">[moderate/severe]</span> subscapularis muscle atrophy/fatty infiltration.</p>
+<p class="i"><b>I:</b> Chronic full-thickness subscapularis tear with advanced fatty atrophy.</p>
+<h2>Pulley / LHBT</h2>
+<div class="dx">Pulley sprain without biceps instability</div>
+<p class="f"><b>F:</b> Edema and irregularity of the rotator interval/biceps reflection pulley without medial subluxation of the long head biceps tendon. Cephalad subscapularis fibers are intact.</p>
+<p class="i"><b>I:</b> Low-grade biceps pulley sprain without biceps instability.</p>
+<div class="dx">LHBT tendinosis</div>
+<p class="f"><b>F:</b> Long head biceps tendon is thickened with intermediate intrasubstance signal in the groove/intra-articular segment. No tendon discontinuity or subluxation.</p>
+<p class="i"><b>I:</b> Long head biceps tendinosis. No tear or instability.</p>
+<div class="dx">LHBT tenosynovitis</div>
+<p class="f"><b>F:</b> Disproportionate fluid surrounding an otherwise intact long head biceps tendon within the bicipital groove. Tendon caliber and signal are preserved.</p>
+<p class="i"><b>I:</b> Long head biceps tenosynovitis.</p>
+<div class="dx">LHBT split tear</div>
+<p class="f"><b>F:</b> Long head biceps tendon is thickened and irregular with longitudinal intrasubstance fluid-signal cleft/splitting in the bicipital groove. Tendon remains continuous.</p>
+<p class="i"><b>I:</b> Longitudinal split tear/high-grade partial tear of the long head biceps tendon.</p>
+<div class="dx">Complete proximal LHBT tear</div>
+<p class="f"><b>F:</b> Empty bicipital groove with nonvisualization of the intra-articular long head biceps tendon. Distally retracted tendon stump is present at the <span class="ph">[proximal humerus/mid arm]</span>.</p>
+<p class="i"><b>I:</b> Complete proximal long head biceps tendon tear with distal retraction.</p>
+<h2>Subcoracoid / Anterosuperior Impingement</h2>
+<div class="dx">Subcoracoid impingement pattern</div>
+<p class="f"><b>F:</b> Narrowing of the coracohumeral interval to <span class="ph">[X]</span> mm with crowding/effacement of the subcoracoid fat, subscapularis tendinosis, and articular-sided partial tearing of the cephalad subscapularis tendon. <span class="ph">[Reactive subcoracoid bursal fluid.]</span></p>
+<p class="i"><b>I:</b> Findings support subcoracoid impingement with cephalad subscapularis tendinosis/partial tearing. Correlate with anterior shoulder pain and provocative exam.</p>
+<div class="dx">Anterosuperior internal impingement</div>
+<p class="f"><b>F:</b> Articular-sided fraying/partial tearing of the superior subscapularis tendon and biceps pulley complex with adjacent anterosuperior labral degeneration. Long head biceps tendon is <span class="ph">[intact/subluxed/tendinotic]</span>.</p>
+<p class="i"><b>I:</b> Anterosuperior internal impingement pattern involving the superior subscapularis/pulley complex.</p>
+<h2 class="group">Labrum, Instability, HAGL, GLAD, and Glenoid Track</h2>
+<h2>Anterior Instability</h2>
+<div class="dx">Soft tissue Bankart</div>
+<p class="f"><b>F:</b> Detachment of the anteroinferior labrum and attached inferior glenohumeral ligament from the glenoid rim at <span class="ph">[3-6 o&#x27;clock]</span>. No displaced osseous fragment. <span class="ph">[Associated Hill-Sachs impaction fracture.]</span></p>
+<p class="i"><b>I:</b> Soft tissue Bankart lesion of the anteroinferior labrum <span class="ph">[with Hill-Sachs lesion]</span>, compatible with prior anterior shoulder dislocation.</p>
+<div class="dx">Bony Bankart</div>
+<p class="f"><b>F:</b> Anteroinferior glenoid rim fracture/labral avulsion involving approximately <span class="ph">[X]</span>% of glenoid width/surface area. Fragment is <span class="ph">[displaced/nondisplaced]</span>.</p>
+<p class="i"><b>I:</b> Bony Bankart lesion with approximately <span class="ph">[X]</span>% anterior glenoid bone loss.</p>
+<div class="dx">ALPSA</div>
+<p class="f"><b>F:</b> Anteroinferior labroligamentous complex is stripped and displaced medially/inferiorly along the glenoid neck with intact scapular periosteal sleeve.</p>
+<p class="i"><b>I:</b> ALPSA lesion of the anteroinferior labroligamentous complex.</p>
+<div class="dx">Perthes</div>
+<p class="f"><b>F:</b> Nondisplaced tear of the anteroinferior labrum with intact but stripped scapular periosteum. Labrum remains near the glenoid rim.</p>
+<p class="i"><b>I:</b> Perthes variant anteroinferior labral tear.</p>
+<h2>HAGL / IGHL</h2>
+<div class="dx">HAGL lesion</div>
+<p class="f"><b>F:</b> Inferior glenohumeral ligament is avulsed from its humeral attachment with lax, edematous, J-shaped configuration of the axillary pouch. Fluid/contrast extravasates along the medial humeral neck. Anteroinferior labrum is <span class="ph">[intact/torn]</span>.</p>
+<p class="i"><b>I:</b> Humeral avulsion of the inferior glenohumeral ligament (HAGL lesion), a cause of anterior glenohumeral instability.</p>
+<div class="dx">BHAGL lesion</div>
+<p class="f"><b>F:</b> Avulsion of the inferior glenohumeral ligament from the humeral attachment with small osseous avulsion fragment from the medial humeral neck and surrounding edema/fluid extravasation.</p>
+<p class="i"><b>I:</b> Bony humeral avulsion of the inferior glenohumeral ligament (BHAGL lesion).</p>
+<div class="dx">Posterior HAGL</div>
+<p class="f"><b>F:</b> Posterior band of the inferior glenohumeral ligament is avulsed from its humeral attachment with posterior capsular discontinuity and fluid/contrast tracking along the posteromedial humeral neck.</p>
+<p class="i"><b>I:</b> Posterior humeral avulsion of the inferior glenohumeral ligament (posterior HAGL lesion).</p>
+<p>Search pattern: HAGL can occur with little/no labral tear. Check subscapularis and LHBT because associated cuff tears commonly involve subscapularis.</p>
+<h2>GLAD / Chondrolabral</h2>
+<div class="dx">Anterior GLAD</div>
+<p class="f"><b>F:</b> Superficial nondisplaced tear of the anteroinferior labrum with adjacent focal cartilage defect/fissuring of the anteroinferior glenoid. Deep labral attachment is relatively preserved. No displaced Bankart fragment.</p>
+<p class="i"><b>I:</b> Glenolabral articular disruption (GLAD lesion) of the anteroinferior glenoid/labrum.</p>
+<div class="dx">Posterior GLAD</div>
+<p class="f"><b>F:</b> Superficial tear of the posterior/posteroinferior labrum with adjacent focal posterior glenoid chondral defect and mild subchondral marrow edema/cystic change.</p>
+<p class="i"><b>I:</b> Posterior GLAD lesion involving the posterior labrum and adjacent glenoid articular cartilage.</p>
+<div class="dx">Glenoid chondral flap</div>
+<p class="f"><b>F:</b> Focal delaminating chondral flap at the <span class="ph">[anteroinferior/posterior/superior]</span> glenoid measuring <span class="ph">[X]</span> mm with adjacent labral fraying/tear and trace subchondral marrow edema.</p>
+<p class="i"><b>I:</b> Focal glenoid chondral flap/delamination with adjacent <span class="ph">[labral tear]</span>.</p>
+<h2>SLAP / Posterior Labrum / Paralabral Cyst</h2>
+<div class="dx">SLAP type II</div>
+<p class="f"><b>F:</b> Irregular laterally curved fluid-signal cleft undermines the superior labrum and extends posterior to the biceps anchor with detachment of the biceps-labral anchor from the supraglenoid tubercle.</p>
+<p class="i"><b>I:</b> Type II SLAP tear with biceps-labral anchor detachment.</p>
+<div class="dx">Posterior labral tear / reverse Bankart</div>
+<p class="f"><b>F:</b> Detachment of the posteroinferior labrum from the glenoid rim with <span class="ph">[posterior capsular stripping/reverse bony Bankart fragment]</span>. Mild posterior humeral head subluxation.</p>
+<p class="i"><b>I:</b> Posteroinferior labral tear/reverse Bankart lesion with posterior instability pattern.</p>
+<div class="dx">Paralabral cyst with nerve effect</div>
+<p class="f"><b>F:</b> Multiloculated paralabral cyst at the <span class="ph">[spinoglenoid/suprascapular]</span> notch measuring <span class="ph">[X]</span> cm, contiguous with a <span class="ph">[posterior/superior]</span> labral tear. There is denervation edema/atrophy of the <span class="ph">[infraspinatus only/supraspinatus and infraspinatus]</span>.</p>
+<p class="i"><b>I:</b> <span class="ph">[Posterior/superior]</span> labral tear with paralabral cyst causing <span class="ph">[spinoglenoid/suprascapular]</span> notch neuropathy.</p>
+<h2>Hill-Sachs and Glenoid Track</h2>
+<div class="dx">On-track Hill-Sachs</div>
+<p class="f"><b>F:</b> Posterosuperolateral humeral head impaction fracture. Glenoid track measures <span class="ph">[GT]</span> mm; Hill-Sachs interval measures <span class="ph">[HSI]</span> mm, which is less than the glenoid track.</p>
+<p class="i"><b>I:</b> On-track Hill-Sachs lesion.</p>
+<div class="dx">Off-track Hill-Sachs</div>
+<p class="f"><b>F:</b> Posterosuperolateral humeral head impaction fracture. Anterior glenoid bone loss measures <span class="ph">[d]</span> mm; expected glenoid diameter <span class="ph">[D]</span> mm; calculated glenoid track <span class="ph">[GT]</span> mm. Hill-Sachs interval <span class="ph">[HSI]</span> mm equals/exceeds the glenoid track.</p>
+<p class="i"><b>I:</b> Off-track Hill-Sachs lesion, at risk for engagement; consider bone augmentation/stabilization planning.</p>
+<h2 class="group">Impingement Patterns, AC Joint, Adhesive Capsulitis, Arthritis</h2>
+<h2>Subacromial / External Impingement</h2>
+<div class="dx">Outlet impingement pattern</div>
+<p class="f"><b>F:</b> <span class="ph">[Type II/III hooked/laterally downsloping]</span> acromion with undersurface acromial spur and mild acromioclavicular osteoarthrosis narrowing the supraspinatus outlet. There is subacromial-subdeltoid bursitis and bursal-sided fraying/partial tearing of the distal supraspinatus tendon.</p>
+<p class="i"><b>I:</b> Subacromial outlet impingement pattern with subacromial-subdeltoid bursitis and bursal-sided supraspinatus fraying/partial tear.</p>
+<div class="dx">Impingement without tear</div>
+<p class="f"><b>F:</b> Mild subacromial-subdeltoid bursal fluid and supraspinatus tendinosis. No fluid-signal partial- or full-thickness rotator cuff tear.</p>
+<p class="i"><b>I:</b> Mild subacromial-subdeltoid bursitis/rotator cuff tendinosis. No cuff tear.</p>
+<div class="dx">AC joint narrowing outlet</div>
+<p class="f"><b>F:</b> Moderate/severe acromioclavicular osteoarthrosis with inferior capsular hypertrophy/osteophytes contacting the myotendinous junction of the supraspinatus. Mild subacromial-subdeltoid bursal edema.</p>
+<p class="i"><b>I:</b> Acromioclavicular osteoarthrosis with inferior osteophytes contributing to supraspinatus outlet narrowing.</p>
+<h2>Internal Posterosuperior Impingement</h2>
+<div class="dx">Classic overhead athlete pattern</div>
+<p class="f"><b>F:</b> Articular-sided partial-thickness tearing/fraying of the posterior supraspinatus/anterior infraspinatus fibers at the footprint with adjacent posterosuperior labral fraying/tear. Mild cystic/edematous change is present in the posterosuperior humeral head/greater tuberosity. <span class="ph">[Posterior capsular thickening.]</span></p>
+<p class="i"><b>I:</b> Findings consistent with internal posterosuperior impingement, including articular-sided posterior cuff tear and posterosuperior labral pathology.</p>
+<div class="dx">Internal impingement with Bennett lesion</div>
+<p class="f"><b>F:</b> Posterior capsular thickening and chronic ossification/mineralization along the posteroinferior glenoid rim compatible with Bennett lesion. Associated posterosuperior labral tear and articular-sided posterior cuff fraying.</p>
+<p class="i"><b>I:</b> Chronic internal impingement/posterior capsular traction pattern with Bennett lesion, posterosuperior labral tear, and articular-sided posterior cuff fraying.</p>
+<h2>Adhesive Capsulitis / Capsule</h2>
+<div class="dx">Adhesive capsulitis</div>
+<p class="f"><b>F:</b> Thickening and edema of the axillary pouch/inferior glenohumeral ligament measuring <span class="ph">[X]</span> mm with edema/scarring in the rotator interval and partial effacement of the subcoracoid fat triangle.</p>
+<p class="i"><b>I:</b> MRI findings compatible with adhesive capsulitis.</p>
+<div class="dx">Capsular sprain</div>
+<p class="f"><b>F:</b> Edema and thickening of the <span class="ph">[anterior/inferior/posterior]</span> capsule without focal capsular discontinuity or contrast extravasation.</p>
+<p class="i"><b>I:</b> <span class="ph">[Anterior/inferior/posterior]</span> capsular sprain without discrete capsular tear.</p>
+<h2>Glenohumeral / AC Arthritis</h2>
+<div class="dx">Glenohumeral OA</div>
+<p class="f"><b>F:</b> Diffuse glenohumeral chondral thinning with marginal osteophytes, subchondral marrow edema/cystic change, and degenerative labral tearing. Small joint effusion with synovitis.</p>
+<p class="i"><b>I:</b> <span class="ph">[Mild/moderate/severe]</span> glenohumeral osteoarthrosis with degenerative labral tearing and synovitis.</p>
+<div class="dx">AC arthrosis active</div>
+<p class="f"><b>F:</b> Acromioclavicular joint space narrowing with capsular hypertrophy, marginal osteophytes, and prominent subchondral marrow edema across the joint.</p>
+<p class="i"><b>I:</b> Active acromioclavicular osteoarthrosis with periarticular marrow edema.</p>
+<div class="dx">Distal clavicle osteolysis</div>
+<p class="f"><b>F:</b> Distal clavicular subchondral marrow edema, cortical irregularity/resorption, and AC joint capsular hypertrophy without acute fracture.</p>
+<p class="i"><b>I:</b> Distal clavicle osteolysis, typically repetitive stress related.</p>
+<h2 class="group">Postoperative Shoulder MRI - Cuff Repair, Biceps Tenodesis, Stabilization</h2>
+<h2>Postoperative Rotator Cuff</h2>
+<div class="dx">Intact cuff repair</div>
+<p class="f"><b>F:</b> Postsurgical changes of <span class="ph">[supraspinatus]</span> tendon repair with suture anchors in the greater tuberosity. Repaired tendon is continuous to the footprint with expected postoperative thickening/heterogeneous signal. No fluid-signal gap traversing the tendon. No anchor displacement.</p>
+<p class="i"><b>I:</b> Intact <span class="ph">[supraspinatus]</span> repair. Expected postoperative tendon heterogeneity without retear.</p>
+<div class="dx">Low-grade postoperative interstitial signal</div>
+<p class="f"><b>F:</b> Repaired <span class="ph">[supraspinatus]</span> tendon is continuous with mild heterogeneous/interstitial increased signal near the footprint, favored postoperative granulation/scar and tendinosis. No full-thickness fluid gap or tendon retraction.</p>
+<p class="i"><b>I:</b> Intact cuff repair with postoperative tendinosis/scarring. No full-thickness retear.</p>
+<div class="dx">Partial-thickness retear</div>
+<p class="f"><b>F:</b> Postsurgical cuff repair with focal articular/bursal-sided fluid-signal defect at the repaired <span class="ph">[supraspinatus]</span> footprint involving approximately <span class="ph">[X]</span>% of tendon thickness. No full-thickness gap or medial retraction.</p>
+<p class="i"><b>I:</b> Partial-thickness retear of the repaired <span class="ph">[supraspinatus]</span> tendon.</p>
+<div class="dx">Full-thickness retear</div>
+<p class="f"><b>F:</b> Recurrent full-thickness fluid-signal defect through the repaired <span class="ph">[supraspinatus]</span> tendon measuring <span class="ph">[X]</span> cm AP by <span class="ph">[Y]</span> cm mediolateral with medial tendon retraction to <span class="ph">[location]</span>. Fluid communicates with the subacromial-subdeltoid bursa. Suture anchors are <span class="ph">[intact/displaced]</span>.</p>
+<p class="i"><b>I:</b> Full-thickness retear of the repaired <span class="ph">[supraspinatus]</span> tendon with <span class="ph">[mild/moderate/severe]</span> retraction.</p>
+<div class="dx">Anchor complication</div>
+<p class="f"><b>F:</b> Suture anchor at the <span class="ph">[greater/lesser]</span> tuberosity is proud/displaced with surrounding marrow edema/cystic change and adjacent bursal/synovial reaction. Repaired tendon is <span class="ph">[intact/torn]</span>.</p>
+<p class="i"><b>I:</b> Suspected suture anchor loosening/displacement with reactive marrow and synovial/bursal inflammation.</p>
+<h2>Biceps / Labral Stabilization</h2>
+<div class="dx">Biceps tenodesis intact</div>
+<p class="f"><b>F:</b> Postsurgical long head biceps tenodesis at the <span class="ph">[proximal humerus/bicipital groove/subpectoral humerus]</span>. Tenodesis tendon is intact without hardware displacement or surrounding fluid collection.</p>
+<p class="i"><b>I:</b> Intact biceps tenodesis.</p>
+<div class="dx">Biceps tenodesis failure</div>
+<p class="f"><b>F:</b> Nonvisualization/discontinuity of the tenodesed biceps tendon at the fixation site with distal tendon retraction and fluid/edema along the tenodesis tract. Hardware is <span class="ph">[intact/displaced]</span>.</p>
+<p class="i"><b>I:</b> Failed biceps tenodesis with tendon retraction.</p>
+<div class="dx">Post Bankart repair intact</div>
+<p class="f"><b>F:</b> Postsurgical changes of anterior labral repair with anchors at the anteroinferior glenoid. Labroligamentous complex is apposed to the glenoid rim without displaced recurrent tear or paralabral cyst. No progressive glenoid bone loss.</p>
+<p class="i"><b>I:</b> Intact anterior labral stabilization repair. No displaced recurrent labral tear.</p>
+<div class="dx">Recurrent labral tear after repair</div>
+<p class="f"><b>F:</b> Postsurgical anterior labral repair with recurrent fluid-signal cleft undermining the <span class="ph">[anteroinferior]</span> labrum and extending to the anchor margin. Labrum is <span class="ph">[displaced/nondisplaced]</span>. <span class="ph">[Associated paralabral cyst/recurrent Hill-Sachs.]</span></p>
+<p class="i"><b>I:</b> Recurrent <span class="ph">[anteroinferior]</span> labral tear at the prior repair site.</p>
+<div class="dx">Postoperative infection concern</div>
+<p class="f"><b>F:</b> Large joint effusion with diffuse synovial thickening, periarticular soft tissue edema, and marrow edema around <span class="ph">[anchor/hardware]</span>. <span class="ph">[Rim-enhancing fluid collection if contrast.]</span></p>
+<p class="i"><b>I:</b> Marked postoperative synovitis/effusion; infection should be excluded clinically.</p>
+<h2>Search Pattern</h2>
+<ul><li><b>1. Check history, indication, and priors.</b></li><li><b>2. Check adequacy, technique, and limitations.</b></li><li><b>3. Look at localizers</b> for incidental pathology (mass lesions, serious pathology easily missed).</li><li><b>4. Assess bone cortex and marrow:</b></li><li>Cortical breaks/fractures, Hill-Sachs/trough sign, osteophytes, loose bodies, heterotopic ossification.</li><li>Marrow replacement (darker than muscle on T1 = infection/neoplasia concern).</li><li>Hematopoietic marrow distribution.</li><li>Incidental ribs/vertebra.</li><li><b>5. Assess fluid</b> in subacromial-subdeltoid bursa and glenohumeral joint; if arthrography, check for abnormal communication.</li><li><b>6. Assess AC joint:</b> osteophytes, os acromiale on axials, subacromial spur.</li><li><b>7. Assess tendons:</b></li><li>Start with supraspinatus (coronals + sagittal fluid-sensitive); look for fluid signal traversing tendon (full or partial tear — bursal, articular, interstitial).</li><li>Correlate with SA-SD bursa fluid if complete tear and note retraction.</li><li>Intermediate signal + thickening = tendinosis; hydroxyapatite = low signal.</li><li>Then infraspinatus, teres minor, subscapularis.</li><li>Biceps tendon: check bicipital groove position/size (subluxation implies subscapularis tear), intra-articular course.</li><li><b>8. Assess glenohumeral joint:</b></li><li>Alignment (superior displacement = chronic cuff tear, inferior = effusion/atrophy); effusion.</li><li>Inferior glenohumeral ligament (thickening/signal on coronals = synovitis; loss of fat signal at rotator interval = adhesive capsulitis).</li><li>Labrum and MGHL (sagittals as map, coronals and axials to assess; superior labrum for SLAP; anterosuperior labrum and Buford complex/sublabral recess; anteroinferior labrum for Bankart spectrum — any detachment of anteroinferior labrum is abnormal; posterior labrum; reciprocating lesions across joint).</li><li>Cartilage (axial and coronal PD/fluid-sensitive; glenoid and humerus separately; subchondral marrow changes).</li><li><b>9. Assess coracoacromial and coracoclavicular ligaments:</b> sagittal images, discontinuity = AC joint injury.</li><li><b>10. Assess subcutaneous tissues and musculature:</b></li><li>T1 precontrast images; atrophy, edema, inflammation, mass.</li><li>Rotator cuff atrophy (supraspinatus below level of spine on oblique sagittals = atrophy).</li><li><b>11. Check neurovascular structures:</b> brachial plexus, suprascapular notch, spinoglenoid notch, quadrilateral space (especially if denervation present); incidental lung/chest viscera.</li><li><b>12. Double check</b> marrow signal, muscles, and subcutaneous tissues.</li><li><b>13. Proofread report.</b></li></ul>
+<h2>Infection Search Pattern</h2>
+<ul><li><b>1. Marrow/bone changes:</b></li><li>Marrow replacement (darker than muscle/disc on T1; geographic pattern more predictive than reticular/periarticular).</li><li>Marrow edema (isolated finding raises concern in diabetics/high-risk).</li><li>Bone erosion (loss of dark T1/T2 cortical line).</li><li><b>2. Surrounding inflammatory changes:</b> fascia, musculature, subcutaneous fat edema/enhancement.</li><li><b>3. Susceptibility suggesting air:</b> in collections, soft tissues, along fascial planes, in bone.</li><li><b>4. Abnormal enhancement:</b></li><li>Rim-enhancing collection = abscess.</li><li>Superficial lesion without enhancement = ulcer.</li><li>Enhancement along fascial planes = infectious/inflammatory fasciitis.</li><li>Non-enhancement of normal structures = ischemia.</li><li>Other patterns of enhancement may not be specific.</li><li><b>5. Differentiating osteomyelitis from neuropathic joint:</b></li><li>Joint effusion with marrow replacement on both sides of joint.</li><li>Fluid collections/abscesses (periprosthetic, subperiosteal, intraosseous/Brodie&#x27;s abscess).</li><li>Sinus tract connecting abnormal marrow signal to skin surface.</li><li>Disappearance of subchondral cysts on sequential imaging.</li><li>Progressive marrow/soft tissue changes greater than expected on sequential imaging.</li></ul>
+<h2>Source Notes</h2>
+<p>Built from the original one-page shoulder MRI cheat sheet plus Radsource Subscapularis Tendon Tear, Radsource HAGL Lesion, and review-level summaries of internal/subacromial/subcoracoid impingement MRI findings. Radsource subscapularis pearls used here: superolateral lesser tuberosity/first facet origin of many tears, lesser tuberosity uncovering/cysts, medial LHBT instability as an indirect sign, and comma sign composition from retracted superior subscapularis + SGHL/CHL. HAGL pearls: abnormal/discontinuous IGHL, J-shaped axillary pouch, medial humeral neck fluid/contrast, BHAGL fragment, and associated subscapularis/LHBT injuries.</p>
+<button id="to-top" class="to-top" aria-label="Back to top" title="Back to top (Home)">↑</button>
+<script>
+(function(){
+  var KEY='cheatsheet-font-scale', MIN=0.7, MAX=1.8, STEP=0.1;
+  var scale=parseFloat(localStorage.getItem(KEY));
+  if(!scale||isNaN(scale)) scale=1;
+  function apply(){ document.body.style.zoom=scale; }
+  function set(s){
+    scale=Math.min(MAX, Math.max(MIN, Math.round(s*10)/10));
+    localStorage.setItem(KEY, scale);
+    apply();
+  }
+  apply();
+  var dec=document.getElementById('fs-dec'),
+      inc=document.getElementById('fs-inc'),
+      rst=document.getElementById('fs-rst');
+  if(dec) dec.onclick=function(){ set(scale-STEP); };
+  if(inc) inc.onclick=function(){ set(scale+STEP); };
+  if(rst) rst.onclick=function(){ set(1); };
+  // back-to-top button
+  var top=document.getElementById('to-top');
+  function goTop(){ window.scrollTo({top:0, behavior:'smooth'}); }
+  function onScroll(){
+    if(!top) return;
+    if(window.scrollY>320) top.classList.add('show');
+    else top.classList.remove('show');
+  }
+  if(top){ top.onclick=goTop; window.addEventListener('scroll', onScroll, {passive:true}); onScroll(); }
+
+  document.addEventListener('keydown', function(e){
+    if(e.metaKey||e.ctrlKey||e.altKey) return;            // leave native zoom alone
+    var t=e.target;
+    if(t && (t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable)) return;
+    if(e.key==='+'||e.key==='='){ set(scale+STEP); e.preventDefault(); }
+    else if(e.key==='-'||e.key==='_'){ set(scale-STEP); e.preventDefault(); }
+    else if(e.key==='0'){ set(1); e.preventDefault(); }
+    else if(e.key==='Home'){ goTop(); e.preventDefault(); }
+  });
+})();
+</script>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}</script>
+</body>
+</html>

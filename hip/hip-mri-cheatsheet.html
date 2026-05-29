@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hip MRI Dictation Cheat Sheet - Expanded Findings &amp; Impressions</title>
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#0b3a52">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MSK MRI">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<style>
+:root{
+  --bg:#0c0f15; --panel:#141925; --panel2:#1a2030; --bdr:#27303f;
+  --tx:#e6eaf2; --tx2:#aab4c5; --tx3:#7c8699;
+  --h1bg:#0b3a52; --h2bg:#11556f; --h3tx:#6cc6e6;
+  --findings:#f4a86a; --impression:#7fd29a;
+  --ph-bg:rgba(244,168,106,0.16); --ph-tx:#f4c89a; --ph-bd:rgba(244,168,106,0.4);
+  --th-bg:#16384a; --th-tx:#cfe7f2;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);color-scheme:dark;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
+  background:var(--bg); color:var(--tx);
+  font-size:18px; line-height:1.62;
+  max-width:1120px; margin:0 auto; padding:0 32px 64px;
+  -webkit-font-smoothing:antialiased;
+}
+
+.topbar{
+  position:sticky; top:0; z-index:10;
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  margin:0 -32px 22px; padding:11px 32px;
+  background:rgba(12,15,21,0.92); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--bdr);
+}
+.topbar .crumb{font-weight:700;color:#fff;font-size:15px;margin-right:auto}
+.topbar a{
+  display:inline-flex; align-items:center;
+  border:1px solid var(--bdr); border-radius:999px;
+  padding:5px 12px; color:#9fdcf0; text-decoration:none;
+  font-size:13px; font-weight:600; background:#0d1a26;
+}
+.topbar a:hover{border-color:var(--h3tx); color:#fff}
+.topbar a.tmpl{border-color:rgba(244,168,106,0.55);background:rgba(244,168,106,0.12);color:#ffe0c8}
+
+.fontctl{
+  display:inline-flex; align-items:center; gap:4px;
+  margin-left:6px; padding-left:10px; border-left:1px solid var(--bdr);
+}
+.fontctl button{
+  cursor:pointer; border:1px solid var(--bdr); border-radius:6px;
+  background:#0d1a26; color:#9fdcf0; font-weight:700;
+  font-family:inherit; line-height:1; padding:5px 9px;
+}
+.fontctl button:hover{border-color:var(--h3tx); color:#fff}
+.fontctl #fs-dec{font-size:12px}
+.fontctl #fs-rst{font-size:13px; min-width:30px}
+.fontctl #fs-inc{font-size:16px}
+
+h1{
+  margin:6px 0 8px; padding:16px 22px;
+  background:linear-gradient(135deg,var(--h1bg),#0a2c40);
+  color:#fff; border-radius:10px; border-left:5px solid var(--h3tx);
+  font-size:30px; line-height:1.18; letter-spacing:0.2px;
+}
+.subtitle{color:var(--tx2); font-size:16px; margin:0 0 22px; line-height:1.5}
+
+h2.group{
+  margin:40px 0 16px; padding:13px 18px;
+  background:linear-gradient(135deg,#241a3a,#1a2030);
+  color:#fff; border-radius:9px; border-left:5px solid #a78bfa;
+  font-size:24px; line-height:1.2; letter-spacing:0.6px;
+  text-transform:uppercase; scroll-margin-top:64px;
+}
+h2{
+  margin:34px 0 14px; padding:11px 16px;
+  background:var(--h2bg); color:#fff; border-radius:8px;
+  font-size:21px; line-height:1.25; letter-spacing:0.2px;
+  scroll-margin-top:64px;
+}
+h3{
+  margin:22px 0 9px; color:var(--h3tx);
+  font-size:18.5px; line-height:1.3; font-weight:700;
+  border-bottom:1px solid #2c3a48; padding-bottom:5px;
+}
+
+p{margin:9px 0}
+.dx{
+  margin:18px 0 4px; font-weight:800; color:#fff;
+  font-size:18.5px; line-height:1.3;
+}
+.f, .i{margin:5px 0; padding-left:14px; border-left:2px solid #25303e}
+.f b{color:var(--findings)}
+.i b{color:var(--impression)}
+
+ul{margin:10px 0 14px 26px}
+li{margin:6px 0}
+
+table{
+  width:100%; border-collapse:collapse; margin:14px 0 18px;
+  font-size:16px; line-height:1.45; background:var(--panel);
+  border-radius:8px; overflow:hidden;
+}
+th{
+  background:var(--th-bg); color:var(--th-tx);
+  text-align:left; font-weight:700; padding:9px 12px;
+  border-bottom:1px solid #2c3a48;
+}
+td{padding:8px 12px; border-bottom:1px solid #232c39; color:var(--tx2); vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
+
+.to-top{
+  position:fixed; right:22px; bottom:22px; z-index:20;
+  width:46px; height:46px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid var(--bdr); background:rgba(17,85,111,0.92);
+  color:#fff; font-size:22px; line-height:1; cursor:pointer;
+  box-shadow:0 6px 20px rgba(0,0,0,0.45); backdrop-filter:blur(6px);
+  opacity:0; visibility:hidden; transform:translateY(8px);
+  transition:opacity .18s, transform .18s, visibility .18s;
+}
+.to-top.show{opacity:1; visibility:visible; transform:translateY(0)}
+.to-top:hover{background:#16638a; border-color:var(--h3tx)}
+@media print{ .to-top{display:none} }
+
+.ph{
+  background:var(--ph-bg); color:var(--ph-tx);
+  border:1px solid var(--ph-bd); border-radius:4px;
+  padding:0 4px; font-size:0.92em; white-space:nowrap;
+}
+
+.section-card{
+  background:var(--panel); border:1px solid var(--bdr);
+  border-radius:10px; padding:4px 20px 16px; margin:0 0 18px;
+}
+
+@media (max-width:680px){
+  body{font-size:17px; padding:0 16px 48px}
+  .topbar{margin:0 -16px 18px; padding:10px 16px}
+  h1{font-size:24px;padding:13px 16px}
+  h2{font-size:19px}
+}
+
+/* Dark-mode PDF (Chrome --print-to-pdf). Backgrounds preserved via
+   print-color-adjust:exact on html above. */
+@page{ size:Letter; margin:0.5in; }
+@media print{
+  body{ background:var(--bg); max-width:none; margin:0; padding:0; font-size:13px; line-height:1.5; }
+  .topbar{ display:none; }
+  h1{ font-size:21px; padding:11px 14px; }
+  h2,h2.group{ font-size:15px; break-after:avoid; }
+  h3,.dx{ break-after:avoid; }
+  .f,.i{ break-inside:avoid; }
+  table,tr{ break-inside:avoid; }
+  table{ font-size:11.5px; }
+}
+</style>
+</head>
+<body>
+<div class="topbar"><span class="crumb">Hip MRI Dictation Cheat Sheet</span><a href="../index.html">← All regions</a><a class="tmpl" href="../templates/hip.html">📋 Dictation template</a><a href="hip-mri-cheatsheet.pdf">PDF (print)</a><a href="hip-mri-cheatsheet-dark.pdf">PDF (dark)</a><a href="hip-mri-cheatsheet.md">Markdown</a><span class="fontctl" title="Font size — shortcuts: -, +, 0 to reset"><button id="fs-dec" aria-label="Decrease font size">A−</button><button id="fs-rst" aria-label="Reset font size">A</button><button id="fs-inc" aria-label="Increase font size">A+</button></span></div>
+<h1>Hip MRI Dictation Cheat Sheet - Expanded Findings &amp; Impressions</h1>
+<p class="subtitle">Copy-ready language. Replace bracketed text. Use as a workstation reference, not a substitute for surgical correlation or local report style.</p>
+<h2>Core Measurements</h2>
+<table><thead><tr><th>Measurement</th><th>Normal / Threshold</th></tr></thead><tbody><tr><td>Alpha angle</td><td>Normal &lt;55 degrees; cam morphology &gt;55 degrees.</td></tr><tr><td>Center-edge angle (CEA)</td><td>Normal 25-40 degrees; dysplasia &lt;20 degrees; overcoverage &gt;40 degrees.</td></tr><tr><td>Tonnis angle</td><td>Normal 0-10 degrees; dysplasia &gt;10 degrees.</td></tr><tr><td>Acetabular head index (AHI)</td><td>Normal &gt;75%; femoral head extrusion index = 100 - AHI.</td></tr><tr><td>Femoral version</td><td>Normal 10-20 degrees anteversion; &gt;20 degrees excessive anteversion; &lt;10 degrees decreased/retroversion.</td></tr><tr><td>Acetabular version</td><td>Normal ~15-20 degrees anteversion; retroversion suggested by crossover sign on AP radiograph.</td></tr></tbody></table>
+<h3>Ficat and Arlet AVN Staging</h3>
+<table><thead><tr><th>Stage</th><th>Description</th></tr></thead><tbody><tr><td>0</td><td>Preclinical, pre-radiographic; biopsy-only diagnosis.</td></tr><tr><td>I</td><td>Normal radiograph; MRI shows marrow edema or early necrosis.</td></tr><tr><td>II</td><td>Sclerosis/cysts on radiograph; no collapse. MRI: double-line sign, preserved sphericity.</td></tr><tr><td>III</td><td>Subchondral collapse (crescent sign); femoral head still spherical overall.</td></tr><tr><td>IV</td><td>Femoral head flattening/collapse with secondary osteoarthritis.</td></tr></tbody></table>
+<h3>Modified Steinberg (University of Pennsylvania) AVN Classification</h3>
+<table><thead><tr><th>Stage</th><th>Description</th></tr></thead><tbody><tr><td>0</td><td>Normal or nondiagnostic.</td></tr><tr><td>I</td><td>Normal radiograph; abnormal MRI/bone scan. A &lt;15%, B 15-30%, C &gt;30% head involvement.</td></tr><tr><td>II</td><td>Lucency and sclerosis on radiograph; no collapse. A/B/C substages by extent.</td></tr><tr><td>III</td><td>Crescent sign without flattening.</td></tr><tr><td>IV</td><td>Flattening of femoral head. A &lt;15%, B 15-30%, C &gt;30% surface collapse and &lt;2 mm, 2-4 mm, &gt;4 mm depression.</td></tr><tr><td>V</td><td>Joint narrowing with or without acetabular changes.</td></tr><tr><td>VI</td><td>Advanced degenerative changes.</td></tr></tbody></table>
+<h2>Modified Outerbridge Chondromalacia Grading - Copy-Ready</h2>
+<p>Use this for any articular surface. Replace <span class="ph">[surface/compartment]</span> with the specific location: patellar median ridge, medial femoral condyle weightbearing surface, anterosuperior acetabulum, radiocapitellar joint, tibiotalar dome, first MTP joint, etc.</p>
+<table><thead><tr><th>Grade</th><th>MRI shorthand</th></tr></thead><tbody><tr><td>0</td><td>Normal cartilage.</td></tr><tr><td>1</td><td>Signal heterogeneity/softening or swelling; surface intact.</td></tr><tr><td>2</td><td>Superficial fissuring/fraying/partial-thickness defect &lt;50% cartilage depth.</td></tr><tr><td>3</td><td>Deep fissuring/partial-thickness defect &gt;50% cartilage depth, not exposing bone.</td></tr><tr><td>4</td><td>Full-thickness cartilage loss with exposed subchondral bone, often edema/cysts.</td></tr></tbody></table>
+<div class="dx">Grade 0 - normal cartilage</div>
+<p class="f"><b>F:</b> Articular cartilage of the <span class="ph">[surface/compartment]</span> is preserved in thickness and signal without focal fissuring, delamination, or subchondral marrow abnormality.</p>
+<p class="i"><b>I:</b> No chondral defect of the <span class="ph">[surface/compartment]</span>.</p>
+<div class="dx">Grade 1 - chondral signal change / softening</div>
+<p class="f"><b>F:</b> Mild focal cartilage signal heterogeneity/softening of the <span class="ph">[surface/compartment]</span> with preserved cartilage thickness and intact articular surface. No subchondral marrow edema.</p>
+<p class="i"><b>I:</b> Grade 1 chondromalacia of the <span class="ph">[surface/compartment]</span>.</p>
+<div class="dx">Grade 2 - superficial partial-thickness chondral loss</div>
+<p class="f"><b>F:</b> Superficial chondral fissuring/fraying of the <span class="ph">[surface/compartment]</span> involving less than 50% of cartilage thickness. No full-thickness defect or subchondral marrow edema.</p>
+<p class="i"><b>I:</b> Grade 2 chondromalacia of the <span class="ph">[surface/compartment]</span>.</p>
+<div class="dx">Grade 3 - deep partial-thickness chondral loss</div>
+<p class="f"><b>F:</b> Deep partial-thickness chondral fissuring/defect of the <span class="ph">[surface/compartment]</span> involving greater than 50% of cartilage thickness without exposed subchondral bone. <span class="ph">[Mild adjacent subchondral marrow edema.]</span></p>
+<p class="i"><b>I:</b> Grade 3 chondromalacia of the <span class="ph">[surface/compartment]</span>.</p>
+<div class="dx">Grade 4 - full-thickness chondral loss</div>
+<p class="f"><b>F:</b> Full-thickness cartilage loss/fissuring of the <span class="ph">[surface/compartment]</span> measuring <span class="ph">[X]</span> x <span class="ph">[Y]</span> mm with exposed subchondral bone and <span class="ph">[subchondral marrow edema/cystic change]</span>. <span class="ph">[Small unstable chondral flap/loose body if present.]</span></p>
+<p class="i"><b>I:</b> Grade 4 chondromalacia/full-thickness chondral defect of the <span class="ph">[surface/compartment]</span>.</p>
+<h2>Hip MRI Tells</h2>
+<ul><li>Labral tear + cam + chondral delamination = classic FAI triad.</li><li>Wave sign = delaminated acetabular cartilage lifting off subchondral bone with fluid undermining the flap.</li><li>Paralabral cyst: always search for the associated labral tear at the adjacent clock position.</li><li>Herniation pit: fibrocystic change at the anterosuperior femoral head-neck junction; marker for cam morphology and chronic abutment.</li><li>Double-line sign on T2 = pathognomonic for AVN (outer low-signal sclerosis, inner high-signal granulation tissue).</li><li>Crescent sign = subchondral fracture/collapse; thin linear T1 hypointensity paralleling the articular surface with fluid signal deep to it.</li><li>QF edema: check ischiofemoral space measurement before calling isolated muscle strain.</li><li>Athletic pubalgia: secondary cleft sign at the rectus abdominis/adductor longus aponeurosis insertion on the pubic symphysis.</li><li>Sublabral sulcus at the posteroinferior labrum (5-7 o&#x27;clock) = normal variant, not a tear.</li><li>Absent perilabral recess anteroinferiorly is normal; do not overcall.</li></ul>
+<h2>Normal / Negative Templates</h2>
+<div class="dx">Normal hip</div>
+<p class="f"><b>F:</b> Hip joint alignment is anatomic. Femoral head sphericity is preserved without subchondral signal abnormality. Acetabular and femoral head articular cartilage is preserved in thickness and signal. No joint effusion or synovitis. Periarticular tendons and musculature demonstrate normal signal and morphology. No fracture, marrow replacement, or aggressive osseous lesion.</p>
+<p class="i"><b>I:</b> Normal MRI of the hip.</p>
+<div class="dx">Normal labrum on nonarthrogram</div>
+<p class="f"><b>F:</b> No displaced labral tear, paralabral cyst, or frank labral detachment identified on this nonarthrographic examination. Note: nondisplaced labral tears and intrasubstance degeneration are better evaluated with direct MR arthrography.</p>
+<p class="i"><b>I:</b> No discrete labral tear identified by nonarthrographic MRI. MR arthrogram may be considered if clinical suspicion for labral pathology persists.</p>
+<h2>Useful Caveats</h2>
+<ul><li><b>Sublabral sulcus:</b> A smooth recess at the posteroinferior labrum (approximately 5-7 o&#x27;clock) is a normal variant and should not be called a tear. True tears have irregular margins, paralabral cysts, or adjacent chondral injury.</li><li><b>Labral degeneration vs. tear on non-arthrogram:</b> Intermediate intrasubstance labral signal without a fluid-signal cleft reaching the labral surface favors degeneration over discrete tear. Direct MR arthrography is more sensitive for nondisplaced tears.</li><li><b>Transient osteoporosis vs. AVN:</b> Transient osteoporosis shows diffuse marrow edema pattern in the femoral head/neck without a focal subchondral lesion or double-line sign; it is self-limiting. AVN shows focal subchondral involvement, serpiginous demarcation, and the double-line sign.</li><li><b>Femoral neck stress fracture location matters:</b> Compression-side (medial/inferior cortex) injuries are generally managed conservatively; tension-side (lateral/superior cortex) injuries are at higher risk for completion and may require fixation.</li><li><b>Non-arthrogram labral sensitivity:</b> MRI without intra-articular contrast has lower sensitivity for small nondisplaced labral tears. State this limitation when findings are equivocal.</li></ul>
+<h2>Labrum / FAI / Cartilage</h2>
+<div class="dx">Intact labrum</div>
+<p class="f"><b>F:</b> The acetabular labrum is triangular in morphology with uniform low T1 and T2 signal throughout. No surface irregularity, detachment, paralabral cyst, or adjacent chondral injury. The labral-chondral junction is smooth.</p>
+<p class="i"><b>I:</b> Intact acetabular labrum without tear or degeneration.</p>
+<div class="dx">Labral degeneration (intrasubstance signal)</div>
+<p class="f"><b>F:</b> Intermediate intrasubstance signal on proton density/T2-weighted sequences within the <span class="ph">[anterosuperior/superior]</span> acetabular labrum without a discrete fluid-signal cleft extending to the labral surface. Labral morphology is mildly blunted/irregular. No paralabral cyst.</p>
+<p class="i"><b>I:</b> Intrasubstance labral degeneration of the <span class="ph">[anterosuperior/superior]</span> labrum. No discrete tear by nonarthrographic criteria.</p>
+<div class="dx">Anterosuperior labral tear with paralabral cyst</div>
+<p class="f"><b>F:</b> Irregular fluid-signal tear of the anterosuperior acetabular labrum at <span class="ph">[11 to 1 o&#x27;clock]</span> with a <span class="ph">[X]</span> mm paralabral cyst extending <span class="ph">[superiorly/laterally]</span>. Adjacent acetabular cartilage is <span class="ph">[intact/shows early fissuring]</span>.</p>
+<p class="i"><b>I:</b> Anterosuperior acetabular labral tear with paralabral cyst at <span class="ph">[11-1 o&#x27;clock]</span>.</p>
+<div class="dx">Superior labral tear</div>
+<p class="f"><b>F:</b> Fluid-signal cleft undermining the superior acetabular labrum at <span class="ph">[12 to 2 o&#x27;clock]</span> with labral detachment from the acetabular rim. <span class="ph">[No/small]</span> paralabral cyst. Adjacent superior acetabular cartilage demonstrates <span class="ph">[no injury/early fissuring/delamination]</span>.</p>
+<p class="i"><b>I:</b> Superior acetabular labral tear at <span class="ph">[12-2 o&#x27;clock]</span>.</p>
+<div class="dx">Posteroinferior labral tear</div>
+<p class="f"><b>F:</b> Irregular fluid-signal cleft at the posteroinferior acetabular labrum at <span class="ph">[7-9 o&#x27;clock]</span> with adjacent periosteal edema and mild subchondral marrow signal change. No paralabral cyst.</p>
+<p class="i"><b>I:</b> Posteroinferior acetabular labral tear with periosteal edema. <span class="ph">[Correlate for posterior impingement or instability pattern.]</span></p>
+<div class="dx">Detached labral fragment with wave sign and chondral delamination</div>
+<p class="f"><b>F:</b> Detached labral fragment at the <span class="ph">[anterosuperior]</span> acetabulum with displaced labral tissue and undulating/delaminated acetabular cartilage (wave sign) measuring <span class="ph">[X]</span> mm in extent. Fluid undermines the acetabular cartilage with separation from subchondral bone.</p>
+<p class="i"><b>I:</b> Anterosuperior labral tear with detached fragment, chondrolabral delamination, and wave sign.</p>
+<div class="dx">Cam FAI</div>
+<p class="f"><b>F:</b> Asphericity and osseous prominence at the anterolateral femoral head-neck junction with elevated alpha angle of <span class="ph">[X]</span> degrees (measured on oblique axial). <span class="ph">[Small fibrocystic change/synovial herniation pit at the anterosuperior head-neck junction measuring X mm.]</span> Associated anterosuperior labral tear and adjacent acetabular chondral <span class="ph">[delamination/fissuring]</span>.</p>
+<p class="i"><b>I:</b> Cam-type femoroacetabular impingement with elevated alpha angle, anterosuperior labral tear, and chondral injury. <span class="ph">[Synovial herniation pit.]</span></p>
+<div class="dx">Pincer FAI</div>
+<p class="f"><b>F:</b> Acetabular overcoverage with center-edge angle of <span class="ph">[X]</span> degrees (&gt;40 degrees), prominent anterior acetabular rim, and crossover sign on coronal images. Labral degeneration/tear at <span class="ph">[12-3 o&#x27;clock]</span>. <span class="ph">[Posteroinferior contrecoup chondral wear/marrow edema.]</span></p>
+<p class="i"><b>I:</b> Pincer-type femoroacetabular impingement pattern with acetabular overcoverage and labral pathology.</p>
+<div class="dx">Combined FAI</div>
+<p class="f"><b>F:</b> Combined cam and pincer morphology. Aspherical femoral head-neck junction with alpha angle of <span class="ph">[X]</span> degrees and acetabular overcoverage with center-edge angle of <span class="ph">[X]</span> degrees. Anterosuperior labral tear with adjacent chondral delamination. <span class="ph">[Posteroinferior contrecoup cartilage wear.]</span></p>
+<p class="i"><b>I:</b> Combined cam and pincer femoroacetabular impingement with labral tear and chondral injury.</p>
+<div class="dx">Mild femoral head-neck flattening without bump</div>
+<p class="f"><b>F:</b> Mild asphericity/flattening of the anterolateral femoral head-neck junction without a discrete osseous bump. Alpha angle measures <span class="ph">[X]</span> degrees (borderline/mildly elevated). No labral tear or chondral injury identified.</p>
+<p class="i"><b>I:</b> Mild cam-type morphology without definite impingement-related labral or chondral damage. Clinical correlation recommended.</p>
+<div class="dx">Focal acetabular cartilage thinning</div>
+<p class="f"><b>F:</b> Focal cartilage thinning/fissuring at the <span class="ph">[anterosuperior/weightbearing]</span> acetabulum measuring <span class="ph">[X]</span> mm in extent without full-thickness loss. Mild adjacent subchondral marrow edema. Labrum is <span class="ph">[intact/torn]</span>.</p>
+<p class="i"><b>I:</b> Focal partial-thickness acetabular chondral loss at the <span class="ph">[anterosuperior]</span> acetabulum. <span class="ph">[Grade 2/3 chondromalacia.]</span></p>
+<div class="dx">Chondrolabral delamination with wave sign</div>
+<p class="f"><b>F:</b> Chondrolabral separation at the anterosuperior acetabulum with fluid undermining a delaminating cartilage flap measuring <span class="ph">[X]</span> mm (wave sign). The detached cartilage is lifted from the subchondral bone plate. Associated labral tear at <span class="ph">[clock position]</span>.</p>
+<p class="i"><b>I:</b> Anterosuperior acetabular chondrolabral delamination with wave sign, associated with labral tear.</p>
+<div class="dx">Diffuse femoral head cartilage thinning</div>
+<p class="f"><b>F:</b> Diffuse thinning of the femoral head articular cartilage, most pronounced at the <span class="ph">[weightbearing/anterosuperior]</span> surface. Subchondral marrow edema and early cystic change are noted. Marginal osteophytes.</p>
+<p class="i"><b>I:</b> Diffuse femoral head chondral thinning consistent with <span class="ph">[moderate/severe]</span> osteoarthrosis.</p>
+<div class="dx">Full-thickness acetabular cartilage loss</div>
+<p class="f"><b>F:</b> Full-thickness cartilage loss at the <span class="ph">[anterosuperior/weightbearing]</span> acetabulum measuring <span class="ph">[X]</span> x <span class="ph">[Y]</span> mm with exposed subchondral bone plate, subchondral marrow edema, and <span class="ph">[subchondral cystic change]</span>. <span class="ph">[Associated labral tear.]</span></p>
+<p class="i"><b>I:</b> Full-thickness acetabular chondral defect (Outerbridge grade 4) at the <span class="ph">[anterosuperior]</span> acetabulum.</p>
+<h2>Tendons / Bursae</h2>
+<div class="dx">Normal gluteal tendons</div>
+<p class="f"><b>F:</b> Gluteus medius and minimus tendons demonstrate normal signal and morphology at their greater trochanter insertions without tendinosis, tear, or peritendinous edema. Greater trochanteric bursae are not distended.</p>
+<p class="i"><b>I:</b> Normal gluteus medius and minimus tendons. No trochanteric bursitis.</p>
+<div class="dx">Gluteus medius tendinosis with trochanteric bursitis</div>
+<p class="f"><b>F:</b> Gluteus medius tendon is thickened with intermediate intrasubstance signal at the lateral facet of the greater trochanter without discrete fiber discontinuity. Fluid and synovial thickening in the greater trochanteric/subgluteus medius bursa with lateral peritrochanteric soft tissue edema.</p>
+<p class="i"><b>I:</b> Gluteus medius tendinosis at the lateral facet with greater trochanteric bursitis.</p>
+<div class="dx">Gluteus medius partial undersurface tear</div>
+<p class="f"><b>F:</b> Focal fluid-signal cleft at the undersurface/deep fibers of the gluteus medius tendon at the lateral facet of the greater trochanter involving approximately <span class="ph">[X]</span>% of tendon thickness. Superficial fibers remain intact. Mild peritrochanteric edema/bursal fluid.</p>
+<p class="i"><b>I:</b> Partial-thickness undersurface tear of the gluteus medius tendon at the lateral facet.</p>
+<div class="dx">Gluteus medius full-thickness tear</div>
+<p class="f"><b>F:</b> Full-thickness discontinuity of the gluteus medius tendon at the lateral facet of the greater trochanter with <span class="ph">[X]</span> cm of lateral/proximal retraction. <span class="ph">[Moderate/severe]</span> fatty infiltration and volume loss of the gluteus medius muscle belly. Trochanteric bursal fluid.</p>
+<p class="i"><b>I:</b> Full-thickness gluteus medius tendon tear with retraction and fatty atrophy.</p>
+<div class="dx">Gluteus minimus tendinosis</div>
+<p class="f"><b>F:</b> Gluteus minimus tendon is thickened with intermediate signal at the anterior facet of the greater trochanter. No discrete fiber discontinuity. Mild subgluteus minimus bursal fluid.</p>
+<p class="i"><b>I:</b> Gluteus minimus tendinosis at the anterior facet.</p>
+<div class="dx">Trochanteric bursitis</div>
+<p class="f"><b>F:</b> Fluid and synovial thickening in the greater trochanteric bursa with adjacent lateral peritrochanteric soft tissue edema. Gluteal tendons are <span class="ph">[intact/show tendinosis/torn]</span>.</p>
+<p class="i"><b>I:</b> Greater trochanteric bursitis/peritrochanteric pain syndrome.</p>
+<div class="dx">Normal hamstring origin</div>
+<p class="f"><b>F:</b> Proximal hamstring tendons (conjoint tendon of the biceps femoris and semitendinosus, and the semimembranosus tendon) at the ischial tuberosity demonstrate normal signal, morphology, and attachment. No peritendinous edema or ischial bursitis.</p>
+<p class="i"><b>I:</b> Normal proximal hamstring tendon origin. No tear or tendinosis.</p>
+<div class="dx">Hamstring tendinosis with ischial bursitis</div>
+<p class="f"><b>F:</b> Thickening and intermediate intrasubstance signal of the proximal hamstring tendons at the ischial tuberosity without discrete fiber disruption. Fluid/edema in the ischial bursa deep to the hamstring origin.</p>
+<p class="i"><b>I:</b> Proximal hamstring tendinosis at the ischial tuberosity with ischial bursitis.</p>
+<div class="dx">Partial hamstring tear</div>
+<p class="f"><b>F:</b> Partial-thickness fiber disruption of the <span class="ph">[conjoint/semimembranosus]</span> tendon at the ischial tuberosity with surrounding T2 hyperintense edema/hemorrhage. Approximately <span class="ph">[X]</span>% of the tendon cross-section is involved. Remaining fibers are in continuity.</p>
+<p class="i"><b>I:</b> Partial-thickness proximal hamstring tendon tear at the ischial tuberosity with peritendinous edema.</p>
+<div class="dx">Complete hamstring tear with retraction</div>
+<p class="f"><b>F:</b> Complete tear of the conjoint/semitendinosus-biceps femoris and semimembranosus tendons from the ischial tuberosity with <span class="ph">[X]</span> cm of distal retraction and surrounding T2 hyperintense hematoma. The sciatic nerve is <span class="ph">[normally positioned/displaced by hematoma/encased in scar; note proximity]</span>.</p>
+<p class="i"><b>I:</b> Complete proximal hamstring avulsion tear with <span class="ph">[X]</span> cm retraction and hematoma. <span class="ph">[Note sciatic nerve relationship.]</span></p>
+<div class="dx">Hamstring avulsion fracture</div>
+<p class="f"><b>F:</b> Avulsion fracture fragment from the ischial tuberosity measuring <span class="ph">[X]</span> mm displaced <span class="ph">[inferolaterally]</span> by <span class="ph">[X]</span> cm with attached hamstring tendon origin. Surrounding marrow edema and soft tissue hemorrhage/edema. Sciatic nerve <span class="ph">[is/is not]</span> displaced.</p>
+<p class="i"><b>I:</b> Ischial tuberosity avulsion fracture at the hamstring origin with <span class="ph">[X]</span> cm displacement.</p>
+<div class="dx">Normal iliopsoas</div>
+<p class="f"><b>F:</b> Iliopsoas tendon is intact with normal signal and morphology at the lesser trochanter insertion. Iliopsoas bursa is not distended.</p>
+<p class="i"><b>I:</b> Normal iliopsoas tendon. No bursitis.</p>
+<div class="dx">Iliopsoas tendinosis with bursitis</div>
+<p class="f"><b>F:</b> Iliopsoas tendon is thickened with intermediate intrasubstance signal near the lesser trochanter insertion. Distended iliopsoas bursa with T2 hyperintense fluid deep to the tendon measuring <span class="ph">[X]</span> mm.</p>
+<p class="i"><b>I:</b> Iliopsoas tendinosis with iliopsoas bursitis.</p>
+<div class="dx">Iliopsoas bursitis alone</div>
+<p class="f"><b>F:</b> Distended iliopsoas bursa with T2 hyperintense fluid measuring <span class="ph">[X]</span> cm anterior to the hip joint capsule. Iliopsoas tendon is intact without tendinosis.</p>
+<p class="i"><b>I:</b> Iliopsoas bursitis without tendon tear.</p>
+<h2>Ischiofemoral Impingement</h2>
+<div class="dx">Normal ischiofemoral space</div>
+<p class="f"><b>F:</b> Ischiofemoral space measures <span class="ph">[X]</span> mm (normal &gt;15 mm) and quadratus femoris space measures <span class="ph">[X]</span> mm (normal &gt;10 mm). Quadratus femoris muscle demonstrates normal signal without edema or fatty replacement.</p>
+<p class="i"><b>I:</b> Normal ischiofemoral space. No impingement.</p>
+<div class="dx">Ischiofemoral impingement, acute</div>
+<p class="f"><b>F:</b> Narrowed ischiofemoral space measuring <span class="ph">[X]</span> mm (normal &gt;15 mm) and quadratus femoris space measuring <span class="ph">[X]</span> mm (normal &gt;10 mm). Quadratus femoris muscle demonstrates diffuse T2 hyperintense edema without fatty replacement, compatible with acute/subacute impingement.</p>
+<p class="i"><b>I:</b> Ischiofemoral impingement with quadratus femoris edema.</p>
+<div class="dx">Ischiofemoral impingement, chronic</div>
+<p class="f"><b>F:</b> Narrowed ischiofemoral space measuring <span class="ph">[X]</span> mm. Quadratus femoris muscle demonstrates T1 hyperintense fatty replacement and volume loss without significant edema, compatible with chronic impingement and denervation-type change.</p>
+<p class="i"><b>I:</b> Chronic ischiofemoral impingement with fatty replacement of the quadratus femoris.</p>
+<h2>Nerves</h2>
+<div class="dx">Normal sciatic nerve and piriformis</div>
+<p class="f"><b>F:</b> Sciatic nerve demonstrates normal caliber and signal in the greater sciatic notch and along the posterior hip. Piriformis muscle is symmetric in size and signal.</p>
+<p class="i"><b>I:</b> Normal sciatic nerve. Normal piriformis muscle.</p>
+<div class="dx">Piriformis asymmetry with sciatic nerve thickening</div>
+<p class="f"><b>F:</b> Piriformis muscle is asymmetrically <span class="ph">[enlarged/edematous]</span> compared to the contralateral side. Sciatic nerve is mildly thickened/hyperintense on fluid-sensitive sequences at the level of the piriformis. No discrete mass lesion.</p>
+<p class="i"><b>I:</b> Piriformis asymmetry with sciatic nerve thickening, compatible with piriformis syndrome. Clinical correlation recommended.</p>
+<div class="dx">Sciatic neuritis</div>
+<p class="f"><b>F:</b> Sciatic nerve demonstrates increased T2 signal and mild fascicular thickening at the level of the <span class="ph">[piriformis/ischial tuberosity/posterior hip]</span> with perineural edema in the surrounding fat. No discrete compressive mass.</p>
+<p class="i"><b>I:</b> Sciatic neuritis with perineural edema. <span class="ph">[Correlate with clinical radiculopathy/neuropathy.]</span></p>
+<div class="dx">Sciatic nerve through piriformis (variant)</div>
+<p class="f"><b>F:</b> Anatomic variant with the <span class="ph">[peroneal division of the]</span> sciatic nerve coursing through the piriformis muscle belly rather than deep to it. The nerve demonstrates <span class="ph">[normal signal/mild T2 hyperintensity]</span>.</p>
+<p class="i"><b>I:</b> Variant sciatic nerve course through the piriformis muscle. <span class="ph">[Possible contributing factor if clinically symptomatic.]</span></p>
+<h2>Bone / AVN / Stress</h2>
+<div class="dx">Normal femoral head</div>
+<p class="f"><b>F:</b> Femoral head is spherical with preserved contour and uniform marrow signal on T1 and T2 sequences. No subchondral fracture, marrow edema, or serpiginous demarcation. No collapse.</p>
+<p class="i"><b>I:</b> Normal femoral head without avascular necrosis or fracture.</p>
+<div class="dx">Early AVN - double-line sign, preserved sphericity</div>
+<p class="f"><b>F:</b> Serpiginous/geographic low-signal line on T1 in the <span class="ph">[anterosuperior/weightbearing]</span> femoral head with characteristic double-line sign on T2 (outer low-signal rim, inner high-signal rim) involving approximately <span class="ph">[X]</span>% of the weightbearing surface. Femoral head sphericity is preserved without subchondral fracture or collapse.</p>
+<p class="i"><b>I:</b> Avascular necrosis of the femoral head without collapse (Ficat stage II / Steinberg stage II). Preserved femoral head contour.</p>
+<div class="dx">AVN without collapse, with sclerosis and cysts</div>
+<p class="f"><b>F:</b> Geographic area of marrow signal abnormality in the <span class="ph">[anterosuperior]</span> femoral head with serpiginous low-signal demarcation on T1, double-line sign on T2, involving approximately <span class="ph">[X]</span>% of the weightbearing surface. Sclerotic reactive margin and small subchondral cysts are present. No crescent sign. Femoral head contour is preserved.</p>
+<p class="i"><b>I:</b> Avascular necrosis of the femoral head without collapse, with reactive sclerosis and subchondral cysts (Ficat stage II).</p>
+<div class="dx">AVN with crescent sign - early collapse</div>
+<p class="f"><b>F:</b> Subchondral fracture line (crescent sign) paralleling the articular surface of the <span class="ph">[anterosuperior]</span> femoral head as a thin linear T1 hypointensity with fluid signal deep to it. Underlying serpiginous demarcation of avascular necrosis involves approximately <span class="ph">[X]</span>% of the weightbearing surface. Mild flattening/depression of the articular surface measuring <span class="ph">[X]</span> mm.</p>
+<p class="i"><b>I:</b> Avascular necrosis with crescent sign and early subchondral collapse (Ficat stage III).</p>
+<div class="dx">AVN with complete collapse and secondary OA</div>
+<p class="f"><b>F:</b> Complete collapse and flattening of the femoral head with loss of normal sphericity. Diffuse low T1 marrow signal with cystic change and sclerosis. Secondary acetabular cartilage loss, marginal osteophytes, and subchondral cystic change. Joint effusion with synovitis.</p>
+<p class="i"><b>I:</b> Avascular necrosis with femoral head collapse and secondary osteoarthritis (Ficat stage IV).</p>
+<div class="dx">Subchondral fracture without double-line sign</div>
+<p class="f"><b>F:</b> Subchondral linear low-signal fracture line paralleling the articular surface of the <span class="ph">[anterosuperior/weightbearing]</span> femoral head with surrounding marrow edema on fluid-sensitive sequences. No serpiginous demarcation, double-line sign, or geographic marrow replacement to suggest AVN. Femoral head contour is preserved.</p>
+<p class="i"><b>I:</b> Subchondral insufficiency fracture of the femoral head. No findings to suggest avascular necrosis. <span class="ph">[Differential includes early AVN; clinical and imaging follow-up recommended.]</span></p>
+<div class="dx">Compression-side femoral neck stress fracture</div>
+<p class="f"><b>F:</b> Linear low-signal fracture line oriented perpendicular to the compression (medial/inferior) cortex of the femoral neck with surrounding T2 hyperintense marrow edema and periosteal edema. Fracture involves approximately <span class="ph">[X]</span>% of the femoral neck width. No fracture at the tension (lateral/superior) cortex.</p>
+<p class="i"><b>I:</b> Compression-side femoral neck stress fracture. <span class="ph">[Low risk for completion; typically managed conservatively.]</span></p>
+<div class="dx">Tension-side femoral neck stress fracture</div>
+<p class="f"><b>F:</b> Linear low-signal fracture line oriented perpendicular to the tension (lateral/superior) cortex of the femoral neck with surrounding marrow edema and periosteal reaction. Fracture involves approximately <span class="ph">[X]</span>% of the femoral neck width. <span class="ph">[No/mild]</span> displacement.</p>
+<p class="i"><b>I:</b> Tension-side femoral neck stress fracture. <span class="ph">[Higher risk for fracture completion; surgical consultation recommended.]</span></p>
+<div class="dx">Femoral neck stress reaction without fracture line</div>
+<p class="f"><b>F:</b> Ill-defined T2 hyperintense/T1 hypointense marrow edema within the femoral neck without a discrete fracture line. Mild periosteal edema along the <span class="ph">[medial/lateral]</span> cortex. No cortical disruption.</p>
+<p class="i"><b>I:</b> Femoral neck stress reaction without visible fracture line. <span class="ph">[Recommend activity modification and follow-up imaging if symptoms persist.]</span></p>
+<div class="dx">Osteoarthritis</div>
+<p class="f"><b>F:</b> Diffuse hip chondral thinning/loss with marginal osteophytes, subchondral cystic change/marrow edema, degenerative labral tearing, and small effusion/synovitis. [Femoral head migration is <span class="ph">[superolateral/medial]</span>.]</p>
+<p class="i"><b>I:</b> <span class="ph">[Mild/moderate/severe]</span> hip osteoarthrosis with degenerative labral tearing.</p>
+<h2>Athletic Pubalgia / Groin</h2>
+<div class="dx">Athletic pubalgia - rectus/adductor aponeurosis</div>
+<p class="f"><b>F:</b> T2 hyperintense signal and thickening at the rectus abdominis/adductor longus common aponeurotic insertion on the anterior pubic symphysis. Linear fluid-signal secondary cleft extends along the aponeurosis. Mild parasymphyseal marrow edema. Adductor longus tendon origin demonstrates <span class="ph">[tendinosis/partial fiber disruption]</span>.</p>
+<p class="i"><b>I:</b> Athletic pubalgia with injury at the rectus abdominis/adductor longus aponeurosis and secondary cleft sign. <span class="ph">[Associated adductor tendinopathy.]</span></p>
+<div class="dx">Muscle strain - hip/groin</div>
+<p class="f"><b>F:</b> T2 hyperintense intramuscular edema and <span class="ph">[mild/moderate]</span> fiber disruption within the <span class="ph">[rectus femoris/adductor longus/iliopsoas/sartorius]</span> muscle at the <span class="ph">[myotendinous junction/muscle belly]</span> without complete discontinuity. <span class="ph">[Small intramuscular hematoma measuring X cm.]</span></p>
+<p class="i"><b>I:</b> <span class="ph">[Grade 1/2]</span> strain of the <span class="ph">[muscle]</span> at the <span class="ph">[myotendinous junction]</span>.</p>
+<h2>Effusion / Other</h2>
+<div class="dx">Trace effusion</div>
+<p class="f"><b>F:</b> Trace physiologic fluid in the hip joint. No synovial thickening or capsular distention.</p>
+<p class="i"><b>I:</b> Trace hip joint effusion, likely physiologic.</p>
+<div class="dx">Small effusion with synovial thickening</div>
+<p class="f"><b>F:</b> Small hip joint effusion with mild synovial thickening. Anterior capsule is not distended.</p>
+<p class="i"><b>I:</b> Small hip joint effusion with mild synovitis.</p>
+<div class="dx">Moderate effusion</div>
+<p class="f"><b>F:</b> Moderate hip joint effusion distending the anterior joint capsule/anterior recess. <span class="ph">[Synovial thickening is present.]</span> <span class="ph">[No intra-articular loose body.]</span></p>
+<p class="i"><b>I:</b> Moderate hip joint effusion <span class="ph">[with synovitis]</span>. <span class="ph">[Differential includes inflammatory, infectious, or degenerative etiology; correlate clinically.]</span></p>
+<h2>Search Pattern</h2>
+<ul><li><b>1. Check history, indication, and priors.</b></li><li><b>2. Assess study adequacy, technique, and limitations.</b></li><li><b>3. Look at localizers</b> for incidental pathology.</li><li><b>4. Assess bone cortex and marrow:</b></li><li>Cortical breaks/fractures, osteophytes, loose bodies, heterotopic ossification; marrow replacement; hematopoietic marrow.</li><li>Lower lumbar spine (disc degeneration, stenosis); sacrum (insufficiency fractures); bony pelvis.</li><li>Acetabulum (developmental dysplasia = shallow acetabulum, superior aspect should be horizontal on coronals; pincer FAI = focal retroversion; osteophytes).</li><li>Femurs (SCFE or AVN in appropriate populations; osteochondral lesions; femoral head deformity/collapse; CAM-type FAI at head-neck junction; neck and shaft fracture/deformity).</li><li><b>5. Assess tendinous insertions:</b></li><li>Iliopectineal line/pubic symphysis (rectus abdominis, adductors — sports hernias).</li><li>ASIS (sartorius); AIIS (rectus femoris indirect head); superior acetabular labrum (rectus femoris direct head).</li><li>Ischial tuberosity (hamstrings); iliac crests (quadratus lumborum).</li><li>Greater trochanter (gluteus medius/minimus, external rotators); lesser trochanter (iliopsoas).</li><li>Look for fluid along iliopsoas course and at greater trochanter (bursitis).</li><li><b>6. Assess sacroiliac joints:</b> inflammatory change bilaterally (axials + coronals); diastasis, erosion/destruction, ankylosis, degenerative changes.</li><li><b>7. Assess pubic symphysis:</b> erosions, degenerative change, osteitis, diastasis.</li><li><b>8. Assess femoroacetabular joints:</b></li><li>Effusion; labrum (most commonly anterosuperior quadrant).</li><li>Cartilage (best on arthrographic images if obtained, otherwise PD and fluid-sensitive sagittals and coronals).</li><li>Subchondral marrow changes.</li><li><b>9. In the pelvis, don&#x27;t forget visceral structures:</b> bowel (mass, inflammation, fistula); reproductive organs; ureters, bladder, urethra; retroperitoneum and pelvic sidewalls (adenopathy); ascites/collections/mass lesions.</li><li><b>10. Assess subcutaneous tissues and musculature:</b> T1 precontrast, fluid-sensitive; muscle signal; collections/effusions.</li><li><b>11. Double check</b> marrow signal, muscles, and subcutaneous tissues.</li><li><b>12. Proofread report.</b></li></ul>
+<h2>Infection Search Pattern</h2>
+<ul><li><b>1. Marrow/bone changes:</b></li><li>Marrow replacement (darker than muscle/disc on T1; geographic pattern more predictive than reticular/periarticular).</li><li>Marrow edema (isolated finding raises concern in diabetics/high-risk).</li><li>Bone erosion (loss of dark T1/T2 cortical line).</li><li><b>2. Surrounding inflammatory changes:</b> fascia, musculature, subcutaneous fat edema/enhancement.</li><li><b>3. Susceptibility suggesting air:</b> in collections, soft tissues, along fascial planes, in bone.</li><li><b>4. Abnormal enhancement:</b></li><li>Rim-enhancing collection = abscess.</li><li>Superficial lesion without enhancement = ulcer.</li><li>Enhancement along fascial planes = infectious/inflammatory fasciitis.</li><li>Non-enhancement of normal structures = ischemia.</li><li>Other patterns of enhancement may not be specific.</li><li><b>5. Differentiating osteomyelitis from neuropathic joint:</b></li><li>Joint effusion with marrow replacement on both sides of joint.</li><li>Fluid collections/abscesses (periprosthetic, subperiosteal, intraosseous/Brodie&#x27;s abscess).</li><li>Sinus tract connecting abnormal marrow signal to skin surface.</li><li>Disappearance of subchondral cysts on sequential imaging.</li><li>Progressive marrow/soft tissue changes greater than expected on sequential imaging.</li></ul>
+<h2>Source Notes</h2>
+<p>Built as a practical dictation aid from standard MSK MRI reporting patterns, review-level radiology references (including Steinberg/Ficat AVN staging, ischiofemoral impingement criteria, athletic pubalgia imaging findings), and the existing shoulder cheat-sheet style. PowerScribe build-script template choices integrated as F/I pairs. Use surgical correlation and local report conventions when needed.</p>
+<button id="to-top" class="to-top" aria-label="Back to top" title="Back to top (Home)">↑</button>
+<script>
+(function(){
+  var KEY='cheatsheet-font-scale', MIN=0.7, MAX=1.8, STEP=0.1;
+  var scale=parseFloat(localStorage.getItem(KEY));
+  if(!scale||isNaN(scale)) scale=1;
+  function apply(){ document.body.style.zoom=scale; }
+  function set(s){
+    scale=Math.min(MAX, Math.max(MIN, Math.round(s*10)/10));
+    localStorage.setItem(KEY, scale);
+    apply();
+  }
+  apply();
+  var dec=document.getElementById('fs-dec'),
+      inc=document.getElementById('fs-inc'),
+      rst=document.getElementById('fs-rst');
+  if(dec) dec.onclick=function(){ set(scale-STEP); };
+  if(inc) inc.onclick=function(){ set(scale+STEP); };
+  if(rst) rst.onclick=function(){ set(1); };
+  // back-to-top button
+  var top=document.getElementById('to-top');
+  function goTop(){ window.scrollTo({top:0, behavior:'smooth'}); }
+  function onScroll(){
+    if(!top) return;
+    if(window.scrollY>320) top.classList.add('show');
+    else top.classList.remove('show');
+  }
+  if(top){ top.onclick=goTop; window.addEventListener('scroll', onScroll, {passive:true}); onScroll(); }
+
+  document.addEventListener('keydown', function(e){
+    if(e.metaKey||e.ctrlKey||e.altKey) return;            // leave native zoom alone
+    var t=e.target;
+    if(t && (t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable)) return;
+    if(e.key==='+'||e.key==='='){ set(scale+STEP); e.preventDefault(); }
+    else if(e.key==='-'||e.key==='_'){ set(scale-STEP); e.preventDefault(); }
+    else if(e.key==='0'){ set(1); e.preventDefault(); }
+    else if(e.key==='Home'){ goTop(); e.preventDefault(); }
+  });
+})();
+</script>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}</script>
+</body>
+</html>

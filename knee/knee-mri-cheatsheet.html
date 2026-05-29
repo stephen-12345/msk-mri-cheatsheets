@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Knee MRI Dictation Cheat Sheet - Expanded Findings &amp; Impressions</title>
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#0b3a52">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MSK MRI">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<style>
+:root{
+  --bg:#0c0f15; --panel:#141925; --panel2:#1a2030; --bdr:#27303f;
+  --tx:#e6eaf2; --tx2:#aab4c5; --tx3:#7c8699;
+  --h1bg:#0b3a52; --h2bg:#11556f; --h3tx:#6cc6e6;
+  --findings:#f4a86a; --impression:#7fd29a;
+  --ph-bg:rgba(244,168,106,0.16); --ph-tx:#f4c89a; --ph-bd:rgba(244,168,106,0.4);
+  --th-bg:#16384a; --th-tx:#cfe7f2;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);color-scheme:dark;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
+  background:var(--bg); color:var(--tx);
+  font-size:18px; line-height:1.62;
+  max-width:1120px; margin:0 auto; padding:0 32px 64px;
+  -webkit-font-smoothing:antialiased;
+}
+
+.topbar{
+  position:sticky; top:0; z-index:10;
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  margin:0 -32px 22px; padding:11px 32px;
+  background:rgba(12,15,21,0.92); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--bdr);
+}
+.topbar .crumb{font-weight:700;color:#fff;font-size:15px;margin-right:auto}
+.topbar a{
+  display:inline-flex; align-items:center;
+  border:1px solid var(--bdr); border-radius:999px;
+  padding:5px 12px; color:#9fdcf0; text-decoration:none;
+  font-size:13px; font-weight:600; background:#0d1a26;
+}
+.topbar a:hover{border-color:var(--h3tx); color:#fff}
+.topbar a.tmpl{border-color:rgba(244,168,106,0.55);background:rgba(244,168,106,0.12);color:#ffe0c8}
+
+.fontctl{
+  display:inline-flex; align-items:center; gap:4px;
+  margin-left:6px; padding-left:10px; border-left:1px solid var(--bdr);
+}
+.fontctl button{
+  cursor:pointer; border:1px solid var(--bdr); border-radius:6px;
+  background:#0d1a26; color:#9fdcf0; font-weight:700;
+  font-family:inherit; line-height:1; padding:5px 9px;
+}
+.fontctl button:hover{border-color:var(--h3tx); color:#fff}
+.fontctl #fs-dec{font-size:12px}
+.fontctl #fs-rst{font-size:13px; min-width:30px}
+.fontctl #fs-inc{font-size:16px}
+
+h1{
+  margin:6px 0 8px; padding:16px 22px;
+  background:linear-gradient(135deg,var(--h1bg),#0a2c40);
+  color:#fff; border-radius:10px; border-left:5px solid var(--h3tx);
+  font-size:30px; line-height:1.18; letter-spacing:0.2px;
+}
+.subtitle{color:var(--tx2); font-size:16px; margin:0 0 22px; line-height:1.5}
+
+h2.group{
+  margin:40px 0 16px; padding:13px 18px;
+  background:linear-gradient(135deg,#241a3a,#1a2030);
+  color:#fff; border-radius:9px; border-left:5px solid #a78bfa;
+  font-size:24px; line-height:1.2; letter-spacing:0.6px;
+  text-transform:uppercase; scroll-margin-top:64px;
+}
+h2{
+  margin:34px 0 14px; padding:11px 16px;
+  background:var(--h2bg); color:#fff; border-radius:8px;
+  font-size:21px; line-height:1.25; letter-spacing:0.2px;
+  scroll-margin-top:64px;
+}
+h3{
+  margin:22px 0 9px; color:var(--h3tx);
+  font-size:18.5px; line-height:1.3; font-weight:700;
+  border-bottom:1px solid #2c3a48; padding-bottom:5px;
+}
+
+p{margin:9px 0}
+.dx{
+  margin:18px 0 4px; font-weight:800; color:#fff;
+  font-size:18.5px; line-height:1.3;
+}
+.f, .i{margin:5px 0; padding-left:14px; border-left:2px solid #25303e}
+.f b{color:var(--findings)}
+.i b{color:var(--impression)}
+
+ul{margin:10px 0 14px 26px}
+li{margin:6px 0}
+
+table{
+  width:100%; border-collapse:collapse; margin:14px 0 18px;
+  font-size:16px; line-height:1.45; background:var(--panel);
+  border-radius:8px; overflow:hidden;
+}
+th{
+  background:var(--th-bg); color:var(--th-tx);
+  text-align:left; font-weight:700; padding:9px 12px;
+  border-bottom:1px solid #2c3a48;
+}
+td{padding:8px 12px; border-bottom:1px solid #232c39; color:var(--tx2); vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
+
+.to-top{
+  position:fixed; right:22px; bottom:22px; z-index:20;
+  width:46px; height:46px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid var(--bdr); background:rgba(17,85,111,0.92);
+  color:#fff; font-size:22px; line-height:1; cursor:pointer;
+  box-shadow:0 6px 20px rgba(0,0,0,0.45); backdrop-filter:blur(6px);
+  opacity:0; visibility:hidden; transform:translateY(8px);
+  transition:opacity .18s, transform .18s, visibility .18s;
+}
+.to-top.show{opacity:1; visibility:visible; transform:translateY(0)}
+.to-top:hover{background:#16638a; border-color:var(--h3tx)}
+@media print{ .to-top{display:none} }
+
+.ph{
+  background:var(--ph-bg); color:var(--ph-tx);
+  border:1px solid var(--ph-bd); border-radius:4px;
+  padding:0 4px; font-size:0.92em; white-space:nowrap;
+}
+
+.section-card{
+  background:var(--panel); border:1px solid var(--bdr);
+  border-radius:10px; padding:4px 20px 16px; margin:0 0 18px;
+}
+
+@media (max-width:680px){
+  body{font-size:17px; padding:0 16px 48px}
+  .topbar{margin:0 -16px 18px; padding:10px 16px}
+  h1{font-size:24px;padding:13px 16px}
+  h2{font-size:19px}
+}
+
+/* Dark-mode PDF (Chrome --print-to-pdf). Backgrounds preserved via
+   print-color-adjust:exact on html above. */
+@page{ size:Letter; margin:0.5in; }
+@media print{
+  body{ background:var(--bg); max-width:none; margin:0; padding:0; font-size:13px; line-height:1.5; }
+  .topbar{ display:none; }
+  h1{ font-size:21px; padding:11px 14px; }
+  h2,h2.group{ font-size:15px; break-after:avoid; }
+  h3,.dx{ break-after:avoid; }
+  .f,.i{ break-inside:avoid; }
+  table,tr{ break-inside:avoid; }
+  table{ font-size:11.5px; }
+}
+</style>
+</head>
+<body>
+<div class="topbar"><span class="crumb">Knee MRI Dictation Cheat Sheet</span><a href="../index.html">← All regions</a><a class="tmpl" href="../templates/knee.html">📋 Dictation template</a><a href="knee-mri-cheatsheet.pdf">PDF (print)</a><a href="knee-mri-cheatsheet-dark.pdf">PDF (dark)</a><a href="knee-mri-cheatsheet.md">Markdown</a><span class="fontctl" title="Font size — shortcuts: -, +, 0 to reset"><button id="fs-dec" aria-label="Decrease font size">A−</button><button id="fs-rst" aria-label="Reset font size">A</button><button id="fs-inc" aria-label="Increase font size">A+</button></span></div>
+<h1>Knee MRI Dictation Cheat Sheet - Expanded Findings &amp; Impressions</h1>
+<p class="subtitle">Copy-ready language. Replace bracketed text. Use as a workstation reference, not a substitute for surgical correlation or local report style.</p>
+<h2>Core Measurements</h2>
+<table><thead><tr><th>System</th><th>Use</th></tr></thead><tbody><tr><td>Modified Outerbridge / ICRS</td><td>Cartilage grading: 0 normal, 1 softening, 2 &lt;50% depth, 3 &gt;50% depth, 4 full-thickness loss.</td></tr><tr><td>Meniscal extrusion</td><td>&gt;=3 mm beyond tibial margin is significant; associated with root tears and accelerated OA.</td></tr><tr><td>ACL tunnel sizing</td><td>Femoral tunnel <span class="ph">[X]</span> mm, tibial tunnel <span class="ph">[X]</span> mm; report widening if &gt;1 mm increase from baseline.</td></tr><tr><td>TT-TG distance</td><td>Normal &lt;15 mm, borderline 15-20 mm, abnormal &gt;20 mm; relevant for patellar instability.</td></tr><tr><td>Insall-Salvati ratio</td><td>Patellar tendon length / patellar diagonal: normal 0.8-1.2; &gt;1.2 patella alta, &lt;0.8 patella baja.</td></tr><tr><td>Caton-Deschamps index</td><td>Distance from inferior patellar articular surface to anterosuperior tibial plateau / patellar articular surface length: normal 0.6-1.2.</td></tr></tbody></table>
+<h2>Modified Outerbridge Chondromalacia Grading - Copy-Ready</h2>
+<p>Use this for any articular surface. Replace <span class="ph">[surface/compartment]</span> with the specific location: patellar median ridge, medial femoral condyle weightbearing surface, anterosuperior acetabulum, radiocapitellar joint, tibiotalar dome, first MTP joint, etc.</p>
+<table><thead><tr><th>Grade</th><th>MRI shorthand</th></tr></thead><tbody><tr><td>0</td><td>Normal cartilage.</td></tr><tr><td>1</td><td>Signal heterogeneity/softening or swelling; surface intact.</td></tr><tr><td>2</td><td>Superficial fissuring/fraying/partial-thickness defect &lt;50% cartilage depth.</td></tr><tr><td>3</td><td>Deep fissuring/partial-thickness defect &gt;50% cartilage depth, not exposing bone.</td></tr><tr><td>4</td><td>Full-thickness cartilage loss with exposed subchondral bone, often edema/cysts.</td></tr></tbody></table>
+<div class="dx">Grade 0 - normal cartilage</div>
+<p class="f"><b>F:</b> Articular cartilage of the <span class="ph">[surface/compartment]</span> is preserved in thickness and signal without focal fissuring, delamination, or subchondral marrow abnormality.</p>
+<p class="i"><b>I:</b> No chondral defect of the <span class="ph">[surface/compartment]</span>.</p>
+<div class="dx">Grade 1 - chondral signal change / softening</div>
+<p class="f"><b>F:</b> Mild focal cartilage signal heterogeneity/softening of the <span class="ph">[surface/compartment]</span> with preserved cartilage thickness and intact articular surface. No subchondral marrow edema.</p>
+<p class="i"><b>I:</b> Grade 1 chondromalacia of the <span class="ph">[surface/compartment]</span>.</p>
+<div class="dx">Grade 2 - superficial partial-thickness chondral loss</div>
+<p class="f"><b>F:</b> Superficial chondral fissuring/fraying of the <span class="ph">[surface/compartment]</span> involving less than 50% of cartilage thickness. No full-thickness defect or subchondral marrow edema.</p>
+<p class="i"><b>I:</b> Grade 2 chondromalacia of the <span class="ph">[surface/compartment]</span>.</p>
+<div class="dx">Grade 3 - deep partial-thickness chondral loss</div>
+<p class="f"><b>F:</b> Deep partial-thickness chondral fissuring/defect of the <span class="ph">[surface/compartment]</span> involving greater than 50% of cartilage thickness without exposed subchondral bone. <span class="ph">[Mild adjacent subchondral marrow edema.]</span></p>
+<p class="i"><b>I:</b> Grade 3 chondromalacia of the <span class="ph">[surface/compartment]</span>.</p>
+<div class="dx">Grade 4 - full-thickness chondral loss</div>
+<p class="f"><b>F:</b> Full-thickness cartilage loss/fissuring of the <span class="ph">[surface/compartment]</span> measuring <span class="ph">[X]</span> x <span class="ph">[Y]</span> mm with exposed subchondral bone and <span class="ph">[subchondral marrow edema/cystic change]</span>. <span class="ph">[Small unstable chondral flap/loose body if present.]</span></p>
+<p class="i"><b>I:</b> Grade 4 chondromalacia/full-thickness chondral defect of the <span class="ph">[surface/compartment]</span>.</p>
+<h2>Meniscus Tells</h2>
+<ul><li>Horizontal: degenerative, older patients; propagates along collagen fiber plane.</li><li>Vertical longitudinal: traumatic, young patients; perpendicular to collagen fibers.</li><li>Radial: functionally equivalent to meniscectomy at the tear site; disrupts circumferential hoop stress.</li><li>Root tear: same biomechanical consequence as total meniscectomy; look for meniscal extrusion.</li><li>Bucket handle: look for double PCL sign, absent bow-tie sign on consecutive sagittal images, and flipped fragment in the intercondylar notch.</li><li>Ghost meniscus on sagittal = radial tear extending through the full width of the meniscal body.</li><li>Meniscal extrusion &gt;3 mm associated with root tears and accelerated cartilage degeneration.</li><li>Meniscal flounce: wavy contour of the free edge on sagittal, normal variant when seen in a single plane.</li><li>Discoid meniscus: &gt;=3 consecutive sagittal bow-tie images (5 mm slice thickness) or meniscal body extends to the intercondylar notch on coronal.</li></ul>
+<h2>Normal / Negative Templates</h2>
+<div class="dx">Normal menisci</div>
+<p class="f"><b>F:</b> The medial and lateral menisci demonstrate normal morphology and low signal intensity without surface-reaching signal abnormality, displaced fragment, or meniscal extrusion. Meniscal roots are intact.</p>
+<p class="i"><b>I:</b> Normal menisci bilaterally. No meniscal tear.</p>
+<div class="dx">Normal ACL</div>
+<p class="f"><b>F:</b> The anterior cruciate ligament demonstrates normal fiber orientation, signal intensity, and tension from the tibial eminence to the lateral femoral condyle. No fiber discontinuity or surrounding edema.</p>
+<p class="i"><b>I:</b> Intact ACL.</p>
+<div class="dx">Normal knee</div>
+<p class="f"><b>F:</b> The medial and lateral menisci are intact without tear or extrusion. The anterior and posterior cruciate ligaments demonstrate normal signal, orientation, and continuity. The MCL and LCL are intact. The extensor mechanism including the quadriceps tendon, patella, and patellar tendon is intact. Articular cartilage of all three compartments is preserved. No significant joint effusion. No marrow signal abnormality. No soft tissue mass.</p>
+<p class="i"><b>I:</b> Normal MRI of the knee.</p>
+<h2>Useful Caveats</h2>
+<ul><li>Meniscal signal: Grade 1/2 intrameniscal signal NOT reaching an articular surface = degenerative intrameniscal change, not a tear. Only surface-reaching signal on at least two consecutive images constitutes a tear.</li><li>Post-meniscectomy: residual meniscus can show abnormal signal and irregular contour; compare to surgical report and prior imaging to differentiate expected postoperative change from retear.</li><li>ACL mucoid degeneration: enlarged, intact ligament with diffuse increased T2 signal along its course; fibers are continuous; no clinical instability. Do not call a tear.</li><li>Magic angle artifact: artifactual increased signal at 55 degrees to B0 in short TE sequences (PD, T1); verify on fluid-sensitive sequences before calling pathology.</li><li>Transverse intermeniscal ligament: connects anterior horns; do not mistake for a free fragment or anterior meniscal tear on axial/sagittal images.</li></ul>
+<h2>Meniscus</h2>
+<div class="dx">Horizontal tear</div>
+<p class="f"><b>F:</b> Horizontal fluid-signal tear of the <span class="ph">[body/posterior horn]</span> <span class="ph">[medial/lateral]</span> meniscus extending to the <span class="ph">[superior/inferior]</span> articular surface with mild meniscal degeneration. No displaced fragment.</p>
+<p class="i"><b>I:</b> Horizontal tear of the <span class="ph">[medial/lateral]</span> meniscus <span class="ph">[body/posterior horn]</span>.</p>
+<div class="dx">Vertical longitudinal tear</div>
+<p class="f"><b>F:</b> Vertical longitudinal fluid-signal tear of the <span class="ph">[posterior horn/body]</span> of the <span class="ph">[medial/lateral]</span> meniscus oriented perpendicular to the meniscal surface and extending <span class="ph">[X]</span> mm in craniocaudal dimension. The tear reaches the <span class="ph">[superior/inferior/both]</span> articular surface<span class="ph">[s]</span>. No displaced fragment or bucket-handle morphology.</p>
+<p class="i"><b>I:</b> Vertical longitudinal tear of the <span class="ph">[medial/lateral]</span> meniscus <span class="ph">[posterior horn/body]</span>.</p>
+<div class="dx">Radial tear / root equivalent</div>
+<p class="f"><b>F:</b> Radial tear of the <span class="ph">[posterior horn/root]</span> of the <span class="ph">[medial/lateral]</span> meniscus with truncation/ghosting on sagittal images and <span class="ph">[X]</span> mm peripheral extrusion of the meniscal body. Ghost meniscus sign is <span class="ph">[present/absent]</span> on sagittal imaging.</p>
+<p class="i"><b>I:</b> Radial/root tear of the <span class="ph">[medial/lateral]</span> meniscus with meniscal extrusion.</p>
+<div class="dx">Complex tear</div>
+<p class="f"><b>F:</b> Complex multiplanar tear of the <span class="ph">[posterior horn and body]</span> of the <span class="ph">[medial/lateral]</span> meniscus with both horizontal and vertical components extending to <span class="ph">[superior and inferior]</span> articular surfaces. <span class="ph">[Associated meniscal deformity/substance loss.]</span> No displaced fragment.</p>
+<p class="i"><b>I:</b> Complex tear of the <span class="ph">[medial/lateral]</span> meniscus <span class="ph">[posterior horn and body]</span>.</p>
+<div class="dx">Bucket-handle tear</div>
+<p class="f"><b>F:</b> Displaced longitudinal tear of the <span class="ph">[medial/lateral]</span> meniscus with centrally displaced fragment lying in the intercondylar notch <span class="ph">[deep to/adjacent to the PCL]</span>. Donor meniscal body is diminutive with absent bow-tie sign on consecutive sagittal images. <span class="ph">[Double PCL sign present on sagittal images.]</span></p>
+<p class="i"><b>I:</b> Bucket-handle tear of the <span class="ph">[medial/lateral]</span> meniscus with displaced fragment in the intercondylar notch.</p>
+<div class="dx">Horizontal cleavage tear with parameniscal cyst</div>
+<p class="f"><b>F:</b> Horizontal cleavage tear of the <span class="ph">[body/posterior horn]</span> of the <span class="ph">[medial/lateral]</span> meniscus with fluid extending along the tear plane to the meniscal periphery. A <span class="ph">[X]</span> cm multiloculated T2-hyperintense/T1-hypointense cyst is present at the <span class="ph">[medial/lateral]</span> meniscocapsular junction, contiguous with the tear.</p>
+<p class="i"><b>I:</b> Horizontal cleavage tear of the <span class="ph">[medial/lateral]</span> meniscus with associated parameniscal cyst.</p>
+<div class="dx">Meniscal flounce</div>
+<p class="f"><b>F:</b> Wavy/undulating contour of the free edge of the <span class="ph">[medial/lateral]</span> meniscus on sagittal images with otherwise normal meniscal signal and morphology. No surface-reaching signal abnormality.</p>
+<p class="i"><b>I:</b> Meniscal flounce of the <span class="ph">[medial/lateral]</span> meniscus, a normal variant. No meniscal tear.</p>
+<div class="dx">Discoid meniscus with tear</div>
+<p class="f"><b>F:</b> The <span class="ph">[lateral/medial]</span> meniscus demonstrates discoid morphology with extension of the meniscal body to or near the intercondylar notch and &gt;=3 consecutive sagittal bow-tie images. Superimposed <span class="ph">[horizontal/complex]</span> tear with fluid-signal extending to the <span class="ph">[superior/inferior]</span> articular surface. <span class="ph">[Peripheral detachment/shift if present.]</span></p>
+<p class="i"><b>I:</b> Discoid <span class="ph">[lateral/medial]</span> meniscus with superimposed <span class="ph">[horizontal/complex]</span> tear.</p>
+<div class="dx">Meniscal root tear</div>
+<p class="f"><b>F:</b> Tear of the <span class="ph">[posterior/anterior]</span> root attachment of the <span class="ph">[medial/lateral]</span> meniscus with fluid signal replacing the normal root fibers on <span class="ph">[coronal/sagittal/axial]</span> images. Ghost meniscus sign is present on sagittal imaging through the <span class="ph">[posterior horn]</span>. Meniscal body extrusion measures <span class="ph">[X]</span> mm beyond the tibial plateau margin. [Associated subchondral marrow edema/insufficiency fracture of the <span class="ph">[medial/lateral]</span> tibial plateau.]</p>
+<p class="i"><b>I:</b> <span class="ph">[Medial/lateral]</span> meniscal <span class="ph">[posterior/anterior]</span> root tear with <span class="ph">[X]</span> mm meniscal extrusion. Note: Biomechanically equivalent to total meniscectomy.</p>
+<div class="dx">Meniscal extrusion</div>
+<p class="f"><b>F:</b> <span class="ph">[Medial/lateral]</span> meniscal body is extruded <span class="ph">[X]</span> mm beyond the tibial margin, associated with <span class="ph">[root tear/advanced compartment chondrosis]</span>.</p>
+<p class="i"><b>I:</b> <span class="ph">[Medial/lateral]</span> meniscal extrusion, functionally significant at &gt;=3 mm.</p>
+<h2>Cruciate Ligaments</h2>
+<div class="dx">ACL complete tear</div>
+<p class="f"><b>F:</b> Complete discontinuity of the ACL fibers with abnormal horizontal fiber orientation, intercondylar edema, and pivot-shift bone contusions of the lateral femoral condyle and posterolateral tibial plateau. <span class="ph">[Anterior tibial translation/subluxation if present.]</span></p>
+<p class="i"><b>I:</b> Complete ACL tear with pivot-shift bone bruise pattern.</p>
+<div class="dx">ACL sprain / partial tear</div>
+<p class="f"><b>F:</b> ACL is thickened and edematous with partial fiber disruption but preserved overall fiber continuity and orientation. No anterior tibial translation. <span class="ph">[Surrounding intercondylar edema.]</span></p>
+<p class="i"><b>I:</b> ACL sprain/high-grade partial tear without complete rupture.</p>
+<div class="dx">ACL mucoid degeneration</div>
+<p class="f"><b>F:</b> The ACL is diffusely enlarged with increased intrasubstance T2 signal and loss of normal low-signal fiber architecture. Fiber continuity is preserved with normal orientation from tibial to femoral attachment. No acute edema or pivot-shift bone contusion pattern. <span class="ph">[Small intercondylar notch cyst may be present.]</span></p>
+<p class="i"><b>I:</b> ACL mucoid degeneration. Intact ligament without tear.</p>
+<div class="dx">ACL ganglion cyst</div>
+<p class="f"><b>F:</b> Well-circumscribed T2-hyperintense/T1-hypointense lobulated cystic lesion within/adjacent to the ACL fibers measuring <span class="ph">[X]</span> cm. ACL fiber continuity is <span class="ph">[preserved/disrupted]</span>. No solid enhancing component.</p>
+<p class="i"><b>I:</b> ACL ganglion cyst. <span class="ph">[ACL is intact / associated ACL tear]</span>.</p>
+<div class="dx">PCL complete tear</div>
+<p class="f"><b>F:</b> Complete discontinuity of the posterior cruciate ligament with loss of normal arcuate morphology, fiber retraction, and surrounding hemorrhage/edema. <span class="ph">[Associated posterior tibial translation.]</span> <span class="ph">[Concomitant posterolateral corner injury / multiligamentous pattern.]</span></p>
+<p class="i"><b>I:</b> Complete PCL tear. <span class="ph">[Evaluate for multiligamentous knee injury.]</span></p>
+<div class="dx">PCL sprain / partial tear</div>
+<p class="f"><b>F:</b> Focal thickening and increased T2 signal within the <span class="ph">[proximal/mid/distal]</span> PCL with partial fiber disruption. Overall ligament continuity and arcuate morphology are preserved. No posterior tibial translation.</p>
+<p class="i"><b>I:</b> PCL sprain/partial tear without complete rupture.</p>
+<div class="dx">PCL mucoid degeneration</div>
+<p class="f"><b>F:</b> The PCL is diffusely thickened with increased intrasubstance T2 signal throughout its course. Fiber continuity is preserved with normal arcuate morphology. No acute edema or posterior tibial translation.</p>
+<p class="i"><b>I:</b> PCL mucoid degeneration without tear.</p>
+<h2>Collateral Ligaments / Posterolateral Corner</h2>
+<div class="dx">MCL sprain</div>
+<p class="f"><b>F:</b> Edema superficial and deep to the MCL with <span class="ph">[mild thickening/partial fiber disruption]</span> and preserved overall continuity. <span class="ph">[Periligamentous fluid tracking.]</span></p>
+<p class="i"><b>I:</b> Grade <span class="ph">[1/2]</span> MCL sprain.</p>
+<div class="dx">MCL grade 3 / complete tear</div>
+<p class="f"><b>F:</b> Complete disruption of the <span class="ph">[superficial/deep]</span> MCL at the <span class="ph">[femoral/tibial/mid-substance]</span> level with <span class="ph">[X]</span> mm fiber gap, surrounding hemorrhage, and periligamentous edema. <span class="ph">[Concomitant deep MCL/meniscocapsular separation.]</span> <span class="ph">[Associated medial meniscus tear.]</span></p>
+<p class="i"><b>I:</b> Grade 3 (complete) MCL tear at the <span class="ph">[femoral/tibial/mid-substance]</span> level.</p>
+<div class="dx">MCL bursitis</div>
+<p class="f"><b>F:</b> Fluid-signal collection deep to the superficial MCL and superficial to the deep MCL/medial joint line measuring <span class="ph">[X]</span> mm in thickness. No MCL fiber disruption or meniscal tear.</p>
+<p class="i"><b>I:</b> MCL bursitis. No ligament tear.</p>
+<div class="dx">LCL sprain</div>
+<p class="f"><b>F:</b> Thickening and increased T2 signal within the lateral collateral ligament (fibular collateral ligament) with periligamentous edema. Fiber continuity is preserved from the lateral femoral epicondyle to the fibular head.</p>
+<p class="i"><b>I:</b> LCL sprain. No complete tear.</p>
+<div class="dx">LCL complete tear</div>
+<p class="f"><b>F:</b> Complete disruption of the lateral collateral ligament at the <span class="ph">[femoral/fibular/mid-substance]</span> level with fiber retraction and surrounding hemorrhage/edema. <span class="ph">[Associated posterolateral corner injury.]</span></p>
+<p class="i"><b>I:</b> Complete LCL tear. <span class="ph">[Evaluate for posterolateral corner injury.]</span></p>
+<div class="dx">Posterolateral corner injury</div>
+<p class="f"><b>F:</b> Injury to the posterolateral corner structures including <span class="ph">[disruption/edema of the LCL]</span>, <span class="ph">[thickening/tear of the popliteus tendon]</span>, <span class="ph">[disruption of the popliteofibular ligament]</span>, and <span class="ph">[edema/stripping of the arcuate ligament complex]</span>. <span class="ph">[Associated lateral meniscus tear.]</span> <span class="ph">[Associated cruciate ligament injury.]</span></p>
+<p class="i"><b>I:</b> Posterolateral corner injury involving the <span class="ph">[LCL, popliteus tendon, popliteofibular ligament, arcuate complex]</span>. Correlate for combined ligamentous instability.</p>
+<div class="dx">Popliteus tendon tear</div>
+<p class="f"><b>F:</b> <span class="ph">[Partial/complete]</span> disruption of the popliteus tendon at the <span class="ph">[musculotendinous junction/popliteal sulcus/femoral attachment]</span> with surrounding edema and <span class="ph">[tendon retraction if complete]</span>. <span class="ph">[Associated posterolateral corner injury/lateral meniscal tear.]</span></p>
+<p class="i"><b>I:</b> <span class="ph">[Partial/complete]</span> popliteus tendon tear. <span class="ph">[Evaluate for posterolateral corner injury.]</span></p>
+<h2>Extensor Mechanism</h2>
+<div class="dx">Patellar tendon rupture</div>
+<p class="f"><b>F:</b> Full-thickness disruption of the <span class="ph">[proximal/mid/distal]</span> patellar tendon with <span class="ph">[X]</span> cm gap, surrounding hemorrhage/edema, and patella alta (Insall-Salvati ratio <span class="ph">[X]</span>).</p>
+<p class="i"><b>I:</b> Complete patellar tendon rupture with patella alta.</p>
+<div class="dx">Patellar tendinopathy (jumper&#x27;s knee)</div>
+<p class="f"><b>F:</b> Fusiform thickening and increased T2 signal within the proximal patellar tendon at the inferior patellar pole insertion without discrete fluid-signal tear. <span class="ph">[Mild adjacent inferior patellar pole marrow edema.]</span> Tendon continuity is preserved.</p>
+<p class="i"><b>I:</b> Patellar tendinopathy (jumper&#x27;s knee). No discrete tear.</p>
+<div class="dx">Quadriceps tendon partial tear</div>
+<p class="f"><b>F:</b> <span class="ph">[Low-grade/high-grade]</span> partial-thickness fluid-signal defect of the <span class="ph">[superficial/deep]</span> layer of the distal quadriceps tendon at its superior patellar insertion, involving approximately <span class="ph">[X]</span>% of tendon thickness. Remaining fibers are intact. No patella baja.</p>
+<p class="i"><b>I:</b> <span class="ph">[Low-grade/high-grade]</span> partial-thickness quadriceps tendon tear.</p>
+<div class="dx">Quadriceps tendon complete tear</div>
+<p class="f"><b>F:</b> Full-thickness disruption of the quadriceps tendon <span class="ph">[X]</span> cm proximal to the superior patellar pole with <span class="ph">[X]</span> cm tendon retraction, surrounding hemorrhage/edema, and patella baja (Insall-Salvati ratio <span class="ph">[X]</span>). <span class="ph">[Suprapatellar hematoma/effusion.]</span></p>
+<p class="i"><b>I:</b> Complete quadriceps tendon rupture with tendon retraction and patella baja.</p>
+<div class="dx">MPFL tear</div>
+<p class="f"><b>F:</b> Disruption and edema of the medial patellofemoral ligament at the <span class="ph">[patellar/femoral/mid-substance]</span> level with <span class="ph">[complete fiber discontinuity/partial tearing and thickening]</span>. <span class="ph">[Associated lateral patellar subluxation/tilt.]</span></p>
+<p class="i"><b>I:</b> <span class="ph">[Partial/complete]</span> MPFL tear, compatible with <span class="ph">[recent/prior]</span> lateral patellar dislocation.</p>
+<div class="dx">Patellar dislocation pattern</div>
+<p class="f"><b>F:</b> Disruption of the medial patellofemoral ligament at the <span class="ph">[patellar/femoral/mid-substance]</span> level. Bone contusion/marrow edema of the inferomedial patella and anterolateral lateral femoral condyle reflecting the characteristic transient patellar dislocation pattern. <span class="ph">[Osteochondral/chondral shear injury of the medial patellar facet and/or lateral trochlea.]</span> [Loose body in the <span class="ph">[suprapatellar pouch/lateral gutter]</span>.] <span class="ph">[Joint effusion/hemarthrosis.]</span></p>
+<p class="i"><b>I:</b> Findings consistent with transient lateral patellar dislocation with MPFL tear, characteristic bone contusion pattern, and <span class="ph">[osteochondral injury/loose body]</span>.</p>
+<div class="dx">Patellar sleeve fracture</div>
+<p class="f"><b>F:</b> Avulsion of a thin osseous shell from the <span class="ph">[inferior/superior]</span> pole of the patella with fluid-signal cleft at the avulsion site and surrounding soft tissue edema. <span class="ph">[Patella alta if inferior pole avulsion.]</span> The patellar tendon attaches to the avulsed fragment. This pattern is characteristic of a pediatric injury.</p>
+<p class="i"><b>I:</b> Patellar sleeve avulsion fracture of the <span class="ph">[inferior/superior]</span> patellar pole. Pediatric pattern injury.</p>
+<h2>Cartilage / Arthritis / Loose Bodies</h2>
+<div class="dx">Patellofemoral chondrosis</div>
+<p class="f"><b>F:</b> <span class="ph">[Grade 2/3/4]</span> chondromalacia of the <span class="ph">[lateral patellar facet/medial patellar facet/trochlea]</span> with <span class="ph">[subchondral marrow edema/cystic change]</span>. TT-TG distance measures <span class="ph">[X]</span> mm. Patella is <span class="ph">[centered/laterally tilted/subluxed]</span>.</p>
+<p class="i"><b>I:</b> <span class="ph">[Mild/moderate/severe]</span> patellofemoral chondrosis with <span class="ph">[maltracking features if present]</span>.</p>
+<div class="dx">Medial compartment chondrosis</div>
+<p class="f"><b>F:</b> <span class="ph">[Grade 2/3/4]</span> chondral <span class="ph">[thinning/fissuring/full-thickness loss]</span> of the medial femoral condyle weightbearing surface and/or medial tibial plateau measuring <span class="ph">[X]</span> x <span class="ph">[Y]</span> mm. <span class="ph">[Subchondral marrow edema/cystic change.]</span> <span class="ph">[Marginal osteophytes.]</span> <span class="ph">[Associated medial meniscal tear/extrusion.]</span></p>
+<p class="i"><b>I:</b> <span class="ph">[Mild/moderate/severe]</span> medial compartment chondrosis <span class="ph">[with associated medial meniscal pathology]</span>.</p>
+<div class="dx">Lateral compartment chondrosis</div>
+<p class="f"><b>F:</b> <span class="ph">[Grade 2/3/4]</span> chondral <span class="ph">[thinning/fissuring/full-thickness loss]</span> of the lateral femoral condyle weightbearing surface and/or lateral tibial plateau measuring <span class="ph">[X]</span> x <span class="ph">[Y]</span> mm. <span class="ph">[Subchondral marrow edema/cystic change.]</span> <span class="ph">[Marginal osteophytes.]</span> <span class="ph">[Associated lateral meniscal tear.]</span></p>
+<p class="i"><b>I:</b> <span class="ph">[Mild/moderate/severe]</span> lateral compartment chondrosis.</p>
+<div class="dx">Osteochondral lesion</div>
+<p class="f"><b>F:</b> Focal osteochondral defect of the <span class="ph">[medial femoral condyle/lateral femoral condyle/trochlea]</span> measuring <span class="ph">[X]</span> x <span class="ph">[Y]</span> mm with fluid signal undermining the fragment and adjacent marrow edema.</p>
+<p class="i"><b>I:</b> Unstable osteochondral lesion of the <span class="ph">[location]</span>.</p>
+<div class="dx">Spontaneous osteonecrosis / subchondral insufficiency fracture (SONK/SIFK)</div>
+<p class="f"><b>F:</b> Focal subchondral low-T1/high-T2 signal abnormality of the <span class="ph">[medial femoral condyle weightbearing surface/medial tibial plateau]</span> measuring <span class="ph">[X]</span> mm with a low-signal subchondral fracture line and surrounding marrow edema disproportionate to the degree of cartilage loss. <span class="ph">[Overlying chondral fissuring/flattening.]</span> <span class="ph">[Small joint effusion.]</span></p>
+<p class="i"><b>I:</b> Subchondral insufficiency fracture of the <span class="ph">[medial femoral condyle/medial tibial plateau]</span> (SONK/SIFK). Correlate with acute onset pain.</p>
+<div class="dx">Osteochondritis dissecans (OCD)</div>
+<p class="f"><b>F:</b> Well-demarcated osteochondral lesion of the <span class="ph">[medial femoral condyle (classic lateral aspect)/lateral femoral condyle]</span> measuring <span class="ph">[X]</span> x <span class="ph">[Y]</span> mm. <span class="ph">[Stability assessment: fluid signal undermining the fragment / T2-bright rim around fragment / overlying cartilage breach / in situ cystic change = unstable features.]</span> <span class="ph">[Fragment is in situ/partially detached/displaced.]</span> <span class="ph">[Overlying articular cartilage is intact/disrupted.]</span></p>
+<p class="i"><b>I:</b> Osteochondritis dissecans of the <span class="ph">[location]</span>, <span class="ph">[stable/unstable based on MRI criteria]</span>. <span class="ph">[Loose body if displaced.]</span></p>
+<div class="dx">Tricompartmental OA</div>
+<p class="f"><b>F:</b> Tricompartmental osteoarthrosis with cartilage loss greatest in the <span class="ph">[medial/lateral/patellofemoral]</span> compartment, marginal osteophytes, subchondral marrow edema/cysts, and small effusion/synovitis.</p>
+<p class="i"><b>I:</b> Tricompartmental osteoarthrosis, greatest in the <span class="ph">[compartment]</span>.</p>
+<h2>Bone / Marrow</h2>
+<div class="dx">Bone contusion - pivot shift pattern (ACL tear)</div>
+<p class="f"><b>F:</b> Bone marrow edema pattern (T1-hypointense/T2-hyperintense marrow signal) involving the posterolateral tibial plateau and the lateral femoral condyle sulcus terminalis, consistent with a pivot-shift mechanism. <span class="ph">[Associated ACL tear.]</span></p>
+<p class="i"><b>I:</b> Pivot-shift bone contusion pattern. <span class="ph">[Evaluate ACL.]</span></p>
+<div class="dx">Bone contusion - dashboard injury pattern</div>
+<p class="f"><b>F:</b> Bone marrow edema pattern involving the anterior proximal tibia and the anterior distal femur, consistent with a dashboard/hyperflexion mechanism with posterior-directed force on the proximal tibia. <span class="ph">[Evaluate PCL.]</span></p>
+<p class="i"><b>I:</b> Dashboard-pattern bone contusions. <span class="ph">[Evaluate PCL.]</span></p>
+<div class="dx">Bone contusion - clip/valgus pattern</div>
+<p class="f"><b>F:</b> Bone marrow edema pattern involving the lateral femoral condyle and lateral tibial plateau from impaction, with contrecoup edema of the medial femoral condyle/tibial plateau. <span class="ph">[Associated MCL sprain/tear and possible ACL injury.]</span></p>
+<p class="i"><b>I:</b> Valgus/clip injury bone contusion pattern. <span class="ph">[Evaluate MCL and ACL.]</span></p>
+<div class="dx">Bone contusion - hyperextension pattern</div>
+<p class="f"><b>F:</b> Bone marrow edema pattern involving the anterior tibial plateau and anterior femoral condyles from direct impaction in hyperextension. <span class="ph">[Associated ACL and/or PCL injury.]</span></p>
+<p class="i"><b>I:</b> Hyperextension bone contusion pattern. <span class="ph">[Evaluate cruciate ligaments.]</span></p>
+<div class="dx">Tibial plateau fracture</div>
+<p class="f"><b>F:</b> Fracture of the <span class="ph">[lateral/medial/bicondylar]</span> tibial plateau with <span class="ph">[X]</span> mm of articular surface depression and <span class="ph">[X]</span> mm lateral cortical widening/split component. <span class="ph">[Associated meniscal tear/entrapment.]</span> <span class="ph">[Surrounding marrow edema and hemarthrosis.]</span> [Fracture line extends to the <span class="ph">[tibial spine/posterior cortex]</span>.]</p>
+<p class="i"><b>I:</b> <span class="ph">[Schatzker type X]</span> <span class="ph">[lateral/medial/bicondylar]</span> tibial plateau fracture with <span class="ph">[X]</span> mm articular depression.</p>
+<div class="dx">Stress fracture</div>
+<p class="f"><b>F:</b> Linear low-T1/low-T2 signal line in the <span class="ph">[proximal tibial metaphysis/distal femoral metaphysis]</span> oriented perpendicular to the cortex with surrounding ill-defined marrow edema (T1-hypointense/T2-hyperintense). No discrete fracture displacement. <span class="ph">[Periosteal edema/reaction.]</span></p>
+<p class="i"><b>I:</b> Stress fracture of the <span class="ph">[proximal tibia/distal femur]</span>. Correlate with activity history.</p>
+<div class="dx">Transient bone marrow edema</div>
+<p class="f"><b>F:</b> Diffuse ill-defined marrow edema (T1-hypointense/T2-hyperintense) involving the <span class="ph">[medial femoral condyle/lateral femoral condyle/proximal tibia]</span> without discrete fracture line, osteochondral defect, or focal subchondral collapse. Articular cartilage is preserved. No meniscal or ligamentous injury.</p>
+<p class="i"><b>I:</b> Transient bone marrow edema of the <span class="ph">[location]</span>. Consider transient osteoporosis or early AVN in appropriate clinical setting.</p>
+<h2>Common Other Diagnoses</h2>
+<div class="dx">Baker cyst (intact)</div>
+<p class="f"><b>F:</b> Well-defined T2-hyperintense/T1-hypointense fluid collection between the medial gastrocnemius and semimembranosus tendons measuring <span class="ph">[X]</span> x <span class="ph">[Y]</span> cm, communicating with the joint through the posteromedial capsule. No internal debris or peripheral enhancement to suggest complication.</p>
+<p class="i"><b>I:</b> Baker cyst (popliteal cyst).</p>
+<div class="dx">Baker cyst leak/rupture</div>
+<p class="f"><b>F:</b> Multiloculated popliteal cyst between the semimembranosus and medial gastrocnemius tendons with inferior fluid tracking along the calf fascial planes and surrounding soft tissue edema. <span class="ph">[Cyst wall irregularity/discontinuity.]</span></p>
+<p class="i"><b>I:</b> Leaking/ruptured Baker cyst.</p>
+<div class="dx">IT band friction syndrome</div>
+<p class="f"><b>F:</b> Edema deep to the iliotibial band over the lateral femoral epicondyle without IT band tear. <span class="ph">[Thickening of the distal ITB.]</span> <span class="ph">[Small fluid collection between the ITB and lateral femoral condyle.]</span></p>
+<p class="i"><b>I:</b> Iliotibial band friction syndrome.</p>
+<div class="dx">Pes anserine bursitis</div>
+<p class="f"><b>F:</b> Fluid and edema in the pes anserine bursa deep to the sartorius/gracilis/semitendinosus tendons along the anteromedial proximal tibia. No tendon tear.</p>
+<p class="i"><b>I:</b> Pes anserine bursitis.</p>
+<div class="dx">Ganglion cyst</div>
+<p class="f"><b>F:</b> Well-circumscribed T2-hyperintense/T1-hypointense lobulated cystic lesion <span class="ph">[adjacent to the proximal tibiofibular joint/along the meniscocapsular junction/in the intercondylar notch]</span> measuring <span class="ph">[X]</span> cm. No solid component or internal enhancement. <span class="ph">[Contiguous with adjacent meniscal tear/joint capsule.]</span></p>
+<p class="i"><b>I:</b> Ganglion cyst of the <span class="ph">[location]</span>.</p>
+<div class="dx">Pigmented villonodular synovitis (PVNS)</div>
+<p class="f"><b>F:</b> Diffuse/nodular synovial proliferation with heterogeneous signal and foci of T1/T2 hypointensity from hemosiderin deposition (blooming on gradient echo) throughout the suprapatellar pouch, posterior recesses, and periarticular soft tissues. Moderate joint effusion. <span class="ph">[Osseous erosions/pressure defects without marginal osteophytes.]</span></p>
+<p class="i"><b>I:</b> Pigmented villonodular synovitis (PVNS) / diffuse-type giant cell tumor of the knee.</p>
+<div class="dx">Synovial chondromatosis</div>
+<p class="f"><b>F:</b> Multiple intra-articular loose bodies of varying size within the suprapatellar pouch, posterior recesses, and intercondylar notch, many demonstrating peripheral calcification/ossification and central marrow-equivalent signal. Synovial proliferation. <span class="ph">[Pressure erosions on articular surfaces without significant cartilage loss.]</span></p>
+<p class="i"><b>I:</b> Synovial chondromatosis of the knee.</p>
+<div class="dx">Hoffa fat pad impingement</div>
+<p class="f"><b>F:</b> Edema and increased T2 signal within the infrapatellar (Hoffa) fat pad, predominantly in the superolateral aspect. <span class="ph">[Focal mass-like fibrosis/scarring within the fat pad.]</span> No discrete meniscal tear or patellar tendon pathology.</p>
+<p class="i"><b>I:</b> Hoffa fat pad edema/impingement syndrome.</p>
+<div class="dx">Plica syndrome (medial plica)</div>
+<p class="f"><b>F:</b> Thickened, edematous medial plica measuring <span class="ph">[X]</span> mm in thickness extending from the suprapatellar pouch along the medial patellofemoral joint. <span class="ph">[Adjacent chondral fissuring/erosion of the medial patellar facet and/or medial femoral condyle from plica impingement.]</span></p>
+<p class="i"><b>I:</b> Symptomatic medial plica with <span class="ph">[associated chondral changes if present]</span>. Correlate with anterior knee pain on clinical exam.</p>
+<h2>Search Pattern</h2>
+<ul><li><b>1. Check history, indication, and priors.</b></li><li><b>2. Assess adequacy, technique, and limitations.</b></li><li><b>3. Check localizers</b> for incidental pathology.</li><li><b>4. Check for effusion/collection</b> on fluid-weighted sequences: joint effusion, synovial thickening/proliferation; loose bodies; cysts around joint (Baker&#x27;s cyst) and associated meniscal cysts; bursitis.</li><li><b>5. Assess bone cortex and marrow:</b> cortical breaks/fractures, osteophytes, loose bodies, heterotopic ossification; marrow replacement.</li><li><b>6. Assess tendons:</b></li><li>Medial (pes anserinus: sartorius, gracilis, semitendinosus from anterior to posterior).</li><li>Lateral (ITB, LCL, biceps femoris tendon, popliteus tendon, popliteofibular ligament).</li><li>Anterior/extensor mechanism (quadriceps tendon, patellar tendon).</li><li>Posterior (hamstrings, soleus/gastrocnemius, plantaris).</li><li><b>7. Assess ligaments:</b></li><li>Morphology and signal on at least two projections (coronals + sagittals, axials to troubleshoot).</li><li>ACL (some intrinsic fluid signal and striated appearance can be normal).</li><li>PCL (should be completely black).</li><li>MCL (superficial and deep fibers, attached to meniscus).</li><li>LCL (look for associated posterolateral corner injuries).</li><li>Posterolateral corner structures (arcuate ligament, LCL, popliteus muscle, fabellofibular ligament, popliteofibular ligament, posterolateral capsule).</li><li><b>8. Assess menisci:</b></li><li>PD correlated with fluid-sensitive images; use coronals and sagittals, axials helpful for bucket-handle/flipped meniscal tears.</li><li>Both medial and lateral; start at intermeniscal ligament attachment, assess anterior horn, body, posterior horns to root.</li><li>Normal morphology and signal; thickness; position (double PCL sign = displaced/flipped/extruded).</li><li>Does internal signal extend to articular surface on more than one sequence?</li><li><b>9. Assess cartilage:</b></li><li>PD and fluid-sensitive; patella (axials and sagittals); trochlea (sagittals).</li><li>Medial compartment (sagittals and coronals); lateral compartment (sagittals and coronals).</li><li>Subchondral marrow changes as clues.</li><li><b>10. Assess subcutaneous tissues and musculature:</b> T1 precontrast, fluid-sensitive; atrophy, edema, inflammation, mass; popliteal artery and neurovascular bundle (aneurysms, entrapment, occlusion, mass).</li><li><b>11. Double check</b> marrow signal, muscles, and subcutaneous tissues.</li><li><b>12. Proofread report.</b></li></ul>
+<h2>Infection Search Pattern</h2>
+<ul><li><b>1. Marrow/bone changes:</b></li><li>Marrow replacement (darker than muscle/disc on T1; geographic pattern more predictive than reticular/periarticular).</li><li>Marrow edema (isolated finding raises concern in diabetics/high-risk).</li><li>Bone erosion (loss of dark T1/T2 cortical line).</li><li><b>2. Surrounding inflammatory changes:</b> fascia, musculature, subcutaneous fat edema/enhancement.</li><li><b>3. Susceptibility suggesting air:</b> in collections, soft tissues, along fascial planes, in bone.</li><li><b>4. Abnormal enhancement:</b></li><li>Rim-enhancing collection = abscess.</li><li>Superficial lesion without enhancement = ulcer.</li><li>Enhancement along fascial planes = infectious/inflammatory fasciitis.</li><li>Non-enhancement of normal structures = ischemia.</li><li>Other patterns of enhancement may not be specific.</li><li><b>5. Differentiating osteomyelitis from neuropathic joint:</b></li><li>Joint effusion with marrow replacement on both sides of joint.</li><li>Fluid collections/abscesses (periprosthetic, subperiosteal, intraosseous/Brodie&#x27;s abscess).</li><li>Sinus tract connecting abnormal marrow signal to skin surface.</li><li>Disappearance of subchondral cysts on sequential imaging.</li><li>Progressive marrow/soft tissue changes greater than expected on sequential imaging.</li></ul>
+<h2>Source Notes</h2>
+<p>Built from the original knee MRI cheat-sheet plus review-level MSK MRI reporting patterns and the expanded shoulder cheat-sheet style. Includes bone contusion pattern recognition, posterolateral corner anatomy, meniscal tear classification, and patellar instability evaluation frameworks.</p>
+<button id="to-top" class="to-top" aria-label="Back to top" title="Back to top (Home)">↑</button>
+<script>
+(function(){
+  var KEY='cheatsheet-font-scale', MIN=0.7, MAX=1.8, STEP=0.1;
+  var scale=parseFloat(localStorage.getItem(KEY));
+  if(!scale||isNaN(scale)) scale=1;
+  function apply(){ document.body.style.zoom=scale; }
+  function set(s){
+    scale=Math.min(MAX, Math.max(MIN, Math.round(s*10)/10));
+    localStorage.setItem(KEY, scale);
+    apply();
+  }
+  apply();
+  var dec=document.getElementById('fs-dec'),
+      inc=document.getElementById('fs-inc'),
+      rst=document.getElementById('fs-rst');
+  if(dec) dec.onclick=function(){ set(scale-STEP); };
+  if(inc) inc.onclick=function(){ set(scale+STEP); };
+  if(rst) rst.onclick=function(){ set(1); };
+  // back-to-top button
+  var top=document.getElementById('to-top');
+  function goTop(){ window.scrollTo({top:0, behavior:'smooth'}); }
+  function onScroll(){
+    if(!top) return;
+    if(window.scrollY>320) top.classList.add('show');
+    else top.classList.remove('show');
+  }
+  if(top){ top.onclick=goTop; window.addEventListener('scroll', onScroll, {passive:true}); onScroll(); }
+
+  document.addEventListener('keydown', function(e){
+    if(e.metaKey||e.ctrlKey||e.altKey) return;            // leave native zoom alone
+    var t=e.target;
+    if(t && (t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable)) return;
+    if(e.key==='+'||e.key==='='){ set(scale+STEP); e.preventDefault(); }
+    else if(e.key==='-'||e.key==='_'){ set(scale-STEP); e.preventDefault(); }
+    else if(e.key==='0'){ set(1); e.preventDefault(); }
+    else if(e.key==='Home'){ goTop(); e.preventDefault(); }
+  });
+})();
+</script>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}</script>
+</body>
+</html>

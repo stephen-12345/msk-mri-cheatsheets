@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MSK MRI — Dictation Templates</title>
+<link rel="stylesheet" href="../assets/cheatsheet.css">
+<style>
+.tmpl-index-wrap{
+  max-width:1100px; margin:0 auto; padding:24px 18px;
+}
+.tmpl-index-hero{
+  background:linear-gradient(135deg,#0e2536,#0c1a26);
+  border:1px solid #2c4a66; border-left:4px solid #35b8d8;
+  border-radius:10px; padding:20px 24px; margin-bottom:24px;
+}
+.tmpl-index-hero h1{
+  margin:0 0 8px; color:#fff; font-size:24px; border:none;
+}
+.tmpl-index-hero p{
+  margin:6px 0; color:var(--text); font-size:14.5px; line-height:1.6;
+}
+.tmpl-index-hero .badge{
+  display:inline-block; background:var(--dict-bg); color:var(--dict-tx);
+  border:1px solid var(--dict-ed); border-radius:999px;
+  padding:3px 10px; font-size:11px; font-weight:700;
+  letter-spacing:1.2px; text-transform:uppercase; margin-bottom:8px;
+}
+.tmpl-grid{
+  display:grid; gap:14px;
+  grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));
+}
+.tmpl-card{
+  background:#0d141f; border:1px solid #27364a; border-radius:10px;
+  padding:18px; cursor:pointer; text-decoration:none; color:var(--text);
+  display:flex; flex-direction:column; gap:8px;
+  transition:all 0.15s ease;
+}
+.tmpl-card:hover{
+  border-color:#f4b183; background:#15243a; transform:translateY(-2px);
+  text-decoration:none;
+}
+.tmpl-card .name{
+  font-size:18px; font-weight:800; color:#fff; letter-spacing:0.2px;
+}
+.tmpl-card .meta{font-size:12.5px; color:var(--muted)}
+.tmpl-card .count{
+  font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+  color:var(--mri-tx); margin-top:auto;
+}
+.tmpl-card.knee-cart{
+  background:#15110d; border-color:#a05530;
+}
+.tmpl-card.knee-cart .name{color:var(--dict-tx)}
+.tmpl-howto{
+  background:#0e1925; border:1px solid #2c4a66;
+  border-left:4px solid #35b8d8; border-radius:8px;
+  padding:14px 18px; margin-top:24px; font-size:13.5px; line-height:1.55;
+}
+.tmpl-howto h3{
+  margin:0 0 6px; color:#8bdcf0; font-size:15px; border:none;
+}
+.tmpl-howto ul{margin:6px 0 0 20px}
+.tmpl-howto li{margin:4px 0}
+.tmpl-howto code{
+  background:#0b1824; border:1px solid #1f2a3a; padding:1px 5px;
+  border-radius:3px; font-size:12px; color:#cfe3ee;
+}
+</style>
+</head>
+<body>
+
+<div class="tmpl-topbar">
+  <div class="row">
+    <span class="title">MSK MRI — PowerScribe Templates</span>
+    <a class="pill-link" href="../index.html">← All regions</a>
+  </div>
+</div>
+
+<div class="tmpl-index-wrap">
+
+  <div class="tmpl-index-hero">
+    <span class="badge">★ Beta · click-to-build dictation</span>
+    <h1>Joint dictation templates</h1>
+    <p>Click any joint below to open its PowerScribe-style template. Each page has every anatomic compartment from the protocol PDF as a clickable section — pick a grade, add locations, toggle associated findings, then copy the compiled dictation straight into PowerScribe.</p>
+    <p style="color:var(--muted);font-size:13px">Defaults to normal/preserved across the board. Modify only what you see on the scan. The output tracks <i>abnormal only</i> or <i>full report</i>.</p>
+  </div>
+
+  <div class="tmpl-grid">
+
+    <a class="tmpl-card" href="shoulder.html">
+      <div class="name">Shoulder</div>
+      <div class="meta">Bone · effusion · AC joint · rotator cuff (SS/IS/TM/subscap) · LHB · labrum (Bankart family, SLAP, posterior) · cartilage · capsulitis features</div>
+      <div class="count">26 sections</div>
+    </a>
+
+    <a class="tmpl-card" href="knee.html">
+      <div class="name">Knee</div>
+      <div class="meta">Effusion · Baker · bone · tendons (quads/patellar/pes/IT/popliteus/biceps fem/hamstring) · ACL/PCL/MCL/LCL/PLC/MPFL · menisci (both, all horns + roots) · cartilage (6 compartments) · Dejour</div>
+      <div class="count">36 sections</div>
+    </a>
+
+    <a class="tmpl-card" href="elbow.html">
+      <div class="name">Elbow</div>
+      <div class="meta">Effusion · bursae · bone (capitellum/trochlea OCD, epicondyles) · cartilage · common flexor/extensor · distal biceps/triceps · UCL/RCL/LUCL/annular · nerves (ulnar/median/radial)</div>
+      <div class="count">28 sections</div>
+    </a>
+
+    <a class="tmpl-card" href="hip.html">
+      <div class="name">Hip & Pelvis</div>
+      <div class="meta">Bone (spine, sacrum, pelvis, acetabula, femurs incl. cam/SCFE/AVN/SIF) · tendinous insertions (~8) · SI joints · pubic symphysis · joint effusion · labrum · cartilage · viscera</div>
+      <div class="count">33 sections</div>
+    </a>
+
+    <a class="tmpl-card" href="ankle.html">
+      <div class="name">Ankle</div>
+      <div class="meta">Effusion · bone (talar dome, accessory ossicles) · Achilles · medial T-D-H · lateral peroneals · anterior T-H-D · syndesmotic / lateral / deltoid / spring / Lisfranc · plantar fascia · hindfoot joints</div>
+      <div class="count">29 sections</div>
+    </a>
+
+    <a class="tmpl-card" href="wrist.html">
+      <div class="name">Wrist</div>
+      <div class="meta">Effusions (DRUJ/RC/MC) · bone (scaphoid, lunate, ulnar variance) · 6 extensor compartments · flexors · SL/LT ligaments · TFCC components · cartilage · median/ulnar nerves</div>
+      <div class="count">29 sections</div>
+    </a>
+
+    <a class="tmpl-card knee-cart" href="knee-cartilage.html">
+      <div class="name">Knee cartilage (legacy prototype)</div>
+      <div class="meta">Standalone cartilage-only template — superseded by the full knee template above but kept for reference.</div>
+      <div class="count">6 compartments</div>
+    </a>
+
+  </div>
+
+  <div class="tmpl-howto">
+    <h3>How the templates work</h3>
+    <ul>
+      <li>Every section defaults to a <b>normal/preserved</b> sentence — only abnormal findings need clicks.</li>
+      <li>Grade buttons (<code>Normal</code> / <code>G1</code> / <code>G2</code> / <code>partial</code> / etc.) are mutually exclusive — pick one per section.</li>
+      <li>Location buttons that say <span style="color:#9be4b5;font-weight:600">(pick one or more)</span> are multi-select. Grammar adjusts automatically: <code>medial + lateral facets</code> → "the medial and lateral facets" (auto-pluralized).</li>
+      <li>Green-check addons (subchondral marrow edema, paralabral cyst, etc.) are toggle additions and append to the section's sentence.</li>
+      <li>Numeric inputs (size in mm, retraction) flow into <code>{placeholders}</code> in the sentence template.</li>
+      <li>Bracketed text like <span class="placeholder" style="background:rgba(255,209,102,0.18);color:var(--mri-tx);padding:0 4px;border-radius:2px">[anatomic location]</span> = unfilled placeholder — pick a location to replace it.</li>
+      <li><b>Copy all</b> = entire compiled report. <b>Copy abnormal only</b> = skips normal sentences (when PowerScribe already has default normal text).</li>
+      <li>Sections are grouped in output by anatomic region per the MSK protocol PDF search-pattern order.</li>
+    </ul>
+  </div>
+
+  <p style="color:var(--muted);font-size:13px;margin-top:18px;text-align:center">
+    Templates are a starting point — edit the inline <code style="background:#0b1824;border:1px solid #1f2a3a;padding:1px 5px;border-radius:3px;font-size:12px;color:#cfe3ee">window.TEMPLATE_CONFIG</code> in each joint's HTML file to refine sentences, add options, or extend coverage.
+  </p>
+
+</div>
+
+</body>
+</html>

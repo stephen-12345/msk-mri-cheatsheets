@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>MSK MRI Dictation Cheat Sheets</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="theme-color" content="#0b3a52">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="MSK MRI">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #090d12;
+      --panel: #111821;
+      --panel-2: #162231;
+      --border: #27364a;
+      --text: #e8eef7;
+      --muted: #aab7c7;
+      --accent: #35b8d8;
+      --accent-2: #ffd166;
+      --ok: #57d68d;
+      --shadow: rgba(0, 0, 0, 0.35);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+      color: var(--text);
+      background:
+        linear-gradient(180deg, rgba(53, 184, 216, 0.08), transparent 22rem),
+        var(--bg);
+    }
+
+    header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(9, 13, 18, 0.88);
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(12px);
+      z-index: 2;
+    }
+
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(1.65rem, 2vw, 2.25rem);
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .sub {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+    }
+
+    .badge {
+      flex: 0 0 auto;
+      border: 1px solid rgba(53, 184, 216, 0.42);
+      background: rgba(53, 184, 216, 0.12);
+      color: #c9f6ff;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+
+    main {
+      padding: 28px 0 40px;
+    }
+
+    .notice {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px 20px;
+      margin-bottom: 18px;
+      color: var(--muted);
+      box-shadow: 0 18px 48px var(--shadow);
+    }
+
+    .notice strong { color: var(--text); }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--panel-2), var(--panel));
+      border-radius: 8px;
+      padding: 20px;
+      min-height: 190px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 18px 48px var(--shadow);
+    }
+
+    .card h2 {
+      margin: 0 0 8px;
+      font-size: 1.35rem;
+      letter-spacing: 0;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 1.08rem;
+    }
+
+    .refs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .refs a {
+      border: 1px solid #34506a;
+      border-radius: 999px;
+      padding: 3px 8px;
+      color: #8bdcf0;
+      text-decoration: none;
+      font-size: 0.95rem;
+      background: #0b1824;
+    }
+
+    .refs a:hover {
+      border-color: var(--accent);
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 10px 13px;
+      border-radius: 7px;
+      text-decoration: none;
+      border: 1px solid var(--border);
+      background: #0b1119;
+      color: var(--text);
+      font-weight: 650;
+      font-size: 1rem;
+    }
+
+    .btn.primary {
+      border-color: rgba(53, 184, 216, 0.58);
+      background: rgba(53, 184, 216, 0.15);
+      color: #d9f9ff;
+    }
+
+    .btn:hover {
+      border-color: var(--accent);
+    }
+
+    footer {
+      color: var(--muted);
+      font-size: 0.95rem;
+      padding: 22px 0 8px;
+    }
+
+    @media (max-width: 620px) {
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 16px 0;
+      }
+
+      .badge {
+        white-space: normal;
+      }
+    }
+  
+.source-links { display: inline-flex; flex-wrap: wrap; gap: 6px; margin-left: 8px; vertical-align: middle; font-weight: 600; }
+.source-links::before { content: "Sources:"; color: #9fb1c8; font-size: 0.82em; font-weight: 700; }
+.source-links a { border: 1px solid #34506a; border-radius: 999px; padding: 2px 7px; background: #0b1824; color: #8bdcf0 !important; text-decoration: none; font-size: 0.82em; line-height: 1.35; }
+.source-links a:hover { border-color: #8bdcf0; background: #102a3a; }
+.dx .source-links { margin-left: 10px; }
+@media print { .source-links { display: none !important; } }
+
+</style>
+</head>
+<body>
+  <header>
+    <div class="wrap topbar">
+      <div>
+        <h1>MSK MRI Dictation Cheat Sheets</h1>
+        <p class="sub">Portable dark-mode launcher for copy-ready findings and impressions.</p>
+      </div>
+      <div class="badge">Open this folder anywhere, then launch index.html</div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="notice">
+      <strong>Tip:</strong> Pages use a color-zoned layout — <span style="color:#8bdcf0">Anatomy</span> · <span style="color:#ffd166">Where on MRI</span> · <span style="color:#c8aaff">Numbers</span> · <span style="color:#f4b183">F: / I: dictation</span> · <span style="color:#ff9ec3">DDx</span> · <span style="color:#9be4b5">Tips</span>. Sticky jump-nav on every page. PDFs / Markdown are legacy source files (use HTML for the enhanced content).
+    </section>
+
+    <section class="notice" style="border-left:4px solid #f4b183;border-color:#f4b183">
+      <strong style="color:#f4b183">📋 Dictation Templates:</strong> Interactive PowerScribe-style templates with toggle buttons, location selectors, and live report preview. <a href="templates/index.html" style="color:#8bdcf0;font-weight:600">Open all templates →</a>
+    </section>
+
+    <section class="grid" aria-label="Cheat sheet links">
+      <article class="card">
+        <div><h2>Shoulder</h2><p>Rotator cuff, labrum, instability, HAGL/GLAD, impingement, postoperative cuff, and Outerbridge grading.</p><div class="refs"><a href="https://radiopaedia.org/articles/rotator-cuff-tear" target="_blank" rel="noopener noreferrer">Rotator cuff</a><a href="https://radiopaedia.org/articles/hagl-lesion" target="_blank" rel="noopener noreferrer">HAGL</a><a href="https://radsource.us/subscapularis-tendon-tear/" target="_blank" rel="noopener noreferrer">Radsource subscap</a></div></div>
+        <div class="links"><a class="btn primary" href="shoulder/shoulder-mri-cheatsheet.html">Open HTML</a><a class="btn" href="shoulder/shoulder-mri-cheatsheet.pdf">PDF</a><a class="btn" href="shoulder/shoulder-mri-cheatsheet.md">MD</a><a class="btn" href="templates/shoulder.html" style="border-color:rgba(244,177,131,0.58);background:rgba(244,177,131,0.12);color:#ffe0c8">📋 Template</a></div>
+      </article>
+      <article class="card">
+        <div><h2>Knee</h2><p>Meniscus, ACL/MCL, extensor mechanism, patellofemoral tracking, chondrosis, Baker cyst, and common overuse patterns.</p><div class="refs"><a href="https://radiopaedia.org/articles/meniscal-tear" target="_blank" rel="noopener noreferrer">Meniscus</a><a href="https://radiopaedia.org/articles/anterior-cruciate-ligament-tear" target="_blank" rel="noopener noreferrer">ACL</a><a href="https://radiopaedia.org/articles/chondromalacia-patellae" target="_blank" rel="noopener noreferrer">Chondrosis</a></div></div>
+        <div class="links"><a class="btn primary" href="knee/knee-mri-cheatsheet.html">Open HTML</a><a class="btn" href="knee/knee-mri-cheatsheet.pdf">PDF</a><a class="btn" href="knee/knee-mri-cheatsheet.md">MD</a><a class="btn" href="templates/knee.html" style="border-color:rgba(244,177,131,0.58);background:rgba(244,177,131,0.12);color:#ffe0c8">📋 Template</a></div>
+      </article>
+      <article class="card">
+        <div><h2>Elbow</h2><p>Epicondylitis, distal biceps/triceps, UCL, lateral ligament complex, capitellar OCD, neuritis, and loose bodies.</p><div class="refs"><a href="https://radiopaedia.org/articles/lateral-epicondylitis" target="_blank" rel="noopener noreferrer">Epicondylitis</a><a href="https://radiopaedia.org/articles/ulnar-collateral-ligament-injury" target="_blank" rel="noopener noreferrer">UCL</a><a href="https://pubmed.ncbi.nlm.nih.gov/24817006/" target="_blank" rel="noopener noreferrer">OCD</a></div></div>
+        <div class="links"><a class="btn primary" href="elbow/elbow-mri-cheatsheet.html">Open HTML</a><a class="btn" href="elbow/elbow-mri-cheatsheet.pdf">PDF</a><a class="btn" href="elbow/elbow-mri-cheatsheet.md">MD</a><a class="btn" href="templates/elbow.html" style="border-color:rgba(244,177,131,0.58);background:rgba(244,177,131,0.12);color:#ffe0c8">📋 Template</a></div>
+      </article>
+      <article class="card">
+        <div><h2>Hip</h2><p>Labrum, FAI, acetabular delamination, gluteal tendons, trochanteric bursitis, hamstring origin, AVN, and stress injury.</p><div class="refs"><a href="https://radiopaedia.org/articles/femoroacetabular-impingement" target="_blank" rel="noopener noreferrer">FAI</a><a href="https://radiopaedia.org/articles/acetabular-labral-tear" target="_blank" rel="noopener noreferrer">Labrum</a><a href="https://radiopaedia.org/articles/osteonecrosis-of-the-femoral-head" target="_blank" rel="noopener noreferrer">Osteonecrosis</a></div></div>
+        <div class="links"><a class="btn primary" href="hip/hip-mri-cheatsheet.html">Open HTML</a><a class="btn" href="hip/hip-mri-cheatsheet.pdf">PDF</a><a class="btn" href="hip/hip-mri-cheatsheet.md">MD</a><a class="btn" href="templates/hip.html" style="border-color:rgba(244,177,131,0.58);background:rgba(244,177,131,0.12);color:#ffe0c8">📋 Template</a></div>
+      </article>
+      <article class="card">
+        <div><h2>Ankle</h2><p>Lateral ligaments, syndesmosis, deltoid, peroneals, posterior tibial tendon, Achilles, talar OLT, and impingement.</p><div class="refs"><a href="https://radiopaedia.org/articles/anterior-talofibular-ligament-injury" target="_blank" rel="noopener noreferrer">ATFL</a><a href="https://radiopaedia.org/articles/osteochondral-lesion-of-the-talus" target="_blank" rel="noopener noreferrer">OLT</a><a href="https://radiopaedia.org/articles/achilles-tendon-rupture" target="_blank" rel="noopener noreferrer">Achilles</a></div></div>
+        <div class="links"><a class="btn primary" href="ankle/ankle-mri-cheatsheet.html">Open HTML</a><a class="btn" href="ankle/ankle-mri-cheatsheet.pdf">PDF</a><a class="btn" href="ankle/ankle-mri-cheatsheet.md">MD</a><a class="btn" href="templates/ankle.html" style="border-color:rgba(244,177,131,0.58);background:rgba(244,177,131,0.12);color:#ffe0c8">📋 Template</a></div>
+      </article>
+      <article class="card">
+        <div><h2>Foot</h2><p>Plantar plate, Morton neuroma, metatarsal stress injury, Lisfranc ligament, sesamoid, first MTP OA, and Freiberg pattern.</p><div class="refs"><a href="https://radiopaedia.org/articles/lisfranc-injury" target="_blank" rel="noopener noreferrer">Lisfranc</a><a href="https://radiopaedia.org/articles/morton-neuroma" target="_blank" rel="noopener noreferrer">Morton neuroma</a><a href="https://radiopaedia.org/articles/plantar-plate-tear" target="_blank" rel="noopener noreferrer">Plantar plate</a></div></div>
+        <div class="links"><a class="btn primary" href="foot/foot-mri-cheatsheet.html">Open HTML</a><a class="btn" href="foot/foot-mri-cheatsheet.pdf">PDF</a><a class="btn" href="foot/foot-mri-cheatsheet.md">MD</a></div>
+      </article>
+      <article class="card">
+        <div><h2>Finger</h2><p>Pulley tears, flexor/extensor tendon injuries, volar plate, collateral ligaments, thumb MCP UCL, fractures, and masses.</p><div class="refs"><a href="https://radiopaedia.org/articles/finger-pulley-injury" target="_blank" rel="noopener noreferrer">Pulley</a><a href="https://pubmed.ncbi.nlm.nih.gov/11896215/" target="_blank" rel="noopener noreferrer">Volar plate</a><a href="https://radiopaedia.org/articles/gamekeeper-thumb" target="_blank" rel="noopener noreferrer">Gamekeeper</a></div></div>
+        <div class="links"><a class="btn primary" href="finger/finger-mri-cheatsheet.html">Open HTML</a><a class="btn" href="finger/finger-mri-cheatsheet.pdf">PDF</a><a class="btn" href="finger/finger-mri-cheatsheet.md">MD</a></div>
+      </article>
+      <article class="card">
+        <div><h2>Wrist</h2><p>TFCC, DRUJ, ulnar impaction, scapholunate/lunotriquetral ligaments, De Quervain, ECU, carpal tunnel, and Kienbock.</p><div class="refs"><a href="https://radiopaedia.org/articles/triangular-fibrocartilage-complex-injury" target="_blank" rel="noopener noreferrer">TFCC</a><a href="https://radiopaedia.org/articles/scapholunate-dissociation" target="_blank" rel="noopener noreferrer">Scapholunate</a><a href="https://radiopaedia.org/articles/ulnar-impaction-syndrome" target="_blank" rel="noopener noreferrer">Ulnar impaction</a></div></div>
+        <div class="links"><a class="btn primary" href="wrist/wrist-mri-cheatsheet.html">Open HTML</a><a class="btn" href="wrist/wrist-mri-cheatsheet.pdf">PDF</a><a class="btn" href="wrist/wrist-mri-cheatsheet.md">MD</a><a class="btn" href="templates/wrist.html" style="border-color:rgba(244,177,131,0.58);background:rgba(244,177,131,0.12);color:#ffe0c8">📋 Template</a></div>
+      </article>
+      <article class="card" style="border-color:#7e3a89;background:linear-gradient(180deg,#1f1422,#162231)">
+        <div><h2>MSK Tumors <span style="font-size:0.7em;color:#ff9ec3;border:1px solid #7e3a89;border-radius:999px;padding:2px 8px;margin-left:6px;vertical-align:middle">NEW</span></h2><p>Bone + soft tissue tumor ddx by age, location, signal. Fluid-fluid level ddx, "don't touch" lesions, MRI fingerprints, dictation, sarcoma referral pathway.</p><div class="refs"><a href="https://radiopaedia.org/articles/bone-tumors" target="_blank" rel="noopener noreferrer">Bone tumors</a><a href="https://radiopaedia.org/articles/soft-tissue-tumour" target="_blank" rel="noopener noreferrer">Soft tissue</a><a href="https://radiopaedia.org/articles/dont-touch-lesions" target="_blank" rel="noopener noreferrer">Don't touch</a></div></div>
+        <div class="links"><a class="btn primary" href="tumors/tumors-mri-cheatsheet.html">Open HTML</a></div>
+      </article>
+    </section>
+
+    <footer>
+      All links are relative, so this folder can be copied to another computer and opened directly from disk.
+    </footer>
+  </main>
+  <script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){});});}</script>
+</body>
+</html>

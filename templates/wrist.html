@@ -1,0 +1,663 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wrist MRI — Dictation Template</title>
+<link rel="stylesheet" href="../assets/cheatsheet.css">
+</head>
+<body>
+
+<div class="tmpl-topbar">
+  <div class="row">
+    <span class="title" id="page-title">Wrist MRI — Dictation Template</span>
+    <a class="pill-link" id="back-link" href="../wrist/wrist-mri-cheatsheet.html">← Wrist cheatsheet</a>
+    <a class="pill-link" href="index.html">All templates</a>
+    <a class="pill-link" href="../index.html">All regions</a>
+    <span class="meta">click options · copy to PowerScribe</span>
+  </div>
+</div>
+
+<div class="tmpl-wrap">
+  <div>
+    <div class="tmpl-help">
+      <b>How it works:</b> Each section defaults to NORMAL. Click a grade/state to change it, then pick locations (multi-select supported, grammar auto-handled). Toggle associated findings with the green check buttons. The dictation builds live on the right — click <b>Copy all</b> or <b>Copy abnormal only</b> to paste into PowerScribe.
+    </div>
+    <div class="options-pane" id="options-pane"></div>
+  </div>
+
+  <div class="preview-pane">
+    <h3>Live Dictation Preview</h3>
+    <p class="sub">Updates as you click. <span class="placeholder">[bracketed]</span> = unfilled placeholder.</p>
+    <div class="preview-output" id="preview-output"></div>
+    <div class="preview-buttons">
+      <button class="preview-btn" id="copy-btn">Copy all</button>
+      <button class="preview-btn" id="copy-abnormal-btn">Copy abnormal only</button>
+      <button class="preview-btn danger" id="reset-btn">Reset</button>
+    </div>
+  </div>
+</div>
+
+<script>
+window.TEMPLATE_CONFIG = {
+  title: 'Wrist MRI — Dictation Template',
+  heading: 'WRIST MRI',
+  back_link: '../wrist/wrist-mri-cheatsheet.html',
+  sections: [
+    // ============= EFFUSIONS / COLLECTIONS =============
+    {
+      id: 'effusion-radiocarpal', label: 'Radiocarpal joint effusion', output_section: 'Effusions / collections',
+      grade_group: {
+        label: 'Radiocarpal effusion',
+        options: [
+          {id: 'none', label: 'None', is_normal: true, sentence: 'No radiocarpal joint effusion.'},
+          {id: 'trace', label: 'Trace', sentence: 'Trace fluid within the radiocarpal joint, within physiologic limits.'},
+          {id: 'small', label: 'Small', sentence: 'Small simple radiocarpal joint effusion.'},
+          {id: 'moderate', label: 'Moderate', sentence: 'Moderate simple radiocarpal joint effusion distending the joint recesses.'},
+          {id: 'large', label: 'Large', sentence: 'Large radiocarpal joint effusion with marked distention of the joint recesses.'},
+          {id: 'complex', label: 'Complex / synovitis', sentence: 'Complex radiocarpal joint effusion with synovial thickening and enhancement, compatible with synovitis.'},
+        ]
+      }
+    },
+    {
+      id: 'effusion-midcarpal', label: 'Midcarpal joint effusion', output_section: 'Effusions / collections',
+      grade_group: {
+        label: 'Midcarpal effusion',
+        options: [
+          {id: 'none', label: 'None', is_normal: true, sentence: 'No midcarpal joint effusion.'},
+          {id: 'small', label: 'Small', sentence: 'Small simple midcarpal joint effusion.'},
+          {id: 'moderate', label: 'Moderate', sentence: 'Moderate midcarpal joint effusion.'},
+          {id: 'communicating', label: 'Communicating with radiocarpal', sentence: 'Midcarpal effusion communicating with the radiocarpal compartment through the scapholunate or lunotriquetral interval, suggesting interosseous ligament disruption.'},
+        ]
+      }
+    },
+    {
+      id: 'effusion-druj', label: 'DRUJ effusion', output_section: 'Effusions / collections',
+      grade_group: {
+        label: 'DRUJ effusion',
+        options: [
+          {id: 'none', label: 'None', is_normal: true, sentence: 'No distal radioulnar joint effusion. DRUJ alignment is anatomic.'},
+          {id: 'small', label: 'Small', sentence: 'Small DRUJ effusion.'},
+          {id: 'moderate', label: 'Moderate', sentence: 'Moderate DRUJ effusion with distention of the joint recess.'},
+          {id: 'instability', label: 'With DRUJ widening / instability', sentence: 'DRUJ effusion with widening of the joint space >3 mm and {sublux} subluxation of the ulna, compatible with DRUJ instability.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'sublux', label: 'Subluxation direction', type: 'mutex', placeholder: '[dorsal / volar]',
+         options: [
+           {id: 'd', label: 'Dorsal', value: 'dorsal'},
+           {id: 'v', label: 'Volar', value: 'volar'},
+         ]}
+      ]
+    },
+    {
+      id: 'ganglion', label: 'Ganglion cyst', output_section: 'Effusions / collections',
+      grade_group: {
+        label: 'Ganglion',
+        options: [
+          {id: 'none', label: 'None', is_normal: true, sentence: 'No ganglion cyst.'},
+          {id: 'dorsal', label: 'Dorsal ganglion', sentence: 'Well-defined T2-hyperintense ganglion cyst overlying the dorsal scapholunate interval, measuring {size} mm — most common location.'},
+          {id: 'volar', label: 'Volar ganglion', sentence: 'Well-defined T2-hyperintense ganglion cyst at the volar radioscaphoid joint, measuring {size} mm.'},
+          {id: 'other', label: 'Other location', sentence: 'T2-hyperintense ganglion cyst at the {location}, measuring {size} mm.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location (if other)', type: 'mutex', placeholder: '[location]',
+         options: [
+           {id: 'dorsal', label: 'Dorsal wrist', value: 'dorsal wrist'},
+           {id: 'volar', label: 'Volar wrist', value: 'volar wrist'},
+           {id: 'ulnar', label: 'Ulnar wrist', value: 'ulnar wrist'},
+           {id: 'radial', label: 'Radial wrist', value: 'radial wrist'},
+           {id: 'tunnel', label: 'Within carpal tunnel', value: 'carpal tunnel'},
+           {id: 'guyon', label: 'Within Guyon canal', value: 'Guyon canal'},
+         ]},
+        {id: 'size', label: 'Size (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+
+    // ============= BONE / MARROW =============
+    {
+      id: 'bone-marrow', label: 'Bone marrow — general', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Marrow signal',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Normal marrow signal throughout the distal radius, distal ulna, and carpal bones without focal lesion, fracture, or marrow replacement.'},
+          {id: 'contusion', label: 'Bone contusion', sentence: 'Geographic T2-hyperintense bone marrow edema involving the {location} without discrete fracture line, compatible with bone contusion.'},
+          {id: 'replacement', label: 'Marrow replacement', sentence: 'T1-hypointense marrow-replacing process involving the {location} — further evaluation recommended.'},
+          {id: 'reactive', label: 'Reactive / nonspecific edema', sentence: 'Patchy T2-hyperintense reactive marrow edema at the {location} without discrete fracture, nonspecific.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'multi', placeholder: '[bone]',
+         options: [
+           {id: 'dr', label: 'Distal radius', value: 'distal radius'},
+           {id: 'du', label: 'Distal ulna', value: 'distal ulna'},
+           {id: 'sc', label: 'Scaphoid', value: 'scaphoid'},
+           {id: 'lu', label: 'Lunate', value: 'lunate'},
+           {id: 'tq', label: 'Triquetrum', value: 'triquetrum'},
+           {id: 'pi', label: 'Pisiform', value: 'pisiform'},
+           {id: 'tm', label: 'Trapezium', value: 'trapezium'},
+           {id: 'td', label: 'Trapezoid', value: 'trapezoid'},
+           {id: 'cap', label: 'Capitate', value: 'capitate'},
+           {id: 'ha', label: 'Hamate', value: 'hamate'},
+         ]}
+      ]
+    },
+    {
+      id: 'scaphoid-fx', label: 'Scaphoid fracture', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Scaphoid fracture',
+        options: [
+          {id: 'none', label: 'None', is_normal: true, sentence: 'No scaphoid fracture. Scaphoid marrow signal is preserved.'},
+          {id: 'occult-edema', label: 'Occult — edema only', sentence: 'Geographic T2-hyperintense bone marrow edema within the scaphoid without a discrete fracture line — bone contusion vs occult fracture, clinical correlation recommended.'},
+          {id: 'nondisplaced', label: 'Non-displaced', sentence: 'Linear T1-hypointense fracture line traversing the {location} of the scaphoid with surrounding bone marrow edema. No significant displacement.'},
+          {id: 'displaced', label: 'Displaced', sentence: 'Displaced fracture through the {location} of the scaphoid with surrounding bone marrow edema.'},
+          {id: 'proximal-pole', label: 'Proximal pole fracture', sentence: 'Fracture through the proximal pole of the scaphoid — high risk for nonunion and proximal pole AVN given tenuous retrograde blood supply.'},
+          {id: 'old-avn', label: 'Old fracture with proximal pole AVN', sentence: 'Chronic appearing scaphoid waist fracture with sclerosis and T1/T2-hypointense marrow signal of the proximal pole, compatible with avascular necrosis of the proximal pole (Preiser-like). {nonunion}'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Scaphoid location', type: 'mutex', placeholder: '[proximal pole / waist / distal]',
+         options: [
+           {id: 'p', label: 'Proximal pole', value: 'proximal pole'},
+           {id: 'w', label: 'Waist', value: 'waist'},
+           {id: 'd', label: 'Distal pole', value: 'distal pole'},
+         ]},
+        {id: 'nonunion', label: 'Nonunion?', type: 'mutex', placeholder: '',
+         options: [
+           {id: 'u', label: 'Nonunion', value: 'Nonunion features with fluid signal at the fracture line.'},
+           {id: 'h', label: 'Healing', value: 'Healing features with bridging marrow signal.'},
+         ]}
+      ]
+    },
+    {
+      id: 'lunate-kienbock', label: 'Lunate / Kienböck disease', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Lunate state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Lunate demonstrates normal marrow signal and morphology without features of avascular necrosis.'},
+          {id: 'edema', label: 'Diffuse edema (Lichtman I)', sentence: 'Diffuse T2-hyperintense / T1-hypointense bone marrow edema of the lunate with preserved morphology, consistent with Lichtman stage I Kienböck disease.'},
+          {id: 'sclerosis', label: 'Diffuse sclerosis (Lichtman II)', sentence: 'Diffuse T1/T2-hypointense signal of the lunate with preserved architecture, compatible with Lichtman stage II Kienböck disease (sclerosis without collapse).'},
+          {id: 'collapse', label: 'Collapse without carpal instability (IIIA)', sentence: 'Lunate collapse with maintained carpal alignment, consistent with Lichtman stage IIIA Kienböck disease.'},
+          {id: 'collapse-instab', label: 'Collapse with carpal instability (IIIB)', sentence: 'Lunate collapse with scaphoid rotatory subluxation and proximal capitate migration, consistent with Lichtman stage IIIB Kienböck disease.'},
+          {id: 'panarthrosis', label: 'Pancarpal arthrosis (Lichtman IV)', sentence: 'Lunate collapse with secondary pancarpal degenerative change, consistent with Lichtman stage IV Kienböck disease.'},
+        ]
+      }
+    },
+    {
+      id: 'lunate-type', label: 'Lunate morphology (type I/II)', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Lunate type',
+        options: [
+          {id: 'type1', label: 'Type I (no medial facet)', is_normal: true, sentence: 'Type I lunate morphology without a medial facet for the hamate.'},
+          {id: 'type2', label: 'Type II (medial facet for hamate)', sentence: 'Type II lunate variant with a medial facet articulating with the proximal pole of the hamate. {chondromalacia}'},
+        ]
+      },
+      variable_groups: [
+        {id: 'chondromalacia', label: 'Hamate chondromalacia (type II)', type: 'mutex', placeholder: '',
+         options: [
+           {id: 'no', label: 'No chondromalacia', value: 'No associated chondromalacia of the proximal pole of the hamate.'},
+           {id: 'yes', label: 'With hamate chondromalacia', value: 'Associated chondral fissuring and subchondral marrow edema at the proximal pole of the hamate (hamatolunate impingement).'},
+         ]}
+      ]
+    },
+    {
+      id: 'ulnar-variance', label: 'Ulnar variance', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Ulnar variance',
+        options: [
+          {id: 'neutral', label: 'Neutral', is_normal: true, sentence: 'Ulnar variance is neutral (within −2 to +2 mm).'},
+          {id: 'positive', label: 'Positive', sentence: 'Positive ulnar variance measuring +{mm} mm, predisposing to ulnar impaction syndrome.'},
+          {id: 'negative', label: 'Negative', sentence: 'Negative ulnar variance measuring −{mm} mm, predisposing to Kienböck disease.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'mm', label: 'Magnitude (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ],
+      addon_group: {
+        label: 'Ulnar impaction features',
+        options: [
+          {id: 'edema', label: 'Lunate ulnar edema', text: 'Associated T2-hyperintense bone marrow edema and subchondral cyst formation at the ulnar aspect of the proximal lunate, compatible with ulnar impaction syndrome.'},
+          {id: 'tfcc', label: 'TFCC degenerative perforation', text: 'Associated central degenerative perforation of the TFCC.'},
+        ]
+      }
+    },
+    {
+      id: 'osteophytes', label: 'Osteophytes / degenerative change', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Degenerative change',
+        options: [
+          {id: 'none', label: 'None', is_normal: true, sentence: 'No significant degenerative osteophytes.'},
+          {id: 'mild', label: 'Mild', sentence: 'Mild marginal osteophyte formation involving the {location}.'},
+          {id: 'moderate', label: 'Moderate', sentence: 'Moderate degenerative osteophytes and joint space narrowing involving the {location}.'},
+          {id: 'slac', label: 'SLAC pattern', sentence: 'Scapholunate advanced collapse (SLAC) pattern with radioscaphoid and capitolunate joint space narrowing, osteophytosis, and subchondral sclerosis.'},
+          {id: 'snac', label: 'SNAC pattern', sentence: 'Scaphoid nonunion advanced collapse (SNAC) pattern with scaphoid nonunion, radioscaphoid arthrosis, and proximal capitate migration.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'multi', placeholder: '[joint]',
+         options: [
+           {id: 'rs', label: 'Radioscaphoid', value: 'radioscaphoid joint'},
+           {id: 'rl', label: 'Radiolunate', value: 'radiolunate joint'},
+           {id: 'cap', label: 'Capitolunate', value: 'capitolunate joint'},
+           {id: 'stt', label: 'STT joint', value: 'scaphotrapeziotrapezoid joint'},
+           {id: 'druj', label: 'DRUJ', value: 'distal radioulnar joint'},
+           {id: 'cmc1', label: '1st CMC', value: 'first carpometacarpal joint'},
+         ]}
+      ]
+    },
+
+    // ============= EXTENSOR TENDONS (by compartment) =============
+    {
+      id: 't-ext1', label: 'Extensor compartment 1 (APL + EPB) — de Quervain', output_section: 'Extensor tendons',
+      grade_group: {
+        label: '1st compartment',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'First extensor compartment (APL and EPB) demonstrates normal fibrillar architecture and signal without peritendinous fluid.'},
+          {id: 'tenosynovitis', label: 'Tenosynovitis (de Quervain)', sentence: 'Thickening of the first extensor retinaculum with peritendinous fluid and intratendinous signal involving the APL and EPB, compatible with de Quervain tenosynovitis. {septum}'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness intrasubstance tear of the {tendon} tendon within the first extensor compartment.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'tendon', label: 'Tendon (if tear)', type: 'mutex', placeholder: '[APL / EPB]',
+         options: [
+           {id: 'apl', label: 'APL', value: 'abductor pollicis longus'},
+           {id: 'epb', label: 'EPB', value: 'extensor pollicis brevis'},
+         ]},
+        {id: 'septum', label: 'Septated compartment?', type: 'mutex', placeholder: '',
+         options: [
+           {id: 'no', label: 'No septum', value: ''},
+           {id: 'yes', label: 'Septated', value: 'Accessory intracompartmental septum separating the APL and EPB sub-compartments (present in ~40% — associated with refractory de Quervain).'},
+         ]}
+      ]
+    },
+    {
+      id: 't-ext2', label: 'Extensor compartment 2 (ECRL + ECRB)', output_section: 'Extensor tendons',
+      grade_group: {
+        label: '2nd compartment',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Second extensor compartment (ECRL and ECRB) demonstrates normal signal and morphology.'},
+          {id: 'tenosynovitis', label: 'Tenosynovitis', sentence: 'Peritendinous fluid surrounding the second extensor compartment tendons (ECRL and ECRB), compatible with tenosynovitis.'},
+          {id: 'tendinosis', label: 'Tendinosis', sentence: 'Fusiform thickening and intermediate intrasubstance signal of the ECRL/ECRB tendons consistent with tendinosis.'},
+          {id: 'intersection', label: 'Intersection syndrome', sentence: 'Peritendinous edema at the crossover of the first and second extensor compartments approximately 4–6 cm proximal to Lister tubercle, compatible with intersection syndrome.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness tear of the {tendon} tendon within the second extensor compartment.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'tendon', label: 'Tendon (if tear)', type: 'mutex', placeholder: '[ECRL / ECRB]',
+         options: [
+           {id: 'ecrl', label: 'ECRL', value: 'extensor carpi radialis longus'},
+           {id: 'ecrb', label: 'ECRB', value: 'extensor carpi radialis brevis'},
+         ]}
+      ]
+    },
+    {
+      id: 't-ext3', label: 'Extensor compartment 3 (EPL)', output_section: 'Extensor tendons',
+      grade_group: {
+        label: '3rd compartment',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Third extensor compartment (EPL) demonstrates normal signal and course around Lister tubercle.'},
+          {id: 'tenosynovitis', label: 'Tenosynovitis', sentence: 'Peritendinous fluid surrounding the EPL tendon, compatible with tenosynovitis. Higher risk for rupture given attritional course around Lister tubercle.'},
+          {id: 'tendinosis', label: 'Tendinosis', sentence: 'Fusiform thickening and intermediate intrasubstance signal of the EPL tendon, consistent with tendinosis.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness tear of the EPL tendon at the level of Lister tubercle.'},
+          {id: 'rupture', label: 'Complete rupture', sentence: 'Complete attritional rupture of the EPL tendon at Lister tubercle with proximal retraction — classic complication of distal radius fracture.'},
+        ]
+      }
+    },
+    {
+      id: 't-ext4', label: 'Extensor compartment 4 (ED + EI)', output_section: 'Extensor tendons',
+      grade_group: {
+        label: '4th compartment',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Fourth extensor compartment (extensor digitorum and extensor indicis) demonstrates normal signal and morphology.'},
+          {id: 'tenosynovitis', label: 'Tenosynovitis', sentence: 'Peritendinous fluid surrounding the fourth extensor compartment tendons, compatible with tenosynovitis.'},
+          {id: 'tendinosis', label: 'Tendinosis', sentence: 'Tendinosis of the fourth extensor compartment tendons with fusiform thickening and intermediate signal.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness tear of the {tendon} tendon within the fourth extensor compartment.'},
+          {id: 'rupture-ra', label: 'Attritional rupture (Vaughan-Jackson)', sentence: 'Attritional rupture of the extensor digitorum tendons to the ulnar digits, classically seen in rheumatoid arthritis with ulnar head erosion (Vaughan-Jackson syndrome).'},
+        ]
+      },
+      variable_groups: [
+        {id: 'tendon', label: 'Tendon (if tear)', type: 'mutex', placeholder: '[ED / EI]',
+         options: [
+           {id: 'ed', label: 'Extensor digitorum', value: 'extensor digitorum'},
+           {id: 'ei', label: 'Extensor indicis', value: 'extensor indicis'},
+         ]}
+      ]
+    },
+    {
+      id: 't-ext5', label: 'Extensor compartment 5 (EDM)', output_section: 'Extensor tendons',
+      grade_group: {
+        label: '5th compartment',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Fifth extensor compartment (extensor digiti minimi) demonstrates normal signal and morphology overlying the DRUJ.'},
+          {id: 'tenosynovitis', label: 'Tenosynovitis', sentence: 'Peritendinous fluid surrounding the EDM tendon, compatible with tenosynovitis.'},
+          {id: 'tendinosis', label: 'Tendinosis', sentence: 'Tendinosis of the EDM tendon with thickening and intermediate signal.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness tear of the EDM tendon overlying the DRUJ.'},
+        ]
+      }
+    },
+    {
+      id: 't-ext6', label: 'Extensor compartment 6 (ECU)', output_section: 'Extensor tendons',
+      grade_group: {
+        label: '6th compartment',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Sixth extensor compartment (ECU) demonstrates normal signal, normal position within the ulnar groove, and intact subsheath.'},
+          {id: 'tendinosis', label: 'Tendinosis', sentence: 'Fusiform thickening and intermediate intrasubstance signal of the ECU tendon, consistent with tendinosis.'},
+          {id: 'tenosynovitis', label: 'Tenosynovitis', sentence: 'Peritendinous fluid surrounding the ECU tendon within the ulnar groove, compatible with tenosynovitis.'},
+          {id: 'split', label: 'Longitudinal split', sentence: 'Longitudinal split tear of the ECU tendon within the ulnar groove with intrasubstance fluid signal.'},
+          {id: 'subsheath', label: 'Subsheath disruption with subluxation', sentence: 'Disruption of the ECU subsheath with {position} subluxation of the ECU tendon out of the ulnar groove, best demonstrated in supination.'},
+          {id: 'rupture', label: 'Complete rupture', sentence: 'Complete rupture of the ECU tendon with proximal retraction.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'position', label: 'Subluxation direction', type: 'mutex', placeholder: '[medial / volar]',
+         options: [
+           {id: 'med', label: 'Medial (to ulnar groove)', value: 'medial'},
+           {id: 'vol', label: 'Volar / palmar', value: 'volar'},
+         ]}
+      ]
+    },
+    {
+      id: 't-flexor', label: 'Flexor tendons (FDP, FDS, FPL)', output_section: 'Extensor tendons',
+      grade_group: {
+        label: 'Flexor tendons',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Flexor tendons (FDP, FDS, FPL, FCR, FCU) demonstrate normal signal and morphology without tenosynovitis.'},
+          {id: 'tenosynovitis', label: 'Flexor tenosynovitis', sentence: 'Peritendinous fluid and synovial thickening surrounding the flexor tendons within the carpal tunnel, compatible with flexor tenosynovitis — may contribute to median nerve compression.'},
+          {id: 'fpl', label: 'FPL tendinosis/tear', sentence: 'Tendinosis and partial-thickness tear of the flexor pollicis longus tendon, classically at risk for attritional rupture from a prominent volar plate/screw or hook of hamate (Mannerfelt lesion).'},
+          {id: 'fcr', label: 'FCR tendinosis', sentence: 'Tendinosis of the flexor carpi radialis tendon with peritendinous fluid at the level of the STT joint.'},
+          {id: 'fcu', label: 'FCU tendinosis/calcific', sentence: 'Tendinosis of the flexor carpi ulnaris tendon at the pisiform insertion. Consider calcific tendinitis if focal low-signal foci.'},
+        ]
+      }
+    },
+
+    // ============= LIGAMENTS — INTEROSSEOUS =============
+    {
+      id: 'sl-ligament', label: 'Scapholunate ligament', output_section: 'Ligaments — interosseous',
+      grade_group: {
+        label: 'SL ligament',
+        options: [
+          {id: 'intact', label: 'Intact', is_normal: true, sentence: 'Scapholunate ligament (dorsal, membranous, and volar portions) is intact with normal triangular dorsal segment. Scapholunate gap is normal (<3 mm).'},
+          {id: 'partial1', label: 'Partial — Geissler I (attenuation)', sentence: 'Attenuation of the {portion} portion of the scapholunate ligament without discrete tear, consistent with Geissler grade I.'},
+          {id: 'partial2', label: 'Partial — Geissler II (incomplete tear)', sentence: 'Incomplete tear of the {portion} portion of the scapholunate ligament with thinning and intermediate signal, consistent with Geissler grade II.'},
+          {id: 'partial3', label: 'Partial — Geissler III (complete one portion)', sentence: 'Complete tear of the {portion} portion of the scapholunate ligament with preserved continuity of the remaining components, Geissler grade III.'},
+          {id: 'complete', label: 'Complete tear', sentence: 'Complete disruption of the scapholunate ligament involving the dorsal, membranous, and volar portions with scapholunate gap widening (Terry Thomas sign) measuring {gap} mm. {disi}'},
+          {id: 'postsurgical', label: 'Postsurgical', sentence: 'Postsurgical changes of the scapholunate ligament. Native fibers are not well visualized.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'portion', label: 'Portion involved', type: 'multi', placeholder: '[dorsal / membranous / volar]',
+         options: [
+           {id: 'd', label: 'Dorsal (strongest)', value: 'dorsal'},
+           {id: 'm', label: 'Membranous / proximal', value: 'membranous'},
+           {id: 'v', label: 'Volar', value: 'volar'},
+         ]},
+        {id: 'gap', label: 'SL gap (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'},
+        {id: 'disi', label: 'DISI deformity', type: 'mutex', placeholder: '',
+         options: [
+           {id: 'no', label: 'No DISI', value: 'Carpal alignment is preserved.'},
+           {id: 'yes', label: 'With DISI', value: 'Associated dorsal intercalated segment instability (DISI) with scapholunate angle >60° and capitolunate angle >30°.'},
+         ]}
+      ]
+    },
+    {
+      id: 'lt-ligament', label: 'Lunotriquetral ligament', output_section: 'Ligaments — interosseous',
+      grade_group: {
+        label: 'LT ligament',
+        options: [
+          {id: 'intact', label: 'Intact', is_normal: true, sentence: 'Lunotriquetral ligament (dorsal, membranous, and volar portions) is intact. Lunotriquetral interval is preserved.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial tear of the {portion} portion of the lunotriquetral ligament with attenuation and intermediate signal.'},
+          {id: 'complete', label: 'Complete tear', sentence: 'Complete disruption of the lunotriquetral ligament with widening of the LT interval. {visi}'},
+          {id: 'postsurgical', label: 'Postsurgical', sentence: 'Postsurgical changes of the lunotriquetral ligament.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'portion', label: 'Portion involved', type: 'multi', placeholder: '[dorsal / membranous / volar]',
+         options: [
+           {id: 'd', label: 'Dorsal', value: 'dorsal'},
+           {id: 'm', label: 'Membranous', value: 'membranous'},
+           {id: 'v', label: 'Volar (strongest)', value: 'volar'},
+         ]},
+        {id: 'visi', label: 'VISI deformity', type: 'mutex', placeholder: '',
+         options: [
+           {id: 'no', label: 'No VISI', value: 'Carpal alignment is preserved.'},
+           {id: 'yes', label: 'With VISI', value: 'Associated volar intercalated segment instability (VISI) with scapholunate angle <30° and volar lunate tilt.'},
+         ]}
+      ]
+    },
+    {
+      id: 'extrinsic-lig', label: 'Extrinsic ligaments (RSC, LRL, DIC, DRC)', output_section: 'Ligaments — interosseous',
+      grade_group: {
+        label: 'Extrinsic ligaments',
+        options: [
+          {id: 'intact', label: 'Intact', is_normal: true, sentence: 'Extrinsic carpal ligaments (radioscaphocapitate, long radiolunate, dorsal intercarpal, dorsal radiocarpal) are intact.'},
+          {id: 'sprain', label: 'Sprain / edema', sentence: 'Periligamentous edema and mild thickening of the {ligament} ligament with preserved continuity, compatible with sprain.'},
+          {id: 'tear', label: 'Tear', sentence: 'Discontinuity of the {ligament} ligament with fluid signal at the expected location.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'ligament', label: 'Ligament', type: 'multi', placeholder: '[ligament]',
+         options: [
+           {id: 'rsc', label: 'Radioscaphocapitate (RSC)', value: 'radioscaphocapitate'},
+           {id: 'lrl', label: 'Long radiolunate (LRL)', value: 'long radiolunate'},
+           {id: 'srl', label: 'Short radiolunate (SRL)', value: 'short radiolunate'},
+           {id: 'dic', label: 'Dorsal intercarpal (DIC)', value: 'dorsal intercarpal'},
+           {id: 'drc', label: 'Dorsal radiocarpal (DRC)', value: 'dorsal radiocarpal'},
+         ]}
+      ]
+    },
+
+    // ============= TFCC =============
+    {
+      id: 'tfcc-disc', label: 'TFCC — articular disc', output_section: 'TFCC',
+      grade_group: {
+        label: 'Articular disc (Palmer)',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'TFCC articular disc demonstrates uniform low signal without perforation. Dorsal and volar radioulnar ligaments are intact. Ulnocarpal ligaments (ulnolunate, ulnotriquetral), meniscal homologue, and ECU subsheath are intact.'},
+          {id: 'degen', label: 'Degenerative thinning (no perforation)', sentence: 'Intermediate intrasubstance signal and thinning of the central articular disc of the TFCC without through-and-through perforation, consistent with Palmer class 2A degenerative change.'},
+          {id: '1a', label: 'Palmer 1A — central traumatic perforation', sentence: 'Through-and-through perforation of the central articular disc of the TFCC, consistent with Palmer class 1A traumatic tear. Peripheral attachments intact.'},
+          {id: '1b', label: 'Palmer 1B — ulnar peripheral avulsion', sentence: 'Avulsion of the TFCC from its ulnar styloid attachment with fluid signal at the foveal insertion, consistent with Palmer class 1B traumatic tear. Associated risk for DRUJ instability.'},
+          {id: '1c', label: 'Palmer 1C — distal ulnar (ulnocarpal ligament)', sentence: 'Disruption of the distal ulnocarpal ligaments (ulnolunate and/or ulnotriquetral) with fluid signal, consistent with Palmer class 1C traumatic tear.'},
+          {id: '1d', label: 'Palmer 1D — radial avulsion', sentence: 'Avulsion of the TFCC from the radial sigmoid notch attachment with fluid signal at the radial margin, consistent with Palmer class 1D traumatic tear. {fracture}'},
+          {id: '2b', label: 'Palmer 2B — disc thinning + lunate chondromalacia', sentence: 'TFCC central thinning with associated chondromalacia of the proximal ulnar lunate, consistent with Palmer class 2B degenerative change in the spectrum of ulnar impaction syndrome.'},
+          {id: '2c', label: 'Palmer 2C — disc perforation + lunate chondromalacia', sentence: 'Central TFCC perforation with chondromalacia of the proximal ulnar lunate, consistent with Palmer class 2C ulnar impaction.'},
+          {id: '2d', label: 'Palmer 2D — adds LT ligament perforation', sentence: 'TFCC perforation with chondromalacia of the lunate and lunotriquetral ligament perforation, consistent with Palmer class 2D ulnar impaction.'},
+          {id: '2e', label: 'Palmer 2E — ulnocarpal arthrosis', sentence: 'TFCC perforation with chondromalacia of the lunate, LT ligament perforation, and ulnocarpal arthrosis, consistent with Palmer class 2E end-stage ulnar impaction.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'fracture', label: 'Associated sigmoid notch fracture (1D)', type: 'mutex', placeholder: '',
+         options: [
+           {id: 'no', label: 'No fracture', value: ''},
+           {id: 'yes', label: 'With fracture', value: 'Associated sigmoid notch osseous avulsion fragment.'},
+         ]}
+      ],
+      addon_group: {
+        label: 'Associated findings',
+        options: [
+          {id: 'impaction', label: 'Ulnar impaction features', text: 'Associated subchondral cystic change and marrow edema at the proximal ulnar aspect of the lunate (and/or triquetrum), supporting ulnar impaction.'},
+          {id: 'druj', label: 'DRUJ instability', text: 'Associated DRUJ widening and ulnar subluxation, suggesting DRUJ instability.'},
+        ]
+      }
+    },
+    {
+      id: 'tfcc-radioulnar', label: 'TFCC — radioulnar ligaments + foveal attachment', output_section: 'TFCC',
+      grade_group: {
+        label: 'Radioulnar ligaments',
+        options: [
+          {id: 'intact', label: 'Intact', is_normal: true, sentence: 'Dorsal and volar radioulnar ligaments are intact at both radial sigmoid notch and ulnar foveal attachments.'},
+          {id: 'foveal-partial', label: 'Foveal partial tear', sentence: 'Partial tear of the {ligament} radioulnar ligament at its foveal attachment with intermediate signal and partial fiber discontinuity.'},
+          {id: 'foveal-complete', label: 'Foveal complete avulsion', sentence: 'Complete avulsion of the {ligament} radioulnar ligament from the ulnar fovea with fluid signal — primary cause of DRUJ instability ("foveal tear").'},
+        ]
+      },
+      variable_groups: [
+        {id: 'ligament', label: 'Ligament', type: 'multi', placeholder: '[dorsal / volar]',
+         options: [
+           {id: 'd', label: 'Dorsal', value: 'dorsal'},
+           {id: 'v', label: 'Volar', value: 'volar'},
+         ]}
+      ]
+    },
+    {
+      id: 'tfcc-meniscus', label: 'TFCC — meniscal homologue + UCL', output_section: 'TFCC',
+      grade_group: {
+        label: 'Meniscal homologue / UCL',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Meniscal homologue and ulnar collateral ligament are intact.'},
+          {id: 'mh-tear', label: 'Meniscal homologue tear', sentence: 'Disruption of the meniscal homologue with fluid signal.'},
+          {id: 'ucl', label: 'UCL injury', sentence: 'Partial-thickness tear of the ulnar collateral ligament with periligamentous edema.'},
+        ]
+      }
+    },
+
+    // ============= CARTILAGE =============
+    {
+      id: 'cart-radius', label: 'Distal radius cartilage', output_section: 'Cartilage',
+      grade_group: {
+        label: 'Outerbridge grade',
+        options: [
+          {id: 'g0', label: 'Normal', is_normal: true, sentence: 'Articular cartilage of the distal radius is preserved without focal fissuring or subchondral marrow abnormality.'},
+          {id: 'g1', label: 'G1 softening', short: 'G1', sentence: 'Mild T2-hyperintense intrachondral signal at the {location} of the distal radius without surface fissuring, consistent with Outerbridge grade 1 chondrosis.'},
+          {id: 'g2', label: 'G2 superficial fissure', short: 'G2', sentence: 'Superficial chondral fissuring at the {location} of the distal radius involving less than 50% of cartilage thickness, consistent with Outerbridge grade 2 chondrosis.'},
+          {id: 'g3', label: 'G3 deep fissure', short: 'G3', sentence: 'Deep chondral fissuring at the {location} of the distal radius extending greater than 50% of cartilage thickness without exposed bone, consistent with Outerbridge grade 3 chondrosis.'},
+          {id: 'g4', label: 'G4 full-thickness', short: 'G4', sentence: 'Full-thickness chondral defect at the {location} of the distal radius with exposed subchondral bone, consistent with Outerbridge grade 4 chondrosis.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'multi', placeholder: '[scaphoid facet / lunate facet / sigmoid notch]',
+         options: [
+           {id: 'sf', label: 'Scaphoid facet', value: 'scaphoid facet'},
+           {id: 'lf', label: 'Lunate facet', value: 'lunate facet'},
+           {id: 'sn', label: 'Sigmoid notch', value: 'sigmoid notch'},
+         ]}
+      ],
+      addon_group: {
+        label: 'Subchondral findings (optional)',
+        options: [
+          {id: 'edema', label: 'Marrow edema', text: 'Associated subchondral T2-hyperintense bone marrow edema.'},
+          {id: 'cyst', label: 'Cyst', text: 'Associated subchondral cyst measuring {cyst_size} mm.', size_input: 'cyst_size'},
+        ]
+      }
+    },
+    {
+      id: 'cart-ulna', label: 'Distal ulna cartilage', output_section: 'Cartilage',
+      grade_group: {
+        label: 'Outerbridge grade',
+        options: [
+          {id: 'g0', label: 'Normal', is_normal: true, sentence: 'Articular cartilage of the distal ulna is preserved.'},
+          {id: 'g1', label: 'G1 softening', short: 'G1', sentence: 'Mild T2-hyperintense intrachondral signal at the distal ulna, consistent with Outerbridge grade 1 chondrosis.'},
+          {id: 'g2', label: 'G2 superficial fissure', short: 'G2', sentence: 'Superficial chondral fissuring at the distal ulna, consistent with Outerbridge grade 2 chondrosis.'},
+          {id: 'g3', label: 'G3 deep fissure', short: 'G3', sentence: 'Deep chondral fissuring at the distal ulna, consistent with Outerbridge grade 3 chondrosis.'},
+          {id: 'g4', label: 'G4 full-thickness', short: 'G4', sentence: 'Full-thickness chondral defect at the distal ulna with exposed subchondral bone, consistent with Outerbridge grade 4 chondrosis.'},
+        ]
+      }
+    },
+    {
+      id: 'cart-carpal', label: 'Carpal cartilage (scaphoid / lunate / others)', output_section: 'Cartilage',
+      grade_group: {
+        label: 'Carpal Outerbridge',
+        options: [
+          {id: 'g0', label: 'Normal', is_normal: true, sentence: 'Carpal articular cartilage is preserved at the scaphoid, lunate, and remaining carpal bones.'},
+          {id: 'g1', label: 'G1 softening', short: 'G1', sentence: 'Mild chondrosis at the proximal articular surface of the {bone}, Outerbridge grade 1.'},
+          {id: 'g2', label: 'G2 superficial fissure', short: 'G2', sentence: 'Superficial chondral fissuring at the proximal articular surface of the {bone}, Outerbridge grade 2.'},
+          {id: 'g3', label: 'G3 deep fissure', short: 'G3', sentence: 'Deep chondral fissuring at the proximal articular surface of the {bone}, Outerbridge grade 3.'},
+          {id: 'g4', label: 'G4 full-thickness', short: 'G4', sentence: 'Full-thickness chondral defect with exposed subchondral bone at the proximal articular surface of the {bone}, Outerbridge grade 4.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'bone', label: 'Carpal bone', type: 'multi', placeholder: '[carpal bone]',
+         options: [
+           {id: 'sc', label: 'Scaphoid', value: 'scaphoid'},
+           {id: 'lu', label: 'Lunate', value: 'lunate'},
+           {id: 'tq', label: 'Triquetrum', value: 'triquetrum'},
+           {id: 'cap', label: 'Capitate', value: 'capitate'},
+           {id: 'ham', label: 'Hamate', value: 'hamate'},
+         ]}
+      ]
+    },
+
+    // ============= SUBCUTANEOUS / SOFT TISSUE =============
+    {
+      id: 'soft-tissues', label: 'Subcutaneous tissues and musculature', output_section: 'Soft tissues',
+      grade_group: {
+        label: 'Soft tissues',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Subcutaneous tissues and visualized musculature are unremarkable.'},
+          {id: 'edema', label: 'Diffuse edema', sentence: 'Diffuse subcutaneous edema overlying the {side} aspect of the wrist.'},
+          {id: 'mass', label: 'Soft tissue mass', sentence: 'Soft tissue mass within the {side} aspect of the wrist, measuring {size} mm — characterization warranted.'},
+          {id: 'cellulitis', label: 'Cellulitis / collection', sentence: 'Subcutaneous edema with focal fluid collection at the {side} aspect of the wrist, measuring {size} mm — concerning for cellulitis with developing abscess in the correct clinical setting.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'side', label: 'Side', type: 'mutex', placeholder: '[dorsal / volar / radial / ulnar]',
+         options: [
+           {id: 'd', label: 'Dorsal', value: 'dorsal'},
+           {id: 'v', label: 'Volar', value: 'volar'},
+           {id: 'r', label: 'Radial', value: 'radial'},
+           {id: 'u', label: 'Ulnar', value: 'ulnar'},
+         ]},
+        {id: 'size', label: 'Size (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+
+    // ============= NERVES =============
+    {
+      id: 'median-nerve', label: 'Median nerve / carpal tunnel', output_section: 'Nerves',
+      grade_group: {
+        label: 'Carpal tunnel',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Median nerve demonstrates normal caliber, signal, and position within the carpal tunnel. Cross-sectional area at the level of the pisiform is normal (<10 mm²). Flexor retinaculum is not bowed.'},
+          {id: 'mild', label: 'Mild CTS', sentence: 'Mild enlargement of the median nerve at the proximal carpal tunnel with cross-sectional area of {csa} mm² at the level of the pisiform (normal <10 mm²), without significant intraneural signal change — compatible with mild carpal tunnel syndrome.'},
+          {id: 'moderate', label: 'Moderate CTS', sentence: 'Enlargement of the median nerve at the proximal carpal tunnel with cross-sectional area of {csa} mm² (10–15 mm²), increased T2 intraneural signal, and palmar bowing of the flexor retinaculum, consistent with moderate carpal tunnel syndrome.'},
+          {id: 'severe', label: 'Severe CTS with thenar atrophy', sentence: 'Marked enlargement of the median nerve at the proximal carpal tunnel with cross-sectional area of {csa} mm² (>15 mm²), increased intraneural T2 signal, palmar bowing of the flexor retinaculum, and fatty atrophy of the thenar musculature, consistent with severe long-standing carpal tunnel syndrome.'},
+          {id: 'masslike', label: 'Mass / space-occupying cause', sentence: 'Median nerve compression within the carpal tunnel secondary to {cause}.'},
+          {id: 'postsurgical', label: 'Postsurgical (release)', sentence: 'Postsurgical carpal tunnel release with discontinuity of the flexor retinaculum. Median nerve is decompressed.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'csa', label: 'CSA at pisiform (mm²)', type: 'numeric', unit: 'mm²', placeholder: '[mm²]'},
+        {id: 'cause', label: 'Space-occupying cause', type: 'mutex', placeholder: '[cause]',
+         options: [
+           {id: 'gang', label: 'Ganglion cyst', value: 'a ganglion cyst within the carpal tunnel'},
+           {id: 'syn', label: 'Synovitis / tenosynovitis', value: 'florid flexor tenosynovitis'},
+           {id: 'mass', label: 'Soft tissue mass', value: 'a soft tissue mass within the carpal tunnel'},
+           {id: 'amyloid', label: 'Amyloid deposition', value: 'amyloid deposition along the flexor tendons'},
+           {id: 'bifid', label: 'Bifid median nerve / persistent median artery', value: 'a bifid median nerve with persistent median artery'},
+         ]}
+      ]
+    },
+    {
+      id: 'ulnar-nerve', label: 'Ulnar nerve / Guyon canal', output_section: 'Nerves',
+      grade_group: {
+        label: 'Guyon canal',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Ulnar nerve demonstrates normal caliber and signal within Guyon canal. No mass effect, signal abnormality, or hypothenar muscle denervation.'},
+          {id: 'compression', label: 'Compression / neuropathy', sentence: 'Compression of the ulnar nerve within Guyon canal at the {zone} with increased intraneural T2 signal, compatible with ulnar neuropathy.'},
+          {id: 'mass', label: 'Mass / space-occupying lesion', sentence: 'Space-occupying lesion within Guyon canal, most consistent with {lesion}, exerting mass effect on the ulnar nerve with associated intraneural signal abnormality.'},
+          {id: 'hookhamate', label: 'Hook of hamate fracture with ulnar neuropathy', sentence: 'Fracture/nonunion of the hook of the hamate with adjacent ulnar nerve signal abnormality within Guyon canal.'},
+          {id: 'denervation', label: 'With hypothenar denervation', sentence: 'Ulnar nerve signal abnormality within Guyon canal with denervation edema/atrophy of the hypothenar musculature and interossei.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'zone', label: 'Guyon zone', type: 'mutex', placeholder: '[zone 1 / 2 / 3]',
+         options: [
+           {id: 'z1', label: 'Zone 1 (proximal, mixed)', value: 'zone 1 (proximal, mixed motor and sensory)'},
+           {id: 'z2', label: 'Zone 2 (deep motor branch)', value: 'zone 2 (deep motor branch)'},
+           {id: 'z3', label: 'Zone 3 (superficial sensory)', value: 'zone 3 (superficial sensory branch)'},
+         ]},
+        {id: 'lesion', label: 'Lesion type', type: 'mutex', placeholder: '[ganglion / mass / lipoma]',
+         options: [
+           {id: 'g', label: 'Ganglion cyst', value: 'a ganglion cyst'},
+           {id: 'l', label: 'Lipoma', value: 'a lipoma'},
+           {id: 'a', label: 'Anomalous muscle', value: 'an anomalous muscle (accessory abductor digiti minimi)'},
+           {id: 'o', label: 'Other soft tissue mass', value: 'a soft tissue mass — characterization warranted'},
+         ]}
+      ]
+    }
+  ]
+};
+</script>
+<script src="engine.js"></script>
+
+</body>
+</html>

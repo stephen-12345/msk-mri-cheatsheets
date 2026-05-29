@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Knee MRI — Dictation Template</title>
+<link rel="stylesheet" href="../assets/cheatsheet.css">
+</head>
+<body>
+
+<div class="tmpl-topbar">
+  <div class="row">
+    <span class="title" id="page-title">Knee MRI — Dictation Template</span>
+    <a class="pill-link" id="back-link" href="../knee/knee-mri-cheatsheet.html">← Knee cheatsheet</a>
+    <a class="pill-link" href="index.html">All templates</a>
+    <a class="pill-link" href="../index.html">All regions</a>
+    <span class="meta">click options · copy to PowerScribe</span>
+  </div>
+</div>
+
+<div class="tmpl-wrap">
+  <div>
+    <div class="tmpl-help">
+      <b>How it works:</b> Each section defaults to NORMAL. Click a grade/state to change it, then pick locations (multi-select supported, grammar auto-handled). Toggle associated findings with the green check buttons. The dictation builds live on the right — click <b>Copy all</b> or <b>Copy abnormal only</b> to paste into PowerScribe.
+    </div>
+    <div class="options-pane" id="options-pane"></div>
+  </div>
+
+  <div class="preview-pane">
+    <h3>Live Dictation Preview</h3>
+    <p class="sub">Updates as you click. <span class="placeholder">[bracketed]</span> = unfilled placeholder.</p>
+    <div class="preview-output" id="preview-output"></div>
+    <div class="preview-buttons">
+      <button class="preview-btn" id="copy-btn">Copy all</button>
+      <button class="preview-btn" id="copy-abnormal-btn">Copy abnormal only</button>
+      <button class="preview-btn danger" id="reset-btn">Reset</button>
+    </div>
+  </div>
+</div>
+
+<script>
+window.TEMPLATE_CONFIG = {
+  title: 'Knee MRI — Dictation Template',
+  heading: 'KNEE MRI',
+  back_link: '../knee/knee-mri-cheatsheet.html',
+  sections: [
+    // ============= EFFUSION / FLUID =============
+    {
+      id: 'effusion', label: 'Joint effusion', output_section: 'Effusion / fluid',
+      grade_group: {
+        label: 'Effusion size',
+        options: [
+          {id: 'none', label: 'None', is_normal: true, sentence: 'No joint effusion.'},
+          {id: 'trace', label: 'Trace', sentence: 'Trace joint fluid in the suprapatellar recess, within physiologic limits.'},
+          {id: 'small', label: 'Small', sentence: 'Small simple joint effusion within the suprapatellar recess.'},
+          {id: 'moderate', label: 'Moderate', sentence: 'Moderate simple joint effusion distending the suprapatellar recess.'},
+          {id: 'large', label: 'Large', sentence: 'Large joint effusion markedly distending the suprapatellar recess and posterior joint recesses.'},
+          {id: 'hemarthrosis', label: 'Hemarthrosis', sentence: 'Moderate complex joint effusion with layering low-signal hemosiderin debris within the suprapatellar recess, consistent with hemarthrosis.'},
+        ]
+      }
+    },
+    {
+      id: 'baker', label: 'Baker cyst', output_section: 'Effusion / fluid',
+      grade_group: {
+        label: 'Baker cyst',
+        options: [
+          {id: 'none', label: 'None', is_normal: true, sentence: 'No Baker cyst.'},
+          {id: 'simple', label: 'Simple', sentence: 'Simple Baker cyst in the medial popliteal fossa between the semimembranosus tendon and the medial gastrocnemius head, measuring {size} mm.'},
+          {id: 'complex', label: 'Complex / dissecting', sentence: 'Complex Baker cyst with internal septations and inferior dissection along the medial gastrocnemius, measuring {size} mm.'},
+          {id: 'ruptured', label: 'Ruptured', sentence: 'Ruptured Baker cyst with extruded fluid tracking inferiorly along the medial calf fascial planes.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'size', label: 'Size', type: 'numeric', unit: 'value', placeholder: '[value]'}
+      ]
+    },
+    {
+      id: 'loose-body', label: 'Intra-articular loose body', output_section: 'Effusion / fluid',
+      grade_group: {
+        label: 'Loose body',
+        options: [
+          {id: 'none', label: 'None', is_normal: true, sentence: 'No discrete intra-articular loose body.'},
+          {id: 'present', label: 'Present', sentence: 'Discrete intra-articular loose body within the {location}, measuring {size} mm.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'mutex',
+         placeholder: '[suprapatellar recess / posterior recess / intercondylar notch]',
+         options: [
+           {id: 'spr', label: 'Suprapatellar recess', value: 'suprapatellar recess'},
+           {id: 'pr', label: 'Posterior recess', value: 'posterior recess'},
+           {id: 'icn', label: 'Intercondylar notch', value: 'intercondylar notch'},
+           {id: 'mg', label: 'Medial gutter', value: 'medial gutter'},
+           {id: 'lg', label: 'Lateral gutter', value: 'lateral gutter'},
+         ]},
+        {id: 'size', label: 'Size (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+
+    // ============= BONE / MARROW =============
+    {
+      id: 'bone-marrow', label: 'Bone marrow', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Marrow signal',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Normal marrow signal throughout the imaged femur, tibia, fibula, and patella without focal lesion, fracture, or marrow replacement.'},
+          {id: 'pivot-shift', label: 'Pivot-shift contusion', sentence: 'Geographic T2-hyperintense bone marrow edema involving the anterior central lateral femoral condyle and the posterolateral tibial plateau in a kissing distribution, diagnostic of pivot-shift contusion pattern.'},
+          {id: 'dashboard', label: 'Dashboard contusion', sentence: 'Anterior tibial bone marrow contusion compatible with dashboard mechanism.'},
+          {id: 'clip', label: 'Clip-injury contusion', sentence: 'Lateral femoral condyle and lateral tibial plateau bone marrow contusion compatible with clip-injury mechanism.'},
+          {id: 'fracture', label: 'Fracture', sentence: 'Linear T1-hypointense fracture line traversing the {location} with surrounding bone marrow edema. {displacement}'},
+          {id: 'sifk', label: 'SIFK', sentence: 'Subchondral T1-hypointense curvilinear fracture line in the {location} paralleling the articular surface, with surrounding extensive bone marrow edema and intact overlying articular cortex — features of subchondral insufficiency fracture (SIFK). No collapse.'},
+          {id: 'avn', label: 'AVN', sentence: 'Serpiginous double-line sign at the {location} subchondral region with surrounding T2-hyperintense edema, diagnostic of osteonecrosis.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'multi', placeholder: '[anatomic location]',
+         options: [
+           {id: 'mfc', label: 'Medial femoral condyle', value: 'medial femoral condyle'},
+           {id: 'lfc', label: 'Lateral femoral condyle', value: 'lateral femoral condyle'},
+           {id: 'mtp', label: 'Medial tibial plateau', value: 'medial tibial plateau'},
+           {id: 'ltp', label: 'Lateral tibial plateau', value: 'lateral tibial plateau'},
+           {id: 'patella', label: 'Patella', value: 'patella'},
+           {id: 'fhead', label: 'Fibular head', value: 'fibular head'},
+         ]},
+        {id: 'displacement', label: 'Displacement', type: 'mutex', placeholder: '',
+         options: [
+           {id: 'nd', label: 'Non-displaced', value: 'No significant displacement.'},
+           {id: 'md', label: 'Minimally displaced', value: 'Minimal displacement.'},
+           {id: 'dis', label: 'Displaced', value: 'Displaced.'},
+         ]}
+      ]
+    },
+    {
+      id: 'segond', label: 'Segond fracture', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Segond / reverse Segond',
+        options: [
+          {id: 'none', label: 'None', is_normal: true, sentence: 'No Segond avulsion fracture at the lateral tibial rim.'},
+          {id: 'segond', label: 'Segond present', sentence: 'Small osseous avulsion fragment at the lateral proximal tibial rim consistent with Segond fracture — highly associated with ACL injury.'},
+          {id: 'reverse', label: 'Reverse Segond', sentence: 'Osseous avulsion fragment at the medial proximal tibial rim consistent with reverse Segond fracture — associated with PCL and medial meniscus injury.'},
+        ]
+      }
+    },
+
+    // ============= TENDONS =============
+    {
+      id: 't-quadriceps', label: 'Quadriceps tendon', output_section: 'Tendons',
+      grade_group: {
+        label: 'Quadriceps state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Quadriceps tendon demonstrates normal fibrillar architecture and signal at the superior pole of the patella.'},
+          {id: 'tendinosis', label: 'Tendinosis', sentence: 'Fusiform thickening and intermediate intrasubstance signal of the distal quadriceps tendon without fluid-signal cleft, consistent with tendinosis.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Curvilinear T2-hyperintense signal extending into the distal quadriceps tendon at the superior patellar pole, reaching fluid intensity but not spanning full thickness, consistent with partial-thickness tear.'},
+          {id: 'full', label: 'Complete rupture', sentence: 'Complete full-thickness disruption of the distal quadriceps tendon at the superior patellar pole with {retraction} mm of proximal retraction and a fluid-filled gap.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'retraction', label: 'Retraction (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+    {
+      id: 't-patellar', label: 'Patellar tendon', output_section: 'Tendons',
+      grade_group: {
+        label: 'Patellar tendon state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Patellar tendon is normal in thickness and signal from the inferior patellar pole to the tibial tubercle.'},
+          {id: 'tendinosis-prox', label: 'Proximal tendinosis', sentence: 'Fusiform thickening and intermediate intrasubstance signal of the proximal patellar tendon at the inferior pole of the patella ("jumper\'s knee") with adjacent Hoffa fat pad edema. No fluid-signal cleft.'},
+          {id: 'tendinosis-dist', label: 'Distal tendinosis', sentence: 'Tendinosis at the distal patellar tendon insertion on the tibial tubercle.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness tear of the patellar tendon at the {location} with fluid-signal cleft and intratendinous T2-hyperintensity.'},
+          {id: 'full', label: 'Complete rupture', sentence: 'Complete full-thickness disruption of the patellar tendon at the {location} with proximal retraction and patella alta. Fluid-filled gap.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'mutex', placeholder: '[proximal / mid-substance / distal]',
+         options: [
+           {id: 'p', label: 'Proximal (patellar pole)', value: 'inferior patellar pole'},
+           {id: 'm', label: 'Mid-substance', value: 'mid-substance'},
+           {id: 'd', label: 'Distal (tibial tubercle)', value: 'tibial tubercle insertion'},
+         ]}
+      ]
+    },
+    {
+      id: 't-pes-anserine', label: 'Pes anserine tendons + bursa', output_section: 'Tendons',
+      grade_group: {
+        label: 'Pes anserine',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Pes anserine tendons (sartorius, gracilis, semitendinosus) demonstrate normal signal and morphology at the proximal medial tibial insertion. No bursitis.'},
+          {id: 'tendinosis', label: 'Tendinosis', sentence: 'Tendinosis at the pes anserine insertion with mild thickening and intermediate signal.'},
+          {id: 'bursitis', label: 'Bursitis', sentence: 'Fluid distention of the pes anserine bursa deep to the conjoint tendon, compatible with bursitis.'},
+        ]
+      }
+    },
+    {
+      id: 't-itband', label: 'Iliotibial band', output_section: 'Tendons',
+      grade_group: {
+        label: 'IT band state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Iliotibial band is normal in thickness and signal, with no peri-fascial edema at the lateral femoral condyle.'},
+          {id: 'itbs', label: 'IT band syndrome', sentence: 'T2-hyperintense edema interposed between the distal iliotibial band and the lateral femoral condyle, compatible with iliotibial band friction syndrome.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness disruption of the iliotibial band at the Gerdy tubercle with peri-tendinous edema.'},
+        ]
+      }
+    },
+    {
+      id: 't-popliteus', label: 'Popliteus', output_section: 'Tendons',
+      grade_group: {
+        label: 'Popliteus state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Popliteus musculotendinous unit demonstrates normal signal and course within the popliteus hiatus.'},
+          {id: 'strain', label: 'Strain', sentence: 'T2-hyperintense edema within the popliteus musculotendinous junction without macroscopic fiber discontinuity, compatible with muscle strain.'},
+          {id: 'tendinosis', label: 'Tendinosis', sentence: 'Fusiform thickening and intratendinous intermediate signal of the popliteus tendon within the popliteus hiatus.'},
+          {id: 'tear', label: 'Tear', sentence: 'Fluid-bright signal traversing the popliteus tendon at the {location}, consistent with tear.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'mutex', placeholder: '[origin / mid-substance / mtj]',
+         options: [
+           {id: 'or', label: 'Femoral origin', value: 'femoral origin'},
+           {id: 'mid', label: 'Mid-substance', value: 'mid-substance'},
+           {id: 'mtj', label: 'Musculotendinous junction', value: 'musculotendinous junction'},
+         ]}
+      ]
+    },
+    {
+      id: 't-biceps-femoris', label: 'Biceps femoris', output_section: 'Tendons',
+      grade_group: {
+        label: 'Biceps femoris state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Biceps femoris tendon is intact at the fibular head conjoined insertion with normal signal.'},
+          {id: 'strain', label: 'Strain', sentence: 'Muscle strain of the biceps femoris with intramuscular T2-hyperintense edema.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness disruption of the biceps femoris tendon at the conjoined insertion on the fibular head.'},
+          {id: 'avulsion', label: 'Avulsion (conjoined)', sentence: 'Complete avulsion of the biceps femoris–fibular collateral ligament conjoined tendon from the fibular head with retraction. Associated arcuate fragment.'},
+        ]
+      }
+    },
+    {
+      id: 't-hamstrings', label: 'Hamstrings (medial)', output_section: 'Tendons',
+      grade_group: {
+        label: 'Medial hamstring state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Semimembranosus and semitendinosus tendons demonstrate normal signal and morphology.'},
+          {id: 'strain-sm', label: 'Semimembranosus strain', sentence: 'T2-hyperintense intramuscular edema of the semimembranosus, compatible with muscle strain.'},
+          {id: 'tendinosis-sm', label: 'Semimembranosus tendinosis', sentence: 'Tendinosis of the semimembranosus tendon at the posteromedial tibial attachment.'},
+        ]
+      }
+    },
+    {
+      id: 't-gastroc', label: 'Gastrocnemius / soleus / plantaris', output_section: 'Tendons',
+      grade_group: {
+        label: 'Posterior calf',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Medial and lateral gastrocnemius heads, soleus, and plantaris are intact at their proximal origins.'},
+          {id: 'mg-strain', label: 'Medial gastroc strain', sentence: 'T2-hyperintense intramuscular edema of the medial head of the gastrocnemius at the musculotendinous junction, compatible with "tennis leg".'},
+          {id: 'plantaris', label: 'Plantaris rupture', sentence: 'Complete rupture of the plantaris musculotendinous junction with adjacent fluid signal.'},
+        ]
+      }
+    },
+
+    // ============= LIGAMENTS =============
+    {
+      id: 'acl', label: 'ACL', output_section: 'Ligaments',
+      grade_group: {
+        label: 'ACL state',
+        options: [
+          {id: 'intact', label: 'Intact', is_normal: true, sentence: 'Anterior cruciate ligament demonstrates uniform low-signal fibers paralleling the intercondylar roof with normal orientation.'},
+          {id: 'sprain', label: 'Grade 1 sprain', sentence: 'Mild intrasubstance T2-hyperintense edema of the ACL with preserved fiber continuity and normal contour, consistent with grade 1 sprain.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Focal partial-thickness fiber disruption of the {bundle} bundle of the ACL with preserved overall orientation. No anterior tibial translation.'},
+          {id: 'complete', label: 'Complete rupture', sentence: 'Amorphous edematous tissue replacing the expected fibers of the ACL with an empty notch sign. Buckled PCL with PCL angle <105° and anterior tibial translation, diagnostic of complete mid-substance ACL rupture.'},
+          {id: 'avulsion', label: 'Tibial spine avulsion', sentence: 'Avulsion fracture of the tibial spine at the ACL attachment with {displacement} displacement.'},
+          {id: 'mucoid', label: 'Mucoid degeneration', sentence: 'Diffuse T2-hyperintensity within the ACL substance with preserved striated fiber pattern ("celery stalk"), consistent with mucoid degeneration. No discontinuity.'},
+          {id: 'reconstructed', label: 'Postsurgical (graft)', sentence: 'Postsurgical ACL reconstruction graft is intact with appropriate femoral and tibial tunnel position. No discrete graft tear or arthrofibrosis.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'bundle', label: 'Bundle (if partial)', type: 'mutex', placeholder: '[AM / PL]',
+         options: [
+           {id: 'am', label: 'Anteromedial', value: 'anteromedial'},
+           {id: 'pl', label: 'Posterolateral', value: 'posterolateral'},
+         ]},
+        {id: 'displacement', label: 'Avulsion displacement', type: 'mutex', placeholder: '',
+         options: [
+           {id: 'nd', label: 'Non-displaced', value: 'minimal'},
+           {id: 'mod', label: 'Moderate', value: 'moderate'},
+           {id: 'mark', label: 'Marked', value: 'marked'},
+         ]}
+      ]
+    },
+    {
+      id: 'pcl', label: 'PCL', output_section: 'Ligaments',
+      grade_group: {
+        label: 'PCL state',
+        options: [
+          {id: 'intact', label: 'Intact', is_normal: true, sentence: 'Posterior cruciate ligament demonstrates uniformly low-signal fibers with normal curvature.'},
+          {id: 'sprain', label: 'Sprain', sentence: 'Mild thickening and intrasubstance signal of the PCL without fiber discontinuity, consistent with sprain.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness fiber disruption of the PCL at the {location} with surrounding edema and preserved fiber continuity.'},
+          {id: 'complete', label: 'Complete tear', sentence: 'Complete discontinuity of the PCL at the {location} with surrounding edema and fluid-filled gap.'},
+          {id: 'avulsion', label: 'Tibial avulsion', sentence: 'Avulsion fracture at the tibial PCL insertion with osseous fragment displacement.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'mutex', placeholder: '[femoral / mid-substance / tibial]',
+         options: [
+           {id: 'f', label: 'Femoral attachment', value: 'femoral attachment'},
+           {id: 'm', label: 'Mid-substance', value: 'mid-substance'},
+           {id: 't', label: 'Tibial attachment', value: 'tibial attachment'},
+         ]}
+      ]
+    },
+    {
+      id: 'mcl', label: 'MCL', output_section: 'Ligaments',
+      grade_group: {
+        label: 'MCL state',
+        options: [
+          {id: 'intact', label: 'Intact', is_normal: true, sentence: 'Medial collateral ligament (superficial and deep components) is intact with normal thickness and signal at both femoral and tibial attachments.'},
+          {id: 'g1', label: 'Grade 1 sprain', sentence: 'Periligamentous T2-hyperintense edema along the {location} of the MCL with preserved fiber continuity and normal contour, consistent with grade 1 sprain.'},
+          {id: 'g2', label: 'Grade 2 partial', sentence: 'Edematous thickening and partial-thickness fiber disruption of the MCL at the {location} attachment without complete discontinuity, consistent with grade 2 partial-thickness tear.'},
+          {id: 'g3', label: 'Grade 3 complete', sentence: 'Complete discontinuity of the MCL at the {location} attachment with retraction and fluid-filled gap, consistent with grade 3 complete tear.'},
+          {id: 'stener', label: 'Stener-like (pes interposed)', sentence: 'Complete MCL disruption with pes anserinus tendons interposed in the gap ("Stener-like" lesion), preventing primary healing.'},
+          {id: 'pellegrini', label: 'Chronic / Pellegrini-Stieda', sentence: 'Chronic MCL thickening and ossification along the proximal femoral attachment (Pellegrini-Stieda).'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'multi', placeholder: '[femoral / mid-substance / tibial]',
+         options: [
+           {id: 'f', label: 'Femoral attachment', value: 'femoral attachment'},
+           {id: 'm', label: 'Mid-substance', value: 'mid-substance'},
+           {id: 't', label: 'Tibial attachment', value: 'tibial attachment'},
+         ]}
+      ],
+      addon_group: {
+        label: 'Associated findings',
+        options: [
+          {id: 'bursa', label: 'MCL bursa fluid', text: 'Associated MCL bursa fluid distention.'},
+          {id: 'deep-mcl', label: 'Deep MCL (meniscofemoral/meniscotibial)', text: 'Associated deep MCL (meniscofemoral/meniscotibial) component disruption.'},
+        ]
+      }
+    },
+    {
+      id: 'lcl', label: 'LCL (fibular collateral ligament)', output_section: 'Ligaments',
+      grade_group: {
+        label: 'LCL state',
+        options: [
+          {id: 'intact', label: 'Intact', is_normal: true, sentence: 'Fibular collateral ligament is intact with normal thickness and signal at both femoral and fibular attachments.'},
+          {id: 'g1', label: 'Grade 1', sentence: 'Periligamentous T2-hyperintense edema around the fibular collateral ligament without fiber discontinuity, consistent with grade 1 sprain.'},
+          {id: 'g2', label: 'Grade 2 partial', sentence: 'Partial-thickness fiber disruption of the fibular collateral ligament at the {location} attachment with thickening and intermediate signal.'},
+          {id: 'g3', label: 'Grade 3 complete', sentence: 'Complete discontinuity of the fibular collateral ligament at the {location} attachment with retraction and fluid-filled gap.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'mutex', placeholder: '[femoral / fibular / mid-substance]',
+         options: [
+           {id: 'f', label: 'Femoral attachment', value: 'femoral'},
+           {id: 'fib', label: 'Fibular head attachment', value: 'fibular'},
+           {id: 'm', label: 'Mid-substance', value: 'mid-substance'},
+         ]}
+      ]
+    },
+    {
+      id: 'plc', label: 'Posterolateral corner', output_section: 'Ligaments',
+      grade_group: {
+        label: 'PLC state',
+        options: [
+          {id: 'intact', label: 'Intact', is_normal: true, sentence: 'Posterolateral corner structures (LCL, popliteus tendon, popliteofibular ligament, arcuate complex, biceps femoris) are intact.'},
+          {id: 'edema', label: 'Edema / partial', sentence: 'T2-hyperintense edema of the posterolateral corner structures with partial-thickness fiber disruption of the {component}.'},
+          {id: 'complete', label: 'Complete PLC injury', sentence: 'High-grade posterolateral corner injury with disruption of the {component}. Fanelli classification applicable.'},
+          {id: 'arcuate', label: 'Arcuate sign', sentence: 'Osseous avulsion at the fibular styloid ("arcuate sign") with adjacent PLC structure disruption.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'component', label: 'Component involved', type: 'multi', placeholder: '[LCL / popliteus / PFL / arcuate / biceps]',
+         options: [
+           {id: 'lcl', label: 'LCL', value: 'fibular collateral ligament'},
+           {id: 'pop', label: 'Popliteus', value: 'popliteus tendon'},
+           {id: 'pfl', label: 'Popliteofibular ligament', value: 'popliteofibular ligament'},
+           {id: 'arc', label: 'Arcuate', value: 'arcuate ligament'},
+           {id: 'fab', label: 'Fabellofibular', value: 'fabellofibular ligament'},
+           {id: 'bf', label: 'Biceps femoris', value: 'biceps femoris'},
+         ]}
+      ]
+    },
+    {
+      id: 'mpfl', label: 'MPFL', output_section: 'Ligaments',
+      grade_group: {
+        label: 'MPFL state',
+        options: [
+          {id: 'intact', label: 'Intact', is_normal: true, sentence: 'Medial patellofemoral ligament is intact with normal signal at both patellar and femoral attachments.'},
+          {id: 'sprain', label: 'Sprain', sentence: 'Periligamentous edema along the MPFL at the {location} attachment with preserved fiber continuity.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness disruption of the MPFL at the {location} attachment.'},
+          {id: 'complete', label: 'Complete tear', sentence: 'Complete discontinuity of the MPFL at the {location} attachment with retraction, often seen following transient lateral patellar dislocation.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'mutex', placeholder: '[femoral / mid-substance / patellar]',
+         options: [
+           {id: 'f', label: 'Femoral (Schöttle\'s point)', value: 'femoral'},
+           {id: 'm', label: 'Mid-substance', value: 'mid-substance'},
+           {id: 'p', label: 'Patellar', value: 'patellar'},
+         ]}
+      ]
+    },
+
+    // ============= MENISCI =============
+    ...meniscusSections('medial', 'Medial meniscus'),
+    ...meniscusSections('lateral', 'Lateral meniscus'),
+
+    // ============= CARTILAGE (Outerbridge per compartment) =============
+    ...cartilageSection('patella', 'Patella cartilage',
+      'patella',
+      [
+        {id: 'mr', label: 'Median ridge', value: 'median ridge'},
+        {id: 'mf', label: 'Medial facet', value: 'medial facet'},
+        {id: 'lf', label: 'Lateral facet', value: 'lateral facet'},
+      ]),
+    ...cartilageSection('trochlea', 'Trochlea cartilage',
+      'trochlea',
+      [
+        {id: 'g', label: 'Trochlear groove', value: 'trochlear groove'},
+        {id: 'mf', label: 'Medial trochlear facet', value: 'medial trochlear facet'},
+        {id: 'lf', label: 'Lateral trochlear facet', value: 'lateral trochlear facet'},
+      ]),
+    ...cartilageSection('mfc', 'Medial femoral condyle cartilage',
+      'medial femoral condyle',
+      [
+        {id: 'wb', label: 'Weight-bearing', value: 'weight-bearing'},
+        {id: 'nwb', label: 'Non-weight-bearing', value: 'non-weight-bearing'},
+        {id: 'p', label: 'Posterior', value: 'posterior'},
+      ], 'aspect'),
+    ...cartilageSection('mtp', 'Medial tibial plateau cartilage',
+      'medial tibial plateau',
+      [], null),
+    ...cartilageSection('lfc', 'Lateral femoral condyle cartilage',
+      'lateral femoral condyle',
+      [
+        {id: 'wb', label: 'Weight-bearing', value: 'weight-bearing'},
+        {id: 'nwb', label: 'Non-weight-bearing', value: 'non-weight-bearing'},
+        {id: 'ac', label: 'Anterior central', value: 'anterior central'},
+      ], 'aspect'),
+    ...cartilageSection('ltp', 'Lateral tibial plateau cartilage',
+      'lateral tibial plateau',
+      [], null),
+
+    // ============= EXTENSOR / PATELLOFEMORAL ALIGNMENT =============
+    {
+      id: 'patellar-alignment', label: 'Patellar alignment', output_section: 'Patellofemoral',
+      grade_group: {
+        label: 'Patellar height',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Patellar height and position are normal (Insall-Salvati within 0.8–1.2).'},
+          {id: 'alta', label: 'Patella alta', sentence: 'Patella alta with elevated Insall-Salvati ratio.'},
+          {id: 'baja', label: 'Patella baja', sentence: 'Patella baja with reduced Insall-Salvati ratio.'},
+          {id: 'lat-tilt', label: 'Lateral tilt', sentence: 'Excessive lateral patellar tilt without subluxation.'},
+          {id: 'lat-sublux', label: 'Lateral subluxation', sentence: 'Lateral patellar subluxation with increased TT-TG distance.'},
+        ]
+      }
+    },
+    {
+      id: 'trochlea-morph', label: 'Trochlear morphology (Dejour)', output_section: 'Patellofemoral',
+      grade_group: {
+        label: 'Trochlear dysplasia',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Trochlear morphology is normal without dysplastic features.'},
+          {id: 'a', label: 'Dejour A', sentence: 'Dejour type A trochlear dysplasia: shallow trochlear groove with crossing sign on lateral view.'},
+          {id: 'b', label: 'Dejour B', sentence: 'Dejour type B trochlear dysplasia with supratrochlear spur.'},
+          {id: 'c', label: 'Dejour C', sentence: 'Dejour type C trochlear dysplasia with asymmetric trochlear facets.'},
+          {id: 'd', label: 'Dejour D', sentence: 'Dejour type D trochlear dysplasia with the cliff-like medial facet ("cliff sign").'},
+        ]
+      }
+    },
+
+    // ============= SOFT TISSUES / NEUROVASCULAR =============
+    {
+      id: 'soft-tissues', label: 'Subcutaneous tissues and musculature', output_section: 'Soft tissues',
+      grade_group: {
+        label: 'Soft tissues',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Subcutaneous tissues and musculature are unremarkable. Popliteal artery and neurovascular bundle are normal.'},
+          {id: 'edema', label: 'Diffuse edema', sentence: 'Diffuse subcutaneous edema overlying the {side} aspect of the knee.'},
+          {id: 'mass', label: 'Soft tissue mass', sentence: 'Soft tissue mass within the {side} aspect of the knee, measuring {size} mm — characterization warranted.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'side', label: 'Side', type: 'mutex', placeholder: '[anterior / medial / lateral / posterior]',
+         options: [
+           {id: 'ant', label: 'Anterior', value: 'anterior'},
+           {id: 'med', label: 'Medial', value: 'medial'},
+           {id: 'lat', label: 'Lateral', value: 'lateral'},
+           {id: 'post', label: 'Posterior', value: 'posterior'},
+         ]},
+        {id: 'size', label: 'Size (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    }
+  ]
+};
+
+// =================================================================
+// Helper builders — keep config readable
+// =================================================================
+function meniscusSections(side, label){
+  const placeMap = {medial:'medial', lateral:'lateral'};
+  const opts = (horn) => ({
+    label: `${label[0].toUpperCase()+label.slice(1)} — ${horn}`,
+    options: [
+      {id: 'intact', label: 'Intact', is_normal: true, sentence: `${horn} of the ${side} meniscus demonstrates normal triangular morphology without surface-extending signal.`},
+      {id: 'degen', label: 'Intrasubstance degen', sentence: `Intrasubstance T2-hyperintense signal within the ${horn} of the ${side} meniscus not extending to an articular surface, consistent with intrasubstance degeneration.`},
+      {id: 'horiz', label: 'Horizontal cleavage', sentence: `Linear T2-hyperintense signal within the ${horn} of the ${side} meniscus oriented parallel to the tibial plateau and extending to the {surface}, consistent with horizontal cleavage tear.`},
+      {id: 'radial', label: 'Radial', sentence: `Linear T2-hyperintense signal at the inner free edge of the ${horn} of the ${side} meniscus oriented perpendicular to the meniscal long axis, consistent with radial tear.`},
+      {id: 'vertical', label: 'Vertical longitudinal', sentence: `Vertical T2-hyperintense signal within the ${horn} of the ${side} meniscus oriented parallel to the meniscal long axis and extending to both articular surfaces, consistent with vertical longitudinal tear.`},
+      {id: 'bucket', label: 'Bucket-handle (displaced)', sentence: `Vertical longitudinal tear of the ${horn} of the ${side} meniscus with displacement of the inner fragment into the intercondylar notch, demonstrating absent bow-tie sign and double-PCL sign — consistent with bucket-handle tear.`},
+      {id: 'complex', label: 'Complex', sentence: `Complex tear of the ${horn} of the ${side} meniscus involving multiple planes with macerated appearance.`},
+      {id: 'flap', label: 'Flap', sentence: `Flap tear of the ${horn} of the ${side} meniscus with displaced meniscal fragment.`},
+      {id: 'postop', label: 'Postsurgical', sentence: `Postsurgical changes of the ${horn} of the ${side} meniscus following prior meniscectomy/repair.`},
+    ]
+  });
+  const surfaceVar = {
+    id: 'surface', label: 'Surface extension (if cleavage)', type: 'mutex', placeholder: '[superior / inferior / free edge]',
+    options: [
+      {id: 'sup', label: 'Superior articular surface', value: 'superior articular surface'},
+      {id: 'inf', label: 'Inferior articular surface', value: 'inferior articular surface'},
+      {id: 'both', label: 'Both surfaces', value: 'both articular surfaces'},
+      {id: 'free', label: 'Free edge', value: 'free edge'},
+    ]
+  };
+  return [
+    {id: `${side}-ah`, label: `${label} — anterior horn`, output_section: `Menisci — ${label}`,
+     grade_group: opts('anterior horn'), variable_groups: [surfaceVar]},
+    {id: `${side}-body`, label: `${label} — body`, output_section: `Menisci — ${label}`,
+     grade_group: opts('body'), variable_groups: [surfaceVar]},
+    {id: `${side}-ph`, label: `${label} — posterior horn`, output_section: `Menisci — ${label}`,
+     grade_group: opts('posterior horn'), variable_groups: [surfaceVar]},
+    {id: `${side}-root`, label: `${label} — root`, output_section: `Menisci — ${label}`,
+     grade_group: {
+       label: `${label} root`,
+       options: [
+         {id: 'intact', label: 'Intact', is_normal: true, sentence: `Posterior ${side} meniscal root attachment is intact without root tear or extrusion.`},
+         {id: 'partial', label: 'Partial', sentence: `Partial-thickness signal at the posterior ${side} meniscal root attachment without complete avulsion.`},
+         {id: 'complete', label: 'Complete avulsion', sentence: `Complete avulsion of the posterior ${side} meniscal root with adjacent meniscal extrusion of {extrusion} mm beyond the tibial margin.`},
+         {id: 'ramp', label: 'Ramp lesion (medial only)', sentence: `Peripheral detachment of the posterior horn of the medial meniscus at the meniscocapsular junction, consistent with ramp lesion. Highly associated with ACL injury.`},
+       ]
+     },
+     variable_groups: [
+       {id: 'extrusion', label: 'Extrusion (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+     ]}
+  ];
+}
+
+function cartilageSection(id, label, anatomicName, locOpts, suffix){
+  // Wrap: "the X aspect of the Y" or "the Y" (no location case)
+  const wrap = locOpts.length === 0
+    ? `the ${anatomicName}`
+    : (suffix ? `the {location} ${suffix === 'aspect' ? '{aspect_word}' : suffix} of the ${anatomicName}` : `the {location} of the ${anatomicName}`);
+  const variable_groups = locOpts.length === 0 ? [] : [{
+    id: 'location', label: 'Location', type: 'multi',
+    placeholder: '[' + locOpts.map(o => o.value).join(' / ') + ']',
+    options: locOpts
+  }];
+  // Note: the {aspect_word} would need conditional pluralization. For simplicity,
+  // we inline "aspect" or "aspects" based on count via a small post-process — but
+  // since we want simple template strings, we'll just write "aspect" and rely on
+  // formatLocations to handle facet/groove pluralization via the suffix word naturally.
+  // For "aspect" — we accept slight imperfection (always singular) since "the weight-bearing
+  // and non-weight-bearing aspect" reads borderline OK. Could improve later.
+  const renderWrap = wrap.replace('{aspect_word}', 'aspect');
+  return [{
+    id: `cart-${id}`, label, output_section: 'Cartilage',
+    grade_group: {
+      label: 'Outerbridge grade',
+      options: [
+        {id: 'g0', label: 'Normal', is_normal: true, sentence: `Articular cartilage of ${anatomicName} is preserved without focal fissuring or subchondral marrow abnormality.`},
+        {id: 'g1', label: 'G1 softening', short: 'G1', sentence: `Mild T2-hyperintense intrachondral signal at ${renderWrap} without surface fissuring or thickness loss, consistent with Outerbridge grade 1 chondrosis.`},
+        {id: 'g2', label: 'G2 superficial fissure', short: 'G2', sentence: `Superficial chondral fissuring at ${renderWrap} involving less than 50% of cartilage thickness, consistent with Outerbridge grade 2 chondrosis.`},
+        {id: 'g3', label: 'G3 deep fissure', short: 'G3', sentence: `Deep chondral fissuring at ${renderWrap} extending greater than 50% of cartilage thickness without exposed subchondral bone, consistent with Outerbridge grade 3 chondrosis.`},
+        {id: 'g4', label: 'G4 full-thickness', short: 'G4', sentence: `Full-thickness chondral defect at ${renderWrap} with exposed subchondral bone, consistent with Outerbridge grade 4 chondrosis.`},
+      ]
+    },
+    variable_groups,
+    addon_group: {
+      label: 'Subchondral findings (optional)',
+      options: [
+        {id: 'edema', label: 'Marrow edema', text: 'Associated subchondral T2-hyperintense bone marrow edema.'},
+        {id: 'cyst', label: 'Cyst', text: 'Associated subchondral cyst measuring {cyst_size} mm.', size_input: 'cyst_size'},
+        {id: 'fracture', label: 'Subchondral fracture', text: 'Associated subchondral fracture line.'},
+      ]
+    }
+  }];
+}
+</script>
+<script src="engine.js"></script>
+
+</body>
+</html>

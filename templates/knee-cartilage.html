@@ -1,0 +1,744 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Knee Cartilage — Dictation Template</title>
+<link rel="stylesheet" href="../assets/cheatsheet.css">
+<style>
+/* ============ Template-specific styles (prototype) ============ */
+:root{
+  --tmpl-bg:#0d141f;
+  --tmpl-border:#27364a;
+  --tmpl-border-soft:#1f2a3a;
+  --opt-bg:#0b1824;
+  --opt-border:#34506a;
+  --opt-hover-bg:#102a3a;
+  --selected-bg:#221511;
+  --selected-border:#f4b183;
+  --selected-tx:#f4b183;
+  --addon-bg:#102019;
+  --addon-border:#3e7d59;
+  --addon-tx:#9be4b5;
+}
+
+.topbar-mini{
+  position:sticky; top:0; z-index:50;
+  background:rgba(9,13,18,0.94); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+  padding:10px 18px;
+}
+.topbar-mini .row{
+  display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+  max-width:1300px; margin:0 auto;
+}
+.topbar-mini .title{font-weight:700;color:#fff;font-size:16px;letter-spacing:0.2px}
+.topbar-mini .pill-link{
+  font-size:12px; color:#9fb1c8;
+  border:1px solid #34506a; border-radius:999px;
+  padding:3px 10px; text-decoration:none;
+}
+.topbar-mini .pill-link:hover{border-color:#8bdcf0;color:#fff;text-decoration:none}
+.topbar-mini .meta{font-size:12px;color:var(--muted);margin-left:auto}
+
+.template-wrap{
+  max-width:1300px; margin:0 auto; padding:18px;
+  display:grid; gap:18px;
+  grid-template-columns:1fr;
+}
+@media(min-width:1024px){
+  .template-wrap{grid-template-columns:minmax(0,1.1fr) minmax(0,0.9fr)}
+}
+
+/* Preview pane */
+.preview-pane{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-left:4px solid var(--mri-tx);
+  border-radius:8px;
+  padding:14px 16px;
+  align-self:start;
+}
+@media(min-width:1024px){
+  .preview-pane{position:sticky; top:64px}
+}
+.preview-pane h3{
+  color:var(--mri-tx); margin:0 0 6px;
+  border:none; padding:0;
+  font-size:14px; letter-spacing:1.5px; text-transform:uppercase; font-weight:700;
+}
+.preview-pane .sub{font-size:12px;color:var(--muted);margin-bottom:10px}
+.preview-output{
+  background:#0b1824;
+  border:1px dashed #2b4259;
+  border-radius:6px;
+  padding:14px 16px;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;
+  font-size:14.5px; line-height:1.6;
+  color:var(--text);
+  min-height:180px;
+  max-height:60vh;
+  overflow-y:auto;
+  white-space:pre-wrap;
+  -webkit-overflow-scrolling:touch;
+}
+.preview-output .heading{
+  display:block; font-weight:700;
+  color:var(--mri-tx); letter-spacing:1px;
+  margin-bottom:6px; font-size:13px; text-transform:uppercase;
+}
+.preview-output .sentence{display:block;margin:4px 0}
+.preview-output .placeholder{
+  background:rgba(255,209,102,0.15);
+  color:var(--mri-tx);
+  padding:0 4px; border-radius:2px;
+}
+.preview-output .normal-line{color:var(--muted);font-style:italic}
+.preview-output .empty{color:var(--muted);font-style:italic}
+.preview-output .abnormal{color:var(--dict-tx);font-weight:600}
+
+.preview-buttons{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.preview-btn{
+  background:var(--mri-bg); color:var(--mri-tx);
+  border:1px solid var(--mri-ed);
+  padding:8px 14px; border-radius:6px;
+  cursor:pointer; font-weight:700; font-size:13px;
+  font-family:inherit;
+  -webkit-tap-highlight-color:transparent;
+  transition:all 0.15s ease;
+}
+.preview-btn:hover{background:#2a2310;border-color:var(--mri-tx);transform:translateY(-1px)}
+.preview-btn.success{background:var(--tip-bg);color:var(--tip-tx);border-color:var(--tip-ed)}
+.preview-btn.danger{background:transparent;color:var(--warn-tx);border-color:var(--warn-ed)}
+.preview-btn.danger:hover{background:#251313}
+
+/* Options pane */
+.options-pane{display:flex;flex-direction:column;gap:12px}
+
+.template-section{
+  background:var(--tmpl-bg);
+  border:1px solid var(--tmpl-border);
+  border-radius:8px;
+  overflow:hidden;
+}
+.template-section header{
+  padding:10px 14px; background:#152337;
+  border-bottom:1px solid var(--tmpl-border);
+  display:flex; align-items:center; gap:10px;
+}
+.template-section header h4{
+  margin:0; padding:0; border:none;
+  color:#fff; font-size:15px; font-weight:700;
+}
+.template-section header .state{
+  font-size:11.5px; color:var(--muted);
+  margin-left:auto;
+  font-family:inherit;
+}
+.template-section header .state.modified{color:var(--dict-tx);font-weight:700}
+.template-section .body{padding:12px 14px}
+
+.option-group{margin-bottom:10px}
+.option-group:last-child{margin-bottom:0}
+.option-group-label{
+  font-size:10.5px; color:var(--muted);
+  text-transform:uppercase; letter-spacing:1.3px;
+  font-weight:700; margin-bottom:5px;
+}
+.option-buttons{display:flex;flex-wrap:wrap;gap:5px}
+.option-btn{
+  background:var(--opt-bg);
+  border:1px solid var(--opt-border);
+  color:var(--text);
+  padding:6px 11px;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:13px;
+  font-family:inherit;
+  transition:all 0.12s ease;
+  -webkit-tap-highlight-color:transparent;
+}
+.option-btn:hover{background:var(--opt-hover-bg);border-color:#8bdcf0}
+.option-btn.selected{
+  background:var(--selected-bg);
+  border-color:var(--selected-border);
+  color:var(--selected-tx);
+  font-weight:700;
+}
+.option-btn .grade{opacity:0.65;margin-right:5px;font-weight:600}
+.option-btn.normal.selected{
+  background:transparent;
+  border-color:var(--opt-border);
+  color:var(--muted);
+  font-weight:500;
+}
+.option-btn.checkbox{
+  background:transparent;
+  border-color:var(--opt-border);
+}
+.option-btn.checkbox.selected{
+  background:var(--addon-bg);
+  border-color:var(--addon-border);
+  color:var(--addon-tx);
+}
+.option-btn.checkbox::before{
+  content:"☐ "; opacity:0.6;
+}
+.option-btn.checkbox.selected::before{
+  content:"✓ "; opacity:1;
+}
+
+.size-input{
+  background:#15243a;
+  color:var(--mri-tx);
+  border:1px solid #2b4259;
+  padding:4px 8px;
+  border-radius:4px;
+  font-size:13px; font-family:inherit;
+  width:64px;
+  outline:none;
+}
+.size-input:focus{border-color:var(--mri-tx)}
+
+.help-note{
+  background:#0e1925;
+  border:1px solid #2c4a66;
+  border-left:4px solid #35b8d8;
+  border-radius:6px;
+  padding:10px 14px;
+  font-size:13px;
+  color:var(--text);
+  margin-bottom:12px;
+}
+.help-note b{color:#8bdcf0}
+
+@media(max-width:640px){
+  .template-wrap{padding:12px}
+  .preview-pane{position:static}
+  .option-btn{padding:8px 12px;font-size:14px}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar-mini">
+  <div class="row">
+    <span class="title">Knee Cartilage — Dictation Template</span>
+    <a class="pill-link" href="../knee/knee-mri-cheatsheet.html">← Knee cheatsheet</a>
+    <a class="pill-link" href="../index.html">All regions</a>
+    <span class="meta">PROTOTYPE · click options · copy to PowerScribe</span>
+  </div>
+</div>
+
+<div class="template-wrap">
+
+<!-- LEFT: OPTIONS -->
+<div class="options-pane">
+
+<div class="help-note">
+  <b>How it works:</b> Each compartment defaults to <i>preserved cartilage</i>. Click an Outerbridge grade to change it, then pick a sub-location. Add subchondral changes with the green check toggles. The dictation builds live on the right — click <b>Copy</b> to paste into PowerScribe.
+</div>
+
+<!-- Patella -->
+<section class="template-section" id="sec-patella" data-section="patella">
+  <header>
+    <h4>Patella</h4>
+    <span class="state">cartilage preserved</span>
+  </header>
+  <div class="body">
+    <div class="option-group" data-group="grade">
+      <div class="option-group-label">Outerbridge Grade</div>
+      <div class="option-buttons">
+        <button class="option-btn normal selected" data-grade="0">Normal</button>
+        <button class="option-btn" data-grade="1"><span class="grade">G1</span>Softening / signal</button>
+        <button class="option-btn" data-grade="2"><span class="grade">G2</span>Superficial fissure</button>
+        <button class="option-btn" data-grade="3"><span class="grade">G3</span>Deep fissure</button>
+        <button class="option-btn" data-grade="4"><span class="grade">G4</span>Full-thickness</button>
+      </div>
+    </div>
+    <div class="option-group" data-group="location">
+      <div class="option-group-label">Location <span style="color:#9be4b5;letter-spacing:0;text-transform:none;font-weight:600">(pick one or more)</span></div>
+      <div class="option-buttons">
+        <button class="option-btn" data-loc="median ridge">Median ridge</button>
+        <button class="option-btn" data-loc="medial facet">Medial facet</button>
+        <button class="option-btn" data-loc="lateral facet">Lateral facet</button>
+      </div>
+    </div>
+    <div class="option-group" data-group="addons">
+      <div class="option-group-label">Subchondral findings (optional)</div>
+      <div class="option-buttons">
+        <button class="option-btn checkbox" data-addon="edema">Subchondral marrow edema</button>
+        <button class="option-btn checkbox" data-addon="cyst">Subchondral cyst</button>
+        <input type="number" class="size-input" data-cyst-size placeholder="mm" min="1" max="99">
+        <button class="option-btn checkbox" data-addon="fracture">Subchondral fracture</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trochlea -->
+<section class="template-section" id="sec-trochlea" data-section="trochlea">
+  <header>
+    <h4>Trochlea</h4>
+    <span class="state">cartilage preserved</span>
+  </header>
+  <div class="body">
+    <div class="option-group" data-group="grade">
+      <div class="option-group-label">Outerbridge Grade</div>
+      <div class="option-buttons">
+        <button class="option-btn normal selected" data-grade="0">Normal</button>
+        <button class="option-btn" data-grade="1"><span class="grade">G1</span>Softening / signal</button>
+        <button class="option-btn" data-grade="2"><span class="grade">G2</span>Superficial fissure</button>
+        <button class="option-btn" data-grade="3"><span class="grade">G3</span>Deep fissure</button>
+        <button class="option-btn" data-grade="4"><span class="grade">G4</span>Full-thickness</button>
+      </div>
+    </div>
+    <div class="option-group" data-group="location">
+      <div class="option-group-label">Location <span style="color:#9be4b5;letter-spacing:0;text-transform:none;font-weight:600">(pick one or more)</span></div>
+      <div class="option-buttons">
+        <button class="option-btn" data-loc="trochlear groove">Trochlear groove</button>
+        <button class="option-btn" data-loc="medial trochlear facet">Medial facet</button>
+        <button class="option-btn" data-loc="lateral trochlear facet">Lateral facet</button>
+      </div>
+    </div>
+    <div class="option-group" data-group="addons">
+      <div class="option-group-label">Subchondral findings (optional)</div>
+      <div class="option-buttons">
+        <button class="option-btn checkbox" data-addon="edema">Subchondral marrow edema</button>
+        <button class="option-btn checkbox" data-addon="cyst">Subchondral cyst</button>
+        <input type="number" class="size-input" data-cyst-size placeholder="mm" min="1" max="99">
+        <button class="option-btn checkbox" data-addon="fracture">Subchondral fracture</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Medial femoral condyle -->
+<section class="template-section" id="sec-medial-femur" data-section="medial-femur">
+  <header>
+    <h4>Medial femoral condyle</h4>
+    <span class="state">cartilage preserved</span>
+  </header>
+  <div class="body">
+    <div class="option-group" data-group="grade">
+      <div class="option-group-label">Outerbridge Grade</div>
+      <div class="option-buttons">
+        <button class="option-btn normal selected" data-grade="0">Normal</button>
+        <button class="option-btn" data-grade="1"><span class="grade">G1</span>Softening / signal</button>
+        <button class="option-btn" data-grade="2"><span class="grade">G2</span>Superficial fissure</button>
+        <button class="option-btn" data-grade="3"><span class="grade">G3</span>Deep fissure</button>
+        <button class="option-btn" data-grade="4"><span class="grade">G4</span>Full-thickness</button>
+      </div>
+    </div>
+    <div class="option-group" data-group="location">
+      <div class="option-group-label">Sub-location</div>
+      <div class="option-buttons">
+        <button class="option-btn" data-loc="weight-bearing">Weight-bearing surface</button>
+        <button class="option-btn" data-loc="non-weight-bearing">Non-weight-bearing</button>
+        <button class="option-btn" data-loc="posterior">Posterior aspect</button>
+      </div>
+    </div>
+    <div class="option-group" data-group="addons">
+      <div class="option-group-label">Subchondral findings (optional)</div>
+      <div class="option-buttons">
+        <button class="option-btn checkbox" data-addon="edema">Subchondral marrow edema</button>
+        <button class="option-btn checkbox" data-addon="cyst">Subchondral cyst</button>
+        <input type="number" class="size-input" data-cyst-size placeholder="mm" min="1" max="99">
+        <button class="option-btn checkbox" data-addon="fracture">Subchondral fracture</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Medial tibial plateau -->
+<section class="template-section" id="sec-medial-tibia" data-section="medial-tibia">
+  <header>
+    <h4>Medial tibial plateau</h4>
+    <span class="state">cartilage preserved</span>
+  </header>
+  <div class="body">
+    <div class="option-group" data-group="grade">
+      <div class="option-group-label">Outerbridge Grade</div>
+      <div class="option-buttons">
+        <button class="option-btn normal selected" data-grade="0">Normal</button>
+        <button class="option-btn" data-grade="1"><span class="grade">G1</span>Softening / signal</button>
+        <button class="option-btn" data-grade="2"><span class="grade">G2</span>Superficial fissure</button>
+        <button class="option-btn" data-grade="3"><span class="grade">G3</span>Deep fissure</button>
+        <button class="option-btn" data-grade="4"><span class="grade">G4</span>Full-thickness</button>
+      </div>
+    </div>
+    <div class="option-group" data-group="addons">
+      <div class="option-group-label">Subchondral findings (optional)</div>
+      <div class="option-buttons">
+        <button class="option-btn checkbox" data-addon="edema">Subchondral marrow edema</button>
+        <button class="option-btn checkbox" data-addon="cyst">Subchondral cyst</button>
+        <input type="number" class="size-input" data-cyst-size placeholder="mm" min="1" max="99">
+        <button class="option-btn checkbox" data-addon="fracture">Subchondral fracture</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lateral femoral condyle -->
+<section class="template-section" id="sec-lateral-femur" data-section="lateral-femur">
+  <header>
+    <h4>Lateral femoral condyle</h4>
+    <span class="state">cartilage preserved</span>
+  </header>
+  <div class="body">
+    <div class="option-group" data-group="grade">
+      <div class="option-group-label">Outerbridge Grade</div>
+      <div class="option-buttons">
+        <button class="option-btn normal selected" data-grade="0">Normal</button>
+        <button class="option-btn" data-grade="1"><span class="grade">G1</span>Softening / signal</button>
+        <button class="option-btn" data-grade="2"><span class="grade">G2</span>Superficial fissure</button>
+        <button class="option-btn" data-grade="3"><span class="grade">G3</span>Deep fissure</button>
+        <button class="option-btn" data-grade="4"><span class="grade">G4</span>Full-thickness</button>
+      </div>
+    </div>
+    <div class="option-group" data-group="location">
+      <div class="option-group-label">Sub-location</div>
+      <div class="option-buttons">
+        <button class="option-btn" data-loc="weight-bearing">Weight-bearing surface</button>
+        <button class="option-btn" data-loc="non-weight-bearing">Non-weight-bearing</button>
+        <button class="option-btn" data-loc="anterior central">Anterior central (post-pivot-shift)</button>
+      </div>
+    </div>
+    <div class="option-group" data-group="addons">
+      <div class="option-group-label">Subchondral findings (optional)</div>
+      <div class="option-buttons">
+        <button class="option-btn checkbox" data-addon="edema">Subchondral marrow edema</button>
+        <button class="option-btn checkbox" data-addon="cyst">Subchondral cyst</button>
+        <input type="number" class="size-input" data-cyst-size placeholder="mm" min="1" max="99">
+        <button class="option-btn checkbox" data-addon="fracture">Subchondral fracture</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lateral tibial plateau -->
+<section class="template-section" id="sec-lateral-tibia" data-section="lateral-tibia">
+  <header>
+    <h4>Lateral tibial plateau</h4>
+    <span class="state">cartilage preserved</span>
+  </header>
+  <div class="body">
+    <div class="option-group" data-group="grade">
+      <div class="option-group-label">Outerbridge Grade</div>
+      <div class="option-buttons">
+        <button class="option-btn normal selected" data-grade="0">Normal</button>
+        <button class="option-btn" data-grade="1"><span class="grade">G1</span>Softening / signal</button>
+        <button class="option-btn" data-grade="2"><span class="grade">G2</span>Superficial fissure</button>
+        <button class="option-btn" data-grade="3"><span class="grade">G3</span>Deep fissure</button>
+        <button class="option-btn" data-grade="4"><span class="grade">G4</span>Full-thickness</button>
+      </div>
+    </div>
+    <div class="option-group" data-group="addons">
+      <div class="option-group-label">Subchondral findings (optional)</div>
+      <div class="option-buttons">
+        <button class="option-btn checkbox" data-addon="edema">Subchondral marrow edema</button>
+        <button class="option-btn checkbox" data-addon="cyst">Subchondral cyst</button>
+        <input type="number" class="size-input" data-cyst-size placeholder="mm" min="1" max="99">
+        <button class="option-btn checkbox" data-addon="fracture">Subchondral fracture</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /.options-pane -->
+
+
+<!-- RIGHT: PREVIEW -->
+<div class="preview-pane">
+  <h3>Cartilage — Live Dictation</h3>
+  <p class="sub">Updates as you click. Bracketed text [like this] = unfilled placeholder.</p>
+  <div class="preview-output" id="preview-output"><span class="empty">Click options to build your dictation…</span></div>
+  <div class="preview-buttons">
+    <button class="preview-btn" id="copy-btn">Copy to clipboard</button>
+    <button class="preview-btn" id="copy-abnormal-btn">Copy abnormal only</button>
+    <button class="preview-btn danger" id="reset-btn">Reset all</button>
+  </div>
+  <p style="font-size:12px;color:var(--muted);margin-top:10px">
+    <b style="color:var(--mri-tx)">PROTOTYPE.</b> This is the cartilage section only — proof of concept for a full PowerScribe-style template per joint. Other sections (menisci, ligaments, etc.) coming soon based on the same pattern.
+  </p>
+</div>
+
+</div><!-- /.template-wrap -->
+
+
+<script>
+(function(){
+  // ========================================================
+  // Compartment definitions — section id → sentence builder
+  // Each builder takes state {grade, location, addons:{}, cystSize} and returns
+  // {text, isAbnormal, isPlaceholder} where text is the dictation sentence.
+  // ========================================================
+  const NORMAL_SENTENCES = {
+    'patella':        'Patellar cartilage is preserved without focal fissuring or subchondral marrow abnormality.',
+    'trochlea':       'Trochlear cartilage is preserved without focal fissuring or subchondral marrow abnormality.',
+    'medial-femur':   'Medial femoral condyle articular cartilage is preserved without focal fissuring or subchondral marrow abnormality.',
+    'medial-tibia':   'Medial tibial plateau articular cartilage is preserved without focal fissuring or subchondral marrow abnormality.',
+    'lateral-femur':  'Lateral femoral condyle articular cartilage is preserved without focal fissuring or subchondral marrow abnormality.',
+    'lateral-tibia':  'Lateral tibial plateau articular cartilage is preserved without focal fissuring or subchondral marrow abnormality.'
+  };
+
+  // -----------------------------------------------------------
+  // Multi-location formatting with smart pluralization
+  // -----------------------------------------------------------
+  function pluralize(word){
+    if (!word) return word;
+    if (/s$/i.test(word)) return word;     // already plural
+    if (/y$/i.test(word)) return word.slice(0, -1) + 'ies';
+    return word + 's';
+  }
+  function joinWithAnd(items){
+    if (items.length === 0) return '';
+    if (items.length === 1) return items[0];
+    if (items.length === 2) return items.join(' and ');
+    return items.slice(0, -1).join(', ') + ', and ' + items[items.length - 1];
+  }
+  /** Find the length (in words) of the longest common trailing suffix across an array of word-arrays. */
+  function commonSuffixLen(arrays){
+    if (arrays.length < 2) return 0;
+    const minLen = Math.min(...arrays.map(a => a.length));
+    let n = 0;
+    for (let i = 1; i <= minLen; i++) {
+      const w = arrays[0][arrays[0].length - i];
+      if (arrays.every(a => a[a.length - i] === w)) n = i;
+      else break;
+    }
+    // never strip ALL words (each item must keep at least one)
+    return n >= minLen ? minLen - 1 : n;
+  }
+  /** Given an array of location strings, produce a natural-language joined phrase
+      with smart pluralization when items share a common trailing suffix.
+      ["medial facet", "lateral facet"]                       → "medial and lateral facets"
+      ["medial trochlear facet", "lateral trochlear facet"]   → "medial and lateral trochlear facets"
+      ["weight-bearing", "non-weight-bearing"]                → "weight-bearing and non-weight-bearing"
+      ["median ridge", "medial facet", "lateral facet"]       → "median ridge, medial facet, and lateral facet" */
+  function formatLocations(locs){
+    if (!locs || locs.length === 0) return '';
+    if (locs.length === 1) return locs[0];
+    const words = locs.map(l => l.trim().split(/\s+/));
+    const suffixLen = commonSuffixLen(words);
+    if (suffixLen > 0) {
+      const stripped = words.map((w, i) =>
+        i === words.length - 1 ? w.join(' ') : w.slice(0, -suffixLen).join(' ')
+      );
+      // pluralize the last word of the final item
+      const lastWords = stripped[stripped.length - 1].split(' ');
+      lastWords[lastWords.length - 1] = pluralize(lastWords[lastWords.length - 1]);
+      stripped[stripped.length - 1] = lastWords.join(' ');
+      return joinWithAnd(stripped);
+    }
+    return joinWithAnd(locs);
+  }
+
+  const COMPARTMENT_PHRASE = {
+    'patella':       (locs) => locs && locs.length ? `the ${formatLocations(locs)} of the patella` : 'the [median ridge / medial facet / lateral facet] of the patella',
+    'trochlea':      (locs) => locs && locs.length ? `the ${formatLocations(locs)} of the trochlea` : 'the [trochlear groove / medial facet / lateral facet] of the trochlea',
+    'medial-femur':  (locs) => {
+      if (!locs || !locs.length) return 'the [weight-bearing / non-weight-bearing / posterior] aspect of the medial femoral condyle';
+      const suf = locs.length === 1 ? 'aspect' : 'aspects';
+      return `the ${formatLocations(locs)} ${suf} of the medial femoral condyle`;
+    },
+    'medial-tibia':  ()    => 'the medial tibial plateau',
+    'lateral-femur': (locs) => {
+      if (!locs || !locs.length) return 'the [weight-bearing / non-weight-bearing / anterior central] aspect of the lateral femoral condyle';
+      const suf = locs.length === 1 ? 'aspect' : 'aspects';
+      return `the ${formatLocations(locs)} ${suf} of the lateral femoral condyle`;
+    },
+    'lateral-tibia': ()    => 'the lateral tibial plateau'
+  };
+
+  const GRADE_TEMPLATES = {
+    '1': (where) => `Mild T2-hyperintense intrachondral signal at ${where} without surface fissuring or thickness loss, consistent with Outerbridge grade 1 chondrosis.`,
+    '2': (where) => `Superficial chondral fissuring at ${where} involving less than 50% of cartilage thickness, consistent with Outerbridge grade 2 chondrosis.`,
+    '3': (where) => `Deep chondral fissuring at ${where} extending greater than 50% of cartilage thickness without exposed subchondral bone, consistent with Outerbridge grade 3 chondrosis.`,
+    '4': (where) => `Full-thickness chondral defect at ${where} with exposed subchondral bone, consistent with Outerbridge grade 4 chondrosis.`
+  };
+
+  function addonsSentence(addons, cystSize){
+    const parts = [];
+    if (addons.edema) parts.push('subchondral T2-hyperintense bone marrow edema');
+    if (addons.cyst) {
+      const size = (cystSize && cystSize.trim()) ? `${cystSize} mm ` : '[X] mm ';
+      parts.push(`a ${size}subchondral cyst`);
+    }
+    if (addons.fracture) parts.push('a subchondral fracture line');
+    if (!parts.length) return '';
+    // Join: "X", "X and Y", "X, Y, and Z"
+    let joined;
+    if (parts.length === 1) joined = parts[0];
+    else if (parts.length === 2) joined = parts.join(' and ');
+    else joined = parts.slice(0, -1).join(', ') + ', and ' + parts[parts.length-1];
+    return ` Associated ${joined}.`;
+  }
+
+  function buildSentence(sec, state){
+    const grade = state.grade || '0';
+    if (grade === '0') {
+      return { text: NORMAL_SENTENCES[sec], isAbnormal: false, isPlaceholder: false };
+    }
+    const where = COMPARTMENT_PHRASE[sec](state.locations);
+    const main = GRADE_TEMPLATES[grade](where);
+    const addons = addonsSentence(state.addons || {}, state.cystSize);
+    const isPlaceholder = (!state.locations || !state.locations.length) && sec !== 'medial-tibia' && sec !== 'lateral-tibia';
+    return { text: main + addons, isAbnormal: true, isPlaceholder };
+  }
+
+  // ========================================================
+  // State + rendering
+  // ========================================================
+  const SECTION_ORDER = ['patella','trochlea','medial-femur','medial-tibia','lateral-femur','lateral-tibia'];
+  const state = {};
+  SECTION_ORDER.forEach(s => state[s] = { grade: '0', locations: [], addons: {}, cystSize: '' });
+
+  const previewEl = document.getElementById('preview-output');
+
+  function escapeHtml(s){
+    return s.replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
+  }
+
+  function highlightPlaceholders(text){
+    // Wrap [bracketed] placeholders in a span for visual highlight
+    return escapeHtml(text).replace(/\[([^\]]+)\]/g, '<span class="placeholder">[$1]</span>');
+  }
+
+  function render(){
+    const lines = ['<span class="heading">CARTILAGE:</span>'];
+    SECTION_ORDER.forEach(sec => {
+      const r = buildSentence(sec, state[sec]);
+      const cls = r.isAbnormal ? 'sentence abnormal' : 'sentence normal-line';
+      lines.push(`<span class="${cls}">${highlightPlaceholders(r.text)}</span>`);
+    });
+    previewEl.innerHTML = lines.join('');
+
+    // Update each section header pill to indicate abnormal vs normal
+    SECTION_ORDER.forEach(sec => {
+      const node = document.querySelector(`#sec-${sec} .state`);
+      if (!node) return;
+      const r = buildSentence(sec, state[sec]);
+      if (r.isAbnormal) {
+        const needsLoc = sec !== 'medial-tibia' && sec !== 'lateral-tibia';
+        const locs = state[sec].locations || [];
+        let locText;
+        if (needsLoc && locs.length === 0) locText = ' · pick location';
+        else if (locs.length === 0) locText = '';
+        else locText = ' · ' + locs.join(', ');
+        node.textContent = `Grade ${state[sec].grade}` + locText;
+        node.classList.add('modified');
+      } else {
+        node.textContent = 'cartilage preserved';
+        node.classList.remove('modified');
+      }
+    });
+  }
+
+  function compiledText(abnormalOnly){
+    const lines = ['CARTILAGE:'];
+    SECTION_ORDER.forEach(sec => {
+      const r = buildSentence(sec, state[sec]);
+      if (abnormalOnly && !r.isAbnormal) return;
+      lines.push(r.text);
+    });
+    return lines.join('\n\n');
+  }
+
+  // ========================================================
+  // Event wiring
+  // ========================================================
+  document.querySelectorAll('.template-section').forEach(sec => {
+    const sectionKey = sec.dataset.section;
+
+    // Grade buttons (mutex)
+    sec.querySelectorAll('[data-group="grade"] .option-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        sec.querySelectorAll('[data-group="grade"] .option-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        state[sectionKey].grade = btn.dataset.grade;
+        render();
+      });
+    });
+
+    // Location buttons (multi-select with toggle + smart grammar)
+    sec.querySelectorAll('[data-group="location"] .option-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const loc = btn.dataset.loc;
+        const list = state[sectionKey].locations;
+        const idx = list.indexOf(loc);
+        if (idx >= 0) {
+          list.splice(idx, 1);
+          btn.classList.remove('selected');
+        } else {
+          list.push(loc);
+          btn.classList.add('selected');
+        }
+        render();
+      });
+    });
+
+    // Addon checkbox buttons (multi-select)
+    sec.querySelectorAll('[data-addon]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.classList.toggle('selected');
+        const addon = btn.dataset.addon;
+        state[sectionKey].addons[addon] = btn.classList.contains('selected');
+        render();
+      });
+    });
+
+    // Cyst size input
+    const sizeInput = sec.querySelector('[data-cyst-size]');
+    if (sizeInput) {
+      sizeInput.addEventListener('input', () => {
+        state[sectionKey].cystSize = sizeInput.value;
+        render();
+      });
+    }
+  });
+
+  // Copy buttons
+  function copy(btn, text){
+    navigator.clipboard.writeText(text).then(() => {
+      const orig = btn.textContent;
+      btn.textContent = '✓ Copied!';
+      btn.classList.add('success');
+      setTimeout(() => { btn.textContent = orig; btn.classList.remove('success'); }, 1800);
+    }).catch(() => {
+      // Fallback: textarea + execCommand
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); } catch(e){}
+      document.body.removeChild(ta);
+      btn.textContent = '✓ Copied!';
+      btn.classList.add('success');
+      setTimeout(() => { btn.textContent = btn.id === 'copy-btn' ? 'Copy to clipboard' : 'Copy abnormal only'; btn.classList.remove('success'); }, 1800);
+    });
+  }
+  document.getElementById('copy-btn').addEventListener('click', e => copy(e.currentTarget, compiledText(false)));
+  document.getElementById('copy-abnormal-btn').addEventListener('click', e => copy(e.currentTarget, compiledText(true)));
+
+  // Reset
+  document.getElementById('reset-btn').addEventListener('click', () => {
+    if (!confirm('Reset all selections to normal/preserved?')) return;
+    SECTION_ORDER.forEach(sec => {
+      state[sec] = { grade: '0', locations: [], addons: {}, cystSize: '' };
+      const node = document.getElementById(`sec-${sec}`);
+      node.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+      node.querySelector('[data-grade="0"]').classList.add('selected');
+      const inp = node.querySelector('[data-cyst-size]');
+      if (inp) inp.value = '';
+    });
+    render();
+  });
+
+  // Initial render
+  render();
+})();
+</script>
+
+</body>
+</html>

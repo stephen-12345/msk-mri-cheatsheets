@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ankle MRI — Dictation Template</title>
+<link rel="stylesheet" href="../assets/cheatsheet.css">
+</head>
+<body>
+
+<div class="tmpl-topbar">
+  <div class="row">
+    <span class="title" id="page-title">Ankle MRI — Dictation Template</span>
+    <a class="pill-link" id="back-link" href="../ankle/ankle-mri-cheatsheet.html">← Ankle cheatsheet</a>
+    <a class="pill-link" href="index.html">All templates</a>
+    <a class="pill-link" href="../index.html">All regions</a>
+    <span class="meta">click options · copy to PowerScribe</span>
+  </div>
+</div>
+
+<div class="tmpl-wrap">
+  <div>
+    <div class="tmpl-help">
+      <b>How it works:</b> Each section defaults to NORMAL. Click a grade/state to change it, then pick locations (multi-select supported, grammar auto-handled). Toggle associated findings with the green check buttons. The dictation builds live on the right — click <b>Copy all</b> or <b>Copy abnormal only</b> to paste into PowerScribe.
+    </div>
+    <div class="options-pane" id="options-pane"></div>
+  </div>
+
+  <div class="preview-pane">
+    <h3>Live Dictation Preview</h3>
+    <p class="sub">Updates as you click. <span class="placeholder">[bracketed]</span> = unfilled placeholder.</p>
+    <div class="preview-output" id="preview-output"></div>
+    <div class="preview-buttons">
+      <button class="preview-btn" id="copy-btn">Copy all</button>
+      <button class="preview-btn" id="copy-abnormal-btn">Copy abnormal only</button>
+      <button class="preview-btn danger" id="reset-btn">Reset</button>
+    </div>
+  </div>
+</div>
+
+<script>
+window.TEMPLATE_CONFIG = {
+  title: 'Ankle MRI — Dictation Template',
+  heading: 'ANKLE MRI',
+  back_link: '../ankle/ankle-mri-cheatsheet.html',
+  sections: [
+    // ============= EFFUSION / COLLECTION =============
+    {
+      id: 'tt-effusion', label: 'Tibiotalar joint effusion', output_section: 'Effusion / collection',
+      grade_group: {
+        label: 'Effusion size',
+        options: [
+          {id: 'none', label: 'None', is_normal: true, sentence: 'No tibiotalar joint effusion.'},
+          {id: 'trace', label: 'Trace', sentence: 'Trace tibiotalar joint fluid, within physiologic limits.'},
+          {id: 'small', label: 'Small', sentence: 'Small simple tibiotalar joint effusion.'},
+          {id: 'moderate', label: 'Moderate', sentence: 'Moderate simple tibiotalar joint effusion distending the anterior and posterior recesses.'},
+          {id: 'large', label: 'Large', sentence: 'Large tibiotalar joint effusion with marked distention of the anterior and posterior recesses.'},
+          {id: 'complex', label: 'Complex / hemarthrosis', sentence: 'Moderate complex tibiotalar joint effusion with internal layering low-signal debris, compatible with hemarthrosis.'},
+        ]
+      }
+    },
+    {
+      id: 'collections', label: 'Cyst / collection', output_section: 'Effusion / collection',
+      grade_group: {
+        label: 'Cyst / collection',
+        options: [
+          {id: 'none', label: 'None', is_normal: true, sentence: 'No discrete periarticular cyst or fluid collection.'},
+          {id: 'ganglion', label: 'Ganglion cyst', sentence: 'Well-defined lobulated T2-hyperintense ganglion cyst at the {location} measuring {size} mm.'},
+          {id: 'paralabral', label: 'Paralabral / capsular cyst', sentence: 'Capsular cyst arising from the {location} measuring {size} mm, likely related to adjacent capsular pathology.'},
+          {id: 'abscess', label: 'Possible abscess', sentence: 'Rim-enhancing complex collection at the {location} measuring {size} mm — possible abscess; clinical correlation warranted.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'mutex', placeholder: '[anterolateral / anteromedial / sinus tarsi / dorsal midfoot]',
+         options: [
+           {id: 'al', label: 'Anterolateral', value: 'anterolateral aspect of the ankle'},
+           {id: 'am', label: 'Anteromedial', value: 'anteromedial aspect of the ankle'},
+           {id: 'pl', label: 'Posterolateral', value: 'posterolateral aspect of the ankle'},
+           {id: 'pm', label: 'Posteromedial', value: 'posteromedial aspect of the ankle'},
+           {id: 'st', label: 'Sinus tarsi', value: 'sinus tarsi'},
+           {id: 'dor', label: 'Dorsal midfoot', value: 'dorsal midfoot'},
+         ]},
+        {id: 'size', label: 'Size (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+
+    // ============= BONE / MARROW =============
+    {
+      id: 'talar-dome', label: 'Talar dome (OCD / OLT)', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Talar OCD / OLT',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Talar dome demonstrates normal cortical and marrow signal without osteochondral defect.'},
+          {id: 'contusion', label: 'Bone marrow contusion', sentence: 'Focal T2-hyperintense bone marrow edema within the {location} talar dome without discrete subchondral fracture or osteochondral defect.'},
+          {id: 'olt-stable', label: 'OLT — stable', sentence: 'Subchondral osteochondral lesion at the {location} talar dome measuring {size} mm with intact overlying cartilage and no fluid undercutting the fragment — stable lesion.'},
+          {id: 'olt-unstable', label: 'OLT — unstable', sentence: 'Osteochondral lesion at the {location} talar dome measuring {size} mm with high T2 signal undercutting the fragment and overlying chondral fissuring, compatible with unstable osteochondral lesion.'},
+          {id: 'olt-displaced', label: 'OLT — displaced / loose body', sentence: 'Displaced osteochondral fragment from the {location} talar dome with donor-site defect measuring {size} mm and intra-articular loose body.'},
+          {id: 'cyst', label: 'Subchondral cyst', sentence: 'Subchondral cyst at the {location} talar dome measuring {size} mm with surrounding bone marrow edema.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'mutex', placeholder: '[medial posterior / lateral central / medial central / lateral anterior]',
+         options: [
+           {id: 'mp', label: 'Medial posterior (most common)', value: 'medial posterior'},
+           {id: 'lc', label: 'Lateral central', value: 'lateral central'},
+           {id: 'mc', label: 'Medial central', value: 'medial central'},
+           {id: 'la', label: 'Lateral anterior', value: 'lateral anterior'},
+           {id: 'mid', label: 'Mid talar dome', value: 'central'},
+         ]},
+        {id: 'size', label: 'Size (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+    {
+      id: 'accessory-ossicles', label: 'Accessory ossicles', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Accessory ossicles',
+        options: [
+          {id: 'none', label: 'None / asymptomatic', is_normal: true, sentence: 'No symptomatic accessory ossicle. Normal variant ossicles, if present, demonstrate normal marrow signal without surrounding edema.'},
+          {id: 'os-trig-asymp', label: 'Os trigonum (asymptomatic)', sentence: 'Incidental os trigonum posterior to the talus without surrounding edema or FHL tenosynovitis. Asymptomatic variant.'},
+          {id: 'os-trig-sympt', label: 'Os trigonum (symptomatic)', sentence: 'Os trigonum posterior to the talus with T2-hyperintense edema across the synchondrosis and adjacent FHL tenosynovitis, compatible with posterior impingement (os trigonum syndrome).'},
+          {id: 'os-nav1', label: 'Os naviculare type 1 (sesamoid)', sentence: 'Type 1 os naviculare — small round ossicle within the distal tibialis posterior tendon, no synchondrosis. Incidental.'},
+          {id: 'os-nav2', label: 'Os naviculare type 2 (synchondrosis)', sentence: 'Type 2 accessory navicular with fibrocartilaginous synchondrosis at the medial navicular tuberosity, demonstrating T2-hyperintense edema across the synchondrosis and within the adjacent marrow — symptomatic accessory navicular syndrome.'},
+          {id: 'os-nav3', label: 'Os naviculare type 3 (cornuate)', sentence: 'Type 3 (cornuate) navicular with enlarged medial navicular tuberosity fused to the navicular.'},
+          {id: 'os-peroneum', label: 'Os peroneum', sentence: 'Os peroneum within the peroneus longus tendon at the cuboid notch. {os_peroneum_state}'},
+        ]
+      },
+      variable_groups: [
+        {id: 'os_peroneum_state', label: 'Os peroneum state (if present)', type: 'mutex', placeholder: '',
+         options: [
+           {id: 'asx', label: 'Asymptomatic', value: 'No surrounding edema.'},
+           {id: 'pos', label: 'Painful os peroneum syndrome', value: 'Surrounding edema and peroneus longus tenosynovitis, compatible with painful os peroneum syndrome.'},
+         ]}
+      ]
+    },
+    {
+      id: 'calcaneus', label: 'Calcaneus', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Calcaneal marrow / cortex',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Calcaneus demonstrates normal cortical contour and marrow signal.'},
+          {id: 'edema', label: 'Marrow edema', sentence: 'Geographic T2-hyperintense bone marrow edema within the {location} calcaneus without discrete fracture line.'},
+          {id: 'stress', label: 'Stress reaction / fracture', sentence: 'Linear T1-hypointense band within the {location} calcaneus oriented perpendicular to the trabeculae with surrounding marrow edema, consistent with calcaneal stress fracture.'},
+          {id: 'fx', label: 'Calcaneal fracture', sentence: 'Acute fracture line traversing the {location} calcaneus with surrounding marrow edema and {displacement}.'},
+          {id: 'spur', label: 'Plantar / Achilles enthesophyte', sentence: 'Plantar calcaneal enthesophyte at the {location} without acute marrow edema.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'mutex', placeholder: '[body / tuberosity / anterior process / sustentaculum]',
+         options: [
+           {id: 'body', label: 'Body', value: 'body of the'},
+           {id: 'tub', label: 'Tuberosity', value: 'tuberosity of the'},
+           {id: 'ap', label: 'Anterior process', value: 'anterior process of the'},
+           {id: 'sus', label: 'Sustentaculum tali', value: 'sustentaculum tali of the'},
+           {id: 'plantar', label: 'Plantar aspect', value: 'plantar aspect of the'},
+         ]},
+        {id: 'displacement', label: 'Displacement', type: 'mutex', placeholder: '',
+         options: [
+           {id: 'nd', label: 'Non-displaced', value: 'no significant displacement'},
+           {id: 'md', label: 'Minimally displaced', value: 'minimal displacement'},
+           {id: 'dis', label: 'Displaced', value: 'displacement'},
+         ]}
+      ]
+    },
+    {
+      id: 'distal-tib-fib', label: 'Distal tibia / fibula', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Distal tibia / fibula',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Distal tibia and fibula demonstrate normal cortical contour and marrow signal without fracture.'},
+          {id: 'edema', label: 'Marrow edema', sentence: 'T2-hyperintense bone marrow edema within the {location} without discrete fracture line.'},
+          {id: 'med-mall', label: 'Medial malleolus fracture', sentence: 'Fracture of the medial malleolus with surrounding marrow edema and {displacement}.'},
+          {id: 'lat-mall', label: 'Lateral malleolus fracture', sentence: 'Fracture of the lateral malleolus (distal fibula) with surrounding marrow edema and {displacement}.'},
+          {id: 'post-mall', label: 'Posterior malleolus fracture', sentence: 'Fracture of the posterior malleolus (posterior tibial plafond) with surrounding marrow edema and {displacement}.'},
+          {id: 'pilon', label: 'Pilon / plafond fracture', sentence: 'Comminuted intra-articular fracture of the distal tibial plafond, compatible with pilon-pattern injury.'},
+          {id: 'stress', label: 'Stress fracture', sentence: 'Linear T1-hypointense fracture line within the {location} with surrounding marrow edema, compatible with stress fracture.'},
+          {id: 'maisonneuve', label: 'Maisonneuve (proximal fibula)', sentence: 'Proximal fibular fracture identified on the imaged proximal fibula, in conjunction with syndesmotic injury — consistent with Maisonneuve pattern (correlate with dedicated tib-fib imaging).'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'mutex', placeholder: '[distal tibia / distal fibula / medial malleolus / lateral malleolus]',
+         options: [
+           {id: 'dt', label: 'Distal tibia', value: 'distal tibial metaphysis'},
+           {id: 'df', label: 'Distal fibula', value: 'distal fibular metaphysis'},
+           {id: 'mm', label: 'Medial malleolus', value: 'medial malleolus'},
+           {id: 'lm', label: 'Lateral malleolus', value: 'lateral malleolus'},
+         ]},
+        {id: 'displacement', label: 'Displacement', type: 'mutex', placeholder: '',
+         options: [
+           {id: 'nd', label: 'Non-displaced', value: 'no significant displacement'},
+           {id: 'md', label: 'Minimally displaced', value: 'minimal displacement'},
+           {id: 'dis', label: 'Displaced', value: 'displacement'},
+         ]}
+      ]
+    },
+    {
+      id: 'marrow-other', label: 'Other marrow signal abnormality', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Marrow signal',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Remaining imaged osseous structures demonstrate normal marrow signal without focal lesion.'},
+          {id: 'edema', label: 'Nonspecific edema', sentence: 'Focal T2-hyperintense marrow edema within the {location} of uncertain etiology; correlate clinically.'},
+          {id: 'lesion', label: 'Focal lesion', sentence: 'Focal marrow lesion within the {location} measuring {size} mm — further characterization warranted.'},
+          {id: 'crps', label: 'Diffuse / patchy (?CRPS)', sentence: 'Diffuse patchy marrow edema involving multiple bones of the foot and ankle without focal fracture, consistent with reflex/regional pattern (clinical correlation for CRPS or transient osteoporosis).'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'mutex', placeholder: '[bone / region]',
+         options: [
+           {id: 'talus', label: 'Talus', value: 'talus'},
+           {id: 'cal', label: 'Calcaneus', value: 'calcaneus'},
+           {id: 'nav', label: 'Navicular', value: 'navicular'},
+           {id: 'cub', label: 'Cuboid', value: 'cuboid'},
+           {id: 'cun', label: 'Cuneiforms', value: 'cuneiforms'},
+           {id: 'mt', label: 'Metatarsal base', value: 'metatarsal base'},
+         ]},
+        {id: 'size', label: 'Size (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+
+    // ============= TENDONS =============
+    {
+      id: 't-achilles', label: 'Achilles tendon', output_section: 'Tendons',
+      grade_group: {
+        label: 'Achilles state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Achilles tendon demonstrates normal fibrillar architecture and uniformly low signal, with AP thickness within normal limits. No paratenonitis or retrocalcaneal bursitis.'},
+          {id: 'paratenonitis', label: 'Paratenonitis', sentence: 'Peritendinous T2-hyperintense edema surrounding the Achilles tendon with paratenon thickening, consistent with paratenonitis. Underlying tendon fibers intact.'},
+          {id: 'tendinosis-mid', label: 'Mid-portion tendinosis (watershed)', sentence: 'Fusiform thickening of the Achilles tendon at the watershed zone (2–6 cm above the calcaneal insertion) with intermediate intrasubstance signal, consistent with mid-portion tendinosis. No fluid-signal cleft.'},
+          {id: 'tendinosis-ins', label: 'Insertional tendinosis', sentence: 'Insertional Achilles tendinosis with thickening and intratendinous signal at the calcaneal attachment, with associated calcaneal enthesophyte formation.'},
+          {id: 'haglund', label: 'Insertional w/ Haglund + retrocalcaneal bursitis', sentence: 'Insertional Achilles tendinopathy with posterosuperior calcaneal prominence (Haglund deformity), retrocalcaneal bursitis, and adjacent paratenonitis — Haglund triad.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness intrasubstance tear of the Achilles tendon at the {location} with fluid-signal cleft involving less than 50% of the tendon thickness.'},
+          {id: 'complete', label: 'Complete rupture', sentence: 'Complete full-thickness disruption of the Achilles tendon at the {location} with proximal stump retraction and a fluid-filled gap measuring {gap} mm.'},
+          {id: 'retrobursitis', label: 'Isolated retrocalcaneal bursitis', sentence: 'Fluid distention of the retrocalcaneal bursa greater than 1 mm AP, compatible with retrocalcaneal bursitis. Underlying Achilles fibers preserved.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Tear location', type: 'mutex', placeholder: '[watershed / insertional / myotendinous junction]',
+         options: [
+           {id: 'ws', label: 'Watershed (2–6 cm above insertion)', value: 'watershed zone'},
+           {id: 'ins', label: 'Insertional', value: 'calcaneal insertion'},
+           {id: 'mtj', label: 'Myotendinous junction', value: 'myotendinous junction'},
+         ]},
+        {id: 'gap', label: 'Gap (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+    {
+      id: 't-tib-post', label: 'Tibialis posterior tendon (PTT)', output_section: 'Tendons',
+      grade_group: {
+        label: 'PTT state (Johnson-Strom)',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Tibialis posterior tendon demonstrates normal caliber (approximately twice the diameter of the flexor digitorum longus) and uniformly low signal from the medial malleolus to the navicular insertion. No tenosynovitis.'},
+          {id: 'tenosynovitis', label: 'Tenosynovitis only', sentence: 'Fluid distention of the tibialis posterior tendon sheath without tendon thickening or fiber discontinuity, consistent with tenosynovitis.'},
+          {id: 'pttd1', label: 'PTTD stage I (tendinosis)', sentence: 'Tibialis posterior tendinosis with mild fusiform thickening and intermediate signal of the PTT without macroscopic tear and preserved hindfoot alignment — PTTD stage I.'},
+          {id: 'pttd2', label: 'PTTD stage II (partial / elongated, flexible flatfoot)', sentence: 'Partial-thickness tear and longitudinal split of the tibialis posterior tendon with tendon elongation and flexible pes planovalgus deformity — PTTD stage II.'},
+          {id: 'pttd3', label: 'PTTD stage III (rigid flatfoot)', sentence: 'Severely diseased or attenuated tibialis posterior tendon with rigid pes planovalgus deformity and subtalar arthrosis — PTTD stage III.'},
+          {id: 'pttd4', label: 'PTTD stage IV (valgus tibiotalar tilt)', sentence: 'End-stage tibialis posterior tendon dysfunction with valgus tibiotalar tilt and deltoid ligament insufficiency — PTTD stage IV.'},
+          {id: 'longsplit', label: 'Longitudinal split tear', sentence: 'Longitudinal split tear of the tibialis posterior tendon at the {location} with intratendinous fluid signal extending along the tendon long axis.'},
+          {id: 'complete', label: 'Complete rupture', sentence: 'Complete full-thickness disruption of the tibialis posterior tendon at the {location} with retraction and a fluid-filled gap.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'mutex', placeholder: '[retromalleolar / inframalleolar / insertional]',
+         options: [
+           {id: 'rm', label: 'Retromalleolar (behind medial mall)', value: 'retromalleolar segment'},
+           {id: 'im', label: 'Inframalleolar', value: 'inframalleolar segment'},
+           {id: 'ins', label: 'Navicular insertion', value: 'navicular insertion'},
+         ]}
+      ]
+    },
+    {
+      id: 't-fdl', label: 'Flexor digitorum longus (FDL)', output_section: 'Tendons',
+      grade_group: {
+        label: 'FDL state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Flexor digitorum longus tendon demonstrates normal signal and morphology along its course through the tarsal tunnel.'},
+          {id: 'tenosynovitis', label: 'Tenosynovitis', sentence: 'FDL tenosynovitis with peritendinous fluid distention without tendon disruption.'},
+          {id: 'tear', label: 'Tear', sentence: 'Partial-thickness tear of the flexor digitorum longus tendon with intratendinous fluid signal.'},
+        ]
+      }
+    },
+    {
+      id: 't-fhl', label: 'Flexor hallucis longus (FHL)', output_section: 'Tendons',
+      grade_group: {
+        label: 'FHL state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Flexor hallucis longus tendon demonstrates normal signal and morphology coursing through the posterior fibro-osseous tunnel and along the plantar foot.'},
+          {id: 'tenosynovitis', label: 'Tenosynovitis', sentence: 'FHL tenosynovitis with peritendinous fluid distention at the posterior ankle. May reflect communication with the tibiotalar joint or posterior impingement.'},
+          {id: 'impinge', label: 'Posterior impingement w/ FHL', sentence: 'FHL tenosynovitis with adjacent posterior process talus / os trigonum edema, consistent with posterior ankle impingement syndrome.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness longitudinal split tear of the FHL with intratendinous fluid signal.'},
+          {id: 'complete', label: 'Complete tear', sentence: 'Complete disruption of the FHL tendon with retraction.'},
+        ]
+      }
+    },
+    {
+      id: 't-per-brevis', label: 'Peroneus brevis', output_section: 'Tendons',
+      grade_group: {
+        label: 'Peroneus brevis state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Peroneus brevis tendon demonstrates a normal crescentic morphology in the retromalleolar groove with uniformly low signal.'},
+          {id: 'tendinopathy', label: 'Tendinopathy', sentence: 'Peroneus brevis tendinopathy with mild thickening and intermediate signal without macroscopic split.'},
+          {id: 'tenosynovitis', label: 'Tenosynovitis', sentence: 'Peroneal tenosynovitis with fluid distention of the common tendon sheath.'},
+          {id: 'split-c', label: 'Longitudinal split (C/boomerang)', sentence: 'Longitudinal split tear of the peroneus brevis tendon producing a C-shaped (boomerang/chevron) configuration in the retromalleolar groove, with peroneus longus interposed within the split. Extends over approximately {length} mm.'},
+          {id: 'complete', label: 'Complete tear', sentence: 'Complete full-thickness disruption of the peroneus brevis tendon at the {location} with retraction.'},
+          {id: 'sublux', label: 'Subluxation / dislocation', sentence: 'Peroneal tendon subluxation/dislocation anterior to the lateral malleolus with disrupted superior peroneal retinaculum.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'mutex', placeholder: '[retromalleolar / inframalleolar / distal]',
+         options: [
+           {id: 'rm', label: 'Retromalleolar', value: 'retromalleolar groove'},
+           {id: 'im', label: 'Inframalleolar', value: 'inframalleolar segment'},
+           {id: 'd', label: '5th metatarsal base', value: '5th metatarsal base insertion'},
+         ]},
+        {id: 'length', label: 'Split length (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+    {
+      id: 't-per-longus', label: 'Peroneus longus', output_section: 'Tendons',
+      grade_group: {
+        label: 'Peroneus longus state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Peroneus longus tendon demonstrates normal signal and morphology along its course to the cuboid notch and plantar 1st metatarsal/medial cuneiform insertion.'},
+          {id: 'tendinopathy', label: 'Tendinopathy', sentence: 'Peroneus longus tendinopathy with thickening and intermediate signal.'},
+          {id: 'tenosynovitis', label: 'Tenosynovitis', sentence: 'Peroneus longus tenosynovitis.'},
+          {id: 'split', label: 'Longitudinal split', sentence: 'Longitudinal split tear of the peroneus longus tendon at the {location}.'},
+          {id: 'pops', label: 'Painful os peroneum syndrome', sentence: 'Findings of painful os peroneum syndrome with peroneus longus tendinopathy/tear at the cuboid notch and adjacent os peroneum edema.'},
+          {id: 'complete', label: 'Complete tear', sentence: 'Complete disruption of the peroneus longus tendon at the {location} with retraction.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'mutex', placeholder: '[retromalleolar / cuboid notch / plantar]',
+         options: [
+           {id: 'rm', label: 'Retromalleolar', value: 'retromalleolar segment'},
+           {id: 'cn', label: 'Cuboid notch (os peroneum)', value: 'cuboid notch'},
+           {id: 'p', label: 'Plantar segment', value: 'plantar segment'},
+         ]}
+      ]
+    },
+    {
+      id: 't-tib-ant', label: 'Tibialis anterior', output_section: 'Tendons',
+      grade_group: {
+        label: 'Tibialis anterior state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Tibialis anterior tendon demonstrates normal signal and morphology from the anterior ankle to the medial cuneiform/1st metatarsal base insertion.'},
+          {id: 'tendinosis', label: 'Tendinosis', sentence: 'Tibialis anterior tendinosis with fusiform thickening and intermediate signal of the distal tendon.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness tear of the tibialis anterior tendon at the {location} with intratendinous fluid-signal cleft.'},
+          {id: 'complete', label: 'Complete rupture', sentence: 'Complete full-thickness disruption of the tibialis anterior tendon at the {location} with retraction, often in older patients with chronic tendinosis.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'mutex', placeholder: '[anterior ankle / distal / insertional]',
+         options: [
+           {id: 'a', label: 'Anterior ankle', value: 'anterior ankle level'},
+           {id: 'd', label: 'Distal pre-insertional', value: 'distal pre-insertional segment'},
+           {id: 'ins', label: 'Insertion', value: 'medial cuneiform / 1st metatarsal insertion'},
+         ]}
+      ]
+    },
+    {
+      id: 't-ehl', label: 'Extensor hallucis longus (EHL)', output_section: 'Tendons',
+      grade_group: {
+        label: 'EHL state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Extensor hallucis longus tendon demonstrates normal signal and morphology along its dorsal course to the distal phalanx of the hallux.'},
+          {id: 'tenosynovitis', label: 'Tenosynovitis', sentence: 'EHL tenosynovitis without tendon disruption.'},
+          {id: 'tear', label: 'Tear', sentence: 'Tear of the extensor hallucis longus tendon.'},
+        ]
+      }
+    },
+    {
+      id: 't-edl', label: 'Extensor digitorum longus (EDL)', output_section: 'Tendons',
+      grade_group: {
+        label: 'EDL state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Extensor digitorum longus tendon demonstrates normal signal and morphology along its dorsal course.'},
+          {id: 'tenosynovitis', label: 'Tenosynovitis', sentence: 'EDL tenosynovitis without tendon disruption.'},
+          {id: 'tear', label: 'Tear', sentence: 'Tear of the extensor digitorum longus tendon.'},
+        ]
+      }
+    },
+
+    // ============= LIGAMENTS =============
+    {
+      id: 'syndesmosis', label: 'Syndesmotic ligaments', output_section: 'Ligaments',
+      grade_group: {
+        label: 'Syndesmosis state',
+        options: [
+          {id: 'intact', label: 'Intact', is_normal: true, sentence: 'Syndesmotic ligaments (AITFL, PITFL, interosseous membrane) are intact with normal tibiofibular clear space (<6 mm at 1 cm above the plafond).'},
+          {id: 'aitfl', label: 'AITFL sprain', sentence: 'Periligamentous edema and thickening of the anterior inferior tibiofibular ligament (AITFL) with preserved fiber continuity, consistent with low-grade syndesmotic sprain.'},
+          {id: 'aitfl-tear', label: 'AITFL partial / complete tear', sentence: 'Partial-thickness fiber disruption of the anterior inferior tibiofibular ligament (AITFL) with surrounding edema and tibiofibular clear space measuring {clear_space} mm.'},
+          {id: 'pitfl', label: 'PITFL injury', sentence: 'Periligamentous edema and partial fiber disruption of the posterior inferior tibiofibular ligament (PITFL).'},
+          {id: 'io', label: 'Interosseous membrane injury', sentence: 'T2-hyperintense edema extending proximally along the tibiofibular interosseous membrane, indicating high syndesmotic injury.'},
+          {id: 'complete', label: 'Complete syndesmotic injury w/ widening', sentence: 'High-grade syndesmotic injury with disruption of the AITFL, PITFL, and interosseous membrane, and frank widening of the tibiofibular clear space measuring {clear_space} mm.'},
+          {id: 'maison', label: 'Maisonneuve pattern', sentence: 'Complete syndesmotic disruption with widening of the tibiofibular clear space measuring {clear_space} mm, in conjunction with deltoid injury and a proximal fibular fracture — Maisonneuve injury pattern.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'clear_space', label: 'Tibfib clear space (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+    {
+      id: 'atfl', label: 'ATFL (anterior talofibular)', output_section: 'Ligaments',
+      grade_group: {
+        label: 'ATFL state',
+        options: [
+          {id: 'intact', label: 'Intact', is_normal: true, sentence: 'Anterior talofibular ligament (ATFL) demonstrates normal thin low-signal band between the anterior margin of the lateral malleolus and the anterolateral talar neck.'},
+          {id: 'g1', label: 'Grade 1 sprain', sentence: 'Periligamentous T2-hyperintense edema around the ATFL with preserved fiber continuity and normal contour, consistent with grade 1 sprain.'},
+          {id: 'g2', label: 'Grade 2 partial', sentence: 'Thickening, intermediate signal, and partial-thickness fiber disruption of the ATFL without complete discontinuity, consistent with grade 2 partial-thickness tear.'},
+          {id: 'g3', label: 'Grade 3 complete', sentence: 'Complete discontinuity of the ATFL with fiber retraction and fluid-filled gap, consistent with grade 3 complete tear.'},
+          {id: 'chronic', label: 'Chronic / attenuated', sentence: 'Chronic attenuation, thickening, and irregularity of the ATFL without acute periligamentous edema, compatible with chronic injury and lateral ligamentous insufficiency.'},
+          {id: 'avulsion', label: 'Talar/fibular avulsion', sentence: 'Cortical avulsion fragment at the {location} ATFL attachment.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Avulsion location', type: 'mutex', placeholder: '[talar / fibular]',
+         options: [
+           {id: 't', label: 'Talar attachment', value: 'talar'},
+           {id: 'f', label: 'Fibular attachment', value: 'fibular'},
+         ]}
+      ]
+    },
+    {
+      id: 'cfl', label: 'CFL (calcaneofibular)', output_section: 'Ligaments',
+      grade_group: {
+        label: 'CFL state',
+        options: [
+          {id: 'intact', label: 'Intact', is_normal: true, sentence: 'Calcaneofibular ligament (CFL) demonstrates normal low-signal fibers extending from the inferior tip of the lateral malleolus to the lateral calcaneal tubercle, deep to the peroneal tendons.'},
+          {id: 'g1', label: 'Grade 1 sprain', sentence: 'Periligamentous edema along the CFL with preserved fiber continuity, consistent with grade 1 sprain.'},
+          {id: 'g2', label: 'Grade 2 partial', sentence: 'Partial-thickness fiber disruption and thickening of the CFL with peritendinous fluid in the adjacent peroneal tendon sheath, consistent with grade 2 tear.'},
+          {id: 'g3', label: 'Grade 3 complete', sentence: 'Complete discontinuity of the CFL with retraction and fluid-filled gap.'},
+        ]
+      }
+    },
+    {
+      id: 'ptfl', label: 'PTFL (posterior talofibular)', output_section: 'Ligaments',
+      grade_group: {
+        label: 'PTFL state',
+        options: [
+          {id: 'intact', label: 'Intact', is_normal: true, sentence: 'Posterior talofibular ligament (PTFL) demonstrates normal striated low-signal fibers extending from the malleolar fossa to the posterolateral talus.'},
+          {id: 'g1', label: 'Grade 1 sprain', sentence: 'Periligamentous edema around the PTFL with preserved fiber continuity, consistent with grade 1 sprain.'},
+          {id: 'g2', label: 'Grade 2 partial', sentence: 'Partial-thickness fiber disruption of the PTFL.'},
+          {id: 'g3', label: 'Grade 3 complete', sentence: 'Complete discontinuity of the PTFL — uncommon, indicates severe lateral ligamentous injury.'},
+        ]
+      }
+    },
+    {
+      id: 'deltoid', label: 'Deltoid ligament', output_section: 'Ligaments',
+      grade_group: {
+        label: 'Deltoid state',
+        options: [
+          {id: 'intact', label: 'Intact', is_normal: true, sentence: 'Deltoid ligament (deep and superficial components) is intact with normal fan-shaped configuration from the medial malleolus to the talus, calcaneus, and navicular.'},
+          {id: 'sup', label: 'Superficial component sprain', sentence: 'Periligamentous edema and partial fiber disruption of the superficial deltoid components ({sup_components}) with preserved deep component.'},
+          {id: 'deep', label: 'Deep component injury', sentence: 'Partial- to full-thickness fiber disruption of the deep deltoid components (anterior and posterior tibiotalar) with widening of the medial clear space.'},
+          {id: 'complete', label: 'Complete deltoid disruption', sentence: 'Complete disruption of both superficial and deep deltoid components with medial clear space widening, often associated with syndesmotic injury and/or lateral malleolar fracture.'},
+          {id: 'chronic', label: 'Chronic deltoid insufficiency', sentence: 'Chronic deltoid thickening and attenuation without acute edema, compatible with chronic deltoid insufficiency.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'sup_components', label: 'Superficial components involved', type: 'multi', placeholder: '[tibionavicular / tibiospring / tibiocalcaneal]',
+         options: [
+           {id: 'tn', label: 'Tibionavicular', value: 'tibionavicular'},
+           {id: 'ts', label: 'Tibiospring', value: 'tibiospring'},
+           {id: 'tc', label: 'Tibiocalcaneal', value: 'tibiocalcaneal'},
+         ]}
+      ]
+    },
+    {
+      id: 'spring', label: 'Spring (plantar calcaneonavicular) ligament', output_section: 'Ligaments',
+      grade_group: {
+        label: 'Spring ligament state',
+        options: [
+          {id: 'intact', label: 'Intact', is_normal: true, sentence: 'Spring (plantar calcaneonavicular) ligament complex (superomedial and inferior components) is intact and supports the talar head.'},
+          {id: 'sprain', label: 'Sprain / partial', sentence: 'Periligamentous edema and partial-thickness fiber disruption of the superomedial component of the spring ligament with thickening and intermediate signal.'},
+          {id: 'complete', label: 'Complete tear', sentence: 'Complete disruption of the spring ligament complex with inferomedial migration of the talar head, frequently associated with PTTD and acquired flatfoot deformity.'},
+        ]
+      }
+    },
+    {
+      id: 'lisfranc', label: 'Lisfranc ligament', output_section: 'Ligaments',
+      grade_group: {
+        label: 'Lisfranc complex',
+        options: [
+          {id: 'intact', label: 'Intact', is_normal: true, sentence: 'Lisfranc ligament complex (dorsal, plantar, and interosseous components between the medial cuneiform and 2nd metatarsal base) is intact without diastasis.'},
+          {id: 'sprain', label: 'Sprain', sentence: 'Periligamentous edema around the Lisfranc ligament complex with preserved fiber continuity, consistent with low-grade sprain. No diastasis.'},
+          {id: 'partial', label: 'Partial — dorsal/plantar only', sentence: 'Partial Lisfranc injury with disruption of the {components} component(s), interosseous component intact, and no significant diastasis at the 1st–2nd intermetatarsal space.'},
+          {id: 'complete', label: 'Complete w/ diastasis', sentence: 'Complete disruption of the Lisfranc ligament complex (dorsal, plantar, and interosseous components) with diastasis at the medial cuneiform–2nd metatarsal base interval.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'components', label: 'Components involved', type: 'multi', placeholder: '[dorsal / plantar / interosseous]',
+         options: [
+           {id: 'd', label: 'Dorsal', value: 'dorsal'},
+           {id: 'p', label: 'Plantar', value: 'plantar'},
+           {id: 'io', label: 'Interosseous', value: 'interosseous'},
+         ]}
+      ]
+    },
+
+    // ============= PLANTAR FASCIA =============
+    {
+      id: 'plantar-fascia', label: 'Plantar fascia', output_section: 'Plantar fascia',
+      grade_group: {
+        label: 'Plantar fascia state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Plantar fascia (central cord, medial and lateral bands) is normal in thickness (≤4 mm) and signal at the calcaneal origin and throughout its course.'},
+          {id: 'fasciitis', label: 'Plantar fasciitis', sentence: 'Fusiform thickening of the plantar fascia at the {band} measuring {thickness} mm with adjacent perifascial edema and reactive calcaneal marrow edema at the origin, consistent with plantar fasciitis.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness tear of the plantar fascia at the {band} with intrafascial fluid-signal cleft.'},
+          {id: 'complete', label: 'Complete rupture', sentence: 'Complete full-thickness disruption of the plantar fascia at the {band} with a fluid-filled gap and adjacent edema.'},
+          {id: 'fibromatosis', label: 'Plantar fibromatosis', sentence: 'Nodular fusiform thickening of the plantar fascia with intermediate T1/T2 signal, compatible with plantar fibromatosis (Ledderhose disease).'},
+        ]
+      },
+      variable_groups: [
+        {id: 'band', label: 'Band involved', type: 'multi', placeholder: '[central cord / medial band / lateral band]',
+         options: [
+           {id: 'c', label: 'Central cord', value: 'central cord'},
+           {id: 'm', label: 'Medial band', value: 'medial band'},
+           {id: 'l', label: 'Lateral band', value: 'lateral band'},
+         ]},
+        {id: 'thickness', label: 'Thickness (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+
+    // ============= HINDFOOT JOINTS =============
+    {
+      id: 'tibiotalar-joint', label: 'Tibiotalar joint (cartilage / arthrosis)', output_section: 'Hindfoot joints',
+      grade_group: {
+        label: 'Tibiotalar joint',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Tibiotalar joint demonstrates preserved articular cartilage, no marginal osteophytes, and no joint space narrowing.'},
+          {id: 'mild', label: 'Mild chondrosis', sentence: 'Mild diffuse thinning of the tibiotalar articular cartilage with small marginal osteophytes, consistent with mild osteoarthrosis.'},
+          {id: 'moderate', label: 'Moderate chondrosis', sentence: 'Moderate tibiotalar chondrosis with focal cartilage defects, joint space narrowing, marginal osteophytosis, and subchondral marrow changes.'},
+          {id: 'severe', label: 'Severe arthrosis', sentence: 'Severe tibiotalar osteoarthrosis with full-thickness cartilage loss, bone-on-bone change, subchondral cysts, and prominent osteophytes.'},
+          {id: 'ant-imp', label: 'Anterior impingement', sentence: 'Anterior tibiotalar osteophytes ("footballer ankle") with adjacent capsular thickening and synovitis, compatible with anterior impingement.'},
+        ]
+      }
+    },
+    {
+      id: 'subtalar', label: 'Subtalar joint', output_section: 'Hindfoot joints',
+      grade_group: {
+        label: 'Subtalar joint',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Subtalar (posterior and middle facets) joint demonstrates preserved articular cartilage without effusion or coalition.'},
+          {id: 'effusion', label: 'Effusion / synovitis', sentence: 'Subtalar joint effusion and synovial thickening at the {facet} without arthrosis.'},
+          {id: 'chondrosis', label: 'Chondrosis / arthrosis', sentence: 'Subtalar chondrosis and osteoarthrosis at the {facet} with cartilage thinning, marginal osteophytes, and subchondral changes.'},
+          {id: 'coal-fib', label: 'Fibrous coalition', sentence: 'Irregularity, narrowing, and marrow edema at the {facet} subtalar facet without osseous bridging, compatible with fibrous talocalcaneal coalition.'},
+          {id: 'coal-cart', label: 'Cartilaginous coalition', sentence: 'Cartilaginous coalition at the {facet} subtalar facet with abnormal joint contour and marrow edema.'},
+          {id: 'coal-osseous', label: 'Osseous coalition', sentence: 'Complete osseous bridging across the {facet} subtalar facet with marrow continuity, compatible with osseous talocalcaneal coalition.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'facet', label: 'Facet', type: 'multi', placeholder: '[posterior / middle / anterior]',
+         options: [
+           {id: 'post', label: 'Posterior facet', value: 'posterior'},
+           {id: 'mid', label: 'Middle facet', value: 'middle'},
+           {id: 'ant', label: 'Anterior facet', value: 'anterior'},
+         ]}
+      ]
+    },
+    {
+      id: 'midfoot-tmt', label: 'Midfoot / tarsometatarsal joints', output_section: 'Hindfoot joints',
+      grade_group: {
+        label: 'Midfoot / TMT',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Midfoot (talonavicular, calcaneocuboid, naviculocuneiform) and tarsometatarsal joints demonstrate preserved alignment and articular cartilage.'},
+          {id: 'tn', label: 'Talonavicular arthrosis', sentence: 'Talonavicular chondrosis and arthrosis with cartilage thinning, marginal osteophytes, and subchondral signal changes.'},
+          {id: 'cc', label: 'Calcaneocuboid arthrosis', sentence: 'Calcaneocuboid chondrosis and arthrosis.'},
+          {id: 'tmt', label: 'TMT arthrosis', sentence: 'Tarsometatarsal joint chondrosis and arthrosis with osteophytes and joint space narrowing, most prominent at the {tmt_level}.'},
+          {id: 'lisfranc-arth', label: 'Post-traumatic Lisfranc arthrosis', sentence: 'Post-traumatic arthrosis at the Lisfranc articulation with osteophytes, joint space narrowing, and bony irregularity.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'tmt_level', label: 'TMT level', type: 'multi', placeholder: '[1st / 2nd / 3rd / 4th / 5th TMT]',
+         options: [
+           {id: '1', label: '1st TMT', value: '1st TMT'},
+           {id: '2', label: '2nd TMT', value: '2nd TMT'},
+           {id: '3', label: '3rd TMT', value: '3rd TMT'},
+           {id: '4', label: '4th TMT', value: '4th TMT'},
+           {id: '5', label: '5th TMT', value: '5th TMT'},
+         ]}
+      ]
+    },
+
+    // ============= SINUS TARSI =============
+    {
+      id: 'sinus-tarsi', label: 'Sinus tarsi', output_section: 'Sinus tarsi',
+      grade_group: {
+        label: 'Sinus tarsi',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Sinus tarsi demonstrates normal preserved fat signal with intact interosseous talocalcaneal and cervical ligaments.'},
+          {id: 'edema', label: 'Edema only', sentence: 'Replacement of normal sinus tarsi fat by T2-hyperintense edema with preserved interosseous talocalcaneal and cervical ligaments.'},
+          {id: 'syndrome', label: 'Sinus tarsi syndrome', sentence: 'Replacement of normal sinus tarsi fat by T2-hyperintense edema and granulation tissue with partial-thickness injury of the interosseous talocalcaneal and/or cervical ligaments, compatible with sinus tarsi syndrome.'},
+          {id: 'ganglion', label: 'Ganglion cyst', sentence: 'Sinus tarsi ganglion cyst measuring {size} mm.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'size', label: 'Size (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+
+    // ============= SOFT TISSUES =============
+    {
+      id: 'soft-tissues', label: 'Subcutaneous tissues and musculature', output_section: 'Soft tissues',
+      grade_group: {
+        label: 'Soft tissues',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Subcutaneous tissues and musculature about the ankle are unremarkable. Posterior tibial neurovascular bundle and tarsal tunnel are normal.'},
+          {id: 'edema', label: 'Diffuse edema', sentence: 'Diffuse subcutaneous edema overlying the {side} aspect of the ankle.'},
+          {id: 'mass', label: 'Soft tissue mass', sentence: 'Soft tissue mass within the {side} aspect of the ankle/foot measuring {size} mm — further characterization warranted.'},
+          {id: 'tarsal', label: 'Tarsal tunnel mass / nerve compression', sentence: 'Mass effect within the tarsal tunnel on the posterior tibial nerve at the {side} aspect of the medial ankle.'},
+          {id: 'muscle-strain', label: 'Muscle strain', sentence: 'Intramuscular T2-hyperintense feathery edema within the {side} musculature, compatible with low-grade muscle strain.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'side', label: 'Side / region', type: 'mutex', placeholder: '[anterior / medial / lateral / posterior]',
+         options: [
+           {id: 'ant', label: 'Anterior', value: 'anterior'},
+           {id: 'med', label: 'Medial', value: 'medial'},
+           {id: 'lat', label: 'Lateral', value: 'lateral'},
+           {id: 'post', label: 'Posterior', value: 'posterior'},
+           {id: 'plant', label: 'Plantar', value: 'plantar'},
+         ]},
+        {id: 'size', label: 'Size (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    }
+  ]
+};
+</script>
+<script src="engine.js"></script>
+
+</body>
+</html>

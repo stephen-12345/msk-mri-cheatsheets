@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Foot MRI Dictation Cheat Sheet - Expanded Findings &amp; Impressions</title>
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#0b3a52">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MSK MRI">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<style>
+:root{
+  --bg:#0c0f15; --panel:#141925; --panel2:#1a2030; --bdr:#27303f;
+  --tx:#e6eaf2; --tx2:#aab4c5; --tx3:#7c8699;
+  --h1bg:#0b3a52; --h2bg:#11556f; --h3tx:#6cc6e6;
+  --findings:#f4a86a; --impression:#7fd29a;
+  --ph-bg:rgba(244,168,106,0.16); --ph-tx:#f4c89a; --ph-bd:rgba(244,168,106,0.4);
+  --th-bg:#16384a; --th-tx:#cfe7f2;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);color-scheme:dark;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
+  background:var(--bg); color:var(--tx);
+  font-size:18px; line-height:1.62;
+  max-width:1120px; margin:0 auto; padding:0 32px 64px;
+  -webkit-font-smoothing:antialiased;
+}
+
+.topbar{
+  position:sticky; top:0; z-index:10;
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  margin:0 -32px 22px; padding:11px 32px;
+  background:rgba(12,15,21,0.92); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--bdr);
+}
+.topbar .crumb{font-weight:700;color:#fff;font-size:15px;margin-right:auto}
+.topbar a{
+  display:inline-flex; align-items:center;
+  border:1px solid var(--bdr); border-radius:999px;
+  padding:5px 12px; color:#9fdcf0; text-decoration:none;
+  font-size:13px; font-weight:600; background:#0d1a26;
+}
+.topbar a:hover{border-color:var(--h3tx); color:#fff}
+.topbar a.tmpl{border-color:rgba(244,168,106,0.55);background:rgba(244,168,106,0.12);color:#ffe0c8}
+
+.fontctl{
+  display:inline-flex; align-items:center; gap:4px;
+  margin-left:6px; padding-left:10px; border-left:1px solid var(--bdr);
+}
+.fontctl button{
+  cursor:pointer; border:1px solid var(--bdr); border-radius:6px;
+  background:#0d1a26; color:#9fdcf0; font-weight:700;
+  font-family:inherit; line-height:1; padding:5px 9px;
+}
+.fontctl button:hover{border-color:var(--h3tx); color:#fff}
+.fontctl #fs-dec{font-size:12px}
+.fontctl #fs-rst{font-size:13px; min-width:30px}
+.fontctl #fs-inc{font-size:16px}
+
+h1{
+  margin:6px 0 8px; padding:16px 22px;
+  background:linear-gradient(135deg,var(--h1bg),#0a2c40);
+  color:#fff; border-radius:10px; border-left:5px solid var(--h3tx);
+  font-size:30px; line-height:1.18; letter-spacing:0.2px;
+}
+.subtitle{color:var(--tx2); font-size:16px; margin:0 0 22px; line-height:1.5}
+
+h2.group{
+  margin:40px 0 16px; padding:13px 18px;
+  background:linear-gradient(135deg,#241a3a,#1a2030);
+  color:#fff; border-radius:9px; border-left:5px solid #a78bfa;
+  font-size:24px; line-height:1.2; letter-spacing:0.6px;
+  text-transform:uppercase; scroll-margin-top:64px;
+}
+h2{
+  margin:34px 0 14px; padding:11px 16px;
+  background:var(--h2bg); color:#fff; border-radius:8px;
+  font-size:21px; line-height:1.25; letter-spacing:0.2px;
+  scroll-margin-top:64px;
+}
+h3{
+  margin:22px 0 9px; color:var(--h3tx);
+  font-size:18.5px; line-height:1.3; font-weight:700;
+  border-bottom:1px solid #2c3a48; padding-bottom:5px;
+}
+
+p{margin:9px 0}
+.dx{
+  margin:18px 0 4px; font-weight:800; color:#fff;
+  font-size:18.5px; line-height:1.3;
+}
+.f, .i{margin:5px 0; padding-left:14px; border-left:2px solid #25303e}
+.f b{color:var(--findings)}
+.i b{color:var(--impression)}
+
+ul{margin:10px 0 14px 26px}
+li{margin:6px 0}
+
+table{
+  width:100%; border-collapse:collapse; margin:14px 0 18px;
+  font-size:16px; line-height:1.45; background:var(--panel);
+  border-radius:8px; overflow:hidden;
+}
+th{
+  background:var(--th-bg); color:var(--th-tx);
+  text-align:left; font-weight:700; padding:9px 12px;
+  border-bottom:1px solid #2c3a48;
+}
+td{padding:8px 12px; border-bottom:1px solid #232c39; color:var(--tx2); vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
+
+.to-top{
+  position:fixed; right:22px; bottom:22px; z-index:20;
+  width:46px; height:46px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid var(--bdr); background:rgba(17,85,111,0.92);
+  color:#fff; font-size:22px; line-height:1; cursor:pointer;
+  box-shadow:0 6px 20px rgba(0,0,0,0.45); backdrop-filter:blur(6px);
+  opacity:0; visibility:hidden; transform:translateY(8px);
+  transition:opacity .18s, transform .18s, visibility .18s;
+}
+.to-top.show{opacity:1; visibility:visible; transform:translateY(0)}
+.to-top:hover{background:#16638a; border-color:var(--h3tx)}
+@media print{ .to-top{display:none} }
+
+.ph{
+  background:var(--ph-bg); color:var(--ph-tx);
+  border:1px solid var(--ph-bd); border-radius:4px;
+  padding:0 4px; font-size:0.92em; white-space:nowrap;
+}
+
+.section-card{
+  background:var(--panel); border:1px solid var(--bdr);
+  border-radius:10px; padding:4px 20px 16px; margin:0 0 18px;
+}
+
+@media (max-width:680px){
+  body{font-size:17px; padding:0 16px 48px}
+  .topbar{margin:0 -16px 18px; padding:10px 16px}
+  h1{font-size:24px;padding:13px 16px}
+  h2{font-size:19px}
+}
+
+/* Dark-mode PDF (Chrome --print-to-pdf). Backgrounds preserved via
+   print-color-adjust:exact on html above. */
+@page{ size:Letter; margin:0.5in; }
+@media print{
+  body{ background:var(--bg); max-width:none; margin:0; padding:0; font-size:13px; line-height:1.5; }
+  .topbar{ display:none; }
+  h1{ font-size:21px; padding:11px 14px; }
+  h2,h2.group{ font-size:15px; break-after:avoid; }
+  h3,.dx{ break-after:avoid; }
+  .f,.i{ break-inside:avoid; }
+  table,tr{ break-inside:avoid; }
+  table{ font-size:11.5px; }
+}
+</style>
+</head>
+<body>
+<div class="topbar"><span class="crumb">Foot MRI Dictation Cheat Sheet</span><a href="../index.html">← All regions</a><a href="foot-mri-cheatsheet.pdf">PDF (print)</a><a href="foot-mri-cheatsheet-dark.pdf">PDF (dark)</a><a href="foot-mri-cheatsheet.md">Markdown</a><span class="fontctl" title="Font size — shortcuts: -, +, 0 to reset"><button id="fs-dec" aria-label="Decrease font size">A−</button><button id="fs-rst" aria-label="Reset font size">A</button><button id="fs-inc" aria-label="Increase font size">A+</button></span></div>
+<h1>Foot MRI Dictation Cheat Sheet - Expanded Findings &amp; Impressions</h1>
+<p>Copy-ready language. Replace bracketed text. Use as a workstation reference, not a substitute for surgical correlation or local report style.</p>
+<h2>Search Pattern</h2>
+<ul><li>Forefoot pain: plantar plate, neuroma/bursa, stress injury, MTP cartilage.</li><li>Midfoot pain: Lisfranc complex, navicular stress fracture, coalition, midfoot OA.</li><li>Lisfranc: inspect dorsal/interosseous/plantar components plus alignment and marrow edema.</li><li>Sesamoid pain: fracture vs bipartite, AVN, sesamoiditis.</li><li>Report exact ray/space because surgical planning depends on it.</li></ul>
+<h2>Infection Search Pattern</h2>
+<ul><li><b>1. Marrow/bone changes:</b></li><li>Marrow replacement (darker than muscle/disc on T1; geographic pattern more predictive than reticular/periarticular).</li><li>Marrow edema (isolated finding raises concern in diabetics/high-risk).</li><li>Bone erosion (loss of dark T1/T2 cortical line).</li><li><b>2. Surrounding inflammatory changes:</b> fascia, musculature, subcutaneous fat edema/enhancement.</li><li><b>3. Susceptibility suggesting air:</b> in collections, soft tissues, along fascial planes, in bone.</li><li><b>4. Abnormal enhancement:</b></li><li>Rim-enhancing collection = abscess.</li><li>Superficial lesion without enhancement = ulcer.</li><li>Enhancement along fascial planes = infectious/inflammatory fasciitis.</li><li>Non-enhancement of normal structures = ischemia.</li><li>Other patterns of enhancement may not be specific.</li><li><b>5. Differentiating osteomyelitis from neuropathic joint:</b></li><li>Joint effusion with marrow replacement on both sides of joint.</li><li>Fluid collections/abscesses (periprosthetic, subperiosteal, intraosseous/Brodie&#x27;s abscess).</li><li>Sinus tract connecting abnormal marrow signal to skin surface.</li><li>Disappearance of subchondral cysts on sequential imaging.</li><li>Progressive marrow/soft tissue changes greater than expected on sequential imaging.</li></ul>
+<h2>Core Measurements</h2>
+<table><thead><tr><th>Structure</th><th>Normal / Threshold</th><th>Clinical Significance</th></tr></thead><tbody><tr><td>Lisfranc interval</td><td>&lt;2 mm between medial cuneiform and 2nd metatarsal base</td><td>&gt;2 mm suggests ligament disruption; compare with contralateral</td></tr><tr><td>Metatarsal stress fracture risk</td><td>2nd and 3rd metatarsal shafts/necks</td><td>Most common sites; 2nd MT especially with hallux valgus transfer</td></tr><tr><td>Tibial sesamoid</td><td>10-12 mm long axis</td><td>Fracture if irregular margins + marrow edema</td></tr><tr><td>Fibular sesamoid</td><td>8-10 mm long axis</td><td>Less commonly injured; bipartite more common</td></tr><tr><td>Navicular body height</td><td>Loss of height = collapse</td><td>Central 1/3 is watershed zone — highest stress fracture risk</td></tr></tbody></table>
+<h2>Foot MRI Tells</h2>
+<ul><li><b>Lisfranc</b>: the dorsal component tears first; always check all three components (dorsal, interosseous, plantar). Interosseous is the strongest and most important.</li><li><b>Plantar plate</b>: look for crossover toe deformity — suggests chronic tear. Second MTP most commonly affected.</li><li><b>Morton neuroma</b>: between 2nd-3rd or 3rd-4th web spaces; T1 and T2 low signal mass (fibrotic). Not a true neuroma — perineural fibrosis.</li><li><b>Navicular stress fracture</b>: central 1/3 at highest risk (watershed vascular zone, tension side). Sagittal plane fracture on axial images.</li><li><b>Sesamoid AVN vs stress fracture</b>: dual sesamoids don&#x27;t enhance uniformly. Bipartite sesamoid has smooth corticated margins; fracture has irregular edges with edema.</li><li><b>Freiberg disease</b>: 2nd metatarsal head most common. Flattening, sclerosis, and fragmentation suggest AVN.</li><li><b>Turf toe</b>: first MTP plantar plate/capsule injury. Grade the severity — grade 3 involves complete plantar plate tear with dorsal subluxation.</li></ul>
+<h2>Modified Outerbridge Chondromalacia Grading - Copy-Ready</h2>
+<p>Use this for any articular surface. Replace <span class="ph">[surface/compartment]</span> with the specific location: patellar median ridge, medial femoral condyle weightbearing surface, anterosuperior acetabulum, radiocapitellar joint, tibiotalar dome, first MTP joint, etc.</p>
+<table><thead><tr><th>Grade</th><th>MRI shorthand</th></tr></thead><tbody><tr><td>0</td><td>Normal cartilage.</td></tr><tr><td>1</td><td>Signal heterogeneity/softening or swelling; surface intact.</td></tr><tr><td>2</td><td>Superficial fissuring/fraying/partial-thickness defect &lt;50% cartilage depth.</td></tr><tr><td>3</td><td>Deep fissuring/partial-thickness defect &gt;50% cartilage depth, not exposing bone.</td></tr><tr><td>4</td><td>Full-thickness cartilage loss with exposed subchondral bone, often edema/cysts.</td></tr></tbody></table>
+<div class="dx">Grade 0 - normal cartilage</div>
+<p class="f"><b>F:</b> Articular cartilage of the <span class="ph">[surface/compartment]</span> is preserved in thickness and signal without focal fissuring, delamination, or subchondral marrow abnormality.</p>
+<p class="i"><b>I:</b> No chondral defect of the <span class="ph">[surface/compartment]</span>.</p>
+<div class="dx">Grade 1 - chondral signal change / softening</div>
+<p class="f"><b>F:</b> Mild focal cartilage signal heterogeneity/softening of the <span class="ph">[surface/compartment]</span> with preserved cartilage thickness and intact articular surface. No subchondral marrow edema.</p>
+<p class="i"><b>I:</b> Grade 1 chondromalacia of the <span class="ph">[surface/compartment]</span>.</p>
+<div class="dx">Grade 2 - superficial partial-thickness chondral loss</div>
+<p class="f"><b>F:</b> Superficial chondral fissuring/fraying of the <span class="ph">[surface/compartment]</span> involving less than 50% of cartilage thickness. No full-thickness defect or subchondral marrow edema.</p>
+<p class="i"><b>I:</b> Grade 2 chondromalacia of the <span class="ph">[surface/compartment]</span>.</p>
+<div class="dx">Grade 3 - deep partial-thickness chondral loss</div>
+<p class="f"><b>F:</b> Deep partial-thickness chondral fissuring/defect of the <span class="ph">[surface/compartment]</span> involving greater than 50% of cartilage thickness without exposed subchondral bone. <span class="ph">[Mild adjacent subchondral marrow edema.]</span></p>
+<p class="i"><b>I:</b> Grade 3 chondromalacia of the <span class="ph">[surface/compartment]</span>.</p>
+<div class="dx">Grade 4 - full-thickness chondral loss</div>
+<p class="f"><b>F:</b> Full-thickness cartilage loss/fissuring of the <span class="ph">[surface/compartment]</span> measuring <span class="ph">[X]</span> x <span class="ph">[Y]</span> mm with exposed subchondral bone and <span class="ph">[subchondral marrow edema/cystic change]</span>. <span class="ph">[Small unstable chondral flap/loose body if present.]</span></p>
+<p class="i"><b>I:</b> Grade 4 chondromalacia/full-thickness chondral defect of the <span class="ph">[surface/compartment]</span>.</p>
+<h2>Normal / Negative Templates</h2>
+<div class="dx">Normal foot</div>
+<p class="f"><b>F:</b> The metatarsals, phalanges, tarsal bones, and sesamoids demonstrate normal marrow signal without fracture, stress injury, or avascular necrosis. The Lisfranc ligament complex is intact with normal alignment of the tarsometatarsal joints. The plantar plates of the MTP joints are intact. No intermetatarsal mass or neuroma. The plantar fascia is normal in thickness and signal. The tendons and ligaments are intact. No joint effusion, synovitis, or soft tissue mass.</p>
+<p class="i"><b>I:</b> Normal MRI of the foot.</p>
+<h2>Useful Caveats</h2>
+<ul><li><b>Bipartite sesamoid vs fracture</b>: bipartite has smooth, well-corticated margins with no marrow edema; fracture has irregular/jagged edges with adjacent marrow edema and soft tissue swelling. Bipartite is bilateral in ~25% of cases — contralateral comparison may help.</li><li><b>Accessory navicular types</b>: Type I is a sesamoid within the tibialis posterior tendon (os tibiale externum); Type II is connected to the navicular by a synchondrosis (most symptomatic); Type III is a cornuate navicular (fused prominence).</li><li><b>Coalition variants</b>: talocalcaneal (middle facet most common) and calcaneonavicular are the two most frequent. Look for irregular joint surfaces, marrow edema, and secondary signs (talar beak, ball-and-socket ankle).</li></ul>
+<h2>Forefoot / Stress / Lisfranc</h2>
+<div class="dx">Plantar plate tear</div>
+<p class="f"><b>F:</b> <span class="ph">[Partial/full-thickness]</span> tear of the <span class="ph">[2nd]</span> MTP plantar plate at the phalangeal attachment with pericapsular edema and <span class="ph">[dorsal subluxation/crossover deformity]</span>. <span class="ph">[Collateral ligament thickening/tear.]</span></p>
+<p class="i"><b>I:</b> <span class="ph">[Partial/full-thickness]</span> <span class="ph">[2nd]</span> MTP plantar plate tear. <span class="ph">[Clinical correlation for crossover toe deformity.]</span></p>
+<div class="dx">Morton neuroma</div>
+<p class="f"><b>F:</b> Ovoid low-to-intermediate T1 and T2 signal soft tissue mass in the <span class="ph">[2nd-3rd/3rd-4th]</span> intermetatarsal space measuring <span class="ph">[X]</span> mm in maximum transverse dimension, plantar to the intermetatarsal ligament. <span class="ph">[Adjacent intermetatarsal bursitis.]</span></p>
+<p class="i"><b>I:</b> Morton neuroma in the <span class="ph">[2nd-3rd/3rd-4th]</span> intermetatarsal space.</p>
+<div class="dx">Intermetatarsal bursitis</div>
+<p class="f"><b>F:</b> T2 hyperintense fluid distension of the <span class="ph">[2nd-3rd/3rd-4th]</span> intermetatarsal bursa dorsal to the intermetatarsal ligament, without discrete solid soft tissue mass. <span class="ph">[Mild surrounding soft tissue edema.]</span></p>
+<p class="i"><b>I:</b> Intermetatarsal bursitis of the <span class="ph">[2nd-3rd/3rd-4th]</span> web space without Morton neuroma. <span class="ph">[Consider reactive/inflammatory etiology.]</span></p>
+<div class="dx">Metatarsal stress reaction</div>
+<p class="f"><b>F:</b> Marrow edema of the <span class="ph">[2nd]</span> metatarsal shaft/neck with periosteal edema but no discrete low-signal fracture line.</p>
+<p class="i"><b>I:</b> Stress reaction of the <span class="ph">[2nd]</span> metatarsal without completed fracture.</p>
+<div class="dx">Metatarsal stress fracture</div>
+<p class="f"><b>F:</b> Linear low-signal fracture line through the <span class="ph">[2nd]</span> metatarsal <span class="ph">[shaft/neck]</span> with surrounding marrow and periosteal edema. <span class="ph">[No displacement or angulation.]</span></p>
+<p class="i"><b>I:</b> Nondisplaced stress fracture of the <span class="ph">[2nd]</span> metatarsal.</p>
+<div class="dx">Navicular stress fracture</div>
+<p class="f"><b>F:</b> Linear low-signal fracture line in the <span class="ph">[central/dorsal]</span> aspect of the navicular body on axial/sagittal images with surrounding marrow edema. <span class="ph">[Partial/complete fracture extending from the dorsal cortex.]</span> No displacement.</p>
+<p class="i"><b>I:</b> Navicular stress fracture. High-risk location — recommend non-weightbearing and orthopedic/sports medicine consultation.</p>
+<div class="dx">Lisfranc ligament tear</div>
+<p class="f"><b>F:</b> Disruption/edema of the Lisfranc ligament complex between the medial cuneiform and second metatarsal base. The <span class="ph">[dorsal/interosseous/plantar]</span> component is <span class="ph">[partially torn/completely torn]</span>. Adjacent marrow edema in the medial cuneiform and second metatarsal base. [Diastasis of <span class="ph">[X]</span> mm between the medial cuneiform and second metatarsal base.] [Associated fractures of the <span class="ph">[cuneiform/metatarsal base]</span>.]</p>
+<p class="i"><b>I:</b> Lisfranc ligament injury <span class="ph">[with/without]</span> malalignment. <span class="ph">[Specify components involved.]</span></p>
+<div class="dx">First MTP OA</div>
+<p class="f"><b>F:</b> First MTP osteoarthrosis with cartilage loss, marginal osteophytes, subchondral cystic change/marrow edema, and small joint effusion/synovitis. [Dorsal osteophyte measuring <span class="ph">[X]</span> mm limiting dorsiflexion.]</p>
+<p class="i"><b>I:</b> First MTP osteoarthrosis/hallux rigidus.</p>
+<div class="dx">Sesamoid fracture/AVN</div>
+<p class="f"><b>F:</b> <span class="ph">[Fracture]</span>: irregular low-signal line through the <span class="ph">[tibial/fibular]</span> sesamoid with surrounding marrow edema and adjacent soft tissue edema. <span class="ph">[AVN]</span>: diffuse low T1 and heterogeneous T2 signal within the <span class="ph">[tibial/fibular]</span> sesamoid with <span class="ph">[partial/absent]</span> enhancement, fragmentation, and surrounding soft tissue edema.</p>
+<p class="i"><b>I:</b> <span class="ph">[Tibial/fibular]</span> sesamoid <span class="ph">[fracture/avascular necrosis]</span>. <span class="ph">[Recommend correlation with contralateral foot to exclude bipartite variant if fracture is suspected.]</span></p>
+<div class="dx">Accessory navicular (Type II) syndrome</div>
+<p class="f"><b>F:</b> Type II accessory navicular with a well-corticated ossicle connected to the navicular tuberosity by a synchondrosis. Marrow edema at the synchondrosis interface and within the accessory ossicle. Surrounding soft tissue edema and <span class="ph">[tibialis posterior tendinosis/partial tear at the insertion]</span>. <span class="ph">[Small joint effusion.]</span></p>
+<p class="i"><b>I:</b> Symptomatic Type II accessory navicular with synchondrosis stress reaction and <span class="ph">[tibialis posterior tendinopathy]</span>.</p>
+<div class="dx">Tarsal coalition</div>
+<p class="f"><b>F:</b> <span class="ph">[Fibrous/cartilaginous/osseous]</span> coalition at the <span class="ph">[talocalcaneal middle facet/calcaneonavicular]</span> joint with irregular articular surfaces, <span class="ph">[marrow edema at the coalition site]</span>, and <span class="ph">[narrowing of the posterior subtalar joint]</span>. Secondary signs include <span class="ph">[talar beaking/ball-and-socket ankle joint/hindfoot valgus]</span>.</p>
+<p class="i"><b>I:</b> <span class="ph">[Talocalcaneal/calcaneonavicular]</span> coalition, <span class="ph">[fibrous/cartilaginous/osseous]</span> type. <span class="ph">[Secondary degenerative changes.]</span></p>
+<div class="dx">Freiberg disease</div>
+<p class="f"><b>F:</b> Flattening and irregularity of the <span class="ph">[2nd/3rd]</span> metatarsal head with subchondral sclerosis, fragmentation, and surrounding marrow edema. <span class="ph">[Overlying cartilage loss and joint effusion.]</span> <span class="ph">[Loose bodies within the MTP joint.]</span></p>
+<p class="i"><b>I:</b> Freiberg disease (metatarsal head avascular necrosis) of the <span class="ph">[2nd/3rd]</span> metatarsal. [Smillie stage <span class="ph">[I-V]</span>.]</p>
+<div class="dx">Turf toe</div>
+<p class="f"><b>F:</b> <span class="ph">[Grade 1: periligamentous edema surrounding the first MTP plantar plate/capsuloligamentous complex without discrete tear.]</span> [Grade 2: partial-thickness tear of the plantar plate at the <span class="ph">[proximal/distal]</span> attachment with surrounding edema and small joint effusion.] [Grade 3: complete tear of the plantar plate with <span class="ph">[proximal retraction/dorsal subluxation of the proximal phalanx]</span> and <span class="ph">[sesamoid diastasis/retraction]</span>.]</p>
+<p class="i"><b>I:</b> Turf toe injury, grade <span class="ph">[1/2/3]</span>. <span class="ph">[First MTP plantar plate/capsuloligamentous tear.]</span></p>
+<div class="dx">Midfoot osteoarthritis</div>
+<p class="f"><b>F:</b> Degenerative changes at the <span class="ph">[tarsometatarsal/naviculocuneiform/intercuneiform]</span> joints with cartilage loss, subchondral sclerosis, marginal osteophytes, and <span class="ph">[dorsal osteophyte formation]</span>. <span class="ph">[Subchondral marrow edema suggesting active degenerative change.]</span> <span class="ph">[Small joint effusion.]</span></p>
+<p class="i"><b>I:</b> Midfoot osteoarthritis involving the <span class="ph">[specify joints]</span>. <span class="ph">[Dorsal osteophyte impingement if symptomatic.]</span></p>
+<div class="dx">Calcaneal stress fracture</div>
+<p class="f"><b>F:</b> Linear low-signal fracture line in the <span class="ph">[posterior/anterior]</span> calcaneal tuberosity perpendicular to the primary trabecular axis with surrounding marrow edema and periosteal edema along the calcaneal cortex. No displacement, cortical step-off, or extension to the subtalar joint surface. <span class="ph">[Adjacent soft tissue edema along the Achilles insertion/plantar fascia origin.]</span></p>
+<p class="i"><b>I:</b> Nondisplaced calcaneal stress fracture. <span class="ph">[Recommend clinical correlation, activity modification, and follow-up imaging if symptoms persist.]</span></p>
+<div class="dx">Plantar fibromatosis (Ledderhose disease)</div>
+<p class="f"><b>F:</b> Fusiform/nodular thickening within the central cord of the plantar fascia measuring <span class="ph">[X]</span> x <span class="ph">[Y]</span> mm, demonstrating low-to-intermediate T1 and low-to-intermediate T2 signal. No aggressive features. <span class="ph">[Multiple nodules along the plantar aponeurosis.]</span></p>
+<p class="i"><b>I:</b> Plantar fibroma/fibromatosis (Ledderhose disease). Benign. <span class="ph">[Surgical excision if symptomatic and refractory to conservative measures.]</span></p>
+<h2>Source Notes</h2>
+<p>Built as a practical dictation aid from standard MSK MRI reporting patterns, review-level radiology references, and the existing shoulder cheat-sheet style. Use surgical correlation and local report conventions when needed.</p>
+<button id="to-top" class="to-top" aria-label="Back to top" title="Back to top (Home)">↑</button>
+<script>
+(function(){
+  var KEY='cheatsheet-font-scale', MIN=0.7, MAX=1.8, STEP=0.1;
+  var scale=parseFloat(localStorage.getItem(KEY));
+  if(!scale||isNaN(scale)) scale=1;
+  function apply(){ document.body.style.zoom=scale; }
+  function set(s){
+    scale=Math.min(MAX, Math.max(MIN, Math.round(s*10)/10));
+    localStorage.setItem(KEY, scale);
+    apply();
+  }
+  apply();
+  var dec=document.getElementById('fs-dec'),
+      inc=document.getElementById('fs-inc'),
+      rst=document.getElementById('fs-rst');
+  if(dec) dec.onclick=function(){ set(scale-STEP); };
+  if(inc) inc.onclick=function(){ set(scale+STEP); };
+  if(rst) rst.onclick=function(){ set(1); };
+  // back-to-top button
+  var top=document.getElementById('to-top');
+  function goTop(){ window.scrollTo({top:0, behavior:'smooth'}); }
+  function onScroll(){
+    if(!top) return;
+    if(window.scrollY>320) top.classList.add('show');
+    else top.classList.remove('show');
+  }
+  if(top){ top.onclick=goTop; window.addEventListener('scroll', onScroll, {passive:true}); onScroll(); }
+
+  document.addEventListener('keydown', function(e){
+    if(e.metaKey||e.ctrlKey||e.altKey) return;            // leave native zoom alone
+    var t=e.target;
+    if(t && (t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable)) return;
+    if(e.key==='+'||e.key==='='){ set(scale+STEP); e.preventDefault(); }
+    else if(e.key==='-'||e.key==='_'){ set(scale-STEP); e.preventDefault(); }
+    else if(e.key==='0'){ set(1); e.preventDefault(); }
+    else if(e.key==='Home'){ goTop(); e.preventDefault(); }
+  });
+})();
+</script>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}</script>
+</body>
+</html>

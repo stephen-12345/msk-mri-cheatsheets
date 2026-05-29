@@ -1,0 +1,553 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elbow MRI Cheat Sheet — Color-Coded Zones</title>
+<style>
+:root{
+  --bg:#090d12; --panel:#111821; --panel-2:#0f1721; --border:#27364a; --border-soft:#1f2a3a;
+  --text:#e8eef7; --muted:#aab7c7; --dim:#8095ad;
+
+  /* Zone colors */
+  --anat-bg:#0f1d2b;  --anat-ed:#3d6e96;  --anat-tx:#8bdcf0;   /* anatomy: cyan */
+  --mri-bg:#23200d;   --mri-ed:#8a7228;   --mri-tx:#ffd166;    /* where on MRI: gold */
+  --dict-bg:#221511;  --dict-ed:#a05530;  --dict-tx:#f4b183;   /* dictation: orange */
+  --ddx-bg:#1f1422;   --ddx-ed:#7e3a89;   --ddx-tx:#ff9ec3;    /* ddx: pink */
+  --tip-bg:#102019;   --tip-ed:#3e7d59;   --tip-tx:#9be4b5;    /* tip: green */
+  --warn-bg:#2a1818;  --warn-ed:#a04444;  --warn-tx:#ff9c9c;   /* pitfall: red */
+}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color:var(--text);background:var(--bg);font-size:15.5px;line-height:1.5}
+a{color:#8bdcf0;text-decoration:none}
+a:hover{text-decoration:underline}
+
+/* Sticky TOC */
+.topbar{position:sticky;top:0;z-index:10;background:rgba(9,13,18,0.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:10px 18px}
+.topbar .row1{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.topbar .title{font-weight:700;color:#fff;font-size:15px;letter-spacing:0.2px}
+.topbar .home{font-size:12px;color:#9fb1c8;border:1px solid #34506a;border-radius:999px;padding:3px 10px}
+
+.jump{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.jump a{font-size:12px;background:#0b1824;border:1px solid #34506a;border-radius:999px;padding:3px 10px;color:#8bdcf0}
+.jump a:hover{background:#102a3a;border-color:#8bdcf0;text-decoration:none}
+
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px;font-size:11.5px;color:var(--muted)}
+.legend .chip{display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:999px;border:1px solid #34506a;background:#0b1824}
+.legend .chip i{width:9px;height:9px;border-radius:50%}
+.legend .chip.anat i{background:var(--anat-tx)} .legend .chip.anat{border-color:var(--anat-ed)}
+.legend .chip.mri i{background:var(--mri-tx)} .legend .chip.mri{border-color:var(--mri-ed)}
+.legend .chip.dict i{background:var(--dict-tx)} .legend .chip.dict{border-color:var(--dict-ed)}
+.legend .chip.ddx i{background:var(--ddx-tx)} .legend .chip.ddx{border-color:var(--ddx-ed)}
+.legend .chip.tip i{background:var(--tip-tx)} .legend .chip.tip{border-color:var(--tip-ed)}
+
+.wrap{max-width:1100px;margin:0 auto;padding:18px 18px 60px}
+
+/* Section header */
+h2.section-h{margin:24px 0 10px;padding:9px 14px;color:#fff;background:linear-gradient(90deg,#155c77,#0d3a52);border-radius:8px;font-size:19px;letter-spacing:0.3px;border-left:4px solid #35b8d8}
+h3{margin:14px 0 6px;color:#8bdcf0;font-size:16px;border-bottom:1px solid #34465c;padding-bottom:3px}
+p{margin:6px 0}
+ul{margin:4px 0 4px 18px;padding:0}
+li{margin:2px 0}
+
+/* Top reference: anatomy tables */
+.anatomy-block{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:10px 14px;margin-bottom:10px}
+table{width:100%;border-collapse:collapse;margin:6px 0;font-size:13.5px}
+th{background:#17344a;color:#ffd166;text-align:left;font-weight:700;padding:5px 7px;border:1px solid #2b4259}
+td{background:#0f1721;border:1px solid #2b4259;padding:5px 7px;vertical-align:top}
+td b{color:#fff}
+
+/* Diagnosis row */
+.dx{border:1px solid var(--border);border-radius:8px;background:#0d141f;margin:12px 0;overflow:hidden}
+.dx-head{display:flex;align-items:center;flex-wrap:wrap;gap:8px;padding:10px 14px;background:#152337;border-bottom:1px solid var(--border)}
+.dx-head .name{font-weight:800;color:#fff;font-size:16px;letter-spacing:0.2px}
+.dx-head .region{font-size:11px;border:1px solid #34506a;border-radius:999px;padding:2px 8px;color:#cfe3ee;background:#0b1824;text-transform:uppercase;letter-spacing:0.6px}
+.dx-head .region.med{border-color:#7a9ec2;color:#cfe3ee}
+.dx-head .region.lat{border-color:#d8a85a;color:#ffd9a3}
+.dx-head .region.ant{border-color:#9bd58a;color:#c5edb4}
+.dx-head .region.post{border-color:#cf8fd6;color:#eecaf2}
+.dx-head .region.nerve{border-color:#b08bff;color:#dcc8ff}
+.dx-head .region.cart{border-color:#57d68d;color:#a4eec0}
+.dx-head .sources{margin-left:auto;display:flex;gap:5px;flex-wrap:wrap}
+.dx-head .sources a{font-size:11px;border:1px solid #34506a;border-radius:999px;padding:1px 8px;color:#8bdcf0;background:#0b1824}
+
+/* Zoned content blocks within a diagnosis card */
+.zones{padding:10px 14px;display:grid;grid-template-columns:1fr;gap:8px}
+.z{border-radius:7px;padding:8px 10px 8px 12px;border:1px solid;font-size:14.5px;line-height:1.45}
+.z .hdr{display:inline-block;font-size:10.5px;letter-spacing:1.5px;text-transform:uppercase;font-weight:800;margin:0 0 4px;padding:1px 7px;border-radius:999px}
+.z ul{margin:2px 0 0 16px}
+.z p{margin:2px 0}
+
+.z.anat{background:var(--anat-bg);border-color:var(--anat-ed)}
+.z.anat .hdr{background:rgba(139,220,240,0.14);color:var(--anat-tx);border:1px solid var(--anat-ed)}
+
+.z.mri{background:var(--mri-bg);border-color:var(--mri-ed)}
+.z.mri .hdr{background:rgba(255,209,102,0.14);color:var(--mri-tx);border:1px solid var(--mri-ed)}
+
+.z.dict{background:var(--dict-bg);border-color:var(--dict-ed)}
+.z.dict .hdr{background:rgba(244,177,131,0.14);color:var(--dict-tx);border:1px solid var(--dict-ed)}
+.z.dict p b{color:var(--dict-tx)}
+
+.z.ddx{background:var(--ddx-bg);border-color:var(--ddx-ed)}
+.z.ddx .hdr{background:rgba(255,158,195,0.14);color:var(--ddx-tx);border:1px solid var(--ddx-ed)}
+
+.z.tip{background:var(--tip-bg);border-color:var(--tip-ed)}
+.z.tip .hdr{background:rgba(155,228,181,0.14);color:var(--tip-tx);border:1px solid var(--tip-ed)}
+
+/* Side-by-side dict + ddx on wide */
+@media (min-width:880px){
+  .zones.split{grid-template-columns:1fr 1fr;column-gap:10px;row-gap:8px}
+  .zones.split .z.anat{grid-column:1 / -1}
+  .zones.split .z.mri{grid-column:1 / -1}
+  .zones.split .z.tip{grid-column:1 / -1}
+}
+
+/* Search pattern callout */
+.callout{background:linear-gradient(135deg,#0e2536,#0c1a26);border:1px solid #2c4a66;border-left:4px solid #35b8d8;border-radius:8px;padding:12px 16px;margin:0 0 14px}
+.callout h3{border:none;margin:0 0 6px;color:#fff;font-size:16px}
+.callout ul{margin:6px 0 0 18px}
+
+/* Pitfalls */
+.pitfalls{background:linear-gradient(135deg,var(--warn-bg),#1f1414);border:1px solid var(--warn-ed);border-left:4px solid #ff7676;border-radius:8px;padding:12px 16px;margin:18px 0}
+.pitfalls h3{border:none;margin:0 0 4px;color:var(--warn-tx);font-size:16px}
+.pitfalls li::marker{color:#ff9c9c}
+
+@media print{
+  body{font-size:9pt;line-height:1.25}
+  .topbar{display:none}
+  .wrap{padding:0}
+  .dx{page-break-inside:avoid;margin:6px 0}
+  .zones{padding:6px 8px;gap:5px}
+  .z{padding:5px 7px;font-size:8pt}
+  table{font-size:7.5pt}
+  h2.section-h{font-size:11pt;padding:5px 8px}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="row1">
+    <span class="title">Elbow MRI — Color-Coded Zones</span>
+    <a class="home" href="../index.html">← All regions</a>
+  </div>
+  <div class="jump">
+    <a href="#search">Search pattern</a>
+    <a href="#anatomy">Anatomy tables</a>
+    <a href="#grading">Cartilage grading</a>
+    <a href="#tendons">Tendons</a>
+    <a href="#ligaments">Ligaments</a>
+    <a href="#cart">Cartilage / Nerves / Loose bodies</a>
+    <a href="#pitfalls">Pitfalls</a>
+  </div>
+  <div class="legend">
+    <span class="chip anat"><i></i>Anatomy</span>
+    <span class="chip mri"><i></i>Where on MRI</span>
+    <span class="chip dict"><i></i>F: / I: dictation</span>
+    <span class="chip ddx"><i></i>DDx mimics</span>
+    <span class="chip tip"><i></i>Tips / pitfalls</span>
+  </div>
+</div>
+
+<main class="wrap">
+
+<!-- SEARCH PATTERN -->
+<section id="search" class="callout">
+  <h3>Search pattern — by location</h3>
+  <ul>
+    <li><b>Lateral pain →</b> common extensor (ECRB), LUCL on posterior coronals, radiocapitellar joint/plica, PIN at arcade of Frohse, capitellum for OCD.</li>
+    <li><b>Medial pain →</b> common flexor, anterior band UCL at sublime tubercle (T-sign), ulnar nerve in cubital tunnel, posteromedial olecranon (valgus extension overload).</li>
+    <li><b>Anterior pain →</b> distal biceps at radial tuberosity (FABS view), brachialis, bicipitoradial bursitis, median nerve between PT heads.</li>
+    <li><b>Posterior pain →</b> triceps insertion, olecranon bursitis vs stress, posterior loose bodies.</li>
+    <li><b>Always sweep the recesses</b> — olecranon, coronoid, radiocapitellar — for loose bodies.</li>
+  </ul>
+</section>
+
+<!-- ANATOMY REFERENCE TABLES -->
+<h2 id="anatomy" class="section-h">Anatomy — Origin / Insertion / Where on MRI</h2>
+
+<div class="anatomy-block">
+  <h3>Ligaments</h3>
+  <table>
+    <tr><th style="width:18%">Ligament</th><th style="width:22%">Origin</th><th style="width:22%">Insertion</th><th style="width:18%">Function</th><th>Where to look on MRI</th></tr>
+    <tr><td><b>UCL — anterior bundle</b><br><span style="color:var(--muted);font-size:12px">Primary medial stabilizer</span></td><td>Anteroinferior medial epicondyle</td><td>Sublime tubercle of coronoid (ulna)</td><td>Primary valgus restraint 30–120°</td><td>Coronal PD-fs medial joint; thin low-signal band. Distal undersurface tear = <b>T-sign</b> on MR arthrogram.</td></tr>
+    <tr><td><b>UCL — posterior bundle</b></td><td>Posterior medial epicondyle</td><td>Medial margin olecranon</td><td>Valgus restraint &gt; 90°</td><td>Coronal posterior slices; fan-shaped.</td></tr>
+    <tr><td><b>UCL — transverse (Cooper)</b></td><td>Medial olecranon</td><td>Coronoid (intra-ulnar)</td><td>Minor</td><td>Axial below joint; rarely a focus.</td></tr>
+    <tr><td><b>RCL</b></td><td>Lateral epicondyle (anterior facet)</td><td>Blends into annular ligament</td><td>Varus restraint</td><td>Coronal anterior; deep to common extensor.</td></tr>
+    <tr><td><b>LUCL</b></td><td>Lateral epicondyle (deep/posterior to RCL)</td><td>Supinator crest of ulna</td><td>Posterolateral rotatory stability</td><td><b>Posterior coronal slices</b>. Edema at supinator crest = arcuate sign.</td></tr>
+    <tr><td><b>Annular ligament</b></td><td>Anterior margin radial notch (ulna)</td><td>Posterior margin radial notch (ulna), wrapping radial head</td><td>Holds radius to ulna in pro/supination</td><td>Axial through radial head.</td></tr>
+  </table>
+</div>
+
+<div class="anatomy-block">
+  <h3>Tendons</h3>
+  <table>
+    <tr><th style="width:18%">Tendon</th><th style="width:22%">Origin</th><th style="width:22%">Insertion</th><th style="width:18%">Function</th><th>Where to look on MRI</th></tr>
+    <tr><td><b>Common extensor</b> (ECRB)</td><td>Anterolateral facet of lateral epicondyle</td><td>Forearm extensors (ECRB, EDC, EDM, ECU)</td><td>Wrist/finger extension</td><td>Coronal PD-fs lateral side.</td></tr>
+    <tr><td><b>Common flexor</b></td><td>Anterior facet of medial epicondyle</td><td>Forearm flexors (PT, FCR, PL, FDS, FCU)</td><td>Wrist flexion, pronation</td><td>Coronal PD-fs medial side, lies superficial to UCL.</td></tr>
+    <tr><td><b>Distal biceps</b></td><td>Short + long head proximally → one distal tendon</td><td>Radial tuberosity + bicipital aponeurosis (lacertus)</td><td>Forearm supinator + elbow flexor</td><td><b>FABS view</b> long-axis; axial T2-fs.</td></tr>
+    <tr><td><b>Triceps</b></td><td>Long, lateral, medial heads</td><td>Olecranon (posterior superior)</td><td>Elbow extension</td><td>Sagittal PD-fs posterior; assess % intact fibers.</td></tr>
+    <tr><td><b>Brachialis</b></td><td>Distal anterior humerus</td><td>Coronoid process + ulnar tuberosity</td><td>Pure elbow flexor</td><td>Sagittal anterior.</td></tr>
+    <tr><td><b>Anconeus</b></td><td>Posterior lateral epicondyle</td><td>Lateral olecranon</td><td>Extensor synergist</td><td>Coronal posterolateral. <b>Anconeus epitrochlearis</b> = accessory muscle in cubital tunnel.</td></tr>
+  </table>
+</div>
+
+<div class="anatomy-block">
+  <h3>Nerves</h3>
+  <table>
+    <tr><th style="width:14%">Nerve</th><th style="width:30%">Course</th><th style="width:26%">Compression site</th><th>MRI clue / pitfall</th></tr>
+    <tr><td><b>Ulnar</b></td><td>Posterior to medial epicondyle through cubital tunnel; roof = Osborne ligament</td><td>Cubital tunnel; anconeus epitrochlearis; subluxation in flexion</td><td>Compare caliber to median. T2 hyperintensity = neuritis. Beware accessory muscle.</td></tr>
+    <tr><td><b>Median</b></td><td>Anteromedial, between PT heads; under lacertus fibrosus</td><td>Pronator syndrome — between PT heads, FDS arch</td><td>Denervation in PT, FDS, FDP (radial half), FPL.</td></tr>
+    <tr><td><b>Radial → PIN</b></td><td>Anterolateral; PIN through supinator at <b>arcade of Frohse</b></td><td>Radial tunnel</td><td>Denervation in supinator + EDC/ECU/APL/EPL/EPB.</td></tr>
+  </table>
+</div>
+
+<!-- CARTILAGE GRADING -->
+<h2 id="grading" class="section-h">Modified Outerbridge Chondromalacia Grading — Copy-Ready</h2>
+<div class="anatomy-block">
+  <p style="color:var(--muted);font-size:13px">Use for any articular surface. Replace <code>[surface/compartment]</code>.</p>
+  <table>
+    <tr><th style="width:8%">Grade</th><th>MRI shorthand</th></tr>
+    <tr><td>0</td><td>Normal cartilage.</td></tr>
+    <tr><td>1</td><td>Signal heterogeneity/softening or swelling; surface intact.</td></tr>
+    <tr><td>2</td><td>Superficial fissuring/fraying/partial-thickness defect &lt;50% cartilage depth.</td></tr>
+    <tr><td>3</td><td>Deep fissuring/partial-thickness defect &gt;50% cartilage depth, not exposing bone.</td></tr>
+    <tr><td>4</td><td>Full-thickness cartilage loss with exposed subchondral bone, often edema/cysts.</td></tr>
+  </table>
+</div>
+
+<div class="dx">
+  <div class="dx-head"><span class="name">Grade 0 — normal cartilage</span><span class="region cart">cartilage</span><span class="sources"><a href="https://pubmed.ncbi.nlm.nih.gov/16801363/" target="_blank" rel="noopener">grading</a></span></div>
+  <div class="zones split">
+    <div class="z dict"><span class="hdr">Dictation</span>
+      <p><b>F:</b> Articular cartilage of the [surface/compartment] is preserved in thickness and signal without focal fissuring, delamination, or subchondral marrow abnormality.</p>
+      <p><b>I:</b> No chondral defect of the [surface/compartment].</p>
+    </div>
+    <div class="z tip"><span class="hdr">Tip</span><p>Use this baseline phrasing for every surface you confirm normal — keeps reports auditable.</p></div>
+  </div>
+</div>
+
+<div class="dx">
+  <div class="dx-head"><span class="name">Grade 1 — chondral softening / signal change</span><span class="region cart">cartilage</span></div>
+  <div class="zones split">
+    <div class="z dict"><span class="hdr">Dictation</span>
+      <p><b>F:</b> Mild focal cartilage signal heterogeneity/softening of the [surface/compartment] with preserved cartilage thickness and intact articular surface. No subchondral marrow edema.</p>
+      <p><b>I:</b> Grade 1 chondromalacia of the [surface/compartment].</p>
+    </div>
+    <div class="z tip"><span class="hdr">Tip</span><p>Confirm on two sequences. Don't over-call from a single fluid-sensitive image.</p></div>
+  </div>
+</div>
+
+<div class="dx">
+  <div class="dx-head"><span class="name">Grade 2 — superficial partial-thickness loss</span><span class="region cart">cartilage</span></div>
+  <div class="zones split">
+    <div class="z dict"><span class="hdr">Dictation</span>
+      <p><b>F:</b> Superficial chondral fissuring/fraying of the [surface/compartment] involving less than 50% of cartilage thickness. No full-thickness defect or subchondral marrow edema.</p>
+      <p><b>I:</b> Grade 2 chondromalacia of the [surface/compartment].</p>
+    </div>
+    <div class="z tip"><span class="hdr">Tip</span><p>&lt;50% depth — earliest "real" defect on coronals.</p></div>
+  </div>
+</div>
+
+<div class="dx">
+  <div class="dx-head"><span class="name">Grade 3 — deep partial-thickness loss</span><span class="region cart">cartilage</span></div>
+  <div class="zones split">
+    <div class="z dict"><span class="hdr">Dictation</span>
+      <p><b>F:</b> Deep partial-thickness chondral fissuring/defect of the [surface/compartment] involving greater than 50% of cartilage thickness without exposed subchondral bone. [Mild adjacent subchondral marrow edema.]</p>
+      <p><b>I:</b> Grade 3 chondromalacia of the [surface/compartment].</p>
+    </div>
+    <div class="z tip"><span class="hdr">Tip</span><p>&gt;50% depth, bone NOT exposed; expect subchondral edema.</p></div>
+  </div>
+</div>
+
+<div class="dx">
+  <div class="dx-head"><span class="name">Grade 4 — full-thickness defect, exposed bone</span><span class="region cart">cartilage</span></div>
+  <div class="zones split">
+    <div class="z dict"><span class="hdr">Dictation</span>
+      <p><b>F:</b> Full-thickness cartilage loss/fissuring of the [surface/compartment] measuring [X] x [Y] mm with exposed subchondral bone and [subchondral marrow edema/cystic change]. [Small unstable chondral flap/loose body if present.]</p>
+      <p><b>I:</b> Grade 4 chondromalacia/full-thickness chondral defect of the [surface/compartment].</p>
+    </div>
+    <div class="z tip"><span class="hdr">Tip</span><p>Measure the defect (mm). State if unstable flap or loose body present.</p></div>
+  </div>
+</div>
+
+<!-- TENDONS -->
+<h2 id="tendons" class="section-h">Tendons</h2>
+
+<div class="dx">
+  <div class="dx-head"><span class="name">Common extensor tendinosis (lateral epicondylitis)</span><span class="region lat">lateral</span>
+    <span class="sources"><a href="https://pubmed.ncbi.nlm.nih.gov/22260933/" target="_blank" rel="noopener">MRI accuracy</a><a href="https://radiopaedia.org/articles/lateral-epicondylitis" target="_blank" rel="noopener">Radiopaedia</a></span>
+  </div>
+  <div class="zones split">
+    <div class="z anat"><span class="hdr">Anatomy</span>
+      <ul><li><b>Origin:</b> anterolateral facet of lateral epicondyle</li><li><b>Culprit fibers:</b> ECRB undersurface (deep) almost always</li><li>Blends with RCL beneath it</li></ul>
+    </div>
+    <div class="z mri"><span class="hdr">Where on MRI</span>
+      <ul><li>Coronal PD-fs lateral side → sagittal for partial-thickness</li><li>Normal = uniform low-signal triangle</li><li>Tendinosis = thickened with intermediate signal</li></ul>
+    </div>
+    <div class="z dict"><span class="hdr">Dictation</span>
+      <p><b>F:</b> Thickening and intermediate signal of the common extensor tendon origin with [low-grade partial-thickness interstitial tearing] and adjacent peritendinous edema.</p>
+      <p><b>I:</b> Common extensor tendinosis/lateral epicondylitis [with low-grade partial tear].</p>
+    </div>
+    <div class="z ddx"><span class="hdr">DDx mimics</span>
+      <ul><li>LUCL injury (posterior coronals)</li><li>Radiocapitellar plica syndrome (plica &gt;3 mm or &gt;1/3 capitellum)</li><li>Radial tunnel / PIN (supinator denervation)</li><li>Capitellar OCD</li><li>Posterolateral rotatory instability</li></ul>
+    </div>
+    <div class="z tip"><span class="hdr">Tips</span>
+      <ul><li>Always check LUCL when calling lateral epicondylitis — combined injury changes management.</li><li>Reflex check capitellar cartilage on the same slice.</li></ul>
+    </div>
+  </div>
+</div>
+
+<div class="dx">
+  <div class="dx-head"><span class="name">Common extensor high-grade / full-thickness tear</span><span class="region lat">lateral</span>
+    <span class="sources"><a href="https://radiopaedia.org/articles/lateral-epicondylitis" target="_blank" rel="noopener">Radiopaedia</a></span>
+  </div>
+  <div class="zones split">
+    <div class="z anat"><span class="hdr">Anatomy</span><ul><li>Same origin; tear typically at enthesis</li></ul></div>
+    <div class="z mri"><span class="hdr">Where on MRI</span><ul><li>Coronal PD-fs — fluid-filled gap at lateral epicondyle</li><li>Measure retraction in mm</li></ul></div>
+    <div class="z dict"><span class="hdr">Dictation</span>
+      <p><b>F:</b> High-grade partial/full-thickness tear of the common extensor tendon origin from the lateral epicondyle with [X] mm retraction and surrounding soft tissue edema.</p>
+      <p><b>I:</b> High-grade tear of the common extensor tendon origin.</p>
+    </div>
+    <div class="z ddx"><span class="hdr">DDx mimics</span><ul><li>LUCL avulsion (often coexists)</li><li>Lateral epicondyle stress reaction</li></ul></div>
+    <div class="z tip"><span class="hdr">Tips</span><ul><li>State LUCL status explicitly — surgeons need to know.</li><li>Look for retracted ligament stump / Bosworth-type avulsion fragment.</li></ul></div>
+  </div>
+</div>
+
+<div class="dx">
+  <div class="dx-head"><span class="name">Common flexor tendinosis (medial epicondylitis / "golfer's elbow")</span><span class="region med">medial</span>
+    <span class="sources"><a href="https://pubmed.ncbi.nlm.nih.gov/22260933/" target="_blank" rel="noopener">MRI accuracy</a><a href="https://radiopaedia.org/articles/medial-epicondylitis" target="_blank" rel="noopener">Radiopaedia</a></span>
+  </div>
+  <div class="zones split">
+    <div class="z anat"><span class="hdr">Anatomy</span><ul><li><b>Origin:</b> anterior facet of medial epicondyle</li><li>Pronator teres + FCR typically affected</li><li>Common flexor lies superficial to UCL</li></ul></div>
+    <div class="z mri"><span class="hdr">Where on MRI</span><ul><li>Coronal PD-fs medial; check UCL on the SAME image</li></ul></div>
+    <div class="z dict"><span class="hdr">Dictation</span>
+      <p><b>F:</b> Thickening and intermediate signal of the common flexor tendon origin with mild peritendinous edema. No full-thickness tear.</p>
+      <p><b>I:</b> Common flexor tendinosis/medial epicondylitis.</p>
+    </div>
+    <div class="z ddx"><span class="hdr">DDx mimics</span><ul><li>UCL anterior band injury — often coexists in throwers</li><li>Ulnar neuritis / cubital tunnel syndrome</li><li>Snapping triceps (medial head)</li><li>Skeletally immature: medial epicondyle apophyseal injury ("Little Leaguer's elbow")</li></ul></div>
+    <div class="z tip"><span class="hdr">Tips</span><ul><li>Medial pain + sublime tubercle edema = think distal UCL tear, not just flexor tendinosis.</li><li>Always report the adjacent ulnar nerve.</li></ul></div>
+  </div>
+</div>
+
+<div class="dx">
+  <div class="dx-head"><span class="name">Distal biceps tendon tear</span><span class="region ant">anterior</span>
+    <span class="sources"><a href="https://radiopaedia.org/articles/distal-biceps-tendon-rupture" target="_blank" rel="noopener">Radiopaedia</a></span>
+  </div>
+  <div class="zones split">
+    <div class="z anat"><span class="hdr">Anatomy</span><ul><li><b>Insertion:</b> radial tuberosity (footprint posterior)</li><li><b>Lacertus fibrosus</b> (bicipital aponeurosis) tethers tendon to forearm fascia — if intact, limits retraction</li></ul></div>
+    <div class="z mri"><span class="hdr">Where on MRI</span><ul><li><b>FABS view</b> — Flexed elbow, ABducted shoulder, Supinated forearm — entire tendon in one long-axis plane</li><li>Axial T2-fs through antecubital fossa to grade thickness</li></ul></div>
+    <div class="z dict"><span class="hdr">Dictation</span>
+      <p><b>F:</b> Full-thickness tear of the distal biceps tendon from the radial tuberosity with [X] cm proximal retraction and fluid/hemorrhage along the bicipitoradial bursa. [Lacertus fibrosus intact/disrupted.]</p>
+      <p><b>I:</b> Complete distal biceps tendon rupture with [X] cm retraction.</p>
+    </div>
+    <div class="z ddx"><span class="hdr">DDx mimics</span><ul><li>Partial undersurface tear at radial-sided footprint — needs FABS</li><li>Bicipitoradial bursitis — fluid without tendon discontinuity; can cause PIN palsy</li><li>Lacertus fibrosus isolated tear</li><li>Brachialis strain (deep + medial)</li></ul></div>
+    <div class="z tip"><span class="hdr">Tips</span><ul><li>State <b>retraction in cm</b> and <b>lacertus status</b> — surgeon chooses 1- vs 2-incision repair on these.</li><li>Fluid in bicipitoradial bursa without tendon defect ≠ tear; can still compress PIN by mass effect.</li></ul></div>
+  </div>
+</div>
+
+<div class="dx">
+  <div class="dx-head"><span class="name">Distal triceps tendon tear</span><span class="region post">posterior</span>
+    <span class="sources"><a href="https://pubmed.ncbi.nlm.nih.gov/32539261/" target="_blank" rel="noopener">Triceps review</a></span>
+  </div>
+  <div class="zones split">
+    <div class="z anat"><span class="hdr">Anatomy</span><ul><li><b>Insertion:</b> posterior superior olecranon</li><li>Superficial (long + lateral) and deep (medial) layers; thin superficial slip usually tears and retracts first</li></ul></div>
+    <div class="z mri"><span class="hdr">Where on MRI</span><ul><li>Sagittal PD-fs posterior — measure thickness of intact fibers</li><li>Axial T2-fs — grade % cross-section involved</li></ul></div>
+    <div class="z dict"><span class="hdr">Dictation</span>
+      <p><b>F:</b> Partial/full-thickness tear of the distal triceps tendon at the olecranon insertion with surrounding posterior soft tissue edema and [olecranon enthesophyte/avulsion fragment].</p>
+      <p><b>I:</b> [Partial/full-thickness] distal triceps tendon tear.</p>
+    </div>
+    <div class="z ddx"><span class="hdr">DDx mimics</span><ul><li>Olecranon bursitis</li><li>Olecranon stress reaction / stress fracture</li><li>Posteromedial impingement / valgus extension overload</li><li>Snapping triceps (medial head dynamic dislocation)</li></ul></div>
+    <div class="z tip"><span class="hdr">Tips</span><ul><li>Partial superficial tears commonly missed — comment specifically on % thickness involved.</li><li>Anabolic steroid / fluoroquinolone users — suspect spontaneous rupture.</li></ul></div>
+  </div>
+</div>
+
+<!-- LIGAMENTS -->
+<h2 id="ligaments" class="section-h">Ligaments / Instability</h2>
+
+<div class="dx">
+  <div class="dx-head"><span class="name">UCL sprain (anterior band partial tear)</span><span class="region med">medial</span>
+    <span class="sources"><a href="https://radiopaedia.org/articles/ulnar-collateral-ligament-injury" target="_blank" rel="noopener">UCL injury</a></span>
+  </div>
+  <div class="zones split">
+    <div class="z anat"><span class="hdr">Anatomy</span><ul><li><b>Anterior band:</b> medial epicondyle → sublime tubercle of coronoid</li><li>Primary valgus stabilizer at 30–120°</li><li>Length ~27 mm, thickness 4–5 mm normal</li></ul></div>
+    <div class="z mri"><span class="hdr">Where on MRI</span><ul><li>Coronal PD-fs — uniform low-signal band</li><li><b>T-sign</b> = contrast between distal UCL and sublime tubercle = partial undersurface tear (MR arthrogram)</li><li>Edema at sublime tubercle on T2-fs is a strong clue without arthrogram</li></ul></div>
+    <div class="z dict"><span class="hdr">Dictation</span>
+      <p><b>F:</b> Ulnar collateral ligament is thickened and edematous with partial fiber irregularity, greatest at the [proximal/distal] attachment. No complete discontinuity.</p>
+      <p><b>I:</b> Grade [1/2] UCL sprain/partial tear.</p>
+    </div>
+    <div class="z ddx"><span class="hdr">DDx mimics</span><ul><li>Common flexor tendinosis (superficial, often coexists)</li><li>Ulnar neuritis (posterior to medial epicondyle)</li><li>Posteromedial impingement</li><li>Medial epicondyle stress reaction</li></ul></div>
+    <div class="z tip"><span class="hdr">Tips</span><ul><li>Throwers with medial pain + borderline UCL → recommend MR arthrogram.</li><li>Comment on chronicity — calcified ligament suggests chronic insult.</li></ul></div>
+  </div>
+</div>
+
+<div class="dx">
+  <div class="dx-head"><span class="name">UCL complete tear (anterior band)</span><span class="region med">medial</span>
+    <span class="sources"><a href="https://radiopaedia.org/articles/ulnar-collateral-ligament-injury" target="_blank" rel="noopener">UCL injury</a></span>
+  </div>
+  <div class="zones split">
+    <div class="z anat"><span class="hdr">Anatomy</span><ul><li>Most tears at humeral or mid-substance; pure distal avulsion possible</li></ul></div>
+    <div class="z mri"><span class="hdr">Where on MRI</span><ul><li>Coronal PD-fs — fluid-filled gap across full thickness</li><li>State location: humeral / mid-substance / ulnar</li></ul></div>
+    <div class="z dict"><span class="hdr">Dictation</span>
+      <p><b>F:</b> Complete discontinuity of the anterior band of the ulnar collateral ligament at the [humeral/ulnar] attachment with fluid-filled gap and medial soft tissue edema.</p>
+      <p><b>I:</b> Complete tear of the anterior band UCL.</p>
+    </div>
+    <div class="z ddx"><span class="hdr">DDx mimics</span><ul><li>Chronic high-grade partial — fibers attenuated but technically continuous</li><li>Medial epicondyle avulsion (skeletally immature)</li></ul></div>
+    <div class="z tip"><span class="hdr">Tips</span><ul><li>State <b>tear location</b> — proximal humeral tears often repair-eligible; mid-substance = Tommy John reconstruction territory.</li><li>Comment on coexisting common flexor and ulnar nerve.</li></ul></div>
+  </div>
+</div>
+
+<div class="dx">
+  <div class="dx-head"><span class="name">RCL / LUCL injury (lateral ligament complex)</span><span class="region lat">lateral</span>
+    <span class="sources"><a href="https://pubmed.ncbi.nlm.nih.gov/24084426/" target="_blank" rel="noopener">Elbow instability</a></span>
+  </div>
+  <div class="zones split">
+    <div class="z anat"><span class="hdr">Anatomy</span><ul><li><b>RCL:</b> lateral epicondyle → annular ligament</li><li><b>LUCL:</b> lateral epicondyle (deep/posterior to RCL) → supinator crest of ulna</li><li>LUCL is THE posterolateral rotatory stabilizer</li></ul></div>
+    <div class="z mri"><span class="hdr">Where on MRI</span><ul><li><b>POSTERIOR coronal slices</b> — LUCL runs obliquely behind radial head</li><li>"Arcuate sign" — bone edema at supinator crest = LUCL avulsion</li><li>Often coexists with common extensor tear after lateral dislocation</li></ul></div>
+    <div class="z dict"><span class="hdr">Dictation</span>
+      <p><b>F:</b> Irregularity/discontinuity of the [radial collateral/lateral ulnar collateral] ligament complex with posterolateral capsular edema [and bone marrow edema at the supinator crest].</p>
+      <p><b>I:</b> [RCL/LUCL] tear; correlate for posterolateral rotatory instability.</p>
+    </div>
+    <div class="z ddx"><span class="hdr">DDx mimics</span><ul><li>Common extensor partial tear (superficial to RCL)</li><li>Radiocapitellar plica (synovial fold mimics LUCL fiber irregularity)</li><li>Posterolateral synovial recess fluid (normal variant)</li></ul></div>
+    <div class="z tip"><span class="hdr">Tips</span><ul><li>Prior elbow dislocation → carefully evaluate LUCL on posterior coronals.</li><li>Combined LUCL + common extensor tear = "lateral collateral ligamentous complex" injury → instability.</li></ul></div>
+  </div>
+</div>
+
+<!-- CARTILAGE / NERVES / LOOSE BODIES -->
+<h2 id="cart" class="section-h">Cartilage / Nerves / Loose Bodies</h2>
+
+<div class="dx">
+  <div class="dx-head"><span class="name">Capitellar osteochondral lesion (OCD)</span><span class="region cart">cartilage</span>
+    <span class="sources"><a href="https://pubmed.ncbi.nlm.nih.gov/24817006/" target="_blank" rel="noopener">MRI staging</a></span>
+  </div>
+  <div class="zones split">
+    <div class="z anat"><span class="hdr">Anatomy</span><ul><li>Capitellum = lateral half of distal humerus articular surface</li><li>Classic OCD site = <b>anterolateral capitellum</b></li><li>Throwers, gymnasts; adolescents</li></ul></div>
+    <div class="z mri"><span class="hdr">Where on MRI</span><ul><li>Coronal PD-fs + sagittal — lesion size, fluid undermining</li><li>T1 marrow — low = sclerosis</li><li><b>Pseudodefect of capitellum</b> (posterolateral) = NORMAL, not OCD</li></ul></div>
+    <div class="z dict"><span class="hdr">Dictation</span>
+      <p><b>F:</b> Osteochondral lesion of the capitellum measuring [X] mm with overlying chondral irregularity, subchondral marrow edema/cystic change, and [fluid undermining/loose body].</p>
+      <p><b>I:</b> Capitellar osteochondral lesion, [stable/unstable].</p>
+    </div>
+    <div class="z ddx"><span class="hdr">DDx mimics</span><ul><li><b>Panner's disease</b> (younger child &lt;10y) — diffuse capitellar marrow signal, self-limited</li><li>Pseudodefect of capitellum (posterolateral, normal)</li><li>Radiocapitellar OA</li><li>Stress reaction of capitellum</li></ul></div>
+    <div class="z tip"><span class="hdr">Tips</span><ul><li>Unstable features (any one): fluid line around fragment, cyst &gt;5 mm, defect &gt;5 mm, displaced fragment.</li><li>Always search the radiocapitellar / coronoid / olecranon recesses for the loose body.</li></ul></div>
+  </div>
+</div>
+
+<div class="dx">
+  <div class="dx-head"><span class="name">Ulnar neuritis / cubital tunnel syndrome</span><span class="region nerve">nerve</span>
+    <span class="sources"><a href="https://radiopaedia.org/articles/cubital-tunnel-syndrome" target="_blank" rel="noopener">Cubital tunnel</a></span>
+  </div>
+  <div class="zones split">
+    <div class="z anat"><span class="hdr">Anatomy</span><ul><li>Cubital tunnel: medial epicondyle (lateral wall), olecranon (medial), Osborne ligament (roof)</li><li>Distal to tunnel — between the two heads of FCU</li></ul></div>
+    <div class="z mri"><span class="hdr">Where on MRI</span><ul><li>Axial T2-fs at and just above medial epicondyle</li><li>Compare ulnar to median nerve caliber and signal</li><li>Look for accessory <b>anconeus epitrochlearis</b> muscle</li></ul></div>
+    <div class="z dict"><span class="hdr">Dictation</span>
+      <p><b>F:</b> Ulnar nerve in the cubital tunnel is enlarged and T2 hyperintense with surrounding perineural edema. No compressive mass identified. [Anconeus epitrochlearis present.]</p>
+      <p><b>I:</b> Ulnar neuritis/cubital tunnel syndrome pattern.</p>
+    </div>
+    <div class="z ddx"><span class="hdr">DDx mimics</span><ul><li>Medial epicondylitis (superficial, not in tunnel)</li><li>Anconeus epitrochlearis (accessory muscle compressing nerve)</li><li>Subluxing ulnar nerve (dynamic — flexion imaging)</li><li>Ganglion / mass in tunnel</li><li>Post-traumatic scarring</li></ul></div>
+    <div class="z tip"><span class="hdr">Tips</span><ul><li>State nerve caliber + signal + presence of anconeus epitrochlearis — surgeon plans differently.</li><li>Denervation edema in FCU and FDP (ulnar half) confirms motor involvement.</li></ul></div>
+  </div>
+</div>
+
+<div class="dx">
+  <div class="dx-head"><span class="name">Radial tunnel syndrome / PIN compression</span><span class="region nerve">nerve</span>
+    <span class="sources"><a href="https://radiopaedia.org/articles/posterior-interosseous-nerve-syndrome" target="_blank" rel="noopener">PIN syndrome</a></span>
+  </div>
+  <div class="zones split">
+    <div class="z anat"><span class="hdr">Anatomy</span><ul><li>Radial nerve divides anterior to radiocapitellar into superficial (sensory) + PIN (motor)</li><li>PIN dives through supinator beneath the <b>arcade of Frohse</b></li></ul></div>
+    <div class="z mri"><span class="hdr">Where on MRI</span><ul><li>Axial T2-fs at radial neck</li><li>Denervation edema in supinator, EDC, ECU, APL, EPL, EPB</li></ul></div>
+    <div class="z dict"><span class="hdr">Dictation</span>
+      <p><b>F:</b> Mild T2 hyperintensity and minimal enlargement of the posterior interosseous nerve at the arcade of Frohse with [denervation edema of the supinator and superficial extensor compartment]. No discrete compressive mass.</p>
+      <p><b>I:</b> Findings consistent with radial tunnel syndrome / PIN compression at the arcade of Frohse.</p>
+    </div>
+    <div class="z ddx"><span class="hdr">DDx mimics</span><ul><li>Lateral epicondylitis — overlapping clinical picture</li><li>Bicipitoradial bursitis pressing on PIN</li><li>Lipoma / ganglion in radial tunnel</li></ul></div>
+    <div class="z tip"><span class="hdr">Tips</span><ul><li>Always check supinator muscle signal in lateral elbow pain — denervation clinches PIN.</li></ul></div>
+  </div>
+</div>
+
+<div class="dx">
+  <div class="dx-head"><span class="name">Synovitis / intra-articular loose body</span><span class="region cart">cartilage</span>
+    <span class="sources"><a href="https://radiopaedia.org/articles/intra-articular-loose-body" target="_blank" rel="noopener">Loose body</a><a href="https://radiopaedia.org/articles/synovial-osteochondromatosis" target="_blank" rel="noopener">Synovial chondromatosis</a></span>
+  </div>
+  <div class="zones split">
+    <div class="z anat"><span class="hdr">Anatomy</span><ul><li>Three recesses harbor loose bodies: <b>coronoid (anterior), olecranon (posterior), radiocapitellar (lateral)</b></li></ul></div>
+    <div class="z mri"><span class="hdr">Where on MRI</span><ul><li>Sagittal PD-fs — sweep all three recesses</li><li>Axial — radiocapitellar recess</li><li>T1 — calcified body dark; cartilage body intermediate</li></ul></div>
+    <div class="z dict"><span class="hdr">Dictation</span>
+      <p><b>F:</b> Small elbow effusion with synovial thickening and [X] mm intra-articular osteochondral body in the [olecranon/coronoid/radiocapitellar] recess.</p>
+      <p><b>I:</b> Elbow synovitis with intra-articular loose body.</p>
+    </div>
+    <div class="z ddx"><span class="hdr">DDx mimics</span><ul><li>Synovial chondromatosis (multiple uniform bodies)</li><li>PVNS / TGCT (low-signal nodular synovium, blooming on GRE)</li><li>Inflammatory synovitis (RA pannus, marginal erosions)</li><li>Posttraumatic intra-articular fragment</li></ul></div>
+    <div class="z tip"><span class="hdr">Tips</span><ul><li>Number and size all loose bodies — surgeon plans portals around the largest.</li><li>Loose body without OA/OCD source → consider synovial chondromatosis.</li></ul></div>
+  </div>
+</div>
+
+<div class="dx">
+  <div class="dx-head"><span class="name">Posteromedial impingement / valgus extension overload</span><span class="region post">posterior</span>
+    <span class="sources"><a href="https://radiopaedia.org/articles/valgus-extension-overload-syndrome" target="_blank" rel="noopener">VEO syndrome</a></span>
+  </div>
+  <div class="zones split">
+    <div class="z anat"><span class="hdr">Anatomy</span><ul><li>Repetitive valgus + extension drives posteromedial olecranon tip into medial trochlea/olecranon fossa</li></ul></div>
+    <div class="z mri"><span class="hdr">Where on MRI</span><ul><li>Sagittal + axial — posteromedial olecranon tip osteophyte</li><li>Trochlear chondrosis, marrow edema</li><li>Coexisting UCL injury, loose body in olecranon fossa</li></ul></div>
+    <div class="z dict"><span class="hdr">Dictation</span>
+      <p><b>F:</b> Posteromedial olecranon tip osteophyte with chondral irregularity of the opposing medial trochlea and posteromedial olecranon recess synovitis. [Adjacent loose body / UCL thickening.]</p>
+      <p><b>I:</b> Posteromedial impingement / valgus extension overload syndrome.</p>
+    </div>
+    <div class="z ddx"><span class="hdr">DDx mimics</span><ul><li>Olecranon stress fracture</li><li>Triceps insertional tendinosis</li><li>Loose body alone (without osteophyte)</li></ul></div>
+    <div class="z tip"><span class="hdr">Tips</span><ul><li>Almost always coexists with UCL pathology — comment on both.</li></ul></div>
+  </div>
+</div>
+
+<div class="dx">
+  <div class="dx-head"><span class="name">Radiocapitellar plica syndrome</span><span class="region lat">lateral</span>
+    <span class="sources"><a href="https://radiopaedia.org/articles/elbow-plica" target="_blank" rel="noopener">Elbow plica</a></span>
+  </div>
+  <div class="zones split">
+    <div class="z anat"><span class="hdr">Anatomy</span><ul><li>Synovial fold along posterolateral radiocapitellar joint</li><li>Becomes symptomatic when thickened or large</li></ul></div>
+    <div class="z mri"><span class="hdr">Where on MRI</span><ul><li>Coronal + axial PD-fs</li><li>Symptomatic: &gt;3 mm or covers &gt;1/3 capitellum</li></ul></div>
+    <div class="z dict"><span class="hdr">Dictation</span>
+      <p><b>F:</b> Thickened synovial fold along the posterolateral radiocapitellar joint measuring [X] mm with adjacent chondral irregularity of the capitellum.</p>
+      <p><b>I:</b> Symptomatic radiocapitellar plica.</p>
+    </div>
+    <div class="z ddx"><span class="hdr">DDx mimics</span><ul><li>LUCL fiber irregularity (deeper, more posterior)</li><li>Common extensor tear (superficial)</li><li>Loose body in radiocapitellar recess</li></ul></div>
+    <div class="z tip"><span class="hdr">Tips</span><ul><li>Add to ddx for any lateral elbow pain MRI; surgically resectable.</li></ul></div>
+  </div>
+</div>
+
+<div class="dx">
+  <div class="dx-head"><span class="name">Bicipitoradial (cubital) bursitis</span><span class="region ant">anterior</span>
+    <span class="sources"><a href="https://radiopaedia.org/articles/bicipitoradial-bursitis" target="_blank" rel="noopener">Bicipitoradial bursitis</a></span>
+  </div>
+  <div class="zones split">
+    <div class="z anat"><span class="hdr">Anatomy</span><ul><li>Bursa between distal biceps tendon and radial tuberosity</li><li>Friction from supination/pronation</li></ul></div>
+    <div class="z mri"><span class="hdr">Where on MRI</span><ul><li>Axial + sagittal — fluid between intact biceps tendon and radial tuberosity</li><li>Check adjacent PIN for mass effect</li></ul></div>
+    <div class="z dict"><span class="hdr">Dictation</span>
+      <p><b>F:</b> Fluid distention of the bicipitoradial bursa adjacent to the radial tuberosity, intact distal biceps tendon. [Mass effect on adjacent posterior interosseous nerve.]</p>
+      <p><b>I:</b> Bicipitoradial bursitis without distal biceps tendon tear.</p>
+    </div>
+    <div class="z ddx"><span class="hdr">DDx mimics</span><ul><li>Partial distal biceps tear (look closely at footprint)</li><li>Ganglion arising from proximal radioulnar joint</li><li>Soft tissue mass</li></ul></div>
+    <div class="z tip"><span class="hdr">Tips</span><ul><li>Trace the tendon to its footprint — don't mistake bursal fluid for biceps tear.</li><li>PIN denervation pattern → bursitis is the cause.</li></ul></div>
+  </div>
+</div>
+
+<!-- PITFALLS -->
+<section id="pitfalls" class="pitfalls">
+  <h3>High-yield pitfalls / normal variants that mimic disease</h3>
+  <ul>
+    <li><b>Pseudodefect of the capitellum</b> — posterolateral notch where capitellar cartilage ends; normal. Do NOT call OCD.</li>
+    <li><b>Pseudodefect of the trochlear groove</b> — bare bone between olecranon and coronoid facets; normal anatomy.</li>
+    <li><b>Anconeus epitrochlearis</b> — accessory muscle replacing Osborne ligament; common cause of ulnar neuritis.</li>
+    <li><b>Cubital bursitis</b> (bicipitoradial bursa fluid) — mimics partial distal biceps tear; can compress PIN.</li>
+    <li><b>Lacertus fibrosus rupture</b> — isolated tear without biceps tendon tear; easily missed.</li>
+    <li><b>Posterior coronal slices for LUCL</b> — LUCL only seen on posterior coronals, never on the anterior ones.</li>
+    <li><b>Sublime tubercle edema</b> = distal UCL avulsion until proven otherwise.</li>
+    <li><b>Magic-angle</b> in distal biceps tendon on short-TE — confirm on T2-fs/STIR.</li>
+    <li><b>Supinator muscle edema</b> on a "lateral epicondylitis" MRI → suspect radial tunnel / PIN compression.</li>
+    <li><b>Radiocapitellar plica</b> — &gt;3 mm or &gt;1/3 capitellum = symptomatic, not incidental.</li>
+  </ul>
+</section>
+
+<p style="color:var(--muted);font-size:13px;margin-top:18px">Source notes: built as a practical dictation aid from standard MSK MRI reporting patterns and review-level radiology references (PubMed, Radiopaedia, Radsource). Use surgical correlation and local report conventions when needed.</p>
+
+</main>
+</body>
+</html>

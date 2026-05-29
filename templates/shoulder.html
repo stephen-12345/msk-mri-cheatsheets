@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shoulder MRI — Dictation Template</title>
+<link rel="stylesheet" href="../assets/cheatsheet.css">
+</head>
+<body>
+
+<div class="tmpl-topbar">
+  <div class="row">
+    <span class="title" id="page-title">Shoulder MRI — Dictation Template</span>
+    <a class="pill-link" id="back-link" href="../shoulder/shoulder-mri-cheatsheet.html">← Shoulder cheatsheet</a>
+    <a class="pill-link" href="index.html">All templates</a>
+    <a class="pill-link" href="../index.html">All regions</a>
+    <span class="meta">click options · copy to PowerScribe</span>
+  </div>
+</div>
+
+<div class="tmpl-wrap">
+  <div>
+    <div class="tmpl-help">
+      <b>How it works:</b> Each section defaults to NORMAL. Click a grade/state to change it, then pick locations (multi-select supported, grammar auto-handled). Toggle associated findings with the green check buttons. The dictation builds live on the right — click <b>Copy all</b> or <b>Copy abnormal only</b> to paste into PowerScribe.
+    </div>
+    <div class="options-pane" id="options-pane"></div>
+  </div>
+
+  <div class="preview-pane">
+    <h3>Live Dictation Preview</h3>
+    <p class="sub">Updates as you click. <span class="placeholder">[bracketed]</span> = unfilled placeholder.</p>
+    <div class="preview-output" id="preview-output"></div>
+    <div class="preview-buttons">
+      <button class="preview-btn" id="copy-btn">Copy all</button>
+      <button class="preview-btn" id="copy-abnormal-btn">Copy abnormal only</button>
+      <button class="preview-btn danger" id="reset-btn">Reset</button>
+    </div>
+  </div>
+</div>
+
+<script>
+window.TEMPLATE_CONFIG = {
+  title: 'Shoulder MRI — Dictation Template',
+  heading: 'SHOULDER MRI',
+  back_link: '../shoulder/shoulder-mri-cheatsheet.html',
+  sections: [
+    // ============= BONE / MARROW =============
+    {
+      id: 'humeral-head', label: 'Humeral head (cortex / Hill-Sachs)', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Humeral head osseous state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Humeral head cortex is intact with normal subchondral marrow signal. No Hill-Sachs or reverse Hill-Sachs lesion.'},
+          {id: 'hill-sachs', label: 'Hill-Sachs', sentence: 'Wedge-shaped compression deformity along the posterosuperior humeral head at the level of the coracoid measuring {depth} mm in depth and {length} mm in craniocaudal length, consistent with Hill-Sachs lesion.'},
+          {id: 'hs-engaging', label: 'Hill-Sachs — engaging / off-track', sentence: 'Hill-Sachs lesion of the posterosuperior humeral head measuring {depth} mm deep and {length} mm long, with medial edge extending medial to the glenoid track — off-track / engaging lesion. Bone augmentation procedure indicated.'},
+          {id: 'reverse-hs', label: 'Reverse Hill-Sachs (McLaughlin)', sentence: 'Compression deformity of the anteromedial humeral head measuring {depth} mm in depth, consistent with reverse Hill-Sachs (McLaughlin) lesion — sequela of posterior dislocation.'},
+          {id: 'gt-cysts', label: 'Greater tuberosity cystic change', sentence: 'Well-circumscribed subcortical cystic change at the greater tuberosity supraspinatus / infraspinatus footprint, reactive to underlying cuff tendinopathy.'},
+          {id: 'gt-fracture', label: 'Greater tuberosity fracture', sentence: 'Linear T1-hypointense fracture line through the greater tuberosity with surrounding bone marrow edema. {displacement}'},
+          {id: 'surgical-neck', label: 'Surgical neck fracture', sentence: 'Transverse fracture of the surgical neck of the humerus with surrounding marrow edema. {displacement}'},
+        ]
+      },
+      variable_groups: [
+        {id: 'depth', label: 'Depth (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'},
+        {id: 'length', label: 'Length (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'},
+        {id: 'displacement', label: 'Displacement', type: 'mutex', placeholder: '',
+         options: [
+           {id: 'nd', label: 'Non-displaced', value: 'No significant displacement.'},
+           {id: 'md', label: 'Minimally displaced', value: 'Minimal displacement.'},
+           {id: 'dis', label: 'Displaced', value: 'Displaced.'},
+         ]}
+      ]
+    },
+    {
+      id: 'glenoid-bone', label: 'Glenoid bone (bony Bankart / bone loss)', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Glenoid osseous state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Glenoid is intact with preserved anteroinferior rim and no osseous Bankart fragment. No critical glenoid bone loss.'},
+          {id: 'bony-bankart', label: 'Bony Bankart', sentence: 'Osseous fragment displaced from the anteroinferior glenoid rim consistent with bony Bankart lesion, measuring approximately {percent}% of the glenoid width by circle method.'},
+          {id: 'attritional', label: 'Attritional bone loss', sentence: 'Attritional anteroinferior glenoid rim bone loss of approximately {percent}% by circle method on sagittal-oblique imaging, without acute osseous fragment — chronic glenoid insufficiency.'},
+          {id: 'critical-loss', label: 'Critical bone loss (>20%)', sentence: 'Anteroinferior glenoid bone loss of approximately {percent}% by circle method, exceeding the 20–25% threshold for bone augmentation (Latarjet / iliac crest graft).'},
+          {id: 'post-rim', label: 'Posterior glenoid bone loss', sentence: 'Posterior glenoid rim attritional bone loss with increased glenoid retroversion, contributing to posterior instability.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'percent', label: 'Bone loss (%)', type: 'numeric', unit: '%', placeholder: '[%]'}
+      ]
+    },
+    {
+      id: 'marrow-signal', label: 'Marrow signal (humerus / scapula / clavicle)', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Marrow signal',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Normal marrow signal throughout the imaged humerus, scapula, and clavicle without focal lesion or marrow replacement.'},
+          {id: 'edema', label: 'Focal marrow edema', sentence: 'Focal T2-hyperintense bone marrow edema within the {location} without discrete fracture line.'},
+          {id: 'lesion', label: 'Focal marrow lesion', sentence: 'Focal T1-hypointense, T2-hyperintense marrow lesion within the {location} measuring {size} mm — characterization warranted.'},
+          {id: 'avn', label: 'AVN / osteonecrosis', sentence: 'Serpiginous double-line sign within the humeral head subchondral region with surrounding T2-hyperintense edema, diagnostic of osteonecrosis. {stage}'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'multi', placeholder: '[anatomic location]',
+         options: [
+           {id: 'hh', label: 'Humeral head', value: 'humeral head'},
+           {id: 'gt', label: 'Greater tuberosity', value: 'greater tuberosity'},
+           {id: 'lt', label: 'Lesser tuberosity', value: 'lesser tuberosity'},
+           {id: 'shaft', label: 'Proximal humeral shaft', value: 'proximal humeral shaft'},
+           {id: 'glenoid', label: 'Glenoid', value: 'glenoid'},
+           {id: 'acr', label: 'Acromion', value: 'acromion'},
+           {id: 'clav', label: 'Distal clavicle', value: 'distal clavicle'},
+           {id: 'cor', label: 'Coracoid', value: 'coracoid process'},
+         ]},
+        {id: 'size', label: 'Size (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'},
+        {id: 'stage', label: 'Collapse', type: 'mutex', placeholder: '',
+         options: [
+           {id: 'no', label: 'No collapse', value: 'No articular collapse.'},
+           {id: 'col', label: 'With collapse', value: 'With subchondral collapse.'},
+         ]}
+      ]
+    },
+
+    // ============= EFFUSION / BURSA =============
+    {
+      id: 'gh-effusion', label: 'Glenohumeral joint effusion', output_section: 'Effusion / bursa',
+      grade_group: {
+        label: 'Effusion size',
+        options: [
+          {id: 'none', label: 'None / physiologic', is_normal: true, sentence: 'No significant glenohumeral joint effusion. Trace physiologic fluid within the axillary recess.'},
+          {id: 'small', label: 'Small', sentence: 'Small glenohumeral joint effusion distributed in the axillary recess and subscapular recess.'},
+          {id: 'moderate', label: 'Moderate', sentence: 'Moderate glenohumeral joint effusion distending the axillary recess and subscapular recess.'},
+          {id: 'large', label: 'Large', sentence: 'Large glenohumeral joint effusion with marked distention of the axillary recess and subscapular recess.'},
+          {id: 'geyser', label: 'Geyser sign', sentence: 'Glenohumeral joint effusion communicating through a full-thickness rotator cuff defect with the subacromial-subdeltoid bursa — geyser sign, indicative of full-thickness cuff tear.'},
+          {id: 'hemarthrosis', label: 'Hemarthrosis', sentence: 'Complex glenohumeral joint effusion with layering low-signal hemosiderin debris, consistent with hemarthrosis.'},
+        ]
+      }
+    },
+    {
+      id: 'sasd-bursa', label: 'Subacromial-subdeltoid bursa', output_section: 'Effusion / bursa',
+      grade_group: {
+        label: 'SASD bursa',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'No subacromial-subdeltoid bursal fluid or thickening.'},
+          {id: 'trace', label: 'Trace fluid', sentence: 'Trace fluid signal within the subacromial-subdeltoid bursa, within physiologic limits.'},
+          {id: 'bursitis', label: 'Bursitis', sentence: 'Fluid distention of the subacromial-subdeltoid bursa with synovial thickening, compatible with bursitis. No joint communication.'},
+          {id: 'commun', label: 'Bursitis with joint communication', sentence: 'Fluid distention of the subacromial-subdeltoid bursa communicating with the glenohumeral joint through a full-thickness rotator cuff defect.'},
+          {id: 'hemorrhagic', label: 'Hemorrhagic / complex', sentence: 'Complex subacromial-subdeltoid bursal fluid with internal debris, compatible with hemorrhagic or proteinaceous bursitis.'},
+        ]
+      }
+    },
+
+    // ============= AC JOINT =============
+    {
+      id: 'ac-joint', label: 'AC joint', output_section: 'AC joint',
+      grade_group: {
+        label: 'AC joint state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Acromioclavicular joint is preserved with normal width ({width} mm) and no significant capsular hypertrophy, marrow edema, or osteophytes.'},
+          {id: 'mild-oa', label: 'Mild OA', sentence: 'Mild AC joint osteoarthritis with marginal osteophytes and minimal capsular hypertrophy without subchondral marrow edema or mass effect on the underlying supraspinatus.'},
+          {id: 'mod-oa', label: 'Moderate OA + capsular hypertrophy', sentence: 'Moderate AC joint osteoarthritis with joint space narrowing, subchondral marrow edema, marginal osteophytes, and capsular hypertrophy causing extrinsic mass effect on the underlying supraspinatus myotendinous junction.'},
+          {id: 'severe-oa', label: 'Severe OA', sentence: 'Severe AC joint osteoarthritis with marked joint space narrowing, prominent subchondral marrow edema, large inferior osteophytes, and capsular hypertrophy contributing to subacromial outlet narrowing.'},
+          {id: 'osteolysis', label: 'Distal clavicular osteolysis', sentence: 'Subchondral marrow edema and cystic change at the distal clavicle disproportionate to the acromial side, compatible with distal clavicular osteolysis (often seen in weightlifters).'},
+          {id: 'separation', label: 'AC separation', sentence: 'AC joint widening to {width} mm with disruption of the acromioclavicular ligament. Coracoclavicular distance {ccdist} mm. {rockwood}'},
+        ]
+      },
+      variable_groups: [
+        {id: 'width', label: 'AC width (mm, normal 3–6)', type: 'numeric', unit: 'mm, normal 3–6', placeholder: '[mm, normal 3–6]'},
+        {id: 'ccdist', label: 'CC distance (mm, normal 11–13)', type: 'numeric', unit: 'mm, normal 11–13', placeholder: '[mm, normal 11–13]'},
+        {id: 'rockwood', label: 'Rockwood type', type: 'mutex', placeholder: '',
+         options: [
+           {id: 'r1', label: 'Type I', value: 'Rockwood type I (sprain).'},
+           {id: 'r2', label: 'Type II', value: 'Rockwood type II (AC torn, CC intact).'},
+           {id: 'r3', label: 'Type III', value: 'Rockwood type III (AC + CC torn, deltotrapezial fascia intact).'},
+           {id: 'r4', label: 'Type IV', value: 'Rockwood type IV with posterior clavicular displacement.'},
+           {id: 'r5', label: 'Type V', value: 'Rockwood type V with marked superior displacement and disruption of deltotrapezial fascia.'},
+         ]}
+      ]
+    },
+    {
+      id: 'acromion-morph', label: 'Acromion morphology (Bigliani)', output_section: 'AC joint',
+      grade_group: {
+        label: 'Bigliani type',
+        options: [
+          {id: 'type1', label: 'Type I (flat)', is_normal: true, sentence: 'Bigliani type I (flat) acromion with normal subacromial outlet contour.'},
+          {id: 'type2', label: 'Type II (curved)', sentence: 'Bigliani type II (curved) acromion.'},
+          {id: 'type3', label: 'Type III (hooked)', sentence: 'Bigliani type III (hooked) acromion with anteroinferior hook morphology — predisposing to subacromial outlet impingement.'},
+          {id: 'type4', label: 'Type IV (convex / downsloping)', sentence: 'Bigliani type IV (convex / downsloping) acromion — variant predisposing to impingement.'},
+        ]
+      },
+      addon_group: {
+        label: 'Associated findings',
+        options: [
+          {id: 'spur', label: 'Anterior subacromial spur', text: 'Anterior subacromial enthesophyte / spur contributing to outlet narrowing.'},
+          {id: 'lateral-angle', label: 'Lateral acromial angle <70°', text: 'Lateral acromial angle less than 70°, consistent with downsloping acromion.'},
+          {id: 'csa', label: 'CSA >35°', text: 'Critical shoulder angle greater than 35°, associated with cuff tear risk.'},
+        ]
+      }
+    },
+    {
+      id: 'os-acromiale', label: 'Os acromiale', output_section: 'AC joint',
+      grade_group: {
+        label: 'Os acromiale',
+        options: [
+          {id: 'absent', label: 'Absent', is_normal: true, sentence: 'No os acromiale. Acromion is fully fused.'},
+          {id: 'present', label: 'Present', sentence: 'Unfused secondary ossification center of the acromion (os acromiale) at the {type}, with synchondrosis seen on axial imaging. May contribute to subacromial impingement.'},
+          {id: 'unstable', label: 'Unstable / edematous', sentence: 'Unstable os acromiale at the {type} with surrounding marrow edema across the synchondrosis, suggesting micromotion and contribution to impingement.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'type', label: 'Type', type: 'mutex', placeholder: '[meso / meta / pre / basi-acromion]',
+         options: [
+           {id: 'meso', label: 'Meso-acromion (most common)', value: 'meso-acromion level'},
+           {id: 'meta', label: 'Meta-acromion', value: 'meta-acromion level'},
+           {id: 'pre', label: 'Pre-acromion', value: 'pre-acromion level'},
+           {id: 'basi', label: 'Basi-acromion', value: 'basi-acromion level'},
+         ]}
+      ]
+    },
+
+    // ============= ROTATOR CUFF TENDONS =============
+    {
+      id: 'supraspinatus', label: 'Supraspinatus tendon', output_section: 'Rotator cuff — supraspinatus',
+      grade_group: {
+        label: 'Supraspinatus state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Supraspinatus tendon demonstrates normal fibrillar architecture and thickness with smooth insertion onto the superior facet of the greater tuberosity. No tendinosis or tear.'},
+          {id: 'mild-tend', label: 'Mild tendinosis', sentence: 'Mild intermediate intrasubstance signal within the distal supraspinatus tendon with preserved tendon caliber and no fiber discontinuity. No fluid-signal defect.'},
+          {id: 'mod-tend', label: 'Moderate tendinosis', sentence: 'Moderate intrasubstance intermediate signal within the distal supraspinatus tendon with mild fusiform thickening and heterogeneous fiber architecture. No fluid-signal cleft. Rotator cable intact.'},
+          {id: 'sev-tend', label: 'Severe tendinosis', sentence: 'Severe intrasubstance hyperintensity within the distal supraspinatus tendon with marked thickening and disorganized fiber architecture. No discrete fluid-signal cleft or full-thickness defect. Rotator cable intact.'},
+          {id: 'pasta1', label: 'PASTA Ellman 1 (<25%)', sentence: 'Partial-thickness articular-surface tear of the supraspinatus tendon at the greater tuberosity footprint measuring {depth} mm in depth (<25% of tendon thickness), consistent with Ellman grade 1 PASTA tear.'},
+          {id: 'pasta2', label: 'PASTA Ellman 2 (25–50%)', sentence: 'Partial-thickness articular-surface tear of the supraspinatus tendon at the greater tuberosity footprint measuring {depth} mm in depth (25–50% of tendon thickness), consistent with Ellman grade 2 PASTA tear.'},
+          {id: 'pasta3', label: 'PASTA Ellman 3 (>50%)', sentence: 'Partial-thickness articular-surface tear of the supraspinatus tendon at the greater tuberosity footprint measuring {depth} mm in depth (>50% of tendon thickness), consistent with Ellman grade 3 PASTA tear — surgical threshold.'},
+          {id: 'bursal', label: 'Partial bursal-side tear', sentence: 'Partial-thickness bursal-surface tear of the supraspinatus tendon at the greater tuberosity footprint with fluid-signal undermining of the bursal fibers.'},
+          {id: 'interstitial', label: 'Concealed interstitial tear', sentence: 'Concealed interstitial / delaminating tear of the supraspinatus tendon without surface communication, best seen on sagittal-oblique imaging.'},
+          {id: 'ft-small', label: 'Full-thickness — small (<1 cm)', sentence: 'Full-thickness tear of the supraspinatus tendon at the greater tuberosity footprint measuring {ap} cm in AP width — small (<1 cm) per DeOrio-Cofield. {retraction}'},
+          {id: 'ft-med', label: 'Full-thickness — medium (1–3 cm)', sentence: 'Full-thickness tear of the supraspinatus tendon at the greater tuberosity footprint measuring {ap} cm in AP width — medium (1–3 cm) per DeOrio-Cofield. {retraction}'},
+          {id: 'ft-large', label: 'Full-thickness — large (3–5 cm)', sentence: 'Full-thickness tear of the supraspinatus tendon at the greater tuberosity footprint measuring {ap} cm in AP width — large (3–5 cm) per DeOrio-Cofield. {retraction}'},
+          {id: 'ft-massive', label: 'Full-thickness — massive (>5 cm or ≥2 tendons)', sentence: 'Full-thickness tear of the supraspinatus tendon at the greater tuberosity footprint measuring {ap} cm in AP width with extension into the infraspinatus — massive (>5 cm / ≥2 tendons) per DeOrio-Cofield. Naked tuberosity sign. {retraction}'},
+          {id: 'calcific', label: 'Calcific tendinosis', sentence: 'Focal hypointense calcific deposit within the supraspinatus tendon measuring {depth} mm with surrounding T2 hyperintense edema, consistent with calcific tendinosis. {gartner}'},
+          {id: 'postop', label: 'Postsurgical repair', sentence: 'Postsurgical changes of the supraspinatus tendon following prior rotator cuff repair with intact suture anchor footprint reattachment. No re-tear.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'depth', label: 'Depth (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'},
+        {id: 'ap', label: 'AP width (cm)', type: 'numeric', unit: 'cm', placeholder: '[cm]'},
+        {id: 'retraction', label: 'Patte retraction stage', type: 'mutex', placeholder: '',
+         options: [
+           {id: 'p1', label: 'Patte 1 (stump near insertion)', value: 'Patte stage 1 — tendon stump near the greater tuberosity.'},
+           {id: 'p2', label: 'Patte 2 (to humeral head)', value: 'Patte stage 2 — retraction to the level of the humeral head.'},
+           {id: 'p3', label: 'Patte 3 (to glenoid)', value: 'Patte stage 3 — retraction medial to the humeral head to the level of the glenoid.'},
+         ]},
+        {id: 'gartner', label: 'Gartner stage (calcific)', type: 'mutex', placeholder: '',
+         options: [
+           {id: 'g1', label: 'Formative (dense)', value: 'Gartner I formative stage.'},
+           {id: 'g2', label: 'Resorptive', value: 'Gartner II–III resorptive stage with surrounding edema.'},
+         ]}
+      ],
+      addon_group: {
+        label: 'Associated findings',
+        options: [
+          {id: 'goutallier', label: 'Goutallier fatty atrophy', text: 'Supraspinatus muscle belly demonstrates Goutallier grade [N] fatty infiltration.'},
+          {id: 'ahi', label: 'Reduced AHI', text: 'Associated reduction of the acromiohumeral interval to [X] mm (normal 7–14 mm) — concerning for cuff insufficiency.'},
+          {id: 'cable', label: 'Cable disruption', text: 'Rotator cable disrupted.'},
+          {id: 'cable-intact', label: 'Cable intact (functional)', text: 'Underlying rotator cable preserved — functional crescent-zone tear.'},
+        ]
+      }
+    },
+    {
+      id: 'infraspinatus', label: 'Infraspinatus tendon', output_section: 'Rotator cuff — infraspinatus',
+      grade_group: {
+        label: 'Infraspinatus state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Infraspinatus tendon demonstrates normal fibrillar architecture and thickness with smooth insertion onto the middle facet of the greater tuberosity. No tendinosis or tear.'},
+          {id: 'tendinosis', label: 'Tendinosis', sentence: 'Tendinosis of the distal infraspinatus tendon with intermediate intrasubstance signal and mild fusiform thickening without fluid-signal cleft.'},
+          {id: 'partial', label: 'Partial-thickness tear', sentence: 'Partial-thickness {surface}-surface tear of the infraspinatus tendon at the middle facet of the greater tuberosity.'},
+          {id: 'full', label: 'Full-thickness tear', sentence: 'Full-thickness tear of the infraspinatus tendon at the middle facet of the greater tuberosity measuring {ap} cm in AP width. {retraction}'},
+          {id: 'extension', label: 'Extension from supraspinatus tear', sentence: 'Posterior extension of full-thickness supraspinatus tear into the infraspinatus tendon, contributing to massive cuff disruption.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'surface', label: 'Surface', type: 'mutex', placeholder: '[articular / bursal / intrasubstance]',
+         options: [
+           {id: 'art', label: 'Articular', value: 'articular'},
+           {id: 'bur', label: 'Bursal', value: 'bursal'},
+           {id: 'int', label: 'Intrasubstance', value: 'intrasubstance'},
+         ]},
+        {id: 'ap', label: 'AP width (cm)', type: 'numeric', unit: 'cm', placeholder: '[cm]'},
+        {id: 'retraction', label: 'Patte retraction', type: 'mutex', placeholder: '',
+         options: [
+           {id: 'p1', label: 'Patte 1', value: 'Patte stage 1.'},
+           {id: 'p2', label: 'Patte 2', value: 'Patte stage 2 retraction to the humeral head.'},
+           {id: 'p3', label: 'Patte 3', value: 'Patte stage 3 retraction to the glenoid.'},
+         ]}
+      ],
+      addon_group: {
+        label: 'Associated findings',
+        options: [
+          {id: 'goutallier', label: 'Goutallier fatty atrophy', text: 'Infraspinatus muscle belly demonstrates Goutallier grade [N] fatty infiltration.'},
+          {id: 'denervation', label: 'Spinoglenoid notch denervation', text: 'Isolated infraspinatus denervation pattern — assess for spinoglenoid notch paralabral cyst.'},
+        ]
+      }
+    },
+    {
+      id: 'teres-minor', label: 'Teres minor tendon', output_section: 'Rotator cuff — teres minor',
+      grade_group: {
+        label: 'Teres minor state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Teres minor tendon and muscle belly are intact with normal signal and bulk, inserting on the inferior facet of the greater tuberosity.'},
+          {id: 'tendinosis', label: 'Tendinosis', sentence: 'Mild tendinosis of the teres minor tendon at the inferior facet with intermediate intrasubstance signal.'},
+          {id: 'tear', label: 'Tear', sentence: 'Partial-thickness tear of the teres minor tendon at the inferior facet of the greater tuberosity (rare in isolation; usually traumatic or part of massive cuff tear).'},
+          {id: 'hypertrophy', label: 'Compensatory hypertrophy', sentence: 'Preserved bulk and compensatory hypertrophy of the teres minor in the setting of massive supraspinatus / infraspinatus tear — favorable for reverse arthroplasty candidacy.'},
+          {id: 'denervation', label: 'Selective denervation (QSS)', sentence: 'Selective fatty atrophy of the teres minor ± deltoid with intact tendons, suggestive of quadrilateral space syndrome with axillary nerve compression.'},
+        ]
+      },
+      addon_group: {
+        label: 'Associated findings',
+        options: [
+          {id: 'goutallier', label: 'Goutallier fatty atrophy', text: 'Teres minor muscle belly demonstrates Goutallier grade [N] fatty infiltration.'},
+        ]
+      }
+    },
+    {
+      id: 'subscapularis', label: 'Subscapularis tendon', output_section: 'Rotator cuff — subscapularis',
+      grade_group: {
+        label: 'Subscapularis state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Subscapularis tendon demonstrates normal fibrillar architecture and signal with intact multipennate insertion onto the lesser tuberosity. No tear.'},
+          {id: 'tendinosis', label: 'Tendinosis', sentence: 'Tendinosis of the subscapularis tendon at the lesser tuberosity with intermediate intrasubstance signal and mild thickening, without fluid-signal cleft.'},
+          {id: 'lafosse1', label: 'Lafosse I (partial upper 1/3)', sentence: 'Partial-thickness articular-surface tear of the upper third of the subscapularis tendon at the lesser tuberosity — Lafosse type I.'},
+          {id: 'lafosse2', label: 'Lafosse II (complete upper 1/3)', sentence: 'Complete tear of the upper third of the subscapularis tendon at the lesser tuberosity with {retraction} mm medial retraction — Lafosse type II.'},
+          {id: 'lafosse3', label: 'Lafosse III (upper 2/3)', sentence: 'Complete tear of the upper two-thirds of the subscapularis tendon at the lesser tuberosity with {retraction} mm medial retraction — Lafosse type III.'},
+          {id: 'lafosse4', label: 'Lafosse IV (complete, centered)', sentence: 'Complete full-thickness tear of the subscapularis tendon with {retraction} mm medial retraction and centered humeral head — Lafosse type IV.'},
+          {id: 'lafosse5', label: 'Lafosse V (complete + subluxed)', sentence: 'Complete full-thickness tear of the subscapularis tendon with humeral head anterosuperior subluxation — Lafosse type V.'},
+          {id: 'comma', label: 'Chronic with comma sign', sentence: 'Chronic tear of the upper subscapularis with comma-shaped fragment of residual tendon adherent to the medially dislocated long head biceps tendon — comma sign, confirming subscap tear.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'retraction', label: 'Medial retraction (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ],
+      addon_group: {
+        label: 'Associated findings',
+        options: [
+          {id: 'goutallier', label: 'Goutallier fatty atrophy', text: 'Subscapularis muscle belly demonstrates Goutallier grade [N] fatty infiltration.'},
+          {id: 'lhb', label: 'LHB pulley failure', text: 'Associated biceps pulley failure with medial subluxation of the long head biceps tendon.'},
+          {id: 'lt-cyst', label: 'Lesser tuberosity cyst', text: 'Reactive cystic change at the lesser tuberosity footprint.'},
+        ]
+      }
+    },
+
+    // ============= LHB TENDON =============
+    {
+      id: 'lhb', label: 'Long head biceps (LHB) tendon', output_section: 'LHB tendon',
+      grade_group: {
+        label: 'LHB tendon state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Long head of biceps tendon demonstrates normal caliber and signal with central position within the bicipital groove and intact biceps pulley. Intra-articular course is unremarkable.'},
+          {id: 'tendinosis', label: 'Tendinosis', sentence: 'Thickening and intermediate intrasubstance signal of the long head of the biceps tendon within the bicipital groove, consistent with tendinosis. No discrete split.'},
+          {id: 'tenosynovitis', label: 'Tenosynovitis', sentence: 'Fluid signal surrounding the long head of the biceps tendon within the bicipital groove disproportionate to glenohumeral joint fluid, consistent with tenosynovitis.'},
+          {id: 'partial-split', label: 'Partial-thickness longitudinal split', sentence: 'Longitudinal split of the long head of the biceps tendon within the bicipital groove with intermediate intrasubstance signal and partial fiber discontinuity.'},
+          {id: 'complete', label: 'Complete rupture — empty groove', sentence: 'Complete discontinuity of the long head of the biceps tendon with an empty bicipital groove and distal retraction of the stump — chronic complete rupture (Popeye deformity).'},
+          {id: 'medial-sublux', label: 'Medial subluxation (pulley failure)', sentence: 'Medial subluxation of the long head of the biceps tendon over the upper border of the subscapularis tendon, consistent with biceps pulley failure.'},
+          {id: 'dislocation', label: 'Intra-articular dislocation', sentence: 'Intra-articular dislocation of the long head of the biceps tendon medial to the disrupted subscapularis tendon, with empty bicipital groove.'},
+        ]
+      },
+      addon_group: {
+        label: 'Pulley lesion (Habermeyer)',
+        options: [
+          {id: 'h1', label: 'Habermeyer I (SGHL only)', text: 'Habermeyer type I biceps pulley lesion — isolated SGHL discontinuity.'},
+          {id: 'h2', label: 'Habermeyer II (+ subscap)', text: 'Habermeyer type II biceps pulley lesion — SGHL discontinuity with partial undersurface subscapularis tear.'},
+          {id: 'h3', label: 'Habermeyer III (+ supraspinatus)', text: 'Habermeyer type III biceps pulley lesion — SGHL discontinuity with partial supraspinatus leading-edge tear.'},
+          {id: 'h4', label: 'Habermeyer IV (complete)', text: 'Habermeyer type IV biceps pulley lesion — complete pulley disruption involving SGHL, subscapularis, and supraspinatus.'},
+        ]
+      }
+    },
+
+    // ============= GLENOHUMERAL JOINT =============
+    {
+      id: 'gh-alignment', label: 'Glenohumeral alignment (AHI)', output_section: 'Glenohumeral joint',
+      grade_group: {
+        label: 'Alignment',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Glenohumeral alignment is anatomic with acromiohumeral interval of {ahi} mm (normal 7–14 mm). No proximal humeral migration.'},
+          {id: 'narrow', label: 'AHI narrowing (<7 mm)', sentence: 'Reduced acromiohumeral interval to {ahi} mm (normal 7–14 mm) — concerning for cuff tear.'},
+          {id: 'arthropathy', label: 'Cuff arthropathy (AHI <5 mm)', sentence: 'Markedly reduced acromiohumeral interval to {ahi} mm with proximal humeral migration and acetabularization of the acromial undersurface — cuff arthropathy.'},
+          {id: 'ant-sublux', label: 'Anterior subluxation', sentence: 'Anterior subluxation of the humeral head relative to the glenoid.'},
+          {id: 'post-sublux', label: 'Posterior subluxation', sentence: 'Posterior subluxation of the humeral head relative to the glenoid, often associated with increased glenoid retroversion.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'ahi', label: 'AHI (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+    {
+      id: 'adhesive-capsulitis', label: 'IGHL / axillary recess + CHL (adhesive capsulitis)', output_section: 'Glenohumeral joint',
+      grade_group: {
+        label: 'Capsule / rotator interval',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Inferior glenohumeral ligament and axillary recess are normal in thickness (≤3 mm). Coracohumeral ligament is normal (≤2 mm). Subcoracoid fat triangle preserved.'},
+          {id: 'axillary', label: 'Axillary recess thickening', sentence: 'Thickening of the axillary recess capsule to {axillary} mm (>4 mm pathologic), consistent with adhesive capsulitis features.'},
+          {id: 'chl', label: 'CHL thickening', sentence: 'Thickening of the coracohumeral ligament to {chl} mm (>4 mm pathologic) with edema and obliteration of the subcoracoid fat triangle within the rotator interval — consistent with adhesive capsulitis.'},
+          {id: 'both', label: 'Both (frank adhesive capsulitis)', sentence: 'Thickening of the axillary recess capsule to {axillary} mm and thickening of the coracohumeral ligament to {chl} mm with edema and obliteration of the subcoracoid fat triangle within the rotator interval — imaging features consistent with adhesive capsulitis.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'axillary', label: 'Axillary capsule (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'},
+        {id: 'chl', label: 'CHL thickness (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+    {
+      id: 'gh-cartilage', label: 'Glenohumeral articular cartilage', output_section: 'Glenohumeral joint',
+      grade_group: {
+        label: 'Cartilage',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Articular cartilage of the humeral head and glenoid is preserved without focal fissuring or thickness loss.'},
+          {id: 'mild', label: 'Mild chondrosis', sentence: 'Mild chondral signal alteration and superficial fissuring of the {location} without focal full-thickness defect.'},
+          {id: 'moderate', label: 'Moderate chondrosis', sentence: 'Moderate chondral thinning and deep fissuring of the {location} without exposed subchondral bone.'},
+          {id: 'severe', label: 'Severe chondral loss', sentence: 'Severe full-thickness chondral loss of the {location} with exposed subchondral bone and reactive subchondral marrow edema.'},
+          {id: 'gh-oa', label: 'Glenohumeral OA', sentence: 'Diffuse glenohumeral osteoarthritis with chondral thinning of both the humeral head and glenoid, marginal osteophytes (notably inferior humeral head goat\'s beard), and subchondral cystic change.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'multi', placeholder: '[humeral head / glenoid]',
+         options: [
+           {id: 'hh', label: 'Humeral head', value: 'humeral head'},
+           {id: 'glen', label: 'Glenoid', value: 'glenoid'},
+           {id: 'central', label: 'Central glenoid', value: 'central glenoid'},
+           {id: 'post-glen', label: 'Posterior glenoid', value: 'posterior glenoid'},
+         ]}
+      ]
+    },
+
+    // ============= LABRUM =============
+    {
+      id: 'labrum-superior', label: 'Superior labrum / SLAP', output_section: 'Labrum',
+      grade_group: {
+        label: 'Superior labrum / biceps anchor',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Superior labrum and biceps anchor are intact at the supraglenoid tubercle without curvilinear fluid signal posterolateral to the biceps anchor.'},
+          {id: 'slap1', label: 'SLAP I (fraying)', sentence: 'Fraying of the superior labrum with intact biceps anchor, consistent with SLAP type I.'},
+          {id: 'slap2', label: 'SLAP II (detachment)', sentence: 'Curvilinear fluid signal extending laterally and posteriorly within the superior labrum with detachment of the labrum and biceps anchor from the glenoid, consistent with SLAP type II.'},
+          {id: 'slap3', label: 'SLAP III (bucket-handle)', sentence: 'Bucket-handle tear of the superior labrum with displacement of the inner fragment into the joint; biceps anchor intact — SLAP type III.'},
+          {id: 'slap4', label: 'SLAP IV (extension into biceps)', sentence: 'Bucket-handle superior labral tear with extension into the long head of the biceps tendon — SLAP type IV.'},
+          {id: 'slap5', label: 'SLAP V (+ Bankart)', sentence: 'SLAP II lesion with anterior extension into a Bankart lesion — SLAP type V.'},
+          {id: 'slap7', label: 'SLAP VII (+ MGHL)', sentence: 'SLAP II lesion with anterior extension into the middle glenohumeral ligament — SLAP type VII.'},
+          {id: 'slap8', label: 'SLAP VIII (+ posterior)', sentence: 'SLAP II lesion with posterior labral extension — SLAP type VIII.'},
+          {id: 'slap10', label: 'SLAP X (+ reverse Bankart)', sentence: 'SLAP II lesion with posteroinferior labral extension (reverse Bankart) — SLAP type X.'},
+          {id: 'recess', label: 'Sublabral recess (normal variant)', sentence: 'Smooth medial and superior signal at the 12 o\'clock superior labrum measuring less than 3 mm, consistent with normal sublabral recess / sulcus — not a SLAP tear.'},
+        ]
+      },
+      addon_group: {
+        label: 'Associated findings',
+        options: [
+          {id: 'spino-cyst', label: 'Spinoglenoid notch paralabral cyst', text: 'Associated paralabral cyst in the spinoglenoid notch measuring [X] mm — assess for isolated infraspinatus denervation.'},
+          {id: 'supra-cyst', label: 'Suprascapular notch paralabral cyst', text: 'Associated paralabral cyst in the suprascapular notch measuring [X] mm — may compress suprascapular nerve with supraspinatus + infraspinatus denervation.'},
+        ]
+      }
+    },
+    {
+      id: 'labrum-anterosuperior', label: 'Anterosuperior labrum (variants)', output_section: 'Labrum',
+      grade_group: {
+        label: 'Anterosuperior labrum',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Anterosuperior labrum (1–3 o\'clock position) is intact without sublabral foramen or Buford complex variant.'},
+          {id: 'sublabral-foramen', label: 'Sublabral foramen (variant)', sentence: 'Sublabral foramen at the 1–3 o\'clock anterosuperior labrum — normal anatomic variant; do not mistake for Bankart or Perthes lesion.'},
+          {id: 'buford', label: 'Buford complex (variant)', sentence: 'Buford complex — absent anterosuperior labrum (1–3 o\'clock) with cord-like middle glenohumeral ligament. Normal anatomic variant.'},
+          {id: 'tear', label: 'Tear', sentence: 'Tear of the anterosuperior labrum at the {clock} position with fluid signal undermining the labral base.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'clock', label: 'Clock position', type: 'mutex', placeholder: '[1 / 2 / 3 o\'clock]',
+         options: [
+           {id: '1', label: '1 o\'clock', value: '1 o\'clock'},
+           {id: '2', label: '2 o\'clock', value: '2 o\'clock'},
+           {id: '3', label: '3 o\'clock', value: '3 o\'clock'},
+         ]}
+      ]
+    },
+    {
+      id: 'labrum-anteroinferior', label: 'Anteroinferior labrum (Bankart family)', output_section: 'Labrum',
+      grade_group: {
+        label: 'Anteroinferior labrum',
+        options: [
+          {id: 'intact', label: 'Intact', is_normal: true, sentence: 'Anteroinferior labrum (3–6 o\'clock) is intact with normal triangular morphology and no detachment, capsuloperiosteal stripping, or Bankart-family lesion.'},
+          {id: 'bankart-soft', label: 'Bankart (soft tissue)', sentence: 'Detached anteroinferior labral fragment from the glenoid rim at the {clock} position with disrupted scapular periosteum and capsuloperiosteal stripping, consistent with soft-tissue Bankart lesion.'},
+          {id: 'bony-bankart', label: 'Bony Bankart', sentence: 'Anteroinferior labral detachment with associated osseous fragment from the glenoid rim, consistent with bony Bankart lesion. Glenoid bone loss approximately {percent}% by circle method.'},
+          {id: 'perthes', label: 'Perthes', sentence: 'Anteroinferior labral detachment with INTACT scapular periosteum and non-displaced labrum, consistent with Perthes lesion — often subtle, best seen on ABER view.'},
+          {id: 'alpsa', label: 'ALPSA', sentence: 'Medially displaced and rolled anteroinferior labroligamentous sleeve along the anterior scapular neck, consistent with chronic ALPSA lesion (anterior labroligamentous periosteal sleeve avulsion).'},
+          {id: 'glad', label: 'GLAD', sentence: 'Non-detached anteroinferior labral fissuring with adjacent chondral defect of the anteroinferior glenoid, consistent with GLAD (glenolabral articular disruption) lesion.'},
+          {id: 'hagl', label: 'HAGL / BHAGL', sentence: 'Humeral-sided avulsion of the anterior band of the IGHL from the humeral neck with J-sign capsular retraction, consistent with HAGL lesion. {bhagl}'},
+        ]
+      },
+      variable_groups: [
+        {id: 'clock', label: 'Clock position', type: 'mutex', placeholder: '[3 / 4 / 5 / 6 o\'clock]',
+         options: [
+           {id: '3', label: '3 o\'clock', value: '3 o\'clock'},
+           {id: '4', label: '4 o\'clock', value: '4 o\'clock'},
+           {id: '5', label: '5 o\'clock', value: '5 o\'clock'},
+           {id: '6', label: '6 o\'clock', value: '6 o\'clock'},
+         ]},
+        {id: 'percent', label: 'Bone loss (%)', type: 'numeric', unit: '%', placeholder: '[%]'},
+        {id: 'bhagl', label: 'BHAGL?', type: 'mutex', placeholder: '',
+         options: [
+           {id: 'no', label: 'No bone fragment', value: ''},
+           {id: 'yes', label: 'With bone fragment (BHAGL)', value: 'Associated bone fragment — BHAGL.'},
+         ]}
+      ]
+    },
+    {
+      id: 'labrum-posterior', label: 'Posterior labrum (Kim / reverse Bankart)', output_section: 'Labrum',
+      grade_group: {
+        label: 'Posterior labrum',
+        options: [
+          {id: 'intact', label: 'Intact', is_normal: true, sentence: 'Posterior labrum (7–9 o\'clock) is intact with normal triangular morphology and no posterior capsular injury.'},
+          {id: 'fraying', label: 'Fraying / partial', sentence: 'Fraying / partial-thickness signal of the posterior labrum at the {clock} position.'},
+          {id: 'reverse-bankart', label: 'Reverse Bankart', sentence: 'Detachment of the posteroinferior labrum from the posterior glenoid rim, consistent with reverse Bankart lesion.'},
+          {id: 'kim', label: 'Kim lesion', sentence: 'Incomplete posterior labral tear with intact superficial fibers but detached deep fibers — Kim lesion.'},
+          {id: 'cyst', label: 'Posterior paralabral cyst', sentence: 'Posterior paralabral cyst adjacent to the posterior labrum measuring {size} mm, likely associated with underlying posterior labral tear.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'clock', label: 'Clock position', type: 'mutex', placeholder: '[7 / 8 / 9 o\'clock]',
+         options: [
+           {id: '7', label: '7 o\'clock', value: '7 o\'clock'},
+           {id: '8', label: '8 o\'clock', value: '8 o\'clock'},
+           {id: '9', label: '9 o\'clock', value: '9 o\'clock'},
+         ]},
+        {id: 'size', label: 'Cyst size (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ],
+      addon_group: {
+        label: 'Associated findings',
+        options: [
+          {id: 'reverse-hs', label: 'Reverse Hill-Sachs', text: 'Associated reverse Hill-Sachs (McLaughlin) lesion on the anteromedial humeral head — consider locked posterior dislocation.'},
+          {id: 'retroversion', label: 'Increased glenoid retroversion', text: 'Associated increased glenoid retroversion (>10°) — consider posterior bone augmentation.'},
+        ]
+      }
+    },
+
+    // ============= CA + CC LIGAMENTS =============
+    {
+      id: 'ca-ligament', label: 'Coracoacromial ligament', output_section: 'CA / CC ligaments',
+      grade_group: {
+        label: 'CA ligament',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Coracoacromial ligament demonstrates normal thickness and signal without thickening to suggest contribution to outlet impingement.'},
+          {id: 'thickened', label: 'Thickened', sentence: 'Thickening of the coracoacromial ligament contributing to subacromial outlet narrowing.'},
+          {id: 'tear', label: 'Tear', sentence: 'Disruption of the coracoacromial ligament — uncommon, may occur in massive cuff disease.'},
+        ]
+      }
+    },
+    {
+      id: 'cc-ligaments', label: 'Coracoclavicular ligaments (conoid + trapezoid)', output_section: 'CA / CC ligaments',
+      grade_group: {
+        label: 'CC ligaments',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Coracoclavicular ligaments (conoid and trapezoid) are intact with normal CC distance ({ccdist} mm; normal 11–13 mm).'},
+          {id: 'sprain', label: 'Sprain', sentence: 'Periligamentous edema around the coracoclavicular ligaments with preserved fiber continuity and CC distance of {ccdist} mm, consistent with sprain.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness disruption of the {component} component of the coracoclavicular ligament complex with periligamentous edema. CC distance {ccdist} mm.'},
+          {id: 'complete', label: 'Complete tear', sentence: 'Complete disruption of both conoid and trapezoid coracoclavicular ligaments with CC distance increased to {ccdist} mm (>25% wider than contralateral side).'},
+        ]
+      },
+      variable_groups: [
+        {id: 'ccdist', label: 'CC distance (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'},
+        {id: 'component', label: 'Component', type: 'mutex', placeholder: '[conoid / trapezoid]',
+         options: [
+           {id: 'con', label: 'Conoid', value: 'conoid'},
+           {id: 'trap', label: 'Trapezoid', value: 'trapezoid'},
+         ]}
+      ]
+    },
+
+    // ============= SOFT TISSUES / MUSCULATURE =============
+    {
+      id: 'goutallier-summary', label: 'Cuff muscle Goutallier (sagittal-oblique Y-view)', output_section: 'Soft tissues / musculature',
+      grade_group: {
+        label: 'Goutallier grade (overall cuff)',
+        options: [
+          {id: 'g0', label: 'Grade 0 (normal)', is_normal: true, sentence: 'Rotator cuff muscle bellies (supraspinatus, infraspinatus, teres minor, subscapularis) demonstrate preserved bulk without fatty infiltration (Goutallier 0).'},
+          {id: 'g1', label: 'Grade 1', short: 'G1', sentence: 'Mild fatty streaking of the {muscle} without volume loss (Goutallier grade 1).'},
+          {id: 'g2', label: 'Grade 2', short: 'G2', sentence: 'Moderate fatty infiltration of the {muscle} with less fat than muscle (Goutallier grade 2).'},
+          {id: 'g3', label: 'Grade 3', short: 'G3', sentence: 'Fatty infiltration of the {muscle} equal to muscle volume (Goutallier grade 3) — repair outcomes poor.'},
+          {id: 'g4', label: 'Grade 4', short: 'G4', sentence: 'Severe fatty infiltration with more fat than muscle within the {muscle} (Goutallier grade 4) — irreparable cuff.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'muscle', label: 'Muscle(s) involved', type: 'multi', placeholder: '[SS / IS / TM / Sub]',
+         options: [
+           {id: 'ss', label: 'Supraspinatus', value: 'supraspinatus'},
+           {id: 'is', label: 'Infraspinatus', value: 'infraspinatus'},
+           {id: 'tm', label: 'Teres minor', value: 'teres minor'},
+           {id: 'sub', label: 'Subscapularis', value: 'subscapularis'},
+         ]}
+      ]
+    },
+    {
+      id: 'denervation', label: 'Muscle denervation pattern', output_section: 'Soft tissues / musculature',
+      grade_group: {
+        label: 'Denervation',
+        options: [
+          {id: 'none', label: 'None', is_normal: true, sentence: 'No abnormal muscle denervation edema or fatty atrophy pattern identified.'},
+          {id: 'spino', label: 'Spinoglenoid notch (infraspinatus only)', sentence: 'Edema-like / fatty change of the infraspinatus muscle in isolation, suggestive of suprascapular nerve compression at the spinoglenoid notch — assess for spinoglenoid paralabral cyst.'},
+          {id: 'supra', label: 'Suprascapular notch (SS + IS)', sentence: 'Edema-like / fatty change of both the supraspinatus and infraspinatus muscles, suggestive of suprascapular nerve compression at the suprascapular notch — assess for suprascapular notch mass / cyst.'},
+          {id: 'qss', label: 'Quadrilateral space (teres minor ± deltoid)', sentence: 'Selective fatty atrophy of the teres minor ± posterior deltoid, suggestive of axillary nerve compression — quadrilateral space syndrome.'},
+        ]
+      }
+    },
+    {
+      id: 'soft-tissues', label: 'Subcutaneous tissues and remaining musculature', output_section: 'Soft tissues / musculature',
+      grade_group: {
+        label: 'Soft tissues',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Subcutaneous tissues and remaining shoulder musculature (deltoid, pectoralis, trapezius) are unremarkable.'},
+          {id: 'edema', label: 'Diffuse edema', sentence: 'Diffuse subcutaneous edema overlying the {side} aspect of the shoulder.'},
+          {id: 'mass', label: 'Soft tissue mass', sentence: 'Soft tissue mass within the {side} aspect of the shoulder measuring {size} mm — characterization warranted.'},
+          {id: 'lipoma', label: 'Lipoma', sentence: 'Well-circumscribed T1-hyperintense, fat-suppressing lesion in the {side} soft tissues measuring {size} mm, consistent with simple lipoma.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'side', label: 'Location', type: 'mutex', placeholder: '[anterior / lateral / posterior]',
+         options: [
+           {id: 'ant', label: 'Anterior', value: 'anterior'},
+           {id: 'lat', label: 'Lateral', value: 'lateral'},
+           {id: 'post', label: 'Posterior', value: 'posterior'},
+           {id: 'med', label: 'Medial', value: 'medial'},
+         ]},
+        {id: 'size', label: 'Size (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+
+    // ============= NEUROVASCULAR / CHEST =============
+    {
+      id: 'neurovascular', label: 'Neurovascular / chest (incidental)', output_section: 'Neurovascular / chest',
+      grade_group: {
+        label: 'Incidental findings',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Axillary neurovascular bundle is unremarkable. No suspicious lung apex, mediastinal, or chest wall findings within the field of view.'},
+          {id: 'lung', label: 'Lung apex finding', sentence: 'Incidental {finding} at the imaged lung apex — recommend dedicated chest imaging if clinically warranted.'},
+          {id: 'lad', label: 'Axillary lymphadenopathy', sentence: 'Enlarged axillary lymph node measuring {size} mm — correlate clinically.'},
+          {id: 'vasc', label: 'Vascular finding', sentence: 'Incidental vascular finding within the axilla — see described.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'finding', label: 'Finding', type: 'mutex', placeholder: '[nodule / opacity / scarring]',
+         options: [
+           {id: 'n', label: 'Pulmonary nodule', value: 'pulmonary nodule'},
+           {id: 'o', label: 'Opacity', value: 'opacity'},
+           {id: 's', label: 'Scarring', value: 'scarring'},
+         ]},
+        {id: 'size', label: 'Size (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    }
+  ]
+};
+</script>
+<script src="engine.js"></script>
+
+</body>
+</html>

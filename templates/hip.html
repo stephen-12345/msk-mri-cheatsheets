@@ -1,0 +1,861 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hip & Pelvis MRI — Dictation Template</title>
+<link rel="stylesheet" href="../assets/cheatsheet.css">
+</head>
+<body>
+
+<div class="tmpl-topbar">
+  <div class="row">
+    <span class="title" id="page-title">Hip & Pelvis MRI — Dictation Template</span>
+    <a class="pill-link" id="back-link" href="../hip/hip-mri-cheatsheet.html">← Hip cheatsheet</a>
+    <a class="pill-link" href="index.html">All templates</a>
+    <a class="pill-link" href="../index.html">All regions</a>
+    <span class="meta">click options · copy to PowerScribe</span>
+  </div>
+</div>
+
+<div class="tmpl-wrap">
+  <div>
+    <div class="tmpl-help">
+      <b>How it works:</b> Each section defaults to NORMAL. Click a grade/state to change it, then pick locations (multi-select supported, grammar auto-handled). Toggle associated findings with the green check buttons. The dictation builds live on the right — click <b>Copy all</b> or <b>Copy abnormal only</b> to paste into PowerScribe.
+    </div>
+    <div class="options-pane" id="options-pane"></div>
+  </div>
+
+  <div class="preview-pane">
+    <h3>Live Dictation Preview</h3>
+    <p class="sub">Updates as you click. <span class="placeholder">[bracketed]</span> = unfilled placeholder.</p>
+    <div class="preview-output" id="preview-output"></div>
+    <div class="preview-buttons">
+      <button class="preview-btn" id="copy-btn">Copy all</button>
+      <button class="preview-btn" id="copy-abnormal-btn">Copy abnormal only</button>
+      <button class="preview-btn danger" id="reset-btn">Reset</button>
+    </div>
+  </div>
+</div>
+
+<script>
+window.TEMPLATE_CONFIG = {
+  title: 'Hip & Pelvis MRI — Dictation Template',
+  heading: 'HIP & PELVIS MRI',
+  back_link: '../hip/hip-mri-cheatsheet.html',
+  sections: [
+    // ============= BONE / MARROW =============
+    {
+      id: 'bone-marrow', label: 'Bone marrow (general)', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Marrow signal',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Normal marrow signal throughout the imaged bony pelvis, sacrum, and proximal femora without focal lesion, fracture, or marrow replacement.'},
+          {id: 'edema', label: 'Focal edema', sentence: 'Focal T2-hyperintense bone marrow edema involving the {location} without discrete fracture line.'},
+          {id: 'fracture', label: 'Fracture', sentence: 'Linear T1-hypointense fracture line traversing the {location} with surrounding bone marrow edema. {displacement}'},
+          {id: 'lesion', label: 'Focal lesion', sentence: 'Focal marrow-replacing lesion within the {location} measuring {size} mm — characterization warranted.'},
+          {id: 'diffuse', label: 'Diffuse marrow replacement', sentence: 'Diffuse heterogeneous T1-hypointense marrow signal throughout the imaged osseous pelvis, concerning for diffuse marrow infiltration.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'multi', placeholder: '[anatomic site]',
+         options: [
+           {id: 'rfh', label: 'Right femoral head', value: 'right femoral head'},
+           {id: 'lfh', label: 'Left femoral head', value: 'left femoral head'},
+           {id: 'rfn', label: 'Right femoral neck', value: 'right femoral neck'},
+           {id: 'lfn', label: 'Left femoral neck', value: 'left femoral neck'},
+           {id: 'rgt', label: 'Right greater trochanter', value: 'right greater trochanter'},
+           {id: 'lgt', label: 'Left greater trochanter', value: 'left greater trochanter'},
+           {id: 'rit', label: 'Right ischial tuberosity', value: 'right ischial tuberosity'},
+           {id: 'lit', label: 'Left ischial tuberosity', value: 'left ischial tuberosity'},
+           {id: 'sacrum', label: 'Sacrum', value: 'sacrum'},
+           {id: 'ilium', label: 'Iliac wing', value: 'iliac wing'},
+           {id: 'pubis', label: 'Pubic ramus', value: 'pubic ramus'},
+         ]},
+        {id: 'displacement', label: 'Displacement', type: 'mutex', placeholder: '',
+         options: [
+           {id: 'nd', label: 'Non-displaced', value: 'No significant displacement.'},
+           {id: 'md', label: 'Minimally displaced', value: 'Minimal displacement.'},
+           {id: 'dis', label: 'Displaced', value: 'Displaced.'},
+         ]},
+        {id: 'size', label: 'Size (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+    {
+      id: 'lumbar-spine', label: 'Lumbar spine (visualized)', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Lower lumbar spine',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Visualized lower lumbar spine demonstrates preserved disc heights and alignment without acute marrow signal abnormality.'},
+          {id: 'mild-degen', label: 'Mild degenerative', sentence: 'Mild multilevel lumbar degenerative disc changes within the partially visualized lower lumbar spine.'},
+          {id: 'mod-degen', label: 'Moderate degenerative', sentence: 'Moderate multilevel lumbar degenerative disc disease with disc space narrowing and endplate changes within the partially visualized lower lumbar spine.'},
+          {id: 'mass', label: 'Lesion', sentence: 'Focal lesion within the partially visualized lower lumbar spine — dedicated lumbar MRI recommended for further characterization.'},
+        ]
+      }
+    },
+    {
+      id: 'sacrum', label: 'Sacrum', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Sacrum',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Sacrum demonstrates normal marrow signal without insufficiency fracture or focal lesion.'},
+          {id: 'sif', label: 'Sacral insufficiency fracture', sentence: 'Bilateral linear T1-hypointense sacral ala signal with surrounding marrow edema in an "H" or "honda" sign distribution, diagnostic of sacral insufficiency fracture.'},
+          {id: 'unilateral-sif', label: 'Unilateral sacral insufficiency', sentence: 'Linear T1-hypointense fracture line through the {side} sacral ala with surrounding marrow edema, consistent with insufficiency fracture.'},
+          {id: 'lesion', label: 'Sacral lesion', sentence: 'Focal sacral lesion measuring {size} mm — characterization warranted.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'side', label: 'Side', type: 'mutex', placeholder: '[right / left]',
+         options: [{id: 'r', label: 'Right', value: 'right'},{id: 'l', label: 'Left', value: 'left'}]},
+        {id: 'size', label: 'Size (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+    {
+      id: 'bony-pelvis', label: 'Bony pelvis (general)', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Bony pelvis',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Iliac wings, pubic rami, and ischia demonstrate normal marrow signal and cortical contour without acute fracture or focal lesion.'},
+          {id: 'apophyseal', label: 'Apophyseal avulsion', sentence: 'Acute apophyseal avulsion of the {apoph} with displacement of the apophyseal fragment and surrounding marrow edema and soft tissue hemorrhage.'},
+          {id: 'het-oss', label: 'Heterotopic ossification', sentence: 'Mature heterotopic ossification within the {location} soft tissues.'},
+          {id: 'loose-body', label: 'Intra-articular loose body', sentence: 'Discrete intra-articular osteochondral loose body within the {location}, measuring {size} mm.'},
+          {id: 'osteophyte', label: 'Marginal osteophytes', sentence: 'Marginal osteophyte formation along the {location} consistent with degenerative change.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'apoph', label: 'Apophysis (if avulsion)', type: 'mutex', placeholder: '[ASIS / AIIS / ischial tuberosity / lesser trochanter / iliac crest]',
+         options: [
+           {id: 'asis', label: 'ASIS (sartorius)', value: 'anterior superior iliac spine (sartorius origin)'},
+           {id: 'aiis', label: 'AIIS (rectus femoris direct)', value: 'anterior inferior iliac spine (rectus femoris direct head)'},
+           {id: 'isch', label: 'Ischial tuberosity (hamstring)', value: 'ischial tuberosity (hamstring origin)'},
+           {id: 'lt', label: 'Lesser trochanter (iliopsoas)', value: 'lesser trochanter (iliopsoas insertion)'},
+           {id: 'crest', label: 'Iliac crest (abdominal wall)', value: 'iliac crest'},
+           {id: 'pubis', label: 'Pubic body (adductor)', value: 'pubic body (adductor origin)'},
+         ]},
+        {id: 'location', label: 'Location', type: 'multi', placeholder: '[anatomic site]',
+         options: [
+           {id: 'periart-r', label: 'Periarticular right', value: 'right periarticular'},
+           {id: 'periart-l', label: 'Periarticular left', value: 'left periarticular'},
+           {id: 'glut', label: 'Gluteal soft tissues', value: 'gluteal soft tissues'},
+           {id: 'adductor', label: 'Adductor compartment', value: 'adductor compartment'},
+           {id: 'rfa', label: 'Right femoroacetabular joint', value: 'right femoroacetabular joint'},
+           {id: 'lfa', label: 'Left femoroacetabular joint', value: 'left femoroacetabular joint'},
+         ]},
+        {id: 'size', label: 'Size (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+    {
+      id: 'acetabula', label: 'Acetabula — version & coverage', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Acetabular morphology',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Acetabular coverage is normal bilaterally with LCEA within 25–40° and Tönnis angle 0–10°. No focal retroversion.'},
+          {id: 'borderline-dys', label: 'Borderline dysplasia', sentence: 'Borderline acetabular dysplasia on the {side} with LCEA of {lcea}° (borderline 20–25°) and Tönnis angle of {tonnis}°.'},
+          {id: 'dysplasia', label: 'Dysplasia', sentence: 'Acetabular dysplasia on the {side} with LCEA of {lcea}° (<20°) and Tönnis angle of {tonnis}° (>10°), indicating undercoverage of the femoral head.'},
+          {id: 'pincer-global', label: 'Pincer (global over-coverage)', sentence: 'Global acetabular over-coverage on the {side} with LCEA of {lcea}° (>40°), consistent with pincer morphology / coxa profunda.'},
+          {id: 'retroversion', label: 'Focal retroversion', sentence: 'Focal cranial acetabular retroversion on the {side} with crossover sign, ischial spine sign, and posterior wall sign — pincer-type FAI morphology.'},
+          {id: 'protrusio', label: 'Coxa profunda / protrusio', sentence: 'Coxa profunda / acetabular protrusio with medialization of the femoral head past the ilioischial line on the {side}.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'side', label: 'Side', type: 'mutex', placeholder: '[right / left / bilateral]',
+         options: [
+           {id: 'r', label: 'Right', value: 'right'},
+           {id: 'l', label: 'Left', value: 'left'},
+           {id: 'b', label: 'Bilateral', value: 'bilateral'},
+         ]},
+        {id: 'lcea', label: 'LCEA value', type: 'numeric', unit: 'value', placeholder: '[value]'},
+        {id: 'tonnis', label: 'Tönnis angle value', type: 'numeric', unit: 'value', placeholder: '[value]'}
+      ]
+    },
+    {
+      id: 'femoral-head', label: 'Femoral head — AVN / SIF / OCD', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Femoral head',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Femoral heads demonstrate normal contour and marrow signal bilaterally without evidence of osteonecrosis, subchondral insufficiency fracture, or osteochondral defect.'},
+          {id: 'avn-arco1', label: 'AVN — ARCO I', sentence: 'Focal subchondral T2-hyperintense marrow edema of the {side} femoral head with preserved cortical contour and no double-line sign on T1/T2, ARCO stage I osteonecrosis.'},
+          {id: 'avn-arco2', label: 'AVN — ARCO II', sentence: 'Serpiginous double-line sign at the {side} femoral head subchondral region with preserved spherical contour, diagnostic of ARCO stage II osteonecrosis.'},
+          {id: 'avn-arco3', label: 'AVN — ARCO III (crescent / collapse)', sentence: 'Osteonecrosis of the {side} femoral head with subchondral crescent sign and early articular surface collapse, ARCO stage III.'},
+          {id: 'avn-arco4', label: 'AVN — ARCO IV', sentence: 'Advanced osteonecrosis of the {side} femoral head with flattening, collapse, and secondary degenerative joint changes, ARCO stage IV.'},
+          {id: 'sif', label: 'Subchondral insufficiency fracture', sentence: 'Subchondral T1-hypointense curvilinear fracture line within the {side} femoral head with surrounding extensive bone marrow edema, consistent with subchondral insufficiency fracture (SIF). {crescent}'},
+          {id: 'ocd', label: 'Osteochondral defect', sentence: 'Focal osteochondral defect of the {side} femoral head with overlying chondral injury and subchondral marrow edema.'},
+          {id: 'cyst', label: 'Subchondral cyst', sentence: 'Subchondral degenerative cyst within the {side} femoral head measuring {size} mm.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'side', label: 'Side', type: 'mutex', placeholder: '[right / left / bilateral]',
+         options: [
+           {id: 'r', label: 'Right', value: 'right'},
+           {id: 'l', label: 'Left', value: 'left'},
+           {id: 'b', label: 'bilateral', value: 'bilateral'},
+         ]},
+        {id: 'crescent', label: 'Crescent sign?', type: 'mutex', placeholder: '',
+         options: [
+           {id: 'no', label: 'No crescent', value: 'No subchondral crescent sign or collapse.'},
+           {id: 'yes', label: 'With crescent', value: 'Subchondral crescent sign is present, concerning for impending collapse.'},
+         ]},
+        {id: 'size', label: 'Size (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+    {
+      id: 'femoral-neck', label: 'Femoral neck — CAM / SCFE / fracture', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Femoral head-neck junction',
+        options: [
+          {id: 'normal', label: 'Normal (alpha <55°)', is_normal: true, sentence: 'Femoral head-neck junction demonstrates normal spherical morphology bilaterally with alpha angle within normal limits (<55°). No cam morphology.'},
+          {id: 'borderline-cam', label: 'Borderline cam (55–65°)', sentence: 'Borderline aspherical morphology of the {side} anterosuperior femoral head-neck junction with alpha angle of {alpha}° (borderline 55–65°).'},
+          {id: 'cam', label: 'Cam morphology (>65°)', sentence: 'Aspherical "pistol grip" morphology of the {side} anterosuperior femoral head-neck junction with alpha angle of {alpha}° (>65°), consistent with cam-type FAI morphology. {pit}'},
+          {id: 'scfe-chronic', label: 'Chronic SCFE deformity', sentence: 'Posteromedial slippage and remodeling of the {side} femoral head relative to the femoral neck consistent with chronic / healed slipped capital femoral epiphysis with secondary cam morphology.'},
+          {id: 'fracture-fn', label: 'Femoral neck fracture', sentence: 'Linear T1-hypointense fracture line traversing the {side} femoral neck with surrounding marrow edema. {displacement}'},
+          {id: 'sif-fn', label: 'Femoral neck stress / insufficiency fracture', sentence: 'Linear T2-hyperintense band along the {compression} cortex of the {side} femoral neck with surrounding bone marrow edema, consistent with {fxtype} fracture.'},
+          {id: 'shaft-fx', label: 'Proximal femoral shaft fracture', sentence: 'Fracture of the proximal {side} femoral shaft with surrounding marrow and soft tissue edema. {displacement}'},
+        ]
+      },
+      variable_groups: [
+        {id: 'side', label: 'Side', type: 'mutex', placeholder: '[right / left / bilateral]',
+         options: [
+           {id: 'r', label: 'Right', value: 'right'},
+           {id: 'l', label: 'Left', value: 'left'},
+           {id: 'b', label: 'bilateral', value: 'bilateral'},
+         ]},
+        {id: 'alpha', label: 'Alpha angle value (°)', type: 'numeric', unit: '°', placeholder: '[°]'},
+        {id: 'pit', label: 'Synovial herniation pit?', type: 'mutex', placeholder: '',
+         options: [
+           {id: 'no', label: 'No pit', value: ''},
+           {id: 'yes', label: 'With Pitt\'s pit', value: 'Associated synovial herniation pit ("Pitt\'s pit") at the anterosuperior femoral head-neck junction.'},
+         ]},
+        {id: 'compression', label: 'Cortex (if stress fx)', type: 'mutex', placeholder: '[compressive / tension]',
+         options: [
+           {id: 'comp', label: 'Inferomedial (compressive)', value: 'inferomedial (compressive)'},
+           {id: 'tens', label: 'Superolateral (tension)', value: 'superolateral (tension)'},
+         ]},
+        {id: 'fxtype', label: 'Fracture type', type: 'mutex', placeholder: '[stress / insufficiency]',
+         options: [
+           {id: 'stress', label: 'Stress', value: 'stress'},
+           {id: 'insuff', label: 'Insufficiency', value: 'insufficiency'},
+         ]},
+        {id: 'displacement', label: 'Displacement', type: 'mutex', placeholder: '',
+         options: [
+           {id: 'nd', label: 'Non-displaced', value: 'No significant displacement.'},
+           {id: 'md', label: 'Minimally displaced', value: 'Minimal displacement.'},
+           {id: 'dis', label: 'Displaced', value: 'Displaced.'},
+         ]}
+      ]
+    },
+
+    // ============= TENDINOUS INSERTIONS =============
+    {
+      id: 't-rectus-adductor', label: 'Rectus abdominis–adductor aponeurosis (sports hernia)', output_section: 'Tendinous insertions',
+      grade_group: {
+        label: 'Rectus–adductor aponeurosis',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Rectus abdominis–adductor aponeurosis at the pubic body is intact bilaterally without secondary cleft sign or aponeurotic disruption.'},
+          {id: 'edema', label: 'Aponeurotic edema', sentence: 'T2-hyperintense edema along the {side} rectus abdominis–adductor aponeurosis at the pubic body without macroscopic tear, suggestive of athletic pubalgia.'},
+          {id: 'cleft', label: 'Secondary cleft sign', sentence: 'Linear fluid-signal extending inferolaterally from the pubic symphysis along the {side} adductor longus origin ("secondary cleft sign"), consistent with athletic pubalgia / sports hernia.'},
+          {id: 'tear', label: 'Aponeurotic tear', sentence: 'Disruption of the {side} rectus abdominis–adductor aponeurosis with fluid-signal cleft, consistent with sports hernia ("athletic pubalgia").'},
+        ]
+      },
+      variable_groups: [
+        {id: 'side', label: 'Side', type: 'mutex', placeholder: '[right / left / bilateral]',
+         options: [
+           {id: 'r', label: 'Right', value: 'right'},
+           {id: 'l', label: 'Left', value: 'left'},
+           {id: 'b', label: 'Bilateral', value: 'bilateral'},
+         ]}
+      ]
+    },
+    {
+      id: 't-sartorius', label: 'Sartorius origin (ASIS)', output_section: 'Tendinous insertions',
+      grade_group: {
+        label: 'Sartorius origin',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Sartorius origin at the anterior superior iliac spine (ASIS) is intact bilaterally with normal signal and morphology.'},
+          {id: 'tendinosis', label: 'Tendinosis', sentence: 'Thickening and intermediate signal of the {side} sartorius origin at the ASIS, consistent with tendinosis.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness disruption of the {side} sartorius origin at the ASIS with adjacent edema.'},
+          {id: 'avulsion', label: 'ASIS apophyseal avulsion', sentence: 'Avulsion of the {side} sartorius origin from the anterior superior iliac spine with apophyseal displacement of {retraction} mm — characteristic adolescent apophyseal injury.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'side', label: 'Side', type: 'mutex', placeholder: '[right / left]',
+         options: [{id: 'r', label: 'Right', value: 'right'},{id: 'l', label: 'Left', value: 'left'}]},
+        {id: 'retraction', label: 'Displacement (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+    {
+      id: 't-rectus-indirect', label: 'Rectus femoris indirect/reflected head', output_section: 'Tendinous insertions',
+      grade_group: {
+        label: 'Rectus femoris reflected head',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Indirect (reflected) head of the rectus femoris is intact bilaterally with normal signal along the superior acetabular rim.'},
+          {id: 'tendinosis', label: 'Tendinosis', sentence: 'Thickening and intermediate signal of the {side} rectus femoris reflected head along the superior acetabulum, consistent with tendinosis.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness tear of the {side} rectus femoris reflected head with mass-like edema along the superior acetabular rim.'},
+          {id: 'full', label: 'Complete rupture', sentence: 'Complete avulsion of the {side} rectus femoris reflected head from the superior acetabular rim with retraction.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'side', label: 'Side', type: 'mutex', placeholder: '[right / left]',
+         options: [{id: 'r', label: 'Right', value: 'right'},{id: 'l', label: 'Left', value: 'left'}]}
+      ]
+    },
+    {
+      id: 't-rectus-direct', label: 'Rectus femoris direct head (AIIS)', output_section: 'Tendinous insertions',
+      grade_group: {
+        label: 'Rectus femoris direct head',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Direct head of the rectus femoris is intact bilaterally at the anterior inferior iliac spine (AIIS).'},
+          {id: 'tendinosis', label: 'Tendinosis', sentence: 'Thickening and intermediate signal of the {side} rectus femoris direct head at the AIIS, consistent with tendinosis.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness disruption of the {side} rectus femoris direct head at the AIIS with surrounding edema.'},
+          {id: 'avulsion', label: 'AIIS apophyseal avulsion', sentence: 'Avulsion of the {side} rectus femoris direct head from the anterior inferior iliac spine with apophyseal displacement of {retraction} mm — classic adolescent injury.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'side', label: 'Side', type: 'mutex', placeholder: '[right / left]',
+         options: [{id: 'r', label: 'Right', value: 'right'},{id: 'l', label: 'Left', value: 'left'}]},
+        {id: 'retraction', label: 'Displacement (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+    {
+      id: 't-hamstring', label: 'Hamstring origin (ischial tuberosity)', output_section: 'Tendinous insertions',
+      grade_group: {
+        label: 'Hamstring origin',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Conjoined proximal hamstring origin (biceps femoris long head and semitendinosus) and semimembranosus tendon are intact bilaterally at the ischial tuberosity with normal signal and morphology.'},
+          {id: 'tendinosis', label: 'Tendinosis', sentence: 'Thickening and intermediate signal of the {side} proximal hamstring origin at the ischial tuberosity with adjacent peritendinous edema, consistent with tendinosis.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness tear of the {side} {tendon} at the ischial tuberosity with intratendinous fluid-signal cleft and peritendinous edema. No discrete retraction.'},
+          {id: 'complete', label: 'Complete avulsion', sentence: 'Complete full-thickness avulsion of the {side} {tendon} from the ischial tuberosity with proximal retraction of {retraction} mm and fluid-filled gap.'},
+          {id: 'apoph', label: 'Ischial apophyseal avulsion', sentence: 'Apophyseal avulsion fracture of the {side} ischial tuberosity at the hamstring origin with displacement of {retraction} mm — adolescent apophyseal injury.'},
+          {id: 'chronic', label: 'Chronic / fatty atrophy', sentence: 'Chronic appearing tendinosis of the {side} proximal hamstring origin with peritendinous scarring and {fatty} fatty atrophy of the hamstring musculature.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'side', label: 'Side', type: 'mutex', placeholder: '[right / left]',
+         options: [{id: 'r', label: 'Right', value: 'right'},{id: 'l', label: 'Left', value: 'left'}]},
+        {id: 'tendon', label: 'Tendon(s)', type: 'multi', placeholder: '[conjoined / semimembranosus]',
+         options: [
+           {id: 'conj', label: 'Conjoined (BF/ST)', value: 'conjoined biceps femoris–semitendinosus tendon'},
+           {id: 'sm', label: 'Semimembranosus', value: 'semimembranosus tendon'},
+         ]},
+        {id: 'retraction', label: 'Retraction (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'},
+        {id: 'fatty', label: 'Fatty atrophy grade', type: 'mutex', placeholder: '[mild / moderate / severe]',
+         options: [
+           {id: 'mild', label: 'Mild', value: 'mild'},
+           {id: 'mod', label: 'Moderate', value: 'moderate'},
+           {id: 'sev', label: 'Severe', value: 'severe'},
+         ]}
+      ]
+    },
+    {
+      id: 't-ql', label: 'Quadratus lumborum (iliac crest)', output_section: 'Tendinous insertions',
+      grade_group: {
+        label: 'Quadratus lumborum',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Quadratus lumborum and abdominal wall musculature at the iliac crest insertions are intact bilaterally.'},
+          {id: 'strain', label: 'Strain', sentence: 'T2-hyperintense intramuscular edema of the {side} quadratus lumborum without macroscopic fiber discontinuity, compatible with strain.'},
+          {id: 'avulsion', label: 'Iliac crest apophyseal avulsion', sentence: 'Apophyseal avulsion at the {side} iliac crest at the abdominal wall musculature insertion, with displacement of {retraction} mm.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'side', label: 'Side', type: 'mutex', placeholder: '[right / left]',
+         options: [{id: 'r', label: 'Right', value: 'right'},{id: 'l', label: 'Left', value: 'left'}]},
+        {id: 'retraction', label: 'Displacement (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+    {
+      id: 't-gluteus', label: 'Gluteus medius / minimus (greater trochanter)', output_section: 'Tendinous insertions',
+      grade_group: {
+        label: 'Gluteus medius / minimus',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Gluteus medius and minimus tendons demonstrate normal signal and thickness bilaterally at their respective greater trochanteric facet insertions, without fluid-signal cleft or "bald" facet.'},
+          {id: 'tendinosis', label: 'Tendinosis', sentence: 'Thickening and intermediate signal of the {side} {tendon} at the {facet} facet of the greater trochanter, consistent with tendinosis. No discrete tear.'},
+          {id: 'partial-under', label: 'Partial-thickness undersurface tear', sentence: 'Partial-thickness undersurface tear of the {side} {tendon} at the {facet} facet of the greater trochanter with fluid-signal cleft along the deep fibers.'},
+          {id: 'partial', label: 'Partial-thickness tear', sentence: 'Partial-thickness tear of the {side} {tendon} at the {facet} facet of the greater trochanter with fluid-signal cleft and surrounding peritendinous edema.'},
+          {id: 'full', label: 'Full-thickness tear ("bald" facet)', sentence: 'Full-thickness tear of the {side} {tendon} with retraction and "bald" greater trochanteric facet ({facet}). Associated {fatty} fatty atrophy of the gluteal musculature.'},
+          {id: 'massive', label: 'Massive retracted tear', sentence: 'Massive full-thickness tear of the {side} gluteus medius and minimus tendons with {retraction} mm of retraction, denuded greater trochanteric facets, and {fatty} fatty atrophy of the gluteal musculature.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'side', label: 'Side', type: 'mutex', placeholder: '[right / left / bilateral]',
+         options: [
+           {id: 'r', label: 'Right', value: 'right'},
+           {id: 'l', label: 'Left', value: 'left'},
+           {id: 'b', label: 'Bilateral', value: 'bilateral'},
+         ]},
+        {id: 'tendon', label: 'Tendon', type: 'multi', placeholder: '[gluteus medius / minimus]',
+         options: [
+           {id: 'gmed', label: 'Gluteus medius', value: 'gluteus medius tendon'},
+           {id: 'gmin', label: 'Gluteus minimus', value: 'gluteus minimus tendon'},
+         ]},
+        {id: 'facet', label: 'Trochanteric facet', type: 'multi', placeholder: '[anterior / lateral / posterosuperior]',
+         options: [
+           {id: 'ant', label: 'Anterior (gluteus minimus)', value: 'anterior'},
+           {id: 'lat', label: 'Lateral (gluteus medius)', value: 'lateral'},
+           {id: 'psup', label: 'Posterosuperior (gluteus medius)', value: 'posterosuperior'},
+         ]},
+        {id: 'retraction', label: 'Retraction (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'},
+        {id: 'fatty', label: 'Fatty atrophy', type: 'mutex', placeholder: '[mild / moderate / severe]',
+         options: [
+           {id: 'none', label: 'No', value: 'no'},
+           {id: 'mild', label: 'Mild', value: 'mild'},
+           {id: 'mod', label: 'Moderate', value: 'moderate'},
+           {id: 'sev', label: 'Severe', value: 'severe'},
+         ]}
+      ],
+      addon_group: {
+        label: 'Associated findings',
+        options: [
+          {id: 'enthes', label: 'Enthesophyte', text: 'Associated enthesophyte formation at the greater trochanteric facet.'},
+          {id: 'cortical-irr', label: 'Cortical irregularity', text: 'Associated cortical irregularity / erosion at the greater trochanteric facet.'},
+        ]
+      }
+    },
+    {
+      id: 't-short-ext', label: 'Short external rotators (piriformis / obturators)', output_section: 'Tendinous insertions',
+      grade_group: {
+        label: 'Short external rotators',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Short external rotators (piriformis, obturator internus and externus, superior and inferior gemelli, quadratus femoris) are intact bilaterally without strain or tendinopathy.'},
+          {id: 'strain', label: 'Strain', sentence: 'T2-hyperintense intramuscular edema of the {side} {muscle} without macroscopic fiber discontinuity, compatible with muscle strain.'},
+          {id: 'tendinosis', label: 'Tendinosis', sentence: 'Thickening and intermediate signal of the {side} {muscle} tendon, consistent with tendinosis.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness disruption of the {side} {muscle} tendon with adjacent peritendinous edema.'},
+          {id: 'piriformis-syndrome', label: 'Piriformis syndrome pattern', sentence: 'Asymmetric enlargement and intermediate signal of the {side} piriformis muscle with adjacent edema along the sciatic nerve at the greater sciatic foramen — clinical correlation for piriformis syndrome.'},
+          {id: 'qf-impingement', label: 'Quadratus femoris (ischiofemoral impingement)', sentence: 'T2-hyperintense edema and partial-thickness tearing of the {side} quadratus femoris muscle with narrowing of the ischiofemoral space to {ifs} mm and quadratus femoris space to {qfs} mm, consistent with ischiofemoral impingement.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'side', label: 'Side', type: 'mutex', placeholder: '[right / left / bilateral]',
+         options: [
+           {id: 'r', label: 'Right', value: 'right'},
+           {id: 'l', label: 'Left', value: 'left'},
+           {id: 'b', label: 'Bilateral', value: 'bilateral'},
+         ]},
+        {id: 'muscle', label: 'Muscle', type: 'mutex', placeholder: '[piriformis / obturator internus / obturator externus / quadratus femoris]',
+         options: [
+           {id: 'pir', label: 'Piriformis', value: 'piriformis'},
+           {id: 'oi', label: 'Obturator internus', value: 'obturator internus'},
+           {id: 'oe', label: 'Obturator externus', value: 'obturator externus'},
+           {id: 'gem', label: 'Gemelli', value: 'gemelli'},
+           {id: 'qf', label: 'Quadratus femoris', value: 'quadratus femoris'},
+         ]},
+        {id: 'ifs', label: 'Ischiofemoral space (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'},
+        {id: 'qfs', label: 'Quadratus femoris space (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+    {
+      id: 't-iliopsoas', label: 'Iliopsoas tendon (lesser trochanter)', output_section: 'Tendinous insertions',
+      grade_group: {
+        label: 'Iliopsoas tendon',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Iliopsoas tendon is normal in caliber and signal bilaterally with intact insertion on the lesser trochanter.'},
+          {id: 'tendinopathy', label: 'Tendinopathy', sentence: 'Thickening of the {side} iliopsoas tendon with intermediate intratendinous signal, consistent with tendinopathy.'},
+          {id: 'tenosynovitis', label: 'Tenosynovitis', sentence: 'Fluid-signal distention of the {side} iliopsoas tendon sheath, consistent with tenosynovitis.'},
+          {id: 'snapping', label: 'Snapping iliopsoas pattern', sentence: 'Thickened {side} iliopsoas tendon with peritendinous fluid as it crosses the iliopectineal eminence, in the appropriate clinical setting compatible with internal snapping hip syndrome.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness tear of the {side} iliopsoas tendon at the lesser trochanter insertion with fluid-signal cleft.'},
+          {id: 'avulsion-lt', label: 'Lesser trochanteric avulsion', sentence: 'Avulsion of the {side} iliopsoas tendon from the lesser trochanter with apophyseal fragment displacement of {retraction} mm.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'side', label: 'Side', type: 'mutex', placeholder: '[right / left]',
+         options: [{id: 'r', label: 'Right', value: 'right'},{id: 'l', label: 'Left', value: 'left'}]},
+        {id: 'retraction', label: 'Displacement (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+    {
+      id: 'iliopsoas-bursa', label: 'Iliopsoas bursa', output_section: 'Tendinous insertions',
+      grade_group: {
+        label: 'Iliopsoas bursa',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'No iliopsoas bursitis.'},
+          {id: 'small', label: 'Small bursitis', sentence: 'Small {side} iliopsoas bursa fluid distention deep to the iliopsoas tendon, compatible with bursitis.'},
+          {id: 'large', label: 'Large bursitis', sentence: 'Markedly distended {side} iliopsoas bursa measuring {size} mm with fluid signal, compatible with bursitis. May communicate with the hip joint.'},
+          {id: 'communicating', label: 'Communicating with joint', sentence: 'Distended {side} iliopsoas bursa with apparent communication with the hip joint via an anterior capsular defect.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'side', label: 'Side', type: 'mutex', placeholder: '[right / left]',
+         options: [{id: 'r', label: 'Right', value: 'right'},{id: 'l', label: 'Left', value: 'left'}]},
+        {id: 'size', label: 'Size (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+    {
+      id: 'trochanteric-bursa', label: 'Trochanteric bursa', output_section: 'Tendinous insertions',
+      grade_group: {
+        label: 'Trochanteric bursa',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'No trochanteric bursitis.'},
+          {id: 'small', label: 'Small bursitis', sentence: 'Small fluid distention of the {side} trochanteric bursa overlying the greater trochanter, compatible with bursitis.'},
+          {id: 'moderate', label: 'Moderate bursitis', sentence: 'Moderate fluid distention of the {side} trochanteric bursa, compatible with bursitis. Frequently associated with gluteal tendinopathy in greater trochanteric pain syndrome (GTPS).'},
+          {id: 'complex', label: 'Complex / hemorrhagic', sentence: 'Complex distended {side} trochanteric bursa with internal debris/septations.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'side', label: 'Side', type: 'mutex', placeholder: '[right / left / bilateral]',
+         options: [
+           {id: 'r', label: 'Right', value: 'right'},
+           {id: 'l', label: 'Left', value: 'left'},
+           {id: 'b', label: 'Bilateral', value: 'bilateral'},
+         ]}
+      ]
+    },
+    {
+      id: 'ischiogluteal-bursa', label: 'Ischiogluteal bursa', output_section: 'Tendinous insertions',
+      grade_group: {
+        label: 'Ischiogluteal bursa',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'No ischiogluteal bursitis.'},
+          {id: 'present', label: 'Bursitis', sentence: 'Fluid distention of the {side} ischiogluteal bursa adjacent to the ischial tuberosity, compatible with bursitis ("weaver\'s bottom").'},
+        ]
+      },
+      variable_groups: [
+        {id: 'side', label: 'Side', type: 'mutex', placeholder: '[right / left / bilateral]',
+         options: [
+           {id: 'r', label: 'Right', value: 'right'},
+           {id: 'l', label: 'Left', value: 'left'},
+           {id: 'b', label: 'Bilateral', value: 'bilateral'},
+         ]}
+      ]
+    },
+
+    // ============= SACROILIAC JOINTS =============
+    {
+      id: 'sij', label: 'Sacroiliac joints', output_section: 'Sacroiliac joints',
+      grade_group: {
+        label: 'SI joints',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Sacroiliac joints are symmetric bilaterally with preserved joint space, normal subchondral marrow signal, and no erosive change.'},
+          {id: 'degen', label: 'Degenerative', sentence: 'Bilateral sacroiliac joint degenerative change with subchondral sclerosis, marginal osteophytes, and joint space narrowing. No active erosive disease or bone marrow edema.'},
+          {id: 'mild-inflam', label: 'Mild sacroiliitis', sentence: 'Mild subchondral T2-hyperintense bone marrow edema along the {side} sacroiliac joint(s) without discrete erosion, suggestive of early/active sacroiliitis. Clinical correlation for inflammatory spondyloarthropathy recommended.'},
+          {id: 'inflam', label: 'Active sacroiliitis', sentence: 'Active sacroiliitis with subchondral bone marrow edema, erosions, and capsulitis involving the {side} sacroiliac joint(s) — features compatible with inflammatory spondyloarthropathy per ASAS criteria.'},
+          {id: 'chronic-inflam', label: 'Chronic inflammatory', sentence: 'Chronic inflammatory changes of the sacroiliac joints with subchondral sclerosis, fatty marrow metaplasia, erosions, and {ankyl} ankylosis — sequela of inflammatory spondyloarthropathy.'},
+          {id: 'infection', label: 'Septic sacroiliitis', sentence: 'Unilateral marked T2-hyperintense subchondral bone marrow edema, joint effusion, and periarticular soft tissue edema centered at the {side} sacroiliac joint, concerning for septic arthritis.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'side', label: 'Side(s)', type: 'mutex', placeholder: '[right / left / bilateral]',
+         options: [
+           {id: 'r', label: 'Right', value: 'right'},
+           {id: 'l', label: 'Left', value: 'left'},
+           {id: 'b', label: 'Bilateral', value: 'bilateral'},
+         ]},
+        {id: 'ankyl', label: 'Ankylosis', type: 'mutex', placeholder: '',
+         options: [
+           {id: 'no', label: 'No ankylosis', value: 'no'},
+           {id: 'partial', label: 'Partial ankylosis', value: 'partial'},
+           {id: 'complete', label: 'Complete ankylosis', value: 'complete'},
+         ]}
+      ]
+    },
+
+    // ============= PUBIC SYMPHYSIS =============
+    {
+      id: 'pubic-symphysis', label: 'Pubic symphysis', output_section: 'Pubic symphysis',
+      grade_group: {
+        label: 'Pubic symphysis',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Pubic symphysis demonstrates normal alignment, articular surfaces, and adjacent marrow signal without erosion, marrow edema, or diastasis.'},
+          {id: 'degen', label: 'Degenerative', sentence: 'Symphyseal degenerative change with marginal osteophytes and subchondral sclerosis without active bone marrow edema or erosion.'},
+          {id: 'osteitis', label: 'Osteitis pubis', sentence: 'Symmetric subchondral T2-hyperintense bone marrow edema involving the parasymphyseal pubic bodies with subchondral erosions and joint widening, consistent with osteitis pubis.'},
+          {id: 'sec-cleft', label: 'Secondary cleft sign (sports hernia)', sentence: 'Asymmetric secondary cleft sign with linear fluid-signal extending inferolaterally from the symphysis along the {side} adductor longus origin, in the setting of marrow edema across the symphysis — sports hernia / athletic pubalgia.'},
+          {id: 'erosions', label: 'Erosive', sentence: 'Erosive change of the pubic symphysis with marginal cortical defects — consider seronegative spondyloarthropathy or chronic inflammatory etiology.'},
+          {id: 'diastasis', label: 'Diastasis', sentence: 'Symphyseal diastasis measuring {size} mm consistent with traumatic disruption (post-partum or post-traumatic). Evaluate for associated SI joint disruption.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'side', label: 'Side (if sports hernia)', type: 'mutex', placeholder: '[right / left]',
+         options: [{id: 'r', label: 'Right', value: 'right'},{id: 'l', label: 'Left', value: 'left'}]},
+        {id: 'size', label: 'Diastasis width (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+
+    // ============= FEMOROACETABULAR JOINTS =============
+    {
+      id: 'effusion-r', label: 'Right hip joint effusion', output_section: 'Right femoroacetabular joint',
+      grade_group: {
+        label: 'Right hip effusion',
+        options: [
+          {id: 'none', label: 'None', is_normal: true, sentence: 'No right hip joint effusion or synovitis.'},
+          {id: 'physiologic', label: 'Physiologic', sentence: 'Trace right hip joint fluid, within physiologic limits.'},
+          {id: 'small', label: 'Small', sentence: 'Small simple right hip joint effusion.'},
+          {id: 'moderate', label: 'Moderate', sentence: 'Moderate simple right hip joint effusion distending the anterior and posterior recesses.'},
+          {id: 'large', label: 'Large', sentence: 'Large right hip joint effusion with capsular distention.'},
+          {id: 'complex', label: 'Complex / synovitis', sentence: 'Right hip joint effusion with synovial proliferation and enhancement, concerning for inflammatory or infectious synovitis. Clinical correlation recommended.'},
+          {id: 'hemarthrosis', label: 'Hemarthrosis', sentence: 'Right hip joint complex effusion with layering low-signal hemosiderin debris, consistent with hemarthrosis.'},
+        ]
+      }
+    },
+    {
+      id: 'effusion-l', label: 'Left hip joint effusion', output_section: 'Left femoroacetabular joint',
+      grade_group: {
+        label: 'Left hip effusion',
+        options: [
+          {id: 'none', label: 'None', is_normal: true, sentence: 'No left hip joint effusion or synovitis.'},
+          {id: 'physiologic', label: 'Physiologic', sentence: 'Trace left hip joint fluid, within physiologic limits.'},
+          {id: 'small', label: 'Small', sentence: 'Small simple left hip joint effusion.'},
+          {id: 'moderate', label: 'Moderate', sentence: 'Moderate simple left hip joint effusion distending the anterior and posterior recesses.'},
+          {id: 'large', label: 'Large', sentence: 'Large left hip joint effusion with capsular distention.'},
+          {id: 'complex', label: 'Complex / synovitis', sentence: 'Left hip joint effusion with synovial proliferation and enhancement, concerning for inflammatory or infectious synovitis. Clinical correlation recommended.'},
+          {id: 'hemarthrosis', label: 'Hemarthrosis', sentence: 'Left hip joint complex effusion with layering low-signal hemosiderin debris, consistent with hemarthrosis.'},
+        ]
+      }
+    },
+    {
+      id: 'labrum-r', label: 'Right acetabular labrum', output_section: 'Right femoroacetabular joint',
+      grade_group: {
+        label: 'Right labrum',
+        options: [
+          {id: 'intact', label: 'Intact', is_normal: true, sentence: 'Right acetabular labrum is intact circumferentially with normal triangular morphology and uniformly low signal. No paralabral cyst.'},
+          {id: 'degen', label: 'Intrasubstance degeneration', sentence: 'Intermediate intrasubstance signal within the right {location} acetabular labrum without surface-extending fluid signal, consistent with intrasubstance degeneration.'},
+          {id: 'chondrolabral', label: 'Chondrolabral tear', sentence: 'Fluid/contrast signal extending into the substance of the right {location} acetabular labrum at the chondrolabral junction, consistent with chondrolabral tear.'},
+          {id: 'bucket', label: 'Bucket-handle tear', sentence: 'Bucket-handle tear of the right {location} acetabular labrum with displaced inner labral fragment into the joint.'},
+          {id: 'detach', label: 'Detached / unstable', sentence: 'Detached and unstable right {location} acetabular labrum with fluid-signal undermining the labral base.'},
+          {id: 'paralabral', label: 'Paralabral cyst', sentence: 'Right {location} chondrolabral tear with adjacent paralabral cyst measuring {size} mm.'},
+          {id: 'hypertrophy', label: 'Hypertrophy (dysplasia)', sentence: 'Diffuse hypertrophy of the right acetabular labrum measuring up to {size} mm, characteristic of underlying acetabular dysplasia.'},
+          {id: 'postop', label: 'Postsurgical', sentence: 'Postsurgical changes of the right acetabular labrum following prior labral repair/debridement.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'multi', placeholder: '[anterosuperior / posterosuperior / anterior / posterior]',
+         options: [
+           {id: 'as', label: 'Anterosuperior (11–1 o\'clock)', value: 'anterosuperior'},
+           {id: 'ps', label: 'Posterosuperior', value: 'posterosuperior'},
+           {id: 'ant', label: 'Anterior', value: 'anterior'},
+           {id: 'post', label: 'Posterior', value: 'posterior'},
+         ]},
+        {id: 'size', label: 'Size (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ],
+      addon_group: {
+        label: 'Associated findings',
+        options: [
+          {id: 'wave', label: 'Wave sign (chondral delamination)', text: 'Adjacent acetabular chondral delamination ("wave sign").'},
+          {id: 'ossif', label: 'Ossification (os acetabuli)', text: 'Adjacent labral / rim ossification (os acetabuli) suggestive of chronic pincer.'},
+        ]
+      }
+    },
+    {
+      id: 'labrum-l', label: 'Left acetabular labrum', output_section: 'Left femoroacetabular joint',
+      grade_group: {
+        label: 'Left labrum',
+        options: [
+          {id: 'intact', label: 'Intact', is_normal: true, sentence: 'Left acetabular labrum is intact circumferentially with normal triangular morphology and uniformly low signal. No paralabral cyst.'},
+          {id: 'degen', label: 'Intrasubstance degeneration', sentence: 'Intermediate intrasubstance signal within the left {location} acetabular labrum without surface-extending fluid signal, consistent with intrasubstance degeneration.'},
+          {id: 'chondrolabral', label: 'Chondrolabral tear', sentence: 'Fluid/contrast signal extending into the substance of the left {location} acetabular labrum at the chondrolabral junction, consistent with chondrolabral tear.'},
+          {id: 'bucket', label: 'Bucket-handle tear', sentence: 'Bucket-handle tear of the left {location} acetabular labrum with displaced inner labral fragment into the joint.'},
+          {id: 'detach', label: 'Detached / unstable', sentence: 'Detached and unstable left {location} acetabular labrum with fluid-signal undermining the labral base.'},
+          {id: 'paralabral', label: 'Paralabral cyst', sentence: 'Left {location} chondrolabral tear with adjacent paralabral cyst measuring {size} mm.'},
+          {id: 'hypertrophy', label: 'Hypertrophy (dysplasia)', sentence: 'Diffuse hypertrophy of the left acetabular labrum measuring up to {size} mm, characteristic of underlying acetabular dysplasia.'},
+          {id: 'postop', label: 'Postsurgical', sentence: 'Postsurgical changes of the left acetabular labrum following prior labral repair/debridement.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'multi', placeholder: '[anterosuperior / posterosuperior / anterior / posterior]',
+         options: [
+           {id: 'as', label: 'Anterosuperior (11–1 o\'clock)', value: 'anterosuperior'},
+           {id: 'ps', label: 'Posterosuperior', value: 'posterosuperior'},
+           {id: 'ant', label: 'Anterior', value: 'anterior'},
+           {id: 'post', label: 'Posterior', value: 'posterior'},
+         ]},
+        {id: 'size', label: 'Size (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ],
+      addon_group: {
+        label: 'Associated findings',
+        options: [
+          {id: 'wave', label: 'Wave sign (chondral delamination)', text: 'Adjacent acetabular chondral delamination ("wave sign").'},
+          {id: 'ossif', label: 'Ossification (os acetabuli)', text: 'Adjacent labral / rim ossification (os acetabuli) suggestive of chronic pincer.'},
+        ]
+      }
+    },
+    {
+      id: 'lig-teres-r', label: 'Right ligamentum teres', output_section: 'Right femoroacetabular joint',
+      grade_group: {
+        label: 'Right ligamentum teres',
+        options: [
+          {id: 'intact', label: 'Intact', is_normal: true, sentence: 'Right ligamentum teres is intact with normal signal and fibers from the acetabular fossa to the fovea capitis.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness disruption of the right ligamentum teres with intrasubstance fluid-signal.'},
+          {id: 'complete', label: 'Complete tear', sentence: 'Complete discontinuity of the right ligamentum teres with fluid-filled gap at the fovea capitis.'},
+        ]
+      }
+    },
+    {
+      id: 'lig-teres-l', label: 'Left ligamentum teres', output_section: 'Left femoroacetabular joint',
+      grade_group: {
+        label: 'Left ligamentum teres',
+        options: [
+          {id: 'intact', label: 'Intact', is_normal: true, sentence: 'Left ligamentum teres is intact with normal signal and fibers from the acetabular fossa to the fovea capitis.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness disruption of the left ligamentum teres with intrasubstance fluid-signal.'},
+          {id: 'complete', label: 'Complete tear', sentence: 'Complete discontinuity of the left ligamentum teres with fluid-filled gap at the fovea capitis.'},
+        ]
+      }
+    },
+    {
+      id: 'cart-acet-r', label: 'Right acetabular cartilage', output_section: 'Right femoroacetabular joint',
+      grade_group: {
+        label: 'Outerbridge grade — right acetabulum',
+        options: [
+          {id: 'g0', label: 'Normal', is_normal: true, sentence: 'Right acetabular articular cartilage is preserved without focal fissuring or subchondral abnormality.'},
+          {id: 'g1', label: 'G1 softening', sentence: 'Mild T2-hyperintense intrachondral signal at the right {location} acetabulum without surface fissuring, consistent with Outerbridge grade 1 chondrosis.'},
+          {id: 'g2', label: 'G2 superficial fissure', sentence: 'Superficial chondral fissuring at the right {location} acetabulum involving less than 50% of cartilage thickness, consistent with Outerbridge grade 2 chondrosis.'},
+          {id: 'g3', label: 'G3 deep fissure', sentence: 'Deep chondral fissuring at the right {location} acetabulum extending greater than 50% of cartilage thickness without exposed subchondral bone, Outerbridge grade 3 chondrosis.'},
+          {id: 'g4', label: 'G4 full-thickness', sentence: 'Full-thickness chondral defect at the right {location} acetabulum with exposed subchondral bone, Outerbridge grade 4 chondrosis.'},
+          {id: 'delam', label: 'Delamination (wave sign)', sentence: 'Chondral delamination at the right {location} acetabulum ("wave sign"), often associated with chondrolabral tear.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'multi', placeholder: '[anterosuperior / posterosuperior / superior / anterior / posterior]',
+         options: [
+           {id: 'as', label: 'Anterosuperior', value: 'anterosuperior'},
+           {id: 'ps', label: 'Posterosuperior', value: 'posterosuperior'},
+           {id: 'sup', label: 'Superior (weight-bearing)', value: 'superior weight-bearing'},
+           {id: 'ant', label: 'Anterior', value: 'anterior'},
+           {id: 'post', label: 'Posterior', value: 'posterior'},
+         ]}
+      ],
+      addon_group: {
+        label: 'Subchondral findings',
+        options: [
+          {id: 'edema', label: 'Marrow edema', text: 'Associated subchondral T2-hyperintense bone marrow edema.'},
+          {id: 'cyst', label: 'Subchondral cyst', text: 'Associated subchondral cyst measuring {cyst_size} mm.', size_input: 'cyst_size'},
+        ]
+      }
+    },
+    {
+      id: 'cart-acet-l', label: 'Left acetabular cartilage', output_section: 'Left femoroacetabular joint',
+      grade_group: {
+        label: 'Outerbridge grade — left acetabulum',
+        options: [
+          {id: 'g0', label: 'Normal', is_normal: true, sentence: 'Left acetabular articular cartilage is preserved without focal fissuring or subchondral abnormality.'},
+          {id: 'g1', label: 'G1 softening', sentence: 'Mild T2-hyperintense intrachondral signal at the left {location} acetabulum without surface fissuring, consistent with Outerbridge grade 1 chondrosis.'},
+          {id: 'g2', label: 'G2 superficial fissure', sentence: 'Superficial chondral fissuring at the left {location} acetabulum involving less than 50% of cartilage thickness, consistent with Outerbridge grade 2 chondrosis.'},
+          {id: 'g3', label: 'G3 deep fissure', sentence: 'Deep chondral fissuring at the left {location} acetabulum extending greater than 50% of cartilage thickness without exposed subchondral bone, Outerbridge grade 3 chondrosis.'},
+          {id: 'g4', label: 'G4 full-thickness', sentence: 'Full-thickness chondral defect at the left {location} acetabulum with exposed subchondral bone, Outerbridge grade 4 chondrosis.'},
+          {id: 'delam', label: 'Delamination (wave sign)', sentence: 'Chondral delamination at the left {location} acetabulum ("wave sign"), often associated with chondrolabral tear.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'multi', placeholder: '[anterosuperior / posterosuperior / superior / anterior / posterior]',
+         options: [
+           {id: 'as', label: 'Anterosuperior', value: 'anterosuperior'},
+           {id: 'ps', label: 'Posterosuperior', value: 'posterosuperior'},
+           {id: 'sup', label: 'Superior (weight-bearing)', value: 'superior weight-bearing'},
+           {id: 'ant', label: 'Anterior', value: 'anterior'},
+           {id: 'post', label: 'Posterior', value: 'posterior'},
+         ]}
+      ],
+      addon_group: {
+        label: 'Subchondral findings',
+        options: [
+          {id: 'edema', label: 'Marrow edema', text: 'Associated subchondral T2-hyperintense bone marrow edema.'},
+          {id: 'cyst', label: 'Subchondral cyst', text: 'Associated subchondral cyst measuring {cyst_size} mm.', size_input: 'cyst_size'},
+        ]
+      }
+    },
+    {
+      id: 'cart-fem-r', label: 'Right femoral head cartilage', output_section: 'Right femoroacetabular joint',
+      grade_group: {
+        label: 'Outerbridge grade — right femoral head',
+        options: [
+          {id: 'g0', label: 'Normal', is_normal: true, sentence: 'Right femoral head articular cartilage is preserved without focal fissuring or subchondral abnormality.'},
+          {id: 'g1', label: 'G1 softening', sentence: 'Mild intrachondral signal at the right femoral head without surface fissuring, Outerbridge grade 1 chondrosis.'},
+          {id: 'g2', label: 'G2 superficial fissure', sentence: 'Superficial chondral fissuring at the right femoral head involving less than 50% of cartilage thickness, Outerbridge grade 2 chondrosis.'},
+          {id: 'g3', label: 'G3 deep fissure', sentence: 'Deep chondral fissuring at the right femoral head extending greater than 50% of cartilage thickness without exposed bone, Outerbridge grade 3 chondrosis.'},
+          {id: 'g4', label: 'G4 full-thickness', sentence: 'Full-thickness chondral defect at the right femoral head with exposed subchondral bone, Outerbridge grade 4 chondrosis.'},
+        ]
+      },
+      addon_group: {
+        label: 'Subchondral findings',
+        options: [
+          {id: 'edema', label: 'Marrow edema', text: 'Associated subchondral T2-hyperintense bone marrow edema.'},
+          {id: 'cyst', label: 'Subchondral cyst', text: 'Associated subchondral cyst measuring {cyst_size} mm.', size_input: 'cyst_size'},
+        ]
+      }
+    },
+    {
+      id: 'cart-fem-l', label: 'Left femoral head cartilage', output_section: 'Left femoroacetabular joint',
+      grade_group: {
+        label: 'Outerbridge grade — left femoral head',
+        options: [
+          {id: 'g0', label: 'Normal', is_normal: true, sentence: 'Left femoral head articular cartilage is preserved without focal fissuring or subchondral abnormality.'},
+          {id: 'g1', label: 'G1 softening', sentence: 'Mild intrachondral signal at the left femoral head without surface fissuring, Outerbridge grade 1 chondrosis.'},
+          {id: 'g2', label: 'G2 superficial fissure', sentence: 'Superficial chondral fissuring at the left femoral head involving less than 50% of cartilage thickness, Outerbridge grade 2 chondrosis.'},
+          {id: 'g3', label: 'G3 deep fissure', sentence: 'Deep chondral fissuring at the left femoral head extending greater than 50% of cartilage thickness without exposed bone, Outerbridge grade 3 chondrosis.'},
+          {id: 'g4', label: 'G4 full-thickness', sentence: 'Full-thickness chondral defect at the left femoral head with exposed subchondral bone, Outerbridge grade 4 chondrosis.'},
+        ]
+      },
+      addon_group: {
+        label: 'Subchondral findings',
+        options: [
+          {id: 'edema', label: 'Marrow edema', text: 'Associated subchondral T2-hyperintense bone marrow edema.'},
+          {id: 'cyst', label: 'Subchondral cyst', text: 'Associated subchondral cyst measuring {cyst_size} mm.', size_input: 'cyst_size'},
+        ]
+      }
+    },
+
+    // ============= VISCERAL STRUCTURES =============
+    {
+      id: 'viscera', label: 'Visceral structures', output_section: 'Visceral structures',
+      grade_group: {
+        label: 'Pelvic viscera (brief survey)',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Visualized pelvic viscera — bowel, reproductive organs, urinary bladder, ureters, and retroperitoneum — are unremarkable without lymphadenopathy or ascites.'},
+          {id: 'bowel', label: 'Bowel finding', sentence: 'Incidental finding within the visualized bowel — clinical and/or dedicated abdominal imaging correlation recommended.'},
+          {id: 'reproductive', label: 'Reproductive organ finding', sentence: 'Incidental finding involving the visualized reproductive organs — dedicated pelvic imaging recommended for further characterization.'},
+          {id: 'bladder', label: 'Bladder finding', sentence: 'Incidental finding involving the urinary bladder — clinical correlation recommended.'},
+          {id: 'adenopathy', label: 'Lymphadenopathy', sentence: 'Borderline-enlarged {location} lymph node measuring {size} mm in short axis — clinical correlation recommended.'},
+          {id: 'ascites', label: 'Free fluid / ascites', sentence: 'Small volume free pelvic fluid / ascites within the cul-de-sac.'},
+          {id: 'mass', label: 'Pelvic mass', sentence: 'Pelvic soft tissue mass measuring {size} mm at the {location} — dedicated pelvic MRI/CT recommended for further characterization.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'mutex', placeholder: '[inguinal / external iliac / internal iliac / pelvic sidewall]',
+         options: [
+           {id: 'ing', label: 'Inguinal', value: 'inguinal'},
+           {id: 'ei', label: 'External iliac', value: 'external iliac'},
+           {id: 'ii', label: 'Internal iliac', value: 'internal iliac'},
+           {id: 'sidewall', label: 'Pelvic sidewall', value: 'pelvic sidewall'},
+           {id: 'rp', label: 'Retroperitoneal', value: 'retroperitoneal'},
+         ]},
+        {id: 'size', label: 'Size (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+
+    // ============= SOFT TISSUES / MUSCULATURE =============
+    {
+      id: 'soft-tissues', label: 'Subcutaneous tissues and musculature', output_section: 'Soft tissues',
+      grade_group: {
+        label: 'Soft tissues',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Subcutaneous tissues and pelvic musculature are otherwise unremarkable. Neurovascular bundles are normal.'},
+          {id: 'edema', label: 'Diffuse edema', sentence: 'Diffuse subcutaneous edema overlying the {side} pelvis/hip.'},
+          {id: 'strain', label: 'Muscle strain', sentence: 'Intramuscular T2-hyperintense edema involving the {muscle} without macroscopic fiber discontinuity, compatible with muscle strain.'},
+          {id: 'hematoma', label: 'Hematoma', sentence: 'Discrete soft tissue hematoma within the {muscle} measuring {size} mm.'},
+          {id: 'mass', label: 'Soft tissue mass', sentence: 'Soft tissue mass within the {side} aspect of the pelvis/hip measuring {size} mm — characterization warranted.'},
+          {id: 'atrophy', label: 'Diffuse fatty atrophy', sentence: 'Diffuse fatty atrophy of the {muscle} musculature, suggestive of chronic disuse or denervation.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'side', label: 'Side', type: 'mutex', placeholder: '[anterior / medial / lateral / posterior]',
+         options: [
+           {id: 'ant', label: 'Anterior', value: 'anterior'},
+           {id: 'med', label: 'Medial', value: 'medial'},
+           {id: 'lat', label: 'Lateral', value: 'lateral'},
+           {id: 'post', label: 'Posterior', value: 'posterior'},
+         ]},
+        {id: 'muscle', label: 'Muscle group', type: 'mutex', placeholder: '[adductor / hamstring / gluteal / iliopsoas / rectus femoris / sartorius]',
+         options: [
+           {id: 'adduct', label: 'Adductor', value: 'adductor'},
+           {id: 'ham', label: 'Hamstring', value: 'hamstring'},
+           {id: 'glut', label: 'Gluteal', value: 'gluteal'},
+           {id: 'ip', label: 'Iliopsoas', value: 'iliopsoas'},
+           {id: 'rf', label: 'Rectus femoris', value: 'rectus femoris'},
+           {id: 'sart', label: 'Sartorius', value: 'sartorius'},
+           {id: 'tfl', label: 'Tensor fascia lata', value: 'tensor fascia lata'},
+         ]},
+        {id: 'size', label: 'Size (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    }
+  ]
+};
+</script>
+<script src="engine.js"></script>
+
+</body>
+</html>

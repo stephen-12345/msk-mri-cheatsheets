@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elbow MRI — Dictation Template</title>
+<link rel="stylesheet" href="../assets/cheatsheet.css">
+</head>
+<body>
+
+<div class="tmpl-topbar">
+  <div class="row">
+    <span class="title" id="page-title">Elbow MRI — Dictation Template</span>
+    <a class="pill-link" id="back-link" href="../elbow/elbow-mri-cheatsheet.html">← Elbow cheatsheet</a>
+    <a class="pill-link" href="index.html">All templates</a>
+    <a class="pill-link" href="../index.html">All regions</a>
+    <span class="meta">click options · copy to PowerScribe</span>
+  </div>
+</div>
+
+<div class="tmpl-wrap">
+  <div>
+    <div class="tmpl-help">
+      <b>How it works:</b> Each section defaults to NORMAL. Click a grade/state to change it, then pick locations (multi-select supported, grammar auto-handled). Toggle associated findings with the green check buttons. The dictation builds live on the right — click <b>Copy all</b> or <b>Copy abnormal only</b> to paste into PowerScribe.
+    </div>
+    <div class="options-pane" id="options-pane"></div>
+  </div>
+
+  <div class="preview-pane">
+    <h3>Live Dictation Preview</h3>
+    <p class="sub">Updates as you click. <span class="placeholder">[bracketed]</span> = unfilled placeholder.</p>
+    <div class="preview-output" id="preview-output"></div>
+    <div class="preview-buttons">
+      <button class="preview-btn" id="copy-btn">Copy all</button>
+      <button class="preview-btn" id="copy-abnormal-btn">Copy abnormal only</button>
+      <button class="preview-btn danger" id="reset-btn">Reset</button>
+    </div>
+  </div>
+</div>
+
+<script>
+window.TEMPLATE_CONFIG = {
+  title: 'Elbow MRI — Dictation Template',
+  heading: 'ELBOW MRI',
+  back_link: '../elbow/elbow-mri-cheatsheet.html',
+  sections: [
+    // ============= EFFUSION / COLLECTION =============
+    {
+      id: 'effusion', label: 'Joint effusion', output_section: 'Effusion / collection',
+      grade_group: {
+        label: 'Effusion size',
+        options: [
+          {id: 'none', label: 'None', is_normal: true, sentence: 'No elbow joint effusion. Anterior and posterior fat pads are not elevated.'},
+          {id: 'trace', label: 'Trace', sentence: 'Trace joint fluid within physiologic limits. No fat pad elevation.'},
+          {id: 'small', label: 'Small', sentence: 'Small simple joint effusion with mild elevation of the anterior fat pad.'},
+          {id: 'moderate', label: 'Moderate', sentence: 'Moderate simple joint effusion distending the anterior and posterior recesses with positive sail sign and posterior fat pad displacement.'},
+          {id: 'large', label: 'Large', sentence: 'Large joint effusion markedly distending the anterior, posterior, and radial recesses with elevation of both fat pads.'},
+          {id: 'hemarthrosis', label: 'Hemarthrosis', sentence: 'Complex joint effusion with layering low-signal hemosiderin debris, consistent with hemarthrosis — raises concern for occult intra-articular fracture.'},
+        ]
+      }
+    },
+    {
+      id: 'synovium', label: 'Synovial proliferation', output_section: 'Effusion / collection',
+      grade_group: {
+        label: 'Synovium',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'No abnormal synovial thickening or proliferation.'},
+          {id: 'mild', label: 'Mild synovitis', sentence: 'Mild synovial thickening with low-grade enhancement-like signal, consistent with synovitis.'},
+          {id: 'prolif', label: 'Frond-like proliferation', sentence: 'Frond-like synovial proliferation with intermediate signal — differential includes inflammatory arthropathy, PVNS, or synovial chondromatosis.'},
+          {id: 'pvns', label: 'PVNS pattern', sentence: 'Lobulated nodular synovial thickening with blooming low-signal foci on gradient-echo, characteristic of pigmented villonodular synovitis (PVNS).'},
+          {id: 'chondromatosis', label: 'Synovial chondromatosis', sentence: 'Multiple intra-articular ossific/chondral bodies of similar size distributed throughout the joint, consistent with primary synovial chondromatosis.'},
+        ]
+      }
+    },
+    {
+      id: 'bicipitoradial-bursa', label: 'Bicipitoradial bursa', output_section: 'Effusion / collection',
+      grade_group: {
+        label: 'Bicipitoradial bursa',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'No bicipitoradial bursitis.'},
+          {id: 'mild', label: 'Mild fluid', sentence: 'Trace fluid within the bicipitoradial bursa adjacent to the distal biceps insertion.'},
+          {id: 'bursitis', label: 'Bursitis', sentence: 'Fluid distention of the bicipitoradial bursa wrapping around the distal biceps tendon at the radial tuberosity, compatible with bicipitoradial bursitis.'},
+          {id: 'mass-effect', label: 'With mass effect', sentence: 'Markedly distended bicipitoradial bursa with mass effect on the adjacent radial nerve at the antecubital fossa.'},
+        ]
+      }
+    },
+    {
+      id: 'olecranon-bursa', label: 'Olecranon bursa', output_section: 'Effusion / collection',
+      grade_group: {
+        label: 'Olecranon bursa',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'No olecranon bursitis.'},
+          {id: 'simple', label: 'Simple bursitis', sentence: 'Simple fluid distention of the olecranon bursa overlying the posterior olecranon, compatible with non-complicated bursitis.'},
+          {id: 'complex', label: 'Complex / hemorrhagic', sentence: 'Complex fluid within the olecranon bursa with internal septations and debris — differential includes hemorrhagic bursitis or septic bursitis (clinical correlation advised).'},
+          {id: 'gouty', label: 'Tophaceous (gout)', sentence: 'Heterogeneous intermediate-signal material within the olecranon bursa with associated juxta-articular erosions, suspicious for tophaceous deposition.'},
+        ]
+      }
+    },
+
+    // ============= BONE / MARROW =============
+    {
+      id: 'bone-marrow', label: 'Bone marrow / fracture', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Marrow signal',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Normal marrow signal throughout the imaged distal humerus, proximal radius, and proximal ulna without focal lesion, fracture, or marrow replacement.'},
+          {id: 'edema', label: 'Reactive edema', sentence: 'Patchy T2-hyperintense bone marrow edema at the {location} without discrete fracture line — likely reactive/contusional.'},
+          {id: 'occult-fx', label: 'Occult/non-displaced fracture', sentence: 'Linear T1-hypointense fracture line traversing the {location} with surrounding bone marrow edema, non-displaced. Joint effusion present.'},
+          {id: 'stress-fx', label: 'Stress reaction / fracture', sentence: 'Cortical thickening and surrounding marrow edema at the {location} with linear low-signal fracture line, consistent with stress fracture.'},
+          {id: 'overload', label: 'Valgus extension overload', sentence: 'Posteromedial olecranon marrow edema with osteophyte formation and adjacent chondral injury, consistent with valgus extension overload syndrome.'},
+          {id: 'lesion', label: 'Focal lesion', sentence: 'Focal marrow-replacing lesion at the {location} measuring {size} mm — further characterization warranted.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'multi', placeholder: '[anatomic location]',
+         options: [
+           {id: 'cap', label: 'Capitellum', value: 'capitellum'},
+           {id: 'tro', label: 'Trochlea', value: 'trochlea'},
+           {id: 'me', label: 'Medial epicondyle', value: 'medial epicondyle'},
+           {id: 'le', label: 'Lateral epicondyle', value: 'lateral epicondyle'},
+           {id: 'olec', label: 'Olecranon', value: 'olecranon'},
+           {id: 'coro', label: 'Coronoid process', value: 'coronoid process'},
+           {id: 'rh', label: 'Radial head', value: 'radial head'},
+           {id: 'rn', label: 'Radial neck', value: 'radial neck'},
+         ]},
+        {id: 'size', label: 'Size (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+    {
+      id: 'epicondyle-edema', label: 'Epicondylar marrow edema', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Epicondylar edema',
+        options: [
+          {id: 'none', label: 'None', is_normal: true, sentence: 'No medial or lateral epicondylar marrow edema.'},
+          {id: 'medial', label: 'Medial epicondyle edema', sentence: 'T2-hyperintense marrow edema within the medial epicondyle adjacent to the common flexor origin, suggesting reactive enthesopathy.'},
+          {id: 'lateral', label: 'Lateral epicondyle edema', sentence: 'T2-hyperintense marrow edema within the lateral epicondyle adjacent to the common extensor origin, suggesting reactive enthesopathy.'},
+          {id: 'both', label: 'Both', sentence: 'Bilateral epicondylar reactive marrow edema adjacent to the common flexor and extensor origins.'},
+        ]
+      }
+    },
+    {
+      id: 'osteophytes', label: 'Osteophytes / degenerative change', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Osteophytes',
+        options: [
+          {id: 'none', label: 'None', is_normal: true, sentence: 'No significant osteophyte formation or degenerative joint disease.'},
+          {id: 'mild', label: 'Mild', sentence: 'Mild marginal osteophyte formation at the {location} without joint space narrowing.'},
+          {id: 'moderate', label: 'Moderate', sentence: 'Moderate osteophytes at the {location} with mild joint space narrowing and subchondral sclerosis.'},
+          {id: 'severe', label: 'Severe / advanced OA', sentence: 'Advanced osteoarthritis with prominent osteophytes, joint space narrowing, and subchondral cystic change at the {location}.'},
+          {id: 'posteromed', label: 'Posteromedial olecranon (VEO)', sentence: 'Posteromedial olecranon osteophyte ("kissing lesion") at the trochlear contact zone — consistent with valgus extension overload sequela.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'multi', placeholder: '[ulnotrochlear / radiocapitellar / proximal radioulnar]',
+         options: [
+           {id: 'ut', label: 'Ulnotrochlear', value: 'ulnotrochlear'},
+           {id: 'rc', label: 'Radiocapitellar', value: 'radiocapitellar'},
+           {id: 'pruj', label: 'Proximal radioulnar', value: 'proximal radioulnar'},
+         ]}
+      ]
+    },
+    {
+      id: 'loose-body', label: 'Intra-articular loose body', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Loose body',
+        options: [
+          {id: 'none', label: 'None', is_normal: true, sentence: 'No discrete intra-articular loose body. Coronoid, olecranon, and radiocapitellar recesses are clear.'},
+          {id: 'single', label: 'Single', sentence: 'Discrete intra-articular loose body within the {location}, measuring {size} mm.'},
+          {id: 'multiple', label: 'Multiple', sentence: 'Multiple intra-articular loose bodies within the {location}, the largest measuring {size} mm.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'multi',
+         placeholder: '[coronoid recess / olecranon recess / radiocapitellar recess]',
+         options: [
+           {id: 'cor', label: 'Coronoid recess (anterior)', value: 'coronoid recess'},
+           {id: 'ole', label: 'Olecranon recess (posterior)', value: 'olecranon recess'},
+           {id: 'rcr', label: 'Radiocapitellar recess', value: 'radiocapitellar recess'},
+         ]},
+        {id: 'size', label: 'Size (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+    {
+      id: 'capitellar-ocd', label: 'Capitellar OCD', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Capitellar OCD',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'No osteochondral lesion of the capitellum.'},
+          {id: 'stable', label: 'Stable OCD', sentence: 'Focal subchondral T2-hypointense osteochondral lesion at the anterolateral capitellum with intact overlying cartilage and no fluid undercutting — stable osteochondritis dissecans.'},
+          {id: 'unstable', label: 'Unstable OCD (fluid rim)', sentence: 'Osteochondral lesion at the anterolateral capitellum with high T2-signal undercutting fluid rim/cyst at the lesion-host interface, consistent with unstable osteochondritis dissecans.'},
+          {id: 'loose-frag', label: 'Displaced fragment', sentence: 'Capitellar osteochondral defect with completely detached/displaced fragment now lying as a loose body within the {location}.'},
+          {id: 'panner', label: 'Panner disease', sentence: 'Diffuse low T1, heterogeneous T2 signal of the capitellar ossification center in a skeletally immature patient without fragmentation — consistent with Panner disease.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Loose body location (if displaced)', type: 'mutex',
+         placeholder: '[coronoid / olecranon / radiocapitellar recess]',
+         options: [
+           {id: 'cor', label: 'Coronoid recess', value: 'coronoid recess'},
+           {id: 'ole', label: 'Olecranon recess', value: 'olecranon recess'},
+           {id: 'rcr', label: 'Radiocapitellar recess', value: 'radiocapitellar recess'},
+         ]}
+      ]
+    },
+    {
+      id: 'trochlear-ocd', label: 'Trochlear OCD', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Trochlear OCD',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'No osteochondral lesion of the trochlea. Note: the transverse trochlear ridge represents a normal cartilage-bare zone (pseudodefect) and should not be mistaken for OCD.'},
+          {id: 'stable', label: 'Stable OCD', sentence: 'Subchondral osteochondral lesion of the trochlea with intact overlying cartilage — stable.'},
+          {id: 'unstable', label: 'Unstable OCD', sentence: 'Trochlear osteochondral lesion with high-signal undercutting fluid rim, consistent with unstable osteochondritis dissecans.'},
+        ]
+      }
+    },
+    {
+      id: 'alignment', label: 'Radiocapitellar alignment', output_section: 'Bone / marrow',
+      grade_group: {
+        label: 'Alignment',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Radiocapitellar alignment is anatomic — a line drawn along the radial neck bisects the capitellum on all planes.'},
+          {id: 'sublux', label: 'Subluxation', sentence: 'Subtle radiocapitellar incongruity with the radiocapitellar line failing to bisect the capitellum, compatible with subluxation.'},
+          {id: 'dislocation', label: 'Dislocation', sentence: 'Frank radiocapitellar dislocation with the radial head displaced relative to the capitellum.'},
+          {id: 'congenital', label: 'Congenital dislocation', sentence: 'Chronic radial head dislocation with dysplastic / dome-shaped radial head, suggesting congenital etiology.'},
+        ]
+      }
+    },
+
+    // ============= CARTILAGE =============
+    {
+      id: 'cart-ut', label: 'Ulnotrochlear cartilage', output_section: 'Cartilage',
+      grade_group: {
+        label: 'Outerbridge grade',
+        options: [
+          {id: 'g0', label: 'Normal', is_normal: true, sentence: 'Articular cartilage of the ulnotrochlear compartment is preserved without focal fissuring or subchondral marrow abnormality.'},
+          {id: 'g1', label: 'G1 softening', sentence: 'Mild T2-hyperintense intrachondral signal at the ulnotrochlear compartment without surface fissuring, consistent with Outerbridge grade 1 chondrosis.'},
+          {id: 'g2', label: 'G2 superficial fissure', sentence: 'Superficial chondral fissuring at the ulnotrochlear compartment involving less than 50% of cartilage thickness, consistent with Outerbridge grade 2 chondrosis.'},
+          {id: 'g3', label: 'G3 deep fissure', sentence: 'Deep chondral fissuring at the ulnotrochlear compartment extending greater than 50% of cartilage thickness without exposed subchondral bone, consistent with Outerbridge grade 3 chondrosis.'},
+          {id: 'g4', label: 'G4 full-thickness', sentence: 'Full-thickness chondral defect at the ulnotrochlear compartment with exposed subchondral bone, consistent with Outerbridge grade 4 chondrosis.'},
+        ]
+      },
+      addon_group: {
+        label: 'Subchondral findings (optional)',
+        options: [
+          {id: 'edema', label: 'Marrow edema', text: 'Associated subchondral T2-hyperintense bone marrow edema.'},
+          {id: 'cyst', label: 'Cyst', text: 'Associated subchondral cyst measuring {cyst_size} mm.', size_input: 'cyst_size'},
+        ]
+      }
+    },
+    {
+      id: 'cart-rc', label: 'Radiocapitellar cartilage', output_section: 'Cartilage',
+      grade_group: {
+        label: 'Outerbridge grade',
+        options: [
+          {id: 'g0', label: 'Normal', is_normal: true, sentence: 'Articular cartilage of the radiocapitellar compartment is preserved.'},
+          {id: 'g1', label: 'G1 softening', sentence: 'Mild T2-hyperintense intrachondral signal at the radiocapitellar compartment without surface fissuring, consistent with Outerbridge grade 1 chondrosis.'},
+          {id: 'g2', label: 'G2 superficial fissure', sentence: 'Superficial chondral fissuring at the radiocapitellar compartment involving less than 50% of cartilage thickness, consistent with Outerbridge grade 2 chondrosis.'},
+          {id: 'g3', label: 'G3 deep fissure', sentence: 'Deep chondral fissuring at the radiocapitellar compartment extending greater than 50% of cartilage thickness, consistent with Outerbridge grade 3 chondrosis.'},
+          {id: 'g4', label: 'G4 full-thickness', sentence: 'Full-thickness chondral defect at the radiocapitellar compartment with exposed subchondral bone, consistent with Outerbridge grade 4 chondrosis.'},
+        ]
+      },
+      addon_group: {
+        label: 'Subchondral findings (optional)',
+        options: [
+          {id: 'edema', label: 'Marrow edema', text: 'Associated subchondral T2-hyperintense bone marrow edema.'},
+          {id: 'cyst', label: 'Cyst', text: 'Associated subchondral cyst measuring {cyst_size} mm.', size_input: 'cyst_size'},
+        ]
+      }
+    },
+    {
+      id: 'cart-pruj', label: 'Proximal radioulnar cartilage', output_section: 'Cartilage',
+      grade_group: {
+        label: 'Outerbridge grade',
+        options: [
+          {id: 'g0', label: 'Normal', is_normal: true, sentence: 'Articular cartilage of the proximal radioulnar joint is preserved.'},
+          {id: 'g1', label: 'G1 softening', sentence: 'Grade 1 chondrosis at the proximal radioulnar joint.'},
+          {id: 'g2', label: 'G2 superficial fissure', sentence: 'Grade 2 chondrosis at the proximal radioulnar joint with superficial fissuring.'},
+          {id: 'g3', label: 'G3 deep fissure', sentence: 'Grade 3 chondrosis at the proximal radioulnar joint with deep fissuring.'},
+          {id: 'g4', label: 'G4 full-thickness', sentence: 'Grade 4 chondrosis at the proximal radioulnar joint with exposed subchondral bone.'},
+        ]
+      }
+    },
+
+    // ============= TENDONS =============
+    {
+      id: 't-cft', label: 'Common flexor tendon (medial epicondylitis)', output_section: 'Tendons',
+      grade_group: {
+        label: 'Common flexor tendon state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Common flexor tendon origin at the medial epicondyle demonstrates normal fibrillar architecture and low signal.'},
+          {id: 'mild', label: 'Mild tendinosis', sentence: 'Mild fusiform thickening and intermediate intrasubstance signal of the common flexor tendon origin without fluid-signal cleft — mild medial epicondylitis (golfer\'s elbow).'},
+          {id: 'mod', label: 'Moderate tendinosis', sentence: 'Moderate thickening and intrasubstance intermediate signal of the common flexor origin without macroscopic fiber discontinuity, consistent with moderate medial epicondylitis.'},
+          {id: 'severe', label: 'Severe tendinosis', sentence: 'Marked thickening and intrasubstance signal abnormality of the common flexor tendon origin approaching fluid intensity, consistent with severe medial epicondylitis.'},
+          {id: 'partial', label: 'Partial-thickness tear', sentence: 'Partial-thickness tear of the common flexor tendon origin with focal fluid-signal cleft at the medial epicondylar attachment, involving less than 50% of tendon thickness.'},
+          {id: 'full', label: 'Full-thickness tear', sentence: 'Full-thickness disruption of the common flexor tendon origin from the medial epicondyle with fluid-filled gap and {retraction} mm of distal retraction.'},
+          {id: 'ossif', label: 'Ossification (chronic)', sentence: 'Chronic enthesopathic ossification at the common flexor tendon origin on the medial epicondyle.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'retraction', label: 'Retraction (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ],
+      addon_group: {
+        label: 'Associated findings',
+        options: [
+          {id: 'me-edema', label: 'Medial epicondyle marrow edema', text: 'Associated medial epicondyle reactive marrow edema.'},
+          {id: 'ucl', label: 'Concomitant UCL injury', text: 'Concomitant anterior bundle UCL signal abnormality — recommend correlation in the UCL section below.'},
+        ]
+      }
+    },
+    {
+      id: 't-cet', label: 'Common extensor tendon (lateral epicondylitis)', output_section: 'Tendons',
+      grade_group: {
+        label: 'Common extensor tendon state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Common extensor tendon origin at the lateral epicondyle (predominantly ECRB) demonstrates normal fibrillar architecture and low signal.'},
+          {id: 'mild', label: 'Mild tendinosis', sentence: 'Mild fusiform thickening and intermediate intrasubstance signal of the common extensor tendon origin without fluid-signal cleft — mild lateral epicondylitis (tennis elbow).'},
+          {id: 'mod', label: 'Moderate tendinosis', sentence: 'Moderate thickening and intermediate signal of the common extensor origin without macroscopic fiber discontinuity, consistent with moderate lateral epicondylitis.'},
+          {id: 'severe', label: 'Severe tendinosis', sentence: 'Marked thickening and intrasubstance signal abnormality of the common extensor tendon origin approaching fluid intensity, consistent with severe lateral epicondylitis.'},
+          {id: 'partial', label: 'Partial-thickness tear', sentence: 'Partial-thickness tear of the common extensor tendon origin with focal fluid-signal cleft at the lateral epicondylar attachment, involving less than 50% of tendon thickness.'},
+          {id: 'full', label: 'Full-thickness tear', sentence: 'Full-thickness disruption of the common extensor tendon origin from the lateral epicondyle with fluid-filled gap and {retraction} mm of distal retraction.'},
+          {id: 'ossif', label: 'Ossification (chronic)', sentence: 'Chronic enthesopathic ossification at the common extensor tendon origin on the lateral epicondyle.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'retraction', label: 'Retraction (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ],
+      addon_group: {
+        label: 'Associated findings',
+        options: [
+          {id: 'le-edema', label: 'Lateral epicondyle marrow edema', text: 'Associated lateral epicondyle reactive marrow edema.'},
+          {id: 'lucl', label: 'Concomitant LUCL injury', text: 'Concomitant LUCL signal abnormality — correlate with LUCL section below.'},
+        ]
+      }
+    },
+    {
+      id: 't-biceps', label: 'Distal biceps tendon', output_section: 'Tendons',
+      grade_group: {
+        label: 'Distal biceps state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Distal biceps tendon demonstrates normal fibrillar architecture and signal with intact insertion on the radial tuberosity. Best evaluated on FABS view.'},
+          {id: 'tendinosis', label: 'Tendinosis', sentence: 'Fusiform thickening and intermediate intrasubstance signal of the distal biceps tendon at the radial tuberosity insertion without fluid-signal cleft, consistent with tendinosis.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness tear of the distal biceps tendon at the radial tuberosity insertion with focal fluid-signal cleft and intact remaining fibers.'},
+          {id: 'partial-bursa', label: 'Partial tear with bicipitoradial bursitis', sentence: 'Partial-thickness tear of the distal biceps tendon with adjacent bicipitoradial bursitis.'},
+          {id: 'complete-mr', label: 'Complete tear, minimally retracted', sentence: 'Complete full-thickness rupture of the distal biceps tendon from the radial tuberosity with minimal retraction ({retraction} mm). Lacertus fibrosus appears intact.'},
+          {id: 'complete-ret', label: 'Complete tear with retraction', sentence: 'Complete full-thickness rupture of the distal biceps tendon with proximal retraction of {retraction} mm. Lacertus fibrosus is disrupted.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'retraction', label: 'Retraction (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+    {
+      id: 't-triceps', label: 'Distal triceps tendon', output_section: 'Tendons',
+      grade_group: {
+        label: 'Distal triceps state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Distal triceps tendon is intact at the olecranon insertion with normal thickness and signal.'},
+          {id: 'tendinosis', label: 'Tendinosis', sentence: 'Fusiform thickening and intermediate intrasubstance signal of the distal triceps tendon at the olecranon insertion, consistent with tendinosis/enthesopathy.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness tear of the distal triceps tendon at the olecranon insertion involving the superficial fibers with intact deep fibers.'},
+          {id: 'partial-deep', label: 'Partial (deep fibers)', sentence: 'Partial-thickness tear of the deep fibers of the distal triceps tendon at the olecranon insertion with intact superficial fibers.'},
+          {id: 'complete', label: 'Complete tear', sentence: 'Complete full-thickness rupture of the distal triceps tendon from the olecranon with {retraction} mm of proximal retraction. Often associated with an olecranon avulsion fragment.'},
+          {id: 'enthesoph', label: 'Enthesophyte / chronic', sentence: 'Chronic enthesopathic ossification (enthesophyte) at the distal triceps insertion on the olecranon.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'retraction', label: 'Retraction (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+    {
+      id: 't-brachialis', label: 'Brachialis', output_section: 'Tendons',
+      grade_group: {
+        label: 'Brachialis state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Brachialis muscle and tendon are normal at the coronoid insertion.'},
+          {id: 'strain', label: 'Strain', sentence: 'T2-hyperintense intramuscular edema of the brachialis without macroscopic fiber discontinuity, compatible with muscle strain ("climber\'s elbow").'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness fiber disruption of the brachialis at the {location} with surrounding edema.'},
+          {id: 'complete', label: 'Complete tear', sentence: 'Complete disruption of the brachialis tendon at the coronoid insertion with retraction.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'mutex', placeholder: '[mtj / distal tendon / coronoid insertion]',
+         options: [
+           {id: 'mtj', label: 'Musculotendinous junction', value: 'musculotendinous junction'},
+           {id: 'dist', label: 'Distal tendon', value: 'distal tendon'},
+           {id: 'cor', label: 'Coronoid insertion', value: 'coronoid insertion'},
+         ]}
+      ]
+    },
+
+    // ============= LIGAMENTS =============
+    {
+      id: 'ucl-ant', label: 'UCL — anterior bundle', output_section: 'Ligaments',
+      grade_group: {
+        label: 'Anterior bundle UCL state',
+        options: [
+          {id: 'intact', label: 'Intact', is_normal: true, sentence: 'Anterior bundle of the ulnar collateral ligament is intact with uniform low signal from the medial epicondyle to the sublime tubercle of the ulna. No T-sign.'},
+          {id: 'sprain', label: 'Grade 1 sprain', sentence: 'Periligamentous T2-hyperintense edema along the anterior bundle of the UCL with preserved fiber continuity and normal contour, consistent with grade 1 sprain.'},
+          {id: 'partial', label: 'Partial-thickness tear', sentence: 'Partial-thickness fiber disruption of the anterior bundle of the UCL at the {location} with thickening and intermediate signal but preserved fiber continuity.'},
+          {id: 'partial-tsign', label: 'Partial with T-sign', sentence: 'Partial-thickness undersurface tear of the anterior bundle of the UCL at the sublime tubercle with contrast/fluid tracking between the distal ligament fibers and the sublime tubercle ("T-sign"), highly specific for partial undersurface tear.'},
+          {id: 'complete', label: 'Complete tear', sentence: 'Complete discontinuity of the anterior bundle of the UCL at the {location} with fluid-filled gap and absent fiber continuity.'},
+          {id: 'calcified', label: 'Calcified / chronic', sentence: 'Heterogeneously thickened anterior bundle of the UCL with intrasubstance low-signal foci consistent with chronic calcification/ossification — sequela of remote injury.'},
+          {id: 'reconstructed', label: 'Reconstructed (postsurgical)', sentence: 'Postsurgical UCL reconstruction (Tommy John); the graft is intact within osseous tunnels at the medial epicondyle and sublime tubercle. No graft tear.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'mutex', placeholder: '[humeral / mid-substance / sublime tubercle]',
+         options: [
+           {id: 'hum', label: 'Humeral attachment', value: 'humeral attachment (medial epicondyle)'},
+           {id: 'mid', label: 'Mid-substance', value: 'mid-substance'},
+           {id: 'sub', label: 'Sublime tubercle', value: 'sublime tubercle'},
+         ]}
+      ],
+      addon_group: {
+        label: 'Associated findings',
+        options: [
+          {id: 'cft', label: 'Concomitant CFT injury', text: 'Concomitant common flexor tendon injury.'},
+          {id: 'ulnar', label: 'Ulnar neuritis', text: 'Adjacent ulnar nerve hyperintensity at the cubital tunnel suggesting traumatic neuritis.'},
+        ]
+      }
+    },
+    {
+      id: 'ucl-post', label: 'UCL — posterior bundle', output_section: 'Ligaments',
+      grade_group: {
+        label: 'Posterior bundle UCL state',
+        options: [
+          {id: 'intact', label: 'Intact', is_normal: true, sentence: 'Posterior bundle of the ulnar collateral ligament is intact, forming the floor of the cubital tunnel.'},
+          {id: 'thick', label: 'Thickened', sentence: 'Thickening of the posterior bundle of the UCL — may contribute to cubital tunnel narrowing.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness fiber disruption of the posterior bundle of the UCL with surrounding edema.'},
+          {id: 'complete', label: 'Complete tear', sentence: 'Complete disruption of the posterior bundle of the UCL with fluid-filled gap.'},
+        ]
+      }
+    },
+    {
+      id: 'rcl', label: 'RCL (radial collateral ligament)', output_section: 'Ligaments',
+      grade_group: {
+        label: 'RCL state',
+        options: [
+          {id: 'intact', label: 'Intact', is_normal: true, sentence: 'Radial collateral ligament is intact with uniform low signal from the lateral epicondyle to the annular ligament.'},
+          {id: 'sprain', label: 'Grade 1 sprain', sentence: 'Periligamentous edema along the radial collateral ligament with preserved fiber continuity, consistent with grade 1 sprain.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness fiber disruption of the radial collateral ligament at the {location} with thickening and intermediate signal.'},
+          {id: 'complete', label: 'Complete tear', sentence: 'Complete discontinuity of the radial collateral ligament at the {location} with fluid-filled gap.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'mutex', placeholder: '[humeral / mid-substance / annular]',
+         options: [
+           {id: 'hum', label: 'Humeral origin', value: 'humeral origin (lateral epicondyle)'},
+           {id: 'mid', label: 'Mid-substance', value: 'mid-substance'},
+           {id: 'ann', label: 'Annular attachment', value: 'annular ligament attachment'},
+         ]}
+      ]
+    },
+    {
+      id: 'lucl', label: 'LUCL (lateral ulnar collateral ligament)', output_section: 'Ligaments',
+      grade_group: {
+        label: 'LUCL state',
+        options: [
+          {id: 'intact', label: 'Intact', is_normal: true, sentence: 'Lateral ulnar collateral ligament is intact, coursing from the lateral epicondyle around the radial head to insert on the supinator crest of the ulna. Best evaluated on posterior coronal images.'},
+          {id: 'sprain', label: 'Sprain', sentence: 'Periligamentous T2-hyperintense edema along the LUCL with preserved fiber continuity, consistent with grade 1 sprain.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness fiber disruption of the LUCL at the {location} with thickening and intermediate signal — predisposes to posterolateral rotatory instability (PLRI).'},
+          {id: 'complete', label: 'Complete tear', sentence: 'Complete discontinuity of the LUCL at the {location} with fluid-filled gap — diagnostic of posterolateral rotatory instability (PLRI). Often follows elbow dislocation.'},
+          {id: 'avulsion', label: 'Humeral avulsion', sentence: 'Avulsion of the LUCL from the lateral epicondyle with retraction — consistent with PLRI pattern injury.'},
+          {id: 'reconstructed', label: 'Reconstructed', sentence: 'Postsurgical LUCL reconstruction graft is intact without discrete tear.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'location', label: 'Location', type: 'mutex', placeholder: '[humeral / mid-substance / supinator crest]',
+         options: [
+           {id: 'hum', label: 'Humeral origin', value: 'humeral origin (lateral epicondyle)'},
+           {id: 'mid', label: 'Mid-substance', value: 'mid-substance'},
+           {id: 'sc', label: 'Supinator crest', value: 'supinator crest of the ulna'},
+         ]}
+      ],
+      addon_group: {
+        label: 'Associated findings',
+        options: [
+          {id: 'cet', label: 'Concomitant CET injury', text: 'Concomitant common extensor tendon tear (frequently associated).'},
+          {id: 'dislo', label: 'Post-dislocation pattern', text: 'Findings compatible with prior elbow dislocation (Osborne-Cotterill lesion / capitellar impaction may be present).'},
+        ]
+      }
+    },
+    {
+      id: 'annular', label: 'Annular ligament', output_section: 'Ligaments',
+      grade_group: {
+        label: 'Annular ligament state',
+        options: [
+          {id: 'intact', label: 'Intact', is_normal: true, sentence: 'Annular ligament is intact, encircling the radial head at the proximal radioulnar joint.'},
+          {id: 'thick', label: 'Thickened', sentence: 'Thickening of the annular ligament without discrete tear — may reflect chronic strain.'},
+          {id: 'partial', label: 'Partial tear', sentence: 'Partial-thickness disruption of the annular ligament with surrounding edema.'},
+          {id: 'complete', label: 'Complete tear', sentence: 'Complete discontinuity of the annular ligament — predisposes to radial head subluxation/dislocation.'},
+        ]
+      }
+    },
+
+    // ============= SOFT TISSUES =============
+    {
+      id: 'soft-tissues', label: 'Subcutaneous tissues and musculature', output_section: 'Soft tissues',
+      grade_group: {
+        label: 'Soft tissues',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Subcutaneous tissues and musculature of the elbow are unremarkable.'},
+          {id: 'edema', label: 'Diffuse edema', sentence: 'Diffuse subcutaneous edema overlying the {side} aspect of the elbow — nonspecific (post-traumatic, cellulitic, or post-procedural).'},
+          {id: 'cellulitis', label: 'Cellulitis', sentence: 'Reticular subcutaneous edema and skin thickening over the {side} aspect of the elbow without drainable collection — compatible with cellulitis.'},
+          {id: 'collection', label: 'Fluid collection', sentence: 'Rim-enhancing-appearing fluid collection within the soft tissues of the {side} aspect of the elbow measuring {size} mm — concerning for abscess; clinical correlation advised.'},
+          {id: 'mass', label: 'Soft tissue mass', sentence: 'Soft tissue mass within the {side} aspect of the elbow measuring {size} mm — characterization warranted with dedicated imaging.'},
+          {id: 'muscle-strain', label: 'Muscle strain (non-specific)', sentence: 'Feathery intramuscular T2-hyperintense edema within the {side} compartment musculature, compatible with muscle strain.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'side', label: 'Side', type: 'mutex', placeholder: '[anterior / medial / lateral / posterior]',
+         options: [
+           {id: 'ant', label: 'Anterior', value: 'anterior'},
+           {id: 'med', label: 'Medial', value: 'medial'},
+           {id: 'lat', label: 'Lateral', value: 'lateral'},
+           {id: 'post', label: 'Posterior', value: 'posterior'},
+         ]},
+        {id: 'size', label: 'Size (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+
+    // ============= NERVES =============
+    {
+      id: 'n-ulnar', label: 'Ulnar nerve (cubital tunnel)', output_section: 'Nerves',
+      grade_group: {
+        label: 'Ulnar nerve state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Ulnar nerve demonstrates normal caliber and signal within the cubital tunnel posterior to the medial epicondyle. No subluxation with elbow flexion (where assessable).'},
+          {id: 'mild', label: 'Mild thickening', sentence: 'Mild enlargement and T2-hyperintensity of the ulnar nerve within the cubital tunnel without focal mass effect, consistent with mild ulnar neuropathy.'},
+          {id: 'cts', label: 'Cubital tunnel syndrome', sentence: 'Enlargement and T2-hyperintensity of the ulnar nerve within the cubital tunnel with effacement of perineural fat, consistent with cubital tunnel syndrome.'},
+          {id: 'cts-sublux', label: 'Cubital tunnel syndrome with subluxation', sentence: 'Enlarged hyperintense ulnar nerve within the cubital tunnel with anterior subluxation over the medial epicondyle, consistent with cubital tunnel syndrome and friction-related neuropathy.'},
+          {id: 'mass-comp', label: 'Compression by mass', sentence: 'Ulnar nerve compression within the cubital tunnel by an adjacent {mass_type} measuring {size} mm.'},
+          {id: 'recon', label: 'Reconstructed / transposed', sentence: 'Postsurgical anterior subcutaneous/submuscular transposition of the ulnar nerve. The transposed nerve demonstrates {postop_state}.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'mass_type', label: 'Mass type', type: 'mutex', placeholder: '[ganglion / osteophyte / accessory anconeus epitrochlearis]',
+         options: [
+           {id: 'gang', label: 'Ganglion', value: 'ganglion cyst'},
+           {id: 'osteo', label: 'Osteophyte', value: 'osteophyte'},
+           {id: 'aae', label: 'Anconeus epitrochlearis', value: 'accessory anconeus epitrochlearis muscle'},
+         ]},
+        {id: 'size', label: 'Size (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'},
+        {id: 'postop_state', label: 'Postop state', type: 'mutex', placeholder: '[normal caliber / residual enlargement]',
+         options: [
+           {id: 'nrm', label: 'Normal caliber', value: 'normal caliber and signal'},
+           {id: 'enl', label: 'Residual enlargement', value: 'persistent enlargement and hyperintensity'},
+         ]}
+      ],
+      addon_group: {
+        label: 'Denervation findings (optional)',
+        options: [
+          {id: 'denerv-acute', label: 'Acute denervation edema (FCU/FDP)', text: 'Diffuse T2-hyperintense intramuscular edema of the flexor carpi ulnaris and ulnar half of flexor digitorum profundus, consistent with subacute denervation.'},
+          {id: 'denerv-chronic', label: 'Chronic denervation fatty atrophy', text: 'Fatty atrophy of the flexor carpi ulnaris and ulnar half of flexor digitorum profundus, consistent with chronic denervation.'},
+          {id: 'denerv-hand', label: 'Hand intrinsics (downstream)', text: 'Where included, fatty change of the ulnar-innervated hand intrinsics — recommend clinical correlation.'},
+        ]
+      }
+    },
+    {
+      id: 'n-median', label: 'Median nerve', output_section: 'Nerves',
+      grade_group: {
+        label: 'Median nerve state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Median nerve demonstrates normal caliber and signal as it courses through the antecubital fossa between the humeral and ulnar heads of the pronator teres.'},
+          {id: 'mild', label: 'Mild neuritis', sentence: 'Mild T2-hyperintensity and enlargement of the median nerve at the antecubital fossa, suggesting low-grade neuritis.'},
+          {id: 'pronator', label: 'Pronator syndrome', sentence: 'Enlargement and T2-hyperintensity of the median nerve as it passes between the humeral and ulnar heads of the pronator teres, consistent with pronator syndrome.'},
+          {id: 'ain', label: 'AIN syndrome', sentence: 'T2-hyperintensity of the anterior interosseous nerve branch with denervation edema of the flexor pollicis longus, pronator quadratus, and radial half of flexor digitorum profundus, consistent with anterior interosseous nerve syndrome.'},
+          {id: 'mass-comp', label: 'Mass compression', sentence: 'Median nerve compression by adjacent {mass_type} measuring {size} mm.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'mass_type', label: 'Mass type', type: 'mutex', placeholder: '[ganglion / lipoma / fibrous band]',
+         options: [
+           {id: 'gang', label: 'Ganglion', value: 'ganglion'},
+           {id: 'lip', label: 'Lipoma', value: 'lipoma'},
+           {id: 'band', label: 'Fibrous band / lacertus', value: 'fibrous band (lacertus / Struthers)'},
+         ]},
+        {id: 'size', label: 'Size (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ]
+    },
+    {
+      id: 'n-radial', label: 'Radial nerve / PIN at radial tunnel', output_section: 'Nerves',
+      grade_group: {
+        label: 'Radial nerve / PIN state',
+        options: [
+          {id: 'normal', label: 'Normal', is_normal: true, sentence: 'Radial nerve and its posterior interosseous branch demonstrate normal caliber and signal through the radial tunnel and arcade of Frohse.'},
+          {id: 'mild', label: 'Mild neuritis', sentence: 'Mild T2-hyperintensity of the radial nerve at the antecubital region without focal compression.'},
+          {id: 'radial-tunnel', label: 'Radial tunnel syndrome', sentence: 'Enlargement and T2-hyperintensity of the radial nerve / PIN at the radial tunnel, consistent with radial tunnel syndrome.'},
+          {id: 'pin', label: 'PIN compression (arcade of Frohse)', sentence: 'Focal narrowing of the posterior interosseous nerve at the arcade of Frohse (proximal edge of the supinator) with upstream enlargement and T2-hyperintensity, consistent with PIN compression syndrome.'},
+          {id: 'mass-comp', label: 'Mass compression', sentence: 'PIN compression by an adjacent {mass_type} at the radial tunnel measuring {size} mm.'},
+        ]
+      },
+      variable_groups: [
+        {id: 'mass_type', label: 'Mass type', type: 'mutex', placeholder: '[ganglion / lipoma / bicipitoradial bursitis]',
+         options: [
+           {id: 'gang', label: 'Ganglion', value: 'ganglion'},
+           {id: 'lip', label: 'Lipoma', value: 'lipoma'},
+           {id: 'brb', label: 'Bicipitoradial bursitis', value: 'distended bicipitoradial bursa'},
+         ]},
+        {id: 'size', label: 'Size (mm)', type: 'numeric', unit: 'mm', placeholder: '[mm]'}
+      ],
+      addon_group: {
+        label: 'Denervation findings (optional)',
+        options: [
+          {id: 'denerv-acute', label: 'Acute denervation (supinator/extensors)', text: 'T2-hyperintense intramuscular edema of the supinator and finger/thumb extensors distal to the lesion, consistent with subacute denervation.'},
+          {id: 'denerv-chronic', label: 'Chronic denervation fatty atrophy', text: 'Fatty atrophy of the supinator and finger/thumb extensors, consistent with chronic denervation.'},
+        ]
+      }
+    },
+  ]
+};
+</script>
+<script src="engine.js"></script>
+
+</body>
+</html>
