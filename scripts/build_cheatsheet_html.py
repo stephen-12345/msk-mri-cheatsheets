@@ -184,6 +184,18 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 .callout.measure{--c-acc:#7fb2ea; --c-bg:#101826}
 .callout.note{--c-acc:#9fb4c6; --c-bg:#141a22}
 
+/* ── Anatomy diagrams (inline SVG) ── */
+.diagram{
+  margin:18px 0; padding:14px 16px 10px;
+  background:#0b131d; border:1px solid var(--bdr); border-radius:10px;
+}
+.diagram svg{ display:block; width:100%; height:auto; max-width:560px; margin:0 auto; }
+.diagram figcaption{
+  margin:10px auto 2px; max-width:620px; text-align:center;
+  font-size:13.5px; color:var(--tx2); line-height:1.5;
+}
+@media print{ .diagram{ break-inside:avoid; } }
+
 @media (max-width:680px){
   body{font-size:17px; padding:0 16px 48px}
   .topbar{margin:0 -16px 18px; padding:10px 16px}
@@ -313,6 +325,100 @@ def render_callout(block: list[str]) -> str:
     return f'<div class="callout {cls}">{head}{"".join(out)}</div>'
 
 
+SVG_ANKLE_TENDONS_AXIAL = '''<svg viewBox="0 0 560 600" role="img" aria-label="Axial cross-section showing the arrangement of ankle tendons" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Arial,sans-serif">
+  <text x="280" y="26" text-anchor="middle" fill="#9fb4c6" font-size="15" font-weight="700" letter-spacing="2">ANTERIOR</text>
+  <text x="280" y="434" text-anchor="middle" fill="#9fb4c6" font-size="15" font-weight="700" letter-spacing="2">POSTERIOR</text>
+  <text x="14" y="214" text-anchor="start" fill="#9fb4c6" font-size="15" font-weight="700" letter-spacing="2">MEDIAL</text>
+  <text x="546" y="214" text-anchor="end" fill="#9fb4c6" font-size="15" font-weight="700" letter-spacing="2">LATERAL</text>
+  <ellipse cx="250" cy="202" rx="86" ry="70" fill="#29323f" stroke="#47576c" stroke-width="2"/>
+  <ellipse cx="180" cy="238" rx="30" ry="30" fill="#29323f" stroke="#47576c" stroke-width="2"/>
+  <ellipse cx="394" cy="198" rx="28" ry="38" fill="#29323f" stroke="#47576c" stroke-width="2"/>
+  <text x="252" y="206" text-anchor="middle" fill="#8593a6" font-size="13" letter-spacing="1">TIBIA</text>
+  <text x="394" y="202" text-anchor="middle" fill="#8593a6" font-size="11">FIB</text>
+  <text x="166" y="250" text-anchor="middle" fill="#74839a" font-size="9">med. mall.</text>
+  <circle cx="176" cy="108" r="14" fill="#79d49b" stroke="#0e1f17" stroke-width="1.5"/>
+  <text x="176" y="112" text-anchor="middle" fill="#0c1410" font-size="10" font-weight="700">TA</text>
+  <circle cx="236" cy="96" r="14" fill="#79d49b" stroke="#0e1f17" stroke-width="1.5"/>
+  <text x="236" y="100" text-anchor="middle" fill="#0c1410" font-size="9" font-weight="700">EHL</text>
+  <circle cx="298" cy="104" r="14" fill="#79d49b" stroke="#0e1f17" stroke-width="1.5"/>
+  <text x="298" y="108" text-anchor="middle" fill="#0c1410" font-size="9" font-weight="700">EDL</text>
+  <circle cx="104" cy="166" r="14" fill="#5fc6e6" stroke="#0d2530" stroke-width="1.5"/>
+  <text x="104" y="170" text-anchor="middle" fill="#06151c" font-size="9" font-weight="700">TP</text>
+  <circle cx="92" cy="214" r="14" fill="#5fc6e6" stroke="#0d2530" stroke-width="1.5"/>
+  <text x="92" y="218" text-anchor="middle" fill="#06151c" font-size="9" font-weight="700">FDL</text>
+  <circle cx="104" cy="262" r="13" fill="#e2737a" stroke="#2a0e10" stroke-width="1.5"/>
+  <text x="104" y="266" text-anchor="middle" fill="#1c0708" font-size="9" font-weight="700">NV</text>
+  <circle cx="148" cy="304" r="14" fill="#5fc6e6" stroke="#0d2530" stroke-width="1.5"/>
+  <text x="148" y="308" text-anchor="middle" fill="#06151c" font-size="9" font-weight="700">FHL</text>
+  <circle cx="440" cy="238" r="14" fill="#f3ad63" stroke="#231406" stroke-width="1.5"/>
+  <text x="440" y="242" text-anchor="middle" fill="#1a1206" font-size="9" font-weight="700">PB</text>
+  <circle cx="464" cy="282" r="14" fill="#f3ad63" stroke="#231406" stroke-width="1.5"/>
+  <text x="464" y="286" text-anchor="middle" fill="#1a1206" font-size="9" font-weight="700">PL</text>
+  <ellipse cx="252" cy="372" rx="52" ry="27" fill="#b69cf0" stroke="#211934" stroke-width="1.5"/>
+  <text x="252" y="376" text-anchor="middle" fill="#160f24" font-size="12" font-weight="700">Achilles</text>
+  <circle cx="196" cy="350" r="8" fill="#b69cf0" stroke="#211934" stroke-width="1.5"/>
+  <text x="196" y="353" text-anchor="middle" fill="#160f24" font-size="7" font-weight="700">pl</text>
+  <line x1="24" y1="452" x2="536" y2="452" stroke="#27303f" stroke-width="1"/>
+  <circle cx="36" cy="474" r="8" fill="#79d49b"/>
+  <text x="52" y="478" font-size="12" fill="#cdd6e2"><tspan font-weight="700" fill="#9be4b5">Anterior</tspan> — TA &#183; EHL &#183; EDL  (anterior to the tibia)</text>
+  <circle cx="36" cy="503" r="8" fill="#5fc6e6"/>
+  <text x="52" y="507" font-size="12" fill="#cdd6e2"><tspan font-weight="700" fill="#8fe0f5">Medial</tspan> (post. to med. malleolus) — <tspan font-weight="700">Tom</tspan>&#183;TP, <tspan font-weight="700">Dick</tspan>&#183;FDL, <tspan font-weight="700">aNd</tspan>&#183;NV, <tspan font-weight="700">Harry</tspan>&#183;FHL</text>
+  <circle cx="36" cy="532" r="8" fill="#f3ad63"/>
+  <text x="52" y="536" font-size="12" fill="#cdd6e2"><tspan font-weight="700" fill="#f7c389">Lateral</tspan> (post. to fibula) — peroneus Brevis (deep, on bone) &#183; Longus (superficial)</text>
+  <circle cx="36" cy="561" r="8" fill="#b69cf0"/>
+  <text x="52" y="565" font-size="12" fill="#cdd6e2"><tspan font-weight="700" fill="#c9b6f5">Posterior</tspan> — Achilles tendon (+ plantaris, anteromedial border)</text>
+</svg>'''
+
+SVG_ANKLE_9ZONE = '''<svg viewBox="0 0 470 372" role="img" aria-label="Talar dome 9-zone grid" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Arial,sans-serif">
+  <text x="175" y="56" text-anchor="middle" fill="#9fb4c6" font-size="13" font-weight="700">MEDIAL</text>
+  <text x="265" y="56" text-anchor="middle" fill="#9fb4c6" font-size="13" font-weight="700">CENTRAL</text>
+  <text x="355" y="56" text-anchor="middle" fill="#9fb4c6" font-size="13" font-weight="700">LATERAL</text>
+  <text x="120" y="120" text-anchor="end" fill="#9fb4c6" font-size="13" font-weight="700">ANTERIOR</text>
+  <text x="120" y="210" text-anchor="end" fill="#9fb4c6" font-size="13" font-weight="700">MIDDLE</text>
+  <text x="120" y="300" text-anchor="end" fill="#9fb4c6" font-size="13" font-weight="700">POSTERIOR</text>
+  <rect x="130" y="250" width="90" height="90" fill="rgba(121,212,155,0.18)"/>
+  <rect x="310" y="160" width="90" height="90" fill="rgba(243,173,99,0.18)"/>
+  <rect x="130" y="70" width="270" height="270" fill="none" stroke="#46566b" stroke-width="2"/>
+  <line x1="220" y1="70" x2="220" y2="340" stroke="#324053" stroke-width="1"/>
+  <line x1="310" y1="70" x2="310" y2="340" stroke="#324053" stroke-width="1"/>
+  <line x1="130" y1="160" x2="400" y2="160" stroke="#324053" stroke-width="1"/>
+  <line x1="130" y1="250" x2="400" y2="250" stroke="#324053" stroke-width="1"/>
+  <text x="175" y="291" text-anchor="middle" fill="#9be4b5" font-size="12" font-weight="700">atraumatic</text>
+  <text x="175" y="307" text-anchor="middle" fill="#9be4b5" font-size="10">(most common)</text>
+  <text x="355" y="203" text-anchor="middle" fill="#f7c389" font-size="12" font-weight="700">traumatic</text>
+  <text x="265" y="364" text-anchor="middle" fill="#8593a6" font-size="11">medial dome &#8594; deeper / cup-shaped &#183; lateral dome &#8594; shallower / wafer</text>
+</svg>'''
+
+DIAGRAMS = {
+    "ankle-tendons-axial": (
+        SVG_ANKLE_TENDONS_AXIAL,
+        "**Ankle tendons in cross-section (axial).** Four groups wrap the joint: "
+        "**anterior** extensors, **medial** flexors behind the medial malleolus "
+        "(*Tom, Dick, aNd Harry*), **lateral** peroneals behind the fibula, and the "
+        "**posterior** Achilles. The neurovascular bundle (NV) sits between FDL and FHL.",
+    ),
+    "ankle-talar-dome-9zone": (
+        SVG_ANKLE_9ZONE,
+        "**Talar dome 9-zone grid.** Map every osteochondral lesion to one of the nine "
+        "cells. Classic locations: **medial-posterior** (atraumatic, deeper) and "
+        "**lateral-central** (traumatic, shallower).",
+    ),
+}
+
+
+def render_diagram(did: str, caption: str | None = None) -> str:
+    entry = DIAGRAMS.get(did)
+    if not entry:
+        return (
+            '<div class="callout note"><div class="c-title"><span class="ico">📝</span>'
+            f'<span class="lbl">Diagram</span></div><p>[missing diagram: {html.escape(did)}]</p></div>'
+        )
+    svg, default_cap = entry
+    cap = caption if caption else default_cap
+    figcap = f"<figcaption>{inline(cap)}</figcaption>" if cap else ""
+    return f'<figure class="diagram">{svg}{figcap}</figure>'
+
+
 def inline(text: str) -> str:
     """Escape, then apply **bold** and [placeholder] formatting."""
     text = html.escape(text)
@@ -367,6 +473,14 @@ def md_to_html(md: str) -> tuple[str, str]:
 
         if not stripped:
             flush_bullets()
+            i += 1
+            continue
+
+        # anatomy diagram token: {{diagram:id}} or {{diagram:id|caption}}
+        mdg = re.match(r"^\{\{diagram:([a-z0-9\-]+)(?:\s*\|\s*(.*?))?\}\}$", stripped)
+        if mdg:
+            flush_bullets()
+            out.append(render_diagram(mdg.group(1), mdg.group(2)))
             i += 1
             continue
 

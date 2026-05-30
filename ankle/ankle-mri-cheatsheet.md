@@ -33,6 +33,8 @@ This section teaches you to systematically locate and evaluate ankle structures 
 > - The **medial malleolus** anchors the deltoid and the Tom-Dick-Harry tendons.
 > - The **lateral malleolus (distal fibula)** anchors ATFL, CFL, PTFL, and the peroneal groove.
 
+{{diagram:ankle-tendons-axial}}
+
 ### Medial Retromalleolar Tendons (Axial)
 
 > [!FIND] Posterior tibial tendon (PTT)
@@ -156,6 +158,8 @@ This section teaches you to systematically locate and evaluate ankle structures 
 
 > [!LANDMARK] The 9-zone grid
 > Mentally divide the talar dome into a **3×3 grid** (medial/central/lateral × anterior/middle/posterior) on coronal/sagittal to standardize lesion location.
+
+{{diagram:ankle-talar-dome-9zone}}
 
 > [!PEARL] Medial-posterior vs lateral-central
 > Two classic locations: **medial dome lesions are posterior, deeper, cup-shaped, and often atraumatic**; **lateral dome lesions are central/anterior, shallower, wafer-shaped, and usually traumatic**.

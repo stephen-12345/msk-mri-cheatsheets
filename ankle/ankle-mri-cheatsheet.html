@@ -165,6 +165,18 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 .callout.measure{--c-acc:#7fb2ea; --c-bg:#101826}
 .callout.note{--c-acc:#9fb4c6; --c-bg:#141a22}
 
+/* ── Anatomy diagrams (inline SVG) ── */
+.diagram{
+  margin:18px 0; padding:14px 16px 10px;
+  background:#0b131d; border:1px solid var(--bdr); border-radius:10px;
+}
+.diagram svg{ display:block; width:100%; height:auto; max-width:560px; margin:0 auto; }
+.diagram figcaption{
+  margin:10px auto 2px; max-width:620px; text-align:center;
+  font-size:13.5px; color:var(--tx2); line-height:1.5;
+}
+@media print{ .diagram{ break-inside:avoid; } }
+
 @media (max-width:680px){
   body{font-size:17px; padding:0 16px 48px}
   .topbar{margin:0 -16px 18px; padding:10px 16px}
@@ -198,6 +210,49 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 <h3>Orientation and Search Strategy</h3>
 <div class="callout pearl"><div class="c-title"><span class="ico">💡</span><span class="lbl">Pearl</span><span class="ttl">Match the structure to its plane</span></div><p>Most ankle pathology is solved by knowing which plane shows the structure best.</p><ul><li><b>Axial:</b> retromalleolar tendons, all three lateral ligaments, syndesmosis, tarsal tunnel</li><li><b>Coronal:</b> deltoid, CFL, talar dome osteochondral surface, peroneal split</li><li><b>Sagittal:</b> Achilles, plantaris, tibiotalar cartilage, os trigonum/FHL, plantar fascia</li></ul></div>
 <div class="callout landmark"><div class="c-title"><span class="ico">📍</span><span class="lbl">Landmark</span><span class="ttl">The medial and lateral malleoli are your anchors</span></div><p>Almost every tendon and ligament is named for its relationship to a malleolus.</p><ul><li>The <b>medial malleolus</b> anchors the deltoid and the Tom-Dick-Harry tendons.</li><li>The <b>lateral malleolus (distal fibula)</b> anchors ATFL, CFL, PTFL, and the peroneal groove.</li></ul></div>
+<figure class="diagram"><svg viewBox="0 0 560 600" role="img" aria-label="Axial cross-section showing the arrangement of ankle tendons" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Arial,sans-serif">
+  <text x="280" y="26" text-anchor="middle" fill="#9fb4c6" font-size="15" font-weight="700" letter-spacing="2">ANTERIOR</text>
+  <text x="280" y="434" text-anchor="middle" fill="#9fb4c6" font-size="15" font-weight="700" letter-spacing="2">POSTERIOR</text>
+  <text x="14" y="214" text-anchor="start" fill="#9fb4c6" font-size="15" font-weight="700" letter-spacing="2">MEDIAL</text>
+  <text x="546" y="214" text-anchor="end" fill="#9fb4c6" font-size="15" font-weight="700" letter-spacing="2">LATERAL</text>
+  <ellipse cx="250" cy="202" rx="86" ry="70" fill="#29323f" stroke="#47576c" stroke-width="2"/>
+  <ellipse cx="180" cy="238" rx="30" ry="30" fill="#29323f" stroke="#47576c" stroke-width="2"/>
+  <ellipse cx="394" cy="198" rx="28" ry="38" fill="#29323f" stroke="#47576c" stroke-width="2"/>
+  <text x="252" y="206" text-anchor="middle" fill="#8593a6" font-size="13" letter-spacing="1">TIBIA</text>
+  <text x="394" y="202" text-anchor="middle" fill="#8593a6" font-size="11">FIB</text>
+  <text x="166" y="250" text-anchor="middle" fill="#74839a" font-size="9">med. mall.</text>
+  <circle cx="176" cy="108" r="14" fill="#79d49b" stroke="#0e1f17" stroke-width="1.5"/>
+  <text x="176" y="112" text-anchor="middle" fill="#0c1410" font-size="10" font-weight="700">TA</text>
+  <circle cx="236" cy="96" r="14" fill="#79d49b" stroke="#0e1f17" stroke-width="1.5"/>
+  <text x="236" y="100" text-anchor="middle" fill="#0c1410" font-size="9" font-weight="700">EHL</text>
+  <circle cx="298" cy="104" r="14" fill="#79d49b" stroke="#0e1f17" stroke-width="1.5"/>
+  <text x="298" y="108" text-anchor="middle" fill="#0c1410" font-size="9" font-weight="700">EDL</text>
+  <circle cx="104" cy="166" r="14" fill="#5fc6e6" stroke="#0d2530" stroke-width="1.5"/>
+  <text x="104" y="170" text-anchor="middle" fill="#06151c" font-size="9" font-weight="700">TP</text>
+  <circle cx="92" cy="214" r="14" fill="#5fc6e6" stroke="#0d2530" stroke-width="1.5"/>
+  <text x="92" y="218" text-anchor="middle" fill="#06151c" font-size="9" font-weight="700">FDL</text>
+  <circle cx="104" cy="262" r="13" fill="#e2737a" stroke="#2a0e10" stroke-width="1.5"/>
+  <text x="104" y="266" text-anchor="middle" fill="#1c0708" font-size="9" font-weight="700">NV</text>
+  <circle cx="148" cy="304" r="14" fill="#5fc6e6" stroke="#0d2530" stroke-width="1.5"/>
+  <text x="148" y="308" text-anchor="middle" fill="#06151c" font-size="9" font-weight="700">FHL</text>
+  <circle cx="440" cy="238" r="14" fill="#f3ad63" stroke="#231406" stroke-width="1.5"/>
+  <text x="440" y="242" text-anchor="middle" fill="#1a1206" font-size="9" font-weight="700">PB</text>
+  <circle cx="464" cy="282" r="14" fill="#f3ad63" stroke="#231406" stroke-width="1.5"/>
+  <text x="464" y="286" text-anchor="middle" fill="#1a1206" font-size="9" font-weight="700">PL</text>
+  <ellipse cx="252" cy="372" rx="52" ry="27" fill="#b69cf0" stroke="#211934" stroke-width="1.5"/>
+  <text x="252" y="376" text-anchor="middle" fill="#160f24" font-size="12" font-weight="700">Achilles</text>
+  <circle cx="196" cy="350" r="8" fill="#b69cf0" stroke="#211934" stroke-width="1.5"/>
+  <text x="196" y="353" text-anchor="middle" fill="#160f24" font-size="7" font-weight="700">pl</text>
+  <line x1="24" y1="452" x2="536" y2="452" stroke="#27303f" stroke-width="1"/>
+  <circle cx="36" cy="474" r="8" fill="#79d49b"/>
+  <text x="52" y="478" font-size="12" fill="#cdd6e2"><tspan font-weight="700" fill="#9be4b5">Anterior</tspan> — TA &#183; EHL &#183; EDL  (anterior to the tibia)</text>
+  <circle cx="36" cy="503" r="8" fill="#5fc6e6"/>
+  <text x="52" y="507" font-size="12" fill="#cdd6e2"><tspan font-weight="700" fill="#8fe0f5">Medial</tspan> (post. to med. malleolus) — <tspan font-weight="700">Tom</tspan>&#183;TP, <tspan font-weight="700">Dick</tspan>&#183;FDL, <tspan font-weight="700">aNd</tspan>&#183;NV, <tspan font-weight="700">Harry</tspan>&#183;FHL</text>
+  <circle cx="36" cy="532" r="8" fill="#f3ad63"/>
+  <text x="52" y="536" font-size="12" fill="#cdd6e2"><tspan font-weight="700" fill="#f7c389">Lateral</tspan> (post. to fibula) — peroneus Brevis (deep, on bone) &#183; Longus (superficial)</text>
+  <circle cx="36" cy="561" r="8" fill="#b69cf0"/>
+  <text x="52" y="565" font-size="12" fill="#cdd6e2"><tspan font-weight="700" fill="#c9b6f5">Posterior</tspan> — Achilles tendon (+ plantaris, anteromedial border)</text>
+</svg><figcaption><b>Ankle tendons in cross-section (axial).</b> Four groups wrap the joint: <b>anterior</b> extensors, <b>medial</b> flexors behind the medial malleolus (*Tom, Dick, aNd Harry*), <b>lateral</b> peroneals behind the fibula, and the <b>posterior</b> Achilles. The neurovascular bundle (NV) sits between FDL and FHL.</figcaption></figure>
 <h3>Medial Retromalleolar Tendons (Axial)</h3>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Posterior tibial tendon (PTT)</span></div><p>On <b>axial</b> at the level of the medial malleolus, find the most <b>anteromedial</b> tendon hugging the back of the medial malleolus; it is normally ~<b>2×</b> the caliber of the adjacent FDL.</p><ul><li>Order behind the medial malleolus, front to back (Tom, Dick, AND Harry): <b>T</b>ibialis posterior, <b>F</b>lexor <b>D</b>igitorum longus, <b>and</b> the neurovascular bundle, <b>H</b>allucis longus.</li><li>Follow the PTT distally to its broad insertion on the <b>navicular tuberosity</b>; the main slip there is the dominant attachment.</li></ul></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Flexor digitorum longus (FDL)</span></div><p>Immediately <b>posterior to the PTT</b> on axial, smaller (about half the PTT diameter). It crosses superficial to FHL at the <b>knot of Henry</b> in the midfoot.</p></div>
@@ -234,6 +289,25 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Achilles paratenonitis (peritendinitis)</span></div><p>On <b>axial</b>, look for a <b>circumferential bright (T2/STIR) rim of fluid/edema around the Achilles</b>, often most conspicuous along the <b>anterior surface in the Kager fat pad</b>; on <b>sagittal</b>, a thin peritendinous fluid line hugging the front and back of the tendon.</p><ul><li>Pure paratenonitis: peritendinous fluid/enhancement with a <b>normal-signal, normal-caliber tendon</b>.</li><li>Distinguish from <b>retrocalcaneal bursitis</b> (focal fluid in the bursa <b>between the tendon and the posterosuperior calcaneus</b>) — a discrete bursa, not a peritendinous rim.</li></ul></div>
 <h3>Talar Dome Osteochondral Lesions (Coronal + Sagittal)</h3>
 <div class="callout landmark"><div class="c-title"><span class="ico">📍</span><span class="lbl">Landmark</span><span class="ttl">The 9-zone grid</span></div><p>Mentally divide the talar dome into a <b>3×3 grid</b> (medial/central/lateral × anterior/middle/posterior) on coronal/sagittal to standardize lesion location.</p></div>
+<figure class="diagram"><svg viewBox="0 0 470 372" role="img" aria-label="Talar dome 9-zone grid" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Arial,sans-serif">
+  <text x="175" y="56" text-anchor="middle" fill="#9fb4c6" font-size="13" font-weight="700">MEDIAL</text>
+  <text x="265" y="56" text-anchor="middle" fill="#9fb4c6" font-size="13" font-weight="700">CENTRAL</text>
+  <text x="355" y="56" text-anchor="middle" fill="#9fb4c6" font-size="13" font-weight="700">LATERAL</text>
+  <text x="120" y="120" text-anchor="end" fill="#9fb4c6" font-size="13" font-weight="700">ANTERIOR</text>
+  <text x="120" y="210" text-anchor="end" fill="#9fb4c6" font-size="13" font-weight="700">MIDDLE</text>
+  <text x="120" y="300" text-anchor="end" fill="#9fb4c6" font-size="13" font-weight="700">POSTERIOR</text>
+  <rect x="130" y="250" width="90" height="90" fill="rgba(121,212,155,0.18)"/>
+  <rect x="310" y="160" width="90" height="90" fill="rgba(243,173,99,0.18)"/>
+  <rect x="130" y="70" width="270" height="270" fill="none" stroke="#46566b" stroke-width="2"/>
+  <line x1="220" y1="70" x2="220" y2="340" stroke="#324053" stroke-width="1"/>
+  <line x1="310" y1="70" x2="310" y2="340" stroke="#324053" stroke-width="1"/>
+  <line x1="130" y1="160" x2="400" y2="160" stroke="#324053" stroke-width="1"/>
+  <line x1="130" y1="250" x2="400" y2="250" stroke="#324053" stroke-width="1"/>
+  <text x="175" y="291" text-anchor="middle" fill="#9be4b5" font-size="12" font-weight="700">atraumatic</text>
+  <text x="175" y="307" text-anchor="middle" fill="#9be4b5" font-size="10">(most common)</text>
+  <text x="355" y="203" text-anchor="middle" fill="#f7c389" font-size="12" font-weight="700">traumatic</text>
+  <text x="265" y="364" text-anchor="middle" fill="#8593a6" font-size="11">medial dome &#8594; deeper / cup-shaped &#183; lateral dome &#8594; shallower / wafer</text>
+</svg><figcaption><b>Talar dome 9-zone grid.</b> Map every osteochondral lesion to one of the nine cells. Classic locations: <b>medial-posterior</b> (atraumatic, deeper) and <b>lateral-central</b> (traumatic, shallower).</figcaption></figure>
 <div class="callout pearl"><div class="c-title"><span class="ico">💡</span><span class="lbl">Pearl</span><span class="ttl">Medial-posterior vs lateral-central</span></div><p>Two classic locations: <b>medial dome lesions are posterior, deeper, cup-shaped, and often atraumatic</b>; <b>lateral dome lesions are central/anterior, shallower, wafer-shaped, and usually traumatic</b>.</p></div>
 <div class="callout measure"><div class="c-title"><span class="ico">📏</span><span class="lbl">Measure</span><span class="ttl">Calling instability</span></div><p>An osteochondral fragment is <b>unstable</b> when <b>high T2 fluid signal fully undermines the fragment</b>, there are subchondral <b>cysts</b>, a displaced fragment, or a &gt;5 mm lesion. A bright fluid line completely encircling the base = loose/unstable.</p></div>
 <h3>Posterior Impingement and Accessory Ossicles (Sagittal/Axial)</h3>
