@@ -259,6 +259,26 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 .toc-children .toc-children .toc-link{ padding-left:18px; }
 @media print{ .toc-toggle, .toc-drawer, .toc-backdrop{ display:none !important; } }
 
+/* Left-edge floating handle — thumb-reach access to the TOC from anywhere */
+.toc-handle{
+  position:fixed; left:0; top:64%; transform:translateY(-50%);
+  z-index:54; display:flex; align-items:center; justify-content:center;
+  width:27px; height:74px; padding:0;
+  background:rgba(17,85,111,0.9); color:#d6f0fb;
+  border:1px solid var(--bdr); border-left:none; border-radius:0 13px 13px 0;
+  box-shadow:3px 0 16px rgba(0,0,0,0.5);
+  -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+  font-size:16px; line-height:1; cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  transition:opacity .18s, background .15s, visibility .18s;
+}
+.toc-handle:hover{ background:#16638a; color:#fff; }
+.toc-handle:active{ background:#1d7aa8; }
+.toc-handle .chev{ font-size:11px; opacity:.75; }
+body.toc-open .toc-handle{ opacity:0; visibility:hidden; }
+@media print{ .toc-handle{ display:none; } }
+@media (min-width:901px) and (hover:hover){ .toc-handle{ display:none; } }
+
 @media (max-width:680px){
   body{font-size:17px; padding:0 16px 48px}
   .topbar{
@@ -327,13 +347,26 @@ SCRIPT = """
   var drawer=document.getElementById('toc-drawer'),
       backdrop=document.getElementById('toc-backdrop'),
       tocToggle=document.getElementById('toc-toggle'),
-      tocClose=document.getElementById('toc-close');
-  function tocOpen(){ if(drawer){ drawer.classList.add('open'); backdrop.classList.add('show'); } }
-  function tocCloseFn(){ if(drawer){ drawer.classList.remove('open'); backdrop.classList.remove('show'); } }
+      tocClose=document.getElementById('toc-close'),
+      tocHandle=document.getElementById('toc-handle');
+  function tocOpen(){ if(drawer){ drawer.classList.add('open'); backdrop.classList.add('show'); document.body.classList.add('toc-open'); } }
+  function tocCloseFn(){ if(drawer){ drawer.classList.remove('open'); backdrop.classList.remove('show'); document.body.classList.remove('toc-open'); } }
   function tocToggleFn(){ drawer && (drawer.classList.contains('open')?tocCloseFn():tocOpen()); }
   if(tocToggle) tocToggle.onclick=tocToggleFn;
+  if(tocHandle) tocHandle.onclick=tocOpen;
   if(tocClose) tocClose.onclick=tocCloseFn;
   if(backdrop) backdrop.onclick=tocCloseFn;
+  // swipe-left on the open drawer to close it
+  var swX=null, swY=null;
+  document.addEventListener('touchstart', function(e){
+    if(drawer && drawer.classList.contains('open')){ var t=e.touches[0]; swX=t.clientX; swY=t.clientY; }
+    else swX=null;
+  }, {passive:true});
+  document.addEventListener('touchmove', function(e){
+    if(swX===null) return; var t=e.touches[0];
+    if(t.clientX-swX < -45 && Math.abs(t.clientY-swY) < 70){ tocCloseFn(); swX=null; }
+  }, {passive:true});
+  document.addEventListener('touchend', function(){ swX=null; }, {passive:true});
   if(drawer){
     drawer.addEventListener('click', function(e){
       var tog=e.target.closest('.toc-tog');
@@ -816,6 +849,7 @@ def build(joint: str) -> None:
 {topbar(joint, title or joint.title(), has_template)}
 {toc_html}
 {body}
+<button id="toc-handle" class="toc-handle" aria-label="Open table of contents" title="Contents">☰<span class="chev">›</span></button>
 <button id="to-top" class="to-top" aria-label="Back to top" title="Back to top (Home)">↑</button>
 <script>{SCRIPT}</script>
 <script>if('serviceWorker' in navigator){{window.addEventListener('load',function(){{navigator.serviceWorker.register('../sw.js').catch(function(){{}});}});}}</script>

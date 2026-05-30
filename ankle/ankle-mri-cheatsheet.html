@@ -240,6 +240,26 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 .toc-children .toc-children .toc-link{ padding-left:18px; }
 @media print{ .toc-toggle, .toc-drawer, .toc-backdrop{ display:none !important; } }
 
+/* Left-edge floating handle — thumb-reach access to the TOC from anywhere */
+.toc-handle{
+  position:fixed; left:0; top:64%; transform:translateY(-50%);
+  z-index:54; display:flex; align-items:center; justify-content:center;
+  width:27px; height:74px; padding:0;
+  background:rgba(17,85,111,0.9); color:#d6f0fb;
+  border:1px solid var(--bdr); border-left:none; border-radius:0 13px 13px 0;
+  box-shadow:3px 0 16px rgba(0,0,0,0.5);
+  -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+  font-size:16px; line-height:1; cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  transition:opacity .18s, background .15s, visibility .18s;
+}
+.toc-handle:hover{ background:#16638a; color:#fff; }
+.toc-handle:active{ background:#1d7aa8; }
+.toc-handle .chev{ font-size:11px; opacity:.75; }
+body.toc-open .toc-handle{ opacity:0; visibility:hidden; }
+@media print{ .toc-handle{ display:none; } }
+@media (min-width:901px) and (hover:hover){ .toc-handle{ display:none; } }
+
 @media (max-width:680px){
   body{font-size:17px; padding:0 16px 48px}
   .topbar{
@@ -597,6 +617,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 <ul><li><b>1. Marrow/bone changes:</b></li><li>Marrow replacement (darker than muscle/disc on T1; geographic pattern more predictive than reticular/periarticular).</li><li>Marrow edema (isolated finding raises concern in diabetics/high-risk).</li><li>Bone erosion (loss of dark T1/T2 cortical line).</li><li><b>2. Surrounding inflammatory changes:</b> fascia, musculature, subcutaneous fat edema/enhancement.</li><li><b>3. Susceptibility suggesting air:</b> in collections, soft tissues, along fascial planes, in bone.</li><li><b>4. Abnormal enhancement:</b></li><li>Rim-enhancing collection = abscess.</li><li>Superficial lesion without enhancement = ulcer.</li><li>Enhancement along fascial planes = infectious/inflammatory fasciitis.</li><li>Non-enhancement of normal structures = ischemia.</li><li>Other patterns of enhancement may not be specific.</li><li><b>5. Differentiating osteomyelitis from neuropathic joint:</b></li><li>Joint effusion with marrow replacement on both sides of joint.</li><li>Fluid collections/abscesses (periprosthetic, subperiosteal, intraosseous/Brodie&#x27;s abscess).</li><li>Sinus tract connecting abnormal marrow signal to skin surface.</li><li>Disappearance of subchondral cysts on sequential imaging.</li><li>Progressive marrow/soft tissue changes greater than expected on sequential imaging.</li></ul>
 <h2 id="source-notes">Source Notes</h2>
 <p>Built as a practical dictation aid from standard MSK MRI reporting patterns, review-level radiology references, and the existing shoulder cheat-sheet style. PowerScribe template selections for Achilles, PTT, peroneals, lateral ligaments, syndesmosis, deltoid/spring, talar dome OLT, impingement, plantar fascia, sinus tarsi, tarsal tunnel, and effusion were incorporated as individual F/I entries. Use surgical correlation and local report conventions when needed.</p>
+<button id="toc-handle" class="toc-handle" aria-label="Open table of contents" title="Contents">☰<span class="chev">›</span></button>
 <button id="to-top" class="to-top" aria-label="Back to top" title="Back to top (Home)">↑</button>
 <script>
 (function(){
@@ -630,13 +651,26 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
   var drawer=document.getElementById('toc-drawer'),
       backdrop=document.getElementById('toc-backdrop'),
       tocToggle=document.getElementById('toc-toggle'),
-      tocClose=document.getElementById('toc-close');
-  function tocOpen(){ if(drawer){ drawer.classList.add('open'); backdrop.classList.add('show'); } }
-  function tocCloseFn(){ if(drawer){ drawer.classList.remove('open'); backdrop.classList.remove('show'); } }
+      tocClose=document.getElementById('toc-close'),
+      tocHandle=document.getElementById('toc-handle');
+  function tocOpen(){ if(drawer){ drawer.classList.add('open'); backdrop.classList.add('show'); document.body.classList.add('toc-open'); } }
+  function tocCloseFn(){ if(drawer){ drawer.classList.remove('open'); backdrop.classList.remove('show'); document.body.classList.remove('toc-open'); } }
   function tocToggleFn(){ drawer && (drawer.classList.contains('open')?tocCloseFn():tocOpen()); }
   if(tocToggle) tocToggle.onclick=tocToggleFn;
+  if(tocHandle) tocHandle.onclick=tocOpen;
   if(tocClose) tocClose.onclick=tocCloseFn;
   if(backdrop) backdrop.onclick=tocCloseFn;
+  // swipe-left on the open drawer to close it
+  var swX=null, swY=null;
+  document.addEventListener('touchstart', function(e){
+    if(drawer && drawer.classList.contains('open')){ var t=e.touches[0]; swX=t.clientX; swY=t.clientY; }
+    else swX=null;
+  }, {passive:true});
+  document.addEventListener('touchmove', function(e){
+    if(swX===null) return; var t=e.touches[0];
+    if(t.clientX-swX < -45 && Math.abs(t.clientY-swY) < 70){ tocCloseFn(); swX=null; }
+  }, {passive:true});
+  document.addEventListener('touchend', function(){ swX=null; }, {passive:true});
   if(drawer){
     drawer.addEventListener('click', function(e){
       var tog=e.target.closest('.toc-tog');
