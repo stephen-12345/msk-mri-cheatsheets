@@ -87,6 +87,7 @@ h3{
   margin:22px 0 9px; color:var(--h3tx);
   font-size:18.5px; line-height:1.3; font-weight:700;
   border-bottom:1px solid #2c3a48; padding-bottom:5px;
+  scroll-margin-top:64px;
 }
 
 p{margin:9px 0}
@@ -177,6 +178,60 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 }
 @media print{ .diagram{ break-inside:avoid; } }
 
+/* ── Table-of-contents drawer (overlay; never resizes the page) ── */
+.toc-toggle{
+  display:inline-flex; align-items:center; gap:5px;
+  border:1px solid var(--bdr); border-radius:7px; background:#0d1a26;
+  color:#9fdcf0; font-weight:700; font-size:13px; padding:5px 11px;
+  cursor:pointer; font-family:inherit; margin-right:4px;
+}
+.toc-toggle:hover{ border-color:var(--h3tx); color:#fff; }
+.toc-backdrop{
+  position:fixed; inset:0; z-index:55; background:rgba(0,0,0,0.5);
+  opacity:0; visibility:hidden; transition:opacity .2s;
+}
+.toc-backdrop.show{ opacity:1; visibility:visible; }
+.toc-drawer{
+  position:fixed; top:0; left:0; height:100vh; width:316px; max-width:86vw; z-index:60;
+  background:#0b121d; border-right:1px solid var(--bdr);
+  box-shadow:3px 0 28px rgba(0,0,0,0.55);
+  transform:translateX(-104%); transition:transform .22s ease;
+  display:flex; flex-direction:column;
+}
+.toc-drawer.open{ transform:translateX(0); }
+.toc-head{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:13px 16px; border-bottom:1px solid var(--bdr); flex:0 0 auto;
+}
+.toc-head .t{ font-weight:800; color:#fff; font-size:15px; letter-spacing:.5px; }
+.toc-close{ background:none; border:none; color:var(--tx2); font-size:24px; line-height:1; cursor:pointer; padding:0 4px; }
+.toc-close:hover{ color:#fff; }
+.toc-list{ overflow-y:auto; padding:8px 8px 28px; flex:1; }
+.toc-node.leaf{ }
+.toc-row{ display:flex; align-items:flex-start; }
+.toc-tog{
+  flex:0 0 auto; width:20px; height:26px; margin-top:1px;
+  background:none; border:none; cursor:pointer; padding:0;
+  color:var(--tx3); font-size:11px;
+}
+.toc-tog::before{ content:"▸"; display:inline-block; transition:transform .15s; }
+.toc-node.open > .toc-row > .toc-tog::before{ transform:rotate(90deg); }
+.toc-node.leaf .toc-row{ padding-left:20px; }
+.toc-children{ display:none; }
+.toc-node.open > .toc-children{ display:block; }
+.toc-link{
+  flex:1; display:block; text-decoration:none; color:var(--tx2);
+  padding:5px 9px; border-radius:6px; font-size:13.5px; line-height:1.35;
+  border-left:2px solid transparent;
+}
+.toc-link:hover{ background:#13212f; color:#fff; }
+.toc-link.active{ border-left-color:var(--h3tx); background:#13212f; color:#fff; }
+.toc-link.lvl-group{ color:#c9b6f5; font-weight:800; text-transform:uppercase; font-size:12px; letter-spacing:.5px; }
+.toc-link.lvl-h2{ color:#e6eaf2; font-weight:600; }
+.toc-link.lvl-h3{ color:var(--tx2); font-size:12.5px; }
+.toc-children .toc-children .toc-link{ padding-left:18px; }
+@media print{ .toc-toggle, .toc-drawer, .toc-backdrop{ display:none !important; } }
+
 @media (max-width:680px){
   body{font-size:17px; padding:0 16px 48px}
   .topbar{margin:0 -16px 18px; padding:10px 16px}
@@ -200,48 +255,49 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 </style>
 </head>
 <body>
-<div class="topbar"><span class="crumb">Wrist MRI Dictation Cheat Sheet</span><a href="../index.html">← All regions</a><a class="tmpl" href="../templates/wrist.html">📋 Dictation template</a><a href="wrist-mri-cheatsheet.pdf">PDF (print)</a><a href="wrist-mri-cheatsheet-dark.pdf">PDF (dark)</a><a href="wrist-mri-cheatsheet.md">Markdown</a><span class="fontctl" title="Font size — shortcuts: -, +, 0 to reset"><button id="fs-dec" aria-label="Decrease font size">A−</button><button id="fs-rst" aria-label="Reset font size">A</button><button id="fs-inc" aria-label="Increase font size">A+</button></span></div>
+<div class="topbar"><button id="toc-toggle" class="toc-toggle" title="Contents (c)" aria-label="Table of contents">☰ Contents</button><span class="crumb">Wrist MRI Dictation Cheat Sheet</span><a href="../index.html">← All regions</a><a class="tmpl" href="../templates/wrist.html">📋 Dictation template</a><a href="wrist-mri-cheatsheet.pdf">PDF (print)</a><a href="wrist-mri-cheatsheet-dark.pdf">PDF (dark)</a><a href="wrist-mri-cheatsheet.md">Markdown</a><span class="fontctl" title="Font size — shortcuts: -, +, 0 to reset"><button id="fs-dec" aria-label="Decrease font size">A−</button><button id="fs-rst" aria-label="Reset font size">A</button><button id="fs-inc" aria-label="Increase font size">A+</button></span></div>
+<div id="toc-backdrop" class="toc-backdrop"></div><nav id="toc-drawer" class="toc-drawer" aria-label="Table of contents"><div class="toc-head"><span class="t">Contents</span><button id="toc-close" class="toc-close" aria-label="Close contents">&times;</button></div><div class="toc-list"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#core-measurements">Core Measurements</a></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-h2" href="#how-to-find-it-landmark-based-identification">How to Find It — Landmark-Based Identification</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#orienting-yourself-planes-and-first-moves">Orienting Yourself — Planes and First Moves</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#coronal-the-tfcc">Coronal — The TFCC</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#coronal-intrinsic-interosseous-ligaments">Coronal — Intrinsic (Interosseous) Ligaments</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#coronal-axial-extrinsic-ligaments">Coronal/Axial — Extrinsic Ligaments</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#axial-extensor-compartments-1-6">Axial — Extensor Compartments (1–6)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#axial-flexor-tendons-carpal-tunnel-and-guyon-canal">Axial — Flexor Tendons, Carpal Tunnel, and Guyon Canal</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#carpal-bones-vascularity-and-avn">Carpal Bones — Vascularity and AVN</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#druj-and-ulnar-variance">DRUJ and Ulnar Variance</a></div></div></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#modified-outerbridge-chondromalacia-grading-copy-ready">Modified Outerbridge Chondromalacia Grading - Copy-Ready</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#wrist-mri-tells">Wrist MRI Tells</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#normal-negative-templates">Normal / Negative Templates</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#useful-caveats">Useful Caveats</a></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-group" href="#tfcc">TFCC</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#intact-normal">Intact / Normal</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#central-disc-perforation">Central Disc Perforation</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#peripheral-foveal-tear">Peripheral / Foveal Tear</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#radial-attachment-tear">Radial Attachment Tear</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#tfcc-degeneration">TFCC Degeneration</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-group" href="#ulnar-variance-impaction">Ulnar Variance / Impaction</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#neutral-ulnar-variance">Neutral Ulnar Variance</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#positive-ulnar-variance">Positive Ulnar Variance</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#negative-ulnar-variance">Negative Ulnar Variance</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-group" href="#intrinsic-ligaments">Intrinsic Ligaments</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#scapholunate-ligament">Scapholunate Ligament</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#lunotriquetral-ligament">Lunotriquetral Ligament</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-group" href="#carpal-tunnel-median-nerve">Carpal Tunnel / Median Nerve</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#normal">Normal</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#mild-carpal-tunnel-syndrome">Mild Carpal Tunnel Syndrome</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#moderate-carpal-tunnel-syndrome">Moderate Carpal Tunnel Syndrome</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#severe-carpal-tunnel-syndrome">Severe Carpal Tunnel Syndrome</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#flexor-tenosynovitis-contributing-to-cts">Flexor Tenosynovitis Contributing to CTS</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-group" href="#guyon-canal-ulnar-nerve">Guyon Canal / Ulnar Nerve</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#normal-2">Normal</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#ganglion-cyst-with-nerve-compression">Ganglion Cyst with Nerve Compression</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#hook-of-hamate-fracture-with-nerve-effect">Hook of Hamate Fracture with Nerve Effect</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#ulnar-neuropathy-with-hypothenar-denervation">Ulnar Neuropathy with Hypothenar Denervation</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-group" href="#extensor-tendons">Extensor Tendons</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#de-quervain-tenosynovitis">De Quervain Tenosynovitis</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#ecu-subluxation-subsheath-injury">ECU Subluxation / Subsheath Injury</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#ecu-split-tear">ECU Split Tear</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#fourth-compartment-tenosynovitis">Fourth Compartment Tenosynovitis</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-group" href="#lunate-kienbock-disease">Lunate / Kienbock Disease</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#lichtman-stage-i">Lichtman Stage I</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#lichtman-stage-ii">Lichtman Stage II</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#lichtman-stage-iiia">Lichtman Stage IIIA</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#lichtman-stage-iiib">Lichtman Stage IIIB</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#lichtman-stage-iv">Lichtman Stage IV</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-group" href="#bone-fracture">Bone / Fracture</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#scaphoid-fracture">Scaphoid Fracture</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#scaphoid-stress-reaction">Scaphoid Stress Reaction</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#distal-radius-ulna-marrow-edema">Distal Radius / Ulna Marrow Edema</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#ganglion-cyst">Ganglion Cyst</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-group" href="#effusion-other">Effusion / Other</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#joint-effusion">Joint Effusion</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#search-pattern">Search Pattern</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#infection-search-pattern">Infection Search Pattern</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#source-notes">Source Notes</a></div></div></div></div></div></nav>
 <h1>Wrist MRI Dictation Cheat Sheet - Expanded Findings &amp; Impressions</h1>
 <p class="subtitle">Copy-ready language. Replace bracketed text. Use as a workstation reference, not a substitute for surgical correlation or local report style.</p>
-<h2>Core Measurements</h2>
+<h2 id="core-measurements">Core Measurements</h2>
 <table><thead><tr><th>Measurement</th><th>Normal / Threshold</th></tr></thead><tbody><tr><td>SL interval</td><td>Normal &lt;3 mm; borderline 3-4 mm; abnormal &gt;4 mm on PA view.</td></tr><tr><td>SL angle</td><td>Normal 30-60 degrees; DISI &gt;70 degrees; VISI &lt;30 degrees.</td></tr><tr><td>Ulnar variance</td><td>Measured on PA neutral rotation; reported in mm positive or negative.</td></tr><tr><td>Carpal height ratio</td><td>Normal &gt;0.54 (carpal height / third MC length).</td></tr><tr><td>Median nerve CSA</td><td>Abnormal &gt;10-12 mm squared at pisiform level.</td></tr><tr><td>Flattening ratio</td><td>Major axis / minor axis of median nerve; abnormal &gt;3.</td></tr><tr><td>Lichtman classification</td><td>Kienbock staging: I = marrow edema only; II = sclerosis, no collapse; IIIA = collapse, no scaphoid rotation; IIIB = collapse + fixed scaphoid rotation; IV = radiocarpal/midcarpal arthrosis.</td></tr></tbody></table>
-<h2>How to Find It — Landmark-Based Identification</h2>
+<h2 id="how-to-find-it-landmark-based-identification">How to Find It — Landmark-Based Identification</h2>
 <p>This section teaches you to navigate the wrist MRI by anchoring every structure to a bony or tendinous landmark. Read the <b>coronal</b> as your workhorse for the TFCC and intrinsic ligaments, and the <b>axial</b> for tendons, compartments, and nerves, cross-referencing constantly between planes.</p>
-<h3>Orienting Yourself — Planes and First Moves</h3>
+<h3 id="orienting-yourself-planes-and-first-moves">Orienting Yourself — Planes and First Moves</h3>
 <div class="callout pearl"><div class="c-title"><span class="ico">💡</span><span class="lbl">Pearl</span><span class="ttl">Pick the right plane before you look for the structure</span></div><p>Each wrist structure has a &quot;home plane&quot; where it is best profiled. Train yourself to switch planes reflexively rather than forcing one image to answer everything.</p><ul><li><b>Coronal</b>: TFCC, scapholunate and lunotriquetral ligaments, ulnar variance, carpal alignment, AVN of scaphoid/lunate</li><li><b>Axial</b>: extensor compartments 1–6, flexor tendons, carpal tunnel, Guyon canal, DRUJ congruence, ECU position</li><li><b>Sagittal</b>: carpal arcs/alignment, dorsal vs volar location of a finding, occult fracture lines</li></ul></div>
 <div class="callout landmark"><div class="c-title"><span class="ico">📍</span><span class="lbl">Landmark</span><span class="ttl">Lister tubercle — your dorsal compass</span></div><p>The <b>Lister tubercle</b> is the small bony prominence on the dorsal distal radius. On <b>axial</b> it is the single most useful dorsal landmark: it separates <b>extensor compartment 2</b> (radial to it) from <b>compartment 3</b> (ulnar to it), and the <b>EPL</b> tendon hooks around its ulnar side. Find Lister first, then count compartments around the radius.</p></div>
-<h3>Coronal — The TFCC</h3>
+<h3 id="coronal-the-tfcc">Coronal — The TFCC</h3>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">TFCC articular disc (triangular fibrocartilage proper)</span></div><p>On <b>coronal</b>, find the low-signal triangular <b>articular disc</b> spanning from the <b>sigmoid notch of the radius</b> to the <b>base of the ulnar styloid/fovea</b>. It is uniformly dark on all sequences and sits between the ulnar head and the proximal lunate/triquetrum.</p><ul><li>Best seen on <b>coronal T2/PD fat-sat</b> or <b>T2* GRE</b>; fluid-bright tears stand out against the dark disc</li><li>The central disc is thinnest and avascular; the periphery is vascular and heals</li></ul></div>
 <div class="callout landmark"><div class="c-title"><span class="ico">📍</span><span class="lbl">Landmark</span><span class="ttl">The ulnar (foveal vs styloid) attachments</span></div><p>The disc attaches to the ulna by <b>two limbs</b>: a deep <b>foveal (ligamentum subcruentum)</b> attachment into the <b>fovea</b> at the base of the styloid, and a superficial <b>styloid</b> attachment. The fovea sits just radial and proximal to the tip of the styloid.</p><ul><li>The <b>foveal attachment</b> is the biomechanically critical one for DRUJ stability — look for it specifically on coronal images angled to the fovea</li><li>Trace both limbs; an isolated foveal avulsion can be missed if you only follow the styloid limb</li></ul></div>
 <div class="callout pearl"><div class="c-title"><span class="ico">💡</span><span class="lbl">Pearl</span><span class="ttl">Traumatic vs degenerative TFCC tears — the concept</span></div><p>Think mechanism by <b>location</b>. <b>Traumatic (Palmer class 1)</b> tears are <b>peripheral/foveal</b> — they involve the vascular ulnar attachments and present after a fall or with DRUJ instability. <b>Degenerative (Palmer class 2)</b> tears are <b>central</b> — wear-through of the avascular disc, associated with <b>ulnar positive variance</b> and ulnar impaction.</p><ul><li>Peripheral/foveal tear → think instability and possible repair</li><li>Central perforation → think chronic load and impaction, often not repaired</li></ul></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Dorsal and volar radioulnar ligaments</span></div><p>These are the thickened <b>dorsal and volar margins of the TFCC</b> that run from the sigmoid notch to the ulnar fovea/styloid, best appreciated at the front and back edges of the disc on <b>axial</b> and peripheral <b>coronal</b> images. Together they are the primary stabilizers of the DRUJ.</p></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Meniscus homologue and ECU subsheath</span></div><p>The <b>meniscus homologue</b> is the loose connective/vascular tissue filling the ulnar-most TFCC between the styloid and triquetrum — do not mistake its intermediate signal for a tear. The <b>ECU subsheath</b> is the deep sheath anchoring the <b>ECU</b> tendon in its groove on the dorsal ulnar head; it is part of the TFCC complex and key to ECU stability.</p></div>
 <div class="callout pitfall"><div class="c-title"><span class="ico">⚠️</span><span class="lbl">Pitfall</span><span class="ttl">TFCC normal-signal mimics</span></div><p>Several normal features create intermediate signal that mimics a tear.</p><ul><li>The <b>ulnar attachment striations</b> and the vascular <b>ligamentum subcruentum</b> show intermediate signal — not fluid-bright</li><li>A true tear is <b>fluid-bright on T2 fat-sat</b> and disrupts the dark fibers; intermediate signal that is not fluid-bright is usually normal</li><li>The disc thins centrally with age — central thinning alone is not a tear</li></ul></div>
-<h3>Coronal — Intrinsic (Interosseous) Ligaments</h3>
+<h3 id="coronal-intrinsic-interosseous-ligaments">Coronal — Intrinsic (Interosseous) Ligaments</h3>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Scapholunate interosseous ligament (SLIL)</span></div><p>On <b>coronal</b>, find the low-signal <b>C-shaped/triangular</b> band bridging the proximal <b>scaphoid</b> and <b>lunate</b>. Identify the two carpal bones on the proximal row, then look at the bone-to-bone interval at their proximal junction.</p><ul><li>The <b>dorsal band is the thickest and most biomechanically important</b> component — scrutinize it most carefully</li><li>Look on the coronal slice where both proximal poles are well profiled; the membranous central portion is normally thinner</li></ul></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Lunotriquetral interosseous ligament (LTIL)</span></div><p>On <b>coronal</b>, the analogous low-signal <b>triangular/C-shaped</b> band bridges the <b>lunate</b> and <b>triquetrum</b>, one bone ulnar to the SLIL. As with the SLIL, the <b>dorsal band</b> is the most important stabilizer.</p><ul><li>Tears are subtler than SLIL tears; correlate with carpal alignment on sagittal</li></ul></div>
 <div class="callout pearl"><div class="c-title"><span class="ico">💡</span><span class="lbl">Pearl</span><span class="ttl">Normal triangle, abnormal gap</span></div><p>A normal intrinsic ligament is a compact <b>dark triangle/C</b> snugly filling the interosseous interval. Replacement by <b>fluid-bright signal</b>, fiber discontinuity, or a <b>widened interval</b> (e.g., scapholunate widening — the &quot;Terry Thomas/David Letterman sign&quot; on radiographs) signals a tear.</p><ul><li>Always read the intrinsic ligaments together with carpal alignment — DISI (with SL tears) and VISI (with LT tears) confirm functional significance</li></ul></div>
-<h3>Coronal/Axial — Extrinsic Ligaments</h3>
+<h3 id="coronal-axial-extrinsic-ligaments">Coronal/Axial — Extrinsic Ligaments</h3>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Volar extrinsic ligaments</span></div><p>On <b>coronal</b> volar slices, orient to the major volar stabilizers running obliquely from the radius to the carpus: the <b>radioscaphocapitate (RSC)</b>, the <b>long radiolunate</b>, and the <b>short radiolunate</b> ligaments, fanning out from the volar radial margin.</p><ul><li>The <b>RSC</b> runs from the radial styloid across the scaphoid waist — it forms a sling and is a landmark for the scaphoid waist</li><li>These appear as low-signal striated bands; thin fat planes between them are normal and should not be called tears</li></ul></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Dorsal extrinsic ligaments</span></div><p>On <b>dorsal coronal</b> slices, find the <b>dorsal radiocarpal (radiotriquetral)</b> ligament running from the dorsal radius to the triquetrum, and the <b>dorsal intercarpal</b> ligament running transversely across the dorsal carpus. Together they form a lateral V centered on the triquetrum.</p></div>
-<h3>Axial — Extensor Compartments (1–6)</h3>
+<h3 id="axial-extensor-compartments-1-6">Axial — Extensor Compartments (1–6)</h3>
 <div class="callout landmark"><div class="c-title"><span class="ico">📍</span><span class="lbl">Landmark</span><span class="ttl">Count the six compartments around the distal radius/ulna</span></div><p>On <b>axial</b> at the distal radius, walk radial-to-ulnar around the dorsal cortex using bony landmarks. Lister tubercle is your fixed reference between compartments 2 and 3.</p></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Compartment 1 — APL and EPB (de Quervain)</span></div><p>At the <b>radial styloid</b>, find the <b>abductor pollicis longus (APL)</b> and <b>extensor pollicis brevis (EPB)</b> in a shared groove on the radial/dorsal surface. This is the site of <b>de Quervain tenosynovitis</b>.</p><ul><li>Look for fluid/thickening around these tendons and thickening of the overlying retinaculum</li><li>A <b>septum</b> dividing APL from EPB is a common variant that predisposes to de Quervain and to treatment failure</li></ul></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Compartments 2 and 3 — separated by Lister tubercle</span></div><p><b>Compartment 2</b> (radial to Lister) carries the <b>ECRL and ECRB</b> (radial wrist extensors). <b>Compartment 3</b> (ulnar to Lister) carries the <b>EPL</b>, which hooks around the ulnar side of the tubercle and then angles toward the thumb.</p><ul><li><b>EPL changes direction at Lister tubercle and is at risk of attritional rupture after distal radius fracture</b> — scrutinize it specifically in that setting</li></ul></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Compartment 6 — ECU in its ulnar groove</span></div><p>On <b>axial</b>, find the <b>extensor carpi ulnaris (ECU)</b> sitting in the <b>groove on the dorsal aspect of the ulnar head/styloid</b>. Its position in the groove and its subsheath are key to ulnar-sided stability.</p><ul><li>Compartments 4 (EDC/EIP) and 5 (EDM) lie between 3 and 6 over the dorsal radius/DRUJ</li></ul></div>
 <div class="callout pitfall"><div class="c-title"><span class="ico">⚠️</span><span class="lbl">Pitfall</span><span class="ttl">ECU subluxation and &quot;magic angle&quot;</span></div><p>The ECU and its groove deserve targeted attention.</p><ul><li>With forearm <b>supination</b>, the ECU can sublux/dislocate out of its groove — check tendon position relative to the groove, ideally correlating with positioning</li><li>Curving tendons (e.g., <b>EPL</b> around Lister, ECU around the ulna) show <b>magic-angle</b> increased signal on short-TE sequences (T1/PD) at ~55° to B0 — confirm on <b>T2</b> before calling tendinosis</li></ul></div>
-<h3>Axial — Flexor Tendons, Carpal Tunnel, and Guyon Canal</h3>
+<h3 id="axial-flexor-tendons-carpal-tunnel-and-guyon-canal">Axial — Flexor Tendons, Carpal Tunnel, and Guyon Canal</h3>
 <div class="callout landmark"><div class="c-title"><span class="ico">📍</span><span class="lbl">Landmark</span><span class="ttl">Hook of hamate and pisiform — the distal carpal tunnel roof anchors</span></div><p>On <b>axial</b> at the distal carpal row, the <b>hook of hamate</b> (radial) and the <b>pisiform/triquetral</b> complex (ulnar) are the bony attachments of the <b>flexor retinaculum (transverse carpal ligament)</b>, which forms the roof of the carpal tunnel.</p><ul><li>The hook of hamate is a frequent <b>occult fracture</b> site — scrutinize its cortex on axial</li><li>These two landmarks also bracket <b>Guyon canal</b>, which lies superficial and ulnar to the retinaculum</li></ul></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Median nerve in the carpal tunnel</span></div><p>On <b>axial</b>, find the <b>median nerve</b> as an ovoid structure superficial (volar) to the flexor tendons, just deep to the flexor retinaculum, typically radial within the tunnel near the <b>FCR</b>. Trace it from proximal to distal.</p><ul><li>In <b>carpal tunnel syndrome</b> look for nerve flattening at the level of the hook of hamate, proximal nerve swelling, and retinacular bowing</li><li>A <b>bifid median nerve</b> and a <b>persistent median artery</b> are common variants — don&#x27;t mistake them for pathology</li></ul></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Guyon canal — ulnar nerve and artery</span></div><p>On <b>axial</b>, find <b>Guyon canal</b> between the <b>pisiform</b> (medial wall) and the <b>hook of hamate</b> (lateral wall), superficial to the flexor retinaculum. The <b>ulnar artery</b> lies radial to the <b>ulnar nerve</b> within the canal.</p><ul><li>The ulnar nerve divides here into superficial (sensory) and deep (motor) branches</li><li>Hamate hook fractures and ganglia are classic causes of distal ulnar neuropathy here</li></ul></div>
-<h3>Carpal Bones — Vascularity and AVN</h3>
+<h3 id="carpal-bones-vascularity-and-avn">Carpal Bones — Vascularity and AVN</h3>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Scaphoid — waist fractures and proximal pole</span></div><p>On <b>coronal</b> and <b>sagittal</b>, trace the scaphoid from distal tubercle to <b>proximal pole</b>; most fractures cross the <b>waist</b>. The scaphoid receives its blood supply <b>retrograde from distal to proximal</b>.</p><ul><li>A <b>proximal pole</b> or displaced waist fracture risks <b>AVN</b> of the proximal fragment because of the retrograde supply</li><li><b>Viable</b> marrow shows preserved/edematous (bright on T2) signal; <b>AVN</b> shows <b>low T1 signal</b> in the proximal pole and lack of enhancement on post-contrast images</li></ul></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Lunate — Kienböck disease</span></div><p>On <b>coronal</b>, evaluate the <b>lunate</b> marrow for <b>Kienböck (lunate AVN)</b>: diffuse <b>low T1 signal</b> in the lunate, with variable T2 signal depending on stage, and eventual collapse/fragmentation.</p><ul><li>Kienböck is <b>associated with ulnar-negative variance</b>, which increases load on the lunate</li><li>Early disease may show only marrow edema; correlate with morphology and variance</li></ul></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Capitate</span></div><p>The <b>capitate</b> is the central keystone of the distal carpal row, articulating proximally with the lunate at the midcarpal joint. Use it as the rotational center when assessing carpal alignment on sagittal images; isolated capitate AVN is rare but assessed the same way (T1 marrow signal, enhancement).</p></div>
-<h3>DRUJ and Ulnar Variance</h3>
+<h3 id="druj-and-ulnar-variance">DRUJ and Ulnar Variance</h3>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">DRUJ congruence</span></div><p>On <b>axial</b> through the <b>sigmoid notch</b>, assess seating of the <b>ulnar head</b> in the <b>sigmoid notch of the radius</b>. The ulna should sit congruently within the notch.</p><ul><li>Dorsal or volar translation of the ulnar head suggests <b>DRUJ instability</b>, often associated with <b>foveal TFCC</b> or radioulnar ligament injury</li><li>Compare with the contralateral side and correlate positioning, since apparent subluxation can be positional</li></ul></div>
 <div class="callout measure"><div class="c-title"><span class="ico">📏</span><span class="lbl">Measure</span><span class="ttl">Ulnar variance</span></div><p>Measure <b>ulnar variance</b> on a <b>coronal</b> image (ideally correlated with a PA radiograph in neutral rotation): the <b>difference in length between the distal articular surface of the ulnar head and the ulnar/medial corner of the distal radial articular surface</b>, measured along the long axis of the radius.</p><ul><li><b>Positive variance</b> = ulna projects distal to the radius → predisposes to <b>ulnar impaction syndrome</b>, <b>central (degenerative) TFCC tears</b>, and lunotriquetral pathology</li><li><b>Negative variance</b> = ulna shorter than the radius → associated with <b>Kienböck disease</b> (increased lunate load)</li><li><b>Neutral</b> = the two articular surfaces are level; variance is rotation-dependent, so positioning matters</li></ul></div>
-<h2>Modified Outerbridge Chondromalacia Grading - Copy-Ready</h2>
+<h2 id="modified-outerbridge-chondromalacia-grading-copy-ready">Modified Outerbridge Chondromalacia Grading - Copy-Ready</h2>
 <p>Use this for any articular surface. Replace <span class="ph">[surface/compartment]</span> with the specific location: patellar median ridge, medial femoral condyle weightbearing surface, anterosuperior acetabulum, radiocapitellar joint, tibiotalar dome, first MTP joint, etc.</p>
 <table><thead><tr><th>Grade</th><th>MRI shorthand</th></tr></thead><tbody><tr><td>0</td><td>Normal cartilage.</td></tr><tr><td>1</td><td>Signal heterogeneity/softening or swelling; surface intact.</td></tr><tr><td>2</td><td>Superficial fissuring/fraying/partial-thickness defect &lt;50% cartilage depth.</td></tr><tr><td>3</td><td>Deep fissuring/partial-thickness defect &gt;50% cartilage depth, not exposing bone.</td></tr><tr><td>4</td><td>Full-thickness cartilage loss with exposed subchondral bone, often edema/cysts.</td></tr></tbody></table>
 <div class="dx">Grade 0 - normal cartilage</div>
@@ -259,9 +315,9 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 <div class="dx">Grade 4 - full-thickness chondral loss</div>
 <p class="f"><b>F:</b> Full-thickness cartilage loss/fissuring of the <span class="ph">[surface/compartment]</span> measuring <span class="ph">[X]</span> x <span class="ph">[Y]</span> mm with exposed subchondral bone and <span class="ph">[subchondral marrow edema/cystic change]</span>. <span class="ph">[Small unstable chondral flap/loose body if present.]</span></p>
 <p class="i"><b>I:</b> Grade 4 chondromalacia/full-thickness chondral defect of the <span class="ph">[surface/compartment]</span>.</p>
-<h2>Wrist MRI Tells</h2>
+<h2 id="wrist-mri-tells">Wrist MRI Tells</h2>
 <ul><li>TFCC: central disc perforations are a common degenerative finding (Palmer class 2); peripheral and foveal tears are more surgically relevant.</li><li>SL ligament: the dorsal component is the strongest and most important for carpal stability; isolated membranous perforations may be incidental.</li><li>Carpal tunnel: palmar bowing of the flexor retinaculum &gt;4 mm is considered significant for carpal tunnel syndrome.</li><li>Kienbock disease: higher risk with negative ulnar variance and type I lunate morphology (Zapico classification, single distal articular facet).</li><li>ECU: subsheath injury allows dynamic subluxation out of the ulnar groove; axial images obtained with the forearm in supination improve detection.</li><li>Ganglion cysts: dorsal scapholunate origin is the most common location; always search for an underlying SL ligament tear.</li></ul>
-<h2>Normal / Negative Templates</h2>
+<h2 id="normal-negative-templates">Normal / Negative Templates</h2>
 <div class="dx">Normal wrist</div>
 <p class="f"><b>F:</b> Carpal bones demonstrate normal morphology and marrow signal. Intrinsic and extrinsic ligaments are intact. TFCC central disc and peripheral attachments are intact. Extensor and flexor tendons are normal in caliber and signal without tenosynovitis. No joint effusion or synovitis. No fracture or aggressive osseous lesion.</p>
 <p class="i"><b>I:</b> Normal MRI of the wrist.</p>
@@ -271,50 +327,50 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 <div class="dx">Normal carpal tunnel</div>
 <p class="f"><b>F:</b> Median nerve is normal in caliber and signal at the level of the pisiform with cross-sectional area measuring <span class="ph">[X]</span> mm squared. No increased T2 signal within the nerve. Normal flattening ratio. No palmar bowing of the flexor retinaculum. Flexor tendons within the carpal tunnel are normal without tenosynovitis or mass lesion.</p>
 <p class="i"><b>I:</b> Normal carpal tunnel. No evidence of median neuropathy.</p>
-<h2>Useful Caveats</h2>
+<h2 id="useful-caveats">Useful Caveats</h2>
 <ul><li>TFCC: central disc perforations increase in prevalence with age; isolated central tears without peripheral detachment may be asymptomatic and incidental.</li><li>SL ligament: membranous component perforations are common age-related findings; clinical significance depends on dorsal/volar component integrity and SL interval measurement.</li><li>Bifid median nerve: normal anatomic variant present in up to 3% of individuals; look for an associated persistent median artery.</li><li>Ulnocarpal abutment triad: positive ulnar variance plus lunate subchondral edema plus TFCC tear; all three components suggest clinically significant impaction.</li></ul>
-<h2 class="group">TFCC</h2>
-<h2>Intact / Normal</h2>
+<h2 class="group" id="tfcc">TFCC</h2>
+<h2 id="intact-normal">Intact / Normal</h2>
 <div class="dx">Intact TFCC</div>
 <p class="f"><b>F:</b> TFCC central articular disc is intact with homogeneous low signal on all sequences. Peripheral ulnar attachment at the foveal and ulnar styloid insertions is intact. Radial attachment is intact. No DRUJ widening or effusion.</p>
 <p class="i"><b>I:</b> Intact TFCC.</p>
-<h2>Central Disc Perforation</h2>
+<h2 id="central-disc-perforation">Central Disc Perforation</h2>
 <div class="dx">Central TFCC perforation (Palmer 1A)</div>
 <p class="f"><b>F:</b> Full-thickness fluid-signal perforation of the central articular disc of the TFCC with fluid communicating between the radiocarpal and distal radioulnar joints. Peripheral foveal and styloid attachments are intact. No DRUJ widening.</p>
 <p class="i"><b>I:</b> Central TFCC perforation, Palmer 1A pattern. Peripheral attachments intact.</p>
-<h2>Peripheral / Foveal Tear</h2>
+<h2 id="peripheral-foveal-tear">Peripheral / Foveal Tear</h2>
 <div class="dx">Ulnar peripheral tear - foveal/styloid insertion (Palmer 1B)</div>
 <p class="f"><b>F:</b> Discontinuity of the ulnar peripheral TFCC attachment at the <span class="ph">[foveal/styloid]</span> insertion with surrounding edema and fluid. Distal radioulnar joint interval is <span class="ph">[mildly widened/within normal limits]</span>. <span class="ph">[DRUJ effusion is present.]</span></p>
 <p class="i"><b>I:</b> Peripheral ulnar-sided TFCC tear at the <span class="ph">[foveal/styloid]</span> insertion (Palmer 1B), a potential source of DRUJ instability. Surgical correlation recommended.</p>
 <div class="dx">Peripheral tear with DRUJ instability</div>
 <p class="f"><b>F:</b> Peripheral discontinuity of the TFCC ulnar attachment with DRUJ fluid and widened distal radioulnar joint interval measuring <span class="ph">[X]</span> mm. Subchondral edema along the ulnar aspect of the sigmoid notch.</p>
 <p class="i"><b>I:</b> Peripheral TFCC tear with findings suggesting DRUJ instability.</p>
-<h2>Radial Attachment Tear</h2>
+<h2 id="radial-attachment-tear">Radial Attachment Tear</h2>
 <div class="dx">Radial attachment tear (Palmer 1D)</div>
 <p class="f"><b>F:</b> Fluid-signal cleft at the radial attachment of the TFCC along the sigmoid notch of the distal radius. Central disc and ulnar peripheral attachments are intact.</p>
 <p class="i"><b>I:</b> TFCC radial attachment tear, Palmer 1D pattern.</p>
-<h2>TFCC Degeneration</h2>
+<h2 id="tfcc-degeneration">TFCC Degeneration</h2>
 <div class="dx">TFCC degeneration without perforation</div>
 <p class="f"><b>F:</b> TFCC central disc demonstrates thinning with diffuse intermediate signal on proton density and T2 sequences without a discrete full-thickness perforation. Peripheral attachments are intact.</p>
 <p class="i"><b>I:</b> TFCC central disc degeneration without complete perforation (Palmer 2A/2B pattern). Correlate with ulnar-sided symptoms.</p>
-<h2 class="group">Ulnar Variance / Impaction</h2>
-<h2>Neutral Ulnar Variance</h2>
+<h2 class="group" id="ulnar-variance-impaction">Ulnar Variance / Impaction</h2>
+<h2 id="neutral-ulnar-variance">Neutral Ulnar Variance</h2>
 <div class="dx">Neutral ulnar variance - no impaction</div>
 <p class="f"><b>F:</b> Neutral ulnar variance on PA neutral rotation view. No subchondral marrow edema in the proximal ulnar lunate or triquetrum. TFCC is intact.</p>
 <p class="i"><b>I:</b> Neutral ulnar variance. No ulnocarpal impaction.</p>
-<h2>Positive Ulnar Variance</h2>
+<h2 id="positive-ulnar-variance">Positive Ulnar Variance</h2>
 <div class="dx">Positive ulnar variance with edema</div>
 <p class="f"><b>F:</b> Positive ulnar variance measuring <span class="ph">[+X]</span> mm. T1 hypointense, T2 hyperintense subchondral marrow edema in the proximal ulnar aspect of the lunate with <span class="ph">[small subchondral cysts]</span>. TFCC is <span class="ph">[thinned/torn]</span>. <span class="ph">[Lunotriquetral ligament signal abnormality.]</span></p>
 <p class="i"><b>I:</b> Positive ulnar variance with ulnocarpal abutment. <span class="ph">[TFCC tear. LT ligament abnormality.]</span></p>
 <div class="dx">Ulnocarpal abutment syndrome - full triad</div>
 <p class="f"><b>F:</b> Positive ulnar variance measuring <span class="ph">[+X]</span> mm with T1 hypointense, T2 hyperintense subchondral marrow edema and small cystic foci in the proximal ulnar lunate. TFCC central disc is thinned/perforated. Lunotriquetral ligament demonstrates increased signal/partial disruption.</p>
 <p class="i"><b>I:</b> Ulnocarpal abutment syndrome with the classic triad of positive ulnar variance, lunate edema, and TFCC tear. LT ligament abnormality.</p>
-<h2>Negative Ulnar Variance</h2>
+<h2 id="negative-ulnar-variance">Negative Ulnar Variance</h2>
 <div class="dx">Negative ulnar variance</div>
 <p class="f"><b>F:</b> Negative ulnar variance measuring <span class="ph">[-X]</span> mm on PA neutral rotation view. Lunate marrow signal is <span class="ph">[normal/shows edema]</span>.</p>
 <p class="i"><b>I:</b> Negative ulnar variance. <span class="ph">[Correlate clinically for Kienbock disease risk given lunate morphology.]</span></p>
-<h2 class="group">Intrinsic Ligaments</h2>
-<h2>Scapholunate Ligament</h2>
+<h2 class="group" id="intrinsic-ligaments">Intrinsic Ligaments</h2>
+<h2 id="scapholunate-ligament">Scapholunate Ligament</h2>
 <div class="dx">Intact SL ligament</div>
 <p class="f"><b>F:</b> Dorsal, membranous, and volar components of the scapholunate ligament demonstrate intact low-signal fibers. SL interval measures <span class="ph">[X]</span> mm, within normal limits. SL angle is <span class="ph">[X]</span> degrees on the sagittal plane.</p>
 <p class="i"><b>I:</b> Intact scapholunate ligament. Normal SL interval and alignment.</p>
@@ -330,7 +386,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 <div class="dx">Complete SL disruption with DISI</div>
 <p class="f"><b>F:</b> Complete disruption of the dorsal, membranous, and volar scapholunate ligament fibers with widened SL interval measuring <span class="ph">[X]</span> mm. Increased SL angle measuring <span class="ph">[Y]</span> degrees with volar flexion of the scaphoid and dorsal extension of the lunate, consistent with DISI pattern. <span class="ph">[Radioscaphoid articular cartilage irregularity/early chondral loss.]</span></p>
 <p class="i"><b>I:</b> Complete scapholunate ligament tear with DISI (dorsal intercalated segmental instability). <span class="ph">[Early SLAC wrist changes.]</span></p>
-<h2>Lunotriquetral Ligament</h2>
+<h2 id="lunotriquetral-ligament">Lunotriquetral Ligament</h2>
 <div class="dx">Intact LT ligament</div>
 <p class="f"><b>F:</b> Lunotriquetral ligament fibers demonstrate intact homogeneous low signal without fluid cleft or disruption.</p>
 <p class="i"><b>I:</b> Intact lunotriquetral ligament.</p>
@@ -343,104 +399,104 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 <div class="dx">Complete LT tear with VISI</div>
 <p class="f"><b>F:</b> Complete discontinuity of the lunotriquetral ligament fibers. SL angle is reduced at <span class="ph">[X]</span> degrees with volar tilt of the lunate, consistent with VISI pattern.</p>
 <p class="i"><b>I:</b> Complete lunotriquetral ligament tear with VISI (volar intercalated segmental instability).</p>
-<h2 class="group">Carpal Tunnel / Median Nerve</h2>
-<h2>Normal</h2>
+<h2 class="group" id="carpal-tunnel-median-nerve">Carpal Tunnel / Median Nerve</h2>
+<h2 id="normal">Normal</h2>
 <div class="dx">Normal median nerve</div>
 <p class="f"><b>F:</b> Median nerve is normal in caliber and signal at the pisiform level with cross-sectional area measuring <span class="ph">[X]</span> mm squared. Flattening ratio is normal. No palmar bowing of the flexor retinaculum. Flexor tendons are normal without tenosynovitis.</p>
 <p class="i"><b>I:</b> Normal median nerve. No carpal tunnel syndrome.</p>
-<h2>Mild Carpal Tunnel Syndrome</h2>
+<h2 id="mild-carpal-tunnel-syndrome">Mild Carpal Tunnel Syndrome</h2>
 <div class="dx">Mild median neuropathy</div>
 <p class="f"><b>F:</b> Mild enlargement of the median nerve at the pisiform level with cross-sectional area measuring <span class="ph">[X]</span> mm squared. Subtle increased T2 signal within the nerve. Flattening ratio is normal. No palmar bowing of the flexor retinaculum.</p>
 <p class="i"><b>I:</b> Mild median nerve enlargement with subtle signal change, compatible with early carpal tunnel syndrome. Correlate with electrodiagnostic studies.</p>
-<h2>Moderate Carpal Tunnel Syndrome</h2>
+<h2 id="moderate-carpal-tunnel-syndrome">Moderate Carpal Tunnel Syndrome</h2>
 <div class="dx">Moderate median neuropathy</div>
 <p class="f"><b>F:</b> Enlarged median nerve with cross-sectional area measuring <span class="ph">[X]</span> mm squared at the pisiform level. Increased T2 signal within the nerve fascicles. Distal flattening of the nerve at the hamate level with flattening ratio of <span class="ph">[X]</span>. Palmar bowing of the flexor retinaculum measuring <span class="ph">[X]</span> mm.</p>
 <p class="i"><b>I:</b> Moderate carpal tunnel syndrome with median nerve enlargement, increased T2 signal, and retinacular bowing.</p>
-<h2>Severe Carpal Tunnel Syndrome</h2>
+<h2 id="severe-carpal-tunnel-syndrome">Severe Carpal Tunnel Syndrome</h2>
 <div class="dx">Severe median neuropathy with thenar denervation</div>
 <p class="f"><b>F:</b> Markedly enlarged median nerve with prominent T2 hyperintense signal. Prominent palmar bowing of the flexor retinaculum measuring <span class="ph">[X]</span> mm. T2 hyperintense signal within the thenar musculature, compatible with denervation edema. <span class="ph">[Thenar muscle volume loss if chronic.]</span></p>
 <p class="i"><b>I:</b> Severe carpal tunnel syndrome with thenar denervation changes.</p>
-<h2>Flexor Tenosynovitis Contributing to CTS</h2>
+<h2 id="flexor-tenosynovitis-contributing-to-cts">Flexor Tenosynovitis Contributing to CTS</h2>
 <div class="dx">Flexor tenosynovitis with mass effect on median nerve</div>
 <p class="f"><b>F:</b> Fluid and synovial thickening surrounding the flexor tendons within the carpal tunnel with mass effect on and displacement of the median nerve. Median nerve demonstrates increased T2 signal. <span class="ph">[Space-occupying lesion/ganglion cyst if present.]</span></p>
 <p class="i"><b>I:</b> Flexor tenosynovitis within the carpal tunnel with secondary median nerve compression.</p>
-<h2 class="group">Guyon Canal / Ulnar Nerve</h2>
-<h2>Normal</h2>
+<h2 class="group" id="guyon-canal-ulnar-nerve">Guyon Canal / Ulnar Nerve</h2>
+<h2 id="normal-2">Normal</h2>
 <div class="dx">Normal ulnar nerve at Guyon canal</div>
 <p class="f"><b>F:</b> Ulnar nerve is normal in caliber and signal at the Guyon canal. Hook of hamate is intact. No mass lesion or ganglion cyst in the Guyon canal.</p>
 <p class="i"><b>I:</b> Normal Guyon canal. No ulnar neuropathy.</p>
-<h2>Ganglion Cyst with Nerve Compression</h2>
+<h2 id="ganglion-cyst-with-nerve-compression">Ganglion Cyst with Nerve Compression</h2>
 <div class="dx">Guyon canal ganglion cyst</div>
 <p class="f"><b>F:</b> Lobulated T2 hyperintense mass in the Guyon canal measuring <span class="ph">[X]</span> cm, consistent with ganglion cyst. Mass effect on and compression of the ulnar nerve with proximal increased T2 signal within the nerve.</p>
 <p class="i"><b>I:</b> Guyon canal ganglion cyst with ulnar nerve compression.</p>
-<h2>Hook of Hamate Fracture with Nerve Effect</h2>
+<h2 id="hook-of-hamate-fracture-with-nerve-effect">Hook of Hamate Fracture with Nerve Effect</h2>
 <div class="dx">Hook of hamate injury with ulnar neuropathy</div>
 <p class="f"><b>F:</b> Cortical irregularity and marrow edema of the hook of the hamate with <span class="ph">[nondisplaced fracture line/nonunion]</span>. Surrounding soft tissue edema with mass effect on the adjacent ulnar nerve in the Guyon canal.</p>
 <p class="i"><b>I:</b> Hook of hamate <span class="ph">[fracture/nonunion]</span> with secondary ulnar nerve compression in the Guyon canal.</p>
-<h2>Ulnar Neuropathy with Hypothenar Denervation</h2>
+<h2 id="ulnar-neuropathy-with-hypothenar-denervation">Ulnar Neuropathy with Hypothenar Denervation</h2>
 <div class="dx">Ulnar neuropathy - Guyon canal</div>
 <p class="f"><b>F:</b> Enlarged ulnar nerve with T2 hyperintense signal at the Guyon canal. T2 hyperintense signal within the hypothenar musculature, compatible with denervation edema. <span class="ph">[Causative mass/fracture/other.]</span></p>
 <p class="i"><b>I:</b> Ulnar neuropathy at the Guyon canal with hypothenar denervation changes.</p>
-<h2 class="group">Extensor Tendons</h2>
-<h2>De Quervain Tenosynovitis</h2>
+<h2 class="group" id="extensor-tendons">Extensor Tendons</h2>
+<h2 id="de-quervain-tenosynovitis">De Quervain Tenosynovitis</h2>
 <div class="dx">De Quervain - first compartment tenosynovitis</div>
 <p class="f"><b>F:</b> Fluid and synovial thickening within the first extensor compartment tendon sheath surrounding the abductor pollicis longus (APL) and extensor pollicis brevis (EPB) tendons. Retinacular thickening. APL and EPB tendons demonstrate <span class="ph">[normal signal/intermediate signal compatible with tendinosis]</span>. <span class="ph">[Intracompartmental septum is present/absent between the APL and EPB.]</span></p>
 <p class="i"><b>I:</b> De Quervain tenosynovitis. <span class="ph">[Intracompartmental septum present, which may be relevant for surgical planning.]</span></p>
-<h2>ECU Subluxation / Subsheath Injury</h2>
+<h2 id="ecu-subluxation-subsheath-injury">ECU Subluxation / Subsheath Injury</h2>
 <div class="dx">ECU subluxation - subsheath injury</div>
 <p class="f"><b>F:</b> ECU tendon is thickened with surrounding subsheath fluid and <span class="ph">[subluxation/dislocation from the ulnar groove on axial images]</span>. Subsheath of the sixth compartment is disrupted/attenuated. <span class="ph">[Forearm supination position increases subluxation.]</span></p>
 <p class="i"><b>I:</b> ECU subsheath injury with tendon subluxation from the ulnar groove, compatible with ECU instability.</p>
-<h2>ECU Split Tear</h2>
+<h2 id="ecu-split-tear">ECU Split Tear</h2>
 <div class="dx">ECU longitudinal split tear</div>
 <p class="f"><b>F:</b> ECU tendon is thickened with intrasubstance longitudinal T2 hyperintense signal compatible with a longitudinal split tear. Surrounding tenosynovitis in the sixth compartment. Tendon remains within the ulnar groove.</p>
 <p class="i"><b>I:</b> Longitudinal split tear of the ECU tendon with tenosynovitis.</p>
-<h2>Fourth Compartment Tenosynovitis</h2>
+<h2 id="fourth-compartment-tenosynovitis">Fourth Compartment Tenosynovitis</h2>
 <div class="dx">Fourth compartment tenosynovitis</div>
 <p class="f"><b>F:</b> Fluid and synovial thickening surrounding the extensor digitorum and extensor indicis tendons within the fourth extensor compartment beneath the extensor retinaculum. Tendons are <span class="ph">[normal in signal/mildly tendinotic]</span>.</p>
 <p class="i"><b>I:</b> Fourth extensor compartment tenosynovitis. <span class="ph">[Correlate with dorsal wrist pain and repetitive use history.]</span></p>
-<h2 class="group">Lunate / Kienbock Disease</h2>
-<h2>Lichtman Stage I</h2>
+<h2 class="group" id="lunate-kienbock-disease">Lunate / Kienbock Disease</h2>
+<h2 id="lichtman-stage-i">Lichtman Stage I</h2>
 <div class="dx">Kienbock stage I - marrow edema only</div>
 <p class="f"><b>F:</b> Diffuse T1 hypointense, T2 hyperintense marrow signal within the lunate without morphologic change, collapse, or fragmentation. Normal lunate height. Normal carpal alignment and carpal height ratio.</p>
 <p class="i"><b>I:</b> Kienbock disease, Lichtman stage I (lunate marrow edema without collapse). Correlate with ulnar variance and clinical findings.</p>
-<h2>Lichtman Stage II</h2>
+<h2 id="lichtman-stage-ii">Lichtman Stage II</h2>
 <div class="dx">Kienbock stage II - sclerosis, no collapse</div>
 <p class="f"><b>F:</b> Diffuse T1 hypointense signal within the lunate with preserved lunate morphology. No lunate collapse, fragmentation, or sclerosis. No loss of carpal height. Carpal alignment is preserved.</p>
 <p class="i"><b>I:</b> Kienbock disease, Lichtman stage II (diffuse signal change without lunate collapse).</p>
-<h2>Lichtman Stage IIIA</h2>
+<h2 id="lichtman-stage-iiia">Lichtman Stage IIIA</h2>
 <div class="dx">Kienbock stage IIIA - collapse, no scaphoid rotation</div>
 <p class="f"><b>F:</b> Lunate collapse with loss of lunate height. T1 hypointense marrow signal. Preserved carpal alignment without fixed scaphoid flexion or increased SL angle. Carpal height ratio is <span class="ph">[X]</span>.</p>
 <p class="i"><b>I:</b> Kienbock disease, Lichtman stage IIIA (lunate collapse without fixed scaphoid rotation).</p>
-<h2>Lichtman Stage IIIB</h2>
+<h2 id="lichtman-stage-iiib">Lichtman Stage IIIB</h2>
 <div class="dx">Kienbock stage IIIB - collapse with scaphoid rotation</div>
 <p class="f"><b>F:</b> Lunate collapse with loss of height. T1 hypointense signal. Increased SL angle measuring <span class="ph">[X]</span> degrees with proximal capitate migration and fixed scaphoid flexion. Decreased carpal height ratio measuring <span class="ph">[X]</span>.</p>
 <p class="i"><b>I:</b> Kienbock disease, Lichtman stage IIIB (lunate collapse with fixed scaphoid rotation and proximal carpal row instability).</p>
-<h2>Lichtman Stage IV</h2>
+<h2 id="lichtman-stage-iv">Lichtman Stage IV</h2>
 <div class="dx">Kienbock stage IV - secondary arthrosis</div>
 <p class="f"><b>F:</b> Lunate collapse with T1 hypointense marrow signal. Secondary radiocarpal and midcarpal joint degenerative changes with chondral loss, osteophyte formation, and subchondral cystic change. <span class="ph">[Capitate articular surface irregularity.]</span></p>
 <p class="i"><b>I:</b> Kienbock disease, Lichtman stage IV (lunate collapse with secondary radiocarpal and midcarpal arthrosis).</p>
-<h2 class="group">Bone / Fracture</h2>
-<h2>Scaphoid Fracture</h2>
+<h2 class="group" id="bone-fracture">Bone / Fracture</h2>
+<h2 id="scaphoid-fracture">Scaphoid Fracture</h2>
 <div class="dx">Scaphoid waist fracture</div>
 <p class="f"><b>F:</b> T1 hypointense, T2/STIR hyperintense fracture line through the scaphoid waist with surrounding marrow edema. [Fracture line is nondisplaced/displaced with <span class="ph">[X]</span> mm gap/step-off.] No evidence of avascular necrosis of the proximal pole on this study.</p>
 <p class="i"><b>I:</b> Scaphoid waist fracture. <span class="ph">[Nondisplaced/displaced.]</span> No AVN of the proximal pole.</p>
-<h2>Scaphoid Stress Reaction</h2>
+<h2 id="scaphoid-stress-reaction">Scaphoid Stress Reaction</h2>
 <div class="dx">Scaphoid stress reaction - no fracture line</div>
 <p class="f"><b>F:</b> T1 hypointense, T2/STIR hyperintense marrow edema within the scaphoid <span class="ph">[waist/proximal pole]</span> without a discrete low-signal fracture line on any sequence. Cortical margins are intact.</p>
 <p class="i"><b>I:</b> Scaphoid stress reaction/bone bruise. No discrete fracture line identified. Short-interval follow-up may be considered if clinical suspicion persists.</p>
-<h2>Distal Radius / Ulna Marrow Edema</h2>
+<h2 id="distal-radius-ulna-marrow-edema">Distal Radius / Ulna Marrow Edema</h2>
 <div class="dx">Distal radius marrow edema</div>
 <p class="f"><b>F:</b> T1 hypointense, T2 hyperintense marrow edema within the distal radius <span class="ph">[metaphysis/epiphysis]</span> without a discrete fracture line or cortical disruption. <span class="ph">[Adjacent soft tissue edema.]</span></p>
 <p class="i"><b>I:</b> Distal radius marrow edema/bone bruise. No fracture identified. Correlate with mechanism and clinical findings.</p>
-<h2>Ganglion Cyst</h2>
+<h2 id="ganglion-cyst">Ganglion Cyst</h2>
 <div class="dx">Dorsal SL ganglion cyst</div>
 <p class="f"><b>F:</b> Well-circumscribed T1 hypointense, T2 hyperintense lobulated cystic lesion on the dorsum of the wrist measuring <span class="ph">[X]</span> x <span class="ph">[Y]</span> x <span class="ph">[Z]</span> mm, arising from the dorsal scapholunate ligament region. <span class="ph">[Scapholunate ligament demonstrates associated partial tear/intact.]</span></p>
 <p class="i"><b>I:</b> Dorsal wrist ganglion cyst arising from the scapholunate ligament interval. <span class="ph">[Evaluate for underlying SL ligament tear.]</span></p>
 <div class="dx">Volar wrist ganglion cyst</div>
 <p class="f"><b>F:</b> Well-circumscribed T2 hyperintense cystic lesion at the volar wrist measuring <span class="ph">[X]</span> cm, adjacent to the <span class="ph">[radiocarpal joint/flexor tendons]</span>. No mass effect on the median nerve.</p>
 <p class="i"><b>I:</b> Volar wrist ganglion cyst.</p>
-<h2 class="group">Effusion / Other</h2>
-<h2>Joint Effusion</h2>
+<h2 class="group" id="effusion-other">Effusion / Other</h2>
+<h2 id="joint-effusion">Joint Effusion</h2>
 <div class="dx">Trace radiocarpal effusion</div>
 <p class="f"><b>F:</b> Trace physiologic fluid within the radiocarpal joint. No synovial thickening or enhancement.</p>
 <p class="i"><b>I:</b> Trace radiocarpal effusion, likely physiologic.</p>
@@ -450,11 +506,11 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 <div class="dx">Moderate/large effusion</div>
 <p class="f"><b>F:</b> Moderate/large radiocarpal and midcarpal joint effusion with <span class="ph">[prominent synovial thickening/enhancement]</span>. <span class="ph">[Periarticular soft tissue edema.]</span></p>
 <p class="i"><b>I:</b> Moderate/large wrist joint effusion with synovitis. Consider inflammatory or infectious etiology and correlate clinically.</p>
-<h2>Search Pattern</h2>
+<h2 id="search-pattern">Search Pattern</h2>
 <ul><li><b>1. Check history, indication, and priors.</b></li><li><b>2. Assess adequacy, technique, and limitations.</b></li><li><b>3. Examine localizers</b> for incidental pathology.</li><li><b>4. Check effusions/collections</b> on fluid-weighted sequences: DRUJ, radiocarpal, midcarpal joint spaces; fluid at DRUJ suggests synovitis, arthropathy, or TFCC tear sequelae.</li><li><b>5. Examine bone cortex and marrow:</b></li><li>Cortical breaks/fractures, osteophytes, loose bodies, heterotopic ossification.</li><li>Marrow replacement (focal and diffuse).</li><li>Scaphoid and lunate specifically (higher incidence of occult fracture and osteonecrosis).</li><li>Type II lunate with associated chondromalacia between lunate and hamate.</li><li>Ulnar variance (negative or positive) with associated degenerative changes.</li><li><b>6. Assess tendons:</b></li><li>Continuity, position/size, signal on PD and fluid-sensitive; fluid in tendon sheaths implies tenosynovitis.</li><li>Follow each tendon along entire course.</li><li>Extensor compartments: 1st (APL, EPB), 2nd (ECRL, ECRB), 3rd (EPL), 4th (ED, EI), 5th (EDM), 6th (ECU).</li><li>Flexor tendons: 4 FDP, 4 FDS, FPL.</li><li><b>7. Assess ligaments:</b></li><li>At least two projections (coronal + axial); fluid signal or contrast interposition (arthrogram).</li><li>Thickening, attenuation, signal, discontinuity.</li><li>If arthrogram, check for abnormal communication between distal radioulnar, radiocarpal, and midcarpal compartments.</li><li>Intrinsic ligaments: SLL (dorsal, membranous, volar), LTL (dorsal, membranous, volar).</li><li>Extrinsic ligaments (coronal images, abnormal signal implies injury or synovitis).</li><li><b>8. Assess TFCC:</b></li><li>Abnormal signal, contrast within perforation, or communication between radiocarpal and midcarpal compartments.</li><li>Examine each component: disc proper (most perforations/tears here), dorsal and volar radioulnar ligaments, ulnolunate and ulnotriquetral ligaments, meniscal homologue, UCL, ECU sheath.</li><li>If arthrogram, look for contrast entering DRUJ from carpal injection.</li><li><b>9. Assess cartilage:</b> PD and fluid-sensitive; subchondral marrow changes as clues to cartilage loss.</li><li><b>10. Assess subcutaneous tissues and musculature:</b> T1 precontrast, fluid-sensitive correlation.</li><li><b>11. Assess nerves:</b></li><li>Ulnar nerve in Guyon&#x27;s canal (swelling, flattening, abnormal signal, adjacent space-occupying lesions).</li><li>Median nerve in carpal tunnel (thickening, flattening, abnormal signal, bowing of flexor retinaculum, associated mass lesions).</li><li><b>12. Double check</b> marrow signal, muscles, and subcutaneous tissues.</li><li><b>13. Proofread report.</b></li></ul>
-<h2>Infection Search Pattern</h2>
+<h2 id="infection-search-pattern">Infection Search Pattern</h2>
 <ul><li><b>1. Marrow/bone changes:</b></li><li>Marrow replacement (darker than muscle/disc on T1; geographic pattern more predictive than reticular/periarticular).</li><li>Marrow edema (isolated finding raises concern in diabetics/high-risk).</li><li>Bone erosion (loss of dark T1/T2 cortical line).</li><li><b>2. Surrounding inflammatory changes:</b> fascia, musculature, subcutaneous fat edema/enhancement.</li><li><b>3. Susceptibility suggesting air:</b> in collections, soft tissues, along fascial planes, in bone.</li><li><b>4. Abnormal enhancement:</b></li><li>Rim-enhancing collection = abscess.</li><li>Superficial lesion without enhancement = ulcer.</li><li>Enhancement along fascial planes = infectious/inflammatory fasciitis.</li><li>Non-enhancement of normal structures = ischemia.</li><li>Other patterns of enhancement may not be specific.</li><li><b>5. Differentiating osteomyelitis from neuropathic joint:</b></li><li>Joint effusion with marrow replacement on both sides of joint.</li><li>Fluid collections/abscesses (periprosthetic, subperiosteal, intraosseous/Brodie&#x27;s abscess).</li><li>Sinus tract connecting abnormal marrow signal to skin surface.</li><li>Disappearance of subchondral cysts on sequential imaging.</li><li>Progressive marrow/soft tissue changes greater than expected on sequential imaging.</li></ul>
-<h2>Source Notes</h2>
+<h2 id="source-notes">Source Notes</h2>
 <p>Built from the original wrist MRI cheat sheet, expanded to match the depth and format of the shoulder MRI dictation cheat sheet. Incorporates standard MSK MRI reporting patterns for TFCC (Palmer classification), intrinsic ligaments (SL and LT), carpal tunnel/median nerve assessment, Guyon canal/ulnar nerve, extensor tendon pathology (De Quervain, ECU instability/split tear), Kienbock disease (Lichtman staging), osseous pathology, and effusion grading. Ulnocarpal abutment triad, ganglion cyst assessment, and core wrist measurements derived from review-level radiology references and standard clinical practice. Use surgical correlation and local report conventions when needed.</p>
 <button id="to-top" class="to-top" aria-label="Back to top" title="Back to top (Home)">↑</button>
 <script>
@@ -485,6 +541,48 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
   }
   if(top){ top.onclick=goTop; window.addEventListener('scroll', onScroll, {passive:true}); onScroll(); }
 
+  // ── Table of contents drawer ──
+  var drawer=document.getElementById('toc-drawer'),
+      backdrop=document.getElementById('toc-backdrop'),
+      tocToggle=document.getElementById('toc-toggle'),
+      tocClose=document.getElementById('toc-close');
+  function tocOpen(){ if(drawer){ drawer.classList.add('open'); backdrop.classList.add('show'); } }
+  function tocCloseFn(){ if(drawer){ drawer.classList.remove('open'); backdrop.classList.remove('show'); } }
+  function tocToggleFn(){ drawer && (drawer.classList.contains('open')?tocCloseFn():tocOpen()); }
+  if(tocToggle) tocToggle.onclick=tocToggleFn;
+  if(tocClose) tocClose.onclick=tocCloseFn;
+  if(backdrop) backdrop.onclick=tocCloseFn;
+  if(drawer){
+    drawer.addEventListener('click', function(e){
+      var tog=e.target.closest('.toc-tog');
+      if(tog){ e.preventDefault(); tog.closest('.toc-node').classList.toggle('open'); return; }
+      if(e.target.closest('a')){ tocCloseFn(); }   // jump (href) + close
+    });
+  }
+  // scroll-spy: highlight current section, open its ancestors
+  var links={}, heads=[];
+  if(drawer){
+    [].forEach.call(drawer.querySelectorAll('a[href^="#"]'), function(a){
+      var id=a.getAttribute('href').slice(1); links[id]=a;
+      var h=document.getElementById(id); if(h) heads.push(h);
+    });
+    heads.sort(function(a,b){ return a.offsetTop-b.offsetTop; });
+  }
+  var spyT=null;
+  function spy(){
+    if(!heads.length) return;
+    var y=window.scrollY+96, cur=null;
+    for(var k=0;k<heads.length;k++){ if(heads[k].offsetTop<=y) cur=heads[k].id; else break; }
+    for(var id in links) links[id].classList.remove('active');
+    if(cur && links[cur]){
+      var a=links[cur]; a.classList.add('active');
+      var node=a.closest('.toc-node');
+      while(node){ node.classList.add('open'); node=node.parentElement&&node.parentElement.closest('.toc-node'); }
+    }
+  }
+  window.addEventListener('scroll', function(){ if(spyT) return; spyT=setTimeout(function(){ spyT=null; spy(); },120); }, {passive:true});
+  spy();
+
   document.addEventListener('keydown', function(e){
     if(e.metaKey||e.ctrlKey||e.altKey) return;            // leave native zoom alone
     var t=e.target;
@@ -493,6 +591,8 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
     else if(e.key==='-'||e.key==='_'){ set(scale-STEP); e.preventDefault(); }
     else if(e.key==='0'){ set(1); e.preventDefault(); }
     else if(e.key==='Home'){ goTop(); e.preventDefault(); }
+    else if(e.key==='c'||e.key==='C'){ tocToggleFn(); e.preventDefault(); }
+    else if(e.key==='Escape'){ tocCloseFn(); }
   });
 })();
 </script>

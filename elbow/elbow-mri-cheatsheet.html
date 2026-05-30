@@ -87,6 +87,7 @@ h3{
   margin:22px 0 9px; color:var(--h3tx);
   font-size:18.5px; line-height:1.3; font-weight:700;
   border-bottom:1px solid #2c3a48; padding-bottom:5px;
+  scroll-margin-top:64px;
 }
 
 p{margin:9px 0}
@@ -177,6 +178,60 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 }
 @media print{ .diagram{ break-inside:avoid; } }
 
+/* ── Table-of-contents drawer (overlay; never resizes the page) ── */
+.toc-toggle{
+  display:inline-flex; align-items:center; gap:5px;
+  border:1px solid var(--bdr); border-radius:7px; background:#0d1a26;
+  color:#9fdcf0; font-weight:700; font-size:13px; padding:5px 11px;
+  cursor:pointer; font-family:inherit; margin-right:4px;
+}
+.toc-toggle:hover{ border-color:var(--h3tx); color:#fff; }
+.toc-backdrop{
+  position:fixed; inset:0; z-index:55; background:rgba(0,0,0,0.5);
+  opacity:0; visibility:hidden; transition:opacity .2s;
+}
+.toc-backdrop.show{ opacity:1; visibility:visible; }
+.toc-drawer{
+  position:fixed; top:0; left:0; height:100vh; width:316px; max-width:86vw; z-index:60;
+  background:#0b121d; border-right:1px solid var(--bdr);
+  box-shadow:3px 0 28px rgba(0,0,0,0.55);
+  transform:translateX(-104%); transition:transform .22s ease;
+  display:flex; flex-direction:column;
+}
+.toc-drawer.open{ transform:translateX(0); }
+.toc-head{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:13px 16px; border-bottom:1px solid var(--bdr); flex:0 0 auto;
+}
+.toc-head .t{ font-weight:800; color:#fff; font-size:15px; letter-spacing:.5px; }
+.toc-close{ background:none; border:none; color:var(--tx2); font-size:24px; line-height:1; cursor:pointer; padding:0 4px; }
+.toc-close:hover{ color:#fff; }
+.toc-list{ overflow-y:auto; padding:8px 8px 28px; flex:1; }
+.toc-node.leaf{ }
+.toc-row{ display:flex; align-items:flex-start; }
+.toc-tog{
+  flex:0 0 auto; width:20px; height:26px; margin-top:1px;
+  background:none; border:none; cursor:pointer; padding:0;
+  color:var(--tx3); font-size:11px;
+}
+.toc-tog::before{ content:"▸"; display:inline-block; transition:transform .15s; }
+.toc-node.open > .toc-row > .toc-tog::before{ transform:rotate(90deg); }
+.toc-node.leaf .toc-row{ padding-left:20px; }
+.toc-children{ display:none; }
+.toc-node.open > .toc-children{ display:block; }
+.toc-link{
+  flex:1; display:block; text-decoration:none; color:var(--tx2);
+  padding:5px 9px; border-radius:6px; font-size:13.5px; line-height:1.35;
+  border-left:2px solid transparent;
+}
+.toc-link:hover{ background:#13212f; color:#fff; }
+.toc-link.active{ border-left-color:var(--h3tx); background:#13212f; color:#fff; }
+.toc-link.lvl-group{ color:#c9b6f5; font-weight:800; text-transform:uppercase; font-size:12px; letter-spacing:.5px; }
+.toc-link.lvl-h2{ color:#e6eaf2; font-weight:600; }
+.toc-link.lvl-h3{ color:var(--tx2); font-size:12.5px; }
+.toc-children .toc-children .toc-link{ padding-left:18px; }
+@media print{ .toc-toggle, .toc-drawer, .toc-backdrop{ display:none !important; } }
+
 @media (max-width:680px){
   body{font-size:17px; padding:0 16px 48px}
   .topbar{margin:0 -16px 18px; padding:10px 16px}
@@ -200,50 +255,51 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 </style>
 </head>
 <body>
-<div class="topbar"><span class="crumb">Elbow MRI Dictation Cheat Sheet</span><a href="../index.html">← All regions</a><a class="tmpl" href="../templates/elbow.html">📋 Dictation template</a><a href="elbow-mri-cheatsheet.pdf">PDF (print)</a><a href="elbow-mri-cheatsheet-dark.pdf">PDF (dark)</a><a href="elbow-mri-cheatsheet.md">Markdown</a><span class="fontctl" title="Font size — shortcuts: -, +, 0 to reset"><button id="fs-dec" aria-label="Decrease font size">A−</button><button id="fs-rst" aria-label="Reset font size">A</button><button id="fs-inc" aria-label="Increase font size">A+</button></span></div>
+<div class="topbar"><button id="toc-toggle" class="toc-toggle" title="Contents (c)" aria-label="Table of contents">☰ Contents</button><span class="crumb">Elbow MRI Dictation Cheat Sheet</span><a href="../index.html">← All regions</a><a class="tmpl" href="../templates/elbow.html">📋 Dictation template</a><a href="elbow-mri-cheatsheet.pdf">PDF (print)</a><a href="elbow-mri-cheatsheet-dark.pdf">PDF (dark)</a><a href="elbow-mri-cheatsheet.md">Markdown</a><span class="fontctl" title="Font size — shortcuts: -, +, 0 to reset"><button id="fs-dec" aria-label="Decrease font size">A−</button><button id="fs-rst" aria-label="Reset font size">A</button><button id="fs-inc" aria-label="Increase font size">A+</button></span></div>
+<div id="toc-backdrop" class="toc-backdrop"></div><nav id="toc-drawer" class="toc-drawer" aria-label="Table of contents"><div class="toc-head"><span class="t">Contents</span><button id="toc-close" class="toc-close" aria-label="Close contents">&times;</button></div><div class="toc-list"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#core-measurements">Core Measurements</a></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-h2" href="#how-to-find-it-landmark-based-identification">How to Find It — Landmark-Based Identification</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#start-with-the-three-planes">Start With the Three Planes</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#medial-elbow-common-flexor-origin-and-the-ucl">Medial Elbow — Common Flexor Origin and the UCL</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#lateral-elbow-common-extensor-origin-and-the-lateral-ligament-complex">Lateral Elbow — Common Extensor Origin and the Lateral Ligament Complex</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#anterior-and-posterior-tendons-biceps-and-triceps">Anterior and Posterior Tendons — Biceps and Triceps</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#articular-cartilage-ocd-and-the-pseudodefects">Articular Cartilage, OCD, and the Pseudodefects</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#nerves-where-to-find-each-and-what-it-supplies">Nerves — Where to Find Each and What It Supplies</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#loose-bodies-where-they-hide">Loose Bodies — Where They Hide</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#pediatric-elbow-ossification-order-critoe">Pediatric Elbow — Ossification Order (CRITOE)</a></div></div></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#modified-outerbridge-chondromalacia-grading-copy-ready">Modified Outerbridge Chondromalacia Grading - Copy-Ready</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#elbow-mri-tells">Elbow MRI Tells</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#normal-negative-templates">Normal / Negative Templates</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#useful-caveats">Useful Caveats</a></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-group" href="#lateral-tendons">Lateral Tendons</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#common-extensor-tendon-normal">Common Extensor Tendon - Normal</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#common-extensor-tendinosis">Common Extensor Tendinosis</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#common-extensor-partial-thickness-tear-low-grade">Common Extensor Partial-Thickness Tear - Low Grade</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#common-extensor-partial-thickness-tear-high-grade">Common Extensor Partial-Thickness Tear - High Grade</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#common-extensor-full-thickness-tear">Common Extensor Full-Thickness Tear</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-group" href="#medial-tendons">Medial Tendons</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#common-flexor-tendon-normal">Common Flexor Tendon - Normal</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#common-flexor-tendinosis">Common Flexor Tendinosis</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#common-flexor-partial-thickness-tear">Common Flexor Partial-Thickness Tear</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#common-flexor-full-thickness-tear">Common Flexor Full-Thickness Tear</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-group" href="#distal-biceps-tendon">Distal Biceps Tendon</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#distal-biceps-normal">Distal Biceps - Normal</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#distal-biceps-tendinosis-bicipitoradial-bursitis">Distal Biceps Tendinosis / Bicipitoradial Bursitis</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#distal-biceps-partial-thickness-tear">Distal Biceps Partial-Thickness Tear</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#distal-biceps-complete-tear">Distal Biceps Complete Tear</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-group" href="#triceps-tendon">Triceps Tendon</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#triceps-tendon-normal">Triceps Tendon - Normal</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#triceps-tendinosis">Triceps Tendinosis</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#triceps-partial-thickness-tear">Triceps Partial-Thickness Tear</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#triceps-full-thickness-tear">Triceps Full-Thickness Tear</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-group" href="#ucl-medial-ligaments">UCL / Medial Ligaments</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#ucl-normal">UCL - Normal</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#ucl-sprain-grade-1">UCL Sprain - Grade 1</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#ucl-partial-tear-proximal-attachment">UCL Partial Tear - Proximal Attachment</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#ucl-partial-tear-distal-attachment">UCL Partial Tear - Distal Attachment</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#ucl-complete-tear-humeral-attachment">UCL Complete Tear - Humeral Attachment</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#ucl-complete-tear-sublime-tubercle-attachment">UCL Complete Tear - Sublime Tubercle Attachment</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#ucl-chronic-changes">UCL Chronic Changes</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-group" href="#lateral-collateral-complex">Lateral Collateral Complex</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#lateral-collateral-complex-normal">Lateral Collateral Complex - Normal</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#rcl-sprain">RCL Sprain</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#lucl-tear">LUCL Tear</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#annular-ligament-injury">Annular Ligament Injury</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-group" href="#cartilage-ocd">Cartilage / OCD</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#capitellar-chondral-softening">Capitellar Chondral Softening</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#capitellar-ocd-stable">Capitellar OCD - Stable</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#capitellar-ocd-unstable">Capitellar OCD - Unstable</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#trochlear-chondral-loss">Trochlear Chondral Loss</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#posteromedial-impingement">Posteromedial Impingement</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-group" href="#nerves">Nerves</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#ulnar-nerve-normal">Ulnar Nerve - Normal</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#ulnar-neuritis">Ulnar Neuritis</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#ulnar-nerve-subluxation">Ulnar Nerve Subluxation</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#ulnar-nerve-mass-compression">Ulnar Nerve - Mass Compression</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#radial-nerve-pin-normal">Radial Nerve / PIN - Normal</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#pin-compression-arcade-of-frohse">PIN Compression - Arcade of Frohse</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#pin-compression-bicipitoradial-bursa">PIN Compression - Bicipitoradial Bursa</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#denervation-pattern-radial-nerve-territory">Denervation Pattern - Radial Nerve Territory</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-group" href="#effusion-bursae-loose-bodies">Effusion / Bursae / Loose Bodies</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#joint-effusion-trace">Joint Effusion - Trace</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#joint-effusion-small-with-synovitis">Joint Effusion - Small with Synovitis</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#joint-effusion-moderate-with-loose-body">Joint Effusion - Moderate with Loose Body</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#olecranon-bursitis">Olecranon Bursitis</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#bicipitoradial-bursitis">Bicipitoradial Bursitis</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#multiple-loose-bodies-synovial-chondromatosis">Multiple Loose Bodies / Synovial Chondromatosis</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#elbow-arthritis-degenerative-changes">Elbow Arthritis / Degenerative Changes</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#occult-fracture-bone-marrow-edema">Occult Fracture / Bone Marrow Edema</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#search-pattern">Search Pattern</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#infection-search-pattern">Infection Search Pattern</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#source-notes">Source Notes</a></div></div></div></div></div></nav>
 <h1>Elbow MRI Dictation Cheat Sheet - Expanded Findings &amp; Impressions</h1>
 <p class="subtitle">Copy-ready language. Replace bracketed text. Use as a workstation reference, not a substitute for surgical correlation or local report style.</p>
-<h2>Core Measurements</h2>
+<h2 id="core-measurements">Core Measurements</h2>
 <table><thead><tr><th>Parameter</th><th>Normal / Threshold</th></tr></thead><tbody><tr><td>UCL thickness</td><td>Normal &lt; 4 mm; thickened &gt; 4 mm suggests chronic injury.</td></tr><tr><td>Ulnar nerve CSA</td><td>Abnormal &gt; 8-10 mm^2 at cubital tunnel.</td></tr><tr><td>Capitellar OCD sizing</td><td>Report AP x transverse x depth in mm; note fluid undermining.</td></tr><tr><td>Radiocapitellar line</td><td>Line through center of radial shaft should bisect capitellum on all views.</td></tr><tr><td>Carrying angle</td><td>Normal ~5-15 degrees valgus; assess on coronal images.</td></tr></tbody></table>
-<h2>How to Find It — Landmark-Based Identification</h2>
+<h2 id="how-to-find-it-landmark-based-identification">How to Find It — Landmark-Based Identification</h2>
 <p>This section trains you to locate and verify each elbow structure by anchoring to fixed bony landmarks, choosing the right plane/sequence, and recognizing the normal variants that masquerade as disease. Work plane-by-plane, but always cross-reference at least two planes before calling a tear.</p>
-<h3>Start With the Three Planes</h3>
+<h3 id="start-with-the-three-planes">Start With the Three Planes</h3>
 <div class="callout pearl"><div class="c-title"><span class="ico">💡</span><span class="lbl">Pearl</span><span class="ttl">What each plane does best</span></div><p>Build a routine and use each plane for what it shows best.</p><ul><li><b>Axial</b> — nerves (ulnar, median, radial/PIN), the radial tunnel, muscle bellies/denervation edema, and the cross-section of the distal biceps and triceps tendons</li><li><b>Coronal</b> — collateral ligaments (<b>UCL anterior band</b>, <b>RCL/LUCL</b>), common <b>extensor</b> and <b>flexor</b> origins, and the medial/lateral epicondyles</li><li><b>Sagittal</b> — articular cartilage of the <b>capitellum/trochlea</b>, <b>OCD</b> lesions, the distal biceps and triceps insertions, and anterior/posterior recess loose bodies</li></ul></div>
 <div class="callout pearl"><div class="c-title"><span class="ico">💡</span><span class="lbl">Pearl</span><span class="ttl">Sequence logic</span></div><p><b>Fluid-sensitive fat-saturated</b> sequences (T2 FS / PD FS / STIR) detect edema, tendon/ligament tears, marrow lesions, and denervation. <b>T1</b> shows anatomy, marrow fat, and fatty muscle atrophy. Tendons and ligaments are normally uniformly <b>low signal</b>; pathologic signal is intermediate-to-bright on fluid-sensitive images.</p></div>
-<h3>Medial Elbow — Common Flexor Origin and the UCL</h3>
+<h3 id="medial-elbow-common-flexor-origin-and-the-ucl">Medial Elbow — Common Flexor Origin and the UCL</h3>
 <div class="callout landmark"><div class="c-title"><span class="ico">📍</span><span class="lbl">Landmark</span><span class="ttl">The medial epicondyle</span></div><p>The <b>medial epicondyle</b> is the anchor for everything medial: the <b>common flexor-pronator tendon</b> arises from its anterior aspect, the <b>UCL anterior band</b> arises just inferior to it, and the <b>ulnar nerve</b> runs in the retroepicondylar (cubital tunnel) groove just posterior to it.</p></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Common flexor-pronator origin (medial epicondylitis / &quot;golfer&#x27;s elbow&quot;)</span></div><p>On <b>coronal</b> fluid-sensitive images, find the tendon arising from the <b>anterior medial epicondyle</b>.</p><ul><li>Normal tendon is thin and uniformly <b>low signal</b></li><li>Tendinosis = thickening with intermediate signal; tear = fluid-bright signal gap or fiber discontinuity</li><li>Always interrogate the <b>underlying UCL</b> on the same images — medial epicondylitis and UCL injury frequently coexist</li></ul></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">UCL anterior band — the functional stabilizer</span></div><p>On <b>coronal</b>, trace the band from the <b>medial epicondyle</b> to the <b>sublime tubercle</b> of the proximal ulna (medial coronoid margin). This is the primary restraint to valgus stress and the structure that fails in overhead throwers.</p><ul><li>Normal: taut, low-signal, fan-shaped band attaching right at the sublime tubercle</li><li>The posterior band and transverse ligament are minor; the <b>anterior band</b> is what you must clear</li></ul></div>
 <div class="callout pitfall"><div class="c-title"><span class="ico">⚠️</span><span class="lbl">Pitfall</span><span class="ttl">The T-sign of partial UCL tear</span></div><p>A partial undersurface (deep) tear lets contrast or joint fluid track <b>between the distal UCL and the sublime tubercle</b>, outlining a &quot;T&quot; where the leaked fluid meets the joint line.</p><ul><li>Best seen on <b>coronal</b> MR arthrogram or with a joint effusion</li><li>Do not mistake the normal <b>transverse synovial recess</b> at the sublime tubercle for a T-sign — a true T-sign requires fluid extending distal to the expected ligament attachment</li></ul></div>
 <div class="callout pearl"><div class="c-title"><span class="ico">💡</span><span class="lbl">Pearl</span><span class="ttl">Distinguishing medial vs lateral epicondylitis</span></div><p>Same disease, opposite corners. <b>Medial epicondylitis</b> = common <b>flexor-pronator</b> origin off the <b>medial</b> epicondyle (golfer&#x27;s/thrower&#x27;s elbow); check the UCL and ulnar nerve next door. <b>Lateral epicondylitis</b> = common <b>extensor</b> origin off the <b>lateral</b> epicondyle (tennis elbow); check the LUCL/RCL next door. Localize the abnormal tendon to its epicondyle on coronal and the diagnosis names itself.</p></div>
-<h3>Lateral Elbow — Common Extensor Origin and the Lateral Ligament Complex</h3>
+<h3 id="lateral-elbow-common-extensor-origin-and-the-lateral-ligament-complex">Lateral Elbow — Common Extensor Origin and the Lateral Ligament Complex</h3>
 <div class="callout landmark"><div class="c-title"><span class="ico">📍</span><span class="lbl">Landmark</span><span class="ttl">The lateral epicondyle</span></div><p>The <b>lateral epicondyle</b> anchors the <b>common extensor tendon</b> anteriorly and the <b>lateral collateral ligament complex</b> (RCL deep to the extensor origin; LUCL coursing posteriorly). The radial nerve/PIN passes just anterior to the radiocapitellar joint.</p></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Common extensor origin (lateral epicondylitis / &quot;tennis elbow&quot;)</span></div><p>On <b>coronal</b>, find the tendon off the <b>anterior lateral epicondyle</b>; the <b>ECRB</b> contributes most and is the usual culprit.</p><ul><li>Tendinosis/tear shows thickening and increased signal at the origin</li><li>When the extensor origin is torn, look one layer deeper — concurrent <b>RCL/LUCL</b> injury upgrades this from simple epicondylitis to potential instability</li></ul></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">LUCL — the key to posterolateral stability</span></div><p>The <b>lateral ulnar collateral ligament (LUCL)</b> arises from the <b>lateral epicondyle</b>, arcs <b>posterior to the radial head</b>, and inserts on the <b>supinator crest (tubercle) of the ulna</b>. Because it sweeps obliquely and posteriorly, it is best followed on sequential <b>coronal</b> images (slightly posterior) — no single slice shows its whole course.</p><ul><li>Normal: thin, continuous low-signal band hugging the posterolateral radial head</li><li>A torn or lax LUCL is the lesion of <b>posterolateral rotatory instability (PLRI)</b></li></ul></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">RCL and annular ligament</span></div><p>The <b>radial collateral ligament (RCL)</b> runs from the <b>lateral epicondyle</b> to blend with the <b>annular ligament</b>; the <b>annular ligament</b> encircles the <b>radial head/neck</b>, anchoring at the anterior and posterior margins of the radial (lesser sigmoid) notch.</p><ul><li>Find the annular ligament on <b>axial</b> as a thin low-signal ring around the radial head</li><li>On coronal, the RCL is the more vertical component anterior to the obliquely posterior LUCL</li></ul></div>
 <div class="callout pearl"><div class="c-title"><span class="ico">💡</span><span class="lbl">Pearl</span><span class="ttl">Posterolateral rotatory instability (PLRI)</span></div><p>PLRI is the most common pattern of chronic elbow instability and is driven by <b>LUCL insufficiency</b> (post-traumatic, prior lateral surgery, or chronic varus overload). On MRI, look for an attenuated, thickened, or discontinuous <b>LUCL</b> at or near its <b>epicondylar origin</b>, often with a lateral effusion. Correlate with a positive lateral pivot-shift clinically.</p></div>
-<h3>Anterior and Posterior Tendons — Biceps and Triceps</h3>
+<h3 id="anterior-and-posterior-tendons-biceps-and-triceps">Anterior and Posterior Tendons — Biceps and Triceps</h3>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Distal biceps tendon and the radial tuberosity</span></div><p>Follow the tendon distally to its insertion on the <b>radial (bicipital) tuberosity</b>. Because it spirals, it is hard to capture on one slice — use the <b>axial</b> plane to trace it segment-by-segment, and add a <b>FABS view</b> (Flexed elbow, ABducted shoulder, forearm Supinated) when available to lay the tendon out in one long-axis image.</p><ul><li>Normal: continuous low-signal tendon to the tuberosity</li><li>Look for fluid in the <b>bicipitoradial bursa</b> and marrow edema at the tuberosity with partial tears</li></ul></div>
 <div class="callout pearl"><div class="c-title"><span class="ico">💡</span><span class="lbl">Pearl</span><span class="ttl">The lacertus fibrosus governs retraction</span></div><p>The <b>lacertus fibrosus</b> (bicipital aponeurosis) tethers the distal biceps to the forearm fascia. In a <b>complete distal biceps rupture</b>, an <b>intact lacertus</b> limits proximal retraction (tendon stays near the joint), while a <b>torn lacertus</b> allows marked proximal retraction. Report the retraction gap and lacertus status — both change the surgical plan.</p></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Distal triceps tendon and the olecranon</span></div><p>On <b>sagittal</b> (and confirm on axial), find the tendon inserting on the <b>posterior olecranon</b>.</p><ul><li>Normal triceps insertion can have a small striated/feathery appearance — do not overcall this as a tear</li><li>True tears show a fluid-filled gap and an avulsed fragment; partial tears commonly spare the deep fibers. Triceps rupture is associated with <b>olecranon bursitis</b> and systemic factors</li></ul></div>
-<h3>Articular Cartilage, OCD, and the Pseudodefects</h3>
+<h3 id="articular-cartilage-ocd-and-the-pseudodefects">Articular Cartilage, OCD, and the Pseudodefects</h3>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Capitellar and trochlear cartilage</span></div><p>Assess the <b>capitellum</b> and <b>trochlea</b> cartilage on <b>sagittal</b> (capitellum) and <b>coronal</b> (trochlea) fluid-sensitive images, scrolling through the entire convex surface.</p><ul><li>Normal cartilage is smooth and intermediate signal over low-signal subchondral bone</li><li>Subchondral marrow edema, fissuring, or a focal defect flags chondral/osteochondral injury</li></ul></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Capitellar OCD vs Panner disease</span></div><p><b>OCD of the capitellum</b> (adolescent throwers/gymnasts, repetitive radiocapitellar load) shows a focal subchondral lesion on the <b>anterolateral capitellum</b>, best on <b>sagittal</b> and <b>coronal</b>.</p><ul><li>Assess <b>stability</b>: high-signal fluid undercutting the fragment, cysts beneath it, or a displaced fragment indicate an <b>unstable</b> lesion</li><li><b>Panner disease</b> is the younger-child (typically <span class="ph">[5–10]</span> years) self-limited osteochondrosis of the entire capitellar ossification center — fragmentation/edema without a true detachable fragment, and it usually resolves with growth</li></ul></div>
 <div class="callout pitfall"><div class="c-title"><span class="ico">⚠️</span><span class="lbl">Pitfall</span><span class="ttl">Pseudodefect of the capitellum</span></div><p>At the <b>posterolateral capitellum</b>, the cartilage-covered articular surface ends abruptly and the bone steps down to the non-articular posterolateral margin, creating a notch that mimics an osteochondral lesion.</p><ul><li>It is <b>posterolateral</b> and best appreciated on <b>coronal/sagittal</b> at the junction of the capitellum and the lateral epicondyle</li><li>True OCD is <b>anterolateral</b> with marrow edema; the pseudodefect has <b>normal adjacent marrow</b> and a smooth corticated margin</li></ul></div>
 <div class="callout pitfall"><div class="c-title"><span class="ico">⚠️</span><span class="lbl">Pitfall</span><span class="ttl">Trochlear groove pseudodefect (and the trochlear notch ridge)</span></div><p>A normal bare <b>transverse groove/ridge</b> divides the trochlear (semilunar) notch of the ulna into anterior (coronoid) and posterior (olecranon) facets; the non-cartilaginous central ridge can look like an erosion or osteochondral defect on <b>sagittal</b>.</p><ul><li>Recognize it as a <b>midline, symmetric, corticated</b> bare area — not focal, not edematous</li><li>Do not call cartilage loss where cartilage is normally absent</li></ul></div>
-<h3>Nerves — Where to Find Each and What It Supplies</h3>
+<h3 id="nerves-where-to-find-each-and-what-it-supplies">Nerves — Where to Find Each and What It Supplies</h3>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Ulnar nerve in the cubital tunnel</span></div><p>On <b>axial</b>, find the <b>ulnar nerve</b> in the <b>retroepicondylar (condylar) groove</b>, just <b>posterior to the medial epicondyle</b>, deep to the cubital tunnel retinaculum (Osborne).</p><ul><li>Normal: round-oval, near-isointense to muscle, minimal T2 signal</li><li>Cubital tunnel syndrome: nerve enlargement and <b>T2 hyperintensity</b>; denervates the <b>FCU</b>, ulnar half of <b>FDP</b>, and the ulnar-innervated intrinsic hand muscles</li></ul></div>
 <div class="callout pitfall"><div class="c-title"><span class="ico">⚠️</span><span class="lbl">Pitfall</span><span class="ttl">Ulnar nerve subluxation and &quot;false&quot; hyperintensity</span></div><p>Mild ulnar nerve <b>T2 hyperintensity can be a normal finding</b> at the elbow — judge it against frank enlargement and clinical symptoms before calling neuritis. Also scroll for <b>anterior subluxation/dislocation</b> of the nerve over the medial epicondyle in flexion (an anconeus epitrochlearis muscle or absent retinaculum predisposes).</p></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Median nerve — pronator teres and the ligament of Struthers</span></div><p>Track the <b>median nerve</b> on <b>axial</b> as it dives <b>between the humeral and ulnar heads of the pronator teres</b>, then deep to the <b>FDS</b> arch.</p><ul><li>Entrapment points: the <b>ligament of Struthers</b> (from a <b>supracondylar process</b> of the distal humerus, when present) proximally, the <b>lacertus fibrosus</b>, the <b>pronator teres</b>, and the <b>FDS arcade</b></li><li>Pronator syndrome denervates median-innervated forearm flexors; isolated <b>AIN</b> involvement targets <b>FPL, pronator quadratus, and the radial half of FDP</b></li></ul></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Radial nerve / PIN — radial tunnel and arcade of Frohse</span></div><p>On <b>axial</b>, find the <b>radial nerve</b> anterior to the lateral epicondyle; it divides into the superficial sensory branch and the deep motor branch (<b>PIN</b>). The PIN enters the <b>radial tunnel</b> and passes under the <b>arcade of Frohse</b> (the proximal tendinous edge of the <b>supinator</b>).</p><ul><li>The arcade of Frohse is the classic PIN compression point</li><li>PIN syndrome denervates the <b>supinator</b> and the wrist/finger extensors (ECU, EDC, EDM, APL, etc.) while typically sparing the <b>ECRL</b>; look for fanned-out <b>T2 hyperintensity/edema across the extensor compartment</b> as the earliest sign</li></ul></div>
 <div class="callout pearl"><div class="c-title"><span class="ico">💡</span><span class="lbl">Pearl</span><span class="ttl">Read denervation as a pattern</span></div><p>Muscle <b>edema</b> (fluid-sensitive bright) is subacute denervation; <b>fatty atrophy</b> (T1 bright) is chronic. The constellation of which muscles light up localizes the lesion better than visualizing the nerve itself — e.g., isolated FPL + pronator quadratus = AIN; whole extensor compartment = PIN.</p></div>
-<h3>Loose Bodies — Where They Hide</h3>
+<h3 id="loose-bodies-where-they-hide">Loose Bodies — Where They Hide</h3>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Search the recesses systematically</span></div><p>Intra-articular bodies collect in the dependent and capacious recesses — hunt each one deliberately.</p><ul><li><b>Anterior</b>: coronoid (anterior) and radial (radiocapitellar) recesses — sagittal and axial</li><li><b>Posterior</b>: olecranon fossa recess — sagittal and axial</li><li>A joint effusion improves conspicuity; loose bodies are low-signal filling defects (ossified bodies follow marrow signal, may show a fatty center)</li></ul></div>
 <div class="callout pitfall"><div class="c-title"><span class="ico">⚠️</span><span class="lbl">Pitfall</span><span class="ttl">Don&#x27;t mistake normal for a loose body</span></div><p>Normal <b>synovial folds/plicae</b>, the <b>posterolateral plica</b>, and a prominent <b>fat pad</b> can mimic a body. Confirm a true loose body on <b>two planes</b> and look for it sitting freely within fluid rather than being tethered.</p></div>
-<h3>Pediatric Elbow — Ossification Order (CRITOE)</h3>
+<h3 id="pediatric-elbow-ossification-order-critoe">Pediatric Elbow — Ossification Order (CRITOE)</h3>
 <div class="callout pearl"><div class="c-title"><span class="ico">💡</span><span class="lbl">Pearl</span><span class="ttl">CRITOE and why order matters</span></div><p>Ossification centers appear in a fixed sequence: <b>C</b>apitellum, <b>R</b>adial head, <b>I</b>nternal (medial) epicondyle, <b>T</b>rochlea, <b>O</b>lecranon, <b>E</b>xternal (lateral) epicondyle (rough ages ~<span class="ph">[1, 3, 5, 7, 9, 11]</span> years — the order is reliable, the ages approximate).</p><ul><li>The rule&#x27;s clinical power: the <b>trochlea never ossifies before the internal (medial) epicondyle</b></li><li>So if you see a &quot;trochlear&quot; ossification center but <b>no medial epicondyle in place</b>, suspect an <b>avulsed/displaced medial epicondyle</b> that has migrated into the joint and is being mistaken for the trochlea</li></ul></div>
 <div class="callout landmark"><div class="c-title"><span class="ico">📍</span><span class="lbl">Landmark</span><span class="ttl">Apply CRITOE on MRI and radiographs together</span></div><p>Use the sequence to decide whether an ossific density is a <b>normal center</b>, a <b>displaced apophysis</b>, or an <b>intra-articular fragment</b>. On MRI, unossified centers are cartilaginous (intermediate signal) and the apophyseal physes are normally open — do not mistake a normal physis for a fracture line.</p></div>
-<h2>Modified Outerbridge Chondromalacia Grading - Copy-Ready</h2>
+<h2 id="modified-outerbridge-chondromalacia-grading-copy-ready">Modified Outerbridge Chondromalacia Grading - Copy-Ready</h2>
 <p>Use this for any articular surface. Replace <span class="ph">[surface/compartment]</span> with the specific location: patellar median ridge, medial femoral condyle weightbearing surface, anterosuperior acetabulum, radiocapitellar joint, tibiotalar dome, first MTP joint, etc.</p>
 <table><thead><tr><th>Grade</th><th>MRI shorthand</th></tr></thead><tbody><tr><td>0</td><td>Normal cartilage.</td></tr><tr><td>1</td><td>Signal heterogeneity/softening or swelling; surface intact.</td></tr><tr><td>2</td><td>Superficial fissuring/fraying/partial-thickness defect &lt;50% cartilage depth.</td></tr><tr><td>3</td><td>Deep fissuring/partial-thickness defect &gt;50% cartilage depth, not exposing bone.</td></tr><tr><td>4</td><td>Full-thickness cartilage loss with exposed subchondral bone, often edema/cysts.</td></tr></tbody></table>
 <div class="dx">Grade 0 - normal cartilage</div>
@@ -261,178 +317,178 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 <div class="dx">Grade 4 - full-thickness chondral loss</div>
 <p class="f"><b>F:</b> Full-thickness cartilage loss/fissuring of the <span class="ph">[surface/compartment]</span> measuring <span class="ph">[X]</span> x <span class="ph">[Y]</span> mm with exposed subchondral bone and <span class="ph">[subchondral marrow edema/cystic change]</span>. <span class="ph">[Small unstable chondral flap/loose body if present.]</span></p>
 <p class="i"><b>I:</b> Grade 4 chondromalacia/full-thickness chondral defect of the <span class="ph">[surface/compartment]</span>.</p>
-<h2>Elbow MRI Tells</h2>
+<h2 id="elbow-mri-tells">Elbow MRI Tells</h2>
 <ul><li>Lateral epicondylitis: extensor carpi radialis brevis (ECRB) is the most commonly affected tendon at the common extensor origin.</li><li>Thrower&#x27;s triad: UCL injury + posteromedial olecranon osteophyte + radiocapitellar overload chondral changes.</li><li>Posterolateral rotatory instability (PLRI): LUCL tear is the key lesion; look for pivot shift pattern on MRI and associated radial head subluxation.</li><li>Terrible triad: elbow dislocation + radial head fracture + coronoid fracture.</li><li>Capitellar OCD: T2 fluid undermining the fragment indicates instability.</li><li>Distal biceps: intact lacertus fibrosus limits proximal retraction even with complete tendon rupture.</li><li>Cubital tunnel: elbow flexion increases ulnar nerve pressure; check for subluxation anterior to the medial epicondyle on axial images.</li></ul>
-<h2>Normal / Negative Templates</h2>
+<h2 id="normal-negative-templates">Normal / Negative Templates</h2>
 <div class="dx">Normal elbow</div>
 <p class="f"><b>F:</b> The elbow joint is normally aligned. Common extensor and common flexor tendon origins demonstrate homogeneous low signal and normal morphology. The distal biceps tendon inserts normally at the radial tuberosity with normal fibrillar architecture. The distal triceps tendon inserts normally at the olecranon. The anterior bundle of the ulnar collateral ligament, radial collateral ligament, lateral ulnar collateral ligament, and annular ligament are intact. Articular cartilage of the radiocapitellar, ulnotrochlear, and proximal radioulnar articulations is preserved. The ulnar nerve is normal in caliber and signal within the cubital tunnel. No joint effusion, intra-articular body, or periarticular soft tissue abnormality.</p>
 <p class="i"><b>I:</b> Normal elbow MRI. No tendon tear, ligament injury, chondral defect, or nerve abnormality.</p>
 <div class="dx">Normal UCL</div>
 <p class="f"><b>F:</b> The anterior bundle of the ulnar collateral ligament is intact from humeral origin to sublime tubercle insertion with homogeneous low signal intensity, normal thickness (&lt; 4 mm), and smooth margins. No periligamentous edema or medial soft tissue abnormality.</p>
 <p class="i"><b>I:</b> Intact ulnar collateral ligament. No sprain or tear.</p>
-<h2>Useful Caveats</h2>
+<h2 id="useful-caveats">Useful Caveats</h2>
 <ul><li>Pseudodefect of the capitellum: normal cortical irregularity/flattening at the bare area of the posterior capitellum; do not mistake for OCD. Located more posteriorly than true OCD, which favors the anterolateral capitellum.</li><li>UCL T-sign on MR arthrography: contrast undermining the deep fibers of the UCL at the sublime tubercle indicates partial undersurface tear.</li><li>Magic angle artifact: intermediate signal in tendons on short TE sequences when fibers oriented 55 degrees to B0; common at tendon insertions around the elbow.</li><li>Post-surgical UCL reconstruction: expect graft signal heterogeneity and tunnel edema in the early postoperative period; diagnose graft failure when there is complete graft discontinuity or fluid-filled tunnels without graft visualization.</li></ul>
-<h2 class="group">Lateral Tendons</h2>
-<h2>Common Extensor Tendon - Normal</h2>
+<h2 class="group" id="lateral-tendons">Lateral Tendons</h2>
+<h2 id="common-extensor-tendon-normal">Common Extensor Tendon - Normal</h2>
 <p class="f"><b>F:</b> The common extensor tendon origin at the lateral epicondyle demonstrates homogeneous low signal intensity on all sequences with normal morphology and no peritendinous edema.</p>
 <p class="i"><b>I:</b> Normal common extensor tendon origin. No lateral epicondylitis.</p>
-<h2>Common Extensor Tendinosis</h2>
+<h2 id="common-extensor-tendinosis">Common Extensor Tendinosis</h2>
 <p class="f"><b>F:</b> The common extensor tendon origin is thickened with intermediate T2 signal and mild peritendinous edema. No discrete fiber disruption or fluid-signal cleft. The extensor carpi radialis brevis (ECRB) component is <span class="ph">[preferentially involved]</span>.</p>
 <p class="i"><b>I:</b> Common extensor tendinosis/lateral epicondylitis without tear.</p>
-<h2>Common Extensor Partial-Thickness Tear - Low Grade</h2>
+<h2 id="common-extensor-partial-thickness-tear-low-grade">Common Extensor Partial-Thickness Tear - Low Grade</h2>
 <p class="f"><b>F:</b> Partial-thickness fiber disruption of the common extensor tendon origin with fluid-signal intensity within the tendon substance involving less than 50% of the tendon cross-section. Surrounding peritendinous edema and lateral epicondyle cortical irregularity. Remaining fibers are intact.</p>
 <p class="i"><b>I:</b> Low-grade partial-thickness tear of the common extensor tendon origin, lateral epicondylitis.</p>
-<h2>Common Extensor Partial-Thickness Tear - High Grade</h2>
+<h2 id="common-extensor-partial-thickness-tear-high-grade">Common Extensor Partial-Thickness Tear - High Grade</h2>
 <p class="f"><b>F:</b> High-grade near-complete disruption of the common extensor tendon origin with extensive fluid-signal intensity replacing greater than 50% of the tendon substance. Marked peritendinous edema and lateral soft tissue swelling. A thin rim of intact fibers remains <span class="ph">[deep/superficial]</span>.</p>
 <p class="i"><b>I:</b> High-grade partial-thickness tear of the common extensor tendon origin.</p>
-<h2>Common Extensor Full-Thickness Tear</h2>
+<h2 id="common-extensor-full-thickness-tear">Common Extensor Full-Thickness Tear</h2>
 <p class="f"><b>F:</b> Full-thickness discontinuity of the common extensor tendon origin from the lateral epicondyle with <span class="ph">[X]</span> mm tendon retraction and fluid-filled gap at the tear site. Lateral soft tissue edema and <span class="ph">[lateral collateral ligament complex is intact/involved]</span>.</p>
 <p class="i"><b>I:</b> Full-thickness tear of the common extensor tendon origin with <span class="ph">[X]</span> mm retraction. <span class="ph">[Evaluate for concomitant lateral collateral ligament injury.]</span></p>
-<h2 class="group">Medial Tendons</h2>
-<h2>Common Flexor Tendon - Normal</h2>
+<h2 class="group" id="medial-tendons">Medial Tendons</h2>
+<h2 id="common-flexor-tendon-normal">Common Flexor Tendon - Normal</h2>
 <p class="f"><b>F:</b> The common flexor-pronator tendon origin at the medial epicondyle demonstrates homogeneous low signal intensity with normal morphology. No medial soft tissue edema.</p>
 <p class="i"><b>I:</b> Normal common flexor tendon origin. No medial epicondylitis.</p>
-<h2>Common Flexor Tendinosis</h2>
+<h2 id="common-flexor-tendinosis">Common Flexor Tendinosis</h2>
 <p class="f"><b>F:</b> The common flexor-pronator tendon origin is thickened with intermediate T2 signal and medial peritendinous edema. Tendon continuity is preserved without discrete fiber disruption.</p>
 <p class="i"><b>I:</b> Common flexor tendinosis/medial epicondylitis without tear.</p>
-<h2>Common Flexor Partial-Thickness Tear</h2>
+<h2 id="common-flexor-partial-thickness-tear">Common Flexor Partial-Thickness Tear</h2>
 <p class="f"><b>F:</b> Partial-thickness disruption of the common flexor-pronator tendon origin with fluid-signal intensity within the tendon substance. Medial soft tissue edema and medial epicondyle cortical irregularity. <span class="ph">[Ulnar collateral ligament is intact/sprained.]</span></p>
 <p class="i"><b>I:</b> Partial-thickness tear of the common flexor-pronator tendon origin. <span class="ph">[Evaluate for concomitant UCL injury.]</span></p>
-<h2>Common Flexor Full-Thickness Tear</h2>
+<h2 id="common-flexor-full-thickness-tear">Common Flexor Full-Thickness Tear</h2>
 <p class="f"><b>F:</b> Full-thickness discontinuity of the common flexor-pronator tendon origin at the medial epicondyle with <span class="ph">[X]</span> mm retraction and fluid/hematoma at the tear site. Medial soft tissue edema and swelling. <span class="ph">[UCL is intact/torn.]</span></p>
 <p class="i"><b>I:</b> Full-thickness tear of the common flexor-pronator tendon origin with retraction. <span class="ph">[Comment on UCL status.]</span></p>
-<h2 class="group">Distal Biceps Tendon</h2>
-<h2>Distal Biceps - Normal</h2>
+<h2 class="group" id="distal-biceps-tendon">Distal Biceps Tendon</h2>
+<h2 id="distal-biceps-normal">Distal Biceps - Normal</h2>
 <p class="f"><b>F:</b> The distal biceps tendon demonstrates normal fibrillar low-signal architecture on all sequences with normal caliber and smooth insertion at the radial tuberosity. No bicipitoradial bursal fluid.</p>
 <p class="i"><b>I:</b> Normal distal biceps tendon. No tendinosis, tear, or bursitis.</p>
-<h2>Distal Biceps Tendinosis / Bicipitoradial Bursitis</h2>
+<h2 id="distal-biceps-tendinosis-bicipitoradial-bursitis">Distal Biceps Tendinosis / Bicipitoradial Bursitis</h2>
 <p class="f"><b>F:</b> The distal biceps tendon is mildly thickened with intermediate T2 signal at or near the radial tuberosity insertion. Fluid distends the bicipitoradial bursa. Tendon continuity is preserved.</p>
 <p class="i"><b>I:</b> Distal biceps tendinosis with bicipitoradial bursitis. No tear.</p>
-<h2>Distal Biceps Partial-Thickness Tear</h2>
+<h2 id="distal-biceps-partial-thickness-tear">Distal Biceps Partial-Thickness Tear</h2>
 <p class="f"><b>F:</b> Partial thinning and irregularity of the distal biceps tendon at the radial tuberosity insertion with focal fluid-signal intensity within the tendon substance. Bicipitoradial bursal fluid is present. <span class="ph">[Remaining fibers are intact but attenuated.]</span></p>
 <p class="i"><b>I:</b> Partial-thickness tear of the distal biceps tendon at the radial tuberosity.</p>
-<h2>Distal Biceps Complete Tear</h2>
+<h2 id="distal-biceps-complete-tear">Distal Biceps Complete Tear</h2>
 <p class="f"><b>F:</b> Complete discontinuity of the distal biceps tendon at the radial tuberosity with <span class="ph">[X]</span> cm proximal retraction of the tendon stump and surrounding hemorrhage/edema. The bicipitoradial bursa is distended with complex fluid. The lacertus fibrosus is <span class="ph">[intact, limiting retraction / torn, allowing greater retraction]</span>.</p>
 <p class="i"><b>I:</b> Complete distal biceps tendon rupture with <span class="ph">[X]</span> cm retraction. Lacertus fibrosus is <span class="ph">[intact/torn]</span>.</p>
-<h2 class="group">Triceps Tendon</h2>
-<h2>Triceps Tendon - Normal</h2>
+<h2 class="group" id="triceps-tendon">Triceps Tendon</h2>
+<h2 id="triceps-tendon-normal">Triceps Tendon - Normal</h2>
 <p class="f"><b>F:</b> The distal triceps tendon demonstrates homogeneous low signal intensity with normal morphology and smooth insertion at the olecranon. No posterior soft tissue edema.</p>
 <p class="i"><b>I:</b> Normal distal triceps tendon.</p>
-<h2>Triceps Tendinosis</h2>
+<h2 id="triceps-tendinosis">Triceps Tendinosis</h2>
 <p class="f"><b>F:</b> The distal triceps tendon is thickened with intermediate T2 signal at the olecranon insertion. No discrete fiber disruption. Mild posterior soft tissue edema.</p>
 <p class="i"><b>I:</b> Distal triceps tendinosis at the olecranon insertion. No tear.</p>
-<h2>Triceps Partial-Thickness Tear</h2>
+<h2 id="triceps-partial-thickness-tear">Triceps Partial-Thickness Tear</h2>
 <p class="f"><b>F:</b> Partial-thickness disruption of the distal triceps tendon at the olecranon insertion with fluid-signal intensity in the tendon substance and posterior peritendinous edema. Remaining fibers are continuous.</p>
 <p class="i"><b>I:</b> Partial-thickness tear of the distal triceps tendon.</p>
-<h2>Triceps Full-Thickness Tear</h2>
+<h2 id="triceps-full-thickness-tear">Triceps Full-Thickness Tear</h2>
 <p class="f"><b>F:</b> Full-thickness discontinuity of the distal triceps tendon at the olecranon insertion with <span class="ph">[X]</span> mm proximal retraction and fluid-filled gap. Posterior soft tissue edema and <span class="ph">[olecranon cortical irregularity/avulsion fragment]</span>. <span class="ph">[Fleck sign on lateral radiograph if available.]</span></p>
 <p class="i"><b>I:</b> Full-thickness distal triceps tendon tear with retraction. <span class="ph">[Olecranon cortical avulsion.]</span></p>
-<h2 class="group">UCL / Medial Ligaments</h2>
-<h2>UCL - Normal</h2>
+<h2 class="group" id="ucl-medial-ligaments">UCL / Medial Ligaments</h2>
+<h2 id="ucl-normal">UCL - Normal</h2>
 <p class="f"><b>F:</b> The anterior bundle of the ulnar collateral ligament is homogeneous low signal on all pulse sequences with smooth margins extending from the undersurface of the medial epicondyle to the sublime tubercle. Thickness is normal (&lt; 4 mm). No periligamentous edema.</p>
 <p class="i"><b>I:</b> Intact ulnar collateral ligament.</p>
-<h2>UCL Sprain - Grade 1</h2>
+<h2 id="ucl-sprain-grade-1">UCL Sprain - Grade 1</h2>
 <p class="f"><b>F:</b> The anterior bundle of the ulnar collateral ligament demonstrates T2 hyperintense edema along its course with preserved fiber continuity and normal thickness. Mild medial soft tissue edema.</p>
 <p class="i"><b>I:</b> Grade 1 UCL sprain. No tear.</p>
-<h2>UCL Partial Tear - Proximal Attachment</h2>
+<h2 id="ucl-partial-tear-proximal-attachment">UCL Partial Tear - Proximal Attachment</h2>
 <p class="f"><b>F:</b> The anterior bundle of the ulnar collateral ligament is thickened with partial-thickness fiber disruption and fluid-signal intensity at the humeral/proximal attachment. Remaining deep/superficial fibers are intact. Medial soft tissue edema. <span class="ph">[Common flexor-pronator mass demonstrates reactive signal.]</span></p>
 <p class="i"><b>I:</b> Partial-thickness tear of the UCL at the proximal (humeral) attachment.</p>
-<h2>UCL Partial Tear - Distal Attachment</h2>
+<h2 id="ucl-partial-tear-distal-attachment">UCL Partial Tear - Distal Attachment</h2>
 <p class="f"><b>F:</b> The anterior bundle of the ulnar collateral ligament is thickened with partial-thickness fiber disruption at the distal/sublime tubercle attachment. Fluid signal undermines the deep fibers at the ulnar insertion. Medial periligamentous edema. <span class="ph">[T-sign present on arthrographic images, if applicable.]</span></p>
 <p class="i"><b>I:</b> Partial-thickness tear of the UCL at the distal (sublime tubercle) attachment.</p>
-<h2>UCL Complete Tear - Humeral Attachment</h2>
+<h2 id="ucl-complete-tear-humeral-attachment">UCL Complete Tear - Humeral Attachment</h2>
 <p class="f"><b>F:</b> Complete discontinuity of the anterior bundle of the ulnar collateral ligament at the humeral origin with fluid-filled gap and retraction of the proximal ligament stump. Marked medial soft tissue edema. <span class="ph">[Common flexor-pronator tendon demonstrates edema/partial tearing.]</span></p>
 <p class="i"><b>I:</b> Complete tear of the anterior bundle UCL at the humeral origin. <span class="ph">[Comment on flexor-pronator status.]</span></p>
-<h2>UCL Complete Tear - Sublime Tubercle Attachment</h2>
+<h2 id="ucl-complete-tear-sublime-tubercle-attachment">UCL Complete Tear - Sublime Tubercle Attachment</h2>
 <p class="f"><b>F:</b> Complete discontinuity of the anterior bundle of the ulnar collateral ligament at the sublime tubercle insertion with fluid-filled gap and medial joint space widening. Medial soft tissue edema. <span class="ph">[Ulnar nerve demonstrates reactive T2 hyperintensity.]</span></p>
 <p class="i"><b>I:</b> Complete tear of the anterior bundle UCL at the sublime tubercle. <span class="ph">[Comment on ulnar nerve status.]</span></p>
-<h2>UCL Chronic Changes</h2>
+<h2 id="ucl-chronic-changes">UCL Chronic Changes</h2>
 <p class="f"><b>F:</b> The ulnar collateral ligament is diffusely thickened (measuring <span class="ph">[X]</span> mm) with heterogeneous signal and periligamentous calcification/ossification. No acute fluid-signal cleft. <span class="ph">[Medial epicondyle traction spur. Posteromedial olecranon osteophytes.]</span></p>
 <p class="i"><b>I:</b> Chronic UCL insufficiency/thickening with periligamentous calcification. <span class="ph">[Correlate for valgus instability.]</span></p>
-<h2 class="group">Lateral Collateral Complex</h2>
-<h2>Lateral Collateral Complex - Normal</h2>
+<h2 class="group" id="lateral-collateral-complex">Lateral Collateral Complex</h2>
+<h2 id="lateral-collateral-complex-normal">Lateral Collateral Complex - Normal</h2>
 <p class="f"><b>F:</b> The radial collateral ligament (RCL), lateral ulnar collateral ligament (LUCL), and annular ligament are intact with homogeneous low signal intensity and normal morphology. No lateral soft tissue edema.</p>
 <p class="i"><b>I:</b> Intact lateral collateral ligament complex.</p>
-<h2>RCL Sprain</h2>
+<h2 id="rcl-sprain">RCL Sprain</h2>
 <p class="f"><b>F:</b> The radial collateral ligament demonstrates T2 hyperintense edema with preserved fiber continuity. LUCL and annular ligament are intact. Mild lateral soft tissue edema.</p>
 <p class="i"><b>I:</b> RCL sprain. No tear. LUCL and annular ligament intact.</p>
-<h2>LUCL Tear</h2>
+<h2 id="lucl-tear">LUCL Tear</h2>
 <p class="f"><b>F:</b> Discontinuity of the lateral ulnar collateral ligament with fluid-signal cleft and posterolateral capsular edema. Edema extends to the supinator crest. <span class="ph">[RCL is intact/sprained. Annular ligament is intact/thickened.]</span></p>
 <p class="i"><b>I:</b> LUCL tear; evaluate for posterolateral rotatory instability (PLRI). <span class="ph">[Comment on RCL and annular ligament status.]</span></p>
-<h2>Annular Ligament Injury</h2>
+<h2 id="annular-ligament-injury">Annular Ligament Injury</h2>
 <p class="f"><b>F:</b> The annular ligament is thickened and edematous with loss of normal low-signal morphology. <span class="ph">[Mild proximal radioulnar joint fluid.]</span> RCL and LUCL are <span class="ph">[intact/injured]</span>.</p>
 <p class="i"><b>I:</b> Annular ligament sprain/thickening. <span class="ph">[Comment on remainder of lateral collateral complex.]</span></p>
-<h2 class="group">Cartilage / OCD</h2>
-<h2>Capitellar Chondral Softening</h2>
+<h2 class="group" id="cartilage-ocd">Cartilage / OCD</h2>
+<h2 id="capitellar-chondral-softening">Capitellar Chondral Softening</h2>
 <p class="f"><b>F:</b> Focal cartilage signal heterogeneity/softening of the anterolateral capitellum with preserved cartilage surface and thickness. No subchondral marrow edema or loose body.</p>
 <p class="i"><b>I:</b> Grade 1 chondromalacia of the capitellum. No OCD lesion.</p>
-<h2>Capitellar OCD - Stable</h2>
+<h2 id="capitellar-ocd-stable">Capitellar OCD - Stable</h2>
 <p class="f"><b>F:</b> Osteochondral lesion of the anterolateral capitellum measuring <span class="ph">[X]</span> x <span class="ph">[Y]</span> x <span class="ph">[Z]</span> mm with overlying chondral irregularity and subchondral marrow edema/cystic change. No fluid undermining the fragment on T2-weighted images. No displaced loose body.</p>
 <p class="i"><b>I:</b> Capitellar osteochondritis dissecans, likely stable. No fluid undermining or displaced fragment.</p>
-<h2>Capitellar OCD - Unstable</h2>
+<h2 id="capitellar-ocd-unstable">Capitellar OCD - Unstable</h2>
 <p class="f"><b>F:</b> Osteochondral lesion of the anterolateral capitellum measuring <span class="ph">[X]</span> x <span class="ph">[Y]</span> x <span class="ph">[Z]</span> mm with overlying chondral irregularity, subchondral marrow edema, and T2 fluid signal undermining/surrounding the fragment. <span class="ph">[Fragment is partially detached/displaced.]</span> [Intra-articular loose body in the <span class="ph">[olecranon/coronoid/radiocapitellar]</span> recess.]</p>
 <p class="i"><b>I:</b> Unstable capitellar osteochondritis dissecans with fluid undermining the fragment. <span class="ph">[Loose body.]</span> Surgical consultation recommended.</p>
-<h2>Trochlear Chondral Loss</h2>
+<h2 id="trochlear-chondral-loss">Trochlear Chondral Loss</h2>
 <p class="f"><b>F:</b> Chondral fissuring/thinning of the trochlea with <span class="ph">[focal/diffuse]</span> partial-thickness cartilage loss and subchondral cystic change. <span class="ph">[Mild subchondral marrow edema.]</span></p>
 <p class="i"><b>I:</b> <span class="ph">[Grade 2/3/4]</span> chondromalacia of the trochlea.</p>
-<h2>Posteromedial Impingement</h2>
+<h2 id="posteromedial-impingement">Posteromedial Impingement</h2>
 <p class="f"><b>F:</b> Posteromedial olecranon osteophyte with opposing trochlear chondral irregularity/thinning and mild synovitis. <span class="ph">[Loose body in the posterior compartment.]</span> <span class="ph">[UCL is thickened/partially torn, consistent with chronic valgus overload.]</span></p>
 <p class="i"><b>I:</b> Posteromedial impingement with olecranon osteophyte and trochlear chondral loss, compatible with valgus extension overload syndrome. <span class="ph">[Comment on UCL status.]</span></p>
-<h2 class="group">Nerves</h2>
-<h2>Ulnar Nerve - Normal</h2>
+<h2 class="group" id="nerves">Nerves</h2>
+<h2 id="ulnar-nerve-normal">Ulnar Nerve - Normal</h2>
 <p class="f"><b>F:</b> The ulnar nerve is normal in caliber and signal within the cubital tunnel. No perineural edema, compressive mass, or subluxation. Cubital tunnel retinaculum is intact.</p>
 <p class="i"><b>I:</b> Normal ulnar nerve. No cubital tunnel syndrome.</p>
-<h2>Ulnar Neuritis</h2>
+<h2 id="ulnar-neuritis">Ulnar Neuritis</h2>
 <p class="f"><b>F:</b> The ulnar nerve within the cubital tunnel is enlarged (cross-sectional area <span class="ph">[X]</span> mm^2) and T2 hyperintense with surrounding perineural edema. No compressive mass or ganglion cyst. Nerve is <span class="ph">[normally positioned posterior to the medial epicondyle / subluxed anterior to the medial epicondyle]</span>.</p>
 <p class="i"><b>I:</b> Ulnar neuritis/cubital tunnel syndrome. <span class="ph">[Comment on nerve subluxation if present.]</span></p>
-<h2>Ulnar Nerve Subluxation</h2>
+<h2 id="ulnar-nerve-subluxation">Ulnar Nerve Subluxation</h2>
 <p class="f"><b>F:</b> The ulnar nerve is subluxed anterior to the medial epicondyle on axial images with T2 hyperintensity and mild enlargement. <span class="ph">[Cubital tunnel retinaculum is attenuated/absent.]</span> No compressive mass.</p>
 <p class="i"><b>I:</b> Ulnar nerve subluxation with neuritis, anterior to the medial epicondyle.</p>
-<h2>Ulnar Nerve - Mass Compression</h2>
+<h2 id="ulnar-nerve-mass-compression">Ulnar Nerve - Mass Compression</h2>
 <p class="f"><b>F:</b> A <span class="ph">[T2 hyperintense/heterogeneous]</span> mass within the cubital tunnel measuring <span class="ph">[X]</span> x <span class="ph">[Y]</span> x <span class="ph">[Z]</span> mm displaces and compresses the ulnar nerve, which is enlarged and T2 hyperintense proximal to the mass. <span class="ph">[Mass characteristics: well-circumscribed/lobulated/enhancing.]</span></p>
 <p class="i"><b>I:</b> Cubital tunnel mass <span class="ph">[ganglion cyst / schwannoma / other]</span> with secondary ulnar nerve compression and neuritis.</p>
-<h2>Radial Nerve / PIN - Normal</h2>
+<h2 id="radial-nerve-pin-normal">Radial Nerve / PIN - Normal</h2>
 <p class="f"><b>F:</b> The radial nerve and posterior interosseous nerve (PIN) are normal in caliber and signal. No enlargement at the arcade of Frohse. Supinator and extensor muscle signal is normal.</p>
 <p class="i"><b>I:</b> Normal radial nerve/PIN. No radial tunnel syndrome.</p>
-<h2>PIN Compression - Arcade of Frohse</h2>
+<h2 id="pin-compression-arcade-of-frohse">PIN Compression - Arcade of Frohse</h2>
 <p class="f"><b>F:</b> The posterior interosseous nerve is enlarged and T2 hyperintense at the level of the arcade of Frohse / proximal edge of the supinator muscle. Edema within the supinator and <span class="ph">[extensor]</span> muscles is present, consistent with denervation. No compressive mass.</p>
 <p class="i"><b>I:</b> PIN entrapment at the arcade of Frohse with denervation signal in the supinator <span class="ph">[and extensor muscles]</span>. Correlate for radial tunnel syndrome.</p>
-<h2>PIN Compression - Bicipitoradial Bursa</h2>
+<h2 id="pin-compression-bicipitoradial-bursa">PIN Compression - Bicipitoradial Bursa</h2>
 <p class="f"><b>F:</b> Distended bicipitoradial bursa with fluid/synovial thickening compresses the posterior interosseous nerve, which is enlarged and T2 hyperintense. <span class="ph">[Denervation edema in the supinator and extensor musculature.]</span></p>
 <p class="i"><b>I:</b> Bicipitoradial bursitis with secondary PIN compression and denervation.</p>
-<h2>Denervation Pattern - Radial Nerve Territory</h2>
+<h2 id="denervation-pattern-radial-nerve-territory">Denervation Pattern - Radial Nerve Territory</h2>
 <p class="f"><b>F:</b> Diffuse T2 hyperintense edema within the supinator and extensor musculature of the posterior forearm compartment without focal mass lesion, consistent with subacute denervation. <span class="ph">[T1 signal is normal / demonstrates fatty atrophy indicating chronicity.]</span></p>
 <p class="i"><b>I:</b> Denervation pattern in the posterior interosseous nerve distribution. <span class="ph">[Subacute if edema only / chronic if fatty replacement.]</span> Correlate for radial nerve or PIN lesion.</p>
-<h2 class="group">Effusion / Bursae / Loose Bodies</h2>
-<h2>Joint Effusion - Trace</h2>
+<h2 class="group" id="effusion-bursae-loose-bodies">Effusion / Bursae / Loose Bodies</h2>
+<h2 id="joint-effusion-trace">Joint Effusion - Trace</h2>
 <p class="f"><b>F:</b> Trace elbow joint effusion. No synovial thickening or intra-articular body.</p>
 <p class="i"><b>I:</b> Trace elbow joint effusion, nonspecific.</p>
-<h2>Joint Effusion - Small with Synovitis</h2>
+<h2 id="joint-effusion-small-with-synovitis">Joint Effusion - Small with Synovitis</h2>
 <p class="f"><b>F:</b> Small elbow joint effusion with mild synovial thickening. No intra-articular loose body.</p>
 <p class="i"><b>I:</b> Small elbow joint effusion with synovitis.</p>
-<h2>Joint Effusion - Moderate with Loose Body</h2>
+<h2 id="joint-effusion-moderate-with-loose-body">Joint Effusion - Moderate with Loose Body</h2>
 <p class="f"><b>F:</b> Moderate elbow joint effusion with synovial thickening and a <span class="ph">[X]</span> mm intra-articular osteochondral/ossific body in the <span class="ph">[olecranon fossa / coronoid fossa / radiocapitellar recess]</span>. [Additional bodies in the <span class="ph">[location]</span>.]</p>
 <p class="i"><b>I:</b> Moderate elbow joint effusion with intra-articular loose body in the <span class="ph">[location]</span>. <span class="ph">[Correlate for mechanical symptoms.]</span></p>
-<h2>Olecranon Bursitis</h2>
+<h2 id="olecranon-bursitis">Olecranon Bursitis</h2>
 <p class="f"><b>F:</b> Fluid distension and synovial thickening of the olecranon bursa measuring <span class="ph">[X]</span> x <span class="ph">[Y]</span> x <span class="ph">[Z]</span> mm overlying the posterior olecranon. <span class="ph">[No internal complexity/debris.]</span> <span class="ph">[Complex fluid with internal septations/debris raising concern for septic bursitis.]</span> No underlying triceps tendon tear.</p>
 <p class="i"><b>I:</b> Olecranon bursitis. <span class="ph">[If complex: clinical correlation for septic bursitis recommended.]</span></p>
-<h2>Bicipitoradial Bursitis</h2>
+<h2 id="bicipitoradial-bursitis">Bicipitoradial Bursitis</h2>
 <p class="f"><b>F:</b> Fluid distension of the bicipitoradial bursa between the distal biceps tendon and radial tuberosity measuring <span class="ph">[X]</span> x <span class="ph">[Y]</span> mm. <span class="ph">[Distal biceps tendon is intact/tendinotic/partially torn.]</span> <span class="ph">[PIN is displaced/compressed.]</span></p>
 <p class="i"><b>I:</b> Bicipitoradial bursitis. <span class="ph">[Comment on biceps tendon and PIN status.]</span></p>
-<h2>Multiple Loose Bodies / Synovial Chondromatosis</h2>
+<h2 id="multiple-loose-bodies-synovial-chondromatosis">Multiple Loose Bodies / Synovial Chondromatosis</h2>
 <p class="f"><b>F:</b> Moderate-to-large elbow joint effusion with numerous small intra-articular ossific/chondral bodies distributed throughout the olecranon fossa, coronoid fossa, and radiocapitellar recess. Synovial thickening/proliferation is present. [Secondary chondral irregularity of the <span class="ph">[capitellum/trochlea]</span>.]</p>
 <p class="i"><b>I:</b> Multiple intra-articular loose bodies with synovitis, consistent with synovial chondromatosis. <span class="ph">[Comment on secondary chondral damage.]</span></p>
-<h2>Elbow Arthritis / Degenerative Changes</h2>
+<h2 id="elbow-arthritis-degenerative-changes">Elbow Arthritis / Degenerative Changes</h2>
 <p class="f"><b>F:</b> Degenerative changes of the elbow joint with marginal osteophytes at the <span class="ph">[olecranon tip / coronoid process / radiocapitellar articulation]</span>, chondral thinning of the <span class="ph">[ulnotrochlear / radiocapitellar]</span> articulation, and small joint effusion. <span class="ph">[Olecranon fossa/coronoid fossa loose body.]</span> No acute fracture.</p>
 <p class="i"><b>I:</b> <span class="ph">[Mild/moderate/severe]</span> elbow osteoarthrosis. <span class="ph">[Loose body.]</span></p>
-<h2>Occult Fracture / Bone Marrow Edema</h2>
+<h2 id="occult-fracture-bone-marrow-edema">Occult Fracture / Bone Marrow Edema</h2>
 <p class="f"><b>F:</b> Bone marrow edema pattern within the <span class="ph">[radial head / coronoid process / capitellum / olecranon]</span> on fluid-sensitive sequences with <span class="ph">[preserved / irregular]</span> overlying cortex. No displaced fracture fragment. Joint effusion with <span class="ph">[posterior fat pad sign on lateral radiograph, if available]</span>.</p>
 <p class="i"><b>I:</b> Bone marrow edema of the <span class="ph">[location]</span> compatible with occult/nondisplaced fracture. Clinical and radiographic correlation recommended.</p>
-<h2>Search Pattern</h2>
+<h2 id="search-pattern">Search Pattern</h2>
 <ul><li><b>1. Check history, indication, and priors.</b></li><li><b>2. Check adequacy, technique, and limitations.</b></li><li><b>3. Examine localizers</b> for incidental pathology.</li><li><b>4. Check for effusion/collection</b> on fluid-weighted sequences:</li><li>Joint effusion, synovial thickening.</li><li>Bicipitoradial bursa (reactive to biceps tendon tear).</li><li>Olecranon bursa.</li><li>Correlate with enhancement if available.</li><li><b>5. Assess bone cortex and marrow:</b></li><li>Cortical breaks/fractures, osteophytes, loose bodies, heterotopic ossification.</li><li>Transverse trochlear ridge pseudodefect (expected finding).</li><li>Marrow replacement; hematopoietic marrow distribution.</li><li>OCD at capitellum and trochlea (fluid signal, cysts, high-intensity line through cartilage).</li><li>Marrow edema at epicondyles as clue to overlying cartilage defects.</li><li>Radiocapitellar alignment.</li><li><b>6. Assess cartilage:</b> PD and fluid-sensitive sequences; ulnotrochlear, radiocarpal, proximal radioulnar articulations; subchondral marrow changes.</li><li><b>7. Assess tendons:</b></li><li>Continuity, position/size, signal on PD and fluid-sensitive.</li><li>Follow from muscle to myotendinous junction to tendon to bony attachment.</li><li>Medial compartment: common flexor tendon.</li><li>Lateral compartment: common extensor tendon.</li><li>Anterior compartment: biceps and brachialis.</li><li>Posterior compartment: triceps and anconeus (accessory anconeus replacing cubital tunnel retinaculum).</li><li><b>8. Assess ligaments:</b></li><li>At least two projections (coronal + axial); fluid signal or contrast interposition (arthrogram).</li><li>Thickening, attenuation, abnormal intrasubstance signal, periligamentous edema, fiber discontinuity.</li><li>UCL (anterior bundle most commonly injured, T-sign = partial tear).</li><li>RCL; LUCL; annular ligament (axials, elbow dislocation setting).</li><li><b>9. Assess subcutaneous tissues and musculature:</b> T1 precontrast, fluid-sensitive correlation.</li><li><b>10. Assess nerves:</b></li><li>Denervation changes first.</li><li>Ulnar nerve (best seen at elbow — osseous/alignment variations, osteophytes, synovial hypertrophy, space-occupying lesions).</li><li>Median and radial nerves (difficult to delineate from adjacent muscle, look for mass lesions along expected courses).</li><li>If nerve abnormality is primary, look for secondary denervation changes.</li><li><b>11. Double check</b> marrow signal, muscles, and subcutaneous tissues.</li><li><b>12. Proofread report.</b></li></ul>
-<h2>Infection Search Pattern</h2>
+<h2 id="infection-search-pattern">Infection Search Pattern</h2>
 <ul><li><b>1. Marrow/bone changes:</b></li><li>Marrow replacement (darker than muscle/disc on T1; geographic pattern more predictive than reticular/periarticular).</li><li>Marrow edema (isolated finding raises concern in diabetics/high-risk).</li><li>Bone erosion (loss of dark T1/T2 cortical line).</li><li><b>2. Surrounding inflammatory changes:</b> fascia, musculature, subcutaneous fat edema/enhancement.</li><li><b>3. Susceptibility suggesting air:</b> in collections, soft tissues, along fascial planes, in bone.</li><li><b>4. Abnormal enhancement:</b></li><li>Rim-enhancing collection = abscess.</li><li>Superficial lesion without enhancement = ulcer.</li><li>Enhancement along fascial planes = infectious/inflammatory fasciitis.</li><li>Non-enhancement of normal structures = ischemia.</li><li>Other patterns of enhancement may not be specific.</li><li><b>5. Differentiating osteomyelitis from neuropathic joint:</b></li><li>Joint effusion with marrow replacement on both sides of joint.</li><li>Fluid collections/abscesses (periprosthetic, subperiosteal, intraosseous/Brodie&#x27;s abscess).</li><li>Sinus tract connecting abnormal marrow signal to skin surface.</li><li>Disappearance of subchondral cysts on sequential imaging.</li><li>Progressive marrow/soft tissue changes greater than expected on sequential imaging.</li></ul>
-<h2>Source Notes</h2>
+<h2 id="source-notes">Source Notes</h2>
 <p>Built from the original elbow MRI cheat sheet, standard MSK MRI reporting conventions, review-level radiology references for UCL/lateral collateral injuries, capitellar OCD staging, cubital tunnel syndrome, and PIN entrapment. Expanded to match the depth of the shoulder cheat sheet with graded findings for all major structures. Use surgical correlation and local report conventions as needed.</p>
 <button id="to-top" class="to-top" aria-label="Back to top" title="Back to top (Home)">↑</button>
 <script>
@@ -463,6 +519,48 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
   }
   if(top){ top.onclick=goTop; window.addEventListener('scroll', onScroll, {passive:true}); onScroll(); }
 
+  // ── Table of contents drawer ──
+  var drawer=document.getElementById('toc-drawer'),
+      backdrop=document.getElementById('toc-backdrop'),
+      tocToggle=document.getElementById('toc-toggle'),
+      tocClose=document.getElementById('toc-close');
+  function tocOpen(){ if(drawer){ drawer.classList.add('open'); backdrop.classList.add('show'); } }
+  function tocCloseFn(){ if(drawer){ drawer.classList.remove('open'); backdrop.classList.remove('show'); } }
+  function tocToggleFn(){ drawer && (drawer.classList.contains('open')?tocCloseFn():tocOpen()); }
+  if(tocToggle) tocToggle.onclick=tocToggleFn;
+  if(tocClose) tocClose.onclick=tocCloseFn;
+  if(backdrop) backdrop.onclick=tocCloseFn;
+  if(drawer){
+    drawer.addEventListener('click', function(e){
+      var tog=e.target.closest('.toc-tog');
+      if(tog){ e.preventDefault(); tog.closest('.toc-node').classList.toggle('open'); return; }
+      if(e.target.closest('a')){ tocCloseFn(); }   // jump (href) + close
+    });
+  }
+  // scroll-spy: highlight current section, open its ancestors
+  var links={}, heads=[];
+  if(drawer){
+    [].forEach.call(drawer.querySelectorAll('a[href^="#"]'), function(a){
+      var id=a.getAttribute('href').slice(1); links[id]=a;
+      var h=document.getElementById(id); if(h) heads.push(h);
+    });
+    heads.sort(function(a,b){ return a.offsetTop-b.offsetTop; });
+  }
+  var spyT=null;
+  function spy(){
+    if(!heads.length) return;
+    var y=window.scrollY+96, cur=null;
+    for(var k=0;k<heads.length;k++){ if(heads[k].offsetTop<=y) cur=heads[k].id; else break; }
+    for(var id in links) links[id].classList.remove('active');
+    if(cur && links[cur]){
+      var a=links[cur]; a.classList.add('active');
+      var node=a.closest('.toc-node');
+      while(node){ node.classList.add('open'); node=node.parentElement&&node.parentElement.closest('.toc-node'); }
+    }
+  }
+  window.addEventListener('scroll', function(){ if(spyT) return; spyT=setTimeout(function(){ spyT=null; spy(); },120); }, {passive:true});
+  spy();
+
   document.addEventListener('keydown', function(e){
     if(e.metaKey||e.ctrlKey||e.altKey) return;            // leave native zoom alone
     var t=e.target;
@@ -471,6 +569,8 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
     else if(e.key==='-'||e.key==='_'){ set(scale-STEP); e.preventDefault(); }
     else if(e.key==='0'){ set(1); e.preventDefault(); }
     else if(e.key==='Home'){ goTop(); e.preventDefault(); }
+    else if(e.key==='c'||e.key==='C'){ tocToggleFn(); e.preventDefault(); }
+    else if(e.key==='Escape'){ tocCloseFn(); }
   });
 })();
 </script>

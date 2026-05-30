@@ -106,6 +106,7 @@ h3{
   margin:22px 0 9px; color:var(--h3tx);
   font-size:18.5px; line-height:1.3; font-weight:700;
   border-bottom:1px solid #2c3a48; padding-bottom:5px;
+  scroll-margin-top:64px;
 }
 
 p{margin:9px 0}
@@ -196,6 +197,60 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 }
 @media print{ .diagram{ break-inside:avoid; } }
 
+/* ── Table-of-contents drawer (overlay; never resizes the page) ── */
+.toc-toggle{
+  display:inline-flex; align-items:center; gap:5px;
+  border:1px solid var(--bdr); border-radius:7px; background:#0d1a26;
+  color:#9fdcf0; font-weight:700; font-size:13px; padding:5px 11px;
+  cursor:pointer; font-family:inherit; margin-right:4px;
+}
+.toc-toggle:hover{ border-color:var(--h3tx); color:#fff; }
+.toc-backdrop{
+  position:fixed; inset:0; z-index:55; background:rgba(0,0,0,0.5);
+  opacity:0; visibility:hidden; transition:opacity .2s;
+}
+.toc-backdrop.show{ opacity:1; visibility:visible; }
+.toc-drawer{
+  position:fixed; top:0; left:0; height:100vh; width:316px; max-width:86vw; z-index:60;
+  background:#0b121d; border-right:1px solid var(--bdr);
+  box-shadow:3px 0 28px rgba(0,0,0,0.55);
+  transform:translateX(-104%); transition:transform .22s ease;
+  display:flex; flex-direction:column;
+}
+.toc-drawer.open{ transform:translateX(0); }
+.toc-head{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:13px 16px; border-bottom:1px solid var(--bdr); flex:0 0 auto;
+}
+.toc-head .t{ font-weight:800; color:#fff; font-size:15px; letter-spacing:.5px; }
+.toc-close{ background:none; border:none; color:var(--tx2); font-size:24px; line-height:1; cursor:pointer; padding:0 4px; }
+.toc-close:hover{ color:#fff; }
+.toc-list{ overflow-y:auto; padding:8px 8px 28px; flex:1; }
+.toc-node.leaf{ }
+.toc-row{ display:flex; align-items:flex-start; }
+.toc-tog{
+  flex:0 0 auto; width:20px; height:26px; margin-top:1px;
+  background:none; border:none; cursor:pointer; padding:0;
+  color:var(--tx3); font-size:11px;
+}
+.toc-tog::before{ content:"▸"; display:inline-block; transition:transform .15s; }
+.toc-node.open > .toc-row > .toc-tog::before{ transform:rotate(90deg); }
+.toc-node.leaf .toc-row{ padding-left:20px; }
+.toc-children{ display:none; }
+.toc-node.open > .toc-children{ display:block; }
+.toc-link{
+  flex:1; display:block; text-decoration:none; color:var(--tx2);
+  padding:5px 9px; border-radius:6px; font-size:13.5px; line-height:1.35;
+  border-left:2px solid transparent;
+}
+.toc-link:hover{ background:#13212f; color:#fff; }
+.toc-link.active{ border-left-color:var(--h3tx); background:#13212f; color:#fff; }
+.toc-link.lvl-group{ color:#c9b6f5; font-weight:800; text-transform:uppercase; font-size:12px; letter-spacing:.5px; }
+.toc-link.lvl-h2{ color:#e6eaf2; font-weight:600; }
+.toc-link.lvl-h3{ color:var(--tx2); font-size:12.5px; }
+.toc-children .toc-children .toc-link{ padding-left:18px; }
+@media print{ .toc-toggle, .toc-drawer, .toc-backdrop{ display:none !important; } }
+
 @media (max-width:680px){
   body{font-size:17px; padding:0 16px 48px}
   .topbar{margin:0 -16px 18px; padding:10px 16px}
@@ -247,6 +302,48 @@ SCRIPT = """
   }
   if(top){ top.onclick=goTop; window.addEventListener('scroll', onScroll, {passive:true}); onScroll(); }
 
+  // ── Table of contents drawer ──
+  var drawer=document.getElementById('toc-drawer'),
+      backdrop=document.getElementById('toc-backdrop'),
+      tocToggle=document.getElementById('toc-toggle'),
+      tocClose=document.getElementById('toc-close');
+  function tocOpen(){ if(drawer){ drawer.classList.add('open'); backdrop.classList.add('show'); } }
+  function tocCloseFn(){ if(drawer){ drawer.classList.remove('open'); backdrop.classList.remove('show'); } }
+  function tocToggleFn(){ drawer && (drawer.classList.contains('open')?tocCloseFn():tocOpen()); }
+  if(tocToggle) tocToggle.onclick=tocToggleFn;
+  if(tocClose) tocClose.onclick=tocCloseFn;
+  if(backdrop) backdrop.onclick=tocCloseFn;
+  if(drawer){
+    drawer.addEventListener('click', function(e){
+      var tog=e.target.closest('.toc-tog');
+      if(tog){ e.preventDefault(); tog.closest('.toc-node').classList.toggle('open'); return; }
+      if(e.target.closest('a')){ tocCloseFn(); }   // jump (href) + close
+    });
+  }
+  // scroll-spy: highlight current section, open its ancestors
+  var links={}, heads=[];
+  if(drawer){
+    [].forEach.call(drawer.querySelectorAll('a[href^="#"]'), function(a){
+      var id=a.getAttribute('href').slice(1); links[id]=a;
+      var h=document.getElementById(id); if(h) heads.push(h);
+    });
+    heads.sort(function(a,b){ return a.offsetTop-b.offsetTop; });
+  }
+  var spyT=null;
+  function spy(){
+    if(!heads.length) return;
+    var y=window.scrollY+96, cur=null;
+    for(var k=0;k<heads.length;k++){ if(heads[k].offsetTop<=y) cur=heads[k].id; else break; }
+    for(var id in links) links[id].classList.remove('active');
+    if(cur && links[cur]){
+      var a=links[cur]; a.classList.add('active');
+      var node=a.closest('.toc-node');
+      while(node){ node.classList.add('open'); node=node.parentElement&&node.parentElement.closest('.toc-node'); }
+    }
+  }
+  window.addEventListener('scroll', function(){ if(spyT) return; spyT=setTimeout(function(){ spyT=null; spy(); },120); }, {passive:true});
+  spy();
+
   document.addEventListener('keydown', function(e){
     if(e.metaKey||e.ctrlKey||e.altKey) return;            // leave native zoom alone
     var t=e.target;
@@ -255,6 +352,8 @@ SCRIPT = """
     else if(e.key==='-'||e.key==='_'){ set(scale-STEP); e.preventDefault(); }
     else if(e.key==='0'){ set(1); e.preventDefault(); }
     else if(e.key==='Home'){ goTop(); e.preventDefault(); }
+    else if(e.key==='c'||e.key==='C'){ tocToggleFn(); e.preventDefault(); }
+    else if(e.key==='Escape'){ tocCloseFn(); }
   });
 })();
 """
@@ -419,6 +518,25 @@ def render_diagram(did: str, caption: str | None = None) -> str:
     return f'<figure class="diagram">{svg}{figcap}</figure>'
 
 
+def plain(text: str) -> str:
+    """Strip markdown emphasis/brackets for TOC labels."""
+    t = text.replace("**", "")
+    t = re.sub(r"\[([^\]]*)\]", r"\1", t)
+    return html.escape(t.strip())
+
+
+def slugify(text: str, used: set) -> str:
+    s = re.sub(r"\*\*", "", text)
+    s = re.sub(r"[\[\]]", "", s).lower()
+    s = re.sub(r"[^a-z0-9]+", "-", s).strip("-") or "section"
+    base, n, sid = s, 2, s
+    while sid in used:
+        sid = f"{base}-{n}"
+        n += 1
+    used.add(sid)
+    return sid
+
+
 def inline(text: str) -> str:
     """Escape, then apply **bold** and [placeholder] formatting."""
     text = html.escape(text)
@@ -452,14 +570,16 @@ def parse_table(rows: list[str]) -> str:
     return "".join(out)
 
 
-def md_to_html(md: str) -> tuple[str, str]:
-    """Return (title, body_html)."""
+def md_to_html(md: str) -> tuple[str, str, list]:
+    """Return (title, body_html, toc) where toc is a list of (level, id, label)."""
     lines = md.split("\n")
     title = ""
     out: list[str] = []
     i = 0
     n = len(lines)
     bullets: list[str] = []
+    used_ids: set = set()
+    toc: list = []
 
     def flush_bullets():
         nonlocal bullets
@@ -522,17 +642,25 @@ def md_to_html(md: str) -> tuple[str, str]:
                     i += 1
             else:
                 # subsequent H1 = anatomical group divider
-                out.append(f'<h2 class="group">{inline(text)}</h2>')
+                sid = slugify(text, used_ids)
+                out.append(f'<h2 class="group" id="{sid}">{inline(text)}</h2>')
+                toc.append(("group", sid, plain(text)))
                 i += 1
             continue
         if stripped.startswith("### "):
             flush_bullets()
-            out.append(f"<h3>{inline(stripped[4:].strip())}</h3>")
+            htext = stripped[4:].strip()
+            sid = slugify(htext, used_ids)
+            out.append(f'<h3 id="{sid}">{inline(htext)}</h3>')
+            toc.append(("h3", sid, plain(htext)))
             i += 1
             continue
         if stripped.startswith("## "):
             flush_bullets()
-            out.append(f"<h2>{inline(stripped[3:].strip())}</h2>")
+            htext = stripped[3:].strip()
+            sid = slugify(htext, used_ids)
+            out.append(f'<h2 id="{sid}">{inline(htext)}</h2>')
+            toc.append(("h2", sid, plain(htext)))
             i += 1
             continue
 
@@ -566,7 +694,47 @@ def md_to_html(md: str) -> tuple[str, str]:
         i += 1
 
     flush_bullets()
-    return title, "\n".join(out)
+    return title, "\n".join(out), toc
+
+
+def build_toc(toc: list) -> str:
+    """Build a nested, collapsible TOC drawer from (level, id, label) entries."""
+    if not toc:
+        return ""
+    rank = {"group": 1, "h2": 2, "h3": 3}
+    root = {"lvl": "root", "L": 0, "children": []}
+    stack = [root]
+    for lvl, sid, label in toc:
+        L = rank[lvl]
+        node = {"lvl": lvl, "L": L, "sid": sid, "label": label, "children": []}
+        while len(stack) > 1 and stack[-1]["L"] >= L:
+            stack.pop()
+        stack[-1]["children"].append(node)
+        stack.append(node)
+
+    def render(node: dict) -> str:
+        link = f'<a class="toc-link lvl-{node["lvl"]}" href="#{node["sid"]}">{node["label"]}</a>'
+        if node["children"]:
+            kids = "".join(render(c) for c in node["children"])
+            return (
+                '<div class="toc-node">'
+                '<div class="toc-row">'
+                '<button class="toc-tog" aria-label="expand section"></button>'
+                f"{link}</div>"
+                f'<div class="toc-children">{kids}</div>'
+                "</div>"
+            )
+        return f'<div class="toc-node leaf"><div class="toc-row">{link}</div></div>'
+
+    items = "".join(render(c) for c in root["children"])
+    return (
+        '<div id="toc-backdrop" class="toc-backdrop"></div>'
+        '<nav id="toc-drawer" class="toc-drawer" aria-label="Table of contents">'
+        '<div class="toc-head"><span class="t">Contents</span>'
+        '<button id="toc-close" class="toc-close" aria-label="Close contents">&times;</button></div>'
+        f'<div class="toc-list">{items}</div>'
+        "</nav>"
+    )
 
 
 def topbar(joint: str, title: str, has_template: bool) -> str:
@@ -586,9 +754,14 @@ def topbar(joint: str, title: str, has_template: bool) -> str:
         '<button id="fs-inc" aria-label="Increase font size">A+</button>'
         "</span>"
     )
+    toc_btn = (
+        '<button id="toc-toggle" class="toc-toggle" title="Contents (c)" '
+        'aria-label="Table of contents">☰ Contents</button>'
+    )
     return (
         '<div class="topbar">'
-        f'<span class="crumb">{html.escape(crumb)}</span>'
+        + toc_btn
+        + f'<span class="crumb">{html.escape(crumb)}</span>'
         + "".join(links)
         + fontctl
         + "</div>"
@@ -599,7 +772,8 @@ def build(joint: str) -> None:
     md_path = ROOT / joint / f"{joint}-mri-cheatsheet.md"
     out_path = ROOT / joint / f"{joint}-mri-cheatsheet.html"
     md = md_path.read_text(encoding="utf-8")
-    title, body = md_to_html(md)
+    title, body, toc = md_to_html(md)
+    toc_html = build_toc(toc)
     has_template = (ROOT / "templates" / f"{joint}.html").exists()
     # move the rendered <h1>/subtitle out so the topbar sits above them
     page = f"""<!DOCTYPE html>
@@ -619,6 +793,7 @@ def build(joint: str) -> None:
 </head>
 <body>
 {topbar(joint, title or joint.title(), has_template)}
+{toc_html}
 {body}
 <button id="to-top" class="to-top" aria-label="Back to top" title="Back to top (Home)">↑</button>
 <script>{SCRIPT}</script>

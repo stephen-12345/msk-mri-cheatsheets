@@ -87,6 +87,7 @@ h3{
   margin:22px 0 9px; color:var(--h3tx);
   font-size:18.5px; line-height:1.3; font-weight:700;
   border-bottom:1px solid #2c3a48; padding-bottom:5px;
+  scroll-margin-top:64px;
 }
 
 p{margin:9px 0}
@@ -177,6 +178,60 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 }
 @media print{ .diagram{ break-inside:avoid; } }
 
+/* ── Table-of-contents drawer (overlay; never resizes the page) ── */
+.toc-toggle{
+  display:inline-flex; align-items:center; gap:5px;
+  border:1px solid var(--bdr); border-radius:7px; background:#0d1a26;
+  color:#9fdcf0; font-weight:700; font-size:13px; padding:5px 11px;
+  cursor:pointer; font-family:inherit; margin-right:4px;
+}
+.toc-toggle:hover{ border-color:var(--h3tx); color:#fff; }
+.toc-backdrop{
+  position:fixed; inset:0; z-index:55; background:rgba(0,0,0,0.5);
+  opacity:0; visibility:hidden; transition:opacity .2s;
+}
+.toc-backdrop.show{ opacity:1; visibility:visible; }
+.toc-drawer{
+  position:fixed; top:0; left:0; height:100vh; width:316px; max-width:86vw; z-index:60;
+  background:#0b121d; border-right:1px solid var(--bdr);
+  box-shadow:3px 0 28px rgba(0,0,0,0.55);
+  transform:translateX(-104%); transition:transform .22s ease;
+  display:flex; flex-direction:column;
+}
+.toc-drawer.open{ transform:translateX(0); }
+.toc-head{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:13px 16px; border-bottom:1px solid var(--bdr); flex:0 0 auto;
+}
+.toc-head .t{ font-weight:800; color:#fff; font-size:15px; letter-spacing:.5px; }
+.toc-close{ background:none; border:none; color:var(--tx2); font-size:24px; line-height:1; cursor:pointer; padding:0 4px; }
+.toc-close:hover{ color:#fff; }
+.toc-list{ overflow-y:auto; padding:8px 8px 28px; flex:1; }
+.toc-node.leaf{ }
+.toc-row{ display:flex; align-items:flex-start; }
+.toc-tog{
+  flex:0 0 auto; width:20px; height:26px; margin-top:1px;
+  background:none; border:none; cursor:pointer; padding:0;
+  color:var(--tx3); font-size:11px;
+}
+.toc-tog::before{ content:"▸"; display:inline-block; transition:transform .15s; }
+.toc-node.open > .toc-row > .toc-tog::before{ transform:rotate(90deg); }
+.toc-node.leaf .toc-row{ padding-left:20px; }
+.toc-children{ display:none; }
+.toc-node.open > .toc-children{ display:block; }
+.toc-link{
+  flex:1; display:block; text-decoration:none; color:var(--tx2);
+  padding:5px 9px; border-radius:6px; font-size:13.5px; line-height:1.35;
+  border-left:2px solid transparent;
+}
+.toc-link:hover{ background:#13212f; color:#fff; }
+.toc-link.active{ border-left-color:var(--h3tx); background:#13212f; color:#fff; }
+.toc-link.lvl-group{ color:#c9b6f5; font-weight:800; text-transform:uppercase; font-size:12px; letter-spacing:.5px; }
+.toc-link.lvl-h2{ color:#e6eaf2; font-weight:600; }
+.toc-link.lvl-h3{ color:var(--tx2); font-size:12.5px; }
+.toc-children .toc-children .toc-link{ padding-left:18px; }
+@media print{ .toc-toggle, .toc-drawer, .toc-backdrop{ display:none !important; } }
+
 @media (max-width:680px){
   body{font-size:17px; padding:0 16px 48px}
   .topbar{margin:0 -16px 18px; padding:10px 16px}
@@ -200,14 +255,15 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 </style>
 </head>
 <body>
-<div class="topbar"><span class="crumb">Ankle MRI Dictation Cheat Sheet</span><a href="../index.html">← All regions</a><a class="tmpl" href="../templates/ankle.html">📋 Dictation template</a><a href="ankle-mri-cheatsheet.pdf">PDF (print)</a><a href="ankle-mri-cheatsheet-dark.pdf">PDF (dark)</a><a href="ankle-mri-cheatsheet.md">Markdown</a><span class="fontctl" title="Font size — shortcuts: -, +, 0 to reset"><button id="fs-dec" aria-label="Decrease font size">A−</button><button id="fs-rst" aria-label="Reset font size">A</button><button id="fs-inc" aria-label="Increase font size">A+</button></span></div>
+<div class="topbar"><button id="toc-toggle" class="toc-toggle" title="Contents (c)" aria-label="Table of contents">☰ Contents</button><span class="crumb">Ankle MRI Dictation Cheat Sheet</span><a href="../index.html">← All regions</a><a class="tmpl" href="../templates/ankle.html">📋 Dictation template</a><a href="ankle-mri-cheatsheet.pdf">PDF (print)</a><a href="ankle-mri-cheatsheet-dark.pdf">PDF (dark)</a><a href="ankle-mri-cheatsheet.md">Markdown</a><span class="fontctl" title="Font size — shortcuts: -, +, 0 to reset"><button id="fs-dec" aria-label="Decrease font size">A−</button><button id="fs-rst" aria-label="Reset font size">A</button><button id="fs-inc" aria-label="Increase font size">A+</button></span></div>
+<div id="toc-backdrop" class="toc-backdrop"></div><nav id="toc-drawer" class="toc-drawer" aria-label="Table of contents"><div class="toc-head"><span class="t">Contents</span><button id="toc-close" class="toc-close" aria-label="Close contents">&times;</button></div><div class="toc-list"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#core-measurements">Core Measurements</a></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-h2" href="#how-to-find-it-landmark-based-identification">How to Find It — Landmark-Based Identification</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#orientation-and-search-strategy">Orientation and Search Strategy</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#medial-retromalleolar-tendons-axial">Medial Retromalleolar Tendons (Axial)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#lateral-peroneal-tendons-axial">Lateral Peroneal Tendons (Axial)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#lateral-collateral-ligaments-axial-cfl-also-coronal">Lateral Collateral Ligaments (Axial; CFL also Coronal)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#syndesmosis-axial">Syndesmosis (Axial)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#medial-ligaments-coronal-primary-axial-adjunct">Medial Ligaments (Coronal primary; Axial adjunct)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#sinus-tarsi-and-tarsal-tunnel">Sinus Tarsi and Tarsal Tunnel</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#achilles-tendon-and-plantaris-sagittal-axial">Achilles Tendon and Plantaris (Sagittal + Axial)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#talar-dome-osteochondral-lesions-coronal-sagittal">Talar Dome Osteochondral Lesions (Coronal + Sagittal)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#posterior-impingement-and-accessory-ossicles-sagittal-axial">Posterior Impingement and Accessory Ossicles (Sagittal/Axial)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#plantar-fascia-sagittal">Plantar Fascia (Sagittal)</a></div></div></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#modified-outerbridge-chondromalacia-grading-copy-ready">Modified Outerbridge Chondromalacia Grading - Copy-Ready</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#ankle-mri-tells">Ankle MRI Tells</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#normal-negative-templates">Normal / Negative Templates</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#useful-caveats">Useful Caveats</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#achilles-tendon">Achilles Tendon</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#tibialis-posterior">Tibialis Posterior</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#peroneal-tendons">Peroneal Tendons</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#lateral-ligaments">Lateral Ligaments</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#syndesmosis">Syndesmosis</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#deltoid-spring-ligament">Deltoid / Spring Ligament</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#talar-dome-olt">Talar Dome / OLT</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#impingement">Impingement</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#plantar-fascia">Plantar Fascia</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#sinus-tarsi-tarsal-tunnel">Sinus Tarsi / Tarsal Tunnel</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#effusion-bone-other">Effusion / Bone / Other</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#search-pattern">Search Pattern</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#infection-search-pattern">Infection Search Pattern</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h2" href="#source-notes">Source Notes</a></div></div></div></nav>
 <h1>Ankle MRI Dictation Cheat Sheet - Expanded Findings &amp; Impressions</h1>
 <p class="subtitle">Copy-ready language. Replace bracketed text. Use as a workstation reference, not a substitute for surgical correlation or local report style.</p>
-<h2>Core Measurements</h2>
+<h2 id="core-measurements">Core Measurements</h2>
 <table><thead><tr><th>Measurement</th><th>Normal / Reference</th></tr></thead><tbody><tr><td>Achilles tendon AP thickness</td><td>4-6 mm (measured on axial, midsubstance)</td></tr><tr><td>Achilles watershed zone</td><td>2-6 cm proximal to calcaneal insertion</td></tr><tr><td>Tibiofibular clear space</td><td>&lt; 6 mm (on mortise radiograph/axial MRI)</td></tr><tr><td>Medial clear space</td><td>&lt; 4 mm</td></tr><tr><td>Talar tilt angle</td><td>&lt; 5 degrees (stress view equivalent)</td></tr><tr><td>Anterior drawer distance</td><td>&lt; 3 mm (clinical correlation)</td></tr><tr><td>OLT sizing</td><td>Report AP x transverse x depth (mm); map to 9-zone grid (medial/central/lateral x anterior/central/posterior)</td></tr><tr><td>PT-to-FDL ratio</td><td>PT normally ~2x diameter of FDL on axial</td></tr></tbody></table>
-<h2>How to Find It — Landmark-Based Identification</h2>
+<h2 id="how-to-find-it-landmark-based-identification">How to Find It — Landmark-Based Identification</h2>
 <p>This section teaches you to systematically locate and evaluate ankle structures using fixed bony landmarks, the optimal plane/sequence for each, what normal looks like, and the mimics that trip up trainees. Work plane-by-plane: tendons and ligaments are best on <b>axial</b>, the Achilles and tibiotalar cartilage on <b>sagittal</b>, and the ligaments/osteochondral surfaces on <b>coronal</b>.</p>
-<h3>Orientation and Search Strategy</h3>
+<h3 id="orientation-and-search-strategy">Orientation and Search Strategy</h3>
 <div class="callout pearl"><div class="c-title"><span class="ico">💡</span><span class="lbl">Pearl</span><span class="ttl">Match the structure to its plane</span></div><p>Most ankle pathology is solved by knowing which plane shows the structure best.</p><ul><li><b>Axial:</b> retromalleolar tendons, all three lateral ligaments, syndesmosis, tarsal tunnel</li><li><b>Coronal:</b> deltoid, CFL, talar dome osteochondral surface, peroneal split</li><li><b>Sagittal:</b> Achilles, plantaris, tibiotalar cartilage, os trigonum/FHL, plantar fascia</li></ul></div>
 <div class="callout landmark"><div class="c-title"><span class="ico">📍</span><span class="lbl">Landmark</span><span class="ttl">The medial and lateral malleoli are your anchors</span></div><p>Almost every tendon and ligament is named for its relationship to a malleolus.</p><ul><li>The <b>medial malleolus</b> anchors the deltoid and the Tom-Dick-Harry tendons.</li><li>The <b>lateral malleolus (distal fibula)</b> anchors ATFL, CFL, PTFL, and the peroneal groove.</li></ul></div>
 <figure class="diagram"><svg viewBox="0 0 560 600" role="img" aria-label="Axial cross-section showing the arrangement of ankle tendons" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Arial,sans-serif">
@@ -253,41 +309,41 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
   <circle cx="36" cy="561" r="8" fill="#b69cf0"/>
   <text x="52" y="565" font-size="12" fill="#cdd6e2"><tspan font-weight="700" fill="#c9b6f5">Posterior</tspan> — Achilles tendon (+ plantaris, anteromedial border)</text>
 </svg><figcaption><b>Ankle tendons in cross-section (axial).</b> Four groups wrap the joint: <b>anterior</b> extensors, <b>medial</b> flexors behind the medial malleolus (*Tom, Dick, aNd Harry*), <b>lateral</b> peroneals behind the fibula, and the <b>posterior</b> Achilles. The neurovascular bundle (NV) sits between FDL and FHL.</figcaption></figure>
-<h3>Medial Retromalleolar Tendons (Axial)</h3>
+<h3 id="medial-retromalleolar-tendons-axial">Medial Retromalleolar Tendons (Axial)</h3>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Posterior tibial tendon (PTT)</span></div><p>On <b>axial</b> at the level of the medial malleolus, find the most <b>anteromedial</b> tendon hugging the back of the medial malleolus; it is normally ~<b>2×</b> the caliber of the adjacent FDL.</p><ul><li>Order behind the medial malleolus, front to back (Tom, Dick, AND Harry): <b>T</b>ibialis posterior, <b>F</b>lexor <b>D</b>igitorum longus, <b>and</b> the neurovascular bundle, <b>H</b>allucis longus.</li><li>Follow the PTT distally to its broad insertion on the <b>navicular tuberosity</b>; the main slip there is the dominant attachment.</li></ul></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Flexor digitorum longus (FDL)</span></div><p>Immediately <b>posterior to the PTT</b> on axial, smaller (about half the PTT diameter). It crosses superficial to FHL at the <b>knot of Henry</b> in the midfoot.</p></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Flexor hallucis longus (FHL)</span></div><p>The <b>most posterolateral</b> of the medial tendons, lying in its groove <b>between the talar tubercles</b>. On sagittal it runs deep, hooking under the sustentaculum tali toward the great toe.</p><ul><li>The <b>neurovascular bundle</b> (posterior tibial artery/vein and tibial nerve) sits between FDL and FHL — this is the &quot;and&quot; in Tom, Dick, AND Harry.</li></ul></div>
 <div class="callout pitfall"><div class="c-title"><span class="ico">⚠️</span><span class="lbl">Pitfall</span><span class="ttl">Magic-angle on the curving PTT</span></div><p>Where the PTT curves around the medial malleolus it may show intermediate signal on short-TE sequences (<b>magic angle</b>, fibers near 55° to B0). Confirm on a long-TE (T2/PD) sequence before calling tendinosis or a tear.</p></div>
 <div class="callout pitfall"><div class="c-title"><span class="ico">⚠️</span><span class="lbl">Pitfall</span><span class="ttl">A small fluid rim is normal around the PTT/FHL</span></div><p>A thin sheath of fluid is physiologic. The <b>FHL sheath communicates with the tibiotalar joint</b> in many people, so isolated FHL fluid is often just a joint effusion, not tenosynovitis. Demand circumferential fluid plus a thickened/enhancing sheath before calling true tenosynovitis.</p></div>
 <div class="callout measure"><div class="c-title"><span class="ico">📏</span><span class="lbl">Measure</span><span class="ttl">Calling PTT dysfunction</span></div><p>Compare the PTT to the FDL on axial. A PTT that is <b>enlarged, thinned, or equal to/smaller than the FDL</b>, or shows longitudinal splits/intratendinous T2 signal, indicates posterior tibial tendon dysfunction (PTTD).</p></div>
-<h3>Lateral Peroneal Tendons (Axial)</h3>
+<h3 id="lateral-peroneal-tendons-axial">Lateral Peroneal Tendons (Axial)</h3>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Peroneus brevis and longus in the retromalleolar groove</span></div><p>On <b>axial</b> at the lateral malleolus, find the two peroneals in the <b>retromalleolar (fibular) groove</b>. The <b>brevis is anterior/medial and sits directly against the fibula</b>; the <b>longus is posterolateral</b> to it.</p><ul><li>Mnemonic: <b>brevis is bony</b> (against bone), longus is lateral/superficial.</li></ul></div>
 <div class="callout pitfall"><div class="c-title"><span class="ico">⚠️</span><span class="lbl">Pitfall</span><span class="ttl">The brevis boomerang/C-shape split sign</span></div><p>A normal brevis is round/oval. When it becomes <b>flattened, C-shaped or boomerang-shaped wrapping around the longus</b>, suspect a <b>longitudinal split tear</b> of the peroneus brevis — classically associated with a shallow/convex fibular groove and a chronically lax superior peroneal retinaculum.</p></div>
 <div class="callout landmark"><div class="c-title"><span class="ico">📍</span><span class="lbl">Landmark</span><span class="ttl">Peroneal tubercle and cuboid tunnel for the longus</span></div><p>Follow the <b>longus</b> distally: it passes below the <b>peroneal tubercle</b> of the lateral calcaneus, then turns medially through the <b>cuboid tunnel/groove</b> beneath the cuboid toward the first metatarsal base.</p><ul><li>An <b>os peroneum</b> (sesamoid in the longus at the cuboid) is a normal variant; check it isn&#x27;t fractured/diastatic if the longus is symptomatic.</li></ul></div>
 <div class="callout pitfall"><div class="c-title"><span class="ico">⚠️</span><span class="lbl">Pitfall</span><span class="ttl">Superior peroneal retinaculum and subluxation</span></div><p>The <b>superior peroneal retinaculum (SPR)</b> holds the tendons in the groove. A torn/stripped SPR allows the tendons to <b>sublux anterolaterally over the fibular tip</b> — look for an empty or shallow groove and a retinacular avulsion fleck.</p></div>
-<h3>Lateral Collateral Ligaments (Axial; CFL also Coronal)</h3>
+<h3 id="lateral-collateral-ligaments-axial-cfl-also-coronal">Lateral Collateral Ligaments (Axial; CFL also Coronal)</h3>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Anterior talofibular ligament (ATFL)</span></div><p>On <b>axial</b> at the level of the malleolar tip, find the thin flat band running from the <b>anterior margin of the lateral malleolus to the talar neck/body</b>. It is the most anterior of the three.</p><ul><li>It is the <b>first and most commonly torn</b> ligament in an inversion sprain.</li></ul></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Calcaneofibular ligament (CFL)</span></div><p>Find it on <b>axial or coronal</b> running from the <b>lateral malleolar tip obliquely down to the lateral calcaneus</b>, passing <b>deep to the peroneal tendons</b>. Use the peroneals as your signpost — the CFL lies directly under them.</p><ul><li>A CFL tear is suggested when fluid tracks into the <b>peroneal tendon sheath</b> because the ligament forms part of its floor.</li></ul></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Posterior talofibular ligament (PTFL)</span></div><p>On <b>axial</b>, the thick, <b>striated/fan-shaped</b> band from the <b>malleolar fossa (medial fibula) to the posterolateral talus</b>. Its normal striated appearance is not a tear.</p></div>
 <div class="callout pearl"><div class="c-title"><span class="ico">💡</span><span class="lbl">Pearl</span><span class="ttl">Lateral sprain order: front to back</span></div><p>Ligaments fail in sequence with inversion: <b>ATFL first, then CFL, then PTFL</b>. An isolated PTFL tear without ATFL/CFL injury is rare — re-check your reading if you see it.</p></div>
-<h3>Syndesmosis (Axial)</h3>
+<h3 id="syndesmosis-axial">Syndesmosis (Axial)</h3>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">AITFL and PITFL</span></div><p>On <b>axial just above the plafond</b>, the <b>anterior inferior tibiofibular ligament (AITFL)</b> runs obliquely from the anterolateral tibia (Chaput tubercle) to the anterior fibula (Wagstaffe), and the <b>posterior inferior tibiofibular ligament (PITFL)</b> runs from the posterior tibia (Volkmann) to the posterior fibula. Both are normally striated.</p></div>
 <div class="callout landmark"><div class="c-title"><span class="ico">📍</span><span class="lbl">Landmark</span><span class="ttl">Interosseous ligament and membrane</span></div><p>Above the AITFL/PITFL, the <b>interosseous ligament</b> is the distal thickening of the <b>interosseous membrane</b> filling the tibiofibular space. Disruption here, especially with a high fibular fracture, signals a <b>high (Maisonneuve) syndesmotic injury</b> — always look up the leg.</p></div>
 <div class="callout measure"><div class="c-title"><span class="ico">📏</span><span class="lbl">Measure</span><span class="ttl">Tibiofibular clear space</span></div><p>Assess the syndesmosis on <b>axial ~1 cm (10 mm) above the tibial plafond</b>. The <b>tibiofibular clear space (between the lateral tibia and medial fibula) should be &lt; ~6 mm</b>; widening suggests syndesmotic diastasis.</p></div>
-<h3>Medial Ligaments (Coronal primary; Axial adjunct)</h3>
+<h3 id="medial-ligaments-coronal-primary-axial-adjunct">Medial Ligaments (Coronal primary; Axial adjunct)</h3>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Deltoid ligament — deep and superficial layers</span></div><p>Best on <b>coronal</b>. The <b>deep deltoid</b> is the short, striated <b>tibiotalar</b> band deep to the tendons connecting the medial malleolus to the talus; the <b>superficial deltoid</b> is the broader fan spanning malleolus to <b>navicular, spring ligament, sustentaculum, and talus</b>.</p><ul><li>Deep deltoid disruption is the key finding in a &quot;deltoid-positive&quot; unstable ankle fracture (medial clear-space widening).</li></ul></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Spring (superomedial calcaneonavicular) ligament</span></div><p>On <b>axial/coronal</b> just deep and plantar to the PTT, find the hammock-like band from the <b>sustentaculum tali to the navicular</b> that cradles the talar head. The <b>superomedial component</b> lies immediately deep to the PTT.</p></div>
 <div class="callout pearl"><div class="c-title"><span class="ico">💡</span><span class="lbl">Pearl</span><span class="ttl">Adult acquired flatfoot triad</span></div><p>PTT dysfunction rarely travels alone. Check all three: <b>(1) PTT tear/tenosynovitis, (2) spring ligament insufficiency, (3) sinus tarsi changes</b>. Finding one should prompt a hunt for the others.</p></div>
-<h3>Sinus Tarsi and Tarsal Tunnel</h3>
+<h3 id="sinus-tarsi-and-tarsal-tunnel">Sinus Tarsi and Tarsal Tunnel</h3>
 <div class="callout landmark"><div class="c-title"><span class="ico">📍</span><span class="lbl">Landmark</span><span class="ttl">Sinus tarsi contents</span></div><p>On <b>sagittal/coronal</b>, the <b>sinus tarsi</b> is the fat-filled cone between the talus and calcaneus, lateral to the subtalar joint. It contains the <b>interosseous talocalcaneal ligament</b> (medial/deep) and the <b>cervical ligament</b> (anterolateral).</p><ul><li><b>Normal = bright fat.</b> Replacement of that fat by T1-dark, T2-bright fluid/scar = <b>sinus tarsi syndrome</b> (often partnered with PTT/spring disease).</li></ul></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Tarsal tunnel</span></div><p>On <b>axial behind the medial malleolus</b>, the tunnel is roofed by the <b>flexor retinaculum</b> and contains (front to back) PTT, FDL, the <b>posterior tibial neurovascular bundle</b>, and FHL. Trace the <b>tibial nerve</b> as it divides into medial and lateral plantar branches; a ganglion or accessory muscle here causes <b>tarsal tunnel syndrome</b>.</p></div>
-<h3>Achilles Tendon and Plantaris (Sagittal + Axial)</h3>
+<h3 id="achilles-tendon-and-plantaris-sagittal-axial">Achilles Tendon and Plantaris (Sagittal + Axial)</h3>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Achilles tendon</span></div><p>Best on <b>sagittal</b>; confirm on <b>axial</b>. Follow it from the musculotendinous junction to the <b>posterosuperior calcaneal insertion</b>. The normal anterior margin is <b>flat or slightly concave</b> on axial — a <b>convex/rounded anterior margin</b> means thickening.</p></div>
 <div class="callout measure"><div class="c-title"><span class="ico">📏</span><span class="lbl">Measure</span><span class="ttl">Achilles thickness and watershed zone</span></div><p>Normal <b>AP thickness ~4–6 mm</b> on sagittal. The <b>hypovascular watershed zone is ~2–6 cm above the insertion</b> — the classic site of degenerative tears. Insertional disease instead centers at the calcaneus with retrocalcaneal bursitis and a Haglund deformity.</p></div>
 <div class="callout pitfall"><div class="c-title"><span class="ico">⚠️</span><span class="lbl">Pitfall</span><span class="ttl">Don&#x27;t mistake plantaris for an intact Achilles</span></div><p>The <b>plantaris tendon</b> runs along the <b>anteromedial border of the Achilles</b>. In an Achilles rupture an intact plantaris can be misread as residual intact fibers — trace it separately on axial; it is a thin discrete band medial to the main tendon.</p></div>
 <div class="callout pearl"><div class="c-title"><span class="ico">💡</span><span class="lbl">Pearl</span><span class="ttl">Sheath vs paratenon — name the inflammation correctly</span></div><p>The <b>Achilles tendon has NO true (synovial) tendon sheath</b> — like the patellar and quadriceps tendons, it is invested only by a <b>paratenon</b> (loose areolar connective tissue). So peritendinous inflammation here is <b>paratenonitis</b> (synonyms: <b>peritendinitis</b>, <b>paratendinitis</b>) — <b>never</b> &quot;tenosynovitis.&quot;</p><ul><li><b>Tenosynovitis</b> is reserved for the <b>sheathed</b> ankle tendons: tibialis posterior, FDL, FHL, peroneus brevis/longus, tibialis anterior, EHL, EDL.</li><li><b>Paratenonitis</b> (Achilles) → fluid/edema in the <b>paratenon</b>, classically a thin rim <b>anterior to the tendon within Kager fat</b> (and circumferentially on axial), with <b>enhancement</b>. The tendon itself may be normal or thickened.</li><li>When tendinosis coexists, call it <b>paratenonitis with tendinosis</b> (part of the &quot;Achilles tendinopathy&quot; spectrum).</li></ul></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Achilles paratenonitis (peritendinitis)</span></div><p>On <b>axial</b>, look for a <b>circumferential bright (T2/STIR) rim of fluid/edema around the Achilles</b>, often most conspicuous along the <b>anterior surface in the Kager fat pad</b>; on <b>sagittal</b>, a thin peritendinous fluid line hugging the front and back of the tendon.</p><ul><li>Pure paratenonitis: peritendinous fluid/enhancement with a <b>normal-signal, normal-caliber tendon</b>.</li><li>Distinguish from <b>retrocalcaneal bursitis</b> (focal fluid in the bursa <b>between the tendon and the posterosuperior calcaneus</b>) — a discrete bursa, not a peritendinous rim.</li></ul></div>
-<h3>Talar Dome Osteochondral Lesions (Coronal + Sagittal)</h3>
+<h3 id="talar-dome-osteochondral-lesions-coronal-sagittal">Talar Dome Osteochondral Lesions (Coronal + Sagittal)</h3>
 <div class="callout landmark"><div class="c-title"><span class="ico">📍</span><span class="lbl">Landmark</span><span class="ttl">The 9-zone grid</span></div><p>Mentally divide the talar dome into a <b>3×3 grid</b> (medial/central/lateral × anterior/middle/posterior) on coronal/sagittal to standardize lesion location.</p></div>
 <figure class="diagram"><svg viewBox="0 0 470 372" role="img" aria-label="Talar dome 9-zone grid" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Arial,sans-serif">
   <text x="175" y="56" text-anchor="middle" fill="#9fb4c6" font-size="13" font-weight="700">MEDIAL</text>
@@ -310,12 +366,12 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 </svg><figcaption><b>Talar dome 9-zone grid.</b> Map every osteochondral lesion to one of the nine cells. Classic locations: <b>medial-posterior</b> (atraumatic, deeper) and <b>lateral-central</b> (traumatic, shallower).</figcaption></figure>
 <div class="callout pearl"><div class="c-title"><span class="ico">💡</span><span class="lbl">Pearl</span><span class="ttl">Medial-posterior vs lateral-central</span></div><p>Two classic locations: <b>medial dome lesions are posterior, deeper, cup-shaped, and often atraumatic</b>; <b>lateral dome lesions are central/anterior, shallower, wafer-shaped, and usually traumatic</b>.</p></div>
 <div class="callout measure"><div class="c-title"><span class="ico">📏</span><span class="lbl">Measure</span><span class="ttl">Calling instability</span></div><p>An osteochondral fragment is <b>unstable</b> when <b>high T2 fluid signal fully undermines the fragment</b>, there are subchondral <b>cysts</b>, a displaced fragment, or a &gt;5 mm lesion. A bright fluid line completely encircling the base = loose/unstable.</p></div>
-<h3>Posterior Impingement and Accessory Ossicles (Sagittal/Axial)</h3>
+<h3 id="posterior-impingement-and-accessory-ossicles-sagittal-axial">Posterior Impingement and Accessory Ossicles (Sagittal/Axial)</h3>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Os trigonum / Stieda process</span></div><p>On <b>sagittal</b>, find the bony ossicle or elongated process at the <b>posterolateral talus</b>, just lateral to the FHL groove. Marrow/soft-tissue edema around it in a plantarflexion athlete (dancer, soccer) indicates <b>posterior ankle impingement</b>.</p><ul><li>The <b>FHL tendon runs immediately medial</b> to the os trigonum/Stieda process; FHL tenosynovitis frequently accompanies posterior impingement.</li></ul></div>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Anterolateral gutter impingement</span></div><p>On <b>axial</b>, the <b>anterolateral gutter</b> sits between the tibia/fibula and talus anterior to the ATFL. Post-sprain <b>scar/synovial soft-tissue masses (meniscoid lesion)</b> filling this gutter cause anterolateral impingement; look for low-signal soft tissue replacing the normal fat.</p></div>
-<h3>Plantar Fascia (Sagittal)</h3>
+<h3 id="plantar-fascia-sagittal">Plantar Fascia (Sagittal)</h3>
 <div class="callout find"><div class="c-title"><span class="ico">🔍</span><span class="lbl">How to find it</span><span class="ttl">Plantar fascia origin</span></div><p>On <b>sagittal</b>, find the thin low-signal band arising from the <b>medial calcaneal tuberosity</b> and running forward along the sole. Normal <b>proximal thickness is &lt; ~4 mm</b>; <b>focal thickening &gt;4 mm with adjacent edema</b> at the calcaneal origin indicates plantar fasciitis.</p></div>
-<h2>Modified Outerbridge Chondromalacia Grading - Copy-Ready</h2>
+<h2 id="modified-outerbridge-chondromalacia-grading-copy-ready">Modified Outerbridge Chondromalacia Grading - Copy-Ready</h2>
 <p>Use this for any articular surface. Replace <span class="ph">[surface/compartment]</span> with the specific location: patellar median ridge, medial femoral condyle weightbearing surface, anterosuperior acetabulum, radiocapitellar joint, tibiotalar dome, first MTP joint, etc.</p>
 <table><thead><tr><th>Grade</th><th>MRI shorthand</th></tr></thead><tbody><tr><td>0</td><td>Normal cartilage.</td></tr><tr><td>1</td><td>Signal heterogeneity/softening or swelling; surface intact.</td></tr><tr><td>2</td><td>Superficial fissuring/fraying/partial-thickness defect &lt;50% cartilage depth.</td></tr><tr><td>3</td><td>Deep fissuring/partial-thickness defect &gt;50% cartilage depth, not exposing bone.</td></tr><tr><td>4</td><td>Full-thickness cartilage loss with exposed subchondral bone, often edema/cysts.</td></tr></tbody></table>
 <div class="dx">Grade 0 - normal cartilage</div>
@@ -333,18 +389,18 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 <div class="dx">Grade 4 - full-thickness chondral loss</div>
 <p class="f"><b>F:</b> Full-thickness cartilage loss/fissuring of the <span class="ph">[surface/compartment]</span> measuring <span class="ph">[X]</span> x <span class="ph">[Y]</span> mm with exposed subchondral bone and <span class="ph">[subchondral marrow edema/cystic change]</span>. <span class="ph">[Small unstable chondral flap/loose body if present.]</span></p>
 <p class="i"><b>I:</b> Grade 4 chondromalacia/full-thickness chondral defect of the <span class="ph">[surface/compartment]</span>.</p>
-<h2>Ankle MRI Tells</h2>
+<h2 id="ankle-mri-tells">Ankle MRI Tells</h2>
 <ul><li>Achilles: watershed zone 2-6 cm above insertion; concave anterior margin lost = tendinopathy; plantaris may mimic intact longitudinal fibers in complete rupture</li><li>PTT: PT should be 2x diameter of FDL on axial; when equal or smaller = chronic dysfunction; always check spring ligament and hindfoot alignment together</li><li>Peroneals: C-shape/boomerang on axial = brevis split; look for retinaculum integrity at the tip of the fibula; longus pathology peaks at the cuboid tunnel</li><li>Sinus tarsi: fat signal loss = sinus tarsi syndrome, often sequela of inversion injury; check cervical and interosseous ligaments</li><li>OLT: medial posterior (atraumatic) vs lateral central (traumatic); fluid undermining fragment = unstable</li><li>Spring ligament: always check with PTT dysfunction (adult acquired flatfoot triad: PTT + spring + deltoid)</li><li>Anterolateral gutter: soft tissue thickening after inversion sprain = anterolateral impingement (meniscoid lesion)</li><li>Os trigonum: marrow edema in os trigonum + FHL tenosynovitis = posterior impingement in dancers/plantarflexion athletes</li></ul>
-<h2>Normal / Negative Templates</h2>
+<h2 id="normal-negative-templates">Normal / Negative Templates</h2>
 <div class="dx">Normal Achilles</div>
 <p class="f"><b>F:</b> Achilles tendon demonstrates normal caliber and uniform low T1 and T2 signal with intact concave anterior margin. AP thickness measures <span class="ph">[X]</span> mm. No fusiform thickening, intrasubstance signal abnormality, or peritendinous fluid. Retrocalcaneal bursa is not distended. Calcaneal insertion is unremarkable without enthesophyte.</p>
 <p class="i"><b>I:</b> Normal Achilles tendon. No tendinopathy, tear, or retrocalcaneal bursitis.</p>
 <div class="dx">Normal ankle</div>
 <p class="f"><b>F:</b> Lateral ligament complex including the anterior talofibular, calcaneofibular, and posterior talofibular ligaments is intact without thickening or signal abnormality. Syndesmosis including the anterior inferior tibiofibular ligament, posterior inferior tibiofibular ligament, and interosseous membrane is intact. Tibiofibular clear space is normal. Deep and superficial deltoid ligament complex and spring ligament are intact. Achilles tendon is normal in caliber and signal without tendinosis, tear, or paratenonitis. The posterior tibial tendon, flexor digitorum longus tendon, flexor hallucis longus tendon, peroneus brevis and longus tendons, and anterior compartment tendons are intact without tendinosis, tear, or tenosynovitis. Talar dome articular cartilage is preserved without osteochondral defect or subchondral marrow abnormality. No ankle joint effusion. Plantar fascia is normal in thickness and signal. Sinus tarsi fat signal is preserved. Osseous structures demonstrate normal marrow signal without fracture or stress reaction.</p>
 <p class="i"><b>I:</b> Normal ankle MRI. No ligamentous, tendinous, chondral, or osseous abnormality.</p>
-<h2>Useful Caveats</h2>
+<h2 id="useful-caveats">Useful Caveats</h2>
 <ul><li>Accessory soleus muscle: normal variant in Kager fat pad; may mimic soft tissue mass on axial images</li><li>Os trigonum vs Stieda process: os trigonum is a separate ossicle (synchondrosis with talus), Stieda process is an elongated lateral tubercle of the posterior talus; both can cause posterior impingement</li><li>Peroneal subluxation: dynamic phenomenon, static MRI may underestimate; look for flat/convex retromalleolar groove and retinaculum disruption</li><li>Magic angle effect: tendons coursing at 55 degrees to B0 (especially peroneal tendons at retromalleolar groove) may show artifactual intermediate signal on short TE sequences</li><li>Low-lying peroneus brevis muscle belly: normal variant that predisposes to crowding and brevis split tears</li><li>Accessory peroneus quartus: present in ~10-20% of individuals; courses posteromedial to peroneals</li></ul>
-<h2>Achilles Tendon</h2>
+<h2 id="achilles-tendon">Achilles Tendon</h2>
 <div class="dx">Normal Achilles</div>
 <p class="f"><b>F:</b> Achilles tendon demonstrates normal caliber and uniform low T1 and T2 signal with intact concave anterior margin. AP thickness measures <span class="ph">[X]</span> mm. No fusiform thickening, intrasubstance signal abnormality, or peritendinous fluid.</p>
 <p class="i"><b>I:</b> Normal Achilles tendon without tendinopathy or tear.</p>
@@ -366,7 +422,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 <div class="dx">Retrocalcaneal bursitis (without tendon abnormality)</div>
 <p class="f"><b>F:</b> Distended retrocalcaneal bursa with fluid signal interposed between the Achilles tendon and posterosuperior calcaneus. Achilles tendon is normal in caliber and signal without tendinosis or tear. Posterosuperior calcaneal prominence is <span class="ph">[present/absent]</span>.</p>
 <p class="i"><b>I:</b> Retrocalcaneal bursitis without Achilles tendinopathy. <span class="ph">[Haglund morphology noted.]</span></p>
-<h2>Tibialis Posterior</h2>
+<h2 id="tibialis-posterior">Tibialis Posterior</h2>
 <div class="dx">Normal posterior tibial tendon</div>
 <p class="f"><b>F:</b> Posterior tibial tendon demonstrates normal caliber with low T1 and T2 signal and ovoid cross-section posterior to the medial malleolus. PT diameter is approximately twice that of the adjacent flexor digitorum longus tendon. No tendon sheath fluid or peritendinous edema.</p>
 <p class="i"><b>I:</b> Normal posterior tibial tendon.</p>
@@ -382,7 +438,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 <div class="dx">PTT chronic dysfunction / advanced disease</div>
 <p class="f"><b>F:</b> Marked thinning and attenuation of the posterior tibial tendon, which is <span class="ph">[equal to/thinner than]</span> the adjacent flexor digitorum longus tendon. Tendon demonstrates diffuse intermediate signal with loss of normal morphology. Spring ligament is <span class="ph">[thickened/attenuated/disrupted]</span>. <span class="ph">[Hindfoot valgus deformity is present.]</span> <span class="ph">[Sinus tarsi fat signal is partially effaced.]</span></p>
 <p class="i"><b>I:</b> Chronic posterior tibial tendon dysfunction with advanced tendon attenuation. <span class="ph">[Spring ligament insufficiency.]</span> <span class="ph">[Hindfoot valgus deformity consistent with adult acquired flatfoot.]</span></p>
-<h2>Peroneal Tendons</h2>
+<h2 id="peroneal-tendons">Peroneal Tendons</h2>
 <div class="dx">Normal peroneal tendons</div>
 <p class="f"><b>F:</b> Peroneus brevis and longus tendons are normal in caliber and signal within the retromalleolar groove. Superior peroneal retinaculum is intact. No subluxation, tenosynovitis, or tendon signal abnormality. Peroneus longus courses normally through the cuboid tunnel.</p>
 <p class="i"><b>I:</b> Normal peroneal tendons without tear, subluxation, or tenosynovitis.</p>
@@ -398,7 +454,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 <div class="dx">Peroneus longus tendinosis at cuboid tunnel</div>
 <p class="f"><b>F:</b> Peroneus longus tendon is thickened with intermediate T2 intrasubstance signal at the cuboid tunnel/peroneal sulcus of the cuboid. No discrete tendon discontinuity. <span class="ph">[Os peroneum is intact/fragmented.]</span></p>
 <p class="i"><b>I:</b> Peroneus longus tendinosis at the cuboid tunnel. <span class="ph">[Os peroneum is intact/fragmented.]</span></p>
-<h2>Lateral Ligaments</h2>
+<h2 id="lateral-ligaments">Lateral Ligaments</h2>
 <div class="dx">Normal lateral ligament complex</div>
 <p class="f"><b>F:</b> Anterior talofibular ligament, calcaneofibular ligament, and posterior talofibular ligament are intact with normal low signal and expected morphology. No periligamentous edema or soft tissue swelling.</p>
 <p class="i"><b>I:</b> Intact lateral ankle ligament complex.</p>
@@ -414,7 +470,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 <div class="dx">Combined ATFL + CFL tear</div>
 <p class="f"><b>F:</b> Complete discontinuity of the anterior talofibular ligament with fluid-filled gap. Calcaneofibular ligament is also discontinuous/absent with surrounding edema. Posterior talofibular ligament is <span class="ph">[intact/injured]</span>. [Talar dome subchondral marrow edema at the <span class="ph">[medial/lateral]</span> shoulder.] <span class="ph">[Anterolateral gutter soft tissue thickening.]</span></p>
 <p class="i"><b>I:</b> Complete tear of the ATFL and CFL. <span class="ph">[Talar dome contusion/osteochondral injury.]</span> <span class="ph">[PTFL is intact/injured.]</span></p>
-<h2>Syndesmosis</h2>
+<h2 id="syndesmosis">Syndesmosis</h2>
 <div class="dx">Normal syndesmosis</div>
 <p class="f"><b>F:</b> Anterior inferior tibiofibular ligament, posterior inferior tibiofibular ligament, and interosseous membrane are intact with normal low signal. Tibiofibular clear space is normal. No fluid in the interosseous recess above the level of the tibial plafond.</p>
 <p class="i"><b>I:</b> Intact syndesmosis.</p>
@@ -427,7 +483,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 <div class="dx">Complete syndesmotic disruption</div>
 <p class="f"><b>F:</b> Complete discontinuity of the anterior inferior tibiofibular ligament, posterior inferior tibiofibular ligament, and interosseous membrane with frank widening of the tibiofibular clear space measuring <span class="ph">[X]</span> mm. Fluid fills the interosseous recess. <span class="ph">[Medial clear space widening measuring X mm.]</span> <span class="ph">[Deltoid ligament injury.]</span></p>
 <p class="i"><b>I:</b> Complete syndesmotic disruption involving the AITFL, PITFL, and interosseous membrane with tibiofibular diastasis. <span class="ph">[Medial clear space widening suggesting deltoid incompetence.]</span></p>
-<h2>Deltoid / Spring Ligament</h2>
+<h2 id="deltoid-spring-ligament">Deltoid / Spring Ligament</h2>
 <div class="dx">Normal deltoid and spring ligament</div>
 <p class="f"><b>F:</b> Deep and superficial components of the deltoid ligament are intact with normal low signal. Spring ligament (superomedial calcaneonavicular ligament) is intact with normal thickness and signal. No medial soft tissue edema.</p>
 <p class="i"><b>I:</b> Intact deltoid and spring ligament complexes.</p>
@@ -440,7 +496,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 <div class="dx">Combined deltoid + spring attenuation with hindfoot valgus</div>
 <p class="f"><b>F:</b> Deep deltoid ligament is attenuated with partial fiber disruption. Spring ligament is thickened and lax with partial disruption. Posterior tibial tendon is <span class="ph">[thinned/torn]</span>. Hindfoot valgus deformity is present. <span class="ph">[Sinus tarsi fat effacement.]</span> <span class="ph">[Talonavicular joint uncovering.]</span></p>
 <p class="i"><b>I:</b> Combined deltoid and spring ligament insufficiency with posterior tibial tendon dysfunction and hindfoot valgus, consistent with adult acquired flatfoot deformity.</p>
-<h2>Talar Dome / OLT</h2>
+<h2 id="talar-dome-olt">Talar Dome / OLT</h2>
 <div class="dx">Normal talar dome</div>
 <p class="f"><b>F:</b> Talar dome articular cartilage is preserved in thickness and signal without focal defect, subchondral marrow edema, or cystic change. Subchondral bone plate is intact.</p>
 <p class="i"><b>I:</b> Normal talar dome. No osteochondral lesion.</p>
@@ -459,7 +515,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 <div class="dx">Subchondral cyst without unstable fragment</div>
 <p class="f"><b>F:</b> Focal subchondral cyst at the <span class="ph">[medial/lateral]</span> talar dome measuring <span class="ph">[X]</span> mm with surrounding mild marrow edema. Overlying articular cartilage is <span class="ph">[intact/thinned]</span>. No discrete fracture line or unstable osteochondral fragment.</p>
 <p class="i"><b>I:</b> Subchondral cyst of the <span class="ph">[medial/lateral]</span> talar dome <span class="ph">[with overlying chondral thinning]</span>. No unstable osteochondral fragment.</p>
-<h2>Impingement</h2>
+<h2 id="impingement">Impingement</h2>
 <div class="dx">No anterior or posterior impingement</div>
 <p class="f"><b>F:</b> No anterior tibial or talar osteophytes. No synovial thickening in the anterior recess. Posterior talus/os trigonum region is unremarkable. Flexor hallucis longus tendon is normal in signal and caliber without tenosynovitis.</p>
 <p class="i"><b>I:</b> No anterior or posterior ankle impingement.</p>
@@ -472,7 +528,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 <div class="dx">Anterolateral soft tissue impingement</div>
 <p class="f"><b>F:</b> Soft tissue thickening and synovial/scar tissue in the anterolateral gutter of the ankle with adjacent capsular edema. <span class="ph">[Anteroinferior tibiofibular ligament thickening.]</span> <span class="ph">[Residual ATFL thickening consistent with prior sprain.]</span></p>
 <p class="i"><b>I:</b> Anterolateral ankle impingement/anterolateral gutter scarring, likely sequela of prior lateral ankle sprain.</p>
-<h2>Plantar Fascia</h2>
+<h2 id="plantar-fascia">Plantar Fascia</h2>
 <div class="dx">Normal plantar fascia</div>
 <p class="f"><b>F:</b> Plantar fascia demonstrates normal thickness (approximately <span class="ph">[X]</span> mm) and uniform low signal at the calcaneal origin and throughout the central band. No perifascial edema or enthesophyte.</p>
 <p class="i"><b>I:</b> Normal plantar fascia.</p>
@@ -485,7 +541,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 <div class="dx">Plantar fascia midsubstance thickening</div>
 <p class="f"><b>F:</b> Fusiform thickening and intermediate T2 signal of the plantar fascia at the midsubstance/midfoot level measuring <span class="ph">[X]</span> mm without discrete discontinuity or calcaneal origin involvement.</p>
 <p class="i"><b>I:</b> Midsubstance plantar fascial thickening/fasciosis without tear.</p>
-<h2>Sinus Tarsi / Tarsal Tunnel</h2>
+<h2 id="sinus-tarsi-tarsal-tunnel">Sinus Tarsi / Tarsal Tunnel</h2>
 <div class="dx">Normal sinus tarsi and tarsal tunnel</div>
 <p class="f"><b>F:</b> Sinus tarsi demonstrates normal fat signal without edema or fibrosis. Cervical and interosseous ligaments are intact. Tarsal tunnel contents are unremarkable with normal tibial nerve caliber and no mass lesion. Plantar musculature demonstrates normal signal.</p>
 <p class="i"><b>I:</b> Normal sinus tarsi and tarsal tunnel.</p>
@@ -498,7 +554,7 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 <div class="dx">Tarsal tunnel - edema with nerve enlargement</div>
 <p class="f"><b>F:</b> Edema and soft tissue thickening within the tarsal tunnel. Tibial nerve is enlarged measuring <span class="ph">[X]</span> mm (normal &lt; 5 mm) with increased T2 signal. <span class="ph">[Flexor retinaculum is thickened.]</span> <span class="ph">[Abnormal signal in the abductor hallucis/abductor digiti minimi/flexor digitorum brevis consistent with denervation edema.]</span></p>
 <p class="i"><b>I:</b> Tarsal tunnel syndrome with tibial nerve enlargement <span class="ph">[and denervation changes in the plantar musculature]</span>.</p>
-<h2>Effusion / Bone / Other</h2>
+<h2 id="effusion-bone-other">Effusion / Bone / Other</h2>
 <div class="dx">Trace ankle effusion</div>
 <p class="f"><b>F:</b> Trace physiologic fluid in the tibiotalar joint. No synovial thickening or intra-articular body.</p>
 <p class="i"><b>I:</b> Trace ankle joint effusion, likely physiologic.</p>
@@ -514,11 +570,11 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 <div class="dx">Subcutaneous soft tissue edema</div>
 <p class="f"><b>F:</b> Subcutaneous soft tissue edema along the <span class="ph">[medial/lateral/posterior]</span> ankle without organized fluid collection or abscess. <span class="ph">[Associated with adjacent ligamentous/tendinous injury.]</span></p>
 <p class="i"><b>I:</b> Subcutaneous edema of the <span class="ph">[medial/lateral/posterior]</span> ankle, reactive.</p>
-<h2>Search Pattern</h2>
+<h2 id="search-pattern">Search Pattern</h2>
 <ul><li><b>1. Check history, indication, and priors.</b></li><li><b>2. Assess study adequacy, technique, and limitations.</b></li><li><b>3. Look at localizers</b> for incidental pathology.</li><li><b>4. Check for effusion/collection</b> on fluid-weighted sequences: most will be at tibiotalar joint; cysts/collections.</li><li><b>5. Examine bony cortex and marrow space:</b></li><li>Cortical breaks/fractures, osteophytes, loose bodies, heterotopic ossification.</li><li>Talar dome (osteochondral lesions); marrow replacement; hematopoietic marrow.</li><li>Accessory ossicles/variants (especially Type 1-3 os naviculare).</li><li><b>6. Assess tendons:</b></li><li>Continuity, position/size, signal on PD and fluid-sensitive; check for accessory muscles/tendons (adjacent to flexors, peroneals, soleus).</li><li>Posterior: Achilles (concave up and completely dark on axial fluid-sensitive; check retrocalcaneal and pre-Achilles bursas; fluid around tendon = paratenonitis).</li><li>Medial (T-D-H: tibialis posterior <span class="ph">[should be 2x size of other medial tendons]</span>, flexor digitorum longus, flexor hallucis longus; axials best along superior extent near medial malleolus; small fluid physiologic; check FDL/FHL crossing in foot for edema/avulsion).</li><li>Lateral (peroneus brevis and longus; small fluid physiologic; check for tear or subluxation; assess retinaculum for thickening/disruption).</li><li>Anterior (T-H-D: tibialis anterior, extensor hallucis longus, extensor digitorum longus; check for abnormal location, thickening, signal; assess retinaculum).</li><li><b>7. Assess ligaments:</b></li><li>Lateral: anterior and posterior tibiofibular (syndesmotic) ligaments (fluid-sensitive axials above tibiotalar articulation, should be thin and dark); anterior and posterior talofibular ligaments (below tibiotalar articulation, thin and dark); calcaneofibular ligament (coronals through ankle, deep to peroneals).</li><li>Medial: deltoid (normal triangular shape spanning tibia, calcaneus, navicular — identify at least deep tibiotalar and superficial tibiospring portions).</li><li>Spring (plantar calcaneonavicular) ligament (deep to deltoid, just under talar head — check especially if posterior tibialis dysfunction/pes planus; identify at least superomedial calcaneonavicular portion from sustentaculum tali to medial navicular, deep to posterior tibialis).</li><li>Incidental: Lisfranc ligament (spanning medial cuneiform and 2nd metatarsal base, check for disruption on short axis views).</li><li><b>8. Assess plantar fascia:</b> thickening, perifascial edema, disruption.</li><li><b>9. Assess hindfoot joints:</b></li><li>Tibiotalar joint (PD and fluid-sensitive; articular cartilage loss; osteochondral lesions; effusion).</li><li>Subtalar (talocalcaneal) joint (coalition at medial and posterior facets; sinus tarsi fat signal/edema).</li><li>Midfoot joints and tarsometatarsal (Lisfranc) joints if visualized (edema, injury, erosion, degeneration).</li><li><b>10. Assess subcutaneous tissues and musculature:</b> T1 precontrast, fluid-sensitive; atrophy, edema, inflammation, mass; note accessory muscles; neurovascular bundle at medial ankle.</li><li><b>11. Double check</b> marrow signal, muscles, and subcutaneous tissues.</li><li><b>12. Proofread report.</b></li></ul>
-<h2>Infection Search Pattern</h2>
+<h2 id="infection-search-pattern">Infection Search Pattern</h2>
 <ul><li><b>1. Marrow/bone changes:</b></li><li>Marrow replacement (darker than muscle/disc on T1; geographic pattern more predictive than reticular/periarticular).</li><li>Marrow edema (isolated finding raises concern in diabetics/high-risk).</li><li>Bone erosion (loss of dark T1/T2 cortical line).</li><li><b>2. Surrounding inflammatory changes:</b> fascia, musculature, subcutaneous fat edema/enhancement.</li><li><b>3. Susceptibility suggesting air:</b> in collections, soft tissues, along fascial planes, in bone.</li><li><b>4. Abnormal enhancement:</b></li><li>Rim-enhancing collection = abscess.</li><li>Superficial lesion without enhancement = ulcer.</li><li>Enhancement along fascial planes = infectious/inflammatory fasciitis.</li><li>Non-enhancement of normal structures = ischemia.</li><li>Other patterns of enhancement may not be specific.</li><li><b>5. Differentiating osteomyelitis from neuropathic joint:</b></li><li>Joint effusion with marrow replacement on both sides of joint.</li><li>Fluid collections/abscesses (periprosthetic, subperiosteal, intraosseous/Brodie&#x27;s abscess).</li><li>Sinus tract connecting abnormal marrow signal to skin surface.</li><li>Disappearance of subchondral cysts on sequential imaging.</li><li>Progressive marrow/soft tissue changes greater than expected on sequential imaging.</li></ul>
-<h2>Source Notes</h2>
+<h2 id="source-notes">Source Notes</h2>
 <p>Built as a practical dictation aid from standard MSK MRI reporting patterns, review-level radiology references, and the existing shoulder cheat-sheet style. PowerScribe template selections for Achilles, PTT, peroneals, lateral ligaments, syndesmosis, deltoid/spring, talar dome OLT, impingement, plantar fascia, sinus tarsi, tarsal tunnel, and effusion were incorporated as individual F/I entries. Use surgical correlation and local report conventions when needed.</p>
 <button id="to-top" class="to-top" aria-label="Back to top" title="Back to top (Home)">↑</button>
 <script>
@@ -549,6 +605,48 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
   }
   if(top){ top.onclick=goTop; window.addEventListener('scroll', onScroll, {passive:true}); onScroll(); }
 
+  // ── Table of contents drawer ──
+  var drawer=document.getElementById('toc-drawer'),
+      backdrop=document.getElementById('toc-backdrop'),
+      tocToggle=document.getElementById('toc-toggle'),
+      tocClose=document.getElementById('toc-close');
+  function tocOpen(){ if(drawer){ drawer.classList.add('open'); backdrop.classList.add('show'); } }
+  function tocCloseFn(){ if(drawer){ drawer.classList.remove('open'); backdrop.classList.remove('show'); } }
+  function tocToggleFn(){ drawer && (drawer.classList.contains('open')?tocCloseFn():tocOpen()); }
+  if(tocToggle) tocToggle.onclick=tocToggleFn;
+  if(tocClose) tocClose.onclick=tocCloseFn;
+  if(backdrop) backdrop.onclick=tocCloseFn;
+  if(drawer){
+    drawer.addEventListener('click', function(e){
+      var tog=e.target.closest('.toc-tog');
+      if(tog){ e.preventDefault(); tog.closest('.toc-node').classList.toggle('open'); return; }
+      if(e.target.closest('a')){ tocCloseFn(); }   // jump (href) + close
+    });
+  }
+  // scroll-spy: highlight current section, open its ancestors
+  var links={}, heads=[];
+  if(drawer){
+    [].forEach.call(drawer.querySelectorAll('a[href^="#"]'), function(a){
+      var id=a.getAttribute('href').slice(1); links[id]=a;
+      var h=document.getElementById(id); if(h) heads.push(h);
+    });
+    heads.sort(function(a,b){ return a.offsetTop-b.offsetTop; });
+  }
+  var spyT=null;
+  function spy(){
+    if(!heads.length) return;
+    var y=window.scrollY+96, cur=null;
+    for(var k=0;k<heads.length;k++){ if(heads[k].offsetTop<=y) cur=heads[k].id; else break; }
+    for(var id in links) links[id].classList.remove('active');
+    if(cur && links[cur]){
+      var a=links[cur]; a.classList.add('active');
+      var node=a.closest('.toc-node');
+      while(node){ node.classList.add('open'); node=node.parentElement&&node.parentElement.closest('.toc-node'); }
+    }
+  }
+  window.addEventListener('scroll', function(){ if(spyT) return; spyT=setTimeout(function(){ spyT=null; spy(); },120); }, {passive:true});
+  spy();
+
   document.addEventListener('keydown', function(e){
     if(e.metaKey||e.ctrlKey||e.altKey) return;            // leave native zoom alone
     var t=e.target;
@@ -557,6 +655,8 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
     else if(e.key==='-'||e.key==='_'){ set(scale-STEP); e.preventDefault(); }
     else if(e.key==='0'){ set(1); e.preventDefault(); }
     else if(e.key==='Home'){ goTop(); e.preventDefault(); }
+    else if(e.key==='c'||e.key==='C'){ tocToggleFn(); e.preventDefault(); }
+    else if(e.key==='Escape'){ tocCloseFn(); }
   });
 })();
 </script>
