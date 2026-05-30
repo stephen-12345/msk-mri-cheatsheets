@@ -139,6 +139,19 @@ This section teaches you to systematically locate and evaluate ankle structures 
 > [!PITFALL] Don't mistake plantaris for an intact Achilles
 > The **plantaris tendon** runs along the **anteromedial border of the Achilles**. In an Achilles rupture an intact plantaris can be misread as residual intact fibers — trace it separately on axial; it is a thin discrete band medial to the main tendon.
 
+> [!PEARL] Sheath vs paratenon — name the inflammation correctly
+> The **Achilles tendon has NO true (synovial) tendon sheath** — like the patellar and quadriceps tendons, it is invested only by a **paratenon** (loose areolar connective tissue). So peritendinous inflammation here is **paratenonitis** (synonyms: **peritendinitis**, **paratendinitis**) — **never** "tenosynovitis."
+>
+> - **Tenosynovitis** is reserved for the **sheathed** ankle tendons: tibialis posterior, FDL, FHL, peroneus brevis/longus, tibialis anterior, EHL, EDL.
+> - **Paratenonitis** (Achilles) → fluid/edema in the **paratenon**, classically a thin rim **anterior to the tendon within Kager fat** (and circumferentially on axial), with **enhancement**. The tendon itself may be normal or thickened.
+> - When tendinosis coexists, call it **paratenonitis with tendinosis** (part of the "Achilles tendinopathy" spectrum).
+
+> [!FIND] Achilles paratenonitis (peritendinitis)
+> On **axial**, look for a **circumferential bright (T2/STIR) rim of fluid/edema around the Achilles**, often most conspicuous along the **anterior surface in the Kager fat pad**; on **sagittal**, a thin peritendinous fluid line hugging the front and back of the tendon.
+>
+> - Pure paratenonitis: peritendinous fluid/enhancement with a **normal-signal, normal-caliber tendon**.
+> - Distinguish from **retrocalcaneal bursitis** (focal fluid in the bursa **between the tendon and the posterosuperior calcaneus**) — a discrete bursa, not a peritendinous rim.
+
 ### Talar Dome Osteochondral Lesions (Coronal + Sagittal)
 
 > [!LANDMARK] The 9-zone grid
@@ -214,7 +227,7 @@ Use this for any articular surface. Replace [surface/compartment] with the speci
 **I:** Normal Achilles tendon. No tendinopathy, tear, or retrocalcaneal bursitis.
 
 **Normal ankle**
-**F:** Lateral ligament complex including the anterior talofibular, calcaneofibular, and posterior talofibular ligaments is intact without thickening or signal abnormality. Syndesmosis including the anterior inferior tibiofibular ligament, posterior inferior tibiofibular ligament, and interosseous membrane is intact. Tibiofibular clear space is normal. Deep and superficial deltoid ligament complex and spring ligament are intact. Achilles tendon, posterior tibial tendon, flexor digitorum longus tendon, flexor hallucis longus tendon, peroneus brevis and longus tendons, and anterior compartment tendons are intact without tendinosis, tear, or tenosynovitis. Talar dome articular cartilage is preserved without osteochondral defect or subchondral marrow abnormality. No ankle joint effusion. Plantar fascia is normal in thickness and signal. Sinus tarsi fat signal is preserved. Osseous structures demonstrate normal marrow signal without fracture or stress reaction.
+**F:** Lateral ligament complex including the anterior talofibular, calcaneofibular, and posterior talofibular ligaments is intact without thickening or signal abnormality. Syndesmosis including the anterior inferior tibiofibular ligament, posterior inferior tibiofibular ligament, and interosseous membrane is intact. Tibiofibular clear space is normal. Deep and superficial deltoid ligament complex and spring ligament are intact. Achilles tendon is normal in caliber and signal without tendinosis, tear, or paratenonitis. The posterior tibial tendon, flexor digitorum longus tendon, flexor hallucis longus tendon, peroneus brevis and longus tendons, and anterior compartment tendons are intact without tendinosis, tear, or tenosynovitis. Talar dome articular cartilage is preserved without osteochondral defect or subchondral marrow abnormality. No ankle joint effusion. Plantar fascia is normal in thickness and signal. Sinus tarsi fat signal is preserved. Osseous structures demonstrate normal marrow signal without fracture or stress reaction.
 **I:** Normal ankle MRI. No ligamentous, tendinous, chondral, or osseous abnormality.
 
 ## Useful Caveats
@@ -242,6 +255,10 @@ Use this for any articular surface. Replace [surface/compartment] with the speci
 **Achilles complete rupture**
 **F:** Complete discontinuity of the Achilles tendon [X] cm proximal to the calcaneal insertion with [Y] cm retraction gap filled with hemorrhage and edema. Proximal tendon stump demonstrates wavy/retracted morphology. Distal stump is [thickened/frayed]. Plantaris tendon is [intact and interposed within the gap/also torn]. Surrounding Kager fat pad demonstrates edema and hemorrhagic signal.
 **I:** Complete Achilles tendon rupture with [Y] cm gap. Plantaris tendon is [intact/torn].
+
+**Achilles paratenonitis (peritendinitis)**
+**F:** Peritendinous edema and fluid surrounding the Achilles tendon, most pronounced along the anterior surface within the Kager fat pad and circumferential on axial images, with [peritendinous enhancement]. The Achilles tendon itself is [normal in caliber and signal / mildly thickened with background tendinosis]. No intrasubstance fluid-signal cleft or fiber discontinuity. (Note: the Achilles has no synovial sheath, so this represents paratenonitis rather than tenosynovitis.)
+**I:** Achilles paratenonitis (peritendinitis) [with mild tendinosis]. No tendon tear.
 
 **Insertional Achilles tendinopathy**
 **F:** Thickening and intermediate T2 signal of the Achilles tendon at the calcaneal insertion with [enthesophyte/posterior calcaneal spur] at the insertion site. [Intratendinous calcification.] Posterosuperior calcaneal prominence (Haglund morphology) is [present/absent]. Retrocalcaneal bursa is [distended with fluid/not distended].
