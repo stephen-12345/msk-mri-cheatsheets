@@ -1,7 +1,12 @@
 /* MSK MRI Dictation Cheat Sheets - offline service worker.
-   Cache-first for the app shell, runtime caching for everything else
-   (PDFs/MD get cached the first time you open them while online). */
-const CACHE = 'msk-mri-v1';
+   Strategy:
+     - HTML / page navigations -> NETWORK-FIRST (always show the latest when online,
+       fall back to the cached copy only when offline). This is what makes updates
+       appear without reinstalling the app.
+     - Other assets (CSS, JS, icons, PDFs, MD) -> CACHE-FIRST with runtime caching,
+       so the app still works offline.
+   Bump CACHE on each meaningful change to purge the old cache. */
+const CACHE = 'msk-mri-v3';
 
 const SHELL = [
   './',
@@ -51,24 +56,40 @@ self.addEventListener('activate', (e) => {
 self.addEventListener('fetch', (e) => {
   const req = e.request;
   if (req.method !== 'GET') return;
+  const url = new URL(req.url);
+  const sameOrigin = url.origin === self.location.origin;
+  const isPage = req.mode === 'navigate' || (sameOrigin && url.pathname.endsWith('.html'));
+
+  if (isPage) {
+    // NETWORK-FIRST: fresh page when online, cached page when offline
+    e.respondWith((async () => {
+      try {
+        const res = await fetch(req);
+        if (res && res.ok && sameOrigin) {
+          const cache = await caches.open(CACHE);
+          cache.put(req, res.clone());
+        }
+        return res;
+      } catch (err) {
+        const cached = await caches.match(req);
+        if (cached) return cached;
+        const home = await caches.match('index.html');
+        if (home) return home;
+        throw err;
+      }
+    })());
+    return;
+  }
+
+  // CACHE-FIRST for static assets, with runtime caching for offline
   e.respondWith((async () => {
     const cached = await caches.match(req);
     if (cached) return cached;
-    try {
-      const res = await fetch(req);
-      // cache same-origin successful responses for next time (offline)
-      if (res && res.ok && new URL(req.url).origin === self.location.origin) {
-        const cache = await caches.open(CACHE);
-        cache.put(req, res.clone());
-      }
-      return res;
-    } catch (err) {
-      // offline & not cached: fall back to the homepage for navigations
-      if (req.mode === 'navigate') {
-        const home = await caches.match('index.html');
-        if (home) return home;
-      }
-      throw err;
+    const res = await fetch(req);
+    if (res && res.ok && sameOrigin) {
+      const cache = await caches.open(CACHE);
+      cache.put(req, res.clone());
     }
+    return res;
   })());
 });
