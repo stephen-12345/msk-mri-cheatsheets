@@ -13,6 +13,184 @@ Copy-ready language. Replace bracketed text. Use as a workstation reference, not
 ### Glenoid Track
 D = expected inferior glenoid diameter; d = anterior glenoid bone loss. GT = 0.83D - d . HSI = Hill-Sachs width + intact medial bone bridge. Off-track if HSI >= GT.
 
+
+## How to Find It — Landmark-Based Identification
+
+This section trains you to navigate a shoulder MRI by anchoring to fixed bony and soft-tissue landmarks, then working outward to each structure on the plane and sequence that shows it best. Master the three planes first, then use them to systematically interrogate the rotator cuff, biceps–labral complex, ligaments, and the neurovascular spaces.
+
+### The Three Standard Planes
+
+> [!LANDMARK] Plane orientation
+> Standard shoulder MRI uses three planes prescribed off the scout, all referenced to the scapular body and the **supraspinatus tendon**.
+>
+> - **Oblique coronal**: prescribed parallel to the **supraspinatus muscle/tendon** (or perpendicular to the glenoid). Best for the supraspinatus, the superior labrum, the AC joint, and the supraspinatus footprint on the greater tuberosity.
+> - **Oblique sagittal**: perpendicular to the oblique coronal (parallel to the glenoid face). Best for the **rotator cuff in cross-section** (the "horseshoe" of cuff tendons), rotator interval, acromial morphology, and the spinoglenoid/suprascapular notches.
+> - **Axial**: best for the **subscapularis**, the **long head biceps in the bicipital groove**, the anterior and posterior labrum, and the glenohumeral ligaments.
+
+> [!PEARL] Match the question to the plane
+> Before calling anything, ask which plane answers your question. Supraspinatus footprint → coronal. Subscapularis and biceps groove → axial. Cuff muscle bulk/atrophy and interval → sagittal. Confirm every finding on at least two planes before you commit to it.
+
+> [!FIND] ABER (abduction–external rotation) view
+> If your protocol includes **ABER**, the arm is abducted with the hand behind the head. This tensions the **anterior band of the IGHL** and the anteroinferior labrum, and relaxes the cuff over the greater tuberosity.
+>
+> - Best for: anteroinferior labral tears (Bankart family) and **articular-side partial supraspinatus tears (PASTA)** that gape open under tension
+> - Read it as an oblique-axial through the glenohumeral joint with the humeral head externally rotated
+
+### Rotator Cuff Tendons and Footprints
+
+> [!FIND] Supraspinatus tendon
+> On the **oblique coronal**, trace the muscle belly laterally over the humeral head to its footprint on the **superior facet of the greater tuberosity**.
+>
+> - Normal: uniform low signal with a smooth taper to insertion
+> - Scrutinize the **critical zone** ~1 cm proximal to the footprint, the watershed where degenerative tears begin
+> - Confirm any signal abnormality on the **oblique sagittal**, where the supraspinatus sits at the "12 o'clock" position of the cuff horseshoe
+
+> [!PITFALL] Magic-angle artifact in the supraspinatus
+> On short-TE sequences (T1, PD, GRE), the obliquely oriented distal supraspinatus near its insertion can show artifactual intermediate signal where the fibers lie ~55° to B0. This **disappears on T2** (long TE). Do not call a tear on a short-TE sequence alone.
+
+> [!FIND] Infraspinatus tendon
+> Posterior to the supraspinatus. On the **oblique sagittal**, it occupies the posterosuperior cuff just below supraspinatus; on **axial/coronal** images it inserts on the **middle facet of the greater tuberosity**, posterior to the supraspinatus footprint.
+>
+> - Normal: low signal, broad tendon
+> - The supraspinatus and infraspinatus footprints overlap; many "supraspinatus" tears extend posteriorly into the infraspinatus — check the sagittal for the true anteroposterior extent
+
+> [!FIND] Teres minor
+> The most inferior posterior cuff muscle. On the **oblique sagittal**, find it at the bottom of the posterior horseshoe; it inserts on the **inferior facet of the greater tuberosity**.
+>
+> - Normal: low-signal tendon, small muscle
+> - Its bulk and signal are the key clue to **axillary nerve / quadrilateral space** pathology (see below)
+
+> [!FIND] Subscapularis tendon
+> The anterior cuff. Best seen on **axial** images: trace the muscle from the anterior scapula laterally to its insertion on the **lesser tuberosity**.
+>
+> - Normal: multipennate tendon with thin fat striations between fascicles (do not mistake the fat clefts for a split tear)
+> - Evaluate the upper fibers on the **sagittal**; tears typically begin at the superior insertion
+> - Confirm: a torn subscapularis often coexists with **biceps pulley failure and medial biceps subluxation**
+
+> [!LANDMARK] Greater vs lesser tuberosity facets
+> The **greater tuberosity** carries three facets — superior (supraspinatus), middle (infraspinatus), inferior (teres minor), front to back. The **lesser tuberosity** (anteromedial) is the subscapularis footprint. The **bicipital groove** runs between them and is your anchor for the biceps tendon.
+
+> [!LANDMARK] Rotator cable and crescent
+> The **rotator cable** is a thick band of coracohumeral ligament fibers arching across the undersurface of the cuff, perpendicular to the tendon fibers, seen best on **coronal/sagittal** as a low-signal cord medial to the footprint. The thinner **rotator crescent** lies lateral to it, between the cable and the insertion.
+>
+> - Teaching point: an intact cable can keep the cuff functional ("suspension bridge" effect) even with a crescent tear — note cable integrity when describing tears
+
+### Long Head of the Biceps and the Biceps–Labral Complex
+
+> [!FIND] Long head of biceps tendon (LHBT)
+> Start on the **axial** at the **bicipital groove** between the tuberosities — the tendon is a round low-signal dot within a small amount of fluid. Follow it proximally as it turns into the joint, crosses under the **biceps pulley**, and runs to its anchor at the superior glenoid.
+>
+> - Normal: uniform low signal, centered in the groove
+> - A little fluid in the sheath is normal (it communicates with the joint); fluid *only* around the biceps with a dry joint suggests tenosynovitis
+
+> [!FIND] Biceps anchor / biceps–labral complex
+> On the **oblique coronal**, follow the intra-articular biceps to where it blends with the **superior labrum at 12 o'clock**. This junction is the biceps–labral complex and the site of SLAP lesions.
+
+> [!PITFALL] Empty groove sign
+> An **empty bicipital groove** on axial means the LHBT is absent from its normal position — either a complete tear with retraction or **medial dislocation** out of the groove. Look medially and along the subscapularis for the displaced tendon before concluding.
+
+### Rotator Interval and the Biceps Pulley
+
+> [!LANDMARK] Rotator interval
+> The triangular gap between the **anterior supraspinatus** and the **superior subscapularis**, bounded medially by the coracoid. Read it on the **oblique sagittal** (most anterosuperior slices) and **axial**. It contains the **biceps pulley**: the **superior glenohumeral ligament (SGHL)** and the **coracohumeral ligament (CHL)**, which together sling the LHBT as it enters the groove.
+
+> [!FIND] Biceps pulley (SGHL + CHL)
+> On **axial** at the level of the proximal groove, the **SGHL** forms a thin band medial/deep to the biceps, and the **CHL** lies superficial. Together they form a sling stabilizing the biceps entrance.
+>
+> - Evaluate pulley integrity whenever there is biceps instability or a high subscapularis tear
+
+> [!PITFALL] Medial biceps subluxation and the comma sign
+> When the pulley and superior subscapularis fail, the LHBT subluxates medially, often dragging torn subscapularis/CHL fibers with it. On axial, the displaced fibers curving off the lesser tuberosity form the **comma sign**, pointing you to the avulsed superomedial subscapularis. Always check the groove for biceps position when you see a subscapularis tear.
+
+### The Labrum — Clock-Face Method
+
+> [!PEARL] Clock-face convention
+> Use the face-on glenoid (oblique sagittal mindset, right shoulder): **12 = biceps anchor (superior)**, **3 = anterior**, **6 = inferior**, **9 = posterior**. State laterality, because 3 and 9 swap meaning between left and right shoulders. Localize every labral finding to a clock position and a plane.
+
+> [!FIND] Reading the labrum across planes
+> The labrum is normally low-signal and triangular, firmly attached to the glenoid rim.
+>
+> - **Axial**: best for **anterior (3 o'clock)** and **posterior (9 o'clock)** labrum
+> - **Oblique coronal**: best for **superior (12)** and **inferior (6)** labrum and SLAP lesions
+> - On arthrography, contrast tracking *into* or *under* the labrum at an abnormal position/orientation indicates a tear
+
+> [!FIND] SLAP lesion (superior labrum)
+> On the **oblique coronal**, look for contrast/fluid signal extending into the **superior labrum at 12 o'clock**, laterally oriented and often extending posteriorly. SLAP tears propagate from the biceps anchor.
+
+> [!FIND] Bankart-family lesions (anteroinferior labrum)
+> Centered at the **3–6 o'clock anteroinferior** labrum, best on **axial** and **ABER**.
+>
+> - **Bankart**: anteroinferior labral tear (± bony "bony Bankart" rim fracture)
+> - **Perthes**: labrum torn but periosteum intact, so the labrum is medially stripped but non-displaced — subtle; ABER helps lift it open
+> - **ALPSA**: anteroinferior labroligamentous sleeve avulsed and displaced medially, healing in a malpositioned location
+
+> [!PITFALL] Normal variants — do NOT call these tears
+> Several anterosuperior variants mimic tears. They all live **above the 3 o'clock equator** with smooth margins:
+>
+> - **Sublabral foramen**: unattached anterosuperior labrum (1–3 o'clock) with intact rest of the labrum
+> - **Buford complex**: absent anterosuperior labrum + a cord-like thickened **MGHL** — never call the absent labrum a tear
+> - **Sublabral recess (sulcus)**: smooth, medially-oriented cleft under the **superior** labrum at 12, following the glenoid contour (vs a SLAP, which is irregular and laterally oriented and extends posteriorly)
+>
+> Rule of thumb: a variant is smooth and parallels the glenoid; a tear is irregular and points laterally/away from the rim. **Below the equator (3–6–9), be very suspicious — true variants are uncommon there.**
+
+### Glenohumeral Ligaments
+
+> [!FIND] Inferior glenohumeral ligament (IGHL) complex
+> The primary anterior stabilizer in abduction. On **coronal/axial**, identify the **anterior band**, **posterior band**, and the dependent **axillary pouch** slung beneath the joint.
+>
+> - Best tensioned and assessed on **ABER**
+> - A **HAGL** lesion is humeral-side avulsion of the IGHL — look for the axillary pouch contour changing from a normal **"U" into a "J"** as contrast leaks from the inferior capsule
+
+> [!FIND] Middle glenohumeral ligament (MGHL)
+> On **axial** anteriorly, a band running obliquely across the front of the joint, deep to the subscapularis. May be cord-like (normal variant, especially with a **Buford complex**).
+
+> [!FIND] Superior glenohumeral ligament (SGHL)
+> Small anterosuperior ligament forming part of the **biceps pulley** in the rotator interval; assess on **axial** at the level of the coracoid base/proximal biceps (see Rotator Interval).
+
+### AC Joint, Acromion, and Os Acromiale
+
+> [!FIND] Acromioclavicular (AC) joint
+> Best on **oblique coronal** (and sagittal). Assess for capsular hypertrophy, osteophytes projecting inferiorly, and marrow edema.
+>
+> - Inferiorly-projecting AC osteophytes narrowing the supraspinatus outlet are a clue to **extrinsic impingement**
+
+> [!LANDMARK] Acromial morphology (Bigliani)
+> Judge acromial undersurface shape on the **oblique sagittal** outlet view: **Type I flat**, **Type II curved**, **Type III hooked** (most associated with outlet impingement). A **lateral downsloping** acromion also narrows the outlet.
+
+> [!PITFALL] Os acromiale
+> An unfused acromial ossification center. On **axial**, look for a corticated cleft across the **anterior acromion** — do not mistake it for a fracture. The mobile fragment can tilt down and contribute to impingement; note marrow edema across the synchondrosis if symptomatic.
+
+### Neurovascular Spaces and Denervation Patterns
+
+> [!FIND] Suprascapular notch (suprascapular nerve)
+> On the **oblique sagittal** medially, find the notch at the superior scapular margin. A cyst here (often from a labral tear) compresses the **suprascapular nerve** proximally, denervating **both supraspinatus and infraspinatus**.
+
+> [!FIND] Spinoglenoid notch (suprascapular nerve, distal)
+> On the **oblique sagittal/axial**, find the notch at the lateral base of the scapular spine. A **paralabral cyst** here (classically from a posterosuperior labral tear) compresses the nerve distally, denervating the **infraspinatus only** (supraspinatus spared).
+>
+> - Teaching: isolated infraspinatus edema/atrophy → look for a spinoglenoid notch cyst and a posterior labral tear
+
+> [!FIND] Quadrilateral space (axillary nerve)
+> Bounded by **teres minor** (superior), **teres major** (inferior), **long head triceps** (medial), and the **humeral neck** (lateral); best appreciated on **sagittal/axial** posteriorly. The **axillary nerve** runs here.
+>
+> - Denervation of **teres minor ± deltoid** (edema then fatty atrophy, especially isolated teres minor) points to **quadrilateral space syndrome**
+
+> [!PEARL] Denervation localizes the lesion
+> Match the denervated muscle to the nerve and the site: **supraspinatus + infraspinatus** → suprascapular nerve at the suprascapular notch; **infraspinatus alone** → suprascapular nerve at the spinoglenoid notch; **teres minor (± deltoid)** → axillary nerve in the quadrilateral space.
+
+### Bone Landmarks and Their Mimics
+
+> [!PITFALL] Bare area of the humeral head
+> On posterior coronal images, the **bare area** of the humeral head shows normal central cartilage thinning and small irregularities. Do not mistake it for a Hill-Sachs lesion or osteochondral defect — it is in the wrong location (central/posterosuperior bare area, not the posterolateral instability site).
+
+> [!LANDMARK] Typical Hill-Sachs location
+> A **Hill-Sachs** impaction is a wedge defect on the **posterosuperior–lateral humeral head**, seen on the **uppermost axial slices** (at or above the coracoid). It pairs with anterior instability and a Bankart lesion.
+>
+> - Rule of thumb: a humeral head defect **at the level of the coracoid or above** on axial is in the Hill-Sachs zone; defects below that level are usually the **normal bare area** and should not be called.
+
+> [!PITFALL] Glenoid bare area / normal rim irregularity
+> The **central glenoid** can show normal cartilage thinning (a "bare spot"). Keep labral and bony Bankart assessment at the **rim**, not the central glenoid face, to avoid over-calling cartilage loss as pathology.
+
 ## Modified Outerbridge Chondromalacia Grading - Copy-Ready
 
 Use this for any articular surface. Replace [surface/compartment] with the specific location: patellar median ridge, medial femoral condyle weightbearing surface, anterosuperior acetabulum, radiocapitellar joint, tibiotalar dome, first MTP joint, etc.

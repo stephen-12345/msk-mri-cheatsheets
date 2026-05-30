@@ -8,6 +8,125 @@ Copy-ready language. Replace bracketed text. Use as a workstation reference, not
 - Pulley injury: report A2/A3/A4 and amount of bowstringing.
 - Thumb MCP UCL: explicitly state Stener lesion present/absent.
 
+
+## How to Find It — Landmark-Based Identification
+
+Finger/hand MRI is a small-FOV, high-resolution exam where the **axial plane** is your anchor for the pulley system and **sagittal** is your anchor for the extensor mechanism and tendon continuity. Work plane-by-plane, always orienting yourself off the underlying **phalanx** (proximal/middle/distal) and the named joints (MCP, PIP, DIP).
+
+### Technique and Planes
+
+> [!PEARL] Small-FOV dedicated technique
+> Image the **single symptomatic ray** with a small FOV (commonly **6–10 cm**), thin slices (**2–3 mm**), and a high-resolution surface/microscopy coil. Always include **T1**, **fluid-sensitive fat-suppressed** (PD/T2 FS or STIR), and obtain true planes prescribed to the **long axis of the finger**, not the hand.
+>
+> - Off-axis obliquity is the #1 reason a pulley or collateral ligament looks "torn" — re-check your prescription before calling pathology
+
+> [!FIND] The three planes and what each is for
+> Use each plane for what it does best:
+>
+> - **Axial** → pulley system, flexor/extensor tendon cross-section, sagittal bands, neurovascular bundles
+> - **Sagittal** → extensor mechanism (central slip, terminal tendon), volar plate, flexor tendon continuity, **bowstringing**
+> - **Coronal** → collateral ligaments, the thumb UCL/RCL, articular surfaces
+
+### Flexor Tendons and the Flexor Sheath
+
+> [!FIND] FDP and FDS
+> On **axial** at the proximal phalanx, the **FDS** lies **superficial (volar)** to the **FDP**. Moving distally, watch the **FDS split** around the FDP — this is the **Camper chiasm** — so the FDS straddles and then passes deep to the FDP to insert on the **volar base of the middle phalanx**.
+>
+> - **FDP** continues distally to insert on the **volar base of the distal phalanx**
+> - On sagittal, trace each tendon as a continuous low-signal band from palm to insertion
+
+> [!LANDMARK] Camper chiasm
+> The point where **FDS divides into two slips** that decussate around the FDP, over the **proximal phalanx**. Recognizing it prevents you from mistaking the normal split/partial-volume of FDS slips for a longitudinal split tear.
+
+> [!PITFALL] Magic-angle in flexor tendons
+> Where the flexor tendons curve **~55°** to B0 (e.g., across the MCP/PIP), intratendinous signal can rise on **short-TE** sequences (T1/PD), mimicking tendinosis or a split. Confirm on a **long-TE (T2)** image — true pathology persists; magic angle fades.
+
+> [!FIND] Flexor tendon sheath
+> Normal sheath is imperceptible; a thin rim of fluid can be physiologic. On **axial fluid-sensitive** images, **circumferential fluid > a thin rim**, synovial thickening, or enhancement suggests **tenosynovitis** (and in the right setting, raises infectious flexor tenosynovitis).
+
+### The Flexor Pulley System (Axial is King)
+
+> [!FIND] How to read the pulley system
+> Scroll **axial** fluid-sensitive images and identify each pulley as a thin low-signal band hugging the flexor tendons against bone. Localize by the **underlying phalanx/joint**, then confirm tendon position relative to bone — pulley failure shows up as **separation of tendon from bone (bowstringing)**.
+
+> [!LANDMARK] Which pulley overlies what
+> Anchor each annular pulley to its bony level:
+>
+> - **A1** → **MCP joint / metacarpal head–proximal phalanx base** (the trigger-finger pulley)
+> - **A2** → **proximal phalanx** (long, critical)
+> - **A3** → **PIP joint**
+> - **A4** → **middle phalanx** (critical)
+> - **A5** → **DIP joint**
+> - Cruciate pulleys **C1 (between A2–A3), C2 (between A3–A4), C3 (between A4–A5)** are thin and collapse to allow flexion
+
+> [!PEARL] The critical pulleys
+> **A2 and A4** are the biomechanically essential pulleys — they keep the flexor tendons apposed to the phalanges. Isolated A2 or A4 disruption (classically the **rock-climber's "closed" grip injury**) is what produces clinically significant bowstringing.
+
+> [!MEASURE] Recognizing bowstringing
+> Bowstringing = abnormal increase in the **tendon–bone (tendon–phalanx) distance** as the pulley no longer tethers the tendon. Best shown on a **flexed sagittal** image (volar displacement of the flexor tendons away from bone). A **tendon–bone distance ≥ ~2 mm** in flexion is the commonly cited threshold for a clinically relevant pulley tear; multi-pulley injury exaggerates it.
+
+> [!PITFALL] Don't overcall a single pulley
+> A faint or partial-volume single annular band on one slice is not a tear. Require **secondary signs** — bowstringing, fluid/edema at the pulley, focal discontinuity over **≥2 slices** — before calling rupture. The thin cruciate pulleys are normally hard to see.
+
+### Extensor Mechanism
+
+> [!FIND] Central slip
+> On **sagittal** over the PIP, follow the extensor hood to its insertion on the **dorsal base of the middle phalanx** — that's the **central slip**. Disruption (fluid/discontinuity at the dorsal middle-phalangeal base) is the lesion behind a **Boutonnière deformity** (PIP flexion, DIP hyperextension).
+>
+> - Correlate with axial to see retraction/edema of the central slip
+
+> [!FIND] Terminal extensor tendon
+> On **sagittal** over the DIP, trace the conjoined lateral bands to the **terminal tendon** inserting on the **dorsal base of the distal phalanx**. Avulsion/discontinuity here = **mallet finger** (DIP droop); look for a small dorsal **bony avulsion fragment**.
+
+> [!FIND] Sagittal bands
+> On **axial at the MCP**, the **sagittal bands** are the transverse fibers that sling the extensor tendon and center it over the metacarpal head. A torn sagittal band (usually **radial** at the long finger — **"boxer's knuckle"**) lets the extensor tendon **sublux into the ulnar gutter**, best seen on **axial in flexion**.
+>
+> - Confirm extensor tendon **off the dorsal apex** of the metacarpal head
+
+> [!PEARL] Match the deformity to the lesion
+> A quick map for the extensor mechanism:
+>
+> - **Mallet finger** → terminal tendon (distal phalanx)
+> - **Boutonnière** → central slip (middle phalanx)
+> - **Extensor subluxation / boxer's knuckle** → sagittal band (MCP)
+
+### Volar Plate and Collateral Ligaments
+
+> [!FIND] Volar plate
+> On **sagittal**, the **volar plate** is the fibrocartilaginous band on the palmar aspect of the **PIP (and MCP)** joint, anchoring the proximal phalanx to the base of the middle phalanx. In a **dorsal PIP dislocation / hyperextension** injury, look for an avulsion at its distal attachment (± small volar-base fragment).
+
+> [!FIND] Collateral ligaments
+> On **coronal**, the **radial and ulnar collateral ligaments** are paired low-signal bands spanning each joint from the phalangeal/metacarpal head to the adjacent base. Assess continuity and for edema; tears show discontinuity, waviness, and surrounding fluid.
+
+> [!PITFALL] Volar plate calcification mimic
+> Post-traumatic **volar plate ossification/calcification** at the PIP can appear as a focal signal abnormality and be misread as an acute fragment — correlate with radiographs and look for cortical/marrow signal.
+
+### Thumb Ulnar Collateral Ligament and the Stener Lesion
+
+> [!FIND] Thumb UCL
+> On **coronal** of the thumb MCP, find the **UCL** along the **ulnar** side, running from the metacarpal head to the proximal phalanx base. The normal **adductor pollicis aponeurosis** lies superficial to it. Distal UCL tear with avulsion ("**gamekeeper/skier's thumb**") is the target injury.
+
+> [!LANDMARK] The Stener lesion
+> A **Stener lesion** is a completely torn distal UCL that **retracts and flips superficial/proximal to the adductor aponeurosis**, so the aponeurosis is interposed between the torn ligament and its insertion. On coronal it looks like a rounded **"yo-yo on a string"** mass at the proximal-ulnar MCP.
+>
+> - This matters because a Stener lesion **cannot heal with immobilization** → it's a surgical lesion
+
+> [!FIND] Thumb RCL
+> On **coronal**, the **radial collateral ligament** is on the **radial** side of the thumb MCP. Less commonly injured than the UCL, but assess it for discontinuity and instability the same way.
+
+### A1 Pulley and Trigger Finger
+
+> [!FIND] A1 pulley / trigger finger
+> On **axial at the MCP/metacarpal head**, identify the **A1 pulley**; in trigger finger look for **thickening of the A1 pulley** and adjacent **flexor tendon sheath fluid/synovitis**, ± nodular thickening of the flexor tendon that catches during motion.
+
+### Neurovascular Bundles
+
+> [!FIND] Digital neurovascular bundles
+> On **axial**, the paired **digital arteries and nerves** sit at the **volar-lateral corners** of the finger (one radial, one ulnar), just superficial to the flexor sheath. Use them as orientation landmarks and to localize masses (e.g., a **glomus tumor**, classically subungual, or a **digital mucoid cyst** near the DIP).
+
+> [!PITFALL] Don't mistake the bundle for pathology
+> The normal **flowing digital artery** (flow-void / small enhancing tubular structure) and accompanying nerve are constant volar-lateral findings — don't call them a small mass or ganglion. Track them craniocaudally across slices to confirm their tubular, paired nature.
+
 ## Infection Search Pattern
 
 - **1. Marrow/bone changes:**

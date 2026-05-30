@@ -11,6 +11,203 @@ Copy-ready language. Replace bracketed text. Use as a workstation reference, not
 | Insall-Salvati ratio | Patellar tendon length / patellar diagonal: normal 0.8-1.2; >1.2 patella alta, <0.8 patella baja. |
 | Caton-Deschamps index | Distance from inferior patellar articular surface to anterosuperior tibial plateau / patellar articular surface length: normal 0.6-1.2. |
 
+
+## How to Find It — Landmark-Based Identification
+
+This section teaches you to *locate* each knee structure by its anatomic landmark and the plane/sequence that displays it best, what a normal version looks like, and the classic normal variants and mimics that fool trainees. Build the habit of confirming every finding on at least two planes before you call it.
+
+### The Three Planes — What Each Is Best For
+
+> [!PEARL] Match the plane to the structure
+> Each plane has a job. Read every structure on its best plane first, then confirm on a second plane.
+>
+> - **Sagittal**: menisci (body as "bowtie", horns in profile), **ACL** and **PCL**, patellar/quad tendons, trochlear cartilage, Hoffa fat pad.
+> - **Coronal**: meniscal body and roots, **MCL** (superficial + deep), **LCL**, meniscal extrusion, tibiofemoral cartilage, collateral origins.
+> - **Axial**: **patellofemoral** joint (tracking, trochlear shape, cartilage), **MPFL** and retinacula, popliteus/PLC relationships, cysts.
+
+> [!PEARL] Sequence logic
+> Fluid-sensitive fat-suppressed sequences (**PD/T2 FS**) show edema, tears, and cartilage defects; non-fat-suppressed **PD/T1** show anatomy and fibrocartilage morphology with better signal-to-noise.
+>
+> - Meniscal signal grading is best judged on short-TE images (**PD**), where the meniscus is uniformly dark.
+
+### Menisci — Body, Horns, Roots
+
+> [!FIND] Meniscal body — the "bowtie"
+> On **sagittal** peripheral slices, the meniscal body appears as a **bowtie**: a continuous dark band connecting anterior and posterior horns.
+>
+> - Normal: count **≥2 consecutive bowties** for the body (slice thickness/spacing dependent, but two is the working rule).
+> - Move centrally and the bowtie "opens" into separate triangular anterior and posterior horns.
+
+> [!PEARL] Counting bowties for a bucket-handle tear
+> The lateral and medial menisci should each show ~**2 bowtie slices**. **Fewer than 2 bowties** suggests a displaced bucket-handle fragment (meniscus is shortened in the AP/peripheral dimension).
+>
+> - Corroborate with the **double-PCL sign**, the **double anterior horn sign**, and a **fragment in the intercondylar notch**.
+
+> [!FIND] Posterior horns and the root attachments
+> On **sagittal**, the **posterior horn of the medial meniscus** is normally the **largest** meniscal segment; the lateral posterior horn is smaller and more symmetric with its anterior horn.
+>
+> - **Roots** attach to the **central tibial plateau** near the tibial eminence; find them on **coronal** and central **sagittal/axial**.
+> - Normal root: dark fibers inserting at the plateau without fluid signal undercutting them.
+
+> [!PITFALL] Root tear and the "ghost meniscus"
+> A **medial posterior root tear** shows a radial/vertical cleft at the insertion, with the body **extruding** medially; on a central slice the posterior horn may seem to vanish (**"ghost meniscus"**).
+>
+> - Always check the **coronal** for extrusion when the posterior root looks abnormal.
+
+> [!MEASURE] Meniscal extrusion
+> On the **coronal** slice through the mid-joint (at the medial collateral level / tibial eminence), measure the meniscus from the edge of the tibial plateau (exclude osteophytes).
+>
+> - **≥3 mm** of extrusion is considered significant ("major" extrusion) and is associated with root tears and degeneration.
+
+> [!MEASURE] Rules for calling a meniscal tear
+> Call a tear when **signal unequivocally reaches an articular surface**.
+>
+> - Require surface-reaching signal on **≥2 consecutive slices** (the "two-slice touch / two-touch rule") to call a tear with confidence.
+> - **Grade 1** (intrasubstance globular) and **grade 2** (linear, not reaching surface) signal are **degeneration, not tears**.
+> - Note morphology: horizontal, vertical-longitudinal, radial, complex, displaced/bucket-handle.
+
+### Normal Meniscal Structures That Mimic Tears
+
+> [!PITFALL] Meniscofemoral ligaments — Humphrey and Wrisberg
+> These run from the **lateral meniscus posterior horn** to the **lateral aspect of the medial femoral condyle**, flanking the PCL.
+>
+> - **Humphrey** = **anterior** to PCL; **Wrisberg** = **posterior** to PCL (mnemonic: "**H** before **W**" = anterior before posterior).
+> - Their origin creates a **cleft of fluid signal** at the lateral posterior horn — do **not** call this a tear.
+
+> [!PITFALL] Popliteomeniscal fascicles and the popliteus hiatus
+> The **popliteus tendon** passes through the **hiatus** at the **lateral meniscus posterior horn**, tethered by superior and inferior **popliteomeniscal fascicles**.
+>
+> - The hiatus produces normal fluid signal/cleft at the **posterolateral** meniscus — a classic **pseudotear**.
+> - Orientation is **oblique** and follows the tendon; a true tear is typically vertical or horizontal and not aligned with the hiatus.
+
+> [!PITFALL] Transverse (intermeniscal) ligament
+> Connects the **anterior horns** of the medial and lateral menisci across the anterior knee.
+>
+> - On **sagittal**, its junction with the anterior horn mimics an **anterior horn tear** ("pseudotear"); trace it on **axial** to confirm it is a ligament coursing through Hoffa fat.
+
+> [!PITFALL] Meniscal flounce
+> A **smooth, wavy fold** of the (usually medial) meniscal free edge seen on a single sagittal image.
+>
+> - It is a **normal**, often position-dependent finding — **not** a tear. Confirm smooth contour and absence of surface-reaching signal.
+
+### Cruciate Ligaments
+
+> [!FIND] Anterior cruciate ligament
+> On **sagittal**, find the ligament paralleling the **roof of the intercondylar notch (Blumensaat line)**; confirm fibers on coronal/axial.
+>
+> - Normal: continuous, taut, **parallel to Blumensaat line**; fibers may appear slightly striated (especially the two bundles) but should be continuous and not wavy.
+> - Origin: posteromedial **lateral femoral condyle**; insertion: **anterior tibial spine** region.
+
+> [!PEARL] ACL tear — primary and secondary signs
+> Primary signs are intrinsic; secondary signs are downstream geometry changes.
+>
+> - **Primary**: discontinuity/non-visualization, abnormal **T2 signal** within the ligament, **wavy or horizontal** fibers (angle below Blumensaat), abnormal **flat** ACL slope.
+> - **Secondary**: **pivot-shift bone bruises** (lateral femoral condyle + posterolateral tibial plateau), **anterior tibial translation** (>~7 mm), **deepened lateral femoral sulcus**, **uncovered/posteriorly displaced posterior horn of lateral meniscus**, **PCL buckling**, **Segond fracture**.
+
+> [!FIND] Posterior cruciate ligament
+> On **sagittal**, the PCL is a **thick, uniformly dark, arcuate (curved) band** from the **medial femoral condyle** to the **posterior tibia** below the joint line.
+>
+> - Normal: smooth curve; can become **more curved/buckled** when the ACL is torn (a secondary ACL sign), so judge PCL signal, not just shape.
+
+### Medial and Lateral Collateral Ligaments
+
+> [!FIND] Medial (tibial) collateral ligament
+> Best on **coronal**. The **superficial MCL** is a long, thin, dark band from the **medial femoral epicondyle** to the **tibia ~5–7 cm below the joint line**.
+>
+> - The **deep MCL** (meniscofemoral + meniscotibial portions) attaches to the **medial meniscus body**; normal fat/bursa separates it from the superficial layer — do not mistake that fat plane for a tear.
+> - Grade sprains: **I** = perifascicular edema, intact fibers; **II** = partial thickness; **III** = full-thickness disruption.
+
+> [!FIND] Lateral (fibular) collateral ligament
+> On **coronal** (often a slightly posterior slice), trace the cord-like **LCL** from the **lateral femoral epicondyle** to the **fibular head**, where it joins the biceps femoris.
+>
+> - It is **extra-articular** and separate from the lateral meniscus (no meniscal attachment — unlike the MCL).
+
+### Posterolateral Corner
+
+> [!LANDMARK] The fibular head and styloid — PLC hub
+> The **fibular head/styloid** anchors most PLC structures; orient yourself here on **coronal** and **axial**.
+>
+> - **LCL** → lateral fibular head.
+> - **Popliteofibular ligament** → from popliteus musculotendinous junction to the **fibular styloid** (best on coronal oblique/axial).
+> - **Biceps femoris–IT band conjoined insertion** → posterolateral fibular head / Gerdy tubercle region.
+
+> [!FIND] Popliteus tendon and hiatus
+> Find the **popliteus tendon** in its groove on the **lateral femoral condyle** (coronal/axial), passing intra-articularly through the **popliteus hiatus** at the posterolateral meniscus toward the muscle belly.
+>
+> - Normal: smooth dark tendon in its sulcus; the surrounding hiatal fluid is normal (see pseudotear pitfall above).
+
+> [!FIND] Arcuate and fabellofibular ligaments
+> These thin posterolateral structures attach to the **fibular styloid**.
+>
+> - The **arcuate sign** = avulsion fracture of the **fibular styloid**, a marker of PLC injury — look for a small bony fragment on coronal/axial and scrutinize the rest of the PLC.
+
+### Extensor Mechanism and Patellofemoral Joint
+
+> [!FIND] Quadriceps and patellar tendons
+> Both are best profiled on **sagittal**.
+>
+> - **Quadriceps tendon**: multilaminar striated band inserting on the **superior patella** (the lamination is normal).
+> - **Patellar tendon**: uniformly dark band from the **inferior patellar pole** to the **tibial tubercle**; normal thickness up to ~**7 mm**.
+
+> [!MEASURE] Patella alta/baja — Insall-Salvati and Caton-Deschamps
+> Assess on a **sagittal** image.
+>
+> - **Insall-Salvati** = **patellar tendon length ÷ patellar (bone) length**. Normal ~**0.8–1.2**; **>1.2 = alta**, **<0.8 = baja**.
+> - **Caton-Deschamps** = distance from inferior articular cartilage margin of patella to anterosuperior tibia, divided by patellar articular surface length. Normal ~**0.6–1.2**; **>1.2 = alta**.
+
+> [!FIND] Trochlea and trochlear dysplasia (Dejour features)
+> Evaluate the **trochlear groove** on **axial** slices a few mm below the roof, where the groove is normally a clean V.
+>
+> - **Dejour features** of dysplasia: **crossing sign**, **trochlear bump/spur (supratrochlear)**, **double-contour sign**, and a **shallow/flat or convex groove**.
+
+> [!MEASURE] Trochlear sulcus angle and depth
+> On **axial** at the proximal trochlea:
+>
+> - **Sulcus angle** normally **≤145°**; a wider (flatter) angle indicates dysplasia.
+> - Trochlear depth **<3 mm** suggests dysplasia.
+
+> [!MEASURE] TT-TG distance (tibial tubercle–trochlear groove)
+> Measure on **axial** by superimposing two slices: one through the deepest point of the **trochlear groove** and one through the **tibial tubercle** at the patellar tendon insertion. Measure the **mediolateral distance** between the two points, perpendicular to a line along the posterior femoral condyles.
+>
+> - Normal **<15 mm**; **≥15–20 mm** is abnormal and **>20 mm** strongly favors lateralized tracking/instability.
+
+> [!FIND] Medial patellofemoral ligament (MPFL)
+> On **axial**, trace the **MPFL** from its femoral origin between the **adductor tubercle and medial epicondyle (Schöttle point)** to the **superomedial patella** (proximal ~⅓ of the medial patellar border).
+>
+> - After **lateral patellar dislocation**, look for MPFL disruption at the femoral origin plus the classic **bone-bruise pair**: **medial patella** and **anterolateral/inferior lateral femoral condyle**, often with an osteochondral fragment.
+
+### Cartilage — Systematic Compartment Mapping
+
+> [!PEARL] Cover every cartilage surface in order
+> Map cartilage by compartment so nothing is missed; use fluid-sensitive FS sequences and grade defects by depth (fibrillation → partial → full-thickness → subchondral involvement).
+>
+> - **Patellofemoral**: patellar facets (medial, lateral, odd) on **axial**; trochlea on **axial + sagittal**.
+> - **Medial compartment**: medial femoral condyle + medial tibial plateau on **coronal + sagittal**.
+> - **Lateral compartment**: lateral femoral condyle + lateral tibial plateau on **coronal + sagittal**.
+
+### Classic Landmarks and Associations
+
+> [!LANDMARK] Segond fracture
+> A small **vertical avulsion fragment off the lateral tibial plateau** (lateral capsular/anterolateral ligament region), best seen on **coronal**.
+>
+> - **Highly associated with ACL tears** (and frequently meniscal injury) — finding it should send you straight to the ACL.
+
+> [!FIND] Baker (popliteal) cyst
+> Look on **axial** posteromedially: a Baker cyst has a **neck between the semimembranosus tendon and the medial head of gastrocnemius**.
+>
+> - That specific neck location distinguishes it from other posterior cystic lesions; rupture tracks fluid distally into the calf.
+
+> [!LANDMARK] Pivot-shift bone bruise pattern
+> The classic **ACL-injury contusion pair**: **lateral femoral condyle (sulcus terminalis)** and **posterolateral tibial plateau**.
+>
+> - Recognizing this pattern should prompt careful ACL, lateral meniscus, and PLC review.
+
+> [!FIND] Synovial plicae
+> Plicae are normal synovial folds; name them by location.
+>
+> - **Mediopatellar (medial) plica**: along the medial joint, best on **axial** — can become symptomatic/thickened and abrade the medial femoral condyle cartilage.
+> - **Suprapatellar** and **infrapatellar (ligamentum mucosum)** plicae: identify on **sagittal**; the infrapatellar plica runs through Hoffa fat toward the notch and should not be mistaken for the ACL or a loose body.
+
 ## Modified Outerbridge Chondromalacia Grading - Copy-Ready
 
 Use this for any articular surface. Replace [surface/compartment] with the specific location: patellar median ridge, medial femoral condyle weightbearing surface, anterosuperior acetabulum, radiocapitellar joint, tibiotalar dome, first MTP joint, etc.

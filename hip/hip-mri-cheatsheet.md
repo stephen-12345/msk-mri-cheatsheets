@@ -31,6 +31,163 @@ Copy-ready language. Replace bracketed text. Use as a workstation reference, not
 | V | Joint narrowing with or without acetabular changes. |
 | VI | Advanced degenerative changes. |
 
+
+## How to Find It — Landmark-Based Identification
+
+This section teaches a systematic, landmark-driven search pattern for hip/pelvis MRI: start with the bony scaffold on coronal images, then use the femoral neck axis to set up oblique and radial planes for the labrum and head-neck junction, and finally interrogate the tendon footprints and neurovascular spaces. Throughout, the convention used here is a **right-hip clock face** where **3 o'clock = anterior**, **12 o'clock = superior**, **6 o'clock = inferior**, and **9 o'clock = posterior**.
+
+### Planes and Sequences — Setting Up the Search
+
+> [!PEARL] What each plane buys you
+> Build a habit of assigning each structure to its best plane before you start scrolling.
+>
+> - **Coronal** (fluid-sensitive + T1): marrow disease, superolateral labrum (11–1 o'clock), abductor tendon footprints, sourcil/center-edge geometry.
+> - **Axial / oblique axial**: anterior and posterior labrum, alpha angle and cam morphology, iliopsoas tendon, hamstring and rectus origins, crossover sign on localizers.
+> - **Sagittal**: anterior–posterior labral extent, cartilage of the dome, rectus femoris reflected head.
+
+> [!FIND] Oblique axial along the femoral neck
+> Prescribe an **oblique axial** by drawing the slice plane parallel to the long axis of the **femoral neck** on a coronal image. This single maneuver gives you a true head-neck profile for the **alpha angle** and an undistorted look at the anterosuperior head-neck junction where cam bumps live.
+
+> [!PEARL] Radial sequences are the labrum's best friend
+> A **radial** acquisition reslices the joint as spokes of a wheel centered on the **femoral head/neck axis**, so every slice cuts the labrum perpendicular to its base. This eliminates the volume-averaging that fakes (or hides) tears on orthogonal planes and lets you assign findings cleanly to clock positions. MR arthrography improves labral and chondral conspicuity but the landmark logic is identical.
+
+### Acetabular Labrum and Its Ligaments
+
+> [!LANDMARK] Clock-face mapping of the labrum
+> Anchor your clock to fixed bony cues: **3 o'clock = anterior**, **12 o'clock = superior/lateral apex**, **9 o'clock = posterior**, **6 o'clock = inferior** (the notch bridged by the transverse ligament).
+>
+> - The **normal labrum** is a small, uniformly **low-signal triangle** on T1/PD continuous with the acetabular rim.
+> - Most degenerative and traumatic tears occur in the **anterosuperior** quadrant (roughly **11–3 o'clock**).
+
+> [!FIND] Anterosuperior labrum
+> Track the **anterosuperior labrum** on **oblique axial** and **radial** slices; this is the highest-yield zone for tears in cam/pincer impingement. A tear shows linear high signal extending to the labral surface or base, often with an adjacent **paralabral cyst** that points back to the tear.
+
+> [!PITFALL] Sublabral sulcus/recess vs tear
+> A **normal sublabral sulcus** is a smooth, shallow cleft at the chondrolabral junction (classically described **posteroinferiorly**, but also seen anteriorly) that does NOT undercut the full labral base.
+>
+> - **Sulcus**: smooth margins, partial depth, no displacement, no paralabral cyst.
+> - **Tear**: irregular margins, extends to/through the base, may displace the labrum, often a **paralabral cyst**.
+
+> [!LANDMARK] Transverse acetabular ligament (TAL)
+> The **TAL** bridges the **acetabular notch at 6 o'clock**, completing the inferior rim. It is a normal low-signal band — do not call the cleft between the TAL and labrum a tear. The TAL is your landmark for the inferior limit of the labrum.
+
+> [!FIND] Ligamentum teres
+> Find the **ligamentum teres** running from the **fovea capitis** of the femoral head to the **acetabular notch/TAL**, best seen on **coronal** and **axial** fluid-sensitive images as a low-signal band within fat.
+>
+> - Normal: thin, taut, uniformly low signal.
+> - Pathologic: thickening, partial/complete discontinuity, or fluid filling the expected course.
+
+### Femoroacetabular Impingement (FAI)
+
+> [!MEASURE] Alpha angle (cam morphology)
+> On an **oblique axial** along the femoral neck, fit a best-fit circle to the **femoral head**; draw the **neck axis** through the center of head and neck; measure the angle between the neck axis and the radius to the point where the head contour first exits the circle (the cam bump).
+>
+> - Abnormal: **> 55°** (values are best assessed at the anterosuperior junction).
+
+> [!FIND] Cam morphology
+> Look for the cam bump at the **anterosuperior head-neck junction** — loss of the normal concave "waist" of the neck. Pair it with adjacent **anterosuperior chondrolabral** damage; cam impingement drives shear at the cartilage that delaminates it from bone.
+
+> [!MEASURE] Lateral center-edge angle (LCEA)
+> On a **coronal** image (or coronal-equivalent), draw a vertical line through the **femoral head center** and a second line to the **lateral edge of the acetabular sourcil**; the angle between them is the LCEA.
+>
+> - Normal: roughly **25–39°**.
+> - **Dysplasia**: < 20–25° (undercoverage).
+> - **Pincer/overcoverage**: > 39–40°.
+
+> [!PEARL] Pincer signs — crossover, coxa profunda, protrusio
+> Pincer is acetabular over-coverage; recognize it by:
+>
+> - **Crossover sign**: anterior wall line crosses the posterior wall line near the lateral rim (focal anterosuperior over-coverage) — assess on a true AP-equivalent localizer.
+> - **Coxa profunda**: acetabular floor medial to the ilioischial line.
+> - **Protrusio**: femoral head medial to the ilioischial line.
+
+> [!FIND] Chondrolabral junction and cartilage delamination
+> Interrogate the **acetabular cartilage** right where it meets the labrum (the **chondrolabral junction**) on radial/oblique images. **Delamination** is a fluid/signal cleft splitting cartilage from subchondral bone, often with intact overlying surface — easy to miss without arthrographic contrast or careful radial review. In cam FAI, look anterosuperiorly; in pincer, expect a contrecoup posteroinferior chondral lesion.
+
+### The "Rotator Cuff of the Hip" — Abductor Footprints
+
+> [!LANDMARK] Greater trochanter facets
+> The greater trochanter has named facets that anchor the abductor footprints; learn which tendon goes where:
+>
+> - **Anterior facet**: **gluteus minimus** insertion.
+> - **Lateral facet**: **gluteus medius** (main/lateral tendon).
+> - **Superoposterior facet**: **gluteus medius** (posterior portion) — covered by the lateral tendon.
+> - **Posterior facet**: bare area covered by the trochanteric bursa.
+
+> [!FIND] Gluteus medius and minimus tendons
+> On **coronal** fluid-sensitive images, follow each abductor to its facet; use **axial** images to separate the more anterior **minimus** from the more lateral/posterior **medius**. Tendinosis/tears show footprint signal, thickening, or fluid-filled gaps — the hip analog of supraspinatus pathology.
+
+> [!PEARL] "Rotator cuff of the hip"
+> Think of the abductors as the hip's rotator cuff: **gluteus medius/minimus = the cuff**, the **greater trochanter facets = the tuberosity footprints**, and **greater trochanteric pain syndrome** is the clinical correlate of cuff tendinopathy plus bursitis.
+
+> [!LANDMARK] Peritrochanteric bursae
+> Three bursae explain lateral hip pain:
+>
+> - **Subgluteus minimus bursa** (deep, near anterior facet).
+> - **Subgluteus medius bursa** (between medius tendon and trochanter).
+> - **Subgluteus maximus / greater trochanteric bursa** (superficial, over the posterior facet) — the largest and most commonly inflamed.
+
+> [!PITFALL] Don't overcall T2-bright footprint signal
+> A little increased signal at the abductor footprint can be magic-angle effect or mild degeneration. Require a **fluid-signal gap, tendon retraction, or footprint bone irregularity** before calling a tear, and correlate with peritrochanteric edema.
+
+### Hamstrings, Rectus Femoris, and Iliopsoas
+
+> [!LANDMARK] Hamstring origin at the ischial tuberosity
+> At the **ischial tuberosity**, the hamstrings arise in a reproducible pattern:
+>
+> - **Conjoint tendon** of **semitendinosus + long head of biceps femoris** arises from the **inferomedial facet**.
+> - **Semimembranosus** arises more **laterally/anteriorly** from a separate facet.
+
+> [!FIND] Hamstring origin
+> Use **axial** images at the level of the ischial tuberosity to separate the conjoint tendon from the semimembranosus, then **coronal/sagittal** to measure retraction. Report avulsions by **which tendons** are involved and the **retraction distance**, since this drives surgical decision-making.
+
+> [!LANDMARK] Rectus femoris origin
+> The rectus femoris has two heads at the front of the hip:
+>
+> - **Direct head**: from the **anterior inferior iliac spine (AIIS)**.
+> - **Indirect (reflected) head**: from the **superior acetabular rim/ridge**, coursing posterolaterally — best traced on **sagittal** and **axial** images.
+
+> [!FIND] Iliopsoas tendon and bursa
+> Follow the **iliopsoas tendon** anterior to the joint on **axial** images as it passes over the **iliopectineal eminence** toward the **lesser trochanter** insertion. The **iliopsoas bursa** lies deep to the tendon and communicates with the joint in ~15% of people.
+>
+> - A distended iliopsoas bursa can mimic a cystic mass anterior to the hip — trace it back to the tendon to identify it.
+
+### Bone Marrow — AVN, Insufficiency Fracture, Edema Syndromes
+
+> [!FIND] Femoral head AVN
+> Scan the **anterosuperior femoral head** (the weight-bearing segment) on **coronal** and **sagittal** fluid-sensitive and T1 images. AVN produces a **serpiginous demarcating line** outlining the necrotic segment.
+
+> [!PEARL] Double-line and crescent signs
+> Two classic AVN signs:
+>
+> - **Double-line sign** (T2): an outer **low-signal** sclerotic rim with an inner **high-signal** hyperemic/granulation line — fairly specific for AVN.
+> - **Crescent sign**: a subchondral fracture line/fluid cleft signaling impending articular collapse.
+
+> [!MEASURE] Quantifying AVN involvement
+> Estimate the **percentage of the weight-bearing surface/femoral head** involved and the **subchondral arc/extent**; larger lesions involving the anterolateral weight-bearing column carry higher collapse risk and guide whether joint-preserving surgery is viable.
+
+> [!PITFALL] Subchondral insufficiency fracture vs transient edema
+> Both show diffuse marrow edema, but they are different entities:
+>
+> - **Subchondral insufficiency fracture (SIF)**: a **low-signal subchondral line paralleling the articular surface** within the edema, often with surrounding edema and risk of collapse — look hard for the fracture line.
+> - **Transient osteoporosis / bone marrow edema syndrome**: **diffuse edema of head ± neck WITHOUT a subchondral fracture line**, typically self-limited.
+> - The presence or absence of the **subchondral line** is the discriminator — and missing an SIF risks progression to collapse.
+
+### SI Joints, Pubic Symphysis, and the Deep Gluteal Space
+
+> [!FIND] Sacroiliac joints
+> Evaluate the **SI joints** on oblique coronal/axial fluid-sensitive and T1 images for **periarticular marrow edema (osteitis)**, erosions, and subchondral sclerosis. Symmetric vs asymmetric involvement plus marrow edema helps separate inflammatory sacroiliitis from degenerative or stress-related change.
+
+> [!LANDMARK] Pubic symphysis and athletic pubalgia
+> Center on the **pubic symphysis** and the **rectus abdominis–adductor longus aponeurosis** that blends across its anterior margin.
+>
+> - **Athletic pubalgia / "sports hernia"**: disruption or signal at the **rectus abdominis/adductor aponeurosis**, the **secondary cleft sign**, and **parasymphyseal marrow edema** — there is no true fascial hernia, so trace the aponeurotic plate carefully.
+
+> [!FIND] Deep gluteal space and sciatic nerve
+> Locate the **deep gluteal space** posterior to the hip, bounded deep by the posterior acetabular column/capsule and superficial by gluteus maximus. Trace the **sciatic nerve** as it passes the **greater sciatic notch** and the **piriformis** muscle on **axial** images.
+>
+> - Look for nerve enlargement, signal change, or perineural scarring/edema where the nerve crosses piriformis — the anatomic substrate of **deep gluteal syndrome ("piriformis syndrome")**.
+
 ## Modified Outerbridge Chondromalacia Grading - Copy-Ready
 
 Use this for any articular surface. Replace [surface/compartment] with the specific location: patellar median ridge, medial femoral condyle weightbearing surface, anterosuperior acetabulum, radiocapitellar joint, tibiotalar dome, first MTP joint, etc.

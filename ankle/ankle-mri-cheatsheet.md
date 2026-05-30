@@ -13,6 +13,158 @@ Copy-ready language. Replace bracketed text. Use as a workstation reference, not
 | OLT sizing | Report AP x transverse x depth (mm); map to 9-zone grid (medial/central/lateral x anterior/central/posterior) |
 | PT-to-FDL ratio | PT normally ~2x diameter of FDL on axial |
 
+
+## How to Find It — Landmark-Based Identification
+
+This section teaches you to systematically locate and evaluate ankle structures using fixed bony landmarks, the optimal plane/sequence for each, what normal looks like, and the mimics that trip up trainees. Work plane-by-plane: tendons and ligaments are best on **axial**, the Achilles and tibiotalar cartilage on **sagittal**, and the ligaments/osteochondral surfaces on **coronal**.
+
+### Orientation and Search Strategy
+
+> [!PEARL] Match the structure to its plane
+> Most ankle pathology is solved by knowing which plane shows the structure best.
+>
+> - **Axial:** retromalleolar tendons, all three lateral ligaments, syndesmosis, tarsal tunnel
+> - **Coronal:** deltoid, CFL, talar dome osteochondral surface, peroneal split
+> - **Sagittal:** Achilles, plantaris, tibiotalar cartilage, os trigonum/FHL, plantar fascia
+
+> [!LANDMARK] The medial and lateral malleoli are your anchors
+> Almost every tendon and ligament is named for its relationship to a malleolus.
+>
+> - The **medial malleolus** anchors the deltoid and the Tom-Dick-Harry tendons.
+> - The **lateral malleolus (distal fibula)** anchors ATFL, CFL, PTFL, and the peroneal groove.
+
+### Medial Retromalleolar Tendons (Axial)
+
+> [!FIND] Posterior tibial tendon (PTT)
+> On **axial** at the level of the medial malleolus, find the most **anteromedial** tendon hugging the back of the medial malleolus; it is normally ~**2×** the caliber of the adjacent FDL.
+>
+> - Order behind the medial malleolus, front to back (Tom, Dick, AND Harry): **T**ibialis posterior, **F**lexor **D**igitorum longus, **and** the neurovascular bundle, **H**allucis longus.
+> - Follow the PTT distally to its broad insertion on the **navicular tuberosity**; the main slip there is the dominant attachment.
+
+> [!FIND] Flexor digitorum longus (FDL)
+> Immediately **posterior to the PTT** on axial, smaller (about half the PTT diameter). It crosses superficial to FHL at the **knot of Henry** in the midfoot.
+
+> [!FIND] Flexor hallucis longus (FHL)
+> The **most posterolateral** of the medial tendons, lying in its groove **between the talar tubercles**. On sagittal it runs deep, hooking under the sustentaculum tali toward the great toe.
+>
+> - The **neurovascular bundle** (posterior tibial artery/vein and tibial nerve) sits between FDL and FHL — this is the "and" in Tom, Dick, AND Harry.
+
+> [!PITFALL] Magic-angle on the curving PTT
+> Where the PTT curves around the medial malleolus it may show intermediate signal on short-TE sequences (**magic angle**, fibers near 55° to B0). Confirm on a long-TE (T2/PD) sequence before calling tendinosis or a tear.
+
+> [!PITFALL] A small fluid rim is normal around the PTT/FHL
+> A thin sheath of fluid is physiologic. The **FHL sheath communicates with the tibiotalar joint** in many people, so isolated FHL fluid is often just a joint effusion, not tenosynovitis. Demand circumferential fluid plus a thickened/enhancing sheath before calling true tenosynovitis.
+
+> [!MEASURE] Calling PTT dysfunction
+> Compare the PTT to the FDL on axial. A PTT that is **enlarged, thinned, or equal to/smaller than the FDL**, or shows longitudinal splits/intratendinous T2 signal, indicates posterior tibial tendon dysfunction (PTTD).
+
+### Lateral Peroneal Tendons (Axial)
+
+> [!FIND] Peroneus brevis and longus in the retromalleolar groove
+> On **axial** at the lateral malleolus, find the two peroneals in the **retromalleolar (fibular) groove**. The **brevis is anterior/medial and sits directly against the fibula**; the **longus is posterolateral** to it.
+>
+> - Mnemonic: **brevis is bony** (against bone), longus is lateral/superficial.
+
+> [!PITFALL] The brevis boomerang/C-shape split sign
+> A normal brevis is round/oval. When it becomes **flattened, C-shaped or boomerang-shaped wrapping around the longus**, suspect a **longitudinal split tear** of the peroneus brevis — classically associated with a shallow/convex fibular groove and a chronically lax superior peroneal retinaculum.
+
+> [!LANDMARK] Peroneal tubercle and cuboid tunnel for the longus
+> Follow the **longus** distally: it passes below the **peroneal tubercle** of the lateral calcaneus, then turns medially through the **cuboid tunnel/groove** beneath the cuboid toward the first metatarsal base.
+>
+> - An **os peroneum** (sesamoid in the longus at the cuboid) is a normal variant; check it isn't fractured/diastatic if the longus is symptomatic.
+
+> [!PITFALL] Superior peroneal retinaculum and subluxation
+> The **superior peroneal retinaculum (SPR)** holds the tendons in the groove. A torn/stripped SPR allows the tendons to **sublux anterolaterally over the fibular tip** — look for an empty or shallow groove and a retinacular avulsion fleck.
+
+### Lateral Collateral Ligaments (Axial; CFL also Coronal)
+
+> [!FIND] Anterior talofibular ligament (ATFL)
+> On **axial** at the level of the malleolar tip, find the thin flat band running from the **anterior margin of the lateral malleolus to the talar neck/body**. It is the most anterior of the three.
+>
+> - It is the **first and most commonly torn** ligament in an inversion sprain.
+
+> [!FIND] Calcaneofibular ligament (CFL)
+> Find it on **axial or coronal** running from the **lateral malleolar tip obliquely down to the lateral calcaneus**, passing **deep to the peroneal tendons**. Use the peroneals as your signpost — the CFL lies directly under them.
+>
+> - A CFL tear is suggested when fluid tracks into the **peroneal tendon sheath** because the ligament forms part of its floor.
+
+> [!FIND] Posterior talofibular ligament (PTFL)
+> On **axial**, the thick, **striated/fan-shaped** band from the **malleolar fossa (medial fibula) to the posterolateral talus**. Its normal striated appearance is not a tear.
+
+> [!PEARL] Lateral sprain order: front to back
+> Ligaments fail in sequence with inversion: **ATFL first, then CFL, then PTFL**. An isolated PTFL tear without ATFL/CFL injury is rare — re-check your reading if you see it.
+
+### Syndesmosis (Axial)
+
+> [!FIND] AITFL and PITFL
+> On **axial just above the plafond**, the **anterior inferior tibiofibular ligament (AITFL)** runs obliquely from the anterolateral tibia (Chaput tubercle) to the anterior fibula (Wagstaffe), and the **posterior inferior tibiofibular ligament (PITFL)** runs from the posterior tibia (Volkmann) to the posterior fibula. Both are normally striated.
+
+> [!LANDMARK] Interosseous ligament and membrane
+> Above the AITFL/PITFL, the **interosseous ligament** is the distal thickening of the **interosseous membrane** filling the tibiofibular space. Disruption here, especially with a high fibular fracture, signals a **high (Maisonneuve) syndesmotic injury** — always look up the leg.
+
+> [!MEASURE] Tibiofibular clear space
+> Assess the syndesmosis on **axial ~1 cm (10 mm) above the tibial plafond**. The **tibiofibular clear space (between the lateral tibia and medial fibula) should be < ~6 mm**; widening suggests syndesmotic diastasis.
+
+### Medial Ligaments (Coronal primary; Axial adjunct)
+
+> [!FIND] Deltoid ligament — deep and superficial layers
+> Best on **coronal**. The **deep deltoid** is the short, striated **tibiotalar** band deep to the tendons connecting the medial malleolus to the talus; the **superficial deltoid** is the broader fan spanning malleolus to **navicular, spring ligament, sustentaculum, and talus**.
+>
+> - Deep deltoid disruption is the key finding in a "deltoid-positive" unstable ankle fracture (medial clear-space widening).
+
+> [!FIND] Spring (superomedial calcaneonavicular) ligament
+> On **axial/coronal** just deep and plantar to the PTT, find the hammock-like band from the **sustentaculum tali to the navicular** that cradles the talar head. The **superomedial component** lies immediately deep to the PTT.
+
+> [!PEARL] Adult acquired flatfoot triad
+> PTT dysfunction rarely travels alone. Check all three: **(1) PTT tear/tenosynovitis, (2) spring ligament insufficiency, (3) sinus tarsi changes**. Finding one should prompt a hunt for the others.
+
+### Sinus Tarsi and Tarsal Tunnel
+
+> [!LANDMARK] Sinus tarsi contents
+> On **sagittal/coronal**, the **sinus tarsi** is the fat-filled cone between the talus and calcaneus, lateral to the subtalar joint. It contains the **interosseous talocalcaneal ligament** (medial/deep) and the **cervical ligament** (anterolateral).
+>
+> - **Normal = bright fat.** Replacement of that fat by T1-dark, T2-bright fluid/scar = **sinus tarsi syndrome** (often partnered with PTT/spring disease).
+
+> [!FIND] Tarsal tunnel
+> On **axial behind the medial malleolus**, the tunnel is roofed by the **flexor retinaculum** and contains (front to back) PTT, FDL, the **posterior tibial neurovascular bundle**, and FHL. Trace the **tibial nerve** as it divides into medial and lateral plantar branches; a ganglion or accessory muscle here causes **tarsal tunnel syndrome**.
+
+### Achilles Tendon and Plantaris (Sagittal + Axial)
+
+> [!FIND] Achilles tendon
+> Best on **sagittal**; confirm on **axial**. Follow it from the musculotendinous junction to the **posterosuperior calcaneal insertion**. The normal anterior margin is **flat or slightly concave** on axial — a **convex/rounded anterior margin** means thickening.
+
+> [!MEASURE] Achilles thickness and watershed zone
+> Normal **AP thickness ~4–6 mm** on sagittal. The **hypovascular watershed zone is ~2–6 cm above the insertion** — the classic site of degenerative tears. Insertional disease instead centers at the calcaneus with retrocalcaneal bursitis and a Haglund deformity.
+
+> [!PITFALL] Don't mistake plantaris for an intact Achilles
+> The **plantaris tendon** runs along the **anteromedial border of the Achilles**. In an Achilles rupture an intact plantaris can be misread as residual intact fibers — trace it separately on axial; it is a thin discrete band medial to the main tendon.
+
+### Talar Dome Osteochondral Lesions (Coronal + Sagittal)
+
+> [!LANDMARK] The 9-zone grid
+> Mentally divide the talar dome into a **3×3 grid** (medial/central/lateral × anterior/middle/posterior) on coronal/sagittal to standardize lesion location.
+
+> [!PEARL] Medial-posterior vs lateral-central
+> Two classic locations: **medial dome lesions are posterior, deeper, cup-shaped, and often atraumatic**; **lateral dome lesions are central/anterior, shallower, wafer-shaped, and usually traumatic**.
+
+> [!MEASURE] Calling instability
+> An osteochondral fragment is **unstable** when **high T2 fluid signal fully undermines the fragment**, there are subchondral **cysts**, a displaced fragment, or a >5 mm lesion. A bright fluid line completely encircling the base = loose/unstable.
+
+### Posterior Impingement and Accessory Ossicles (Sagittal/Axial)
+
+> [!FIND] Os trigonum / Stieda process
+> On **sagittal**, find the bony ossicle or elongated process at the **posterolateral talus**, just lateral to the FHL groove. Marrow/soft-tissue edema around it in a plantarflexion athlete (dancer, soccer) indicates **posterior ankle impingement**.
+>
+> - The **FHL tendon runs immediately medial** to the os trigonum/Stieda process; FHL tenosynovitis frequently accompanies posterior impingement.
+
+> [!FIND] Anterolateral gutter impingement
+> On **axial**, the **anterolateral gutter** sits between the tibia/fibula and talus anterior to the ATFL. Post-sprain **scar/synovial soft-tissue masses (meniscoid lesion)** filling this gutter cause anterolateral impingement; look for low-signal soft tissue replacing the normal fat.
+
+### Plantar Fascia (Sagittal)
+
+> [!FIND] Plantar fascia origin
+> On **sagittal**, find the thin low-signal band arising from the **medial calcaneal tuberosity** and running forward along the sole. Normal **proximal thickness is < ~4 mm**; **focal thickening >4 mm with adjacent edema** at the calcaneal origin indicates plantar fasciitis.
+
 ## Modified Outerbridge Chondromalacia Grading - Copy-Ready
 
 Use this for any articular surface. Replace [surface/compartment] with the specific location: patellar median ridge, medial femoral condyle weightbearing surface, anterosuperior acetabulum, radiocapitellar joint, tibiotalar dome, first MTP joint, etc.

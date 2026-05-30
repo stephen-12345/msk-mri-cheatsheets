@@ -10,6 +10,129 @@ Copy-ready language. Replace bracketed text. Use as a workstation reference, not
 - Sesamoid pain: fracture vs bipartite, AVN, sesamoiditis.
 - Report exact ray/space because surgical planning depends on it.
 
+
+## How to Find It — Landmark-Based Identification
+
+Forefoot and midfoot MRI is read structure-by-structure off a few constant bony landmarks. Master the short-axis-to-the-metatarsals plane first, anchor yourself at the **second tarsometatarsal (TMT) joint**, and the rest of the anatomy hangs predictably off it.
+
+### Planes and Prescription
+
+> [!PEARL] Prescribe short axis to the metatarsals
+> Forefoot studies are usually planned with the **"short axis"** prescribed perpendicular to the long axis of the **metatarsal shafts** (a true short axis to the rays), plus a **long-axis** plane along the shafts and a **coronal/sagittal** of the foot.
+>
+> - The plane radiologists call **axial** in the forefoot is really **short-axis to the metatarsals** — it shows the rays in cross-section and is the workhorse for plantar plates, intermetatarsal spaces, and Lisfranc.
+> - **Fat-suppressed fluid-sensitive** (STIR or FS T2/PD) finds marrow edema and fluid; **T1** shows marrow fat and cortex; small FOV and thin slices are essential in this small anatomy.
+
+> [!LANDMARK] The second TMT recess is your anchor
+> The **base of the second metatarsal** is recessed proximally between the **medial and lateral cuneiforms**, forming a mortise. This keystone is the origin point for the Lisfranc complex and the reference for normal TMT alignment.
+
+### Lisfranc Complex and TMT Alignment
+
+> [!FIND] Lisfranc ligament (interosseous component)
+> On **short-axis/axial**, find the strongest **interosseous Lisfranc ligament** running obliquely from the lateral aspect of the **medial cuneiform (C1)** to the **base of the second metatarsal (M2)**.
+>
+> - There are three bands at this interval — **dorsal**, **interosseous (strongest)**, and **plantar**; the interosseous band is the key stabilizer.
+> - Normal: a thick **low-signal** band; trace it on consecutive short-axis slices from dorsal to plantar.
+
+> [!LANDMARK] Normal TMT alignment landmarks
+> Check these constant alignments on axial/short-axis and correlate with radiographs:
+>
+> - The **medial border of M2** lines up with the **medial border of the middle cuneiform (C2)**.
+> - The **medial border of M4** lines up with the **medial border of the cuboid**.
+> - Widening of the **C1–M2 interval** (diastasis) or a **fleck sign** (avulsion off M2 base) signals a Lisfranc injury.
+
+> [!PITFALL] Plantar band is the prognostic one
+> The **plantar Lisfranc ligament** (C1 to bases of M2 and M3) is the most important for stability/outcome. Don't stop at the dorsal band — a torn or high-signal plantar component predicts instability even when alignment looks near-normal on static images.
+
+> [!PEARL] Read Lisfranc as a complex, not a single ligament
+> Assess **dorsal, interosseous, and plantar** bands plus alignment and marrow edema at the M2 base and cuneiforms together. Bone marrow edema at the **second metatarsal base** is a sensitive red flag for subtle Lisfranc injury.
+
+### Lesser MTP Joints — Plantar Plate and Collaterals
+
+> [!FIND] Plantar plate of the lesser MTP joints (especially the 2nd)
+> The **plantar plate** is the fibrocartilaginous floor of the MTP joint. It is best seen on **sagittal** and **short-axis** fat-suppressed images as a **low-signal band** on the plantar aspect of the joint.
+>
+> - Its firm **distal attachment** is onto the **base of the proximal phalanx**; the proximal attachment to the metatarsal neck is looser.
+> - Tears classically occur at the **distal (phalangeal) insertion** and show fluid/high signal undermining the attachment, often with adjacent MTP synovitis.
+
+> [!LANDMARK] Collateral ligaments of the MTP joint
+> The **collateral ligaments** run from the metatarsal head epicondyle to the proximal phalanx base (collateral proper) and to the plantar plate (accessory collateral). Find them on **short-axis** flanking the joint medially and laterally.
+>
+> - Loss of a collateral plus plantar plate tear underlies the **crossover / drifting second toe** deformity.
+
+> [!PITFALL] Magic-angle on the plantar plate
+> Normal plantar plate and adjacent flexor tendon can show intermediate signal on **short-TE (PD/T1)** sequences from **magic-angle** effect. Confirm a true tear on **fluid-sensitive (T2/STIR)** images — real tears stay bright and show fluid cleft or distal detachment.
+
+### Intermetatarsal Space — Morton Neuroma and Bursa
+
+> [!FIND] Morton neuroma
+> Look in the **intermetatarsal space**, most often the **3rd (third/fourth) web space** and next the **2nd**, sitting **plantar to the deep transverse intermetatarsal ligament**.
+>
+> - On **short-axis**, it is a teardrop/dumbbell-shaped mass that is **low-to-intermediate signal on T2** (fibrosis) and enhances; it sits plantar/between the metatarsal heads.
+> - It is best demonstrated on **short-axis T1/T2**; the plantar bulge below the transverse ligament is the locating cue.
+
+> [!PITFALL] Intermetatarsal bursa vs neuroma
+> The **intermetatarsal bursa** lies **dorsal to the deep transverse metatarsal ligament**, is **fluid-bright (high T2)**, and is often a thin crescent. A **Morton neuroma** is **plantar** to that ligament and **low-T2/fibrous**. Position relative to the **deep transverse ligament** plus signal character separates them.
+>
+> - A small dorsal fluid collection up to a few millimeters can be a normal/asymptomatic bursa — don't overcall it as a neuroma.
+
+> [!MEASURE] Size threshold for symptomatic neuroma
+> Symptomatic Morton neuromas are usually **>5 mm** in transverse (short-axis) diameter. Smaller lesions are common and may be incidental — correlate with focal web-space tenderness.
+
+### Great Toe Sesamoids
+
+> [!FIND] Tibial and fibular sesamoids
+> Find the two sesamoids on **short-axis/axial** plantar to the **first metatarsal head**, embedded in the **flexor hallucis brevis (FHB)** tendons. The **medial = tibial** sesamoid, the **lateral = fibular** sesamoid.
+>
+> - The **flexor hallucis longus (FHL)** tendon runs in the groove **between** the two sesamoids — use it to confirm medial vs lateral.
+
+> [!PITFALL] Bipartite sesamoid vs fracture
+> A **bipartite (or multipartite) sesamoid** has **smooth, corticated, rounded** margins at the cleft and is more common on the **tibial (medial)** side; fragments together are often larger than a single sesamoid.
+>
+> - A **fracture** shows **sharp, non-corticated, matching** edges and, on MRI, **marrow edema** in the fragments (which also occurs in sesamoiditis/osteonecrosis).
+> - Marrow edema is the MRI tiebreaker — present in acute fracture/stress and sesamoiditis, typically absent in a quiescent bipartite variant.
+
+### Metatarsal Stress Injury
+
+> [!FIND] Stress reaction vs stress fracture
+> Scan the metatarsal shafts on **fat-suppressed fluid-sensitive** images. Most metatarsal stress injuries occur in the **2nd and 3rd metatarsal shafts/necks** (march fracture).
+>
+> - **Stress reaction:** **periosteal/marrow edema** only, no fracture line.
+> - **Stress fracture:** edema **plus a low-signal fracture line** on T1/PD, often with periosteal reaction.
+
+> [!PEARL] Watch the base of the 5th metatarsal
+> The **proximal fifth metatarsal** has distinct zones — a tuberosity avulsion vs the **metaphyseal-diaphyseal (Jones) zone** ~1.5–2 cm distal, which is the **watershed** area prone to delayed/non-union. Localize the line precisely before calling it a Jones fracture.
+
+### Plantar Fascia
+
+> [!FIND] Plantar fascia (plantar aponeurosis)
+> On **sagittal** and **coronal**, trace the fascia from its origin on the **medial calcaneal tuberosity** running distally toward the toes. The thick **central cord** is the dominant band, with thinner **medial and lateral bands**.
+>
+> - Normal: a thin **uniformly low-signal** band, thickest near the calcaneal origin.
+
+> [!MEASURE] Plantar fasciitis thickness
+> Measure thickness at/just distal to the **calcaneal origin**. Normal is roughly **≤4 mm**; **plantar fasciitis** shows thickening (often **>4 mm**) with **fusiform high signal** in and around the fascia and **perifascial edema**.
+
+> [!PITFALL] Plantar fibromatosis vs fasciitis vs tear
+> **Plantar fibromatosis (Ledderhose)** is a **nodular** low-T1/low-to-intermediate-T2 mass arising from the fascia, typically more **distal** (mid-arch), and is **not** at the calcaneal origin. A **tear** shows fiber discontinuity and surrounding edema/fluid, usually after a traumatic or steroid history.
+
+### Accessory Ossicles and Variants
+
+> [!FIND] Accessory navicular (types I–III)
+> Look at the **medial navicular** at the **posterior tibial tendon (PTT)** insertion.
+>
+> - **Type I (os tibiale externum):** small round sesamoid **within** the distal PTT, separate from the navicular.
+> - **Type II:** larger triangular ossicle joined to the navicular by a **synchondrosis** (cartilaginous/fibrous bridge) — the symptomatic one; look for **marrow edema across the synchondrosis** on fluid-sensitive images.
+> - **Type III (cornuate navicular):** **fused** prominence (medial horn) of the navicular.
+
+> [!FIND] Os peroneum
+> Find the **os peroneum** within the **peroneus longus tendon** as it curves around the **lateral/plantar cuboid**. It is a normal sesamoid; **edema, displacement, or a gap** in the tendon suggests **painful os peroneum syndrome** or a peroneus longus tear.
+
+> [!PITFALL] Normal marrow heterogeneity — don't overcall edema
+> **Red (hematopoietic) marrow** and normal marrow heterogeneity in the **calcaneus, cuneiforms, and metatarsal bases** can mimic pathology. True significant edema is **bright on fat-suppressed fluid-sensitive** sequences **and** **dark on T1**; physiologic red marrow stays **brighter than muscle/disc on T1** and lacks a discrete lesion or cortical correlate.
+>
+> - Always pair a fluid-sensitive finding with the **T1** appearance and look for an anatomic explanation (stress site, adjacent ligament/tendon injury, arthropathy) before calling marrow edema pathologic.
+
 ## Infection Search Pattern
 
 - **1. Marrow/bone changes:**

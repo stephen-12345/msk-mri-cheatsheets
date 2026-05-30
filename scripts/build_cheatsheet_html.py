@@ -159,6 +159,31 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
   border-radius:10px; padding:4px 20px 16px; margin:0 0 18px;
 }
 
+/* ── Teaching callout boxes ── */
+.callout{
+  border:1px solid var(--bdr); border-left:4px solid var(--c-acc,#6cc6e6);
+  background:var(--c-bg,#101a22); border-radius:9px;
+  padding:12px 18px 13px; margin:14px 0;
+}
+.callout .c-title{
+  display:flex; align-items:baseline; gap:9px;
+  font-weight:800; font-size:14px; letter-spacing:0.6px;
+  text-transform:uppercase; color:var(--c-acc,#6cc6e6); margin:0 0 7px;
+}
+.callout .c-title .ico{font-size:15px; line-height:1}
+.callout .c-title .lbl{opacity:0.78; font-size:11px; font-weight:700}
+.callout .c-title .ttl{color:var(--tx); text-transform:none; letter-spacing:0; font-size:16px}
+.callout p{margin:7px 0; color:var(--tx)}
+.callout ul{margin:7px 0 7px 22px}
+.callout li{margin:5px 0; color:var(--tx)}
+.callout b{color:#fff}
+.callout.find{--c-acc:#5fc6e6; --c-bg:#0d1c25}
+.callout.landmark{--c-acc:#b69cf0; --c-bg:#16132a}
+.callout.pearl{--c-acc:#79d49b; --c-bg:#0e1f17}
+.callout.pitfall{--c-acc:#f3ad63; --c-bg:#231910}
+.callout.measure{--c-acc:#7fb2ea; --c-bg:#101826}
+.callout.note{--c-acc:#9fb4c6; --c-bg:#141a22}
+
 @media (max-width:680px){
   body{font-size:17px; padding:0 16px 48px}
   .topbar{margin:0 -16px 18px; padding:10px 16px}
@@ -223,6 +248,71 @@ SCRIPT = """
 """
 
 
+CALLOUT_TYPES = {
+    "FIND": ("find", "🔍", "How to find it"),
+    "LANDMARK": ("landmark", "📍", "Landmark"),
+    "PEARL": ("pearl", "💡", "Pearl"),
+    "PITFALL": ("pitfall", "⚠️", "Pitfall"),
+    "MEASURE": ("measure", "📏", "Measure"),
+    "NOTE": ("note", "📝", "Note"),
+}
+
+
+def render_callout(block: list[str]) -> str:
+    """Render a blockquote admonition block into a styled callout.
+    block: lines already stripped of the leading '>' marker."""
+    # detect [!TYPE] optional-title on the first non-empty line
+    cls, ico, label, title = "note", "📝", "Note", ""
+    body = list(block)
+    for idx, ln in enumerate(block):
+        if ln.strip():
+            m = re.match(r"^\[!(\w+)\]\s*(.*)$", ln.strip())
+            if m:
+                key = m.group(1).upper()
+                cls, ico, label = CALLOUT_TYPES.get(key, ("note", "📝", key.title()))
+                title = m.group(2).strip()
+                body = block[idx + 1:]
+            break
+
+    # build body: paragraphs + bullet lists
+    out: list[str] = []
+    buf: list[str] = []
+    blist: list[str] = []
+
+    def flush_p():
+        if buf:
+            out.append("<p>" + inline(" ".join(buf).strip()) + "</p>")
+            buf.clear()
+
+    def flush_b():
+        if blist:
+            out.append("<ul>" + "".join(f"<li>{inline(x)}</li>" for x in blist) + "</ul>")
+            blist.clear()
+
+    for ln in body:
+        s = ln.strip()
+        if not s:
+            flush_p()
+            flush_b()
+        elif s.startswith("- "):
+            flush_p()
+            blist.append(s[2:].strip())
+        else:
+            flush_b()
+            buf.append(s)
+    flush_p()
+    flush_b()
+
+    ttl = f'<span class="ttl">{inline(title)}</span>' if title else ""
+    head = (
+        '<div class="c-title">'
+        f'<span class="ico">{ico}</span>'
+        f'<span class="lbl">{html.escape(label)}</span>'
+        f"{ttl}</div>"
+    )
+    return f'<div class="callout {cls}">{head}{"".join(out)}</div>'
+
+
 def inline(text: str) -> str:
     """Escape, then apply **bold** and [placeholder] formatting."""
     text = html.escape(text)
@@ -278,6 +368,19 @@ def md_to_html(md: str) -> tuple[str, str]:
         if not stripped:
             flush_bullets()
             i += 1
+            continue
+
+        # blockquote callout (admonition)
+        if stripped.startswith(">"):
+            flush_bullets()
+            block = []
+            while i < n and lines[i].lstrip().startswith(">"):
+                raw = lines[i].lstrip()[1:]          # drop leading '>'
+                if raw.startswith(" "):
+                    raw = raw[1:]                     # drop one space after '>'
+                block.append(raw)
+                i += 1
+            out.append(render_callout(block))
             continue
 
         # table block

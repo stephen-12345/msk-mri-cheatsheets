@@ -12,6 +12,164 @@ Copy-ready language. Replace bracketed text. Use as a workstation reference, not
 | Flattening ratio | Major axis / minor axis of median nerve; abnormal >3. |
 | Lichtman classification | Kienbock staging: I = marrow edema only; II = sclerosis, no collapse; IIIA = collapse, no scaphoid rotation; IIIB = collapse + fixed scaphoid rotation; IV = radiocarpal/midcarpal arthrosis. |
 
+
+## How to Find It — Landmark-Based Identification
+
+This section teaches you to navigate the wrist MRI by anchoring every structure to a bony or tendinous landmark. Read the **coronal** as your workhorse for the TFCC and intrinsic ligaments, and the **axial** for tendons, compartments, and nerves, cross-referencing constantly between planes.
+
+### Orienting Yourself — Planes and First Moves
+
+> [!PEARL] Pick the right plane before you look for the structure
+> Each wrist structure has a "home plane" where it is best profiled. Train yourself to switch planes reflexively rather than forcing one image to answer everything.
+>
+> - **Coronal**: TFCC, scapholunate and lunotriquetral ligaments, ulnar variance, carpal alignment, AVN of scaphoid/lunate
+> - **Axial**: extensor compartments 1–6, flexor tendons, carpal tunnel, Guyon canal, DRUJ congruence, ECU position
+> - **Sagittal**: carpal arcs/alignment, dorsal vs volar location of a finding, occult fracture lines
+
+> [!LANDMARK] Lister tubercle — your dorsal compass
+> The **Lister tubercle** is the small bony prominence on the dorsal distal radius. On **axial** it is the single most useful dorsal landmark: it separates **extensor compartment 2** (radial to it) from **compartment 3** (ulnar to it), and the **EPL** tendon hooks around its ulnar side. Find Lister first, then count compartments around the radius.
+
+### Coronal — The TFCC
+
+> [!FIND] TFCC articular disc (triangular fibrocartilage proper)
+> On **coronal**, find the low-signal triangular **articular disc** spanning from the **sigmoid notch of the radius** to the **base of the ulnar styloid/fovea**. It is uniformly dark on all sequences and sits between the ulnar head and the proximal lunate/triquetrum.
+>
+> - Best seen on **coronal T2/PD fat-sat** or **T2* GRE**; fluid-bright tears stand out against the dark disc
+> - The central disc is thinnest and avascular; the periphery is vascular and heals
+
+> [!LANDMARK] The ulnar (foveal vs styloid) attachments
+> The disc attaches to the ulna by **two limbs**: a deep **foveal (ligamentum subcruentum)** attachment into the **fovea** at the base of the styloid, and a superficial **styloid** attachment. The fovea sits just radial and proximal to the tip of the styloid.
+>
+> - The **foveal attachment** is the biomechanically critical one for DRUJ stability — look for it specifically on coronal images angled to the fovea
+> - Trace both limbs; an isolated foveal avulsion can be missed if you only follow the styloid limb
+
+> [!PEARL] Traumatic vs degenerative TFCC tears — the concept
+> Think mechanism by **location**. **Traumatic (Palmer class 1)** tears are **peripheral/foveal** — they involve the vascular ulnar attachments and present after a fall or with DRUJ instability. **Degenerative (Palmer class 2)** tears are **central** — wear-through of the avascular disc, associated with **ulnar positive variance** and ulnar impaction.
+>
+> - Peripheral/foveal tear → think instability and possible repair
+> - Central perforation → think chronic load and impaction, often not repaired
+
+> [!FIND] Dorsal and volar radioulnar ligaments
+> These are the thickened **dorsal and volar margins of the TFCC** that run from the sigmoid notch to the ulnar fovea/styloid, best appreciated at the front and back edges of the disc on **axial** and peripheral **coronal** images. Together they are the primary stabilizers of the DRUJ.
+
+> [!FIND] Meniscus homologue and ECU subsheath
+> The **meniscus homologue** is the loose connective/vascular tissue filling the ulnar-most TFCC between the styloid and triquetrum — do not mistake its intermediate signal for a tear. The **ECU subsheath** is the deep sheath anchoring the **ECU** tendon in its groove on the dorsal ulnar head; it is part of the TFCC complex and key to ECU stability.
+
+> [!PITFALL] TFCC normal-signal mimics
+> Several normal features create intermediate signal that mimics a tear.
+>
+> - The **ulnar attachment striations** and the vascular **ligamentum subcruentum** show intermediate signal — not fluid-bright
+> - A true tear is **fluid-bright on T2 fat-sat** and disrupts the dark fibers; intermediate signal that is not fluid-bright is usually normal
+> - The disc thins centrally with age — central thinning alone is not a tear
+
+### Coronal — Intrinsic (Interosseous) Ligaments
+
+> [!FIND] Scapholunate interosseous ligament (SLIL)
+> On **coronal**, find the low-signal **C-shaped/triangular** band bridging the proximal **scaphoid** and **lunate**. Identify the two carpal bones on the proximal row, then look at the bone-to-bone interval at their proximal junction.
+>
+> - The **dorsal band is the thickest and most biomechanically important** component — scrutinize it most carefully
+> - Look on the coronal slice where both proximal poles are well profiled; the membranous central portion is normally thinner
+
+> [!FIND] Lunotriquetral interosseous ligament (LTIL)
+> On **coronal**, the analogous low-signal **triangular/C-shaped** band bridges the **lunate** and **triquetrum**, one bone ulnar to the SLIL. As with the SLIL, the **dorsal band** is the most important stabilizer.
+>
+> - Tears are subtler than SLIL tears; correlate with carpal alignment on sagittal
+
+> [!PEARL] Normal triangle, abnormal gap
+> A normal intrinsic ligament is a compact **dark triangle/C** snugly filling the interosseous interval. Replacement by **fluid-bright signal**, fiber discontinuity, or a **widened interval** (e.g., scapholunate widening — the "Terry Thomas/David Letterman sign" on radiographs) signals a tear.
+>
+> - Always read the intrinsic ligaments together with carpal alignment — DISI (with SL tears) and VISI (with LT tears) confirm functional significance
+
+### Coronal/Axial — Extrinsic Ligaments
+
+> [!FIND] Volar extrinsic ligaments
+> On **coronal** volar slices, orient to the major volar stabilizers running obliquely from the radius to the carpus: the **radioscaphocapitate (RSC)**, the **long radiolunate**, and the **short radiolunate** ligaments, fanning out from the volar radial margin.
+>
+> - The **RSC** runs from the radial styloid across the scaphoid waist — it forms a sling and is a landmark for the scaphoid waist
+> - These appear as low-signal striated bands; thin fat planes between them are normal and should not be called tears
+
+> [!FIND] Dorsal extrinsic ligaments
+> On **dorsal coronal** slices, find the **dorsal radiocarpal (radiotriquetral)** ligament running from the dorsal radius to the triquetrum, and the **dorsal intercarpal** ligament running transversely across the dorsal carpus. Together they form a lateral V centered on the triquetrum.
+
+### Axial — Extensor Compartments (1–6)
+
+> [!LANDMARK] Count the six compartments around the distal radius/ulna
+> On **axial** at the distal radius, walk radial-to-ulnar around the dorsal cortex using bony landmarks. Lister tubercle is your fixed reference between compartments 2 and 3.
+
+> [!FIND] Compartment 1 — APL and EPB (de Quervain)
+> At the **radial styloid**, find the **abductor pollicis longus (APL)** and **extensor pollicis brevis (EPB)** in a shared groove on the radial/dorsal surface. This is the site of **de Quervain tenosynovitis**.
+>
+> - Look for fluid/thickening around these tendons and thickening of the overlying retinaculum
+> - A **septum** dividing APL from EPB is a common variant that predisposes to de Quervain and to treatment failure
+
+> [!FIND] Compartments 2 and 3 — separated by Lister tubercle
+> **Compartment 2** (radial to Lister) carries the **ECRL and ECRB** (radial wrist extensors). **Compartment 3** (ulnar to Lister) carries the **EPL**, which hooks around the ulnar side of the tubercle and then angles toward the thumb.
+>
+> - **EPL changes direction at Lister tubercle and is at risk of attritional rupture after distal radius fracture** — scrutinize it specifically in that setting
+
+> [!FIND] Compartment 6 — ECU in its ulnar groove
+> On **axial**, find the **extensor carpi ulnaris (ECU)** sitting in the **groove on the dorsal aspect of the ulnar head/styloid**. Its position in the groove and its subsheath are key to ulnar-sided stability.
+>
+> - Compartments 4 (EDC/EIP) and 5 (EDM) lie between 3 and 6 over the dorsal radius/DRUJ
+
+> [!PITFALL] ECU subluxation and "magic angle"
+> The ECU and its groove deserve targeted attention.
+>
+> - With forearm **supination**, the ECU can sublux/dislocate out of its groove — check tendon position relative to the groove, ideally correlating with positioning
+> - Curving tendons (e.g., **EPL** around Lister, ECU around the ulna) show **magic-angle** increased signal on short-TE sequences (T1/PD) at ~55° to B0 — confirm on **T2** before calling tendinosis
+
+### Axial — Flexor Tendons, Carpal Tunnel, and Guyon Canal
+
+> [!LANDMARK] Hook of hamate and pisiform — the distal carpal tunnel roof anchors
+> On **axial** at the distal carpal row, the **hook of hamate** (radial) and the **pisiform/triquetral** complex (ulnar) are the bony attachments of the **flexor retinaculum (transverse carpal ligament)**, which forms the roof of the carpal tunnel.
+>
+> - The hook of hamate is a frequent **occult fracture** site — scrutinize its cortex on axial
+> - These two landmarks also bracket **Guyon canal**, which lies superficial and ulnar to the retinaculum
+
+> [!FIND] Median nerve in the carpal tunnel
+> On **axial**, find the **median nerve** as an ovoid structure superficial (volar) to the flexor tendons, just deep to the flexor retinaculum, typically radial within the tunnel near the **FCR**. Trace it from proximal to distal.
+>
+> - In **carpal tunnel syndrome** look for nerve flattening at the level of the hook of hamate, proximal nerve swelling, and retinacular bowing
+> - A **bifid median nerve** and a **persistent median artery** are common variants — don't mistake them for pathology
+
+> [!FIND] Guyon canal — ulnar nerve and artery
+> On **axial**, find **Guyon canal** between the **pisiform** (medial wall) and the **hook of hamate** (lateral wall), superficial to the flexor retinaculum. The **ulnar artery** lies radial to the **ulnar nerve** within the canal.
+>
+> - The ulnar nerve divides here into superficial (sensory) and deep (motor) branches
+> - Hamate hook fractures and ganglia are classic causes of distal ulnar neuropathy here
+
+### Carpal Bones — Vascularity and AVN
+
+> [!FIND] Scaphoid — waist fractures and proximal pole
+> On **coronal** and **sagittal**, trace the scaphoid from distal tubercle to **proximal pole**; most fractures cross the **waist**. The scaphoid receives its blood supply **retrograde from distal to proximal**.
+>
+> - A **proximal pole** or displaced waist fracture risks **AVN** of the proximal fragment because of the retrograde supply
+> - **Viable** marrow shows preserved/edematous (bright on T2) signal; **AVN** shows **low T1 signal** in the proximal pole and lack of enhancement on post-contrast images
+
+> [!FIND] Lunate — Kienböck disease
+> On **coronal**, evaluate the **lunate** marrow for **Kienböck (lunate AVN)**: diffuse **low T1 signal** in the lunate, with variable T2 signal depending on stage, and eventual collapse/fragmentation.
+>
+> - Kienböck is **associated with ulnar-negative variance**, which increases load on the lunate
+> - Early disease may show only marrow edema; correlate with morphology and variance
+
+> [!FIND] Capitate
+> The **capitate** is the central keystone of the distal carpal row, articulating proximally with the lunate at the midcarpal joint. Use it as the rotational center when assessing carpal alignment on sagittal images; isolated capitate AVN is rare but assessed the same way (T1 marrow signal, enhancement).
+
+### DRUJ and Ulnar Variance
+
+> [!FIND] DRUJ congruence
+> On **axial** through the **sigmoid notch**, assess seating of the **ulnar head** in the **sigmoid notch of the radius**. The ulna should sit congruently within the notch.
+>
+> - Dorsal or volar translation of the ulnar head suggests **DRUJ instability**, often associated with **foveal TFCC** or radioulnar ligament injury
+> - Compare with the contralateral side and correlate positioning, since apparent subluxation can be positional
+
+> [!MEASURE] Ulnar variance
+> Measure **ulnar variance** on a **coronal** image (ideally correlated with a PA radiograph in neutral rotation): the **difference in length between the distal articular surface of the ulnar head and the ulnar/medial corner of the distal radial articular surface**, measured along the long axis of the radius.
+>
+> - **Positive variance** = ulna projects distal to the radius → predisposes to **ulnar impaction syndrome**, **central (degenerative) TFCC tears**, and lunotriquetral pathology
+> - **Negative variance** = ulna shorter than the radius → associated with **Kienböck disease** (increased lunate load)
+> - **Neutral** = the two articular surfaces are level; variance is rotation-dependent, so positioning matters
+
 ## Modified Outerbridge Chondromalacia Grading - Copy-Ready
 
 Use this for any articular surface. Replace [surface/compartment] with the specific location: patellar median ridge, medial femoral condyle weightbearing surface, anterosuperior acetabulum, radiocapitellar joint, tibiotalar dome, first MTP joint, etc.
