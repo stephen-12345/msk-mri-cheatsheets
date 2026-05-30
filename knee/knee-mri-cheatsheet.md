@@ -185,6 +185,15 @@ This section teaches you to *locate* each knee structure by its anatomic landmar
 > - **Medial compartment**: medial femoral condyle + medial tibial plateau on **coronal + sagittal**.
 > - **Lateral compartment**: lateral femoral condyle + lateral tibial plateau on **coronal + sagittal**.
 
+> [!PITFALL] Acute vs chronic osteochondral defect — say which
+> Date the lesion from the bone, not just the cartilage. The wording changes management.
+>
+> - **Acute** (osteochondral fracture/injury): **subchondral marrow edema**, a sharp **non-sclerotic** margin, ± a subchondral **fracture line**, and often an effusion with a **lipohemarthrosis** (fat–fluid level = intra-articular fracture). Hunt for a **displaced fragment / loose body**.
+> - **Chronic** (e.g., old OCD/defect): **sclerotic rim**, **subchondral cysts**, and little or no marrow edema.
+
+> [!MEASURE] Is the osteochondral fragment unstable?
+> Call instability when you see any of: **fluid signal fully undermining the fragment**, a **displaced fragment** or a **loose body**, a **focal cartilage breach with fluid entering**, or (chronic) **subchondral cysts >5 mm**. Report size as **AP × transverse × depth (mm)** and state stability explicitly — it drives surgical decision-making.
+
 ### Classic Landmarks and Associations
 
 > [!LANDMARK] Segond fracture
@@ -421,6 +430,10 @@ Use this for any articular surface. Replace [surface/compartment] with the speci
 **Osteochondral lesion**
 **F:** Focal osteochondral defect of the [medial femoral condyle/lateral femoral condyle/trochlea] measuring [X] x [Y] mm with fluid signal undermining the fragment and adjacent marrow edema.
 **I:** Unstable osteochondral lesion of the [location].
+
+**Acute osteochondral defect / fracture — tibial plateau**
+**F:** Acute full-thickness osteochondral defect of the weight-bearing medial tibial plateau ([central/anterior/posterior] aspect) measuring [X] x [Y] mm (AP x transverse) with [Z] mm depth. Overlying cartilage is disrupted with an associated osteochondral fragment that is [in situ/partially detached/displaced], with [fluid signal undermining/no fluid undermining] the fragment base. There is acute subchondral marrow edema and a [nondisplaced subchondral fracture line] beneath the defect. Margins are sharp and non-sclerotic, without a subchondral sclerotic rim or cyst, consistent with an acute injury. [A displaced osteochondral fragment/loose body measuring [X] mm is identified in the (intercondylar notch/posterior recess/suprapatellar pouch).] Joint effusion is present [with a fluid-fluid level/lipohemarthrosis, indicating an intra-articular fracture]. [Associated internal derangement: (ACL tear/meniscal tear/collateral injury).]
+**I:** Acute osteochondral defect of the weight-bearing medial tibial plateau, [X] x [Y] mm, with subchondral marrow edema [and an (in situ/displaced) osteochondral fragment]. [Unstable: fluid undermining the fragment / displaced fragment with intra-articular loose body.] [Lipohemarthrosis consistent with intra-articular fracture.]
 
 **Spontaneous osteonecrosis / subchondral insufficiency fracture (SONK/SIFK)**
 **F:** Focal subchondral low-T1/high-T2 signal abnormality of the [medial femoral condyle weightbearing surface/medial tibial plateau] measuring [X] mm with a low-signal subchondral fracture line and surrounding marrow edema disproportionate to the degree of cartilage loss. [Overlying chondral fissuring/flattening.] [Small joint effusion.]
