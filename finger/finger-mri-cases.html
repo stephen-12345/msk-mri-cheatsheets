@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Finger MRI — 30 Sample Cases</title>
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#0b3a52">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MSK MRI">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<style>
+:root{
+  --bg:#0c0f15; --panel:#141925; --panel2:#1a2030; --bdr:#27303f;
+  --tx:#e6eaf2; --tx2:#aab4c5; --tx3:#7c8699;
+  --h1bg:#0b3a52; --h2bg:#11556f; --h3tx:#6cc6e6;
+  --findings:#f4a86a; --impression:#7fd29a;
+  --ph-bg:rgba(244,168,106,0.16); --ph-tx:#f4c89a; --ph-bd:rgba(244,168,106,0.4);
+  --th-bg:#16384a; --th-tx:#cfe7f2;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);color-scheme:dark;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
+  background:var(--bg); color:var(--tx);
+  font-size:18px; line-height:1.62;
+  max-width:1120px; margin:0 auto; padding:0 32px 64px;
+  -webkit-font-smoothing:antialiased;
+}
+
+.topbar{
+  position:sticky; top:0; z-index:10;
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  margin:0 -32px 22px;
+  padding:11px 32px;
+  padding-top:calc(11px + env(safe-area-inset-top, 0px));
+  padding-left:calc(32px + env(safe-area-inset-left, 0px));
+  padding-right:calc(32px + env(safe-area-inset-right, 0px));
+  background:rgba(12,15,21,0.94); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--bdr);
+}
+.topbar .crumb{font-weight:700;color:#fff;font-size:15px;margin-right:auto}
+.topbar a{
+  display:inline-flex; align-items:center;
+  border:1px solid var(--bdr); border-radius:999px;
+  padding:5px 12px; color:#9fdcf0; text-decoration:none;
+  font-size:13px; font-weight:600; background:#0d1a26;
+}
+.topbar a:hover{border-color:var(--h3tx); color:#fff}
+.topbar a.tmpl{border-color:rgba(244,168,106,0.55);background:rgba(244,168,106,0.12);color:#ffe0c8}
+.topbar a.cases{border-color:rgba(121,212,155,0.55);background:rgba(121,212,155,0.12);color:#bdeccf}
+
+.fontctl{
+  display:inline-flex; align-items:center; gap:4px;
+  margin-left:6px; padding-left:10px; border-left:1px solid var(--bdr);
+}
+.fontctl button{
+  cursor:pointer; border:1px solid var(--bdr); border-radius:6px;
+  background:#0d1a26; color:#9fdcf0; font-weight:700;
+  font-family:inherit; line-height:1; padding:5px 9px;
+}
+.fontctl button:hover{border-color:var(--h3tx); color:#fff}
+.fontctl #fs-dec{font-size:12px}
+.fontctl #fs-rst{font-size:13px; min-width:30px}
+.fontctl #fs-inc{font-size:16px}
+
+h1{
+  margin:6px 0 8px; padding:16px 22px;
+  background:linear-gradient(135deg,var(--h1bg),#0a2c40);
+  color:#fff; border-radius:10px; border-left:5px solid var(--h3tx);
+  font-size:30px; line-height:1.18; letter-spacing:0.2px;
+}
+.subtitle{color:var(--tx2); font-size:16px; margin:0 0 22px; line-height:1.5}
+
+h2.group{
+  margin:40px 0 16px; padding:13px 18px;
+  background:linear-gradient(135deg,#241a3a,#1a2030);
+  color:#fff; border-radius:9px; border-left:5px solid #a78bfa;
+  font-size:24px; line-height:1.2; letter-spacing:0.6px;
+  text-transform:uppercase; scroll-margin-top:calc(64px + env(safe-area-inset-top, 0px));
+}
+h2{
+  margin:34px 0 14px; padding:11px 16px;
+  background:var(--h2bg); color:#fff; border-radius:8px;
+  font-size:21px; line-height:1.25; letter-spacing:0.2px;
+  scroll-margin-top:calc(64px + env(safe-area-inset-top, 0px));
+}
+h3{
+  margin:22px 0 9px; color:var(--h3tx);
+  font-size:18.5px; line-height:1.3; font-weight:700;
+  border-bottom:1px solid #2c3a48; padding-bottom:5px;
+  scroll-margin-top:calc(64px + env(safe-area-inset-top, 0px));
+}
+
+p{margin:9px 0}
+.dx{
+  margin:18px 0 4px; font-weight:800; color:#fff;
+  font-size:18.5px; line-height:1.3;
+}
+.f, .i{margin:5px 0; padding-left:14px; border-left:2px solid #25303e}
+.f b{color:var(--findings)}
+.i b{color:var(--impression)}
+
+ul{margin:10px 0 14px 26px}
+li{margin:6px 0}
+
+table{
+  width:100%; border-collapse:collapse; margin:14px 0 18px;
+  font-size:16px; line-height:1.45; background:var(--panel);
+  border-radius:8px; overflow:hidden;
+}
+th{
+  background:var(--th-bg); color:var(--th-tx);
+  text-align:left; font-weight:700; padding:9px 12px;
+  border-bottom:1px solid #2c3a48;
+}
+td{padding:8px 12px; border-bottom:1px solid #232c39; color:var(--tx2); vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
+
+.to-top{
+  position:fixed; z-index:20;
+  right:calc(22px + env(safe-area-inset-right, 0px));
+  bottom:calc(22px + env(safe-area-inset-bottom, 0px));
+  width:46px; height:46px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid var(--bdr); background:rgba(17,85,111,0.92);
+  color:#fff; font-size:22px; line-height:1; cursor:pointer;
+  box-shadow:0 6px 20px rgba(0,0,0,0.45); backdrop-filter:blur(6px);
+  opacity:0; visibility:hidden; transform:translateY(8px);
+  transition:opacity .18s, transform .18s, visibility .18s;
+}
+.to-top.show{opacity:1; visibility:visible; transform:translateY(0)}
+.to-top:hover{background:#16638a; border-color:var(--h3tx)}
+@media print{ .to-top{display:none} }
+
+.ph{
+  background:var(--ph-bg); color:var(--ph-tx);
+  border:1px solid var(--ph-bd); border-radius:4px;
+  padding:0 4px; font-size:0.92em; white-space:nowrap;
+}
+
+.section-card{
+  background:var(--panel); border:1px solid var(--bdr);
+  border-radius:10px; padding:4px 20px 16px; margin:0 0 18px;
+}
+
+/* ── Teaching callout boxes ── */
+.callout{
+  border:1px solid var(--bdr); border-left:4px solid var(--c-acc,#6cc6e6);
+  background:var(--c-bg,#101a22); border-radius:9px;
+  padding:12px 18px 13px; margin:14px 0;
+}
+.callout .c-title{
+  display:flex; align-items:baseline; gap:9px;
+  font-weight:800; font-size:14px; letter-spacing:0.6px;
+  text-transform:uppercase; color:var(--c-acc,#6cc6e6); margin:0 0 7px;
+}
+.callout .c-title .ico{font-size:15px; line-height:1}
+.callout .c-title .lbl{opacity:0.78; font-size:11px; font-weight:700}
+.callout .c-title .ttl{color:var(--tx); text-transform:none; letter-spacing:0; font-size:16px}
+.callout p{margin:7px 0; color:var(--tx)}
+.callout ul{margin:7px 0 7px 22px}
+.callout li{margin:5px 0; color:var(--tx)}
+.callout b{color:#fff}
+.callout.find{--c-acc:#5fc6e6; --c-bg:#0d1c25}
+.callout.landmark{--c-acc:#b69cf0; --c-bg:#16132a}
+.callout.pearl{--c-acc:#79d49b; --c-bg:#0e1f17}
+.callout.pitfall{--c-acc:#f3ad63; --c-bg:#231910}
+.callout.measure{--c-acc:#7fb2ea; --c-bg:#101826}
+.callout.note{--c-acc:#9fb4c6; --c-bg:#141a22}
+
+/* ── Anatomy diagrams (inline SVG) ── */
+.diagram{
+  margin:18px 0; padding:14px 16px 10px;
+  background:#0b131d; border:1px solid var(--bdr); border-radius:10px;
+}
+.diagram svg{ display:block; width:100%; height:auto; max-width:560px; margin:0 auto; }
+.diagram figcaption{
+  margin:10px auto 2px; max-width:620px; text-align:center;
+  font-size:13.5px; color:var(--tx2); line-height:1.5;
+}
+@media print{ .diagram{ break-inside:avoid; } }
+
+/* ── Table-of-contents drawer (overlay; never resizes the page) ── */
+.toc-toggle{
+  display:inline-flex; align-items:center; gap:5px;
+  border:1px solid var(--bdr); border-radius:7px; background:#0d1a26;
+  color:#9fdcf0; font-weight:700; font-size:13px; padding:5px 11px;
+  cursor:pointer; font-family:inherit; margin-right:4px;
+}
+.toc-toggle:hover{ border-color:var(--h3tx); color:#fff; }
+.toc-backdrop{
+  position:fixed; inset:0; z-index:55; background:rgba(0,0,0,0.5);
+  opacity:0; visibility:hidden; transition:opacity .2s;
+}
+.toc-backdrop.show{ opacity:1; visibility:visible; }
+.toc-drawer{
+  position:fixed; top:0; left:0; height:100vh; width:316px; max-width:86vw; z-index:60;
+  background:#0b121d; border-right:1px solid var(--bdr);
+  box-shadow:3px 0 28px rgba(0,0,0,0.55);
+  transform:translateX(-104%); transition:transform .22s ease;
+  display:flex; flex-direction:column;
+}
+.toc-drawer.open{ transform:translateX(0); }
+.toc-head{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:13px 16px;
+  padding-top:calc(13px + env(safe-area-inset-top, 0px));
+  border-bottom:1px solid var(--bdr); flex:0 0 auto;
+}
+.toc-head .t{ font-weight:800; color:#fff; font-size:15px; letter-spacing:.5px; }
+.toc-close{ background:none; border:none; color:var(--tx2); font-size:24px; line-height:1; cursor:pointer; padding:0 4px; }
+.toc-close:hover{ color:#fff; }
+.toc-list{ overflow-y:auto; padding:8px 8px 28px; flex:1; }
+.toc-node.leaf{ }
+.toc-row{ display:flex; align-items:flex-start; }
+.toc-tog{
+  flex:0 0 auto; width:20px; height:26px; margin-top:1px;
+  background:none; border:none; cursor:pointer; padding:0;
+  color:var(--tx3); font-size:11px;
+}
+.toc-tog::before{ content:"▸"; display:inline-block; transition:transform .15s; }
+.toc-node.open > .toc-row > .toc-tog::before{ transform:rotate(90deg); }
+.toc-node.leaf .toc-row{ padding-left:20px; }
+.toc-children{ display:none; }
+.toc-node.open > .toc-children{ display:block; }
+.toc-link{
+  flex:1; display:block; text-decoration:none; color:var(--tx2);
+  padding:5px 9px; border-radius:6px; font-size:13.5px; line-height:1.35;
+  border-left:2px solid transparent;
+}
+.toc-link:hover{ background:#13212f; color:#fff; }
+.toc-link.active{ border-left-color:var(--h3tx); background:#13212f; color:#fff; }
+.toc-link.lvl-group{ color:#c9b6f5; font-weight:800; text-transform:uppercase; font-size:12px; letter-spacing:.5px; }
+.toc-link.lvl-h2{ color:#e6eaf2; font-weight:600; }
+.toc-link.lvl-h3{ color:var(--tx2); font-size:12.5px; }
+.toc-children .toc-children .toc-link{ padding-left:18px; }
+@media print{ .toc-toggle, .toc-drawer, .toc-backdrop{ display:none !important; } }
+
+/* Left-edge floating handle — thumb-reach access to the TOC from anywhere */
+.toc-handle{
+  position:fixed; left:0; top:64%; transform:translateY(-50%);
+  z-index:54; display:flex; align-items:center; justify-content:center;
+  width:27px; height:74px; padding:0;
+  background:rgba(17,85,111,0.9); color:#d6f0fb;
+  border:1px solid var(--bdr); border-left:none; border-radius:0 13px 13px 0;
+  box-shadow:3px 0 16px rgba(0,0,0,0.5);
+  -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+  font-size:16px; line-height:1; cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  transition:opacity .18s, background .15s, visibility .18s;
+}
+.toc-handle:hover{ background:#16638a; color:#fff; }
+.toc-handle:active{ background:#1d7aa8; }
+.toc-handle .chev{ font-size:11px; opacity:.75; }
+body.toc-open .toc-handle{ opacity:0; visibility:hidden; }
+@media print{ .toc-handle{ display:none; } }
+@media (min-width:901px) and (hover:hover){ .toc-handle{ display:none; } }
+
+@media (max-width:680px){
+  body{font-size:17px; padding:0 16px 48px}
+  .topbar{
+    margin:0 -16px 18px;
+    padding:8px 14px;
+    padding-top:calc(8px + env(safe-area-inset-top, 0px));
+    padding-left:calc(14px + env(safe-area-inset-left, 0px));
+    padding-right:calc(14px + env(safe-area-inset-right, 0px));
+    gap:7px;
+  }
+  .topbar .crumb{ display:none; }            /* title already shown in the h1 banner */
+  .topbar a{ font-size:12px; padding:5px 9px; min-height:36px; }
+  .toc-toggle{ font-size:12.5px; padding:6px 11px; min-height:36px; }
+  .fontctl{ margin-left:2px; padding-left:8px; }
+  .fontctl button{ padding:6px 9px; }
+  h1{font-size:24px;padding:13px 16px}
+  h2{font-size:19px}
+  h1,h2,h2.group,h3{ scroll-margin-top:calc(96px + env(safe-area-inset-top, 0px)); }
+}
+
+/* Dark-mode PDF (Chrome --print-to-pdf). Backgrounds preserved via
+   print-color-adjust:exact on html above. */
+@page{ size:Letter; margin:0.5in; }
+@media print{
+  body{ background:var(--bg); max-width:none; margin:0; padding:0; font-size:13px; line-height:1.5; }
+  .topbar{ display:none; }
+  h1{ font-size:21px; padding:11px 14px; }
+  h2,h2.group{ font-size:15px; break-after:avoid; }
+  h3,.dx{ break-after:avoid; }
+  .f,.i{ break-inside:avoid; }
+  table,tr{ break-inside:avoid; }
+  table{ font-size:11.5px; }
+}
+</style>
+</head>
+<body>
+<div class="topbar"><button id="toc-toggle" class="toc-toggle" title="Contents (c)" aria-label="Table of contents">☰ Contents</button><span class="crumb">Finger MRI</span><a href="../index.html">← All regions</a><a href="finger-mri-cheatsheet.html">Cheat sheet</a><a href="finger-mri-cases-dark.pdf">PDF (dark)</a><a href="finger-mri-cases.md">Markdown</a><span class="fontctl" title="Font size — shortcuts: -, +, 0 to reset"><button id="fs-dec" aria-label="Decrease font size">A−</button><button id="fs-rst" aria-label="Reset font size">A</button><button id="fs-inc" aria-label="Increase font size">A+</button></span></div>
+<div id="toc-backdrop" class="toc-backdrop"></div><nav id="toc-drawer" class="toc-drawer" aria-label="Table of contents"><div class="toc-head"><span class="t">Contents</span><button id="toc-close" class="toc-close" aria-label="Close contents">&times;</button></div><div class="toc-list"><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-h2" href="#pulleys-flexor-tendons">Pulleys &amp; Flexor Tendons</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-1-a2-pulley-tear-with-bowstringing-climber">Case 1 — A2 pulley tear with bowstringing (climber)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-2-a4-pulley-tear">Case 2 — A4 pulley tear</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-3-multi-pulley-injury-a2-a3-a4">Case 3 — Multi-pulley injury (A2 + A3 + A4)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-4-fdp-avulsion-jersey-finger-leddy-type-ii">Case 4 — FDP avulsion (jersey finger), Leddy type II</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-5-flexor-tendon-laceration-zone-ii">Case 5 — Flexor tendon laceration (Zone II)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-6-stenosing-flexor-tenosynovitis-trigger-thumb">Case 6 — Stenosing flexor tenosynovitis (trigger thumb)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-7-infectious-flexor-tenosynovitis">Case 7 — Infectious flexor tenosynovitis</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-h2" href="#extensor-mechanism">Extensor Mechanism</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-8-mallet-finger-terminal-tendon-bony-avulsion">Case 8 — Mallet finger (terminal tendon, bony avulsion)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-9-central-slip-rupture-boutonni-re">Case 9 — Central slip rupture / boutonnière</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-10-sagittal-band-rupture-boxer-s-knuckle">Case 10 — Sagittal band rupture (boxer&#x27;s knuckle)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-11-extensor-tendon-laceration-dorsal-zone-vi">Case 11 — Extensor tendon laceration (dorsal, Zone VI)</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-h2" href="#ligaments-volar-plate">Ligaments &amp; Volar Plate</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-12-thumb-ucl-tear-with-stener-lesion-skier-s-thumb">Case 12 — Thumb UCL tear with Stener lesion (skier&#x27;s thumb)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-13-thumb-ucl-tear-without-stener-lesion">Case 13 — Thumb UCL tear without Stener lesion</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-14-thumb-radial-collateral-ligament-rcl-injury">Case 14 — Thumb radial collateral ligament (RCL) injury</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-15-pip-volar-plate-injury-dorsal-dislocation">Case 15 — PIP volar plate injury (dorsal dislocation)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-16-collateral-ligament-tear-of-a-finger-pip">Case 16 — Collateral ligament tear of a finger PIP</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-17-chronic-gamekeeper-s-thumb">Case 17 — Chronic gamekeeper&#x27;s thumb</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-h2" href="#bone-joint-other">Bone, Joint &amp; Other</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-18-condylar-fracture-of-the-proximal-phalanx">Case 18 — Condylar fracture of the proximal phalanx</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-19-pip-dip-osteoarthritis">Case 19 — PIP/DIP osteoarthritis</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-20-rheumatoid-arthritis-erosions-pannus">Case 20 — Rheumatoid arthritis (erosions/pannus)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-21-gout-with-tophi">Case 21 — Gout with tophi</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-22-glomus-tumor-subungual">Case 22 — Glomus tumor (subungual)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-23-digital-mucoid-ganglion-cyst-at-dip">Case 23 — Digital mucoid (ganglion) cyst at DIP</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-24-giant-cell-tumor-of-the-tendon-sheath">Case 24 — Giant cell tumor of the tendon sheath</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-25-osteomyelitis-of-the-distal-phalanx">Case 25 — Osteomyelitis of the distal phalanx</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-26-dupuytren-contracture">Case 26 — Dupuytren contracture</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-27-fdp-avulsion-leddy-type-i-retraction-to-palm">Case 27 — FDP avulsion, Leddy type I (retraction to palm)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-28-pulp-space-felon-with-early-osseous-involvement">Case 28 — Pulp-space felon with early osseous involvement</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-29-chronic-boutonni-re-with-lateral-band-subluxation">Case 29 — Chronic boutonnière with lateral band subluxation</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-30-chronic-volar-plate-injury-with-pip-osteoarthritis">Case 30 — Chronic volar plate injury with PIP osteoarthritis</a></div></div></div></div></div></nav>
+<h1>Finger MRI — 30 Sample Cases</h1>
+<p class="subtitle">A teaching collection of the most common finger, hand, and thumb MRI diagnoses with realistic worked dictations.</p>
+<h2 id="pulleys-flexor-tendons">Pulleys &amp; Flexor Tendons</h2>
+<h3 id="case-1-a2-pulley-tear-with-bowstringing-climber">Case 1 — A2 pulley tear with bowstringing (climber)</h3>
+<p><b>Clinical:</b> 28-year-old male competitive rock climber, acute &quot;pop&quot; at the base of the ring finger during a crimp move, with pain and visible bowstringing.</p>
+<p class="f"><b>F:</b> Axial and sagittal T2 fat-saturated images of the <b>left ring finger</b> show complete disruption of the <b>A2 pulley</b> at the proximal phalanx with edema and fluid tracking along the flexor sheath. On the flexed sagittal sequence, the <b>tendon–bone (TB) distance</b> at the proximal phalanx measures <b>5 mm</b> (normal &lt;2 mm), confirming <b>bowstringing</b> of the flexor tendons. The <b>A3 and A4 pulleys</b> remain intact and the FDP/FDS tendons are continuous without retraction. No phalangeal fracture.</p>
+<p class="i"><b>I:</b> Complete A2 pulley rupture with bowstringing in a climber. TB distance 5 mm supports a high-grade (Schöffl grade III–IV) injury.</p>
+<h3 id="case-2-a4-pulley-tear">Case 2 — A4 pulley tear</h3>
+<p><b>Clinical:</b> 31-year-old male climber, localized middle-phalanx pain after a dynamic move; less dramatic than A2 injuries clinically.</p>
+<p class="f"><b>F:</b> High-resolution axial T2 FS of the <b>long finger</b> demonstrates discontinuity of the <b>A4 pulley</b> over the middle phalanx with sheath fluid and mild adjacent soft-tissue edema. Flexed sagittal images show a <b>TB distance of 3 mm</b> at the middle phalanx indicating mild bowstringing. <b>A2 pulley intact.</b> Flexor tendons intact without tear or retraction.</p>
+<p class="i"><b>I:</b> Isolated A4 pulley tear with mild bowstringing. Frequently combined with A2/A3 injury in multi-pulley patterns; isolated here.</p>
+<h3 id="case-3-multi-pulley-injury-a2-a3-a4">Case 3 — Multi-pulley injury (A2 + A3 + A4)</h3>
+<p><b>Clinical:</b> 35-year-old elite boulderer, loud pop while crimping, immediate swelling and inability to fully flex the finger.</p>
+<p class="f"><b>F:</b> Axial and flexed sagittal T2 FS of the <b>ring finger</b> show combined rupture of the <b>A2, A3, and A4 pulleys</b> with extensive flexor sheath fluid and subcutaneous edema. The flexor tendon complex is markedly displaced volarly with a <b>TB distance of 7 mm</b>. FDP and FDS tendons are intact but bowstrung. No avulsion fracture at the proximal phalanx base.</p>
+<p class="i"><b>I:</b> Multi-pulley rupture (A2/A3/A4) with marked bowstringing — Schöffl grade IV. Surgical reconstruction commonly indicated.</p>
+<h3 id="case-4-fdp-avulsion-jersey-finger-leddy-type-ii">Case 4 — FDP avulsion (jersey finger), Leddy type II</h3>
+<p><b>Clinical:</b> 22-year-old male rugby player, forced hyperextension of the flexed ring finger grabbing an opponent&#x27;s jersey; cannot actively flex the DIP.</p>
+<p class="f"><b>F:</b> Sagittal PD and T2 FS of the <b>ring finger</b> show avulsion of the <b>flexor digitorum profundus (FDP)</b> from its insertion on the distal phalanx base. The retracted tendon stump lies at the level of the <b>PIP joint (Leddy–Packer type II)</b>, tethered at the vinculum, with intervening hematoma along the sheath. A small <b>2 mm bony avulsion fragment</b> is noted. FDS intact.</p>
+<p class="i"><b>I:</b> Jersey finger — FDP avulsion, Leddy type II with tendon retraction to the PIP joint. Retraction level guides surgical timing.</p>
+<h3 id="case-5-flexor-tendon-laceration-zone-ii">Case 5 — Flexor tendon laceration (Zone II)</h3>
+<p><b>Clinical:</b> 44-year-old male chef, kitchen knife laceration to the volar long finger; unable to flex DIP and PIP.</p>
+<p class="f"><b>F:</b> Axial and sagittal T2 FS through the <b>volar long finger</b> demonstrate full-thickness laceration of both <b>FDP and FDS tendons within Zone II</b> at the level of the proximal phalanx, with an <b>8 mm gap</b> between retracted tendon ends and surrounding hematoma. The overlying skin defect and sheath disruption are seen. Neurovascular bundles not clearly involved.</p>
+<p class="i"><b>I:</b> Complete Zone II FDP and FDS laceration with 8 mm retraction. &quot;No man&#x27;s land&quot; zone — primary repair with attention to both slips.</p>
+<h3 id="case-6-stenosing-flexor-tenosynovitis-trigger-thumb">Case 6 — Stenosing flexor tenosynovitis (trigger thumb)</h3>
+<p><b>Clinical:</b> 53-year-old diabetic woman, painful catching and locking of the thumb in flexion, palpable nodule at the MCP.</p>
+<p class="f"><b>F:</b> Axial and sagittal PD FS of the <b>thumb</b> show thickening of the <b>A1 pulley</b> with a hypointense nodular thickening of the <b>flexor pollicis longus</b> tendon at the MCP level and a thin rim of sheath fluid. No tendon tear. Mild adjacent soft-tissue edema.</p>
+<p class="i"><b>I:</b> Stenosing tenosynovitis (trigger thumb) with A1 pulley and FPL thickening. Often managed with injection or A1 release.</p>
+<h3 id="case-7-infectious-flexor-tenosynovitis">Case 7 — Infectious flexor tenosynovitis</h3>
+<p><b>Clinical:</b> 39-year-old man, penetrating thorn injury to the volar index 4 days prior, now with fusiform swelling, fixed flexion, and pain on passive extension (Kanavel signs).</p>
+<p class="f"><b>F:</b> Axial and sagittal T2 FS of the <b>index finger</b> show marked complex fluid distending the <b>flexor tendon sheath</b> with synovial thickening and avid post-contrast peripheral enhancement. Surrounding subcutaneous edema and reactive enhancement extend to the palm. The FDP/FDS tendons are intact but surrounded by debris-laden fluid. No drainable abscess or osteomyelitis.</p>
+<p class="i"><b>I:</b> Pyogenic (infectious) flexor tenosynovitis. Surgical emergency — drainage and IV antibiotics indicated.</p>
+<h2 id="extensor-mechanism">Extensor Mechanism</h2>
+<h3 id="case-8-mallet-finger-terminal-tendon-bony-avulsion">Case 8 — Mallet finger (terminal tendon, bony avulsion)</h3>
+<p><b>Clinical:</b> 26-year-old volleyball player, ball struck the fingertip forcing flexion; cannot actively extend the DIP, fingertip droops.</p>
+<p class="f"><b>F:</b> Sagittal T2 FS and PD of the <b>long finger</b> show avulsion of the <b>terminal extensor tendon</b> from the dorsal base of the distal phalanx with a <b>3 mm displaced bony fragment</b> involving roughly <b>30% of the articular surface</b>. Mild DIP joint effusion and dorsal soft-tissue edema. No volar subluxation of the distal phalanx.</p>
+<p class="i"><b>I:</b> Bony mallet finger with 3 mm avulsion fragment. Fragment size/articular involvement guides splinting versus fixation.</p>
+<h3 id="case-9-central-slip-rupture-boutonni-re">Case 9 — Central slip rupture / boutonnière</h3>
+<p><b>Clinical:</b> 34-year-old basketball player, jammed middle finger weeks ago, now with evolving fixed PIP flexion and DIP hyperextension.</p>
+<p class="f"><b>F:</b> Sagittal and axial T2 FS of the <b>middle finger</b> show discontinuity of the <b>central slip</b> at its insertion on the dorsal base of the middle phalanx with surrounding edema and PIP effusion. Early <b>volar migration of the lateral bands</b> is suggested. The terminal tendon is intact.</p>
+<p class="i"><b>I:</b> Central slip rupture producing a boutonnière deformity. Lateral band subluxation is the key associated finding.</p>
+<h3 id="case-10-sagittal-band-rupture-boxer-s-knuckle">Case 10 — Sagittal band rupture (boxer&#x27;s knuckle)</h3>
+<p><b>Clinical:</b> 29-year-old male amateur boxer, pain and &quot;snapping&quot; over the long-finger MCP after a punch; extensor tendon subluxes with flexion.</p>
+<p class="f"><b>F:</b> Axial T2 FS at the <b>long finger MCP</b> shows disruption of the <b>radial sagittal band</b> with <b>ulnar subluxation of the extensor digitorum tendon</b> into the intermetacarpal groove on flexion. Dorsal capsular edema and a small MCP effusion. Extensor tendon itself intact.</p>
+<p class="i"><b>I:</b> Radial sagittal band tear with ulnar extensor subluxation — &quot;boxer&#x27;s knuckle.&quot; Radial band tears typically cause ulnar tendon dislocation.</p>
+<h3 id="case-11-extensor-tendon-laceration-dorsal-zone-vi">Case 11 — Extensor tendon laceration (dorsal, Zone VI)</h3>
+<p><b>Clinical:</b> 41-year-old man, dorsal hand laceration from broken glass; loss of MCP extension of the index.</p>
+<p class="f"><b>F:</b> Axial and sagittal T2 FS over the <b>dorsal index</b> at the metacarpal level (<b>Zone VI</b>) show full-thickness laceration of the <b>extensor digitorum tendon</b> with a <b>6 mm gap</b> between tendon ends and adjacent hematoma. The juncturae tendinum partially maintains alignment. No fracture.</p>
+<p class="i"><b>I:</b> Zone VI extensor tendon laceration with 6 mm gap. Junctura may mask the deficit clinically.</p>
+<h2 id="ligaments-volar-plate">Ligaments &amp; Volar Plate</h2>
+<h3 id="case-12-thumb-ucl-tear-with-stener-lesion-skier-s-thumb">Case 12 — Thumb UCL tear with Stener lesion (skier&#x27;s thumb)</h3>
+<p><b>Clinical:</b> 38-year-old skier, fell on an abducted thumb with a planted pole; pain and instability at the thumb MCP with valgus stress.</p>
+<p class="f"><b>F:</b> Coronal T2 FS of the <b>thumb MCP</b> shows a full-thickness tear of the <b>ulnar collateral ligament</b> at its distal (phalangeal) attachment, with the retracted, balled-up ligament displaced <b>proximal and superficial to the adductor aponeurosis</b> — a <b>Stener lesion</b> (&quot;yo-yo on a string&quot;). Adjacent edema and a small MCP effusion. No fracture.</p>
+<p class="i"><b>I:</b> Complete thumb UCL tear with Stener lesion. Surgical repair required — the interposed aponeurosis prevents healing.</p>
+<h3 id="case-13-thumb-ucl-tear-without-stener-lesion">Case 13 — Thumb UCL tear without Stener lesion</h3>
+<p><b>Clinical:</b> 45-year-old woman, fall onto outstretched abducted thumb; MCP pain, mild laxity.</p>
+<p class="f"><b>F:</b> Coronal and axial T2 FS of the <b>thumb MCP</b> show a full-thickness tear of the <b>UCL</b> at the distal attachment, but the torn ligament remains <b>deep to and beneath the adductor aponeurosis</b> in near-anatomic position (no Stener). Surrounding edema and small effusion. Volar plate and RCL intact.</p>
+<p class="i"><b>I:</b> Complete thumb UCL tear without Stener lesion. Non-displaced fibers favor conservative or surgical management depending on stability.</p>
+<h3 id="case-14-thumb-radial-collateral-ligament-rcl-injury">Case 14 — Thumb radial collateral ligament (RCL) injury</h3>
+<p><b>Clinical:</b> 33-year-old man, forced adduction injury of the thumb; tenderness over the radial MCP.</p>
+<p class="f"><b>F:</b> Coronal T2 FS of the <b>thumb MCP</b> shows a partial-thickness tear of the <b>radial collateral ligament</b> with thickening, intrasubstance high signal, and surrounding edema; fibers remain in continuity. Small MCP effusion. UCL and volar plate intact.</p>
+<p class="i"><b>I:</b> Partial RCL tear of the thumb MCP. Less common than UCL injury; usually managed conservatively.</p>
+<h3 id="case-15-pip-volar-plate-injury-dorsal-dislocation">Case 15 — PIP volar plate injury (dorsal dislocation)</h3>
+<p><b>Clinical:</b> 24-year-old man, hyperextension &quot;jam&quot; of the index PIP during a fall; swelling and dorsal tenderness.</p>
+<p class="f"><b>F:</b> Sagittal T2 FS of the <b>index PIP</b> shows disruption of the <b>volar plate</b> at its distal attachment on the middle phalanx base with a small <b>2 mm avulsion fragment</b> and surrounding edema. PIP effusion present. Collateral ligaments intact; no persistent dislocation.</p>
+<p class="i"><b>I:</b> Volar plate injury with small avulsion at the middle phalanx base, consistent with a reduced dorsal PIP dislocation.</p>
+<h3 id="case-16-collateral-ligament-tear-of-a-finger-pip">Case 16 — Collateral ligament tear of a finger PIP</h3>
+<p><b>Clinical:</b> 30-year-old woman, lateral &quot;jamming&quot; force to the small finger PIP; localized radial-sided pain and instability.</p>
+<p class="f"><b>F:</b> Coronal T2 FS of the <b>small finger PIP</b> shows a full-thickness tear of the <b>radial collateral ligament</b> at its proximal-phalanx origin with retraction and fluid in the gap. Adjacent edema and effusion. Volar plate intact.</p>
+<p class="i"><b>I:</b> Complete radial collateral ligament tear of the small finger PIP. Stress instability correlates clinically.</p>
+<h3 id="case-17-chronic-gamekeeper-s-thumb">Case 17 — Chronic gamekeeper&#x27;s thumb</h3>
+<p><b>Clinical:</b> 58-year-old farmer, chronic ulnar-sided thumb pain and weak pinch over many months.</p>
+<p class="f"><b>F:</b> Coronal T2 FS and PD of the <b>thumb MCP</b> show a thickened, irregular, attenuated <b>UCL</b> with chronic intrasubstance signal, no acute edema, and a small <b>ossific fragment</b> at the phalangeal attachment. Mild MCP joint-space narrowing and early osteophytes from chronic instability.</p>
+<p class="i"><b>I:</b> Chronic gamekeeper&#x27;s thumb — attenuated UCL with secondary degenerative change. Distinct from acute skier&#x27;s thumb.</p>
+<h2 id="bone-joint-other">Bone, Joint &amp; Other</h2>
+<h3 id="case-18-condylar-fracture-of-the-proximal-phalanx">Case 18 — Condylar fracture of the proximal phalanx</h3>
+<p><b>Clinical:</b> 19-year-old man, axial/lateral load to the long finger in a fall; localized PIP swelling and tenderness.</p>
+<p class="f"><b>F:</b> Coronal and sagittal PD/T2 FS of the <b>long finger</b> show a <b>unicondylar fracture</b> of the proximal phalangeal head with a <b>2 mm articular step-off</b> at the PIP and surrounding marrow edema. Small PIP effusion. Collateral ligaments and volar plate intact.</p>
+<p class="i"><b>I:</b> Unicondylar proximal phalanx fracture with 2 mm articular step-off. Intra-articular involvement warrants orthopedic evaluation for fixation.</p>
+<h3 id="case-19-pip-dip-osteoarthritis">Case 19 — PIP/DIP osteoarthritis</h3>
+<p><b>Clinical:</b> 64-year-old woman, chronic finger stiffness and bony enlargement (Heberden and Bouchard nodes).</p>
+<p class="f"><b>F:</b> PD and T2 FS of the <b>index and long fingers</b> show <b>DIP and PIP joint-space narrowing</b>, marginal <b>osteophytes</b>, subchondral cysts, and subchondral marrow edema-like signal. Small effusions without erosive synovitis or pannus. No marginal erosions.</p>
+<p class="i"><b>I:</b> Primary osteoarthritis of the DIP (Heberden) and PIP (Bouchard) joints. Absence of erosive pannus distinguishes from inflammatory arthritis.</p>
+<h3 id="case-20-rheumatoid-arthritis-erosions-pannus">Case 20 — Rheumatoid arthritis (erosions/pannus)</h3>
+<p><b>Clinical:</b> 47-year-old woman, symmetric MCP/PIP pain, morning stiffness, positive RF/anti-CCP.</p>
+<p class="f"><b>F:</b> Coronal post-contrast T1 FS of the hand show <b>enhancing synovial pannus</b> distending the <b>2nd and 3rd MCP joints</b> with marginal <b>erosions</b> (largest ~<b>4 mm</b> at the 2nd metacarpal head), subchondral marrow edema (osteitis), and tenosynovial enhancement of the extensor compartments. No DIP involvement.</p>
+<p class="i"><b>I:</b> Inflammatory arthritis with enhancing pannus, marginal erosions, and osteitis — consistent with rheumatoid arthritis. MCP/PIP predominance with DIP sparing is typical.</p>
+<h3 id="case-21-gout-with-tophi">Case 21 — Gout with tophi</h3>
+<p><b>Clinical:</b> 56-year-old man, recurrent painful swelling of the fingers, hyperuricemia.</p>
+<p class="f"><b>F:</b> PD and T2 FS of the <b>index DIP</b> show a juxta-articular soft-tissue mass of <b>intermediate-to-low T2 signal</b> (<b>tophus</b>) with adjacent <b>&quot;punched-out&quot; erosions</b> with sclerotic, overhanging margins and preserved joint space until late. Mild surrounding edema. No diffuse synovial pannus.</p>
+<p class="i"><b>I:</b> Tophaceous gout with characteristic punched-out periarticular erosions and intermediate-signal tophi. Relative joint-space preservation distinguishes from RA.</p>
+<h3 id="case-22-glomus-tumor-subungual">Case 22 — Glomus tumor (subungual)</h3>
+<p><b>Clinical:</b> 42-year-old woman, exquisite point tenderness and cold sensitivity under the fingernail for over a year.</p>
+<p class="f"><b>F:</b> Axial and sagittal T2 FS and post-contrast T1 FS of the <b>index fingertip</b> show a small <b>6 mm</b> well-circumscribed <b>subungual</b> nodule that is <b>markedly T2 hyperintense</b> with <b>intense homogeneous enhancement</b>, with subtle scalloping of the adjacent dorsal distal phalangeal cortex. No aggressive features.</p>
+<p class="i"><b>I:</b> Subungual glomus tumor. Classic triad of pain, cold sensitivity, and point tenderness with an avidly enhancing T2-bright nodule.</p>
+<h3 id="case-23-digital-mucoid-ganglion-cyst-at-dip">Case 23 — Digital mucoid (ganglion) cyst at DIP</h3>
+<p><b>Clinical:</b> 60-year-old woman, dorsal DIP swelling with longitudinal nail grooving and underlying osteoarthritis.</p>
+<p class="f"><b>F:</b> Sagittal and axial T2 FS of the <b>long finger</b> show a well-defined <b>lobulated T2-hyperintense cyst</b> (about <b>8 mm</b>) arising from the <b>dorsal DIP joint</b> with a stalk communicating with the joint, abutting the germinal nail matrix. Adjacent DIP osteophytes and joint-space narrowing. Thin peripheral enhancement only.</p>
+<p class="i"><b>I:</b> Digital mucoid (ganglion) cyst arising from an osteoarthritic DIP, accounting for the nail deformity.</p>
+<h3 id="case-24-giant-cell-tumor-of-the-tendon-sheath">Case 24 — Giant cell tumor of the tendon sheath</h3>
+<p><b>Clinical:</b> 37-year-old woman, slowly growing painless firm nodule on the volar finger.</p>
+<p class="f"><b>F:</b> Axial and sagittal T1, T2 FS, and gradient-echo of the <b>volar long finger</b> show a well-defined lobulated soft-tissue mass (<b>14 mm</b>) adjacent to the <b>flexor tendon sheath</b>, <b>low-to-intermediate on T1 and T2</b> with characteristic <b>blooming on gradient-echo</b> from hemosiderin, and avid enhancement. Mild scalloping of the adjacent phalanx without marrow invasion.</p>
+<p class="i"><b>I:</b> Giant cell tumor of the tendon sheath (localized PVNS). Hemosiderin blooming and tendon-sheath origin are characteristic.</p>
+<h3 id="case-25-osteomyelitis-of-the-distal-phalanx">Case 25 — Osteomyelitis of the distal phalanx</h3>
+<p><b>Clinical:</b> 61-year-old diabetic man, chronic fingertip ulcer with discharge and persistent swelling.</p>
+<p class="f"><b>F:</b> T1, T2 FS, and post-contrast T1 FS of the <b>distal phalanx of the long finger</b> show <b>confluent low T1 / high T2 marrow signal</b> with avid enhancement, cortical destruction, and an adjacent enhancing soft-tissue collection with overlying skin ulceration consistent with a <b>rim-enhancing abscess</b>. Findings indicate <b>osteomyelitis</b> with septic involvement of the adjacent DIP.</p>
+<p class="i"><b>I:</b> Osteomyelitis of the distal phalanx with adjacent soft-tissue abscess and septic DIP arthritis. Marrow T1 replacement is the most reliable sign.</p>
+<h3 id="case-26-dupuytren-contracture">Case 26 — Dupuytren contracture</h3>
+<p><b>Clinical:</b> 66-year-old man of Northern European descent, painless palmar nodule with progressive flexion contracture of the ring finger.</p>
+<p class="f"><b>F:</b> Axial and sagittal T1 and T2 FS of the <b>palm</b> show a <b>hypointense (T1/T2) nodular and cord-like thickening</b> of the <b>palmar aponeurosis</b> extending from the distal palm toward the ring-finger MCP, superficial to the flexor tendons which are normal. Low signal reflects fibrous/collagenous tissue; minimal enhancement suggests a quiescent stage.</p>
+<p class="i"><b>I:</b> Dupuytren contracture — palmar fascial cord and nodule. Low T2 signal indicates mature fibrosis with lower recurrence/progression risk.</p>
+<h3 id="case-27-fdp-avulsion-leddy-type-i-retraction-to-palm">Case 27 — FDP avulsion, Leddy type I (retraction to palm)</h3>
+<p><b>Clinical:</b> 25-year-old male football player, jersey-finger mechanism with severe pain and palmar swelling.</p>
+<p class="f"><b>F:</b> Sagittal and axial T2 FS of the <b>ring finger</b> show <b>FDP avulsion</b> from the distal phalanx with the tendon stump <b>retracted into the palm (Leddy–Packer type I)</b>, indicating disruption of both vincula and compromised vascular supply, with a fluid-filled empty distal sheath. No bony fragment.</p>
+<p class="i"><b>I:</b> Jersey finger, Leddy type I with retraction into the palm. Type I requires urgent repair due to devascularization.</p>
+<h3 id="case-28-pulp-space-felon-with-early-osseous-involvement">Case 28 — Pulp-space felon with early osseous involvement</h3>
+<p><b>Clinical:</b> 48-year-old woman, throbbing pulp-space infection of the thumb tip after a splinter, with tense swelling.</p>
+<p class="f"><b>F:</b> Axial and sagittal post-contrast T1 FS of the <b>thumb tip</b> show a <b>rim-enhancing collection</b> within the septated pulp space (<b>felon</b>) with surrounding cellulitic enhancement and early reactive marrow edema in the distal phalangeal tuft without frank cortical destruction.</p>
+<p class="i"><b>I:</b> Pulp-space felon with early reactive osteitis. Drainage indicated to prevent progression to distal phalanx osteomyelitis.</p>
+<h3 id="case-29-chronic-boutonni-re-with-lateral-band-subluxation">Case 29 — Chronic boutonnière with lateral band subluxation</h3>
+<p><b>Clinical:</b> 52-year-old woman with longstanding rheumatoid arthritis, fixed boutonnière deformity of the long finger.</p>
+<p class="f"><b>F:</b> Sagittal and axial T2 FS of the <b>long finger</b> show chronic attenuation/disruption of the <b>central slip</b> with <b>volar subluxation of the lateral bands</b> below the PIP axis of rotation, fixed PIP flexion, and compensatory DIP hyperextension. Associated synovitis and small marginal erosions reflect the underlying RA.</p>
+<p class="i"><b>I:</b> Chronic boutonnière deformity with volar lateral band subluxation, secondary to rheumatoid central slip attrition.</p>
+<h3 id="case-30-chronic-volar-plate-injury-with-pip-osteoarthritis">Case 30 — Chronic volar plate injury with PIP osteoarthritis</h3>
+<p><b>Clinical:</b> 55-year-old man with prior PIP hyperextension injury, now chronic stiffness and a small swan-neck tendency.</p>
+<p class="f"><b>F:</b> Sagittal PD and T2 FS of the <b>index PIP</b> show chronic thickening and scarring of the <b>volar plate</b> with a small ossific focus at the middle phalanx base, mild PIP joint-space narrowing, marginal osteophytes, and subchondral cysts. No acute edema or effusion.</p>
+<p class="i"><b>I:</b> Chronic volar plate injury with secondary PIP osteoarthritis. Post-traumatic degenerative change from prior hyperextension injury.</p>
+<button id="toc-handle" class="toc-handle" aria-label="Open table of contents" title="Contents">☰<span class="chev">›</span></button>
+<button id="to-top" class="to-top" aria-label="Back to top" title="Back to top (Home)">↑</button>
+<script>
+(function(){
+  var KEY='cheatsheet-font-scale', MIN=0.7, MAX=1.8, STEP=0.1;
+  var scale=parseFloat(localStorage.getItem(KEY));
+  if(!scale||isNaN(scale)) scale=1;
+  function apply(){ document.body.style.zoom=scale; }
+  function set(s){
+    scale=Math.min(MAX, Math.max(MIN, Math.round(s*10)/10));
+    localStorage.setItem(KEY, scale);
+    apply();
+  }
+  apply();
+  var dec=document.getElementById('fs-dec'),
+      inc=document.getElementById('fs-inc'),
+      rst=document.getElementById('fs-rst');
+  if(dec) dec.onclick=function(){ set(scale-STEP); };
+  if(inc) inc.onclick=function(){ set(scale+STEP); };
+  if(rst) rst.onclick=function(){ set(1); };
+  // back-to-top button
+  var top=document.getElementById('to-top');
+  function goTop(){ window.scrollTo({top:0, behavior:'smooth'}); }
+  function onScroll(){
+    if(!top) return;
+    if(window.scrollY>320) top.classList.add('show');
+    else top.classList.remove('show');
+  }
+  if(top){ top.onclick=goTop; window.addEventListener('scroll', onScroll, {passive:true}); onScroll(); }
+
+  // ── Table of contents drawer ──
+  var drawer=document.getElementById('toc-drawer'),
+      backdrop=document.getElementById('toc-backdrop'),
+      tocToggle=document.getElementById('toc-toggle'),
+      tocClose=document.getElementById('toc-close'),
+      tocHandle=document.getElementById('toc-handle');
+  function tocOpen(){ if(drawer){ drawer.classList.add('open'); backdrop.classList.add('show'); document.body.classList.add('toc-open'); } }
+  function tocCloseFn(){ if(drawer){ drawer.classList.remove('open'); backdrop.classList.remove('show'); document.body.classList.remove('toc-open'); } }
+  function tocToggleFn(){ drawer && (drawer.classList.contains('open')?tocCloseFn():tocOpen()); }
+  if(tocToggle) tocToggle.onclick=tocToggleFn;
+  if(tocHandle) tocHandle.onclick=tocOpen;
+  if(tocClose) tocClose.onclick=tocCloseFn;
+  if(backdrop) backdrop.onclick=tocCloseFn;
+  // swipe-left on the open drawer to close it
+  var swX=null, swY=null;
+  document.addEventListener('touchstart', function(e){
+    if(drawer && drawer.classList.contains('open')){ var t=e.touches[0]; swX=t.clientX; swY=t.clientY; }
+    else swX=null;
+  }, {passive:true});
+  document.addEventListener('touchmove', function(e){
+    if(swX===null) return; var t=e.touches[0];
+    if(t.clientX-swX < -45 && Math.abs(t.clientY-swY) < 70){ tocCloseFn(); swX=null; }
+  }, {passive:true});
+  document.addEventListener('touchend', function(){ swX=null; }, {passive:true});
+  if(drawer){
+    drawer.addEventListener('click', function(e){
+      var tog=e.target.closest('.toc-tog');
+      if(tog){ e.preventDefault(); tog.closest('.toc-node').classList.toggle('open'); return; }
+      if(e.target.closest('a')){ tocCloseFn(); }   // jump (href) + close
+    });
+  }
+  // scroll-spy: highlight current section, open its ancestors
+  var links={}, heads=[];
+  if(drawer){
+    [].forEach.call(drawer.querySelectorAll('a[href^="#"]'), function(a){
+      var id=a.getAttribute('href').slice(1); links[id]=a;
+      var h=document.getElementById(id); if(h) heads.push(h);
+    });
+    heads.sort(function(a,b){ return a.offsetTop-b.offsetTop; });
+  }
+  var spyT=null;
+  function spy(){
+    if(!heads.length) return;
+    var y=window.scrollY+96, cur=null;
+    for(var k=0;k<heads.length;k++){ if(heads[k].offsetTop<=y) cur=heads[k].id; else break; }
+    for(var id in links) links[id].classList.remove('active');
+    if(cur && links[cur]){
+      var a=links[cur]; a.classList.add('active');
+      var node=a.closest('.toc-node');
+      while(node){ node.classList.add('open'); node=node.parentElement&&node.parentElement.closest('.toc-node'); }
+    }
+  }
+  window.addEventListener('scroll', function(){ if(spyT) return; spyT=setTimeout(function(){ spyT=null; spy(); },120); }, {passive:true});
+  spy();
+
+  document.addEventListener('keydown', function(e){
+    if(e.metaKey||e.ctrlKey||e.altKey) return;            // leave native zoom alone
+    var t=e.target;
+    if(t && (t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable)) return;
+    if(e.key==='+'||e.key==='='){ set(scale+STEP); e.preventDefault(); }
+    else if(e.key==='-'||e.key==='_'){ set(scale-STEP); e.preventDefault(); }
+    else if(e.key==='0'){ set(1); e.preventDefault(); }
+    else if(e.key==='Home'){ goTop(); e.preventDefault(); }
+    else if(e.key==='c'||e.key==='C'){ tocToggleFn(); e.preventDefault(); }
+    else if(e.key==='Escape'){ tocCloseFn(); }
+  });
+})();
+</script>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}</script>
+</body>
+</html>

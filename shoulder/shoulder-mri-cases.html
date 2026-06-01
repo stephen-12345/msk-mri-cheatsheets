@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shoulder MRI — 30 Sample Cases</title>
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#0b3a52">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MSK MRI">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<style>
+:root{
+  --bg:#0c0f15; --panel:#141925; --panel2:#1a2030; --bdr:#27303f;
+  --tx:#e6eaf2; --tx2:#aab4c5; --tx3:#7c8699;
+  --h1bg:#0b3a52; --h2bg:#11556f; --h3tx:#6cc6e6;
+  --findings:#f4a86a; --impression:#7fd29a;
+  --ph-bg:rgba(244,168,106,0.16); --ph-tx:#f4c89a; --ph-bd:rgba(244,168,106,0.4);
+  --th-bg:#16384a; --th-tx:#cfe7f2;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);color-scheme:dark;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
+  background:var(--bg); color:var(--tx);
+  font-size:18px; line-height:1.62;
+  max-width:1120px; margin:0 auto; padding:0 32px 64px;
+  -webkit-font-smoothing:antialiased;
+}
+
+.topbar{
+  position:sticky; top:0; z-index:10;
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  margin:0 -32px 22px;
+  padding:11px 32px;
+  padding-top:calc(11px + env(safe-area-inset-top, 0px));
+  padding-left:calc(32px + env(safe-area-inset-left, 0px));
+  padding-right:calc(32px + env(safe-area-inset-right, 0px));
+  background:rgba(12,15,21,0.94); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--bdr);
+}
+.topbar .crumb{font-weight:700;color:#fff;font-size:15px;margin-right:auto}
+.topbar a{
+  display:inline-flex; align-items:center;
+  border:1px solid var(--bdr); border-radius:999px;
+  padding:5px 12px; color:#9fdcf0; text-decoration:none;
+  font-size:13px; font-weight:600; background:#0d1a26;
+}
+.topbar a:hover{border-color:var(--h3tx); color:#fff}
+.topbar a.tmpl{border-color:rgba(244,168,106,0.55);background:rgba(244,168,106,0.12);color:#ffe0c8}
+.topbar a.cases{border-color:rgba(121,212,155,0.55);background:rgba(121,212,155,0.12);color:#bdeccf}
+
+.fontctl{
+  display:inline-flex; align-items:center; gap:4px;
+  margin-left:6px; padding-left:10px; border-left:1px solid var(--bdr);
+}
+.fontctl button{
+  cursor:pointer; border:1px solid var(--bdr); border-radius:6px;
+  background:#0d1a26; color:#9fdcf0; font-weight:700;
+  font-family:inherit; line-height:1; padding:5px 9px;
+}
+.fontctl button:hover{border-color:var(--h3tx); color:#fff}
+.fontctl #fs-dec{font-size:12px}
+.fontctl #fs-rst{font-size:13px; min-width:30px}
+.fontctl #fs-inc{font-size:16px}
+
+h1{
+  margin:6px 0 8px; padding:16px 22px;
+  background:linear-gradient(135deg,var(--h1bg),#0a2c40);
+  color:#fff; border-radius:10px; border-left:5px solid var(--h3tx);
+  font-size:30px; line-height:1.18; letter-spacing:0.2px;
+}
+.subtitle{color:var(--tx2); font-size:16px; margin:0 0 22px; line-height:1.5}
+
+h2.group{
+  margin:40px 0 16px; padding:13px 18px;
+  background:linear-gradient(135deg,#241a3a,#1a2030);
+  color:#fff; border-radius:9px; border-left:5px solid #a78bfa;
+  font-size:24px; line-height:1.2; letter-spacing:0.6px;
+  text-transform:uppercase; scroll-margin-top:calc(64px + env(safe-area-inset-top, 0px));
+}
+h2{
+  margin:34px 0 14px; padding:11px 16px;
+  background:var(--h2bg); color:#fff; border-radius:8px;
+  font-size:21px; line-height:1.25; letter-spacing:0.2px;
+  scroll-margin-top:calc(64px + env(safe-area-inset-top, 0px));
+}
+h3{
+  margin:22px 0 9px; color:var(--h3tx);
+  font-size:18.5px; line-height:1.3; font-weight:700;
+  border-bottom:1px solid #2c3a48; padding-bottom:5px;
+  scroll-margin-top:calc(64px + env(safe-area-inset-top, 0px));
+}
+
+p{margin:9px 0}
+.dx{
+  margin:18px 0 4px; font-weight:800; color:#fff;
+  font-size:18.5px; line-height:1.3;
+}
+.f, .i{margin:5px 0; padding-left:14px; border-left:2px solid #25303e}
+.f b{color:var(--findings)}
+.i b{color:var(--impression)}
+
+ul{margin:10px 0 14px 26px}
+li{margin:6px 0}
+
+table{
+  width:100%; border-collapse:collapse; margin:14px 0 18px;
+  font-size:16px; line-height:1.45; background:var(--panel);
+  border-radius:8px; overflow:hidden;
+}
+th{
+  background:var(--th-bg); color:var(--th-tx);
+  text-align:left; font-weight:700; padding:9px 12px;
+  border-bottom:1px solid #2c3a48;
+}
+td{padding:8px 12px; border-bottom:1px solid #232c39; color:var(--tx2); vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
+
+.to-top{
+  position:fixed; z-index:20;
+  right:calc(22px + env(safe-area-inset-right, 0px));
+  bottom:calc(22px + env(safe-area-inset-bottom, 0px));
+  width:46px; height:46px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid var(--bdr); background:rgba(17,85,111,0.92);
+  color:#fff; font-size:22px; line-height:1; cursor:pointer;
+  box-shadow:0 6px 20px rgba(0,0,0,0.45); backdrop-filter:blur(6px);
+  opacity:0; visibility:hidden; transform:translateY(8px);
+  transition:opacity .18s, transform .18s, visibility .18s;
+}
+.to-top.show{opacity:1; visibility:visible; transform:translateY(0)}
+.to-top:hover{background:#16638a; border-color:var(--h3tx)}
+@media print{ .to-top{display:none} }
+
+.ph{
+  background:var(--ph-bg); color:var(--ph-tx);
+  border:1px solid var(--ph-bd); border-radius:4px;
+  padding:0 4px; font-size:0.92em; white-space:nowrap;
+}
+
+.section-card{
+  background:var(--panel); border:1px solid var(--bdr);
+  border-radius:10px; padding:4px 20px 16px; margin:0 0 18px;
+}
+
+/* ── Teaching callout boxes ── */
+.callout{
+  border:1px solid var(--bdr); border-left:4px solid var(--c-acc,#6cc6e6);
+  background:var(--c-bg,#101a22); border-radius:9px;
+  padding:12px 18px 13px; margin:14px 0;
+}
+.callout .c-title{
+  display:flex; align-items:baseline; gap:9px;
+  font-weight:800; font-size:14px; letter-spacing:0.6px;
+  text-transform:uppercase; color:var(--c-acc,#6cc6e6); margin:0 0 7px;
+}
+.callout .c-title .ico{font-size:15px; line-height:1}
+.callout .c-title .lbl{opacity:0.78; font-size:11px; font-weight:700}
+.callout .c-title .ttl{color:var(--tx); text-transform:none; letter-spacing:0; font-size:16px}
+.callout p{margin:7px 0; color:var(--tx)}
+.callout ul{margin:7px 0 7px 22px}
+.callout li{margin:5px 0; color:var(--tx)}
+.callout b{color:#fff}
+.callout.find{--c-acc:#5fc6e6; --c-bg:#0d1c25}
+.callout.landmark{--c-acc:#b69cf0; --c-bg:#16132a}
+.callout.pearl{--c-acc:#79d49b; --c-bg:#0e1f17}
+.callout.pitfall{--c-acc:#f3ad63; --c-bg:#231910}
+.callout.measure{--c-acc:#7fb2ea; --c-bg:#101826}
+.callout.note{--c-acc:#9fb4c6; --c-bg:#141a22}
+
+/* ── Anatomy diagrams (inline SVG) ── */
+.diagram{
+  margin:18px 0; padding:14px 16px 10px;
+  background:#0b131d; border:1px solid var(--bdr); border-radius:10px;
+}
+.diagram svg{ display:block; width:100%; height:auto; max-width:560px; margin:0 auto; }
+.diagram figcaption{
+  margin:10px auto 2px; max-width:620px; text-align:center;
+  font-size:13.5px; color:var(--tx2); line-height:1.5;
+}
+@media print{ .diagram{ break-inside:avoid; } }
+
+/* ── Table-of-contents drawer (overlay; never resizes the page) ── */
+.toc-toggle{
+  display:inline-flex; align-items:center; gap:5px;
+  border:1px solid var(--bdr); border-radius:7px; background:#0d1a26;
+  color:#9fdcf0; font-weight:700; font-size:13px; padding:5px 11px;
+  cursor:pointer; font-family:inherit; margin-right:4px;
+}
+.toc-toggle:hover{ border-color:var(--h3tx); color:#fff; }
+.toc-backdrop{
+  position:fixed; inset:0; z-index:55; background:rgba(0,0,0,0.5);
+  opacity:0; visibility:hidden; transition:opacity .2s;
+}
+.toc-backdrop.show{ opacity:1; visibility:visible; }
+.toc-drawer{
+  position:fixed; top:0; left:0; height:100vh; width:316px; max-width:86vw; z-index:60;
+  background:#0b121d; border-right:1px solid var(--bdr);
+  box-shadow:3px 0 28px rgba(0,0,0,0.55);
+  transform:translateX(-104%); transition:transform .22s ease;
+  display:flex; flex-direction:column;
+}
+.toc-drawer.open{ transform:translateX(0); }
+.toc-head{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:13px 16px;
+  padding-top:calc(13px + env(safe-area-inset-top, 0px));
+  border-bottom:1px solid var(--bdr); flex:0 0 auto;
+}
+.toc-head .t{ font-weight:800; color:#fff; font-size:15px; letter-spacing:.5px; }
+.toc-close{ background:none; border:none; color:var(--tx2); font-size:24px; line-height:1; cursor:pointer; padding:0 4px; }
+.toc-close:hover{ color:#fff; }
+.toc-list{ overflow-y:auto; padding:8px 8px 28px; flex:1; }
+.toc-node.leaf{ }
+.toc-row{ display:flex; align-items:flex-start; }
+.toc-tog{
+  flex:0 0 auto; width:20px; height:26px; margin-top:1px;
+  background:none; border:none; cursor:pointer; padding:0;
+  color:var(--tx3); font-size:11px;
+}
+.toc-tog::before{ content:"▸"; display:inline-block; transition:transform .15s; }
+.toc-node.open > .toc-row > .toc-tog::before{ transform:rotate(90deg); }
+.toc-node.leaf .toc-row{ padding-left:20px; }
+.toc-children{ display:none; }
+.toc-node.open > .toc-children{ display:block; }
+.toc-link{
+  flex:1; display:block; text-decoration:none; color:var(--tx2);
+  padding:5px 9px; border-radius:6px; font-size:13.5px; line-height:1.35;
+  border-left:2px solid transparent;
+}
+.toc-link:hover{ background:#13212f; color:#fff; }
+.toc-link.active{ border-left-color:var(--h3tx); background:#13212f; color:#fff; }
+.toc-link.lvl-group{ color:#c9b6f5; font-weight:800; text-transform:uppercase; font-size:12px; letter-spacing:.5px; }
+.toc-link.lvl-h2{ color:#e6eaf2; font-weight:600; }
+.toc-link.lvl-h3{ color:var(--tx2); font-size:12.5px; }
+.toc-children .toc-children .toc-link{ padding-left:18px; }
+@media print{ .toc-toggle, .toc-drawer, .toc-backdrop{ display:none !important; } }
+
+/* Left-edge floating handle — thumb-reach access to the TOC from anywhere */
+.toc-handle{
+  position:fixed; left:0; top:64%; transform:translateY(-50%);
+  z-index:54; display:flex; align-items:center; justify-content:center;
+  width:27px; height:74px; padding:0;
+  background:rgba(17,85,111,0.9); color:#d6f0fb;
+  border:1px solid var(--bdr); border-left:none; border-radius:0 13px 13px 0;
+  box-shadow:3px 0 16px rgba(0,0,0,0.5);
+  -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+  font-size:16px; line-height:1; cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  transition:opacity .18s, background .15s, visibility .18s;
+}
+.toc-handle:hover{ background:#16638a; color:#fff; }
+.toc-handle:active{ background:#1d7aa8; }
+.toc-handle .chev{ font-size:11px; opacity:.75; }
+body.toc-open .toc-handle{ opacity:0; visibility:hidden; }
+@media print{ .toc-handle{ display:none; } }
+@media (min-width:901px) and (hover:hover){ .toc-handle{ display:none; } }
+
+@media (max-width:680px){
+  body{font-size:17px; padding:0 16px 48px}
+  .topbar{
+    margin:0 -16px 18px;
+    padding:8px 14px;
+    padding-top:calc(8px + env(safe-area-inset-top, 0px));
+    padding-left:calc(14px + env(safe-area-inset-left, 0px));
+    padding-right:calc(14px + env(safe-area-inset-right, 0px));
+    gap:7px;
+  }
+  .topbar .crumb{ display:none; }            /* title already shown in the h1 banner */
+  .topbar a{ font-size:12px; padding:5px 9px; min-height:36px; }
+  .toc-toggle{ font-size:12.5px; padding:6px 11px; min-height:36px; }
+  .fontctl{ margin-left:2px; padding-left:8px; }
+  .fontctl button{ padding:6px 9px; }
+  h1{font-size:24px;padding:13px 16px}
+  h2{font-size:19px}
+  h1,h2,h2.group,h3{ scroll-margin-top:calc(96px + env(safe-area-inset-top, 0px)); }
+}
+
+/* Dark-mode PDF (Chrome --print-to-pdf). Backgrounds preserved via
+   print-color-adjust:exact on html above. */
+@page{ size:Letter; margin:0.5in; }
+@media print{
+  body{ background:var(--bg); max-width:none; margin:0; padding:0; font-size:13px; line-height:1.5; }
+  .topbar{ display:none; }
+  h1{ font-size:21px; padding:11px 14px; }
+  h2,h2.group{ font-size:15px; break-after:avoid; }
+  h3,.dx{ break-after:avoid; }
+  .f,.i{ break-inside:avoid; }
+  table,tr{ break-inside:avoid; }
+  table{ font-size:11.5px; }
+}
+</style>
+</head>
+<body>
+<div class="topbar"><button id="toc-toggle" class="toc-toggle" title="Contents (c)" aria-label="Table of contents">☰ Contents</button><span class="crumb">Shoulder MRI</span><a href="../index.html">← All regions</a><a href="shoulder-mri-cheatsheet.html">Cheat sheet</a><a class="tmpl" href="../templates/shoulder.html">📋 Dictation template</a><a href="shoulder-mri-cases-dark.pdf">PDF (dark)</a><a href="shoulder-mri-cases.md">Markdown</a><span class="fontctl" title="Font size — shortcuts: -, +, 0 to reset"><button id="fs-dec" aria-label="Decrease font size">A−</button><button id="fs-rst" aria-label="Reset font size">A</button><button id="fs-inc" aria-label="Increase font size">A+</button></span></div>
+<div id="toc-backdrop" class="toc-backdrop"></div><nav id="toc-drawer" class="toc-drawer" aria-label="Table of contents"><div class="toc-head"><span class="t">Contents</span><button id="toc-close" class="toc-close" aria-label="Close contents">&times;</button></div><div class="toc-list"><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-h2" href="#rotator-cuff">Rotator Cuff</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-1-supraspinatus-tendinosis">Case 1 — Supraspinatus tendinosis</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-2-articular-side-partial-thickness-tear-pasta">Case 2 — Articular-side partial-thickness tear (PASTA)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-3-bursal-side-partial-thickness-tear">Case 3 — Bursal-side partial-thickness tear</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-4-full-thickness-supraspinatus-tear-with-retraction-and-fatty-atrophy">Case 4 — Full-thickness supraspinatus tear with retraction and fatty atrophy</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-5-massive-cuff-tear-with-superior-humeral-migration">Case 5 — Massive cuff tear with superior humeral migration</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-6-subscapularis-tear-with-biceps-medial-subluxation">Case 6 — Subscapularis tear with biceps medial subluxation</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-7-infraspinatus-tear">Case 7 — Infraspinatus tear</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-8-calcific-tendinitis">Case 8 — Calcific tendinitis</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-h2" href="#biceps-labrum">Biceps &amp; Labrum</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-9-long-head-of-biceps-tendinosis">Case 9 — Long head of biceps tendinosis</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-10-lhb-tear-and-dislocation">Case 10 — LHB tear and dislocation</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-11-slap-ii-tear">Case 11 — SLAP II tear</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-12-bankart-lesion-anteroinferior-labrum">Case 12 — Bankart lesion (anteroinferior labrum)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-13-bony-bankart">Case 13 — Bony Bankart</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-14-hill-sachs-lesion">Case 14 — Hill-Sachs lesion</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-15-alpsa-perthes-lesion">Case 15 — ALPSA / Perthes lesion</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-16-posterior-labral-tear-reverse-bankart">Case 16 — Posterior labral tear / reverse Bankart</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-17-paralabral-cyst-with-spinoglenoid-notch-involvement">Case 17 — Paralabral cyst with spinoglenoid notch involvement</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-h2" href="#impingement-ac-joint">Impingement &amp; AC Joint</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-18-subacromial-subdeltoid-bursitis">Case 18 — Subacromial-subdeltoid bursitis</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-19-ac-joint-osteoarthritis-with-downward-osteophyte">Case 19 — AC joint osteoarthritis with downward osteophyte</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-20-os-acromiale">Case 20 — Os acromiale</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-h2" href="#other">Other</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-21-adhesive-capsulitis-frozen-shoulder">Case 21 — Adhesive capsulitis (frozen shoulder)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-22-quadrilateral-space-syndrome-teres-minor-denervation">Case 22 — Quadrilateral space syndrome / teres minor denervation</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-23-greater-tuberosity-contusion-nondisplaced-fracture">Case 23 — Greater tuberosity contusion / nondisplaced fracture</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-24-postoperative-rotator-cuff-retear">Case 24 — Postoperative rotator cuff retear</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-25-internal-posterosuperior-impingement">Case 25 — Internal (posterosuperior) impingement</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-26-glenohumeral-osteoarthritis">Case 26 — Glenohumeral osteoarthritis</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-27-hagl-lesion-humeral-avulsion-of-glenohumeral-ligament">Case 27 — HAGL lesion (humeral avulsion of glenohumeral ligament)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-28-glad-lesion-glenolabral-articular-disruption">Case 28 — GLAD lesion (glenolabral articular disruption)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-29-suprascapular-notch-ganglion">Case 29 — Suprascapular notch ganglion</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-30-cuff-tear-arthropathy-hamada-chronic-massive-tear">Case 30 — Cuff-tear arthropathy (Hamada) — chronic massive tear</a></div></div></div></div></div></nav>
+<h1>Shoulder MRI — 30 Sample Cases</h1>
+<p class="subtitle">A worked teaching file of the 30 most common shoulder MRI diagnoses, with realistic clinical vignettes, filled-in findings, and concise impressions.</p>
+<h2 id="rotator-cuff">Rotator Cuff</h2>
+<h3 id="case-1-supraspinatus-tendinosis">Case 1 — Supraspinatus tendinosis</h3>
+<p><b>Clinical:</b> 47-year-old male recreational tennis player with insidious anterolateral shoulder pain and painful arc over 4 months.</p>
+<p class="f"><b>F:</b> On the oblique coronal and sagittal <b>fat-suppressed T2/PD</b> sequences, the <b>supraspinatus</b> tendon shows intermediate-grade intratendinous signal hyperintensity within the <b>critical zone</b> approximately 12 mm from the footprint, without fluid-bright signal and without a discrete fiber gap. The tendon is mildly thickened. The articular and bursal surfaces remain intact with a continuous footprint at the greater tuberosity. No subacromial-subdeltoid fluid. Mild <b>type II (curved) acromion</b>. Muscle bulk is preserved with <b>Goutallier 0</b>. Normal AC joint and glenohumeral cartilage.</p>
+<p class="i"><b>I:</b> Supraspinatus tendinosis without tear. No full- or partial-thickness defect.</p>
+<h3 id="case-2-articular-side-partial-thickness-tear-pasta">Case 2 — Articular-side partial-thickness tear (PASTA)</h3>
+<p><b>Clinical:</b> 34-year-old female competitive swimmer with anterior pain on overhead reach and weakness in abduction.</p>
+<p class="f"><b>F:</b> Oblique coronal <b>fat-suppressed T2</b> images demonstrate a fluid-signal cleft along the <b>articular (undersurface)</b> fibers of the <b>distal supraspinatus</b> at the footprint, measuring ~5 mm in AP depth and involving roughly 40% of the ~11 mm tendon thickness, consistent with a <b>partial articular-sided tendon avulsion (PASTA)</b>. The bursal-side fibers and footprint cortex are intact. Minimal reactive marrow edema at the greater tuberosity. No tendon retraction; muscle bulk normal (<b>Goutallier 0</b>). Trace glenohumeral joint fluid.</p>
+<p class="i"><b>I:</b> Articular-side partial-thickness supraspinatus tear (PASTA), grade ~40% (intermediate-depth). No full-thickness component.</p>
+<h3 id="case-3-bursal-side-partial-thickness-tear">Case 3 — Bursal-side partial-thickness tear</h3>
+<p><b>Clinical:</b> 58-year-old male warehouse worker with chronic impingement-type pain worse with overhead lifting.</p>
+<p class="f"><b>F:</b> Fluid-bright signal involves the <b>bursal-surface</b> fibers of the <b>supraspinatus</b> near the footprint, with focal fiber irregularity over a ~7 mm AP segment and depth involving ~30% of tendon thickness; the articular surface remains continuous. Associated <b>subacromial-subdeltoid bursal fluid</b> and reactive bursal thickening. <b>Type III (hooked) acromion</b> with a small enthesophyte and mild downsloping. Greater tuberosity cortical irregularity. <b>Goutallier 0–1</b>.</p>
+<p class="i"><b>I:</b> Bursal-side partial-thickness supraspinatus tear in the setting of subacromial impingement.</p>
+<h3 id="case-4-full-thickness-supraspinatus-tear-with-retraction-and-fatty-atrophy">Case 4 — Full-thickness supraspinatus tear with retraction and fatty atrophy</h3>
+<p><b>Clinical:</b> 64-year-old male, fall onto outstretched arm 6 weeks ago, now with weakness and positive drop-arm sign.</p>
+<p class="f"><b>F:</b> A <b>full-thickness tear</b> of the <b>supraspinatus</b> is present with a complete fluid-filled gap; the AP (coronal) tear dimension is ~18 mm and the retracted tendon stump lies at the level of the glenoid rim (<b>Patte stage 2</b>, <b>medial retraction ~22 mm</b>). The footprint is denuded. <b>Subacromial-subdeltoid and glenohumeral fluid</b>. The supraspinatus muscle belly shows <b>Goutallier grade 2</b> fatty infiltration with mild atrophy on the parasagittal <b>T1</b> images (positive tangent sign borderline). Infraspinatus intact.</p>
+<p class="i"><b>I:</b> Retracted full-thickness supraspinatus tear (~18 mm, Patte 2) with Goutallier 2 fatty atrophy. Repairable but at-risk myotendinous quality.</p>
+<h3 id="case-5-massive-cuff-tear-with-superior-humeral-migration">Case 5 — Massive cuff tear with superior humeral migration</h3>
+<p><b>Clinical:</b> 73-year-old female with chronic shoulder pain, pseudoparalysis, and inability to actively elevate the arm.</p>
+<p class="f"><b>F:</b> Confluent <b>full-thickness tears</b> involve the <b>supraspinatus and infraspinatus</b> (≥2 tendons, AP width &gt;5 cm), with extensive medial retraction to the glenoid and beyond (<b>Patte 3</b>). The <b>acromiohumeral interval is narrowed to 4 mm</b> with superior subluxation of the humeral head and remodeling/concavity of the undersurface of the acromion (early <b>cuff-tear arthropathy / &quot;femoralization&quot;</b>). <b>Goutallier grade 3–4</b> fatty atrophy of supraspinatus and infraspinatus with positive <b>tangent sign</b>. Biceps long head is medially subluxed.</p>
+<p class="i"><b>I:</b> Massive (2-tendon) retracted rotator cuff tear with superior humeral migration and advanced fatty atrophy — features of early cuff-tear arthropathy, likely irreparable.</p>
+<h3 id="case-6-subscapularis-tear-with-biceps-medial-subluxation">Case 6 — Subscapularis tear with biceps medial subluxation</h3>
+<p><b>Clinical:</b> 52-year-old male, forced external rotation/abduction injury, with weakness on lift-off and belly-press.</p>
+<p class="f"><b>F:</b> The <b>upper subscapularis</b> demonstrates a full-thickness tear of the superior 1/3 with a ~9 mm fluid gap and medial fiber retraction; the lower fibers remain attached at the lesser tuberosity. The <b>medial sling (coracohumeral/superior glenohumeral ligaments)</b> is disrupted, and the <b>long head of biceps tendon is medially subluxed</b> out of the bicipital groove, lying over the torn subscapularis. Mild reactive marrow edema at the lesser tuberosity. <b>Goutallier 1</b> of subscapularis. Supraspinatus intact.</p>
+<p class="i"><b>I:</b> Partial (upper-third) subscapularis tear with medial sling disruption and medial subluxation of the long head of biceps.</p>
+<h3 id="case-7-infraspinatus-tear">Case 7 — Infraspinatus tear</h3>
+<p><b>Clinical:</b> 60-year-old male laborer with posterolateral pain and external-rotation weakness.</p>
+<p class="f"><b>F:</b> Oblique coronal and sagittal <b>fat-suppressed T2</b> images show a high-grade partial- to small full-thickness tear of the <b>infraspinatus</b> at its footprint on the posterior facet of the greater tuberosity, with a ~6 mm fluid-signal defect and adjacent tendinosis. Posterosuperior footprint marrow edema. Supraspinatus shows coexistent tendinosis without full-thickness tear. <b>Goutallier 1</b> of infraspinatus; teres minor preserved. Mild posterior capsular fluid.</p>
+<p class="i"><b>I:</b> High-grade partial-thickness infraspinatus tear with adjacent supraspinatus tendinosis.</p>
+<h3 id="case-8-calcific-tendinitis">Case 8 — Calcific tendinitis</h3>
+<p><b>Clinical:</b> 45-year-old female with acute, severe, non-traumatic shoulder pain and markedly restricted motion.</p>
+<p class="f"><b>F:</b> A rounded <b>hypointense (low signal on all sequences) calcific deposit</b> measuring ~12 mm is seen within the <b>supraspinatus</b> tendon near the footprint, with surrounding <b>fat-suppressed T2</b> hyperintense edema in the tendon and adjacent <b>subacromial-subdeltoid bursa</b> indicating the resorptive/inflammatory phase. No full-thickness tendon defect. Faint blooming is suggested; correlation with radiographs confirms amorphous calcific density. No osseous erosion.</p>
+<p class="i"><b>I:</b> Hydroxyapatite calcific tendinitis of the supraspinatus in the resorptive phase with reactive bursitis.</p>
+<h2 id="biceps-labrum">Biceps &amp; Labrum</h2>
+<h3 id="case-9-long-head-of-biceps-tendinosis">Case 9 — Long head of biceps tendinosis</h3>
+<p><b>Clinical:</b> 49-year-old female with anterior shoulder pain localized to the bicipital groove, tender to palpation.</p>
+<p class="f"><b>F:</b> The <b>long head of the biceps (LHB)</b> tendon within the bicipital groove is thickened with intermediate intrasubstance signal on <b>fat-suppressed T2</b> but no fiber discontinuity. A small amount of fluid surrounds the tendon in the groove (tenosynovial fluid, communicating with the joint) without true effusion-out-of-proportion. The tendon remains seated in the groove; the transverse ligament is intact. No SLAP extension. Rotator cuff intact.</p>
+<p class="i"><b>I:</b> Long head of biceps tendinosis with mild tenosynovial fluid. No tear or dislocation.</p>
+<h3 id="case-10-lhb-tear-and-dislocation">Case 10 — LHB tear and dislocation</h3>
+<p><b>Clinical:</b> 66-year-old male with a &quot;pop&quot; while lifting, anterior ecchymosis and a &quot;Popeye&quot; deformity developing.</p>
+<p class="f"><b>F:</b> The <b>bicipital groove is empty</b> of tendon; the <b>long head of biceps</b> is <b>medially dislocated</b>, displaced over a torn <b>subscapularis</b> insertion, with the medial sling disrupted. More distally the tendon shows discontinuity/retraction compatible with a high-grade/complete tear and distal bunching of the muscle. Fluid tracks along the groove. Associated upper subscapularis tearing. Supraspinatus tendinosis.</p>
+<p class="i"><b>I:</b> Long head of biceps dislocation with high-grade tear, associated with subscapularis insertional tear and medial sling disruption.</p>
+<h3 id="case-11-slap-ii-tear">Case 11 — SLAP II tear</h3>
+<p><b>Clinical:</b> 27-year-old male overhead baseball pitcher with deep posterior shoulder pain and loss of velocity; positive O&#x27;Brien.</p>
+<p class="f"><b>F:</b> On <b>fat-suppressed T2</b> and the <b>ABER/MR arthrogram</b> images, contrast/fluid signal undermines the <b>superior labrum</b> and extends both anterior and posterior to the biceps anchor, separating the labral-biceps complex from the superior glenoid (<b>SLAP type II</b>). The signal is laterally curved and extends &gt;2 mm medial to the glenoid rim, distinguishing it from a sublabral recess. The biceps anchor is detached. No paralabral cyst. Rotator cuff intact.</p>
+<p class="i"><b>I:</b> SLAP type II tear involving the biceps anchor (anteroposterior).</p>
+<h3 id="case-12-bankart-lesion-anteroinferior-labrum">Case 12 — Bankart lesion (anteroinferior labrum)</h3>
+<p><b>Clinical:</b> 21-year-old male rugby player after a traumatic anterior glenohumeral dislocation, now with apprehension.</p>
+<p class="f"><b>F:</b> <b>MR arthrogram</b> shows detachment/tear of the <b>anteroinferior labrum</b> at the 3–6 o&#x27;clock position with contrast insinuating between labrum and glenoid; the <b>scapular periosteum is disrupted</b> (classic soft-tissue <b>Bankart</b>). Associated impaction deformity of the posterosuperolateral humeral head (see Hill-Sachs). The anterior band of the <b>inferior glenohumeral ligament (IGHL)</b> complex is attached to the avulsed labral fragment. No osseous glenoid fragment on the GRE images.</p>
+<p class="i"><b>I:</b> Soft-tissue Bankart lesion (anteroinferior labral tear with periosteal disruption) following anterior dislocation.</p>
+<h3 id="case-13-bony-bankart">Case 13 — Bony Bankart</h3>
+<p><b>Clinical:</b> 31-year-old male with recurrent anterior instability after multiple dislocations.</p>
+<p class="f"><b>F:</b> There is an <b>osseous Bankart</b> with a displaced bony fragment from the <b>anteroinferior glenoid rim</b> and a corresponding marginal defect; estimated glenoid bone loss ~18% of the inferior glenoid diameter on the en-face sagittal reformat. The attached anteroinferior labrum/IGHL is avulsed with the fragment. Marrow edema along the fracture margin indicates relative acuity. Engaging Hill-Sachs not demonstrated at neutral.</p>
+<p class="i"><b>I:</b> Bony Bankart lesion with ~18% anteroinferior glenoid bone loss — relevant to surgical planning (approaching critical bone loss).</p>
+<h3 id="case-14-hill-sachs-lesion">Case 14 — Hill-Sachs lesion</h3>
+<p><b>Clinical:</b> 24-year-old female after first-time anterior dislocation, reduced in the ED.</p>
+<p class="f"><b>F:</b> A wedge-shaped impaction fracture of the <b>posterosuperolateral humeral head</b> is seen on the superior axial sections (the <b>Hill-Sachs lesion</b>), measuring ~14 mm in width and ~7 mm in depth, with subchondral marrow edema indicating acuity. The defect lies above the level of the coracoid. Accompanying anteroinferior labral (Bankart) injury. No loose body.</p>
+<p class="i"><b>I:</b> Acute Hill-Sachs impaction fracture with associated anteroinferior labral injury (anterior instability complex).</p>
+<h3 id="case-15-alpsa-perthes-lesion">Case 15 — ALPSA / Perthes lesion</h3>
+<p><b>Clinical:</b> 29-year-old male with chronic anterior instability and recurrent subluxations after a remote dislocation.</p>
+<p class="f"><b>F:</b> <b>MR arthrogram</b> demonstrates an <b>anterior labroligamentous periosteal sleeve avulsion (ALPSA)</b>: the anteroinferior labrum is avulsed but the scapular periosteum remains <b>intact and stripped/displaced medially</b>, with the labroligamentous complex rolled medially and resynovialized/blunted along the glenoid neck. (In the <b>Perthes</b> variant the medially intact periosteum keeps the nondisplaced labrum reduced, requiring ABER views to show contrast undercutting.) No osseous fragment.</p>
+<p class="i"><b>I:</b> ALPSA lesion — medially displaced, healed-in anteroinferior labrum with intact periosteum; chronic anterior instability.</p>
+<h3 id="case-16-posterior-labral-tear-reverse-bankart">Case 16 — Posterior labral tear / reverse Bankart</h3>
+<p><b>Clinical:</b> 26-year-old male lineman with posterior shoulder pain after a posteriorly directed load; sense of instability.</p>
+<p class="f"><b>F:</b> Axial <b>MR arthrogram</b> images show a tear/detachment of the <b>posteroinferior labrum</b> (7–9 o&#x27;clock) with contrast undermining the labrum (<b>reverse Bankart</b>); the posterior band of the IGHL and posterior capsule are involved. A small impaction defect of the anteromedial humeral head (<b>reverse Hill-Sachs / McLaughlin</b>) is noted. No osseous posterior glenoid fragment. Posterior capsular redundancy.</p>
+<p class="i"><b>I:</b> Posterior labral tear (reverse Bankart) with reverse Hill-Sachs — posterior instability complex.</p>
+<h3 id="case-17-paralabral-cyst-with-spinoglenoid-notch-involvement">Case 17 — Paralabral cyst with spinoglenoid notch involvement</h3>
+<p><b>Clinical:</b> 38-year-old male volleyball player with vague posterior pain and external-rotation weakness; EMG suggested infraspinatus denervation.</p>
+<p class="f"><b>F:</b> A lobulated <b>T2-hyperintense, T1-hypointense paralabral (ganglion) cyst</b> measuring ~22 × 12 mm arises from a <b>posterosuperior labral tear</b> and extends into the <b>spinoglenoid notch</b>, compressing the <b>suprascapular nerve</b> distal to the supraspinatus branch. The <b>infraspinatus</b> muscle shows <b>T2 hyperintense edema-like denervation signal</b> with early fatty change (<b>Goutallier 1</b>); supraspinatus spared (lesion distal to its branch). Underlying posterosuperior labral tear confirmed.</p>
+<p class="i"><b>I:</b> Spinoglenoid notch paralabral cyst from a posterosuperior labral tear causing suprascapular neuropathy with isolated infraspinatus denervation.</p>
+<h2 id="impingement-ac-joint">Impingement &amp; AC Joint</h2>
+<h3 id="case-18-subacromial-subdeltoid-bursitis">Case 18 — Subacromial-subdeltoid bursitis</h3>
+<p><b>Clinical:</b> 41-year-old female with lateral shoulder pain and painful overhead activity; no trauma.</p>
+<p class="f"><b>F:</b> <b>Fat-suppressed T2</b> images show distension of the <b>subacromial-subdeltoid bursa</b> with fluid and synovial thickening, the bursa measuring up to ~4 mm in thickness, without an underlying full-thickness cuff defect. Mild supraspinatus tendinosis and a mildly downsloping <b>type II acromion</b>. No calcific deposit. Glenohumeral joint and labrum unremarkable.</p>
+<p class="i"><b>I:</b> Subacromial-subdeltoid bursitis with mild supraspinatus tendinosis; impingement-pattern changes.</p>
+<h3 id="case-19-ac-joint-osteoarthritis-with-downward-osteophyte">Case 19 — AC joint osteoarthritis with downward osteophyte</h3>
+<p><b>Clinical:</b> 56-year-old male manual laborer with focal pain over the top of the shoulder, worse on cross-body adduction.</p>
+<p class="f"><b>F:</b> The <b>acromioclavicular joint</b> demonstrates capsular hypertrophy, subchondral cystic change and marginal osteophytes, with a <b>downward-projecting inferior osteophyte</b> that effaces the subacromial fat and impinges upon the <b>supraspinatus myotendinous junction</b>. Reactive marrow edema on both sides of the joint. Underlying supraspinatus bursal-surface fraying without full-thickness tear. Mild SASD bursal fluid.</p>
+<p class="i"><b>I:</b> AC joint osteoarthritis with an inferior osteophyte contributing to extrinsic supraspinatus impingement.</p>
+<h3 id="case-20-os-acromiale">Case 20 — Os acromiale</h3>
+<p><b>Clinical:</b> 33-year-old male with chronic impingement symptoms refractory to therapy; tenderness over the acromion.</p>
+<p class="f"><b>F:</b> A well-corticated <b>unfused acromial ossification center (os acromiale)</b> is identified at the <b>meso-acromion</b> level on the axial images, with a synchondrosis showing mild <b>fat-suppressed T2</b> edema and adjacent subchondral cystic change suggesting instability/motion. The undersurface of the mobile fragment shows a small enthesophyte narrowing the subacromial space. Underlying supraspinatus bursal-side fraying. SASD bursal fluid.</p>
+<p class="i"><b>I:</b> Symptomatic (meso-) os acromiale with edema across the synchondrosis contributing to impingement.</p>
+<h2 id="other">Other</h2>
+<h3 id="case-21-adhesive-capsulitis-frozen-shoulder">Case 21 — Adhesive capsulitis (frozen shoulder)</h3>
+<p><b>Clinical:</b> 53-year-old diabetic female with progressive global stiffness and night pain; markedly reduced passive external rotation.</p>
+<p class="f"><b>F:</b> <b>Fat-suppressed T2/post-contrast</b> images show thickening and edema/enhancement of the <b>axillary recess capsule and IGHL</b> (capsule &gt;4 mm) and soft-tissue thickening/edema in the <b>rotator interval</b> enveloping the coracohumeral ligament, with obliteration of the subcoracoid fat triangle. Reduced axillary recess volume. No significant joint effusion. Rotator cuff and labrum intact.</p>
+<p class="i"><b>I:</b> Findings characteristic of adhesive capsulitis (frozen shoulder), interval and axillary recess phenotype.</p>
+<h3 id="case-22-quadrilateral-space-syndrome-teres-minor-denervation">Case 22 — Quadrilateral space syndrome / teres minor denervation</h3>
+<p><b>Clinical:</b> 36-year-old male overhead athlete with vague posterior shoulder pain and external-rotation weakness.</p>
+<p class="f"><b>F:</b> On parasagittal <b>T1 and fat-suppressed T2</b> images the <b>teres minor</b> shows isolated <b>T2 hyperintense denervation edema</b> with early fatty replacement, while deltoid, infraspinatus and supraspinatus are spared — implicating the <b>axillary nerve branch within the quadrilateral space</b>. Mild fibrous/vascular narrowing of the quadrilateral space is suggested; no discrete mass. Rotator cuff tendons intact.</p>
+<p class="i"><b>I:</b> Isolated teres minor denervation consistent with quadrilateral space syndrome (axillary nerve, posterior branch).</p>
+<h3 id="case-23-greater-tuberosity-contusion-nondisplaced-fracture">Case 23 — Greater tuberosity contusion / nondisplaced fracture</h3>
+<p><b>Clinical:</b> 59-year-old female after a fall onto the shoulder, point tenderness over the greater tuberosity, intact active motion.</p>
+<p class="f"><b>F:</b> A <b>nondisplaced fracture line</b> through the <b>greater tuberosity</b> is seen as a hypointense line on T1 with surrounding extensive <b>fat-suppressed T2</b> marrow edema (bone contusion/trabecular microfracture pattern), without cortical step-off &gt;2 mm or fragment displacement. The overlying <b>supraspinatus/infraspinatus footprint</b> fibers are intact (no avulsion). Small reactive joint effusion and SASD fluid.</p>
+<p class="i"><b>I:</b> Nondisplaced greater tuberosity fracture with bone marrow edema; rotator cuff insertions intact.</p>
+<h3 id="case-24-postoperative-rotator-cuff-retear">Case 24 — Postoperative rotator cuff retear</h3>
+<p><b>Clinical:</b> 62-year-old male, 8 months after arthroscopic supraspinatus repair, with recurrent weakness and pain.</p>
+<p class="f"><b>F:</b> At the prior <b>supraspinatus</b> repair, susceptibility artifact from suture anchors is noted at the greater tuberosity. There is a recurrent <b>full-thickness fluid-signal gap</b> at the repaired footprint measuring ~10 mm AP with retraction of the tendon edge to the level of the humeral articular surface, indicating <b>retear (Sugaya type IV–V)</b>. Anchors appear seated without pullout. Progression of <b>Goutallier to grade 2</b> fatty atrophy compared with expected. SASD fluid.</p>
+<p class="i"><b>I:</b> Recurrent full-thickness supraspinatus tear at the repair site (retear) with interval progression of fatty atrophy.</p>
+<h3 id="case-25-internal-posterosuperior-impingement">Case 25 — Internal (posterosuperior) impingement</h3>
+<p><b>Clinical:</b> 25-year-old male throwing athlete with posterosuperior pain in the late-cocking (ABER) position; GIRD on exam.</p>
+<p class="f"><b>F:</b> <b>ABER MR arthrogram</b> images show contact-pattern changes of <b>posterosuperior impingement</b>: undersurface (articular-side) fraying/partial tear of the <b>posterior supraspinatus/anterior infraspinatus</b> fibers, fraying of the <b>posterosuperior labrum</b>, and a subcortical cyst/edema in the <b>posterosuperior greater tuberosity/humeral head</b>. Mild posterior capsular thickening. No full-thickness cuff tear.</p>
+<p class="i"><b>I:</b> Posterosuperior (internal) impingement of the throwing shoulder — articular-side cuff and posterosuperior labral changes.</p>
+<h3 id="case-26-glenohumeral-osteoarthritis">Case 26 — Glenohumeral osteoarthritis</h3>
+<p><b>Clinical:</b> 68-year-old female with chronic deep aching pain, stiffness, and crepitus; no instability.</p>
+<p class="f"><b>F:</b> Diffuse <b>glenohumeral cartilage loss</b> with joint-space narrowing, <b>marginal osteophytes</b> (notably an inferior humeral head &quot;goat&#x27;s beard&quot; osteophyte), subchondral cysts and sclerosis, and small intra-articular <b>loose bodies</b> are seen. Mild posterior glenoid wear (Walch B pattern) with slight posterior humeral subluxation. Rotator cuff is intact. Mild synovitis and effusion.</p>
+<p class="i"><b>I:</b> Primary glenohumeral osteoarthritis with posterior glenoid wear and loose bodies; cuff intact.</p>
+<h3 id="case-27-hagl-lesion-humeral-avulsion-of-glenohumeral-ligament">Case 27 — HAGL lesion (humeral avulsion of glenohumeral ligament)</h3>
+<p><b>Clinical:</b> 28-year-old male after a hyperabduction/external-rotation injury with anterior instability but no labral findings clinically.</p>
+<p class="f"><b>F:</b> <b>MR arthrogram</b> shows extravasation of contrast at the <b>humeral attachment of the inferior glenohumeral ligament</b>, with the axillary pouch assuming a <b>&quot;J-shaped&quot; configuration</b> rather than the normal U, indicating a <b>HAGL</b> lesion. The anteroinferior labrum is intact (distinguishing from Bankart). No osseous fragment (i.e., not a BHAGL). Mild subscapularis strain.</p>
+<p class="i"><b>I:</b> HAGL lesion (humeral-sided avulsion of the inferior glenohumeral ligament); an instability cause with an intact labrum.</p>
+<h3 id="case-28-glad-lesion-glenolabral-articular-disruption">Case 28 — GLAD lesion (glenolabral articular disruption)</h3>
+<p><b>Clinical:</b> 30-year-old male after a forced adduction injury; persistent anterior pain without frank instability.</p>
+<p class="f"><b>F:</b> <b>MR arthrogram</b> demonstrates a superficial tear of the <b>anteroinferior labrum</b> with an adjacent <b>articular cartilage flap/defect</b> of the anteroinferior glenoid (<b>GLAD</b>), with a small chondral fragment. The IGHL and periosteum remain intact and the labrum is not displaced, accounting for stability despite the chondral injury. Subchondral marrow edema beneath the chondral defect.</p>
+<p class="i"><b>I:</b> GLAD lesion — anteroinferior labral tear with associated glenoid chondral injury; typically stable.</p>
+<h3 id="case-29-suprascapular-notch-ganglion">Case 29 — Suprascapular notch ganglion</h3>
+<p><b>Clinical:</b> 44-year-old male with deep aching shoulder pain and combined supraspinatus/infraspinatus weakness.</p>
+<p class="f"><b>F:</b> A multiloculated <b>paralabral/ganglion cyst</b> (~25 × 14 mm) tracks to the <b>suprascapular notch</b> proximal to the spinoglenoid notch, compressing the <b>suprascapular nerve</b> before its supraspinatus branch. Consequently <b>both supraspinatus and infraspinatus</b> show denervation edema-like <b>T2 hyperintensity</b> with early fatty change (<b>Goutallier 1</b>). Arises from a superior/posterosuperior labral tear. Cuff tendons intact.</p>
+<p class="i"><b>I:</b> Suprascapular notch ganglion causing suprascapular neuropathy with combined supraspinatus and infraspinatus denervation.</p>
+<h3 id="case-30-cuff-tear-arthropathy-hamada-chronic-massive-tear">Case 30 — Cuff-tear arthropathy (Hamada) — chronic massive tear</h3>
+<p><b>Clinical:</b> 79-year-old female with long-standing pseudoparalysis, prior known massive cuff tear, now with grinding pain.</p>
+<p class="f"><b>F:</b> Chronic <b>massive full-thickness cuff tear</b> (supraspinatus + infraspinatus, with partial subscapularis involvement) with <b>Goutallier grade 4</b> fatty atrophy and positive tangent sign. The <b>acromiohumeral interval is obliterated (≤2 mm)</b> with acetabularization of the acromion and femoralization of the humeral head, glenohumeral cartilage loss and superior glenoid erosion — <b>cuff-tear arthropathy (Hamada grade 4)</b>. The deltoid is intact and hypertrophied (relevant to reverse arthroplasty candidacy).</p>
+<p class="i"><b>I:</b> End-stage cuff-tear arthropathy (Hamada 4) from a chronic massive irreparable cuff tear; deltoid intact.</p>
+<button id="toc-handle" class="toc-handle" aria-label="Open table of contents" title="Contents">☰<span class="chev">›</span></button>
+<button id="to-top" class="to-top" aria-label="Back to top" title="Back to top (Home)">↑</button>
+<script>
+(function(){
+  var KEY='cheatsheet-font-scale', MIN=0.7, MAX=1.8, STEP=0.1;
+  var scale=parseFloat(localStorage.getItem(KEY));
+  if(!scale||isNaN(scale)) scale=1;
+  function apply(){ document.body.style.zoom=scale; }
+  function set(s){
+    scale=Math.min(MAX, Math.max(MIN, Math.round(s*10)/10));
+    localStorage.setItem(KEY, scale);
+    apply();
+  }
+  apply();
+  var dec=document.getElementById('fs-dec'),
+      inc=document.getElementById('fs-inc'),
+      rst=document.getElementById('fs-rst');
+  if(dec) dec.onclick=function(){ set(scale-STEP); };
+  if(inc) inc.onclick=function(){ set(scale+STEP); };
+  if(rst) rst.onclick=function(){ set(1); };
+  // back-to-top button
+  var top=document.getElementById('to-top');
+  function goTop(){ window.scrollTo({top:0, behavior:'smooth'}); }
+  function onScroll(){
+    if(!top) return;
+    if(window.scrollY>320) top.classList.add('show');
+    else top.classList.remove('show');
+  }
+  if(top){ top.onclick=goTop; window.addEventListener('scroll', onScroll, {passive:true}); onScroll(); }
+
+  // ── Table of contents drawer ──
+  var drawer=document.getElementById('toc-drawer'),
+      backdrop=document.getElementById('toc-backdrop'),
+      tocToggle=document.getElementById('toc-toggle'),
+      tocClose=document.getElementById('toc-close'),
+      tocHandle=document.getElementById('toc-handle');
+  function tocOpen(){ if(drawer){ drawer.classList.add('open'); backdrop.classList.add('show'); document.body.classList.add('toc-open'); } }
+  function tocCloseFn(){ if(drawer){ drawer.classList.remove('open'); backdrop.classList.remove('show'); document.body.classList.remove('toc-open'); } }
+  function tocToggleFn(){ drawer && (drawer.classList.contains('open')?tocCloseFn():tocOpen()); }
+  if(tocToggle) tocToggle.onclick=tocToggleFn;
+  if(tocHandle) tocHandle.onclick=tocOpen;
+  if(tocClose) tocClose.onclick=tocCloseFn;
+  if(backdrop) backdrop.onclick=tocCloseFn;
+  // swipe-left on the open drawer to close it
+  var swX=null, swY=null;
+  document.addEventListener('touchstart', function(e){
+    if(drawer && drawer.classList.contains('open')){ var t=e.touches[0]; swX=t.clientX; swY=t.clientY; }
+    else swX=null;
+  }, {passive:true});
+  document.addEventListener('touchmove', function(e){
+    if(swX===null) return; var t=e.touches[0];
+    if(t.clientX-swX < -45 && Math.abs(t.clientY-swY) < 70){ tocCloseFn(); swX=null; }
+  }, {passive:true});
+  document.addEventListener('touchend', function(){ swX=null; }, {passive:true});
+  if(drawer){
+    drawer.addEventListener('click', function(e){
+      var tog=e.target.closest('.toc-tog');
+      if(tog){ e.preventDefault(); tog.closest('.toc-node').classList.toggle('open'); return; }
+      if(e.target.closest('a')){ tocCloseFn(); }   // jump (href) + close
+    });
+  }
+  // scroll-spy: highlight current section, open its ancestors
+  var links={}, heads=[];
+  if(drawer){
+    [].forEach.call(drawer.querySelectorAll('a[href^="#"]'), function(a){
+      var id=a.getAttribute('href').slice(1); links[id]=a;
+      var h=document.getElementById(id); if(h) heads.push(h);
+    });
+    heads.sort(function(a,b){ return a.offsetTop-b.offsetTop; });
+  }
+  var spyT=null;
+  function spy(){
+    if(!heads.length) return;
+    var y=window.scrollY+96, cur=null;
+    for(var k=0;k<heads.length;k++){ if(heads[k].offsetTop<=y) cur=heads[k].id; else break; }
+    for(var id in links) links[id].classList.remove('active');
+    if(cur && links[cur]){
+      var a=links[cur]; a.classList.add('active');
+      var node=a.closest('.toc-node');
+      while(node){ node.classList.add('open'); node=node.parentElement&&node.parentElement.closest('.toc-node'); }
+    }
+  }
+  window.addEventListener('scroll', function(){ if(spyT) return; spyT=setTimeout(function(){ spyT=null; spy(); },120); }, {passive:true});
+  spy();
+
+  document.addEventListener('keydown', function(e){
+    if(e.metaKey||e.ctrlKey||e.altKey) return;            // leave native zoom alone
+    var t=e.target;
+    if(t && (t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable)) return;
+    if(e.key==='+'||e.key==='='){ set(scale+STEP); e.preventDefault(); }
+    else if(e.key==='-'||e.key==='_'){ set(scale-STEP); e.preventDefault(); }
+    else if(e.key==='0'){ set(1); e.preventDefault(); }
+    else if(e.key==='Home'){ goTop(); e.preventDefault(); }
+    else if(e.key==='c'||e.key==='C'){ tocToggleFn(); e.preventDefault(); }
+    else if(e.key==='Escape'){ tocCloseFn(); }
+  });
+})();
+</script>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}</script>
+</body>
+</html>

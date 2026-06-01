@@ -6,7 +6,7 @@
      - Other assets (CSS, JS, icons, PDFs, MD) -> CACHE-FIRST with runtime caching,
        so the app still works offline.
    Bump CACHE on each meaningful change to purge the old cache. */
-const CACHE = 'msk-mri-v3';
+const CACHE = 'msk-mri-v4';
 
 const SHELL = [
   './',
@@ -33,7 +33,15 @@ const SHELL = [
   'wrist/wrist-mri-cheatsheet.html',
   'foot/foot-mri-cheatsheet.html',
   'finger/finger-mri-cheatsheet.html',
-  'tumors/tumors-mri-cheatsheet.html'
+  'tumors/tumors-mri-cheatsheet.html',
+  'ankle/ankle-mri-cases.html',
+  'knee/knee-mri-cases.html',
+  'elbow/elbow-mri-cases.html',
+  'hip/hip-mri-cases.html',
+  'shoulder/shoulder-mri-cases.html',
+  'wrist/wrist-mri-cases.html',
+  'foot/foot-mri-cases.html',
+  'finger/finger-mri-cases.html'
 ];
 
 self.addEventListener('install', (e) => {

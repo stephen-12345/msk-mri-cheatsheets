@@ -70,6 +70,7 @@ body{
 }
 .topbar a:hover{border-color:var(--h3tx); color:#fff}
 .topbar a.tmpl{border-color:rgba(244,168,106,0.55);background:rgba(244,168,106,0.12);color:#ffe0c8}
+.topbar a.cases{border-color:rgba(121,212,155,0.55);background:rgba(121,212,155,0.12);color:#bdeccf}
 
 .fontctl{
   display:inline-flex; align-items:center; gap:4px;
@@ -791,15 +792,27 @@ def build_toc(toc: list) -> str:
     )
 
 
-def topbar(joint: str, title: str, has_template: bool) -> str:
-    links = [
-        '<a href="../index.html">← All regions</a>',
-        f'<a href="{joint}-mri-cheatsheet.pdf">PDF (print)</a>',
-        f'<a href="{joint}-mri-cheatsheet-dark.pdf">PDF (dark)</a>',
-        f'<a href="{joint}-mri-cheatsheet.md">Markdown</a>',
-    ]
-    if has_template:
-        links.insert(1, f'<a class="tmpl" href="../templates/{joint}.html">\U0001F4CB Dictation template</a>')
+def topbar(joint: str, title: str, has_template: bool, kind: str = "cheatsheet", has_cases: bool = False) -> str:
+    if kind == "cases":
+        links = [
+            '<a href="../index.html">← All regions</a>',
+            f'<a href="{joint}-mri-cheatsheet.html">Cheat sheet</a>',
+            f'<a href="{joint}-mri-cases-dark.pdf">PDF (dark)</a>',
+            f'<a href="{joint}-mri-cases.md">Markdown</a>',
+        ]
+        if has_template:
+            links.insert(2, f'<a class="tmpl" href="../templates/{joint}.html">\U0001F4CB Dictation template</a>')
+    else:
+        links = [
+            '<a href="../index.html">← All regions</a>',
+            f'<a href="{joint}-mri-cheatsheet.pdf">PDF (print)</a>',
+            f'<a href="{joint}-mri-cheatsheet-dark.pdf">PDF (dark)</a>',
+            f'<a href="{joint}-mri-cheatsheet.md">Markdown</a>',
+        ]
+        if has_cases:
+            links.insert(1, f'<a class="cases" href="{joint}-mri-cases.html">\U0001F4DA 30 cases</a>')
+        if has_template:
+            links.insert(1, f'<a class="tmpl" href="../templates/{joint}.html">\U0001F4CB Dictation template</a>')
     crumb = title.split(" - ")[0].split(" — ")[0]
     fontctl = (
         '<span class="fontctl" title="Font size — shortcuts: -, +, 0 to reset">'
@@ -822,14 +835,17 @@ def topbar(joint: str, title: str, has_template: bool) -> str:
     )
 
 
-def build(joint: str) -> None:
-    md_path = ROOT / joint / f"{joint}-mri-cheatsheet.md"
-    out_path = ROOT / joint / f"{joint}-mri-cheatsheet.html"
+def build_doc(joint: str, kind: str = "cheatsheet") -> None:
+    suffix = "cheatsheet" if kind == "cheatsheet" else "cases"
+    md_path = ROOT / joint / f"{joint}-mri-{suffix}.md"
+    if not md_path.exists():
+        return
+    out_path = ROOT / joint / f"{joint}-mri-{suffix}.html"
     md = md_path.read_text(encoding="utf-8")
     title, body, toc = md_to_html(md)
     toc_html = build_toc(toc)
     has_template = (ROOT / "templates" / f"{joint}.html").exists()
-    # move the rendered <h1>/subtitle out so the topbar sits above them
+    has_cases = (ROOT / joint / f"{joint}-mri-cases.md").exists()
     page = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -846,7 +862,7 @@ def build(joint: str) -> None:
 <style>{CSS}</style>
 </head>
 <body>
-{topbar(joint, title or joint.title(), has_template)}
+{topbar(joint, title or joint.title(), has_template, kind, has_cases)}
 {toc_html}
 {body}
 <button id="toc-handle" class="toc-handle" aria-label="Open table of contents" title="Contents">☰<span class="chev">›</span></button>
@@ -857,13 +873,14 @@ def build(joint: str) -> None:
 </html>
 """
     out_path.write_text(page, encoding="utf-8")
-    print(f"  {joint:9s} -> {out_path.name}  ({len(page)//1024} KB)")
+    print(f"  {joint:9s} {suffix:10s} -> {out_path.name}  ({len(page)//1024} KB)")
 
 
 def main() -> None:
-    print("Building dark-mode document cheat sheets:")
+    print("Building dark-mode cheat sheets + case files:")
     for j in JOINTS:
-        build(j)
+        build_doc(j, "cheatsheet")
+        build_doc(j, "cases")
     print("Done.")
 
 

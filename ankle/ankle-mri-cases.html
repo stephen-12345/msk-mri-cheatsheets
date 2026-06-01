@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ankle MRI — 30 Sample Cases</title>
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#0b3a52">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MSK MRI">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<style>
+:root{
+  --bg:#0c0f15; --panel:#141925; --panel2:#1a2030; --bdr:#27303f;
+  --tx:#e6eaf2; --tx2:#aab4c5; --tx3:#7c8699;
+  --h1bg:#0b3a52; --h2bg:#11556f; --h3tx:#6cc6e6;
+  --findings:#f4a86a; --impression:#7fd29a;
+  --ph-bg:rgba(244,168,106,0.16); --ph-tx:#f4c89a; --ph-bd:rgba(244,168,106,0.4);
+  --th-bg:#16384a; --th-tx:#cfe7f2;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);color-scheme:dark;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
+  background:var(--bg); color:var(--tx);
+  font-size:18px; line-height:1.62;
+  max-width:1120px; margin:0 auto; padding:0 32px 64px;
+  -webkit-font-smoothing:antialiased;
+}
+
+.topbar{
+  position:sticky; top:0; z-index:10;
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  margin:0 -32px 22px;
+  padding:11px 32px;
+  padding-top:calc(11px + env(safe-area-inset-top, 0px));
+  padding-left:calc(32px + env(safe-area-inset-left, 0px));
+  padding-right:calc(32px + env(safe-area-inset-right, 0px));
+  background:rgba(12,15,21,0.94); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--bdr);
+}
+.topbar .crumb{font-weight:700;color:#fff;font-size:15px;margin-right:auto}
+.topbar a{
+  display:inline-flex; align-items:center;
+  border:1px solid var(--bdr); border-radius:999px;
+  padding:5px 12px; color:#9fdcf0; text-decoration:none;
+  font-size:13px; font-weight:600; background:#0d1a26;
+}
+.topbar a:hover{border-color:var(--h3tx); color:#fff}
+.topbar a.tmpl{border-color:rgba(244,168,106,0.55);background:rgba(244,168,106,0.12);color:#ffe0c8}
+.topbar a.cases{border-color:rgba(121,212,155,0.55);background:rgba(121,212,155,0.12);color:#bdeccf}
+
+.fontctl{
+  display:inline-flex; align-items:center; gap:4px;
+  margin-left:6px; padding-left:10px; border-left:1px solid var(--bdr);
+}
+.fontctl button{
+  cursor:pointer; border:1px solid var(--bdr); border-radius:6px;
+  background:#0d1a26; color:#9fdcf0; font-weight:700;
+  font-family:inherit; line-height:1; padding:5px 9px;
+}
+.fontctl button:hover{border-color:var(--h3tx); color:#fff}
+.fontctl #fs-dec{font-size:12px}
+.fontctl #fs-rst{font-size:13px; min-width:30px}
+.fontctl #fs-inc{font-size:16px}
+
+h1{
+  margin:6px 0 8px; padding:16px 22px;
+  background:linear-gradient(135deg,var(--h1bg),#0a2c40);
+  color:#fff; border-radius:10px; border-left:5px solid var(--h3tx);
+  font-size:30px; line-height:1.18; letter-spacing:0.2px;
+}
+.subtitle{color:var(--tx2); font-size:16px; margin:0 0 22px; line-height:1.5}
+
+h2.group{
+  margin:40px 0 16px; padding:13px 18px;
+  background:linear-gradient(135deg,#241a3a,#1a2030);
+  color:#fff; border-radius:9px; border-left:5px solid #a78bfa;
+  font-size:24px; line-height:1.2; letter-spacing:0.6px;
+  text-transform:uppercase; scroll-margin-top:calc(64px + env(safe-area-inset-top, 0px));
+}
+h2{
+  margin:34px 0 14px; padding:11px 16px;
+  background:var(--h2bg); color:#fff; border-radius:8px;
+  font-size:21px; line-height:1.25; letter-spacing:0.2px;
+  scroll-margin-top:calc(64px + env(safe-area-inset-top, 0px));
+}
+h3{
+  margin:22px 0 9px; color:var(--h3tx);
+  font-size:18.5px; line-height:1.3; font-weight:700;
+  border-bottom:1px solid #2c3a48; padding-bottom:5px;
+  scroll-margin-top:calc(64px + env(safe-area-inset-top, 0px));
+}
+
+p{margin:9px 0}
+.dx{
+  margin:18px 0 4px; font-weight:800; color:#fff;
+  font-size:18.5px; line-height:1.3;
+}
+.f, .i{margin:5px 0; padding-left:14px; border-left:2px solid #25303e}
+.f b{color:var(--findings)}
+.i b{color:var(--impression)}
+
+ul{margin:10px 0 14px 26px}
+li{margin:6px 0}
+
+table{
+  width:100%; border-collapse:collapse; margin:14px 0 18px;
+  font-size:16px; line-height:1.45; background:var(--panel);
+  border-radius:8px; overflow:hidden;
+}
+th{
+  background:var(--th-bg); color:var(--th-tx);
+  text-align:left; font-weight:700; padding:9px 12px;
+  border-bottom:1px solid #2c3a48;
+}
+td{padding:8px 12px; border-bottom:1px solid #232c39; color:var(--tx2); vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
+
+.to-top{
+  position:fixed; z-index:20;
+  right:calc(22px + env(safe-area-inset-right, 0px));
+  bottom:calc(22px + env(safe-area-inset-bottom, 0px));
+  width:46px; height:46px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid var(--bdr); background:rgba(17,85,111,0.92);
+  color:#fff; font-size:22px; line-height:1; cursor:pointer;
+  box-shadow:0 6px 20px rgba(0,0,0,0.45); backdrop-filter:blur(6px);
+  opacity:0; visibility:hidden; transform:translateY(8px);
+  transition:opacity .18s, transform .18s, visibility .18s;
+}
+.to-top.show{opacity:1; visibility:visible; transform:translateY(0)}
+.to-top:hover{background:#16638a; border-color:var(--h3tx)}
+@media print{ .to-top{display:none} }
+
+.ph{
+  background:var(--ph-bg); color:var(--ph-tx);
+  border:1px solid var(--ph-bd); border-radius:4px;
+  padding:0 4px; font-size:0.92em; white-space:nowrap;
+}
+
+.section-card{
+  background:var(--panel); border:1px solid var(--bdr);
+  border-radius:10px; padding:4px 20px 16px; margin:0 0 18px;
+}
+
+/* ── Teaching callout boxes ── */
+.callout{
+  border:1px solid var(--bdr); border-left:4px solid var(--c-acc,#6cc6e6);
+  background:var(--c-bg,#101a22); border-radius:9px;
+  padding:12px 18px 13px; margin:14px 0;
+}
+.callout .c-title{
+  display:flex; align-items:baseline; gap:9px;
+  font-weight:800; font-size:14px; letter-spacing:0.6px;
+  text-transform:uppercase; color:var(--c-acc,#6cc6e6); margin:0 0 7px;
+}
+.callout .c-title .ico{font-size:15px; line-height:1}
+.callout .c-title .lbl{opacity:0.78; font-size:11px; font-weight:700}
+.callout .c-title .ttl{color:var(--tx); text-transform:none; letter-spacing:0; font-size:16px}
+.callout p{margin:7px 0; color:var(--tx)}
+.callout ul{margin:7px 0 7px 22px}
+.callout li{margin:5px 0; color:var(--tx)}
+.callout b{color:#fff}
+.callout.find{--c-acc:#5fc6e6; --c-bg:#0d1c25}
+.callout.landmark{--c-acc:#b69cf0; --c-bg:#16132a}
+.callout.pearl{--c-acc:#79d49b; --c-bg:#0e1f17}
+.callout.pitfall{--c-acc:#f3ad63; --c-bg:#231910}
+.callout.measure{--c-acc:#7fb2ea; --c-bg:#101826}
+.callout.note{--c-acc:#9fb4c6; --c-bg:#141a22}
+
+/* ── Anatomy diagrams (inline SVG) ── */
+.diagram{
+  margin:18px 0; padding:14px 16px 10px;
+  background:#0b131d; border:1px solid var(--bdr); border-radius:10px;
+}
+.diagram svg{ display:block; width:100%; height:auto; max-width:560px; margin:0 auto; }
+.diagram figcaption{
+  margin:10px auto 2px; max-width:620px; text-align:center;
+  font-size:13.5px; color:var(--tx2); line-height:1.5;
+}
+@media print{ .diagram{ break-inside:avoid; } }
+
+/* ── Table-of-contents drawer (overlay; never resizes the page) ── */
+.toc-toggle{
+  display:inline-flex; align-items:center; gap:5px;
+  border:1px solid var(--bdr); border-radius:7px; background:#0d1a26;
+  color:#9fdcf0; font-weight:700; font-size:13px; padding:5px 11px;
+  cursor:pointer; font-family:inherit; margin-right:4px;
+}
+.toc-toggle:hover{ border-color:var(--h3tx); color:#fff; }
+.toc-backdrop{
+  position:fixed; inset:0; z-index:55; background:rgba(0,0,0,0.5);
+  opacity:0; visibility:hidden; transition:opacity .2s;
+}
+.toc-backdrop.show{ opacity:1; visibility:visible; }
+.toc-drawer{
+  position:fixed; top:0; left:0; height:100vh; width:316px; max-width:86vw; z-index:60;
+  background:#0b121d; border-right:1px solid var(--bdr);
+  box-shadow:3px 0 28px rgba(0,0,0,0.55);
+  transform:translateX(-104%); transition:transform .22s ease;
+  display:flex; flex-direction:column;
+}
+.toc-drawer.open{ transform:translateX(0); }
+.toc-head{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:13px 16px;
+  padding-top:calc(13px + env(safe-area-inset-top, 0px));
+  border-bottom:1px solid var(--bdr); flex:0 0 auto;
+}
+.toc-head .t{ font-weight:800; color:#fff; font-size:15px; letter-spacing:.5px; }
+.toc-close{ background:none; border:none; color:var(--tx2); font-size:24px; line-height:1; cursor:pointer; padding:0 4px; }
+.toc-close:hover{ color:#fff; }
+.toc-list{ overflow-y:auto; padding:8px 8px 28px; flex:1; }
+.toc-node.leaf{ }
+.toc-row{ display:flex; align-items:flex-start; }
+.toc-tog{
+  flex:0 0 auto; width:20px; height:26px; margin-top:1px;
+  background:none; border:none; cursor:pointer; padding:0;
+  color:var(--tx3); font-size:11px;
+}
+.toc-tog::before{ content:"▸"; display:inline-block; transition:transform .15s; }
+.toc-node.open > .toc-row > .toc-tog::before{ transform:rotate(90deg); }
+.toc-node.leaf .toc-row{ padding-left:20px; }
+.toc-children{ display:none; }
+.toc-node.open > .toc-children{ display:block; }
+.toc-link{
+  flex:1; display:block; text-decoration:none; color:var(--tx2);
+  padding:5px 9px; border-radius:6px; font-size:13.5px; line-height:1.35;
+  border-left:2px solid transparent;
+}
+.toc-link:hover{ background:#13212f; color:#fff; }
+.toc-link.active{ border-left-color:var(--h3tx); background:#13212f; color:#fff; }
+.toc-link.lvl-group{ color:#c9b6f5; font-weight:800; text-transform:uppercase; font-size:12px; letter-spacing:.5px; }
+.toc-link.lvl-h2{ color:#e6eaf2; font-weight:600; }
+.toc-link.lvl-h3{ color:var(--tx2); font-size:12.5px; }
+.toc-children .toc-children .toc-link{ padding-left:18px; }
+@media print{ .toc-toggle, .toc-drawer, .toc-backdrop{ display:none !important; } }
+
+/* Left-edge floating handle — thumb-reach access to the TOC from anywhere */
+.toc-handle{
+  position:fixed; left:0; top:64%; transform:translateY(-50%);
+  z-index:54; display:flex; align-items:center; justify-content:center;
+  width:27px; height:74px; padding:0;
+  background:rgba(17,85,111,0.9); color:#d6f0fb;
+  border:1px solid var(--bdr); border-left:none; border-radius:0 13px 13px 0;
+  box-shadow:3px 0 16px rgba(0,0,0,0.5);
+  -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+  font-size:16px; line-height:1; cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  transition:opacity .18s, background .15s, visibility .18s;
+}
+.toc-handle:hover{ background:#16638a; color:#fff; }
+.toc-handle:active{ background:#1d7aa8; }
+.toc-handle .chev{ font-size:11px; opacity:.75; }
+body.toc-open .toc-handle{ opacity:0; visibility:hidden; }
+@media print{ .toc-handle{ display:none; } }
+@media (min-width:901px) and (hover:hover){ .toc-handle{ display:none; } }
+
+@media (max-width:680px){
+  body{font-size:17px; padding:0 16px 48px}
+  .topbar{
+    margin:0 -16px 18px;
+    padding:8px 14px;
+    padding-top:calc(8px + env(safe-area-inset-top, 0px));
+    padding-left:calc(14px + env(safe-area-inset-left, 0px));
+    padding-right:calc(14px + env(safe-area-inset-right, 0px));
+    gap:7px;
+  }
+  .topbar .crumb{ display:none; }            /* title already shown in the h1 banner */
+  .topbar a{ font-size:12px; padding:5px 9px; min-height:36px; }
+  .toc-toggle{ font-size:12.5px; padding:6px 11px; min-height:36px; }
+  .fontctl{ margin-left:2px; padding-left:8px; }
+  .fontctl button{ padding:6px 9px; }
+  h1{font-size:24px;padding:13px 16px}
+  h2{font-size:19px}
+  h1,h2,h2.group,h3{ scroll-margin-top:calc(96px + env(safe-area-inset-top, 0px)); }
+}
+
+/* Dark-mode PDF (Chrome --print-to-pdf). Backgrounds preserved via
+   print-color-adjust:exact on html above. */
+@page{ size:Letter; margin:0.5in; }
+@media print{
+  body{ background:var(--bg); max-width:none; margin:0; padding:0; font-size:13px; line-height:1.5; }
+  .topbar{ display:none; }
+  h1{ font-size:21px; padding:11px 14px; }
+  h2,h2.group{ font-size:15px; break-after:avoid; }
+  h3,.dx{ break-after:avoid; }
+  .f,.i{ break-inside:avoid; }
+  table,tr{ break-inside:avoid; }
+  table{ font-size:11.5px; }
+}
+</style>
+</head>
+<body>
+<div class="topbar"><button id="toc-toggle" class="toc-toggle" title="Contents (c)" aria-label="Table of contents">☰ Contents</button><span class="crumb">Ankle MRI</span><a href="../index.html">← All regions</a><a href="ankle-mri-cheatsheet.html">Cheat sheet</a><a class="tmpl" href="../templates/ankle.html">📋 Dictation template</a><a href="ankle-mri-cases-dark.pdf">PDF (dark)</a><a href="ankle-mri-cases.md">Markdown</a><span class="fontctl" title="Font size — shortcuts: -, +, 0 to reset"><button id="fs-dec" aria-label="Decrease font size">A−</button><button id="fs-rst" aria-label="Reset font size">A</button><button id="fs-inc" aria-label="Increase font size">A+</button></span></div>
+<div id="toc-backdrop" class="toc-backdrop"></div><nav id="toc-drawer" class="toc-drawer" aria-label="Table of contents"><div class="toc-head"><span class="t">Contents</span><button id="toc-close" class="toc-close" aria-label="Close contents">&times;</button></div><div class="toc-list"><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-h2" href="#lateral-ligaments-syndesmosis">Lateral Ligaments &amp; Syndesmosis</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-1-acute-atfl-tear-full-thickness">Case 1 — Acute ATFL tear (full-thickness)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-2-combined-atfl-cfl-tear">Case 2 — Combined ATFL + CFL tear</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-3-chronic-atfl-scarring-with-anterolateral-impingement">Case 3 — Chronic ATFL scarring with anterolateral impingement</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-4-high-ankle-syndesmotic-aitfl-sprain-with-tibiofibular-widening">Case 4 — High ankle (syndesmotic/AITFL) sprain with tibiofibular widening</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-5-maisonneuve-pattern">Case 5 — Maisonneuve pattern</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-h2" href="#medial-spring-ligament">Medial &amp; Spring Ligament</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-6-deltoid-ligament-sprain-tear">Case 6 — Deltoid ligament sprain/tear</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-7-spring-ligament-insufficiency-with-adult-acquired-flatfoot-triad">Case 7 — Spring ligament insufficiency with adult-acquired flatfoot triad</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-h2" href="#tendons">Tendons</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-8-achilles-mid-substance-tendinosis">Case 8 — Achilles mid-substance tendinosis</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-9-achilles-partial-thickness-tear">Case 9 — Achilles partial-thickness tear</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-10-complete-achilles-rupture-with-gap">Case 10 — Complete Achilles rupture with gap</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-11-achilles-paratenonitis-peritendinitis">Case 11 — Achilles paratenonitis (peritendinitis)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-12-insertional-achilles-tendinopathy-with-haglund-and-retrocalcaneal-bursitis">Case 12 — Insertional Achilles tendinopathy with Haglund and retrocalcaneal bursitis</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-13-posterior-tibial-tendinosis-dysfunction">Case 13 — Posterior tibial tendinosis / dysfunction</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-14-ptt-longitudinal-split-tear">Case 14 — PTT longitudinal split tear</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-15-peroneus-brevis-split-tear">Case 15 — Peroneus brevis split tear</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-16-peroneal-tenosynovitis">Case 16 — Peroneal tenosynovitis</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-17-peroneal-subluxation-with-spr-injury">Case 17 — Peroneal subluxation with SPR injury</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-18-fhl-tenosynovitis">Case 18 — FHL tenosynovitis</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-h2" href="#bone-ocd-impingement">Bone, OCD &amp; Impingement</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-19-medial-talar-dome-osteochondral-lesion">Case 19 — Medial talar dome osteochondral lesion</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-20-lateral-talar-dome-osteochondral-lesion">Case 20 — Lateral talar dome osteochondral lesion</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-21-posterior-impingement-with-os-trigonum">Case 21 — Posterior impingement with os trigonum</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-22-anterolateral-soft-tissue-impingement">Case 22 — Anterolateral soft-tissue impingement</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-23-sinus-tarsi-syndrome">Case 23 — Sinus tarsi syndrome</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-24-calcaneal-stress-fracture">Case 24 — Calcaneal stress fracture</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-25-bone-contusion-pattern-from-inversion-injury">Case 25 — Bone contusion pattern from inversion injury</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-h2" href="#plantar-other">Plantar &amp; Other</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-26-plantar-fasciitis">Case 26 — Plantar fasciitis</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-27-tarsal-tunnel-syndrome">Case 27 — Tarsal tunnel syndrome</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-28-ankle-joint-effusion-with-synovitis">Case 28 — Ankle joint effusion with synovitis</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-29-tibialis-anterior-tendinosis-partial-tear">Case 29 — Tibialis anterior tendinosis/partial tear</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-30-posterolateral-talar-stieda-process-fracture-with-fhl-involvement">Case 30 — Posterolateral talar (Stieda) process fracture with FHL involvement</a></div></div></div></div></div></nav>
+<h1>Ankle MRI — 30 Sample Cases</h1>
+<p class="subtitle">A worked teaching file of the 30 most common ankle MRI diagnoses, with realistic findings and impressions for dictation reference.</p>
+<h2 id="lateral-ligaments-syndesmosis">Lateral Ligaments &amp; Syndesmosis</h2>
+<h3 id="case-1-acute-atfl-tear-full-thickness">Case 1 — Acute ATFL tear (full-thickness)</h3>
+<p><b>Clinical:</b> 24-year-old male recreational basketball player, acute inversion injury 3 days ago with lateral swelling and difficulty bearing weight.</p>
+<p class="f"><b>F:</b> Axial and coronal fluid-sensitive sequences show full-thickness discontinuity of the <b>anterior talofibular ligament (ATFL)</b> with a wavy, lax fiber contour and a 6 mm gap filled with T2-hyperintense edema/hemorrhage. There is associated <b>anterolateral capsular</b> disruption and reactive fluid in the lateral gutter. The <b>calcaneofibular ligament (CFL)</b> is intact and taut beneath the peroneal tendons. Mild bone marrow edema is present along the lateral talar process. The <b>syndesmosis (AITFL/PITFL)</b> is intact; tibiofibular clear space is normal at 3 mm. No osteochondral injury of the talar dome. Peroneal tendons are intact without subluxation.</p>
+<p class="i"><b>I:</b> Acute full-thickness tear of the ATFL with intact CFL and syndesmosis. Grade III isolated lateral ligament injury.</p>
+<h3 id="case-2-combined-atfl-cfl-tear">Case 2 — Combined ATFL + CFL tear</h3>
+<p><b>Clinical:</b> 31-year-old female trail runner, severe inversion on uneven ground, gross lateral instability on exam.</p>
+<p class="f"><b>F:</b> There is full-thickness tear of the <b>ATFL</b> with complete fiber discontinuity and a fluid-filled gap, accompanied by full-thickness tear of the <b>calcaneofibular ligament (CFL)</b>, which is detached from the fibular tip with surrounding edema deep to the peroneal tendons. Fluid tracks into the <b>peroneal tendon sheath</b> secondary to capsular disruption (communicating effusion) rather than primary tenosynovitis. Marked soft-tissue edema overlies the lateral malleolus. Talar dome cartilage is intact; no fracture. The deltoid ligament and syndesmosis are intact.</p>
+<p class="i"><b>I:</b> Combined full-thickness ATFL and CFL tears — grade III lateral ligament complex injury with mechanical instability.</p>
+<h3 id="case-3-chronic-atfl-scarring-with-anterolateral-impingement">Case 3 — Chronic ATFL scarring with anterolateral impingement</h3>
+<p><b>Clinical:</b> 29-year-old male with chronic lateral ankle pain and &quot;giving way&quot; 14 months after a sprain.</p>
+<p class="f"><b>F:</b> The <b>ATFL</b> is thickened, irregular, and attenuated with intermediate signal, consistent with chronic scarring rather than acute tear. A focal <b>anterolateral soft-tissue mass</b> (meniscoid lesion) measuring 9 x 6 mm of intermediate-to-low T2 signal occupies the anterolateral gutter, abutting the talar shoulder. Mild synovitis lines the lateral recess. No acute ligament discontinuity, no marrow edema, and the talar cartilage is preserved. Syndesmosis intact.</p>
+<p class="i"><b>I:</b> Chronic ATFL insufficiency with anterolateral soft-tissue (meniscoid) impingement lesion.</p>
+<h3 id="case-4-high-ankle-syndesmotic-aitfl-sprain-with-tibiofibular-widening">Case 4 — High ankle (syndesmotic/AITFL) sprain with tibiofibular widening</h3>
+<p><b>Clinical:</b> 22-year-old male football lineman, external-rotation/dorsiflexion injury, pain above the joint line with squeeze-test positivity.</p>
+<p class="f"><b>F:</b> The <b>anterior inferior tibiofibular ligament (AITFL)</b> is thickened, edematous, and partially torn with periligamentous hemorrhage. The <b>tibiofibular clear space</b> is widened to 7 mm (upper limit ~5 mm) and the tibiofibular overlap is reduced. Edema tracks along the <b>interosseous membrane</b> for approximately 4 cm above the plafond. The <b>PITFL</b> is intact. Bone marrow edema is present at the anterolateral distal tibia. No frank diastasis on this static study; deltoid intact.</p>
+<p class="i"><b>I:</b> Syndesmotic (high ankle) sprain with AITFL injury and mild tibiofibular widening. Recommend weight-bearing radiographs to exclude dynamic diastasis.</p>
+<h3 id="case-5-maisonneuve-pattern">Case 5 — Maisonneuve pattern</h3>
+<p><b>Clinical:</b> 45-year-old male, external rotation injury with medial ankle pain and proximal calf tenderness.</p>
+<p class="f"><b>F:</b> There is full-thickness tear of the <b>AITFL</b> and disruption of the <b>interosseous membrane</b> extending proximally, with marrow edema and a spiral fracture of the <b>proximal fibula</b> at the level imaged on the most cephalad sections. The <b>deltoid ligament</b> demonstrates full-thickness tear of the deep tibiotalar fibers with widening of the medial clear space to 6 mm. Medial malleolus is intact. The tibiofibular clear space is widened. Talar dome cartilage preserved.</p>
+<p class="i"><b>I:</b> Maisonneuve injury — proximal fibular fracture with syndesmotic and deltoid disruption. This is an unstable pattern requiring orthopedic evaluation.</p>
+<h2 id="medial-spring-ligament">Medial &amp; Spring Ligament</h2>
+<h3 id="case-6-deltoid-ligament-sprain-tear">Case 6 — Deltoid ligament sprain/tear</h3>
+<p><b>Clinical:</b> 38-year-old female, eversion/pronation injury during a fall, medial ankle swelling.</p>
+<p class="f"><b>F:</b> The <b>deltoid ligament</b> complex shows partial-thickness tearing of the superficial tibiocalcaneal and tibionavicular fibers with periligamentous edema; the deep <b>tibiotalar</b> band is thickened and edematous but in continuity. Medial clear space is preserved at 3 mm. Reactive marrow edema along the medial malleolar tip. Lateral ligaments and syndesmosis are intact. <b>Posterior tibial tendon</b> is normal in caliber and signal.</p>
+<p class="i"><b>I:</b> Partial-thickness deltoid ligament sprain (predominantly superficial) without medial clear space widening.</p>
+<h3 id="case-7-spring-ligament-insufficiency-with-adult-acquired-flatfoot-triad">Case 7 — Spring ligament insufficiency with adult-acquired flatfoot triad</h3>
+<p><b>Clinical:</b> 58-year-old female with progressive medial arch collapse and &quot;too many toes&quot; sign.</p>
+<p class="f"><b>F:</b> The <b>superomedial calcaneonavicular (spring) ligament</b> is thickened and attenuated with intrasubstance increased signal and a focal tear at its talar-head articular surface. The <b>posterior tibial tendon</b> is markedly thickened with longitudinal interstitial split and surrounding tenosynovitis (PTT dysfunction). There is <b>hindfoot valgus</b> alignment with talonavicular uncoverage and sinus tarsi crowding. Plantar sag at the talonavicular joint. No talar dome osteochondral lesion.</p>
+<p class="i"><b>I:</b> Spring ligament insufficiency in the setting of posterior tibial tendon dysfunction — adult-acquired flatfoot deformity triad.</p>
+<h2 id="tendons">Tendons</h2>
+<h3 id="case-8-achilles-mid-substance-tendinosis">Case 8 — Achilles mid-substance tendinosis</h3>
+<p><b>Clinical:</b> 47-year-old male recreational runner with chronic posterior heel pain, worse after activity, no acute event.</p>
+<p class="f"><b>F:</b> The <b>Achilles tendon</b> is fusiformly thickened to an AP diameter of 11 mm (normal &lt;7 mm) at 4 cm above the calcaneal insertion, with intrasubstance intermediate T2 signal but no discrete fiber gap or full-thickness defect. The anterior tendon margin remains flat to convex. There is no significant <b>paratenon</b> edema and Kager fat is clear. No retrocalcaneal bursitis. Insertion is normal.</p>
+<p class="i"><b>I:</b> Mid-substance (non-insertional) Achilles tendinosis without tear.</p>
+<h3 id="case-9-achilles-partial-thickness-tear">Case 9 — Achilles partial-thickness tear</h3>
+<p><b>Clinical:</b> 52-year-old male, sudden calf pain during tennis push-off, able to weight-bear with weakness.</p>
+<p class="f"><b>F:</b> Against a background of mid-substance tendinosis (AP thickening to 13 mm), there is a focal <b>partial-thickness tear</b> involving approximately 40% of the cross-sectional area along the anterior fibers 4–5 cm above the insertion, with a fluid-signal cleft on sagittal and axial images. Intact posterior fibers maintain continuity. Mild <b>paratenonitis (peritendinitis)</b> with peritendinous edema; no synovial sheath is present. Plantaris is intact. No full-thickness gap.</p>
+<p class="i"><b>I:</b> Partial-thickness Achilles tear (~40%) superimposed on tendinosis, with paratenonitis. Tendon remains in continuity.</p>
+<h3 id="case-10-complete-achilles-rupture-with-gap">Case 10 — Complete Achilles rupture with gap</h3>
+<p><b>Clinical:</b> 44-year-old male, felt a &quot;pop/kick&quot; during basketball, positive Thompson test.</p>
+<p class="f"><b>F:</b> Full-thickness, full-width discontinuity of the <b>Achilles tendon</b> approximately 5 cm above the calcaneal insertion with a fluid- and hemorrhage-filled gap measuring 3.2 cm with the foot in neutral. The torn stumps are thickened, frayed, and retracted; the proximal stump is wavy. Kager fat pad is edematous/hemorrhagic. The <b>plantaris</b> tendon is intact and may simulate residual fibers medially. No bony avulsion.</p>
+<p class="i"><b>I:</b> Acute complete Achilles tendon rupture with a 3.2 cm gap. Stump retraction noted for surgical planning.</p>
+<h3 id="case-11-achilles-paratenonitis-peritendinitis">Case 11 — Achilles paratenonitis (peritendinitis)</h3>
+<p><b>Clinical:</b> 26-year-old female long-distance runner with posterior ankle pain and crepitus, recently increased mileage.</p>
+<p class="f"><b>F:</b> The <b>Achilles tendon</b> itself is normal in caliber (AP 6 mm) and signal without intrasubstance abnormality or tear. There is circumferential T2-hyperintense edema surrounding the tendon within the <b>paratenon</b>, with peritendinous fluid and fat stranding in the pre-Achilles (Kager) fat. Because the Achilles has no synovial sheath, this represents <b>paratenonitis/peritendinitis</b> rather than tenosynovitis. No retrocalcaneal bursitis.</p>
+<p class="i"><b>I:</b> Achilles paratenonitis (peritendinitis) without underlying tendinosis or tear.</p>
+<h3 id="case-12-insertional-achilles-tendinopathy-with-haglund-and-retrocalcaneal-bursitis">Case 12 — Insertional Achilles tendinopathy with Haglund and retrocalcaneal bursitis</h3>
+<p><b>Clinical:</b> 55-year-old female with posterior heel pain and a tender bony prominence, aggravated by shoes.</p>
+<p class="f"><b>F:</b> The distal <b>Achilles</b> is thickened with intrasubstance signal and small intratendinous calcific/ossific foci at its calcaneal insertion (insertional tendinopathy). A prominent posterosuperior calcaneal tuberosity (<b>Haglund deformity</b>) is present. The <b>retrocalcaneal bursa</b> is distended with fluid (12 x 5 mm), and there is reactive marrow edema in the posterosuperior calcaneus. Adventitial pre-Achilles bursitis also noted. No full-thickness tear.</p>
+<p class="i"><b>I:</b> Insertional Achilles tendinopathy with Haglund deformity and retrocalcaneal bursitis (Haglund syndrome).</p>
+<h3 id="case-13-posterior-tibial-tendinosis-dysfunction">Case 13 — Posterior tibial tendinosis / dysfunction</h3>
+<p><b>Clinical:</b> 60-year-old female with medial ankle/arch pain and difficulty performing single-leg heel rise.</p>
+<p class="f"><b>F:</b> The <b>posterior tibialis tendon (PTT)</b> is thickened to nearly twice the caliber of the adjacent FDL with intrasubstance intermediate signal but no discrete split, in the retromalleolar and submalleolar segments. Mild <b>tenosynovial</b> fluid surrounds the tendon. Early hindfoot valgus with mild talonavicular uncoverage; spring ligament is mildly attenuated. No acute marrow edema.</p>
+<p class="i"><b>I:</b> Posterior tibial tendinosis with dysfunction (stage I–II), early flatfoot change.</p>
+<h3 id="case-14-ptt-longitudinal-split-tear">Case 14 — PTT longitudinal split tear</h3>
+<p><b>Clinical:</b> 63-year-old female, chronic medial ankle pain with progressive flatfoot.</p>
+<p class="f"><b>F:</b> The <b>posterior tibialis tendon</b> is enlarged and demonstrates a <b>longitudinal split</b> into two slips on axial images at the level of the medial malleolus, with interposed fluid and surrounding <b>tenosynovitis</b>. There is plantar-flexion attrition along the medial malleolar groove with mild marginal spurring. Associated <b>spring ligament</b> thinning and hindfoot valgus. The FDL and FHL are normal.</p>
+<p class="i"><b>I:</b> Longitudinal split tear of the posterior tibial tendon with tenosynovitis (PTT dysfunction stage II).</p>
+<h3 id="case-15-peroneus-brevis-split-tear">Case 15 — Peroneus brevis split tear</h3>
+<p><b>Clinical:</b> 41-year-old male with lateral ankle pain and prior recurrent sprains.</p>
+<p class="f"><b>F:</b> At and just distal to the fibular tip, the <b>peroneus brevis</b> assumes a boomerang/C-shaped configuration and is split longitudinally into two slips that partially envelop the intact <b>peroneus longus</b>, consistent with a <b>peroneus brevis split tear</b>. There is associated <b>peroneal tenosynovitis</b> with sheath fluid. The retromalleolar groove is shallow/convex and the <b>superior peroneal retinaculum</b> is intact. Mild attenuation of the chronic ATFL.</p>
+<p class="i"><b>I:</b> Longitudinal split tear of the peroneus brevis with peroneal tenosynovitis; shallow retromalleolar groove predisposing factor.</p>
+<h3 id="case-16-peroneal-tenosynovitis">Case 16 — Peroneal tenosynovitis</h3>
+<p><b>Clinical:</b> 35-year-old female dancer with lateral retromalleolar pain and swelling, no instability.</p>
+<p class="f"><b>F:</b> Both <b>peroneal tendons (longus and brevis)</b> are normal in caliber and intrinsic signal, but are surrounded by a moderate amount of T2-hyperintense fluid within the common <b>peroneal tendon sheath</b>, with mild synovial thickening — findings of <b>tenosynovitis</b>. No tendon split or tear, and the SPR is intact with the tendons reduced in the retromalleolar groove. No fibular marrow edema.</p>
+<p class="i"><b>I:</b> Peroneal tenosynovitis without tendon tear or subluxation.</p>
+<h3 id="case-17-peroneal-subluxation-with-spr-injury">Case 17 — Peroneal subluxation with SPR injury</h3>
+<p><b>Clinical:</b> 28-year-old male skier, acute dorsiflexion-eversion injury with a snapping sensation laterally.</p>
+<p class="f"><b>F:</b> The <b>superior peroneal retinaculum (SPR)</b> is stripped/avulsed from the posterolateral fibula with a small periosteal-rim fibrocartilage detachment, and the <b>peroneal tendons are subluxed/dislocated</b> anterolaterally, lying anterior to the fibular tip on axial images. A shallow, convex retromalleolar groove is noted. There is peroneal tenosynovitis and a thin cortical avulsion fleck off the fibula. Peroneus brevis shows mild fraying but no full split.</p>
+<p class="i"><b>I:</b> Acute peroneal tendon subluxation with superior peroneal retinaculum injury and rim avulsion.</p>
+<h3 id="case-18-fhl-tenosynovitis">Case 18 — FHL tenosynovitis</h3>
+<p><b>Clinical:</b> 23-year-old female ballet dancer (en pointe) with posteromedial ankle pain.</p>
+<p class="f"><b>F:</b> The <b>flexor hallucis longus (FHL)</b> tendon demonstrates increased fluid within its sheath at the level of the posterior talus between the medial and lateral talar tubercles (fibro-osseous tunnel), consistent with <b>stenosing tenosynovitis</b>, with mild synovial thickening. The tendon caliber is preserved without split. There is associated posterior ankle synovitis and a prominent <b>os trigonum</b>. No FHL nodularity on this static study.</p>
+<p class="i"><b>I:</b> FHL stenosing tenosynovitis at the fibro-osseous tunnel, associated with posterior impingement (os trigonum).</p>
+<h2 id="bone-ocd-impingement">Bone, OCD &amp; Impingement</h2>
+<h3 id="case-19-medial-talar-dome-osteochondral-lesion">Case 19 — Medial talar dome osteochondral lesion</h3>
+<p><b>Clinical:</b> 32-year-old male with deep ankle pain and catching 8 months after an inversion injury.</p>
+<p class="f"><b>F:</b> There is an <b>osteochondral lesion of the talus (OLT)</b> at the posteromedial talar dome (<b>zone 4</b> of the 9-zone grid) measuring 11 x 8 mm with overlying chondral fissuring and a subchondral cyst (4 mm). High T2 signal at the bone-fragment interface suggests an unstable/loose fragment. Mild subchondral marrow edema. The tibial plafond cartilage is intact. Small reactive joint effusion.</p>
+<p class="i"><b>I:</b> Posteromedial talar dome osteochondral lesion (zone 4) with unstable-appearing fragment and subchondral cyst.</p>
+<h3 id="case-20-lateral-talar-dome-osteochondral-lesion">Case 20 — Lateral talar dome osteochondral lesion</h3>
+<p><b>Clinical:</b> 27-year-old female snowboarder, prior dorsiflexion-inversion injury, persistent lateral ankle pain.</p>
+<p class="f"><b>F:</b> An <b>osteochondral lesion</b> is present at the anterolateral talar dome (<b>zone 6</b>) measuring 9 x 6 mm, shallow and wafer-shaped as is typical for lateral lesions, with overlying cartilage thinning but no displaced fragment. Mild underlying marrow edema; no subchondral cyst. Associated chronic <b>ATFL</b> attenuation. No loose body within the joint.</p>
+<p class="i"><b>I:</b> Anterolateral talar dome osteochondral lesion (zone 6), shallow and stable-appearing, with chronic lateral ligament insufficiency.</p>
+<h3 id="case-21-posterior-impingement-with-os-trigonum">Case 21 — Posterior impingement with os trigonum</h3>
+<p><b>Clinical:</b> 25-year-old female ballet dancer with posterior ankle pain in plantar flexion.</p>
+<p class="f"><b>F:</b> A well-corticated <b>os trigonum</b> is present posterior to the lateral talar tubercle with fluid signal across the <b>synchondrosis</b> and marrow edema on both sides, indicating a symptomatic os trigonum syndrome. There is posterior capsular synovitis and edema within the posterior recess. Mild <b>FHL tenosynovitis</b> adjacent. No fracture of the posterior talar process.</p>
+<p class="i"><b>I:</b> Posterior ankle impingement with symptomatic os trigonum (edematous synchondrosis) and associated FHL tenosynovitis.</p>
+<h3 id="case-22-anterolateral-soft-tissue-impingement">Case 22 — Anterolateral soft-tissue impingement</h3>
+<p><b>Clinical:</b> 30-year-old male with persistent anterolateral ankle pain after a sprain, no instability.</p>
+<p class="f"><b>F:</b> Soft-tissue thickening and intermediate-signal scar fill the <b>anterolateral gutter</b> forming a meniscoid lesion (8 x 5 mm) abutting the talus, with adjacent synovitis. The <b>ATFL</b> is chronically thickened and scarred. No osteochondral lesion, no acute ligament tear, and the syndesmosis is intact. Small joint effusion outlines the lesion.</p>
+<p class="i"><b>I:</b> Anterolateral soft-tissue (meniscoid) impingement following prior lateral ligament injury.</p>
+<h3 id="case-23-sinus-tarsi-syndrome">Case 23 — Sinus tarsi syndrome</h3>
+<p><b>Clinical:</b> 49-year-old female with lateral hindfoot pain and a feeling of instability after recurrent sprains.</p>
+<p class="f"><b>F:</b> The normal fat within the <b>sinus tarsi</b> is replaced by T2-hyperintense fluid/edema and T1-hypointense fibrosis, with disruption of the <b>interosseous talocalcaneal</b> and <b>cervical</b> ligaments. Associated chronic <b>ATFL</b> attenuation and mild posterior tibial tendinosis. No subtalar joint osteochondral lesion. Small subtalar effusion.</p>
+<p class="i"><b>I:</b> Sinus tarsi syndrome — obliteration of sinus tarsi fat with ligament disruption, in the setting of chronic lateral instability.</p>
+<h3 id="case-24-calcaneal-stress-fracture">Case 24 — Calcaneal stress fracture</h3>
+<p><b>Clinical:</b> 19-year-old male military recruit with insidious heel pain worsening over 3 weeks of marching.</p>
+<p class="f"><b>F:</b> A linear T1-hypointense, T2-hyperintense band oriented perpendicular to the trabeculae in the posterior <b>calcaneal tuberosity</b> is surrounded by extensive marrow edema, consistent with a <b>stress fracture</b>. No cortical break or displacement. The Achilles insertion and plantar fascia are normal. No soft-tissue mass.</p>
+<p class="i"><b>I:</b> Calcaneal stress (insufficiency/fatigue) fracture of the posterior tuberosity with surrounding marrow edema.</p>
+<h3 id="case-25-bone-contusion-pattern-from-inversion-injury">Case 25 — Bone contusion pattern from inversion injury</h3>
+<p><b>Clinical:</b> 21-year-old female soccer player, acute inversion injury, diffuse ankle pain, radiographs negative.</p>
+<p class="f"><b>F:</b> Geographic, ill-defined subchondral <b>bone marrow edema (contusion)</b> is present at the <b>medial talar dome</b> and at the <b>lateral malleolus/distal fibula</b> in a kissing-contusion distribution typical of inversion mechanism, without cortical fracture line or osteochondral fragment. The <b>ATFL</b> is sprained (thickened, edematous, partial fibers) but in continuity. Small reactive effusion. No syndesmotic injury.</p>
+<p class="i"><b>I:</b> Inversion-injury bone contusion pattern (medial talar dome and distal fibula) with low-grade ATFL sprain; no fracture.</p>
+<h2 id="plantar-other">Plantar &amp; Other</h2>
+<h3 id="case-26-plantar-fasciitis">Case 26 — Plantar fasciitis</h3>
+<p><b>Clinical:</b> 50-year-old female with insidious inferior heel pain, worst with first steps in the morning.</p>
+<p class="f"><b>F:</b> The proximal <b>plantar fascia</b> is thickened to 7 mm at its calcaneal origin (normal &lt;4 mm) with intrasubstance and perifascial T2 hyperintensity, and mild reactive marrow edema at the medial calcaneal tubercle. No focal fascial tear/discontinuity. A small inferior calcaneal enthesophyte is present. No plantar fibroma or soft-tissue mass.</p>
+<p class="i"><b>I:</b> Plantar fasciitis at the calcaneal origin with reactive enthesopathic marrow edema; no fascial tear.</p>
+<h3 id="case-27-tarsal-tunnel-syndrome">Case 27 — Tarsal tunnel syndrome</h3>
+<p><b>Clinical:</b> 46-year-old male with burning medial ankle and plantar paresthesias, worse at night.</p>
+<p class="f"><b>F:</b> Within the <b>tarsal tunnel</b> deep to the flexor retinaculum, there is a lobulated T2-hyperintense <b>ganglion cyst</b> (15 x 10 mm) arising from the subtalar joint that compresses and displaces the <b>tibial nerve</b> and its plantar branches. The nerve is mildly enlarged with increased signal proximally. No intrinsic muscle denervation edema in the foot at this time. Tendons of the tarsal tunnel are intact.</p>
+<p class="i"><b>I:</b> Tarsal tunnel syndrome secondary to a ganglion cyst compressing the tibial nerve.</p>
+<h3 id="case-28-ankle-joint-effusion-with-synovitis">Case 28 — Ankle joint effusion with synovitis</h3>
+<p><b>Clinical:</b> 39-year-old female with diffuse ankle swelling and stiffness, no recent trauma.</p>
+<p class="f"><b>F:</b> There is a moderate <b>tibiotalar joint effusion</b> distending the anterior and posterior recesses, with frond-like <b>synovial proliferation/thickening</b> that enhances on post-contrast images. No discrete intra-articular loose body or erosion. Cartilage is preserved; no osteochondral lesion. Mild fluid extends into the posterior subtalar joint. Tendons and ligaments are intact.</p>
+<p class="i"><b>I:</b> Tibiotalar joint effusion with synovitis; nonspecific inflammatory synovial process — correlate clinically for inflammatory arthropathy.</p>
+<h3 id="case-29-tibialis-anterior-tendinosis-partial-tear">Case 29 — Tibialis anterior tendinosis/partial tear</h3>
+<p><b>Clinical:</b> 64-year-old male with anterior ankle swelling and weakness of dorsiflexion, insidious onset.</p>
+<p class="f"><b>F:</b> The <b>tibialis anterior tendon</b> is thickened with intrasubstance signal and a focal <b>partial-thickness tear</b> near its insertion on the medial cuneiform/first metatarsal base, with surrounding <b>tenosynovial</b> fluid (a sheathed tendon). No full-thickness gap or retraction. Mild reactive marrow edema at the insertion. Extensor hallucis longus intact.</p>
+<p class="i"><b>I:</b> Distal tibialis anterior tendinosis with partial-thickness tear and tenosynovitis; tendon in continuity.</p>
+<h3 id="case-30-posterolateral-talar-stieda-process-fracture-with-fhl-involvement">Case 30 — Posterolateral talar (Stieda) process fracture with FHL involvement</h3>
+<p><b>Clinical:</b> 33-year-old male, forced plantar flexion injury (kickboxing), posterolateral ankle pain.</p>
+<p class="f"><b>F:</b> There is marrow edema involving the <b>posterolateral talar (Stieda) process</b> with a faint nondisplaced fracture line, distinguished from a corticated os trigonum by irregular non-sclerotic margins and acute edema. Adjacent <b>FHL tenosynovitis</b> and posterior recess synovitis are present. No displaced fragment or loose body. The posterior tibiotalar cartilage is intact.</p>
+<p class="i"><b>I:</b> Acute fracture of the posterolateral talar process (Stieda process) with associated FHL tenosynovitis and posterior soft-tissue edema.</p>
+<button id="toc-handle" class="toc-handle" aria-label="Open table of contents" title="Contents">☰<span class="chev">›</span></button>
+<button id="to-top" class="to-top" aria-label="Back to top" title="Back to top (Home)">↑</button>
+<script>
+(function(){
+  var KEY='cheatsheet-font-scale', MIN=0.7, MAX=1.8, STEP=0.1;
+  var scale=parseFloat(localStorage.getItem(KEY));
+  if(!scale||isNaN(scale)) scale=1;
+  function apply(){ document.body.style.zoom=scale; }
+  function set(s){
+    scale=Math.min(MAX, Math.max(MIN, Math.round(s*10)/10));
+    localStorage.setItem(KEY, scale);
+    apply();
+  }
+  apply();
+  var dec=document.getElementById('fs-dec'),
+      inc=document.getElementById('fs-inc'),
+      rst=document.getElementById('fs-rst');
+  if(dec) dec.onclick=function(){ set(scale-STEP); };
+  if(inc) inc.onclick=function(){ set(scale+STEP); };
+  if(rst) rst.onclick=function(){ set(1); };
+  // back-to-top button
+  var top=document.getElementById('to-top');
+  function goTop(){ window.scrollTo({top:0, behavior:'smooth'}); }
+  function onScroll(){
+    if(!top) return;
+    if(window.scrollY>320) top.classList.add('show');
+    else top.classList.remove('show');
+  }
+  if(top){ top.onclick=goTop; window.addEventListener('scroll', onScroll, {passive:true}); onScroll(); }
+
+  // ── Table of contents drawer ──
+  var drawer=document.getElementById('toc-drawer'),
+      backdrop=document.getElementById('toc-backdrop'),
+      tocToggle=document.getElementById('toc-toggle'),
+      tocClose=document.getElementById('toc-close'),
+      tocHandle=document.getElementById('toc-handle');
+  function tocOpen(){ if(drawer){ drawer.classList.add('open'); backdrop.classList.add('show'); document.body.classList.add('toc-open'); } }
+  function tocCloseFn(){ if(drawer){ drawer.classList.remove('open'); backdrop.classList.remove('show'); document.body.classList.remove('toc-open'); } }
+  function tocToggleFn(){ drawer && (drawer.classList.contains('open')?tocCloseFn():tocOpen()); }
+  if(tocToggle) tocToggle.onclick=tocToggleFn;
+  if(tocHandle) tocHandle.onclick=tocOpen;
+  if(tocClose) tocClose.onclick=tocCloseFn;
+  if(backdrop) backdrop.onclick=tocCloseFn;
+  // swipe-left on the open drawer to close it
+  var swX=null, swY=null;
+  document.addEventListener('touchstart', function(e){
+    if(drawer && drawer.classList.contains('open')){ var t=e.touches[0]; swX=t.clientX; swY=t.clientY; }
+    else swX=null;
+  }, {passive:true});
+  document.addEventListener('touchmove', function(e){
+    if(swX===null) return; var t=e.touches[0];
+    if(t.clientX-swX < -45 && Math.abs(t.clientY-swY) < 70){ tocCloseFn(); swX=null; }
+  }, {passive:true});
+  document.addEventListener('touchend', function(){ swX=null; }, {passive:true});
+  if(drawer){
+    drawer.addEventListener('click', function(e){
+      var tog=e.target.closest('.toc-tog');
+      if(tog){ e.preventDefault(); tog.closest('.toc-node').classList.toggle('open'); return; }
+      if(e.target.closest('a')){ tocCloseFn(); }   // jump (href) + close
+    });
+  }
+  // scroll-spy: highlight current section, open its ancestors
+  var links={}, heads=[];
+  if(drawer){
+    [].forEach.call(drawer.querySelectorAll('a[href^="#"]'), function(a){
+      var id=a.getAttribute('href').slice(1); links[id]=a;
+      var h=document.getElementById(id); if(h) heads.push(h);
+    });
+    heads.sort(function(a,b){ return a.offsetTop-b.offsetTop; });
+  }
+  var spyT=null;
+  function spy(){
+    if(!heads.length) return;
+    var y=window.scrollY+96, cur=null;
+    for(var k=0;k<heads.length;k++){ if(heads[k].offsetTop<=y) cur=heads[k].id; else break; }
+    for(var id in links) links[id].classList.remove('active');
+    if(cur && links[cur]){
+      var a=links[cur]; a.classList.add('active');
+      var node=a.closest('.toc-node');
+      while(node){ node.classList.add('open'); node=node.parentElement&&node.parentElement.closest('.toc-node'); }
+    }
+  }
+  window.addEventListener('scroll', function(){ if(spyT) return; spyT=setTimeout(function(){ spyT=null; spy(); },120); }, {passive:true});
+  spy();
+
+  document.addEventListener('keydown', function(e){
+    if(e.metaKey||e.ctrlKey||e.altKey) return;            // leave native zoom alone
+    var t=e.target;
+    if(t && (t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable)) return;
+    if(e.key==='+'||e.key==='='){ set(scale+STEP); e.preventDefault(); }
+    else if(e.key==='-'||e.key==='_'){ set(scale-STEP); e.preventDefault(); }
+    else if(e.key==='0'){ set(1); e.preventDefault(); }
+    else if(e.key==='Home'){ goTop(); e.preventDefault(); }
+    else if(e.key==='c'||e.key==='C'){ tocToggleFn(); e.preventDefault(); }
+    else if(e.key==='Escape'){ tocCloseFn(); }
+  });
+})();
+</script>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}</script>
+</body>
+</html>

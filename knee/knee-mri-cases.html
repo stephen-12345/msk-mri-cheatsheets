@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Knee MRI — 30 Sample Cases</title>
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#0b3a52">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MSK MRI">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<style>
+:root{
+  --bg:#0c0f15; --panel:#141925; --panel2:#1a2030; --bdr:#27303f;
+  --tx:#e6eaf2; --tx2:#aab4c5; --tx3:#7c8699;
+  --h1bg:#0b3a52; --h2bg:#11556f; --h3tx:#6cc6e6;
+  --findings:#f4a86a; --impression:#7fd29a;
+  --ph-bg:rgba(244,168,106,0.16); --ph-tx:#f4c89a; --ph-bd:rgba(244,168,106,0.4);
+  --th-bg:#16384a; --th-tx:#cfe7f2;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--bg);color-scheme:dark;
+  -webkit-print-color-adjust:exact; print-color-adjust:exact;}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;
+  background:var(--bg); color:var(--tx);
+  font-size:18px; line-height:1.62;
+  max-width:1120px; margin:0 auto; padding:0 32px 64px;
+  -webkit-font-smoothing:antialiased;
+}
+
+.topbar{
+  position:sticky; top:0; z-index:10;
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+  margin:0 -32px 22px;
+  padding:11px 32px;
+  padding-top:calc(11px + env(safe-area-inset-top, 0px));
+  padding-left:calc(32px + env(safe-area-inset-left, 0px));
+  padding-right:calc(32px + env(safe-area-inset-right, 0px));
+  background:rgba(12,15,21,0.94); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--bdr);
+}
+.topbar .crumb{font-weight:700;color:#fff;font-size:15px;margin-right:auto}
+.topbar a{
+  display:inline-flex; align-items:center;
+  border:1px solid var(--bdr); border-radius:999px;
+  padding:5px 12px; color:#9fdcf0; text-decoration:none;
+  font-size:13px; font-weight:600; background:#0d1a26;
+}
+.topbar a:hover{border-color:var(--h3tx); color:#fff}
+.topbar a.tmpl{border-color:rgba(244,168,106,0.55);background:rgba(244,168,106,0.12);color:#ffe0c8}
+.topbar a.cases{border-color:rgba(121,212,155,0.55);background:rgba(121,212,155,0.12);color:#bdeccf}
+
+.fontctl{
+  display:inline-flex; align-items:center; gap:4px;
+  margin-left:6px; padding-left:10px; border-left:1px solid var(--bdr);
+}
+.fontctl button{
+  cursor:pointer; border:1px solid var(--bdr); border-radius:6px;
+  background:#0d1a26; color:#9fdcf0; font-weight:700;
+  font-family:inherit; line-height:1; padding:5px 9px;
+}
+.fontctl button:hover{border-color:var(--h3tx); color:#fff}
+.fontctl #fs-dec{font-size:12px}
+.fontctl #fs-rst{font-size:13px; min-width:30px}
+.fontctl #fs-inc{font-size:16px}
+
+h1{
+  margin:6px 0 8px; padding:16px 22px;
+  background:linear-gradient(135deg,var(--h1bg),#0a2c40);
+  color:#fff; border-radius:10px; border-left:5px solid var(--h3tx);
+  font-size:30px; line-height:1.18; letter-spacing:0.2px;
+}
+.subtitle{color:var(--tx2); font-size:16px; margin:0 0 22px; line-height:1.5}
+
+h2.group{
+  margin:40px 0 16px; padding:13px 18px;
+  background:linear-gradient(135deg,#241a3a,#1a2030);
+  color:#fff; border-radius:9px; border-left:5px solid #a78bfa;
+  font-size:24px; line-height:1.2; letter-spacing:0.6px;
+  text-transform:uppercase; scroll-margin-top:calc(64px + env(safe-area-inset-top, 0px));
+}
+h2{
+  margin:34px 0 14px; padding:11px 16px;
+  background:var(--h2bg); color:#fff; border-radius:8px;
+  font-size:21px; line-height:1.25; letter-spacing:0.2px;
+  scroll-margin-top:calc(64px + env(safe-area-inset-top, 0px));
+}
+h3{
+  margin:22px 0 9px; color:var(--h3tx);
+  font-size:18.5px; line-height:1.3; font-weight:700;
+  border-bottom:1px solid #2c3a48; padding-bottom:5px;
+  scroll-margin-top:calc(64px + env(safe-area-inset-top, 0px));
+}
+
+p{margin:9px 0}
+.dx{
+  margin:18px 0 4px; font-weight:800; color:#fff;
+  font-size:18.5px; line-height:1.3;
+}
+.f, .i{margin:5px 0; padding-left:14px; border-left:2px solid #25303e}
+.f b{color:var(--findings)}
+.i b{color:var(--impression)}
+
+ul{margin:10px 0 14px 26px}
+li{margin:6px 0}
+
+table{
+  width:100%; border-collapse:collapse; margin:14px 0 18px;
+  font-size:16px; line-height:1.45; background:var(--panel);
+  border-radius:8px; overflow:hidden;
+}
+th{
+  background:var(--th-bg); color:var(--th-tx);
+  text-align:left; font-weight:700; padding:9px 12px;
+  border-bottom:1px solid #2c3a48;
+}
+td{padding:8px 12px; border-bottom:1px solid #232c39; color:var(--tx2); vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
+
+.to-top{
+  position:fixed; z-index:20;
+  right:calc(22px + env(safe-area-inset-right, 0px));
+  bottom:calc(22px + env(safe-area-inset-bottom, 0px));
+  width:46px; height:46px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid var(--bdr); background:rgba(17,85,111,0.92);
+  color:#fff; font-size:22px; line-height:1; cursor:pointer;
+  box-shadow:0 6px 20px rgba(0,0,0,0.45); backdrop-filter:blur(6px);
+  opacity:0; visibility:hidden; transform:translateY(8px);
+  transition:opacity .18s, transform .18s, visibility .18s;
+}
+.to-top.show{opacity:1; visibility:visible; transform:translateY(0)}
+.to-top:hover{background:#16638a; border-color:var(--h3tx)}
+@media print{ .to-top{display:none} }
+
+.ph{
+  background:var(--ph-bg); color:var(--ph-tx);
+  border:1px solid var(--ph-bd); border-radius:4px;
+  padding:0 4px; font-size:0.92em; white-space:nowrap;
+}
+
+.section-card{
+  background:var(--panel); border:1px solid var(--bdr);
+  border-radius:10px; padding:4px 20px 16px; margin:0 0 18px;
+}
+
+/* ── Teaching callout boxes ── */
+.callout{
+  border:1px solid var(--bdr); border-left:4px solid var(--c-acc,#6cc6e6);
+  background:var(--c-bg,#101a22); border-radius:9px;
+  padding:12px 18px 13px; margin:14px 0;
+}
+.callout .c-title{
+  display:flex; align-items:baseline; gap:9px;
+  font-weight:800; font-size:14px; letter-spacing:0.6px;
+  text-transform:uppercase; color:var(--c-acc,#6cc6e6); margin:0 0 7px;
+}
+.callout .c-title .ico{font-size:15px; line-height:1}
+.callout .c-title .lbl{opacity:0.78; font-size:11px; font-weight:700}
+.callout .c-title .ttl{color:var(--tx); text-transform:none; letter-spacing:0; font-size:16px}
+.callout p{margin:7px 0; color:var(--tx)}
+.callout ul{margin:7px 0 7px 22px}
+.callout li{margin:5px 0; color:var(--tx)}
+.callout b{color:#fff}
+.callout.find{--c-acc:#5fc6e6; --c-bg:#0d1c25}
+.callout.landmark{--c-acc:#b69cf0; --c-bg:#16132a}
+.callout.pearl{--c-acc:#79d49b; --c-bg:#0e1f17}
+.callout.pitfall{--c-acc:#f3ad63; --c-bg:#231910}
+.callout.measure{--c-acc:#7fb2ea; --c-bg:#101826}
+.callout.note{--c-acc:#9fb4c6; --c-bg:#141a22}
+
+/* ── Anatomy diagrams (inline SVG) ── */
+.diagram{
+  margin:18px 0; padding:14px 16px 10px;
+  background:#0b131d; border:1px solid var(--bdr); border-radius:10px;
+}
+.diagram svg{ display:block; width:100%; height:auto; max-width:560px; margin:0 auto; }
+.diagram figcaption{
+  margin:10px auto 2px; max-width:620px; text-align:center;
+  font-size:13.5px; color:var(--tx2); line-height:1.5;
+}
+@media print{ .diagram{ break-inside:avoid; } }
+
+/* ── Table-of-contents drawer (overlay; never resizes the page) ── */
+.toc-toggle{
+  display:inline-flex; align-items:center; gap:5px;
+  border:1px solid var(--bdr); border-radius:7px; background:#0d1a26;
+  color:#9fdcf0; font-weight:700; font-size:13px; padding:5px 11px;
+  cursor:pointer; font-family:inherit; margin-right:4px;
+}
+.toc-toggle:hover{ border-color:var(--h3tx); color:#fff; }
+.toc-backdrop{
+  position:fixed; inset:0; z-index:55; background:rgba(0,0,0,0.5);
+  opacity:0; visibility:hidden; transition:opacity .2s;
+}
+.toc-backdrop.show{ opacity:1; visibility:visible; }
+.toc-drawer{
+  position:fixed; top:0; left:0; height:100vh; width:316px; max-width:86vw; z-index:60;
+  background:#0b121d; border-right:1px solid var(--bdr);
+  box-shadow:3px 0 28px rgba(0,0,0,0.55);
+  transform:translateX(-104%); transition:transform .22s ease;
+  display:flex; flex-direction:column;
+}
+.toc-drawer.open{ transform:translateX(0); }
+.toc-head{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:13px 16px;
+  padding-top:calc(13px + env(safe-area-inset-top, 0px));
+  border-bottom:1px solid var(--bdr); flex:0 0 auto;
+}
+.toc-head .t{ font-weight:800; color:#fff; font-size:15px; letter-spacing:.5px; }
+.toc-close{ background:none; border:none; color:var(--tx2); font-size:24px; line-height:1; cursor:pointer; padding:0 4px; }
+.toc-close:hover{ color:#fff; }
+.toc-list{ overflow-y:auto; padding:8px 8px 28px; flex:1; }
+.toc-node.leaf{ }
+.toc-row{ display:flex; align-items:flex-start; }
+.toc-tog{
+  flex:0 0 auto; width:20px; height:26px; margin-top:1px;
+  background:none; border:none; cursor:pointer; padding:0;
+  color:var(--tx3); font-size:11px;
+}
+.toc-tog::before{ content:"▸"; display:inline-block; transition:transform .15s; }
+.toc-node.open > .toc-row > .toc-tog::before{ transform:rotate(90deg); }
+.toc-node.leaf .toc-row{ padding-left:20px; }
+.toc-children{ display:none; }
+.toc-node.open > .toc-children{ display:block; }
+.toc-link{
+  flex:1; display:block; text-decoration:none; color:var(--tx2);
+  padding:5px 9px; border-radius:6px; font-size:13.5px; line-height:1.35;
+  border-left:2px solid transparent;
+}
+.toc-link:hover{ background:#13212f; color:#fff; }
+.toc-link.active{ border-left-color:var(--h3tx); background:#13212f; color:#fff; }
+.toc-link.lvl-group{ color:#c9b6f5; font-weight:800; text-transform:uppercase; font-size:12px; letter-spacing:.5px; }
+.toc-link.lvl-h2{ color:#e6eaf2; font-weight:600; }
+.toc-link.lvl-h3{ color:var(--tx2); font-size:12.5px; }
+.toc-children .toc-children .toc-link{ padding-left:18px; }
+@media print{ .toc-toggle, .toc-drawer, .toc-backdrop{ display:none !important; } }
+
+/* Left-edge floating handle — thumb-reach access to the TOC from anywhere */
+.toc-handle{
+  position:fixed; left:0; top:64%; transform:translateY(-50%);
+  z-index:54; display:flex; align-items:center; justify-content:center;
+  width:27px; height:74px; padding:0;
+  background:rgba(17,85,111,0.9); color:#d6f0fb;
+  border:1px solid var(--bdr); border-left:none; border-radius:0 13px 13px 0;
+  box-shadow:3px 0 16px rgba(0,0,0,0.5);
+  -webkit-backdrop-filter:blur(6px); backdrop-filter:blur(6px);
+  font-size:16px; line-height:1; cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+  transition:opacity .18s, background .15s, visibility .18s;
+}
+.toc-handle:hover{ background:#16638a; color:#fff; }
+.toc-handle:active{ background:#1d7aa8; }
+.toc-handle .chev{ font-size:11px; opacity:.75; }
+body.toc-open .toc-handle{ opacity:0; visibility:hidden; }
+@media print{ .toc-handle{ display:none; } }
+@media (min-width:901px) and (hover:hover){ .toc-handle{ display:none; } }
+
+@media (max-width:680px){
+  body{font-size:17px; padding:0 16px 48px}
+  .topbar{
+    margin:0 -16px 18px;
+    padding:8px 14px;
+    padding-top:calc(8px + env(safe-area-inset-top, 0px));
+    padding-left:calc(14px + env(safe-area-inset-left, 0px));
+    padding-right:calc(14px + env(safe-area-inset-right, 0px));
+    gap:7px;
+  }
+  .topbar .crumb{ display:none; }            /* title already shown in the h1 banner */
+  .topbar a{ font-size:12px; padding:5px 9px; min-height:36px; }
+  .toc-toggle{ font-size:12.5px; padding:6px 11px; min-height:36px; }
+  .fontctl{ margin-left:2px; padding-left:8px; }
+  .fontctl button{ padding:6px 9px; }
+  h1{font-size:24px;padding:13px 16px}
+  h2{font-size:19px}
+  h1,h2,h2.group,h3{ scroll-margin-top:calc(96px + env(safe-area-inset-top, 0px)); }
+}
+
+/* Dark-mode PDF (Chrome --print-to-pdf). Backgrounds preserved via
+   print-color-adjust:exact on html above. */
+@page{ size:Letter; margin:0.5in; }
+@media print{
+  body{ background:var(--bg); max-width:none; margin:0; padding:0; font-size:13px; line-height:1.5; }
+  .topbar{ display:none; }
+  h1{ font-size:21px; padding:11px 14px; }
+  h2,h2.group{ font-size:15px; break-after:avoid; }
+  h3,.dx{ break-after:avoid; }
+  .f,.i{ break-inside:avoid; }
+  table,tr{ break-inside:avoid; }
+  table{ font-size:11.5px; }
+}
+</style>
+</head>
+<body>
+<div class="topbar"><button id="toc-toggle" class="toc-toggle" title="Contents (c)" aria-label="Table of contents">☰ Contents</button><span class="crumb">Knee MRI</span><a href="../index.html">← All regions</a><a href="knee-mri-cheatsheet.html">Cheat sheet</a><a class="tmpl" href="../templates/knee.html">📋 Dictation template</a><a href="knee-mri-cases-dark.pdf">PDF (dark)</a><a href="knee-mri-cases.md">Markdown</a><span class="fontctl" title="Font size — shortcuts: -, +, 0 to reset"><button id="fs-dec" aria-label="Decrease font size">A−</button><button id="fs-rst" aria-label="Reset font size">A</button><button id="fs-inc" aria-label="Increase font size">A+</button></span></div>
+<div id="toc-backdrop" class="toc-backdrop"></div><nav id="toc-drawer" class="toc-drawer" aria-label="Table of contents"><div class="toc-head"><span class="t">Contents</span><button id="toc-close" class="toc-close" aria-label="Close contents">&times;</button></div><div class="toc-list"><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-h2" href="#meniscus">Meniscus</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-1-medial-meniscus-posterior-horn-horizontal-oblique-tear">Case 1 — Medial meniscus posterior horn horizontal/oblique tear</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-2-radial-tear-of-the-medial-meniscus">Case 2 — Radial tear of the medial meniscus</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-3-medial-meniscus-posterior-root-tear-with-extrusion">Case 3 — Medial meniscus posterior root tear with extrusion</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-4-bucket-handle-tear-with-displaced-fragment-and-double-pcl-sign">Case 4 — Bucket-handle tear with displaced fragment and double-PCL sign</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-5-lateral-meniscus-tear">Case 5 — Lateral meniscus tear</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-6-discoid-lateral-meniscus-with-tear">Case 6 — Discoid lateral meniscus with tear</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-7-degenerative-meniscal-maceration">Case 7 — Degenerative meniscal maceration</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-h2" href="#cruciate-ligaments">Cruciate Ligaments</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-8-acute-complete-acl-tear-with-pivot-shift-contusions-and-segond-fracture">Case 8 — Acute complete ACL tear with pivot-shift contusions and Segond fracture</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-9-acl-mucoid-degeneration">Case 9 — ACL mucoid degeneration</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-10-acl-reconstruction-graft-evaluation">Case 10 — ACL reconstruction graft evaluation</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-11-pcl-tear">Case 11 — PCL tear</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-12-o-donoghue-triad-acl-mcl-medial-meniscus">Case 12 — O&#x27;Donoghue triad (ACL + MCL + medial meniscus)</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-h2" href="#collaterals-plc">Collaterals &amp; PLC</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-13-mcl-grade-2-sprain">Case 13 — MCL grade 2 sprain</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-14-lcl-fibular-collateral-ligament-tear">Case 14 — LCL (fibular collateral ligament) tear</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-15-posterolateral-corner-injury-with-arcuate-sign">Case 15 — Posterolateral corner injury with arcuate sign</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-h2" href="#extensor-mechanism-patellofemoral">Extensor Mechanism &amp; Patellofemoral</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-16-patellar-tendon-partial-tear">Case 16 — Patellar tendon partial tear</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-17-quadriceps-tendon-tear">Case 17 — Quadriceps tendon tear</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-18-acute-lateral-patellar-dislocation-with-mpfl-tear-and-bone-bruise-pair">Case 18 — Acute lateral patellar dislocation with MPFL tear and bone-bruise pair</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-19-patellofemoral-chondromalacia-with-maltracking">Case 19 — Patellofemoral chondromalacia with maltracking</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-h2" href="#cartilage-bone">Cartilage &amp; Bone</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-20-acute-osteochondral-injury">Case 20 — Acute osteochondral injury</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-21-osteochondritis-dissecans">Case 21 — Osteochondritis dissecans</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-22-sonk-subchondral-insufficiency-fracture">Case 22 — SONK / subchondral insufficiency fracture</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-23-tibial-plateau-contusion-fracture">Case 23 — Tibial plateau contusion/fracture</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-24-tricompartmental-osteoarthritis">Case 24 — Tricompartmental osteoarthritis</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-h2" href="#other">Other</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-25-baker-popliteal-cyst">Case 25 — Baker (popliteal) cyst</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-26-pes-anserine-bursitis">Case 26 — Pes anserine bursitis</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-27-iliotibial-band-friction-syndrome">Case 27 — Iliotibial band friction syndrome</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-28-chronic-acl-deficient-knee">Case 28 — Chronic ACL-deficient knee</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-29-medial-meniscocapsular-separation-ramp-lesion">Case 29 — Medial meniscocapsular separation (ramp lesion)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-30-hoffa-fat-pad-impingement-syndrome">Case 30 — Hoffa fat-pad impingement syndrome</a></div></div></div></div></div></nav>
+<h1>Knee MRI — 30 Sample Cases</h1>
+<p class="subtitle">A worked teaching file of the 30 most common knee MRI diagnoses with realistic dictated findings and impressions.</p>
+<h2 id="meniscus">Meniscus</h2>
+<h3 id="case-1-medial-meniscus-posterior-horn-horizontal-oblique-tear">Case 1 — Medial meniscus posterior horn horizontal/oblique tear</h3>
+<p><b>Clinical:</b> 54-year-old man, gradual medial joint-line pain after squatting at work, no acute injury.</p>
+<p class="f"><b>F:</b> On sagittal and coronal PD fat-sat images there is a horizontal-oblique high-signal line within the <b>posterior horn of the medial meniscus</b> reaching the inferior articular surface, measuring approximately 11 mm in AP extent. A small associated <b>parameniscal cyst</b> is seen tracking medially measuring 8 x 5 mm. No displaced fragment. Mild adjacent grade 2 chondral signal change over the medial femoral condyle without full-thickness loss. The ACL, PCL, and collateral ligaments are intact. No significant joint effusion.</p>
+<p class="i"><b>I:</b> Degenerative horizontal-oblique tear of the medial meniscus posterior horn with small parameniscal cyst.</p>
+<h3 id="case-2-radial-tear-of-the-medial-meniscus">Case 2 — Radial tear of the medial meniscus</h3>
+<p><b>Clinical:</b> 47-year-old woman, twisting injury stepping off a curb, mechanical medial pain.</p>
+<p class="f"><b>F:</b> A vertically oriented full-thickness cleft perpendicular to the long axis of the <b>medial meniscus</b> is identified at the junction of the body and posterior horn, producing the <b>truncated-triangle</b> and <b>ghost meniscus</b> signs on consecutive sagittal images. The radial defect spans the full 9 mm meniscal width. Early 2 mm meniscal extrusion at the medial margin. No bucket-handle displacement. Cruciate and collateral ligaments intact. Trace effusion.</p>
+<p class="i"><b>I:</b> Full-thickness radial tear of the medial meniscus body–posterior horn junction.</p>
+<h3 id="case-3-medial-meniscus-posterior-root-tear-with-extrusion">Case 3 — Medial meniscus posterior root tear with extrusion</h3>
+<p><b>Clinical:</b> 61-year-old woman, felt a pop rising from a chair, acute medial pain.</p>
+<p class="f"><b>F:</b> There is a radial-type defect at the <b>posterior root attachment of the medial meniscus</b> with a fluid-filled cleft and the <b>ghost meniscus sign</b> at the root on sagittal images. The meniscal body is extruded 5 mm beyond the medial tibial margin on the coronal sequence. Associated <b>subchondral marrow edema</b> within the medial femoral condyle and medial tibial plateau without discrete fracture line. Mild medial compartment cartilage thinning. ACL intact.</p>
+<p class="i"><b>I:</b> Medial meniscus posterior root tear with significant meniscal extrusion, functionally equivalent to a complete tear and predisposing to accelerated medial compartment degeneration.</p>
+<h3 id="case-4-bucket-handle-tear-with-displaced-fragment-and-double-pcl-sign">Case 4 — Bucket-handle tear with displaced fragment and double-PCL sign</h3>
+<p><b>Clinical:</b> 23-year-old male soccer player, locked knee unable to fully extend after a tackle.</p>
+<p class="f"><b>F:</b> The <b>medial meniscus</b> is foreshortened with absence of the normal bow-tie configuration on peripheral sagittal images. A displaced meniscal fragment lies within the intercondylar notch anterior and inferior to the PCL, producing the <b>double-PCL sign</b> on the sagittal sequence and the <b>fragment-in-notch</b> appearance on coronal images. The donor posterior horn is diminutive. Moderate joint effusion. ACL intact.</p>
+<p class="i"><b>I:</b> Displaced bucket-handle tear of the medial meniscus with intercondylar fragment (double-PCL sign), correlating with the locked knee.</p>
+<h3 id="case-5-lateral-meniscus-tear">Case 5 — Lateral meniscus tear</h3>
+<p><b>Clinical:</b> 29-year-old man, pivoting basketball injury, lateral joint-line tenderness.</p>
+<p class="f"><b>F:</b> Vertical-longitudinal increased signal reaching the inferior surface of the <b>posterior horn of the lateral meniscus</b> measuring 7 mm, situated just lateral to the popliteus tendon hiatus (a normal structure, not to be mistaken for tear). No displaced fragment and no double-PCL sign. The lateral meniscus body and anterior horn are normal. Small reactive lateral compartment effusion. ACL intact.</p>
+<p class="i"><b>I:</b> Vertical-longitudinal tear of the lateral meniscus posterior horn.</p>
+<h3 id="case-6-discoid-lateral-meniscus-with-tear">Case 6 — Discoid lateral meniscus with tear</h3>
+<p><b>Clinical:</b> 16-year-old girl, recurrent lateral clicking and intermittent pain, no major trauma.</p>
+<p class="f"><b>F:</b> The <b>lateral meniscus</b> demonstrates a continuous bow-tie configuration across more than three contiguous 4 mm sagittal slices and a widened transverse diameter exceeding 15 mm on coronal images, consistent with a <b>discoid lateral meniscus</b> (complete type). Within the thickened meniscus there is horizontal intrasubstance high signal reaching the inferior surface indicating a degenerative tear. No displacement. Cruciates intact.</p>
+<p class="i"><b>I:</b> Complete discoid lateral meniscus with a horizontal tear.</p>
+<h3 id="case-7-degenerative-meniscal-maceration">Case 7 — Degenerative meniscal maceration</h3>
+<p><b>Clinical:</b> 68-year-old man, chronic medial pain, prior known osteoarthritis.</p>
+<p class="f"><b>F:</b> The <b>medial meniscus</b> posterior horn and body are diffusely irregular, blunted, and macerated with complex high signal and loss of the normal triangular morphology; no discrete reparable tear plane. Meniscal extrusion measures 4 mm medially. Background medial compartment full-thickness cartilage loss and subchondral cystic change. Marginal osteophytes. Cruciates intact.</p>
+<p class="i"><b>I:</b> Degenerative maceration of the medial meniscus in the setting of established medial compartment osteoarthritis.</p>
+<h2 id="cruciate-ligaments">Cruciate Ligaments</h2>
+<h3 id="case-8-acute-complete-acl-tear-with-pivot-shift-contusions-and-segond-fracture">Case 8 — Acute complete ACL tear with pivot-shift contusions and Segond fracture</h3>
+<p><b>Clinical:</b> 19-year-old female soccer player, non-contact pivot with a pop and immediate swelling.</p>
+<p class="f"><b>F:</b> The <b>anterior cruciate ligament</b> is discontinuous with absent fibers in the mid-substance, a wavy redundant distal stump, and increased T2 signal; the expected oblique orientation is lost. Characteristic <b>pivot-shift bone contusions</b> involve the lateral femoral condyle (sulcus terminalis) and posterolateral tibial plateau. A small cortical avulsion at the lateral tibial margin represents a <b>Segond fracture</b>, indicating anterolateral ligamentous injury. Anterior tibial translation and uncovering of the posterior horn lateral meniscus are noted. Large hemarthrosis.</p>
+<p class="i"><b>I:</b> Acute complete ACL tear with classic pivot-shift contusion pattern and Segond fracture.</p>
+<h3 id="case-9-acl-mucoid-degeneration">Case 9 — ACL mucoid degeneration</h3>
+<p><b>Clinical:</b> 58-year-old woman, posterior knee fullness and pain at terminal flexion, no instability.</p>
+<p class="f"><b>F:</b> The <b>anterior cruciate ligament</b> is diffusely thickened with ill-defined intermediate T2 signal interspersed between intact, taut fibers producing a <b>celery-stalk appearance</b>; the fibers remain continuous from origin to insertion. Adjacent intraosseous <b>ganglion/mucoid cysts</b> are present at the tibial insertion. No pivot-shift contusions and no anterior tibial translation. Menisci intact.</p>
+<p class="i"><b>I:</b> Mucoid degeneration of the ACL; no discrete tear or instability findings.</p>
+<h3 id="case-10-acl-reconstruction-graft-evaluation">Case 10 — ACL reconstruction graft evaluation</h3>
+<p><b>Clinical:</b> 31-year-old man, 2 years post ACL reconstruction, recurrent giving-way.</p>
+<p class="f"><b>F:</b> A <b>bone–patellar tendon–bone ACL graft</b> courses through the femoral and tibial tunnels. The intra-articular graft fibers are partially attenuated with intermediate signal and mild laxity; there is interval widening of the tibial tunnel and a focal full-thickness fiber discontinuity proximally suggesting <b>partial graft tear</b>. No cyclops lesion impinging on extension. Tunnel positions acceptable. Menisci intact.</p>
+<p class="i"><b>I:</b> Partial tear/attenuation of the ACL graft with tibial tunnel widening; clinical correlation for recurrent instability.</p>
+<h3 id="case-11-pcl-tear">Case 11 — PCL tear</h3>
+<p><b>Clinical:</b> 36-year-old man, dashboard injury in a motor-vehicle collision, posterior knee pain.</p>
+<p class="f"><b>F:</b> The <b>posterior cruciate ligament</b> is markedly thickened and edematous with intrasubstance high T2 signal and partial fiber disruption at the mid-substance; AP diameter measures 9 mm (upper limit normal ~7 mm). The femoral and tibial attachments remain intact, favoring an interstitial/partial tear rather than complete avulsion. Associated anterior tibial bone contusion. ACL intact. No posterior tibial avulsion fragment.</p>
+<p class="i"><b>I:</b> Acute high-grade partial (interstitial) PCL tear without bony avulsion.</p>
+<h3 id="case-12-o-donoghue-triad-acl-mcl-medial-meniscus">Case 12 — O&#x27;Donoghue triad (ACL + MCL + medial meniscus)</h3>
+<p><b>Clinical:</b> 25-year-old male skier, valgus + external rotation injury, immediate effusion.</p>
+<p class="f"><b>F:</b> Complete mid-substance tear of the <b>anterior cruciate ligament</b> with pivot-shift contusions of the lateral femoral condyle and posterolateral tibial plateau. The <b>medial collateral ligament</b> shows a high-grade sprain with periligamentous edema and partial proximal fiber disruption (grade 2–3). A peripheral vertical-longitudinal tear of the <b>medial meniscus</b> posterior horn is present at the meniscocapsular junction. Large hemarthrosis.</p>
+<p class="i"><b>I:</b> O&#x27;Donoghue unhappy triad: ACL tear, MCL injury, and medial meniscus tear.</p>
+<h2 id="collaterals-plc">Collaterals &amp; PLC</h2>
+<h3 id="case-13-mcl-grade-2-sprain">Case 13 — MCL grade 2 sprain</h3>
+<p><b>Clinical:</b> 21-year-old male football player, valgus blow to the lateral knee, medial tenderness.</p>
+<p class="f"><b>F:</b> The <b>medial collateral ligament</b> demonstrates periligamentous and intrasubstance edema with partial-thickness fiber disruption of the superficial component at its femoral origin; the deep fibers and overall ligament continuity are preserved. No complete discontinuity and no associated meniscal tear. Mild adjacent soft-tissue edema. ACL and PCL intact.</p>
+<p class="i"><b>I:</b> Grade 2 (partial) sprain of the superficial MCL at the femoral attachment.</p>
+<h3 id="case-14-lcl-fibular-collateral-ligament-tear">Case 14 — LCL (fibular collateral ligament) tear</h3>
+<p><b>Clinical:</b> 33-year-old man, varus injury with the foot planted, lateral instability.</p>
+<p class="f"><b>F:</b> The <b>fibular (lateral) collateral ligament</b> is thickened and discontinuous near its fibular head insertion with a lax, wavy distal stump and surrounding edema, consistent with a high-grade/complete tear. The <b>biceps femoris</b> insertion is also edematous. No fibular head avulsion fragment. Cruciates intact. Lateral meniscus intact.</p>
+<p class="i"><b>I:</b> High-grade tear of the fibular collateral ligament near the fibular insertion.</p>
+<h3 id="case-15-posterolateral-corner-injury-with-arcuate-sign">Case 15 — Posterolateral corner injury with arcuate sign</h3>
+<p><b>Clinical:</b> 28-year-old man, hyperextension + varus injury, posterolateral pain and instability.</p>
+<p class="f"><b>F:</b> There is disruption of the <b>posterolateral corner</b> structures including the <b>fibular collateral ligament</b>, <b>popliteus tendon</b>, and <b>popliteofibular ligament</b> with diffuse periligamentous edema. A small avulsed cortical fragment at the <b>fibular styloid</b> represents the <b>arcuate sign</b>. Associated anteromedial femoral and tibial bone contusions reflect the hyperextension mechanism. Concurrent partial PCL injury is suspected.</p>
+<p class="i"><b>I:</b> Posterolateral corner injury with arcuate (fibular styloid avulsion) sign; assess for associated cruciate injury.</p>
+<h2 id="extensor-mechanism-patellofemoral">Extensor Mechanism &amp; Patellofemoral</h2>
+<h3 id="case-16-patellar-tendon-partial-tear">Case 16 — Patellar tendon partial tear</h3>
+<p><b>Clinical:</b> 30-year-old recreational basketball player, anterior knee pain after jumping, palpable defect.</p>
+<p class="f"><b>F:</b> The <b>patellar tendon</b> is thickened at its proximal origin from the inferior patellar pole with intrasubstance high T2 signal and partial-thickness fiber disruption involving roughly 40% of the cross-section; the tendon remains in continuity. Adjacent <b>Hoffa fat-pad</b> edema and small inferior pole marrow edema. No complete rupture and no patella alta. No quadriceps tendon abnormality.</p>
+<p class="i"><b>I:</b> Proximal patellar tendon partial-thickness tear (jumper&#x27;s knee), tendon in continuity.</p>
+<h3 id="case-17-quadriceps-tendon-tear">Case 17 — Quadriceps tendon tear</h3>
+<p><b>Clinical:</b> 63-year-old man, missed step on stairs, sudden inability to extend the knee.</p>
+<p class="f"><b>F:</b> The <b>quadriceps tendon</b> is completely disrupted approximately 1.5 cm above the superior patellar pole with a fluid-filled gap measuring 2.2 cm and retraction of the proximal tendon. There is <b>patella baja</b> from loss of the proximal tether and a moderate suprapatellar effusion with hemorrhage. The patellar tendon is intact. Mild background tendinosis at the torn margins.</p>
+<p class="i"><b>I:</b> Complete quadriceps tendon rupture with tendon gap and retraction; surgical repair indicated.</p>
+<h3 id="case-18-acute-lateral-patellar-dislocation-with-mpfl-tear-and-bone-bruise-pair">Case 18 — Acute lateral patellar dislocation with MPFL tear and bone-bruise pair</h3>
+<p><b>Clinical:</b> 17-year-old girl, twisting non-contact injury during dance, sense of the kneecap &quot;popping out.&quot;</p>
+<p class="f"><b>F:</b> Findings of transient <b>lateral patellar dislocation</b> with the characteristic <b>bone-contusion pair</b>: marrow edema involving the <b>inferomedial patellar facet</b> and the <b>anterolateral femoral condyle</b>. The <b>medial patellofemoral ligament (MPFL)</b> is disrupted at its patellar attachment with surrounding edema. A small osteochondral fragment (4 mm) is seen in the lateral gutter. Trochlear dysplasia and patella alta predispose. Large effusion/hemarthrosis.</p>
+<p class="i"><b>I:</b> Acute transient lateral patellar dislocation with MPFL tear, characteristic contusion pair, and a small osteochondral fragment.</p>
+<h3 id="case-19-patellofemoral-chondromalacia-with-maltracking">Case 19 — Patellofemoral chondromalacia with maltracking</h3>
+<p><b>Clinical:</b> 26-year-old woman, anterior knee pain with stairs and prolonged sitting, no trauma.</p>
+<p class="f"><b>F:</b> Axial PD fat-sat images show <b>chondromalacia</b> of the patellar median ridge and lateral facet with grade 3 fissuring and focal grade 4 full-thickness cartilage loss laterally. There is <b>lateral patellar tilt</b> (patellar tilt angle increased), a shallow trochlea, and an increased <b>TT–TG distance of 19 mm</b> indicating maltracking. Mild lateral retinacular thickening. No acute marrow edema.</p>
+<p class="i"><b>I:</b> Patellofemoral chondromalacia with lateral maltracking (increased TT–TG distance and patellar tilt).</p>
+<h2 id="cartilage-bone">Cartilage &amp; Bone</h2>
+<h3 id="case-20-acute-osteochondral-injury">Case 20 — Acute osteochondral injury</h3>
+<p><b>Clinical:</b> 22-year-old man, acute impaction injury landing from a height, persistent pain.</p>
+<p class="f"><b>F:</b> A focal <b>osteochondral injury</b> of the lateral femoral condyle weight-bearing surface shows a 12 x 9 mm chondral fissure with underlying subchondral marrow edema and a partially detached osteochondral flap; fluid signal undermines the fragment indicating instability. A small intra-articular loose body is identified in the suprapatellar recess. Surrounding reactive effusion.</p>
+<p class="i"><b>I:</b> Acute unstable osteochondral injury of the lateral femoral condyle with a loose body.</p>
+<h3 id="case-21-osteochondritis-dissecans">Case 21 — Osteochondritis dissecans</h3>
+<p><b>Clinical:</b> 15-year-old boy, chronic activity-related knee pain, occasional catching.</p>
+<p class="f"><b>F:</b> A well-corticated osteochondral lesion at the classic <b>lateral aspect of the medial femoral condyle</b> measures 15 x 12 mm. There is no high-signal fluid line fully encircling the fragment and the overlying cartilage is intact, indicating a <b>stable</b> lesion. No displaced fragment or loose body. Mild adjacent marrow edema. Physes open.</p>
+<p class="i"><b>I:</b> Stable osteochondritis dissecans of the medial femoral condyle (juvenile form).</p>
+<h3 id="case-22-sonk-subchondral-insufficiency-fracture">Case 22 — SONK / subchondral insufficiency fracture</h3>
+<p><b>Clinical:</b> 67-year-old woman, sudden spontaneous medial knee pain, no trauma, osteopenic.</p>
+<p class="f"><b>F:</b> The <b>medial femoral condyle</b> weight-bearing surface shows a subchondral low-signal fracture line paralleling the articular surface with extensive surrounding <b>bone marrow edema</b> and a focal subchondral T2-hypointense area, consistent with a <b>subchondral insufficiency fracture (SONK pattern)</b>. Mild overlying chondral flattening without large defect. Adjacent medial meniscus posterior root tear with extrusion contributing to altered load. Joint effusion.</p>
+<p class="i"><b>I:</b> Subchondral insufficiency fracture of the medial femoral condyle (SONK), associated with medial meniscus root tear.</p>
+<h3 id="case-23-tibial-plateau-contusion-fracture">Case 23 — Tibial plateau contusion/fracture</h3>
+<p><b>Clinical:</b> 44-year-old man, fall from a ladder onto a flexed knee, lateral pain and inability to bear weight.</p>
+<p class="f"><b>F:</b> The <b>lateral tibial plateau</b> demonstrates a depressed articular fracture with a vertically oriented split component and approximately 4 mm of articular depression (Schatzker II pattern); extensive surrounding marrow edema. A <b>lipohemarthrosis</b> with a fat–fluid level confirms intra-articular fracture. The lateral meniscus is displaced peripherally over the fracture margin. ACL intact.</p>
+<p class="i"><b>I:</b> Lateral tibial plateau split-depression fracture (Schatzker II) with lipohemarthrosis.</p>
+<h3 id="case-24-tricompartmental-osteoarthritis">Case 24 — Tricompartmental osteoarthritis</h3>
+<p><b>Clinical:</b> 71-year-old woman, chronic diffuse knee pain and stiffness, progressive over years.</p>
+<p class="f"><b>F:</b> There is <b>tricompartmental osteoarthritis</b> with full-thickness cartilage loss in the medial, lateral, and patellofemoral compartments, marginal <b>osteophytes</b>, subchondral sclerosis and cystic change, and degenerative maceration of both menisci with medial extrusion. Mild varus alignment. Moderate effusion with a <b>Baker cyst</b>. No acute fracture.</p>
+<p class="i"><b>I:</b> Advanced tricompartmental osteoarthritis with degenerative meniscal disease and a Baker cyst.</p>
+<h2 id="other">Other</h2>
+<h3 id="case-25-baker-popliteal-cyst">Case 25 — Baker (popliteal) cyst</h3>
+<p><b>Clinical:</b> 55-year-old woman, posterior knee fullness and occasional tightness.</p>
+<p class="f"><b>F:</b> A well-defined fluid signal collection arises between the <b>medial head of gastrocnemius</b> and the <b>semimembranosus</b> tendons, communicating with the joint, measuring 4.5 x 2.0 x 6.0 cm, consistent with a <b>Baker cyst</b>. Mild internal septation and a few loose bodies. No rupture or dissection into the calf and no surrounding edema to suggest leakage. Associated joint effusion and degenerative meniscal changes.</p>
+<p class="i"><b>I:</b> Uncomplicated Baker cyst arising at the gastrocnemius–semimembranosus bursa.</p>
+<h3 id="case-26-pes-anserine-bursitis">Case 26 — Pes anserine bursitis</h3>
+<p><b>Clinical:</b> 59-year-old woman with type 2 diabetes, medial knee pain below the joint line.</p>
+<p class="f"><b>F:</b> A fluid collection deep to the conjoined <b>pes anserine</b> tendons (sartorius, gracilis, semitendinosus) along the anteromedial proximal tibia measures 3.2 x 1.1 cm with surrounding soft-tissue edema, consistent with <b>pes anserine bursitis</b>. No communication with the joint. The MCL is intact and uninvolved. Mild background medial compartment degenerative change.</p>
+<p class="i"><b>I:</b> Pes anserine bursitis.</p>
+<h3 id="case-27-iliotibial-band-friction-syndrome">Case 27 — Iliotibial band friction syndrome</h3>
+<p><b>Clinical:</b> 34-year-old male long-distance runner, lateral knee pain at ~2 miles, worse downhill.</p>
+<p class="f"><b>F:</b> There is ill-defined edema in the soft tissues deep to the <b>iliotibial band</b> overlying the lateral femoral epicondyle, with the IT band itself mildly thickened. No discrete bursal fluid collection or intra-articular extension. The lateral meniscus, LCL, and popliteus are intact, excluding intra-articular causes of lateral pain.</p>
+<p class="i"><b>I:</b> Iliotibial band friction syndrome.</p>
+<h3 id="case-28-chronic-acl-deficient-knee">Case 28 — Chronic ACL-deficient knee</h3>
+<p><b>Clinical:</b> 41-year-old man, remote untreated ACL injury, chronic instability and giving-way.</p>
+<p class="f"><b>F:</b> The <b>anterior cruciate ligament</b> is not identified in its expected course with only scarred residual fibers, and there is fixed <b>anterior tibial translation</b> with uncovering of the posterior horn of the lateral meniscus. Secondary degenerative changes include medial compartment cartilage loss and a chronic radial/degenerative tear of the medial meniscus. No acute marrow edema. Notch osteophytes are present.</p>
+<p class="i"><b>I:</b> Chronic ACL-deficient knee with secondary degenerative meniscal and chondral changes.</p>
+<h3 id="case-29-medial-meniscocapsular-separation-ramp-lesion">Case 29 — Medial meniscocapsular separation (ramp lesion)</h3>
+<p><b>Clinical:</b> 20-year-old male footballer, ACL injury, persistent posteromedial pain.</p>
+<p class="f"><b>F:</b> At the posteromedial periphery there is fluid signal and disruption at the <b>meniscocapsular junction</b> of the medial meniscus posterior horn (<b>ramp lesion</b>) with adjacent posteromedial tibial marrow edema. This accompanies a complete <b>ACL tear</b> with typical pivot-shift contusions. The meniscal body itself is otherwise intact and non-displaced.</p>
+<p class="i"><b>I:</b> Medial meniscocapsular (ramp) lesion accompanying acute ACL tear; important to identify as it is easily missed and alters surgical management.</p>
+<h3 id="case-30-hoffa-fat-pad-impingement-syndrome">Case 30 — Hoffa fat-pad impingement syndrome</h3>
+<p><b>Clinical:</b> 38-year-old woman, anterior knee pain with extension, no acute injury.</p>
+<p class="f"><b>F:</b> The superolateral aspect of the <b>infrapatellar (Hoffa) fat pad</b> demonstrates ill-defined edema-like high T2 signal and mild mass effect between the patellar tendon and lateral femoral condyle, consistent with <b>Hoffa fat-pad impingement</b>. The patellar tendon is intact without tear. No focal mass or hemorrhage. No effusion. Patellofemoral cartilage is preserved.</p>
+<p class="i"><b>I:</b> Superolateral Hoffa fat-pad impingement syndrome.</p>
+<button id="toc-handle" class="toc-handle" aria-label="Open table of contents" title="Contents">☰<span class="chev">›</span></button>
+<button id="to-top" class="to-top" aria-label="Back to top" title="Back to top (Home)">↑</button>
+<script>
+(function(){
+  var KEY='cheatsheet-font-scale', MIN=0.7, MAX=1.8, STEP=0.1;
+  var scale=parseFloat(localStorage.getItem(KEY));
+  if(!scale||isNaN(scale)) scale=1;
+  function apply(){ document.body.style.zoom=scale; }
+  function set(s){
+    scale=Math.min(MAX, Math.max(MIN, Math.round(s*10)/10));
+    localStorage.setItem(KEY, scale);
+    apply();
+  }
+  apply();
+  var dec=document.getElementById('fs-dec'),
+      inc=document.getElementById('fs-inc'),
+      rst=document.getElementById('fs-rst');
+  if(dec) dec.onclick=function(){ set(scale-STEP); };
+  if(inc) inc.onclick=function(){ set(scale+STEP); };
+  if(rst) rst.onclick=function(){ set(1); };
+  // back-to-top button
+  var top=document.getElementById('to-top');
+  function goTop(){ window.scrollTo({top:0, behavior:'smooth'}); }
+  function onScroll(){
+    if(!top) return;
+    if(window.scrollY>320) top.classList.add('show');
+    else top.classList.remove('show');
+  }
+  if(top){ top.onclick=goTop; window.addEventListener('scroll', onScroll, {passive:true}); onScroll(); }
+
+  // ── Table of contents drawer ──
+  var drawer=document.getElementById('toc-drawer'),
+      backdrop=document.getElementById('toc-backdrop'),
+      tocToggle=document.getElementById('toc-toggle'),
+      tocClose=document.getElementById('toc-close'),
+      tocHandle=document.getElementById('toc-handle');
+  function tocOpen(){ if(drawer){ drawer.classList.add('open'); backdrop.classList.add('show'); document.body.classList.add('toc-open'); } }
+  function tocCloseFn(){ if(drawer){ drawer.classList.remove('open'); backdrop.classList.remove('show'); document.body.classList.remove('toc-open'); } }
+  function tocToggleFn(){ drawer && (drawer.classList.contains('open')?tocCloseFn():tocOpen()); }
+  if(tocToggle) tocToggle.onclick=tocToggleFn;
+  if(tocHandle) tocHandle.onclick=tocOpen;
+  if(tocClose) tocClose.onclick=tocCloseFn;
+  if(backdrop) backdrop.onclick=tocCloseFn;
+  // swipe-left on the open drawer to close it
+  var swX=null, swY=null;
+  document.addEventListener('touchstart', function(e){
+    if(drawer && drawer.classList.contains('open')){ var t=e.touches[0]; swX=t.clientX; swY=t.clientY; }
+    else swX=null;
+  }, {passive:true});
+  document.addEventListener('touchmove', function(e){
+    if(swX===null) return; var t=e.touches[0];
+    if(t.clientX-swX < -45 && Math.abs(t.clientY-swY) < 70){ tocCloseFn(); swX=null; }
+  }, {passive:true});
+  document.addEventListener('touchend', function(){ swX=null; }, {passive:true});
+  if(drawer){
+    drawer.addEventListener('click', function(e){
+      var tog=e.target.closest('.toc-tog');
+      if(tog){ e.preventDefault(); tog.closest('.toc-node').classList.toggle('open'); return; }
+      if(e.target.closest('a')){ tocCloseFn(); }   // jump (href) + close
+    });
+  }
+  // scroll-spy: highlight current section, open its ancestors
+  var links={}, heads=[];
+  if(drawer){
+    [].forEach.call(drawer.querySelectorAll('a[href^="#"]'), function(a){
+      var id=a.getAttribute('href').slice(1); links[id]=a;
+      var h=document.getElementById(id); if(h) heads.push(h);
+    });
+    heads.sort(function(a,b){ return a.offsetTop-b.offsetTop; });
+  }
+  var spyT=null;
+  function spy(){
+    if(!heads.length) return;
+    var y=window.scrollY+96, cur=null;
+    for(var k=0;k<heads.length;k++){ if(heads[k].offsetTop<=y) cur=heads[k].id; else break; }
+    for(var id in links) links[id].classList.remove('active');
+    if(cur && links[cur]){
+      var a=links[cur]; a.classList.add('active');
+      var node=a.closest('.toc-node');
+      while(node){ node.classList.add('open'); node=node.parentElement&&node.parentElement.closest('.toc-node'); }
+    }
+  }
+  window.addEventListener('scroll', function(){ if(spyT) return; spyT=setTimeout(function(){ spyT=null; spy(); },120); }, {passive:true});
+  spy();
+
+  document.addEventListener('keydown', function(e){
+    if(e.metaKey||e.ctrlKey||e.altKey) return;            // leave native zoom alone
+    var t=e.target;
+    if(t && (t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable)) return;
+    if(e.key==='+'||e.key==='='){ set(scale+STEP); e.preventDefault(); }
+    else if(e.key==='-'||e.key==='_'){ set(scale-STEP); e.preventDefault(); }
+    else if(e.key==='0'){ set(1); e.preventDefault(); }
+    else if(e.key==='Home'){ goTop(); e.preventDefault(); }
+    else if(e.key==='c'||e.key==='C'){ tocToggleFn(); e.preventDefault(); }
+    else if(e.key==='Escape'){ tocCloseFn(); }
+  });
+})();
+</script>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}</script>
+</body>
+</html>
