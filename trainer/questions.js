@@ -5679,5 +5679,329 @@ window.TRAINER_QUESTIONS = [
 ],
 "explain": "The myotendinous (musculotendinous) junction is the weakest link and the typical site of muscle strain, showing feathery edema on fluid-sensitive sequences.",
 "id": 119
+},
+{
+"type": "mcq",
+"joint": "shoulder",
+"topic": "Management",
+"difficulty": 2,
+"prompt": "A young patient has recurrent anterior shoulder dislocations. CT shows ~25% glenoid bone loss with an engaging Hill-Sachs lesion. What does this most change about surgical management?",
+"choices": [
+"Favors an isolated arthroscopic Bankart repair",
+"Favors a bony augmentation procedure such as Latarjet",
+"Favors nonoperative physiotherapy alone",
+"Favors reverse total shoulder arthroplasty"
+],
+"answer": 1,
+"explain": "Glenoid bone loss above roughly 20-25% (and engaging/off-track Hill-Sachs lesions) markedly raises the failure rate of isolated soft-tissue (arthroscopic Bankart) repair. The standard recommendation is a bony procedure such as the Latarjet, which restores the glenoid arc and adds a sling effect. Isolated Bankart is for low bone-loss cases; nonoperative care fails in recurrent instability; rTSA is for cuff-deficient arthropathy.",
+"id": 120
+},
+{
+"type": "mcq",
+"joint": "shoulder",
+"topic": "Management",
+"difficulty": 2,
+"prompt": "MRI of a full-thickness supraspinatus tear shows Goutallier grade 3-4 fatty atrophy of the muscle belly. How should this influence management?",
+"choices": [
+"The tendon is highly reparable with expected good outcome",
+"Advanced fatty atrophy predicts irreparability/poor healing, favoring tendon transfer or reverse arthroplasty",
+"Atrophy grading is irrelevant to surgical decision-making",
+"Recommend immediate primary repair regardless of muscle quality"
+],
+"answer": 1,
+"explain": "Goutallier 3-4 (more fat than muscle) indicates irreversible degeneration; primary repair has high re-tear rates. This steers the surgeon toward salvage options (tendon transfer, superior capsular reconstruction, or reverse total shoulder arthroplasty). Reporting the grade directly affects whether repair is attempted.",
+"id": 121
+},
+{
+"type": "mcq",
+"joint": "shoulder",
+"topic": "Management",
+"difficulty": 2,
+"prompt": "For a bony Bankart lesion, what is the expected method to quantify glenoid bone loss for the surgeon?",
+"choices": [
+"Subjective visual estimate on a single axial slice",
+"Best-fit circle on the en-face (sagittal oblique) glenoid view",
+"Measuring only the humeral head diameter",
+"AP radiograph width of the acromion"
+],
+"answer": 1,
+"explain": "The accepted method is a best-fit circle over the inferior glenoid on the en-face sagittal-oblique view (3D CT or MR), measuring the missing arc as a percentage. This drives the >20-25% threshold for bony procedures, so the report should provide it, not a vague estimate.",
+"id": 122
+},
+{
+"type": "mcq",
+"joint": "knee",
+"topic": "Management",
+"difficulty": 2,
+"prompt": "During MRI for a complete ACL tear you identify a ramp lesion (posteromedial meniscocapsular tear). Why does flagging this change management?",
+"choices": [
+"It is incidental with no surgical relevance",
+"It is frequently missed arthroscopically and, if unrepaired, increases ACL graft failure and persistent instability",
+"It mandates total meniscectomy",
+"It contraindicates ACL reconstruction"
+],
+"answer": 1,
+"explain": "Ramp lesions are easily overlooked at arthroscopy. Left unaddressed they increase rotatory laxity and ACL graft failure, so the surgeon will specifically inspect and repair them. Reporting it prompts targeted repair at reconstruction.",
+"id": 123
+},
+{
+"type": "mcq",
+"joint": "knee",
+"topic": "Management",
+"difficulty": 2,
+"prompt": "MRI shows a complete posterior root tear of the medial meniscus with extrusion. What is the most appropriate principle?",
+"choices": [
+"Observe; root tears do not affect mechanics",
+"Recommend root repair because an untreated root tear is biomechanically equivalent to total meniscectomy and accelerates OA",
+"Total meniscectomy first-line",
+"No follow-up needed"
+],
+"answer": 1,
+"explain": "A posterior medial root tear disrupts hoop-stress function, producing extrusion and load equivalent to total meniscectomy with rapid cartilage loss. In non-arthritic patients, root repair restores hoop tension and is recommended to prevent rapid degeneration.",
+"id": 124
+},
+{
+"type": "mcq",
+"joint": "knee",
+"topic": "Management",
+"difficulty": 2,
+"prompt": "Radiographs show a lipohemarthrosis (fat-fluid level) in the suprapatellar recess but no obvious fracture line. Next best step?",
+"choices": [
+"No further imaging; effusion is benign",
+"Obtain CT to find the intra-articular fracture the marrow fat indicates",
+"Aspirate and discharge",
+"MRI of the contralateral knee"
+],
+"answer": 1,
+"explain": "A fat-fluid level means marrow fat escaped into the joint, essentially pathognomonic of an intra-articular fracture even when occult on radiographs. CT is the next step to find and characterize it (commonly tibial plateau) for fixation planning.",
+"id": 125
+},
+{
+"type": "mcq",
+"joint": "ankle",
+"topic": "Management",
+"difficulty": 2,
+"prompt": "After a twisting injury, radiographs show medial and tibiofibular clear space widening with a normal-appearing distal fibula. What is essential?",
+"choices": [
+"No further work-up",
+"Image the proximal fibula to exclude a Maisonneuve fracture and obtain weight-bearing/stress views for instability",
+"Cast and discharge",
+"MRI of the contralateral ankle"
+],
+"answer": 1,
+"explain": "Medial clear space widening with syndesmotic disruption but an intact distal fibula should prompt evaluation of the proximal fibula (Maisonneuve), as force transmits proximally. Weight-bearing/stress views confirm instability. Unstable syndesmotic injuries need fixation.",
+"id": 126
+},
+{
+"type": "mcq",
+"joint": "wrist",
+"topic": "Management",
+"difficulty": 3,
+"prompt": "MR arthrography shows a peripheral (foveal/ulnar) TFCC tear with DRUJ instability. How does location change management vs a central tear?",
+"choices": [
+"Peripheral foveal tears are degenerative and debrided only",
+"Peripheral foveal tears are vascular and repairable, whereas central tears are typically debrided",
+"Both managed identically with immobilization",
+"Central tears always require ulnar shortening"
+],
+"answer": 1,
+"explain": "The peripheral/foveal TFCC is vascularized and repairable, especially with DRUJ instability. Central tears are avascular/degenerative and usually debrided (± ulnar shortening for abutment). Location dictates repair vs debridement.",
+"id": 127
+},
+{
+"type": "mcq",
+"joint": "wrist",
+"topic": "Management",
+"difficulty": 2,
+"prompt": "MRI of a scaphoid fracture shows proximal pole nonunion with low T1/T2 marrow and no enhancement (AVN). What does this favor surgically?",
+"choices": [
+"Simple cast immobilization",
+"A vascularized bone graft procedure",
+"Excision of the entire scaphoid",
+"Observation with repeat film in 6 weeks"
+],
+"answer": 1,
+"explain": "The proximal pole's retrograde supply makes it prone to AVN/nonunion. Avascular proximal pole nonunion favors a vascularized bone graft to provide blood supply and union; casting/non-vascularized grafts are likely to fail.",
+"id": 128
+},
+{
+"type": "mcq",
+"joint": "hand",
+"topic": "Management",
+"difficulty": 2,
+"prompt": "MRI of the thumb shows a torn UCL displaced superficial to the adductor aponeurosis (Stener lesion). Why does this require surgery?",
+"choices": [
+"It heals with thumb spica casting",
+"The interposed aponeurosis prevents the ligament ends from apposing, so it cannot heal conservatively",
+"It is a stable injury needing no treatment",
+"Buddy taping suffices"
+],
+"answer": 1,
+"explain": "In a Stener lesion the adductor aponeurosis is interposed between the retracted UCL and its insertion, physically blocking healing, so surgical repair is required. Distinguishing it from a non-displaced UCL tear is the key management determinant.",
+"id": 129
+},
+{
+"type": "mcq",
+"joint": "hand",
+"topic": "Management",
+"difficulty": 3,
+"prompt": "A climber has rupture of both A2 and A4 pulleys with marked bowstringing. How does multi-pulley involvement change management?",
+"choices": [
+"Both single- and multi-pulley injuries are managed with taping",
+"Combined A2+A4 rupture with bowstringing favors surgical pulley reconstruction rather than conservative care",
+"All pulley injuries require amputation",
+"Multi-pulley injury needs no immobilization"
+],
+"answer": 1,
+"explain": "Isolated single-pulley injuries usually heal conservatively. Combined ruptures of multiple critical pulleys (A2 and A4) cause significant bowstringing/biomechanical loss and are an indication for surgical reconstruction. The combination involved tips toward surgery.",
+"id": 130
+},
+{
+"type": "mcq",
+"joint": "ankle",
+"topic": "Management",
+"difficulty": 2,
+"prompt": "MRI shows a complete Achilles rupture. Which feature is most relevant to report for the operative-vs-nonoperative discussion?",
+"choices": [
+"The presence of a plantaris tendon",
+"The gap size between tendon ends and whether the gap apposes in plantar flexion",
+"The signal of the adjacent fat pad only",
+"The length of the calcaneus"
+],
+"answer": 1,
+"explain": "Management (surgical repair vs functional bracing) is influenced by the gap between torn ends and whether it closes in plantar flexion. A large, non-apposing gap favors surgery; ends that appose support functional nonoperative care. Report gap size and apposition.",
+"id": 131
+},
+{
+"type": "mcq",
+"joint": "hip",
+"topic": "Management",
+"difficulty": 3,
+"prompt": "MRI shows a femoral neck stress fracture on the superolateral (tension) side. Why is this more urgent than a compression-side fracture?",
+"choices": [
+"Tension-side fractures are low risk; continue running",
+"Tension-side femoral neck stress fractures are high risk for completion/displacement and require urgent referral and non-weight-bearing",
+"Both managed identically with rest",
+"Compression-side need surgery while tension-side need none"
+],
+"answer": 1,
+"explain": "Superolateral (tension-side) femoral neck stress fractures are under distraction and at high risk of completing/displacing with possible AVN, so they warrant urgent referral, non-weight-bearing, and often prophylactic fixation. Compression-side fractures are lower risk.",
+"id": 132
+},
+{
+"type": "mcq",
+"joint": "foot",
+"topic": "Management",
+"difficulty": 2,
+"prompt": "MRI shows a tarsal navicular stress fracture. Why is it 'high-risk,' and how does that change management?",
+"choices": [
+"Low-risk; continue activity",
+"High-risk for nonunion/AVN due to poor central blood supply, warranting CT and non-weight-bearing immobilization",
+"Requires no immobilization",
+"Always immediate screw fixation regardless of grade"
+],
+"answer": 1,
+"explain": "The central third of the navicular is relatively avascular, making these prone to delayed/nonunion and AVN. Management is aggressive: CT to assess completeness and strict non-weight-bearing (or surgery for complete/displaced), unlike low-risk stress fractures.",
+"id": 133
+},
+{
+"type": "mcq",
+"joint": "foot",
+"topic": "Management",
+"difficulty": 2,
+"prompt": "A fifth metatarsal fracture is at the metaphyseal-diaphyseal junction (zone 2, Jones). How does management differ from a zone-1 tuberosity avulsion?",
+"choices": [
+"Both heal reliably with weight-bearing as tolerated",
+"The Jones fracture has a high nonunion rate in a watershed zone and often warrants non-weight-bearing or screw fixation, unlike the well-healing tuberosity avulsion",
+"Zone 1 avulsions require surgery while Jones do not",
+"Location does not affect prognosis"
+],
+"answer": 1,
+"explain": "The zone-2 Jones fracture lies in a vascular watershed with a high nonunion rate, managed with strict non-weight-bearing or (especially in athletes) intramedullary screw fixation. The zone-1 tuberosity avulsion has good blood supply and heals with symptomatic care.",
+"id": 134
+},
+{
+"type": "mcq",
+"joint": "general",
+"topic": "Management",
+"difficulty": 3,
+"prompt": "On a knee MRI you incidentally find a focal lesion that is low T1 (replacing fatty marrow) in the distal femur. Why change your recommendation?",
+"choices": [
+"Low-T1 marrow-replacing lesions are always benign red marrow",
+"A T1 marrow-replacing lesion is not simple edema and warrants further work-up for tumor or infection",
+"Describe it as a bone bruise",
+"Repeat MRI in 2 years only"
+],
+"answer": 1,
+"explain": "Normal marrow and edema retain some T1 fat signal; a lesion truly replacing T1 marrow signal indicates a cellular/infiltrative process (metastasis, primary tumor, marrow infiltration, osteomyelitis), mandating further work-up rather than dismissal.",
+"id": 135
+},
+{
+"type": "mcq",
+"joint": "ankle",
+"topic": "Management",
+"difficulty": 2,
+"prompt": "A talar dome osteochondral lesion has a rim of high T2 fluid completely undermining the fragment. How does this change management vs a stable lesion?",
+"choices": [
+"Indicates instability favoring surgical fixation/removal, whereas a stable lesion can be conservative",
+"Both managed conservatively regardless of fluid",
+"Fluid undermining means it has healed",
+"Mandates total ankle arthroplasty"
+],
+"answer": 0,
+"explain": "A continuous rim of T2-bright fluid undermining the fragment indicates instability (detached). Unstable lesions risk displacement/loose bodies and are managed surgically (fixation, microfracture, grafting); stable lesions without undermining fluid can be conservative.",
+"id": 136
+},
+{
+"type": "cloze",
+"joint": "shoulder",
+"topic": "Management",
+"difficulty": 1,
+"prompt": "For labral/intrinsic-ligament questions where conventional MRI is equivocal, the recommended next study is MR ___ to distend the joint and improve detection.",
+"answers": [
+"arthrography",
+"arthrogram"
+],
+"explain": "Intra-articular gadolinium distends the capsule and outlines the labrum and intrinsic ligaments, improving sensitivity for SLAP/Bankart and TFCC/intrinsic carpal ligament tears versus conventional MRI.",
+"id": 137
+},
+{
+"type": "cloze",
+"joint": "knee",
+"topic": "Management",
+"difficulty": 2,
+"prompt": "An untreated posterior medial meniscus root tear is biomechanically equivalent to a total ___, leading to extrusion and rapidly progressive osteoarthritis.",
+"answers": [
+"meniscectomy"
+],
+"explain": "Loss of the root eliminates conversion of axial load into hoop stress, so the meniscus extrudes and no longer protects cartilage — functionally equal to removing it. This is why root repair is recommended in appropriate patients.",
+"id": 138
+},
+{
+"type": "cloze",
+"joint": "hip",
+"topic": "Management",
+"difficulty": 2,
+"prompt": "A femoral neck stress fracture on the ___ (superolateral) side is high-risk and warrants urgent referral and non-weight-bearing because it is prone to completion and displacement.",
+"answers": [
+"tension",
+"tension-side",
+"distraction"
+],
+"explain": "The superolateral femoral neck experiences distraction (tension) forces; a stress fracture here can propagate to a complete displaced fracture with risk of AVN, the high-risk pattern requiring urgent management.",
+"id": 139
+},
+{
+"type": "cloze",
+"joint": "wrist",
+"topic": "Management",
+"difficulty": 2,
+"prompt": "A proximal pole scaphoid nonunion with avascular necrosis is best treated with a ___ bone graft to restore blood supply and achieve union.",
+"answers": [
+"vascularized",
+"vascularised"
+],
+"explain": "Because the proximal pole has a tenuous retrograde supply, an avascular proximal pole nonunion is unlikely to heal with a conventional graft or casting; a vascularized bone graft supplies blood flow for union.",
+"id": 140
 }
 ];

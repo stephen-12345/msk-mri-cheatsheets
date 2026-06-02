@@ -13,9 +13,20 @@
     set streak(v) { localStorage.setItem("mskt-streak", v); },
     get best() { return +localStorage.getItem("mskt-best") || 0; },
     set best(v) { localStorage.setItem("mskt-best", v); },
+    get day() { return JSON.parse(localStorage.getItem("mskt-day") || '{"last":"","count":0}'); },
+    set day(v) { localStorage.setItem("mskt-day", JSON.stringify(v)); },
     results: JSON.parse(localStorage.getItem("mskt-results") || "{}"),
     saveResults: function () { localStorage.setItem("mskt-results", JSON.stringify(this.results)); }
   };
+
+  function todayStr() { var d = new Date(); return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate(); }
+  function yesterdayStr() { var d = new Date(Date.now() - 864e5); return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate(); }
+  function rollDailyStreak() {
+    var d = store.day, t = todayStr();
+    if (d.last === t) return d.count;            // already counted today
+    d.count = (d.last === yesterdayStr()) ? (d.count + 1) : 1;
+    d.last = t; store.day = d; return d.count;
+  }
 
   // ---------- state ----------
   var sel = { mode: "dictate", joint: "all", diff: 0 };
@@ -34,7 +45,7 @@
     var into = xp % LVL_XP;
     $("xpfill").style.width = (into / LVL_XP * 100) + "%";
     $("xptext").textContent = xp + " XP";
-    $("streak").textContent = store.streak;
+    $("streak").textContent = store.day.count || 0;
   }
 
   function addXP(n, passed) {
@@ -82,9 +93,15 @@
     if (sel.mode === "review") {
       return pool.filter(function (q) { var r = store.results[q.id]; return r && r.pass === false; });
     }
-    return pool; // mixed
+    return pool; // mixed, exam
   }
+  var EXAM_LEN = 15, EXAM_SECONDS = 12 * 60;
 
+  function sessionLen(n) {
+    if (sel.mode === "lightning") return Math.min(10, n);
+    if (sel.mode === "exam") return Math.min(EXAM_LEN, n);
+    return Math.min(12, n);
+  }
   function refreshCount() {
     var n = poolForMode().length;
     var btn = $("startbtn"), note = $("countnote");
@@ -93,22 +110,40 @@
       note.textContent = sel.mode === "review" ? "No misses to review yet — go practice!" : "No questions match these filters.";
     } else {
       btn.disabled = false;
-      var len = sel.mode === "lightning" ? Math.min(10, n) : Math.min(12, n);
-      note.textContent = len + " question" + (len > 1 ? "s" : "") + " this session  ·  " + n + " available";
+      var len = sessionLen(n);
+      var extra = sel.mode === "exam" ? "  ·  12-min timed exam, graded" : "";
+      note.textContent = len + " question" + (len > 1 ? "s" : "") + " this session  ·  " + n + " available" + extra;
     }
   }
 
   // ---------- session ----------
+  var examTimer = null;
   function startSession() {
+    rollDailyStreak(); updateHUD();
     var pool = shuffle(poolForMode());
     // prioritise unseen questions
     pool.sort(function (a, b) { return ((store.results[a.id] ? 1 : 0) - (store.results[b.id] ? 1 : 0)); });
-    var len = sel.mode === "lightning" ? 10 : 12;
-    session = { queue: pool.slice(0, Math.min(len, pool.length)), i: 0, correct: 0, totalCov: 0, answered: 0, xpStart: store.xp };
+    var len = sessionLen(pool.length);
+    session = { queue: pool.slice(0, len), i: 0, correct: 0, totalCov: 0, answered: 0, xpStart: store.xp, exam: sel.mode === "exam" };
     $("start").classList.add("hidden");
     $("summary").classList.add("hidden");
     $("quiz").classList.remove("hidden");
+    if (examTimer) { clearInterval(examTimer); examTimer = null; }
+    if (session.exam) {
+      session.examEnd = Date.now() + EXAM_SECONDS * 1000;
+      examTimer = setInterval(tickExam, 1000);
+    }
     renderQuestion();
+  }
+  function tickExam() {
+    var left = Math.max(0, Math.round((session.examEnd - Date.now()) / 1000));
+    var el = $("examtime");
+    if (el) {
+      var m = Math.floor(left / 60), s = left % 60;
+      el.textContent = "⏱ " + m + ":" + (s < 10 ? "0" : "") + s;
+      el.style.color = left <= 60 ? "#e2737a" : "var(--amber)";
+    }
+    if (left <= 0) { clearInterval(examTimer); examTimer = null; showSummary(); }
   }
 
   function renderQuestion() {
@@ -118,7 +153,9 @@
     $("qjoint").textContent = jn[q.joint] || q.joint;
     $("qtopic").textContent = q.topic || "";
     $("qdiff").textContent = ["", "Easy", "Medium", "Hard"][q.difficulty || 1];
-    $("qprog").textContent = (session.i + 1) + " / " + session.queue.length;
+    $("qprog").innerHTML = (session.i + 1) + " / " + session.queue.length +
+      (session.exam ? ' &nbsp; <span id="examtime" style="font-weight:700">⏱ --:--</span>' : "");
+    if (session.exam) tickExam();
     $("qprogfill").style.width = (session.i / session.queue.length * 100) + "%";
     var tl = { dictate: "Dictate It", mcq: "Term Match", cloze: "Fill the Blank" }[q.type];
     var te = $("qtypelabel"); te.textContent = tl; te.className = "qtype " + q.type;
@@ -256,14 +293,17 @@
   }
 
   // ---------- summary ----------
+  function gradeLetter(p) { return p >= 90 ? "A" : p >= 80 ? "B" : p >= 70 ? "C" : p >= 60 ? "D" : "F"; }
   function showSummary() {
+    if (examTimer) { clearInterval(examTimer); examTimer = null; }
     $("quiz").classList.add("hidden");
     var s = $("summary"); s.classList.remove("hidden");
     var pct = session.answered ? Math.round(session.totalCov / session.answered * 100) : 0;
     var xpEarned = store.xp - session.xpStart;
-    var em = pct >= 85 ? "🏆" : pct >= 60 ? "💪" : "📚";
+    var em = session.exam ? "🎓" : pct >= 85 ? "🏆" : pct >= 60 ? "💪" : "📚";
+    var heading = session.exam ? ("Exam grade: " + gradeLetter(pct)) : "Session complete";
     s.innerHTML =
-      '<div class="summary"><div class="em">' + em + "</div><h2>Session complete</h2>" +
+      '<div class="summary"><div class="em">' + em + "</div><h2>" + heading + "</h2>" +
       '<div class="grid">' +
       '<div class="cell"><div class="n">' + pct + '%</div><div class="l">Avg score</div></div>' +
       '<div class="cell"><div class="n">' + session.correct + "/" + session.answered + '</div><div class="l">Passed</div></div>' +

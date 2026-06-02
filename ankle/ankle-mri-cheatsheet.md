@@ -529,3 +529,68 @@ Use this for any articular surface. Replace [surface/compartment] with the speci
 
 ## Source Notes
 Built as a practical dictation aid from standard MSK MRI reporting patterns, review-level radiology references, and the existing shoulder cheat-sheet style. PowerScribe template selections for Achilles, PTT, peroneals, lateral ligaments, syndesmosis, deltoid/spring, talar dome OLT, impingement, plantar fascia, sinus tarsi, tarsal tunnel, and effusion were incorporated as individual F/I entries. Use surgical correlation and local report conventions when needed.
+
+## Test Yourself & Visual Pearls
+
+Work through these before you sign the report — the tendons, ligaments, and bony os variants of the ankle reward pattern recognition.
+
+### Tendons around the ankle
+
+On an axial image at the level of the medial malleolus, the flexor tendons run in a fixed anterior-to-posterior order that you can name on sight.
+
+{{diagram:ankle-tendons-axial}}
+
+> [!KEY] Tendon map
+> - Medial (behind medial malleolus, front-to-back): ==**T**ibialis posterior → flexor **D**igitorum longus → posterior tibial **N**eurovascular bundle → flexor **H**allucis longus== — **Tom, Dick, aNd Harry**.
+> - Lateral (behind lateral malleolus): peroneus **brevis** lies anteromedial (against the fibula), peroneus **longus** posterolateral.
+> - ==Achilles has no synovial sheath → it gets **paratenonitis**, not tenosynovitis==; a true sheath (and sheath fluid) implies a different tendon.
+
+> [!QUIZ] A patient with a flatfoot deformity has fluid and thickening of the most anterior medial tendon. Which tendon, and what is its role?
+> ==Tibialis posterior== — the chief dynamic stabilizer of the medial longitudinal arch. PTT dysfunction is the leading cause of ==acquired adult flatfoot==.
+
+> [!QUIZ] Behind the lateral malleolus, which peroneal tendon sits closer to the bone, and why does it matter?
+> Peroneus **brevis** lies ==deep/anteromedial, sandwiched between peroneus longus and the fibula==. Compression here predisposes brevis to a longitudinal ==split tear==.
+
+### Talar dome lesions
+
+Localize every osteochondral lesion on a 9-zone grid (medial/central/lateral × anterior/middle/posterior) — location predicts mechanism and the chondral surface tells you about stability.
+
+{{diagram:ankle-talar-dome-9zone}}
+
+> [!TIP] Classic dichotomy: ==medial-posterior lesions are deeper, cup-shaped, and often atraumatic/degenerative==, whereas ==lateral lesions are shallow, wafer-shaped, and trauma-related==. Lateral lesions are more likely to displace.
+
+> [!QUIZ] On a fluid-sensitive sequence, a talar dome osteochondral fragment has a rim of high T2 signal completely encircling its base. Stable or unstable?
+> ==Unstable== — fluid signal **undermining/encircling** the fragment indicates a loose or detached osteochondral fragment. Cysts deep to the fragment and a high-signal line are likewise unstable signs.
+
+### Rapid review
+
+> [!QUIZ] Name the lateral collateral ligaments in order of how commonly they tear in an inversion injury.
+> ==ATFL > CFL > PTFL==. The anterior talofibular ligament fails first; the posterior talofibular ligament is rarely torn in isolation.
+
+> [!QUIZ] How do you grade an ATFL injury on MRI?
+> Grade I = sprain/edema, intact fibers; Grade II = partial tear (thinning, partial discontinuity); Grade III = ==full-thickness discontinuity / non-visualization== with surrounding edema.
+
+> [!QUIZ] Which is the key anterior syndesmotic ligament, and what measurement flags a syndesmotic injury?
+> The ==AITFL== (anteroinferior tibiofibular ligament). On axial images ==1 cm above the plafond, a tibiofibular clear space > 6 mm== suggests diastasis.
+
+> [!PITFALL] Isolated AITFL tear with a normal clear space is easy to dismiss — but always trace the fibula proximally. A high fibular fracture (==Maisonneuve==) means the whole syndesmosis and deltoid are disrupted even if the ankle "looks" reduced.
+
+> [!QUIZ] A patient with chronic flatfoot has a torn medial soft-tissue sling. Name the classic flatfoot triad of structures.
+> ==Posterior tibial tendon + spring (calcaneonavicular) ligament + deltoid ligament==. The spring ligament supports the talar head; its failure unroofs the medial arch.
+
+> [!QUIZ] Where does the peroneus brevis split tear typically occur, and what bony sign and restraint do you check?
+> Splits occur at the ==retromalleolar groove==, producing the ==C-shaped "boomerang" brevis== wrapping longus on axial images. Check the ==superior peroneal retinaculum (SPR)== — its tear allows tendon subluxation.
+
+> [!QUIZ] Distinguish Achilles paratenonitis from "tenosynovitis."
+> The Achilles has ==no synovial sheath==, so peritendinous inflammation is **paratenonitis** (edema in the surrounding fat/paratenon). True tenosynovitis cannot occur in the Achilles — that term belongs to sheathed tendons like FHL and the peroneals.
+
+> [!QUIZ] Differentiate insertional from non-insertional Achilles disease, and name the associated bony bump.
+> Insertional tendinosis affects the ==distal 2 cm at the calcaneal enthesis== (± retrocalcaneal bursitis and a ==Haglund deformity==). Non-insertional/midportion tendinosis is ==2–6 cm above== the insertion in a relative hypovascular zone.
+
+> [!QUIZ] What plantar fascia thickness is abnormal, and where is it measured?
+> ==> 4 mm== at the calcaneal origin (normal ≤ 4 mm), with adjacent marrow and soft-tissue edema in plantar fasciitis.
+
+> [!QUIZ] What occupies the sinus tarsi, and what does loss of its fat signal indicate?
+> Normally ==fat plus the interosseous talocalcaneal and cervical ligaments==. ==Replacement of fat by fluid/fibrosis== (sinus tarsi syndrome) is associated with PTT dysfunction and hindfoot instability.
+
+> [!PITFALL] Don't call every posterior talar ossicle a fracture. An ==os trigonum== is a smooth, corticated unfused ossicle behind the talus; marrow edema across it (or in the adjacent process) signals ==os trigonum syndrome / posterior impingement==, often in dancers and with FHL tenosynovitis.

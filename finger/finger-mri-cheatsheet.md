@@ -283,3 +283,49 @@ Use this for any articular surface. Replace [surface/compartment] with the speci
 
 ## Source Notes
 Built as a practical dictation aid from standard MSK MRI reporting patterns, review-level radiology references, and the existing shoulder cheat-sheet style. Use surgical correlation and local report conventions when needed.
+
+## Test Yourself & Visual Pearls
+A rapid self-check on the tendons, pulleys, and ligaments that make or break hand function — read the question, then expand for the answer.
+
+### Key points
+> [!KEY] Hand essentials
+> - ==Flexor pulleys A2 (proximal phalanx) & A4 (middle phalanx) are the critical pulleys; rupture → bowstringing== of the flexor tendons away from bone.
+> - ==Thumb UCL tear with a Stener lesion== is surgical — the torn ligament retracts superficial to the **adductor aponeurosis**, which becomes interposed and prevents healing.
+> - FDP avulsion from the distal phalanx = ==jersey finger==, graded by the **Leddy classification** based on level of tendon retraction.
+> - ==Mallet finger = terminal (distal) extensor tendon injury at the DIP; boutonnière = central slip injury at the PIP== — distinct levels, distinct deformities.
+> - Sagittal band rupture (typically radial, long finger) = **boxer's knuckle**, allowing extensor tendon subluxation at the MCP.
+
+### Rapid review
+> [!QUIZ] A rock climber has pain and a palpable cord along the volar finger; MRI shows increased tendon–bone distance. Which structures are torn and what is the sign?
+> Rupture of the ==A2 and/or A4 flexor pulleys==, the biomechanically critical pulleys. Loss of pulley restraint allows ==bowstringing== — increased flexor ==tendon–bone distance==, best measured on sagittal/axial images in flexion. The classic "climber's finger."
+
+> [!QUIZ] FDP tendon avulses from the volar base of the distal phalanx. What is the eponym and how is it classified?
+> ==Jersey finger== (commonly the ring finger). Graded by the **Leddy classification**: **Type I** = retraction into the palm (vincula torn, urgent repair); **Type II** = retraction to the PIP (held by vinculum, ± small fleck); **Type III** = large bony avulsion fragment caught at the A4 pulley.
+
+> [!QUIZ] A patient cannot actively extend the DIP and holds it flexed after a "jammed" fingertip. Which tendon is injured?
+> The ==terminal (distal) extensor tendon== at its insertion on the dorsal distal phalanx — **mallet finger**. May be purely tendinous or an avulsion fracture of the dorsal base.
+
+> [!QUIZ] Disruption of the central slip at the PIP produces what deformity, and what do the lateral bands do?
+> **Boutonnière deformity** — PIP flexion with DIP hyperextension. Central slip rupture lets the ==lateral bands subluxate volarly== (palmar to the PIP axis), converting them into PIP flexors while hyperextending the DIP.
+
+> [!QUIZ] A boxer has dorsal MCP pain with extensor tendon snapping. What is torn and which direction does the tendon go?
+> ==Radial sagittal band tear== (most often the long finger) = **boxer's knuckle**. Loss of the radial tether allows the extensor digitorum tendon to ==subluxate ulnarly== into the intermetacarpal groove during flexion.
+
+> [!QUIZ] Skier falls on an abducted thumb; MRI shows the torn UCL balled up and displaced proximal to the adductor aponeurosis. Name the lesion and why it matters.
+> ==Stener lesion== — the avulsed **ulnar collateral ligament** of the thumb MCP retracts superficial to the **adductor aponeurosis**, which folds underneath like a ==yo-yo on a string==. The interposed aponeurosis blocks healing, so it requires **surgical** repair.
+
+> [!PITFALL] Don't call every proximal UCL stump a Stener lesion. The diagnosis requires the retracted ligament to lie ==superficial to the adductor aponeurosis==; a torn but non-displaced UCL still sitting deep to the aponeurosis is **not** surgical.
+
+> [!QUIZ] A finger forced into hyperextension dislocates dorsally at the PIP. Which volar structure fails?
+> The ==volar plate== — its avulsion (often with a small fragment off the volar base of the middle phalanx) is the hallmark of **dorsal PIP dislocation**. Chronic insufficiency can lead to swan-neck deformity.
+
+> [!QUIZ] A diabetic patient has painful catching of a finger that locks in flexion. What is the lesion and where?
+> **Trigger finger** — stenosing tenosynovitis at the ==A1 pulley== (over the MCP). Thickening of the pulley and flexor tendon/sheath impedes smooth gliding, causing the digit to catch.
+
+> [!QUIZ] A small, exquisitely painful subungual nodule shows intense post-contrast enhancement on MRI. Diagnosis?
+> ==Glomus tumor== — a benign vascular hamartoma, classically **subungual**, with cold sensitivity and pinpoint tenderness. T2-hyperintense with ==avid enhancement==; may scallop the underlying distal phalanx.
+
+> [!QUIZ] A firm volar finger mass along the tendon sheath is low signal on all sequences and "blooms" on gradient-echo. What is it?
+> ==Giant cell tumor of the tendon sheath== (localized tenosynovial giant cell tumor). Hemosiderin-laden, so it is low signal on T1 and T2 and shows ==hemosiderin blooming== on gradient-echo sequences.
+
+> [!PITFALL] On gradient-echo, ==hemosiderin blooming== is the giveaway for giant cell tumor of the tendon sheath — but correlate with the typical periarticular/tendon-sheath location and lobulated morphology.

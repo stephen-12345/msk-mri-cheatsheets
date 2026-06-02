@@ -552,3 +552,66 @@ Use this for any articular surface. Replace [surface/compartment] with the speci
 
 ## Source Notes
 Built from the original wrist MRI cheat sheet, expanded to match the depth and format of the shoulder MRI dictation cheat sheet. Incorporates standard MSK MRI reporting patterns for TFCC (Palmer classification), intrinsic ligaments (SL and LT), carpal tunnel/median nerve assessment, Guyon canal/ulnar nerve, extensor tendon pathology (De Quervain, ECU instability/split tear), Kienbock disease (Lichtman staging), osseous pathology, and effusion grading. Ulnocarpal abutment triad, ganglion cyst assessment, and core wrist measurements derived from review-level radiology references and standard clinical practice. Use surgical correlation and local report conventions when needed.
+
+## Test Yourself & Visual Pearls
+
+Lock in the wrist with the extensor compartments first, then drill the high-yield trauma and entrapment patterns.
+
+### The six extensor compartments
+
+On axial T1, count the tendons radial-to-ulnar across the dorsal distal radius and ulna; ==Lister tubercle is the key landmark separating compartments 2 and 3==.
+
+{{diagram:wrist-extensor-compartments}}
+
+> [!KEY] Compartments
+> - ==1: APL/EPB (de Quervain)==
+> - 2: ECRL/ECRB
+> - ==3: EPL hooks around Lister tubercle==
+> - 4: EDC/EIP
+> - 5: EDM
+> - ==6: ECU in ulnar groove==
+
+> [!QUIZ] Which compartment tendon angles around Lister tubercle and is at risk of attritional rupture after a distal radius fracture?
+> The ==EPL (compartment 3)==, which hooks around the tubercle; it can rupture in displaced or healing distal radius fractures (classically drummer-boy palsy).
+
+> [!QUIZ] A tender, thickened sheath over the radial styloid with fluid around APL/EPB — diagnosis and compartment?
+> ==De Quervain tenosynovitis==, involving the ==first extensor compartment (APL/EPB)==; look for an accessory septum that predicts failure of conservative therapy.
+
+### Rapid review
+
+> [!QUIZ] A 25-year-old with ulnar-sided wrist pain after a fall has a vertical tear at the peripheral/ulnar (foveal) attachment of the TFCC — Palmer class and significance?
+> ==Palmer 1B (traumatic peripheral/foveal) tear==; foveal involvement destabilizes the ==DRUJ== and these peripheral tears are vascularized, so they are potentially repairable.
+
+> [!QUIZ] How does a central degenerative TFCC tear differ in mechanism and management?
+> Central (Palmer 2/degenerative) tears arise from chronic ==ulnar impaction==, are typically avascular and irreparable, and are debrided rather than repaired.
+
+> [!PITFALL] Don't call every TFCC defect a "tear" — the central disc is normally thin and a smooth communicating defect in older patients may be a degenerative perforation, not acute injury. Correlate with ==ulnar variance== and marrow edema.
+
+> [!QUIZ] Ulnar-sided pain with subchondral cysts/edema at the proximal ulnar lunate and distal ulna, plus positive ulnar variance — syndrome?
+> ==Ulnar impaction (abutment) syndrome==; positive ==ulnar variance== drives load transfer, producing lunate and ulnar head chondral loss and often a central TFCC perforation.
+
+> [!QUIZ] A torn dorsal band of the scapholunate ligament with widening of the SL interval — what carpal malalignment results?
+> ==Dorsal SL band tear== is the most biomechanically important; it produces ==DISI== (scaphoid flexes, lunate extends; SL angle >70°) and predisposes to SLAC.
+
+> [!QUIZ] A lunotriquetral ligament tear classically produces which instability pattern?
+> ==VISI== (lunate flexes; SL angle <30°), often subtler than SL injury and associated with ulnar-sided pain.
+
+> [!QUIZ] Contrast the end-stage arthritis patterns of untreated SL versus scaphoid injury.
+> ==SLAC== (scapholunate advanced collapse) follows chronic SL dissociation; ==SNAC== (scaphoid nonunion advanced collapse) follows scaphoid nonunion — both progress radial-styloid → radioscaphoid → capitolunate, sparing the radiolunate joint early.
+
+> [!QUIZ] Why is a displaced scaphoid waist fracture prone to proximal pole avascular necrosis?
+> The scaphoid has ==retrograde blood supply== (dorsal carpal branch of the radial artery enters distally), so waist/proximal fractures devascularize the proximal pole — watch for proximal-pole low T1 and lack of enhancement.
+
+> [!PITFALL] A sclerotic, nonenhancing scaphoid proximal pole is not always dead — reactive sclerosis can enhance; ==loss of contrast enhancement is the most reliable MRI sign of AVN==, more specific than T1/T2 signal alone.
+
+> [!QUIZ] Diffuse low T1 signal in the lunate with chronic wrist pain and negative ulnar variance — diagnosis?
+> ==Kienbock disease== (lunate osteonecrosis), strongly associated with ==negative ulnar variance==; stage by Lichtman (signal change → sclerosis → collapse → perilunate arthrosis).
+
+> [!QUIZ] Painful ulnar wrist with a snapping ECU on supination/ulnar deviation — what structure has failed?
+> The ==ECU subsheath== (over the ulnar groove); rupture allows ECU subluxation/dislocation, best seen dynamically with the forearm supinated.
+
+> [!QUIZ] Numbness in the radial 3.5 digits with a flattened, bright median nerve at the level of the hook of hamate — diagnosis and MRI signs?
+> ==Carpal tunnel syndrome==; signs are ==median nerve flattening== at the distal tunnel, proximal nerve swelling/T2 hyperintensity, and palmar bowing of the flexor retinaculum.
+
+> [!QUIZ] A ganglion at the hook of hamate causing intrinsic hand weakness compresses which nerve, and where?
+> The ==ulnar nerve in Guyon canal==; ganglia and hook-of-hamate fractures are classic causes of distal ulnar neuropathy.

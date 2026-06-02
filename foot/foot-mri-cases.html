@@ -174,6 +174,40 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 .callout.pitfall{--c-acc:#f3ad63; --c-bg:#231910}
 .callout.measure{--c-acc:#7fb2ea; --c-bg:#101826}
 .callout.note{--c-acc:#9fb4c6; --c-bg:#141a22}
+.callout.tip{--c-acc:#5fd0c0; --c-bg:#0c1f1d}
+.callout.key{--c-acc:#ffd166; --c-bg:#221d0f}
+.callout.quiz{--c-acc:#b69cf0; --c-bg:#16132a}
+.callout.quiz .c-title .ttl{font-weight:700;}
+.quiz-ans{margin-top:6px;}
+.quiz-ans > summary{
+  cursor:pointer; list-style:none; display:inline-flex; align-items:center; gap:7px;
+  color:#b69cf0; font-weight:700; font-size:13.5px; border:1px solid rgba(167,139,250,0.45);
+  background:rgba(167,139,250,0.12); border-radius:999px; padding:5px 13px; user-select:none;
+}
+.quiz-ans > summary::-webkit-details-marker{display:none;}
+.quiz-ans > summary::before{content:"▸ "; font-size:11px;}
+.quiz-ans[open] > summary::before{content:"▾ ";}
+.quiz-ans[open] > summary{color:#cbbdf5;}
+.quiz-ans .ans{margin-top:9px; padding-top:9px; border-top:1px solid #2a2440; color:var(--tx);}
+mark, .callout mark, p mark, li mark{ background:rgba(255,209,102,0.2); color:#ffe6ad; border-radius:3px; padding:0 3px; }
+mark.hl{ background:rgba(95,198,230,0.2); color:#cdeffb; }
+
+/* inline 'On this page' TOC */
+.inline-toc{ background:var(--panel); border:1px solid var(--bdr); border-radius:10px; padding:11px 15px; margin:14px 0 22px; }
+.inline-toc > summary{ cursor:pointer; font-weight:800; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--tx2); list-style:none; }
+.inline-toc > summary::-webkit-details-marker{ display:none; }
+.inline-toc > summary::before{ content:"▸ "; color:var(--tx3); }
+.inline-toc[open] > summary::before{ content:"▾ "; }
+.itoc-links{ display:flex; flex-wrap:wrap; gap:7px 9px; margin-top:11px; align-items:baseline; }
+.itoc-links a{ text-decoration:none; font-size:13.5px; }
+.itoc-links a.itoc-group{ width:100%; color:#c9b6f5; font-weight:800; text-transform:uppercase; font-size:11.5px; letter-spacing:.5px; margin-top:5px; }
+.itoc-links a.itoc-h2{ color:#9fdcf0; border:1px solid var(--bdr); border-radius:999px; padding:3px 11px; background:#0d1a26; }
+.itoc-links a.itoc-h2:hover{ border-color:var(--h3tx); color:#fff; }
+@media print{
+  .inline-toc{ display:none; }
+  details.quiz-ans > summary{ display:none; }
+  details.quiz-ans .ans{ display:block !important; border-top:none; padding-top:0; }
+}
 
 /* ── Anatomy diagrams (inline SVG) ── */
 .diagram{
@@ -314,6 +348,7 @@ body.toc-open .toc-handle{ opacity:0; visibility:hidden; }
 <div id="toc-backdrop" class="toc-backdrop"></div><nav id="toc-drawer" class="toc-drawer" aria-label="Table of contents"><div class="toc-head"><span class="t">Contents</span><button id="toc-close" class="toc-close" aria-label="Close contents">&times;</button></div><div class="toc-list"><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-h2" href="#forefoot">Forefoot</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-1-second-mtp-plantar-plate-tear">Case 1 — Second MTP plantar plate tear</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-2-morton-neuroma-third-webspace">Case 2 — Morton neuroma, third webspace</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-3-intermetatarsal-bursitis">Case 3 — Intermetatarsal bursitis</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-4-sesamoiditis">Case 4 — Sesamoiditis</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-5-sesamoid-fracture-versus-bipartite-sesamoid">Case 5 — Sesamoid fracture versus bipartite sesamoid</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-6-turf-toe-first-mtp-capsuloligamentous-injury">Case 6 — Turf toe (first MTP capsuloligamentous injury)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-7-first-mtp-osteoarthritis-hallux-rigidus">Case 7 — First MTP osteoarthritis / hallux rigidus</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-8-freiberg-infraction">Case 8 — Freiberg infraction</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-h2" href="#midfoot-stress">Midfoot &amp; Stress</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-9-lisfranc-ligament-injury-with-diastasis">Case 9 — Lisfranc ligament injury with diastasis</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-10-second-metatarsal-stress-fracture">Case 10 — Second metatarsal stress fracture</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-11-navicular-stress-fracture">Case 11 — Navicular stress fracture</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-12-jones-fracture-fifth-metatarsal-base">Case 12 — Jones fracture (fifth metatarsal base)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-13-midfoot-osteoarthritis">Case 13 — Midfoot osteoarthritis</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-14-accessory-navicular-syndrome-type-ii">Case 14 — Accessory navicular syndrome (type II)</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-h2" href="#hindfoot-plantar">Hindfoot &amp; Plantar</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-15-plantar-fasciitis">Case 15 — Plantar fasciitis</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-16-plantar-fascia-tear">Case 16 — Plantar fascia tear</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-17-plantar-fibromatosis-ledderhose">Case 17 — Plantar fibromatosis (Ledderhose)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-18-calcaneal-stress-fracture">Case 18 — Calcaneal stress fracture</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-19-peroneus-longus-tear-painful-os-peroneum-syndrome">Case 19 — Peroneus longus tear / painful os peroneum syndrome</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-20-achilles-insertional-tendinosis-with-haglund-deformity">Case 20 — Achilles insertional tendinosis with Haglund deformity</a></div></div></div></div><div class="toc-node"><div class="toc-row"><button class="toc-tog" aria-label="expand section"></button><a class="toc-link lvl-h2" href="#other-infection-marrow">Other / Infection / Marrow</a></div><div class="toc-children"><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-21-osteomyelitis-with-diabetic-foot-ulcer">Case 21 — Osteomyelitis with diabetic foot ulcer</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-22-charcot-neuroarthropathy">Case 22 — Charcot neuroarthropathy</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-23-soft-tissue-abscess-with-cellulitis">Case 23 — Soft-tissue abscess with cellulitis</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-24-ganglion-cyst">Case 24 — Ganglion cyst</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-25-tarsal-coalition-talocalcaneal">Case 25 — Tarsal coalition (talocalcaneal)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-26-bone-contusion-talar-dome">Case 26 — Bone contusion / talar dome</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-27-avulsion-fracture-fifth-metatarsal-styloid-pseudo-jones">Case 27 — Avulsion fracture, fifth metatarsal styloid (pseudo-Jones)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-28-gout-first-mtp">Case 28 — Gout (first MTP)</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-29-tibialis-posterior-tendon-dysfunction-with-acquired-flatfoot">Case 29 — Tibialis posterior tendon dysfunction with acquired flatfoot</a></div></div><div class="toc-node leaf"><div class="toc-row"><a class="toc-link lvl-h3" href="#case-30-osteochondral-lesion-of-the-talus">Case 30 — Osteochondral lesion of the talus</a></div></div></div></div></div></nav>
 <h1>Foot MRI — 30 Sample Cases</h1>
 <p class="subtitle">A teaching file of 30 commonly encountered foot MRI diagnoses spanning the forefoot, midfoot, hindfoot, and marrow/infection processes, each with a realistic worked case.</p>
+<details class="inline-toc" open><summary>On this page</summary><div class="itoc-links"><a href="#forefoot" class="itoc-h2">Forefoot</a><a href="#midfoot-stress" class="itoc-h2">Midfoot &amp; Stress</a><a href="#hindfoot-plantar" class="itoc-h2">Hindfoot &amp; Plantar</a><a href="#other-infection-marrow" class="itoc-h2">Other / Infection / Marrow</a></div></details>
 <h2 id="forefoot">Forefoot</h2>
 <h3 id="case-1-second-mtp-plantar-plate-tear">Case 1 — Second MTP plantar plate tear</h3>
 <p><b>Clinical:</b> 54-year-old woman, progressive forefoot pain and a &quot;walking on a pebble&quot; sensation, with early second toe drift.</p>
@@ -354,7 +389,7 @@ body.toc-open .toc-handle{ opacity:0; visibility:hidden; }
 <p><b>Clinical:</b> 16-year-old female gymnast, chronic pain and swelling at the second MTP.</p>
 <p class="f"><b>F:</b> The <b>second metatarsal head</b> is flattened with dorsal articular surface collapse, subchondral low T1 signal and patchy fat-suppressed T2 marrow edema, and a subchondral fracture line. There is mild joint-space widening with a small effusion and a 3 mm intra-articular fragment. Adjacent synovitis is present. The plantar plate is intact.</p>
 <p class="i"><b>I:</b> Freiberg infraction of the second metatarsal head with articular flattening and subchondral collapse.</p>
-<p class="review"><a href="foot-mri-cheatsheet.html#freiberg-disease">Review in cheat sheet: Freiberg disease →</a></p>
+<p class="review"><a href="foot-mri-cheatsheet.html#what-is-freiberg-infraction-and-where-does-it-occur">Review in cheat sheet: What is Freiberg infraction and where does it occur? →</a></p>
 <h2 id="midfoot-stress">Midfoot &amp; Stress</h2>
 <h3 id="case-9-lisfranc-ligament-injury-with-diastasis">Case 9 — Lisfranc ligament injury with diastasis</h3>
 <p><b>Clinical:</b> 31-year-old man, midfoot pain after a fall from a curb with the foot plantarflexed; plantar ecchymosis.</p>
@@ -416,23 +451,23 @@ body.toc-open .toc-handle{ opacity:0; visibility:hidden; }
 <p><b>Clinical:</b> 55-year-old recreational runner, posterior heel pain and swelling at the tendon insertion.</p>
 <p class="f"><b>F:</b> The distal <b>Achilles tendon</b> at its calcaneal insertion is thickened to 11 mm with intrasubstance intermediate signal and insertional enthesophyte formation. There is a prominent posterosuperior calcaneal process (<b>Haglund deformity</b>) with reactive retrocalcaneal bursitis (fluid &gt;6 mm) and adjacent calcaneal marrow edema. No full-thickness tear; fibers remain continuous.</p>
 <p class="i"><b>I:</b> Insertional Achilles tendinosis with Haglund deformity and retrocalcaneal bursitis.</p>
-<p class="review"><a href="foot-mri-cheatsheet.html#plantar-plate-tear">Review in cheat sheet: Plantar plate tear →</a></p>
+<p class="review"><a href="foot-mri-cheatsheet.html#what-mri-findings-indicate-a-plantar-plate-tear-and-what-deformity-results">Review in cheat sheet: What MRI findings indicate a plantar plate tear, and what deformity results? →</a></p>
 <h2 id="other-infection-marrow">Other / Infection / Marrow</h2>
 <h3 id="case-21-osteomyelitis-with-diabetic-foot-ulcer">Case 21 — Osteomyelitis with diabetic foot ulcer</h3>
 <p><b>Clinical:</b> 63-year-old diabetic man, plantar forefoot ulcer over a callus with surrounding erythema.</p>
 <p class="f"><b>F:</b> Beneath a plantar soft-tissue ulcer at the <b>first metatarsal head</b>, there is confluent low T1 marrow signal replacing the normal fatty marrow, with corresponding fat-suppressed T2 hyperintensity and avid post-contrast enhancement, plus cortical destruction. A sinus tract extends from the skin ulcer to the bone. Surrounding soft-tissue edema, phlegmon, and a small rim-enhancing collection are present. &quot;Ghost sign&quot; of the metatarsal head on T1.</p>
 <p class="i"><b>I:</b> First metatarsal head osteomyelitis contiguous with a plantar ulcer and adjacent soft-tissue infection.</p>
-<p class="review"><a href="foot-mri-cheatsheet.html#foot-mri-tells">Review in cheat sheet: Foot MRI Tells →</a></p>
+<p class="review"><a href="foot-mri-cheatsheet.html#how-does-osteomyelitis-differ-from-neuropathic-charcot-arthropathy-on-mri-in-the-diabetic-foot">Review in cheat sheet: How does osteomyelitis differ from neuropathic (Charcot) arthropathy on MRI in the diabetic foot? →</a></p>
 <h3 id="case-22-charcot-neuroarthropathy">Case 22 — Charcot neuroarthropathy</h3>
 <p><b>Clinical:</b> 58-year-old diabetic woman with peripheral neuropathy, a swollen warm &quot;rocker-bottom&quot; midfoot without ulcer.</p>
 <p class="f"><b>F:</b> The <b>tarsometatarsal (Lisfranc) and midtarsal joints</b> show fragmentation, subluxation, and bony debris with periarticular marrow edema and large joint effusions, producing a rocker-bottom deformity. Marrow signal abnormality is centered on the joints (subchondral, periarticular) rather than subcortical with an overlying ulcer, and there is no sinus tract. Subchondral cysts and ligamentous disruption are present. No drainable abscess.</p>
 <p class="i"><b>I:</b> Midfoot Charcot neuroarthropathy; periarticular distribution and absence of an ulcer/sinus tract favor Charcot over osteomyelitis.</p>
-<p class="review"><a href="foot-mri-cheatsheet.html#infection-search-pattern">Review in cheat sheet: Infection Search Pattern →</a></p>
+<p class="review"><a href="foot-mri-cheatsheet.html#how-does-osteomyelitis-differ-from-neuropathic-charcot-arthropathy-on-mri-in-the-diabetic-foot">Review in cheat sheet: How does osteomyelitis differ from neuropathic (Charcot) arthropathy on MRI in the diabetic foot? →</a></p>
 <h3 id="case-23-soft-tissue-abscess-with-cellulitis">Case 23 — Soft-tissue abscess with cellulitis</h3>
 <p><b>Clinical:</b> 44-year-old man, painful swollen dorsal foot after a puncture wound, febrile.</p>
 <p class="f"><b>F:</b> In the <b>dorsal midfoot subcutaneous and intermuscular soft tissues</b>, there is a 3.2 × 2.0 cm rim-enhancing fluid collection with central T2 hyperintensity and restricted diffusion, consistent with an abscess. Surrounding reticulated subcutaneous fat-suppressed T2 hyperintensity and skin thickening indicate cellulitis. No definite osseous marrow signal abnormality or cortical destruction to suggest osteomyelitis. No gas locules.</p>
 <p class="i"><b>I:</b> Dorsal foot soft-tissue abscess with overlying cellulitis; no MRI evidence of osteomyelitis.</p>
-<p class="review"><a href="foot-mri-cheatsheet.html#infection-search-pattern">Review in cheat sheet: Infection Search Pattern →</a></p>
+<p class="review"><a href="foot-mri-cheatsheet.html#secondary-signs-favoring-osteomyelitis-an-adjacent-skin-ulcer-sinus-tract-cellulitis-and-the-penumbra-sign-a-t1-hyperintense-rim-around-an-intraosseous-abscess">Review in cheat sheet: Secondary signs favoring osteomyelitis: an adjacent skin ulcer, sinus tract, cellulitis, and the ==penumbra sign== — a T1-hyperintense rim around an intraosseous abscess. →</a></p>
 <h3 id="case-24-ganglion-cyst">Case 24 — Ganglion cyst</h3>
 <p><b>Clinical:</b> 33-year-old woman, painless soft dorsal midfoot lump.</p>
 <p class="f"><b>F:</b> Arising adjacent to the <b>sinus tarsi/talonavicular region</b>, there is a well-circumscribed lobulated cystic lesion measuring 18 × 10 mm, homogeneously T2 hyperintense, T1 hypointense, with a thin neck/pedicle to the talonavicular joint and only thin peripheral enhancement. No internal solid nodularity or septal enhancement. No bone erosion.</p>
@@ -452,7 +487,7 @@ body.toc-open .toc-handle{ opacity:0; visibility:hidden; }
 <p><b>Clinical:</b> 38-year-old woman, lateral foot pain after an inversion injury stepping off a curb.</p>
 <p class="f"><b>F:</b> There is an avulsion fracture at the <b>tip of the fifth metatarsal styloid (Zone 1)</b> at the peroneus brevis/lateral plantar fascia attachment, with a minimally displaced fragment and surrounding marrow edema. The fracture line does not extend into the fourth–fifth intermetatarsal articulation. The <b>peroneus brevis</b> tendon is intact and taut. No Lisfranc injury.</p>
 <p class="i"><b>I:</b> Zone 1 avulsion (&quot;pseudo-Jones&quot;) fracture of the fifth metatarsal styloid; favorable healing prognosis.</p>
-<p class="review"><a href="foot-mri-cheatsheet.html#metatarsal-stress-reaction">Review in cheat sheet: Metatarsal stress reaction →</a></p>
+<p class="review"><a href="foot-mri-cheatsheet.html#how-do-you-distinguish-a-jones-fracture-from-a-5th-metatarsal-tuberosity-avulsion">Review in cheat sheet: How do you distinguish a Jones fracture from a 5th metatarsal tuberosity avulsion? →</a></p>
 <h3 id="case-28-gout-first-mtp">Case 28 — Gout (first MTP)</h3>
 <p><b>Clinical:</b> 57-year-old man, recurrent acutely painful red swollen great toe, hyperuricemia.</p>
 <p class="f"><b>F:</b> At the <b>first MTP joint</b>, there is a juxta-articular soft-tissue mass (tophus) measuring 12 mm that is intermediate-to-low signal on T1 and heterogeneous intermediate signal on T2 with surrounding enhancement. There is a &quot;punched-out&quot; para-articular erosion with overhanging sclerotic margins along the medial metatarsal head, mild adjacent marrow edema, and a joint effusion. Relative preservation of joint space.</p>

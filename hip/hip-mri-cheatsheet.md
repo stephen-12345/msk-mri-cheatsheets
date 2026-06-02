@@ -513,3 +513,55 @@ Use this for any articular surface. Replace [surface/compartment] with the speci
 
 ## Source Notes
 Built as a practical dictation aid from standard MSK MRI reporting patterns, review-level radiology references (including Steinberg/Ficat AVN staging, ischiofemoral impingement criteria, athletic pubalgia imaging findings), and the existing shoulder cheat-sheet style. PowerScribe build-script template choices integrated as F/I pairs. Use surgical correlation and local report conventions when needed.
+
+## Test Yourself & Visual Pearls
+
+Lock in the high-yield hip measurements and active-recall traps before you sign your next report.
+
+### Measuring cam FAI
+
+Femoroacetabular impingement is fundamentally a problem of abnormal bony morphology, so start every FAI dictation by measuring the alpha angle on an oblique axial through the femoral head-neck junction and assessing acetabular coverage on the coronal.
+
+{{diagram:hip-alpha-angle}}
+
+> [!KEY] FAI numbers
+> - ==Alpha angle >55°== indicates a ==cam== deformity (aspherical head-neck junction, classically anterosuperior).
+> - ==Lateral center-edge angle (LCEA): <20-25° = dysplasia (undercoverage), >40° = pincer (overcoverage)==.
+> - A ==crossover sign== on the AP radiograph/scout indicates acetabular ==retroversion== (focal cranial overcoverage), a form of pincer impingement.
+> - Cam + pincer together = mixed FAI, the most common pattern.
+
+> [!QUIZ] An active 28-year-old male has groin pain; the oblique axial shows an alpha angle of 68° with an anterosuperior chondrolabral lesion. Cam, pincer, or mixed?
+> ==Cam== FAI. The elevated ==alpha angle (>55°)== with the characteristic ==anterosuperior== chondrolabral delamination is the classic cam pattern. The femoral "bump" jams against the acetabular rim in flexion/internal rotation.
+
+> [!QUIZ] LCEA measures 17° with a hypertrophied, torn labrum and lateral joint-space changes. What underlying morphology, and why is the labrum hypertrophied?
+> ==Developmental dysplasia== (LCEA <20-25° = undercoverage). The labrum ==hypertrophies to compensate== for the deficient bony coverage, predisposing it to tearing and paralabral cyst formation.
+
+### Rapid review
+
+> [!QUIZ] On the clock-face, where do labral tears most commonly occur, and what high-T2-signal structure confirms a tear?
+> Most tears are ==anterosuperior (roughly the 1-3 o'clock position)==. A ==paralabral cyst== — fluid tracking through the tear, often into the surrounding soft tissues — is a secondary sign that confirms an underlying labral tear even when the tear itself is subtle.
+
+> [!QUIZ] What is chondrolabral delamination and why does it matter for the surgeon?
+> ==Delamination== is shearing of the articular cartilage off the subchondral bone at the chondrolabral junction, classically at the ==anterosuperior acetabulum== in cam FAI. It signals advanced impingement, is easily missed on routine sequences (best seen on MR arthrography or fluid-sensitive images), and changes the surgical plan.
+
+> [!QUIZ] Describe the MRI hallmark of osteonecrosis (AVN) and the two features that herald imminent collapse.
+> The ==double-line sign== (inner T2-hyperintense granulation tissue, outer T2-hypointense sclerosis) is pathognomonic. The ==subchondral crescent sign== (subchondral fracture) and articular surface flattening herald ==impending/early collapse==.
+
+> [!QUIZ] How do the ARCO stage and the percentage of weight-bearing surface involved guide AVN prognosis?
+> ==ARCO== staging runs from marrow changes (no collapse) through crescent/subchondral fracture to articular collapse and secondary OA. Lesions involving a larger ==percentage of the weight-bearing surface (especially >30%)== and located more laterally carry a much higher risk of collapse.
+
+> [!QUIZ] An older osteopenic woman has acute hip pain with diffuse femoral head marrow edema. How do you distinguish ==subchondral insufficiency fracture (SIF)== from ==transient marrow edema==?
+> Look for a ==subchondral low-signal fracture line== paralleling the articular surface: ==present in SIF, absent in transient marrow edema==. SIF risks collapse and may mimic AVN; transient osteoporosis is self-limiting. Both show extensive edema, so the fracture line — not the edema — is the discriminator.
+
+> [!PITFALL] Do not call extensive femoral head/neck marrow edema "AVN." Edema is nonspecific — without a ==double-line sign (AVN)== or a ==subchondral fracture line (SIF)==, favor transient marrow edema. Over-calling AVN drives unnecessary intervention.
+
+> [!QUIZ] Why are the gluteus medius/minimus tendons called the "rotator cuff of the hip," and what grading system describes their fatty change?
+> They are the primary abductors inserting on the greater trochanter; tendinosis and tears here cause ==greater trochanteric pain syndrome== and a Trendelenburg gait, analogous to shoulder cuff disease. Fatty muscle degeneration is graded with the ==Goutallier classification== (0-4), which predicts repair success.
+
+> [!QUIZ] In athletic pubalgia ("sports hernia"), what MRI finding at the pubic symphysis is most specific?
+> The ==secondary cleft sign== — a curvilinear fluid signal extending inferolaterally from the symphysis along the rectus abdominis–adductor aponeurosis, indicating microtearing of the common attachment. Look also for adductor longus tendinosis and pubic bone marrow edema.
+
+> [!QUIZ] A sprinter felt a "pop" with sudden posterior thigh pain. What proximal injury must you measure, and why?
+> ==Proximal hamstring origin tear== at the ischial tuberosity. Report the number of tendons torn (semitendinosus/biceps conjoint, semimembranosus) and the ==degree of tendon retraction== — retraction (typically >2 cm) and complete avulsions favor surgical repair.
+
+> [!PITFALL] The ischial apophysis does not fuse until the early-to-mid 20s. In an adolescent, a "hamstring tear" with a displaced bony fragment is an ==apophyseal avulsion fracture==, not a pure tendon injury — describe the bony fragment and displacement.

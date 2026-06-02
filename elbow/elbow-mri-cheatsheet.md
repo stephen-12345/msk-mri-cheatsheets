@@ -505,3 +505,61 @@ Use this for any articular surface. Replace [surface/compartment] with the speci
 
 ## Source Notes
 Built from the original elbow MRI cheat sheet, standard MSK MRI reporting conventions, review-level radiology references for UCL/lateral collateral injuries, capitellar OCD staging, cubital tunnel syndrome, and PIN entrapment. Expanded to match the depth of the shoulder cheat sheet with graded findings for all major structures. Use surgical correlation and local report conventions as needed.
+
+## Test Yourself & Visual Pearls
+Lock in the high-yield elbow anatomy and the classic MRI traps before you sign the report.
+
+### The UCL and the T-sign
+The ulnar collateral ligament complex is the dominant restraint to valgus stress, and a small fluid cleft at its distal attachment is the single most important partial-tear sign.
+
+{{diagram:elbow-ucl-tsign}}
+
+> [!KEY] UCL
+> - The ==anterior bundle== is the key valgus stabilizer (the posterior bundle and transverse band contribute little).
+> - It attaches distally at the ==sublime tubercle== of the coronoid; failure here is the overhead-throwing athlete's nemesis.
+> - A ==T-sign== = contrast or fluid tracking distal to the ligament along the sublime tubercle = ==partial undersurface (deep) tear==, even when the proximal fibers look intact.
+
+> [!QUIZ] On a coronal image, the anterior bundle of the UCL should attach where, and what does fluid tracking past that point indicate?
+> It should insert flush onto the ==sublime tubercle==. Fluid extending distal to the insertion is the ==T-sign==, indicating a ==partial undersurface tear== of the anterior bundle.
+
+> [!QUIZ] A 22-year-old pitcher has medial elbow pain. Which UCL bundle do you scrutinize, and on which sequence is the T-sign best seen?
+> The ==anterior bundle==, best evaluated on a ==fluid-sensitive coronal== (or MR arthrogram), where the T-sign manifests as fluid undercutting the distal ligament.
+
+### Rapid review
+
+> [!QUIZ] Lateral epicondylitis ("tennis elbow") involves degeneration of which specific tendon, and where does it originate?
+> The ==common extensor tendon==, with the ==ECRB (extensor carpi radialis brevis)== as the principal culprit, originating from the lateral epicondyle.
+
+> [!QUIZ] Medial epicondylitis ("golfer's elbow") affects which tendon group?
+> The ==common flexor-pronator tendon== (pronator teres and flexor carpi radialis predominate) at the medial epicondyle.
+
+> [!QUIZ] A thrower with a chronic complete UCL tear develops valgus extension overload. What bony lesion do you expect, and where?
+> A ==posteromedial olecranon osteophyte== (and posteromedial trochlear chondral wear) from repetitive valgus extension impaction.
+
+> [!QUIZ] Which ligament, when torn, produces posterolateral rotatory instability, and what is the eponymous test?
+> The ==lateral ulnar collateral ligament (LUCL)==; its disruption causes ==posterolateral rotatory instability (PLRI)==, demonstrated by the lateral pivot-shift test.
+
+> [!QUIZ] A weightlifter feels a "pop" with a retracted anterior arm mass. What ruptured, and what structure may mask retraction?
+> The ==distal biceps tendon== at the radial tuberosity; an intact ==lacertus fibrosus== can tether the stump and mask retraction. Image with the ==FABS== view (Flexed elbow, ABducted shoulder, forearm Supinated) for the best longitudinal look.
+
+> [!PITFALL] Do not call every anterior signal abnormality a biceps tear. Confirm the radial tuberosity footprint and assess the lacertus fibrosus; a partial tear with intact lacertus is easily over- or under-called.
+
+> [!QUIZ] How do you distinguish a true capitellar osteochondritis dissecans from the normal pseudodefect of the capitellum?
+> True ==OCD== is anterolateral on the capitellum (the weight-bearing zone), often with fluid/cysts undercutting the fragment signaling instability. The ==pseudodefect of capitellum== is a normal ==posterolateral== groove at the capitellotrochlear junction — do not mistake it for a defect.
+
+> [!QUIZ] What features on MRI suggest an unstable capitellar OCD fragment?
+> ==Fluid signal encircling the fragment==, underlying cysts, a displaced fragment, or contrast tracking beneath the osteochondral lesion (instability criteria).
+
+> [!QUIZ] A 9-year-old gymnast has diffuse capitellar marrow change without a discrete fragment. What is the likely diagnosis?
+> ==Panner disease== (osteochondrosis of the capitellar ossification center) — self-limiting, no loose body, distinct from the older child's focal OCD.
+
+> [!QUIZ] Medial elbow paresthesias into the small finger with a flattened nerve at the retrocondylar groove — what and where?
+> ==Ulnar neuritis== within the ==cubital tunnel== (retrocondylar groove deep to Osborne's retinaculum); look for nerve enlargement, T2 hyperintensity, and possible subluxation over the medial epicondyle.
+
+> [!QUIZ] Pure motor weakness of finger/thumb extension with sparing of wrist extension and no sensory loss localizes to which nerve at which landmark?
+> The ==posterior interosseous nerve (PIN)==, compressed at the ==arcade of Frohse== (proximal edge of the supinator) — the deep, motor branch of the radial nerve.
+
+> [!PITFALL] PIN syndrome spares sensation and wrist extension (ECRL is innervated proximally); do not confuse it with lateral epicondylitis even though pain overlaps over the radial tunnel.
+
+> [!QUIZ] What is the ossification order of the pediatric elbow centers (CRITOE), and why does it matter?
+> ==Capitellum, Radial head, Internal (medial) epicondyle, Trochlea, Olecranon, External (lateral) epicondyle==. It matters because the ==trochlea must never ossify before the internal epicondyle== — an apparent intra-articular ossicle without a visible medial epicondyle = an avulsed/entrapped medial epicondyle.

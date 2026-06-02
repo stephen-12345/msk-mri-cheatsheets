@@ -570,3 +570,71 @@ Use this for any articular surface. Replace [surface/compartment] with the speci
 
 ## Source Notes
 Built from the original knee MRI cheat-sheet plus review-level MSK MRI reporting patterns and the expanded shoulder cheat-sheet style. Includes bone contusion pattern recognition, posterolateral corner anatomy, meniscal tear classification, and patellar instability evaluation frameworks.
+
+## Test Yourself & Visual Pearls
+Active-recall prompts and pattern recognition to sharpen your knee MRI eye.
+
+### Reading the meniscus
+Orient yourself on sagittal sequences: the meniscus is a low-signal bowtie that you track from periphery to free edge, then confirm any abnormality on the orthogonal coronal plane.
+
+{{diagram:knee-meniscus-map}}
+
+> [!KEY] Meniscus rules
+> - ==Two-slice-touch rule==: a tear should be confirmed on ==≥2 consecutive slices== (or on both planes) before you call it — single-slice signal is usually a mimic or partial volume.
+> - Signal grading: ==grade 1== = globular intrasubstance signal (not surfacing); ==grade 2== = linear signal not reaching an articular surface; ==grade 3== = signal contacting an articular surface = a true tear.
+> - Bowtie counting: a normal meniscus shows ==≥2 bowtie segments== on contiguous 4–5 mm sagittal slices; fewer than 2 suggests a torn/displaced or post-meniscectomy meniscus.
+> - Extrusion: meniscal body displacement ==≥3 mm== beyond the tibial margin signals meniscal dysfunction (root tear, complex/radial tear, or degeneration).
+
+> [!QUIZ] Why does grade 2 signal NOT count as a tear, and what changes it to grade 3?
+> Grade 2 is ==linear intrasubstance signal that does not contact an articular surface== — degenerative, not a tear. It becomes ==grade 3 (a true tear)== only when the signal unequivocally ==reaches the superior or inferior articular surface==. Apply the two-slice-touch rule to avoid over-calling partial-volume artifact.
+
+> [!QUIZ] What is the significance of meniscal extrusion ≥3 mm?
+> It indicates ==loss of the meniscus's hoop-stress function== and is strongly associated with ==radial/root tears, complex degenerative tears==, and accelerated cartilage loss. Extrusion is a key driver of ==early osteoarthritis== even when the tear itself looks subtle.
+
+### Rapid review
+Quick cases spanning menisci, ligaments, cartilage, and patellofemoral measurements.
+
+> [!QUIZ] A radial tear of the meniscus produces which two classic signs, and why does it matter functionally?
+> The ==truncated triangle== (blunted free edge) on one slice and the ==ghost/cleft sign== (focal absence of meniscal tissue) on the adjacent slice. A full-thickness radial tear severs the ==circumferential collagen==, abolishing hoop stress — functionally equivalent to a ==partial meniscectomy== with consequent extrusion.
+
+> [!QUIZ] How does a medial meniscus posterior root tear present, and what is its downstream consequence?
+> A ==vertical/oblique cleft at the root attachment==, often with a ==ghost sign== and ==≥3 mm extrusion== (the "==functional meniscectomy=="). It accelerates ==medial compartment osteoarthritis== and subchondral insufficiency fracture; look for it in the older patient with acute pain after a minor squat.
+
+> [!QUIZ] What two signs confirm a bucket-handle meniscal tear?
+> The ==double-PCL sign== (the displaced fragment lies anteroinferior to the PCL, mimicking a second PCL) and the ==absent-bowtie sign== (fewer than two bowtie segments because the inner fragment has flipped into the notch). Also look for the ==double-anterior-horn sign== and fragment in the intercondylar notch.
+
+> [!QUIZ] What is a ramp lesion and why is it easy to miss?
+> A ==tear at the meniscocapsular junction of the posterior horn of the medial meniscus==, often associated with ACL tears. It is subtle on standard sequences — look for ==posteromedial fluid/edema== and irregularity at the meniscocapsular attachment; fluid-sensitive sequences and arthroscopy increase detection.
+
+> [!PITFALL] Beware the normal structures that mimic meniscal tears.
+> The ==meniscofemoral ligaments (Humphrey, anterior to PCL; Wrisberg, posterior to PCL)==, the ==transverse intermeniscal ligament== (mimics an anterior-horn tear at its attachment), and the ==popliteomeniscal fascicles== with the popliteus tendon (normal cleft at the lateral meniscus posterior horn) are all classic pseudo-tears. Follow each structure across slices.
+
+> [!QUIZ] What is a meniscal flounce and is it pathologic?
+> A ==smooth, undulating wave of the free edge of the (usually medial) meniscus== — a ==normal variant== reflecting meniscal redundancy, NOT a tear. Don't mistake the rippled contour for a complex tear.
+
+> [!QUIZ] Distinguish the primary from secondary MRI signs of an ACL tear.
+> ==Primary==: discontinuity/non-visualization of fibers, abnormal flat/horizontal slope, edema/high T2 within the ligament. ==Secondary==: ==anterior tibial translation==, uncovered/posteriorly buckled PCL, deepened lateral femoral notch, and the characteristic ==bone-bruise pair==.
+
+> [!QUIZ] Where are the pivot-shift bone contusions, and what bony avulsion clinches an ACL injury?
+> The ==pivot-shift pattern== bruises the ==lateral femoral condyle (sulcus terminalis) and posterolateral tibial plateau==. A ==Segond fracture== — a small ==avulsion of the lateral tibial plateau== (lateral capsular/anterolateral ligament) — is highly specific for an associated ==ACL tear==.
+
+> [!QUIZ] What does a thickened, "celery-stalk" ACL with intact fibers represent?
+> ==Mucoid degeneration of the ACL== — increased intrasubstance T2 signal with longitudinally oriented fibers giving a striated ==celery-stalk== appearance, often with intraligamentous/intraosseous ganglion cysts. The ligament is ==functionally intact==; don't call it a tear.
+
+> [!QUIZ] What is the arcuate sign and what injury does it flag?
+> An ==avulsion of the fibular styloid== (arcuate complex insertion) — a marker of ==posterolateral corner (PLC) injury==. Always interrogate the PCL and PLC structures (popliteus, popliteofibular and lateral collateral ligaments) when you see it.
+
+> [!QUIZ] How is an MCL injury graded on MRI?
+> ==Grade 1==: periligamentous edema, intact fibers; ==Grade 2==: partial-thickness fiber disruption with edema, ligament thickened but continuous; ==Grade 3==: ==complete fiber discontinuity== with fluid through the gap. Proximal (femoral) tears risk the ==Pellegrini-Stieda== calcification.
+
+> [!PITFALL] Don't let a subchondral fracture masquerade as osteonecrosis.
+> "==SONK==" (spontaneous osteonecrosis of the knee) is now understood as a ==subchondral insufficiency fracture== — a ==subchondral low-signal line with surrounding marrow edema==, classically the ==medial femoral condyle==, frequently downstream of a ==medial meniscus root tear==. True avascular osteonecrosis has a different (epiphyseal, serpiginous) pattern.
+
+> [!QUIZ] What defines an Outerbridge grade 4 cartilage lesion and an unstable osteochondral fragment?
+> ==Outerbridge grade 4== = ==full-thickness cartilage loss with exposed subchondral bone==. An osteochondral lesion is ==unstable== when MRI shows ==fluid signal undercutting the fragment==, surrounding cysts, or a displaced fragment — the key signs that change management toward fixation.
+
+> [!QUIZ] After a lateral patellar dislocation, what bone-bruise pair and ligament should you check?
+> The classic ==bone-bruise pair== is the ==medial patellar facet and the anterolateral/lateral femoral condyle==. Assess the ==MPFL== (medial patellofemoral ligament), most often torn at its ==femoral (Schöttle point) attachment==.
+
+> [!QUIZ] Which patellofemoral measurements predict instability, and their thresholds?
+> ==TT-TG distance== (tibial tubercle–trochlear groove) ==>20 mm== is abnormal (15–20 mm borderline); ==trochlear dysplasia== is assessed by a shallow/flat sulcus (==sulcus angle >145°==), the ==crossing sign==, supratrochlear spur, and double-contour — together with ==patella alta (Insall-Salvati >1.2)== they drive recurrent lateral dislocation.

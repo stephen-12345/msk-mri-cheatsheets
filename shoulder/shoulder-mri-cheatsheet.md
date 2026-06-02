@@ -601,3 +601,73 @@ Search pattern: HAGL can occur with little/no labral tear. Check subscapularis a
 
 ## Source Notes
 Built from the original one-page shoulder MRI cheat sheet plus Radsource Subscapularis Tendon Tear, Radsource HAGL Lesion, and review-level summaries of internal/subacromial/subcoracoid impingement MRI findings. Radsource subscapularis pearls used here: superolateral lesser tuberosity/first facet origin of many tears, lesser tuberosity uncovering/cysts, medial LHBT instability as an indirect sign, and comma sign composition from retracted superior subscapularis + SGHL/CHL. HAGL pearls: abnormal/discontinuous IGHL, J-shaped axillary pouch, medial humeral neck fluid/contrast, BHAGL fragment, and associated subscapularis/LHBT injuries.
+
+## Test Yourself & Visual Pearls
+Lock in the high-yield shoulder anatomy and pathology with annotated diagrams and active-recall questions.
+
+### The rotator interval
+The rotator interval is the triangular gap between the anterior margin of supraspinatus and the superior margin of subscapularis, through which the long head of biceps enters the joint.
+
+{{diagram:shoulder-rotator-interval}}
+
+> [!KEY] Rotator interval
+> - **Contents:** ==SGHL==, ==coracohumeral ligament (CHL)==, and the ==biceps pulley== (SGHL/CHL sling stabilizing the LHB)
+> - **Borders:** ==supraspinatus== superiorly, ==subscapularis== inferiorly, coracoid medially at the apex
+> - **Function:** stabilizes the long head of biceps and restrains inferior/posterior translation
+> - **Pathology:** widening/scarring seen in ==adhesive capsulitis==; pulley lesions destabilize the LHB tendon
+
+> [!QUIZ] Which two ligaments form the biceps pulley (reflection sling) within the rotator interval?
+> The ==superior glenohumeral ligament (SGHL)== and the ==coracohumeral ligament (CHL)==. They form a sling around the LHB at the entrance to the bicipital groove; disruption allows **medial subluxation/dislocation** of the biceps tendon, often associated with subscapularis tears.
+
+> [!QUIZ] A tear of which cuff tendon is most commonly associated with medial dislocation of the biceps tendon out of the groove?
+> The ==subscapularis==. Because the deep fibers of subscapularis and the SGHL/CHL form the medial wall of the pulley/groove, a subscapularis (especially upper-border) tear lets the LHB displace **medially**, sometimes coming to lie within or deep to the subscapularis substance.
+
+### Cuff footprints
+Knowing the normal tendon insertions lets you localize a tear precisely and distinguish a true defect from anatomic variation.
+
+{{diagram:shoulder-cuff-footprints}}
+
+> [!TIP] Footprint anatomy
+> Supraspinatus and infraspinatus insert on the ==greater tuberosity== (superior and middle facets, with considerable overlap of the SS/IS footprint), teres minor on the inferior facet, and subscapularis on the ==lesser tuberosity==. The bare area of the humeral head lies just posterior to the cuff insertion and should not be mistaken for an erosion.
+
+> [!QUIZ] On which tuberosity and facet does the supraspinatus insert, and where does subscapularis go?
+> Supraspinatus inserts on the ==superior facet of the greater tuberosity== (anterior footprint), while subscapularis inserts on the ==lesser tuberosity==. The intervening rotator interval transmits the biceps tendon between these two insertions.
+
+### Rapid review
+Spaced-recall questions across the highest-yield shoulder topics — answer each before revealing.
+
+> [!QUIZ] What is a PASTA lesion, and which surface of the cuff does it involve?
+> PASTA = ==Partial Articular-sided Supraspinatus Tendon Avulsion==. It is an **articular (undersurface) partial-thickness tear** at the supraspinatus footprint. Articular-sided partial tears are roughly **2–3x more common** than bursal-sided tears; bursal-sided tears track along the superficial (subacromial) surface and are often more symptomatic with impingement.
+
+> [!QUIZ] In a full-thickness supraspinatus tear, how do you grade retraction and assess reparability?
+> Use the ==Patte classification== for tendon retraction in the coronal plane (stage 1 = near footprint, stage 2 = at humeral head/glenoid level, stage 3 = retracted to glenoid). Assess muscle quality with the ==Goutallier grade== of fatty infiltration (0–4 on sagittal oblique) and the ==tangent sign==.
+
+> [!QUIZ] How is the tangent sign performed and what does a positive result mean?
+> On the most lateral sagittal-oblique image showing the scapular spine and coracoid (the "Y"), draw a line along the superior borders of the scapular spine and coracoid. If the ==supraspinatus muscle belly lies entirely below== this line (does not cross it), the tangent sign is **positive**, indicating significant supraspinatus atrophy and predicting poorer repair outcomes.
+
+> [!PITFALL] Goutallier fatty infiltration is not reversible
+> ==Grade 3–4 fatty infiltration== (fat equal to or greater than muscle) and a **positive tangent sign** predict a high rate of repair failure and irreparability. Unlike acute tears, advanced fatty muscle degeneration does **not** reverse after repair — flag it explicitly, as it changes surgical decision-making toward debridement, tendon transfer, or arthroplasty.
+
+> [!QUIZ] Define the impingement terminology: subacromial (external) vs internal impingement.
+> ==Subacromial (external) impingement== is compression of the cuff/bursa between the humeral head and the coracoacromial arch, promoted by a ==hooked (type III) acromion==, os acromiale, or subacromial spurs. ==Internal impingement== is contact of the **articular** undersurface of the posterosuperior cuff against the posterosuperior glenoid in abduction–external rotation, seen in overhead athletes and associated with posterosuperior labral fraying and cysts.
+
+> [!QUIZ] How do you distinguish a SLAP tear from a normal sublabral recess?
+> A ==sublabral recess (sulcus)== is a normal cleft between the superior labrum and glenoid that follows the glenoid contour, is **smooth, medially oriented (toward the head)**, and typically extends ≤1–2 mm. A ==SLAP tear== shows signal that is **laterally oriented, irregular, extends posteriorly**, often >3 mm wide, with associated paralabral cysts or displaced fragments. MR arthrography in ABER improves detection.
+
+> [!QUIZ] Name the members of the "Bankart family" of anteroinferior labroligamentous lesions.
+> ==Bankart== (anteroinferior labral tear, ± bony fragment = bony Bankart); ==Perthes== (labrum detached but medially stripped periosteum intact, labrum remains in near-anatomic position — easily missed, best seen on ABER); ==ALPSA== (Anterior Labroligamentous Periosteal Sleeve Avulsion — labrum displaced medially and inferiorly with intact periosteum, healing in a malpositioned "roll"); and ==GLAD== (Glenolabral Articular Disruption — labral tear with adjacent cartilage defect).
+
+> [!PITFALL] Don't miss a HAGL or the J-sign
+> A ==HAGL lesion== (Humeral Avulsion of the Glenohumeral Ligament) avulses the IGHL from its **humeral** rather than glenoid side and is a frequently overlooked cause of recurrent instability. On coronal images the normal U-shaped axillary pouch becomes a ==J-shaped pouch (the "J-sign")== as contrast/fluid leaks inferomedially. Always inspect the humeral attachment of the IGHL, not just the labrum.
+
+> [!QUIZ] What makes a Hill-Sachs lesion "engaging," and what is the glenoid track concept?
+> An ==engaging Hill-Sachs== is a posterosuperolateral humeral head impaction defect that rotates into and catches on the anterior glenoid rim in abduction–external rotation. The ==glenoid track== is the contact zone of the glenoid on the humeral head; if the Hill-Sachs extends **medial to the glenoid track ("off-track")**, it engages and predicts recurrent instability, often requiring a Remplissage or bony procedure.
+
+> [!QUIZ] What are the phases of calcific tendinitis (hydroxyapatite deposition)?
+> The ==formative (resting) phase== shows dense, well-defined calcium (often supraspinatus) with little surrounding edema; the ==resorptive phase== shows ill-defined, "fluffy" calcium with marked surrounding edema, bursitis, and pain (can mimic infection or migrate intraosseously/intramuscularly). It is most often seen in the **supraspinatus tendon ~1–2 cm from the insertion** (the critical zone).
+
+> [!QUIZ] What are the MRI hallmarks of adhesive capsulitis (frozen shoulder)?
+> ==Thickening and edema of the axillary recess and IGHL== (often >4 mm), obliteration of the subcoracoid fat triangle, and ==scarring/edema in the rotator interval== with thickening of the coracohumeral ligament. On MR arthrography there is **reduced joint capacity**. It is a clinical-radiologic diagnosis; imaging helps exclude mimics.
+
+> [!QUIZ] How do you localize suprascapular nerve denervation: suprascapular notch vs spinoglenoid notch?
+> A mass/cyst at the ==suprascapular notch== denervates **both supraspinatus and infraspinatus**. A cyst at the more distal ==spinoglenoid notch== (commonly from a posterosuperior/SLAP labral tear with a paralabral cyst) denervates the ==infraspinatus only==. Edema then fatty atrophy in the affected muscle(s) localizes the lesion along the nerve's course.

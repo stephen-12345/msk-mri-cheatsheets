@@ -286,3 +286,52 @@ Use this for any articular surface. Replace [surface/compartment] with the speci
 
 ## Source Notes
 Built as a practical dictation aid from standard MSK MRI reporting patterns, review-level radiology references, and the existing shoulder cheat-sheet style. Use surgical correlation and local report conventions when needed.
+
+## Test Yourself & Visual Pearls
+A rapid self-check on the highest-yield forefoot and midfoot pitfalls — Lisfranc, Morton neuroma, plantar plate, sesamoids, and the stress fractures you must not miss.
+
+### Key points
+> [!KEY] Forefoot/midfoot essentials
+> - ==Lisfranc: C1-M2 diastasis, plantar component, fleck sign== — look for a flake of bone in the Lisfranc interval and disruption of the medial M2–medial cuneiform alignment.
+> - Morton neuroma = ==plantar to the intermetatarsal ligament==, ==low T2== signal (fibrosis), most common in the 3rd web space.
+> - The ==plantar plate at the 2nd MTP== is the key stabilizer; tear leads to crossover/hammer toe deformity.
+> - Sesamoid: distinguish ==bipartite== (smooth corticated margins) from fracture (sharp, non-corticated, marrow edema).
+> - ==Navicular & Jones (5th MT zone 2) are high-risk stress fractures== — watershed perfusion, prone to nonunion.
+
+### Rapid review
+
+> [!QUIZ] What are the imaging hallmarks of a Lisfranc injury, and which finding confirms instability?
+> ==Diastasis between the medial cuneiform (C1) and base of the 2nd metatarsal (M2)==, a ==fleck sign== (bony avulsion in the Lisfranc interval), and disruption of the ==plantar Lisfranc ligament==. Loss of the plantar ligament or >2 mm diastasis (best seen on ==weight-bearing== views) indicates ==instability== and favors surgical fixation.
+
+> [!QUIZ] How do you distinguish a Morton neuroma from intermetatarsal bursitis?
+> A ==Morton neuroma== is a teardrop/dumbbell mass ==plantar to the deep transverse intermetatarsal ligament==, shows ==low-to-intermediate T2== signal (fibrosis), and ==enhances==. An ==intermetatarsal bursitis== lies ==dorsal to (above) the ligament==, is ==fluid-bright (high T2)==, and shows thin rim enhancement. Both commonly coexist in the 3rd web space.
+
+> [!PITFALL] A small fluid-signal collection dorsal to the transverse ligament is a normal/incidental intermetatarsal bursa if <3 mm; do not call every web-space lesion a neuroma — check the T2 signal and craniocaudal position relative to the ligament.
+
+> [!QUIZ] What MRI findings indicate a plantar plate tear, and what deformity results?
+> Disruption or detachment of the ==plantar plate at the 2nd MTP==, seen as ==high T2 signal and discontinuity== at its distal insertion on the proximal phalanx base, often with adjacent synovitis. The result is dorsal subluxation and a ==crossover toe== and/or hammer toe.
+
+> [!QUIZ] How do you differentiate a bipartite sesamoid from a sesamoid fracture?
+> A ==bipartite sesamoid== (usually medial/tibial) has ==smooth, corticated, well-rounded margins== and ==no marrow edema==. A ==fracture== shows ==sharp, non-corticated fragment edges with surrounding marrow edema==. Sesamoiditis shows marrow edema without a discrete fracture line.
+
+> [!QUIZ] What is Freiberg infraction and where does it occur?
+> ==Freiberg infraction== is ==osteonecrosis of a metatarsal head==, classically the ==2nd metatarsal head==, most common in adolescent females. MRI shows ==flattening of the metatarsal head==, marrow edema, subchondral collapse, and eventual articular incongruity.
+
+> [!QUIZ] Why is a navicular stress fracture considered high-risk, and where is it located?
+> The ==tarsal navicular== has a ==central watershed (hypovascular) zone==; stress fractures occur in the ==sagittal central third== and are prone to ==nonunion, delayed union, and AVN==. MRI shows marrow edema before the fracture line — a high-risk fracture warranting non–weight-bearing or surgical management.
+
+> [!QUIZ] How do you distinguish a Jones fracture from a 5th metatarsal tuberosity avulsion?
+> A ==Jones fracture== is at the ==metaphyseal-diaphyseal junction (zone 2)==, in a watershed zone, and is ==high-risk for nonunion==. A ==tuberosity (pseudo-Jones) avulsion== is more proximal (==zone 1==, peroneus brevis/plantar fascia insertion), extra-articular, and ==heals well== with conservative care.
+
+> [!PITFALL] Do not mistake the longitudinally oriented ==apophysis== (in adolescents) or the os vesalianum for a 5th metatarsal fracture — the apophysis is parallel to the shaft, whereas a fracture line is transverse/oblique.
+
+> [!QUIZ] How do you differentiate plantar fasciitis from plantar fibromatosis?
+> ==Plantar fasciitis== shows ==fascial thickening >4 mm== at the ==calcaneal origin== with perifascial edema. ==Plantar fibromatosis (Ledderhose disease)== is a ==nodular mass arising within the mid/distal fascia==, typically ==low T2== signal (fibrous), often multiple and not at the calcaneal insertion.
+
+> [!QUIZ] What are the MRI features of a symptomatic type II accessory navicular?
+> A ==type II accessory navicular== connects to the navicular tuberosity by a ==fibrocartilaginous synchondrosis==. Symptomatic cases show ==marrow edema on both sides of the synchondrosis== and abnormal signal/tendinosis at the adjacent ==posterior tibial tendon (PTT)== insertion.
+
+> [!QUIZ] How does osteomyelitis differ from neuropathic (Charcot) arthropathy on MRI in the diabetic foot?
+> ==Osteomyelitis== shows ==confluent T1 marrow replacement== (low T1 in a medullary distribution), usually at a pressure point or adjacent to an ulcer/sinus tract, with the ==ghost sign== and rim-enhancing abscess. ==Charcot== is ==periarticular and centered on joints== (esp. midfoot/Lisfranc), with subchondral cysts, deformity/dislocation, and marrow changes that ==spare the T1 signal== (preserved fatty marrow).
+
+> [!PEARL] Secondary signs favoring osteomyelitis: an adjacent skin ulcer, sinus tract, cellulitis, and the ==penumbra sign== — a T1-hyperintense rim around an intraosseous abscess.

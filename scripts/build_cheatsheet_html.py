@@ -206,6 +206,40 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 .callout.pitfall{--c-acc:#f3ad63; --c-bg:#231910}
 .callout.measure{--c-acc:#7fb2ea; --c-bg:#101826}
 .callout.note{--c-acc:#9fb4c6; --c-bg:#141a22}
+.callout.tip{--c-acc:#5fd0c0; --c-bg:#0c1f1d}
+.callout.key{--c-acc:#ffd166; --c-bg:#221d0f}
+.callout.quiz{--c-acc:#b69cf0; --c-bg:#16132a}
+.callout.quiz .c-title .ttl{font-weight:700;}
+.quiz-ans{margin-top:6px;}
+.quiz-ans > summary{
+  cursor:pointer; list-style:none; display:inline-flex; align-items:center; gap:7px;
+  color:#b69cf0; font-weight:700; font-size:13.5px; border:1px solid rgba(167,139,250,0.45);
+  background:rgba(167,139,250,0.12); border-radius:999px; padding:5px 13px; user-select:none;
+}
+.quiz-ans > summary::-webkit-details-marker{display:none;}
+.quiz-ans > summary::before{content:"▸ "; font-size:11px;}
+.quiz-ans[open] > summary::before{content:"▾ ";}
+.quiz-ans[open] > summary{color:#cbbdf5;}
+.quiz-ans .ans{margin-top:9px; padding-top:9px; border-top:1px solid #2a2440; color:var(--tx);}
+mark, .callout mark, p mark, li mark{ background:rgba(255,209,102,0.2); color:#ffe6ad; border-radius:3px; padding:0 3px; }
+mark.hl{ background:rgba(95,198,230,0.2); color:#cdeffb; }
+
+/* inline 'On this page' TOC */
+.inline-toc{ background:var(--panel); border:1px solid var(--bdr); border-radius:10px; padding:11px 15px; margin:14px 0 22px; }
+.inline-toc > summary{ cursor:pointer; font-weight:800; font-size:12px; letter-spacing:1px; text-transform:uppercase; color:var(--tx2); list-style:none; }
+.inline-toc > summary::-webkit-details-marker{ display:none; }
+.inline-toc > summary::before{ content:"▸ "; color:var(--tx3); }
+.inline-toc[open] > summary::before{ content:"▾ "; }
+.itoc-links{ display:flex; flex-wrap:wrap; gap:7px 9px; margin-top:11px; align-items:baseline; }
+.itoc-links a{ text-decoration:none; font-size:13.5px; }
+.itoc-links a.itoc-group{ width:100%; color:#c9b6f5; font-weight:800; text-transform:uppercase; font-size:11.5px; letter-spacing:.5px; margin-top:5px; }
+.itoc-links a.itoc-h2{ color:#9fdcf0; border:1px solid var(--bdr); border-radius:999px; padding:3px 11px; background:#0d1a26; }
+.itoc-links a.itoc-h2:hover{ border-color:var(--h3tx); color:#fff; }
+@media print{
+  .inline-toc{ display:none; }
+  details.quiz-ans > summary{ display:none; }
+  details.quiz-ans .ans{ display:block !important; border-top:none; padding-top:0; }
+}
 
 /* ── Anatomy diagrams (inline SVG) ── */
 .diagram{
@@ -446,6 +480,9 @@ CALLOUT_TYPES = {
     "PEARL": ("pearl", "💡", "Pearl"),
     "PITFALL": ("pitfall", "⚠️", "Pitfall"),
     "MEASURE": ("measure", "📏", "Measure"),
+    "TIP": ("tip", "💡", "Tip"),
+    "KEY": ("key", "🔑", "Key points"),
+    "QUIZ": ("quiz", "❓", "Quiz"),
     "NOTE": ("note", "📝", "Note"),
 }
 
@@ -514,6 +551,14 @@ def render_callout(block: list[str], cid: str | None = None) -> str:
         f"{ttl}</div>"
     )
     idattr = f' id="{cid}"' if cid else ""
+    if cls == "quiz":
+        body_html = "".join(out)
+        inner = (
+            head
+            + '<details class="quiz-ans"><summary>Show answer</summary>'
+            + f'<div class="ans">{body_html}</div></details>'
+        )
+        return f'<div class="callout {cls}"{idattr}>{inner}</div>'
     return f'<div class="callout {cls}"{idattr}>{head}{"".join(out)}</div>'
 
 
@@ -581,7 +626,144 @@ SVG_ANKLE_9ZONE = '''<svg viewBox="0 0 470 372" role="img" aria-label="Talar dom
   <text x="265" y="364" text-anchor="middle" fill="#8593a6" font-size="11">medial dome &#8594; deeper / cup-shaped &#183; lateral dome &#8594; shallower / wafer</text>
 </svg>'''
 
+SVG_SHOULDER_ROTATOR_INTERVAL = '''<svg viewBox="0 0 560 380" role="img" aria-label="Rotator interval anatomy" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Arial,sans-serif">
+  <ellipse cx="430" cy="200" rx="105" ry="120" fill="#29323f" stroke="#47576c" stroke-width="2"/>
+  <text x="446" y="205" text-anchor="middle" fill="#8593a6" font-size="12">humeral head</text>
+  <path d="M70 150 Q 130 120 150 175 Q 120 150 70 150 Z" fill="#29323f" stroke="#47576c" stroke-width="2"/>
+  <text x="92" y="138" text-anchor="middle" fill="#8593a6" font-size="11">coracoid</text>
+  <path d="M150 120 L 360 90 L 360 120 L 160 160 Z" fill="#79d49b" opacity="0.85"/>
+  <text x="250" y="78" text-anchor="middle" fill="#9be4b5" font-size="13" font-weight="700">Supraspinatus (superior border)</text>
+  <path d="M150 280 L 360 310 L 360 280 L 160 240 Z" fill="#5fc6e6" opacity="0.85"/>
+  <text x="250" y="332" text-anchor="middle" fill="#8fe0f5" font-size="13" font-weight="700">Subscapularis (inferior border)</text>
+  <text x="150" y="208" fill="#cfe7f2" font-size="13" font-weight="700">ROTATOR INTERVAL</text>
+  <circle cx="330" cy="200" r="24" fill="#b69cf0" stroke="#211934" stroke-width="1.5"/>
+  <text x="330" y="204" text-anchor="middle" fill="#160f24" font-size="11" font-weight="700">LHB</text>
+  <path d="M300 178 Q 330 158 360 178" fill="none" stroke="#f3ad63" stroke-width="5" stroke-linecap="round"/>
+  <text x="330" y="150" text-anchor="middle" fill="#f7c389" font-size="12" font-weight="700">CHL</text>
+  <path d="M300 222 Q 330 244 360 222" fill="none" stroke="#5fd0c0" stroke-width="5" stroke-linecap="round"/>
+  <text x="330" y="266" text-anchor="middle" fill="#7fded0" font-size="12" font-weight="700">SGHL</text>
+  <text x="280" y="358" text-anchor="middle" fill="#8593a6" font-size="11">CHL + SGHL form the biceps pulley sling around the LHB</text>
+</svg>'''
+
+SVG_SHOULDER_FOOTPRINTS = '''<svg viewBox="0 0 540 380" role="img" aria-label="Rotator cuff footprints" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Arial,sans-serif">
+  <text x="270" y="26" text-anchor="middle" fill="#9fb4c6" font-size="13" font-weight="700" letter-spacing="1">PROXIMAL HUMERUS (top-down)</text>
+  <ellipse cx="250" cy="210" rx="130" ry="120" fill="#29323f" stroke="#47576c" stroke-width="2"/>
+  <text x="250" y="214" text-anchor="middle" fill="#7d8a9c" font-size="12">articular surface</text>
+  <path d="M362 130 A130 120 0 0 1 380 210 L 332 210 A82 75 0 0 0 322 158 Z" fill="#79d49b" opacity="0.85"/>
+  <text x="430" y="150" text-anchor="middle" fill="#9be4b5" font-size="12" font-weight="700">Supraspinatus</text>
+  <text x="430" y="166" text-anchor="middle" fill="#8593a6" font-size="10">(superior facet)</text>
+  <path d="M380 210 A130 120 0 0 1 360 292 L 320 262 A82 75 0 0 0 332 210 Z" fill="#5fc6e6" opacity="0.85"/>
+  <text x="446" y="232" text-anchor="middle" fill="#8fe0f5" font-size="12" font-weight="700">Infraspinatus</text>
+  <text x="446" y="248" text-anchor="middle" fill="#8593a6" font-size="10">(middle facet)</text>
+  <path d="M360 292 A130 120 0 0 1 300 326 L 290 280 A82 75 0 0 0 320 262 Z" fill="#f3ad63" opacity="0.85"/>
+  <text x="400" y="318" text-anchor="middle" fill="#f7c389" font-size="11" font-weight="700">Teres minor</text>
+  <text x="400" y="333" text-anchor="middle" fill="#8593a6" font-size="10">(inferior facet)</text>
+  <text x="455" y="206" fill="#cfe7f2" font-size="11" font-weight="700">Greater</text>
+  <text x="455" y="220" fill="#cfe7f2" font-size="11" font-weight="700">tuberosity</text>
+  <path d="M138 130 A130 120 0 0 0 120 210 L 168 210 A82 75 0 0 1 178 158 Z" fill="#b69cf0" opacity="0.85"/>
+  <text x="70" y="150" text-anchor="middle" fill="#c9b6f5" font-size="12" font-weight="700">Subscap.</text>
+  <text x="58" y="166" text-anchor="middle" fill="#8593a6" font-size="10">(lesser tub.)</text>
+  <rect x="236" y="92" width="28" height="40" rx="6" fill="#1a2230" stroke="#47576c" stroke-width="1.5"/>
+  <text x="250" y="84" text-anchor="middle" fill="#8593a6" font-size="10">bicipital groove (LHB)</text>
+</svg>'''
+
+SVG_KNEE_MENISCUS = '''<svg viewBox="0 0 560 360" role="img" aria-label="Meniscus map and bowtie" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Arial,sans-serif">
+  <text x="160" y="24" text-anchor="middle" fill="#9fb4c6" font-size="12" font-weight="700">TIBIAL PLATEAU (top-down)</text>
+  <text x="160" y="40" text-anchor="middle" fill="#7d8a9c" font-size="10">anterior ↑</text>
+  <ellipse cx="160" cy="200" rx="135" ry="120" fill="#10161f" stroke="#2c3a48" stroke-width="1.5"/>
+  <path d="M150 95 C 95 100 80 175 100 250 C 110 290 140 300 150 300" fill="none" stroke="#5fc6e6" stroke-width="16" stroke-linecap="round"/>
+  <text x="62" y="200" text-anchor="middle" fill="#8fe0f5" font-size="12" font-weight="700">Medial</text>
+  <path d="M170 95 C 225 100 240 175 220 250 C 210 290 180 300 170 300" fill="none" stroke="#f3ad63" stroke-width="13" stroke-linecap="round"/>
+  <text x="262" y="200" text-anchor="middle" fill="#f7c389" font-size="12" font-weight="700">Lateral</text>
+  <text x="160" y="92" text-anchor="middle" fill="#cdd6e2" font-size="10">anterior horns / roots</text>
+  <text x="160" y="320" text-anchor="middle" fill="#cdd6e2" font-size="10">posterior horns / roots</text>
+  <line x1="320" y1="60" x2="320" y2="320" stroke="#27303f" stroke-width="1"/>
+  <text x="440" y="36" text-anchor="middle" fill="#9fb4c6" font-size="12" font-weight="700">SAGITTAL "BOWTIE"</text>
+  <path d="M370 150 L 510 150 L 460 195 Z" fill="#5fc6e6" opacity="0.85"/>
+  <path d="M370 245 L 510 245 L 420 200 Z" fill="#5fc6e6" opacity="0.85"/>
+  <text x="440" y="135" text-anchor="middle" fill="#8593a6" font-size="10">peripheral slice = bowtie</text>
+  <text x="440" y="300" text-anchor="middle" fill="#cdd6e2" font-size="10.5">≥2 bowties = intact body</text>
+  <text x="440" y="316" text-anchor="middle" fill="#cdd6e2" font-size="10.5">tear if signal reaches surface ×2 slices</text>
+</svg>'''
+
+SVG_HIP_ALPHA = '''<svg viewBox="0 0 540 360" role="img" aria-label="Alpha angle for cam FAI" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Arial,sans-serif">
+  <text x="270" y="26" text-anchor="middle" fill="#9fb4c6" font-size="12.5" font-weight="700" letter-spacing=".5">ALPHA ANGLE — femoral head-neck junction</text>
+  <rect x="150" y="250" width="300" height="90" rx="10" fill="#29323f" stroke="#47576c" stroke-width="2"/>
+  <text x="380" y="300" fill="#8593a6" font-size="12">femoral neck</text>
+  <circle cx="230" cy="170" r="92" fill="#29323f" stroke="#47576c" stroke-width="2"/>
+  <circle cx="230" cy="170" r="92" fill="none" stroke="#9be4b5" stroke-width="2" stroke-dasharray="5 5"/>
+  <text x="230" y="175" text-anchor="middle" fill="#8593a6" font-size="11">best-fit circle</text>
+  <path d="M300 110 Q 322 150 318 196 L 300 196 Q 300 150 286 122 Z" fill="#f3ad63" opacity="0.9"/>
+  <text x="350" y="120" fill="#f7c389" font-size="11.5" font-weight="700">cam bump</text>
+  <text x="350" y="135" fill="#8593a6" font-size="10">(asphericity)</text>
+  <line x1="230" y1="170" x2="455" y2="285" stroke="#cdd6e2" stroke-width="2"/>
+  <text x="430" y="270" fill="#cdd6e2" font-size="10">neck axis</text>
+  <line x1="230" y1="170" x2="300" y2="108" stroke="#5fc6e6" stroke-width="2"/>
+  <text x="300" y="100" fill="#8fe0f5" font-size="10">head exits circle here</text>
+  <path d="M285 200 A 60 60 0 0 0 296 150" fill="none" stroke="#ffd166" stroke-width="2.5"/>
+  <text x="262" y="240" fill="#ffd166" font-size="15" font-weight="800">α</text>
+  <text x="150" y="354" text-anchor="middle" fill="#9be4b5" font-size="11.5" font-weight="700">α &gt; 55° = cam morphology</text>
+</svg>'''
+
+SVG_WRIST_COMPARTMENTS = '''<svg viewBox="0 0 560 470" role="img" aria-label="Six dorsal extensor compartments of the wrist" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Arial,sans-serif">
+  <text x="280" y="24" text-anchor="middle" fill="#9fb4c6" font-size="13" font-weight="700" letter-spacing="2">DORSAL (axial, distal radius/ulna)</text>
+  <ellipse cx="225" cy="250" rx="120" ry="70" fill="#29323f" stroke="#47576c" stroke-width="2"/>
+  <text x="225" y="255" text-anchor="middle" fill="#8593a6" font-size="13">RADIUS</text>
+  <ellipse cx="400" cy="250" rx="48" ry="42" fill="#29323f" stroke="#47576c" stroke-width="2"/>
+  <text x="400" y="254" text-anchor="middle" fill="#8593a6" font-size="11">ULNA</text>
+  <rect x="247" y="183" width="14" height="20" rx="3" fill="#1a2230" stroke="#5fc6e6" stroke-width="2"/>
+  <text x="254" y="172" text-anchor="middle" fill="#8fe0f5" font-size="10">Lister</text>
+  <g font-family="-apple-system,Segoe UI,Arial,sans-serif">
+    <circle cx="120" cy="232" r="15" fill="#5fc6e6"/><text x="120" y="236" text-anchor="middle" fill="#06151c" font-size="11" font-weight="700">1</text>
+    <circle cx="200" cy="186" r="15" fill="#79d49b"/><text x="200" y="190" text-anchor="middle" fill="#0c1410" font-size="11" font-weight="700">2</text>
+    <circle cx="270" cy="180" r="15" fill="#f3ad63"/><text x="270" y="184" text-anchor="middle" fill="#1a1206" font-size="11" font-weight="700">3</text>
+    <circle cx="320" cy="196" r="15" fill="#b69cf0"/><text x="320" y="200" text-anchor="middle" fill="#160f24" font-size="11" font-weight="700">4</text>
+    <circle cx="372" cy="206" r="14" fill="#e2737a"/><text x="372" y="210" text-anchor="middle" fill="#1c0708" font-size="11" font-weight="700">5</text>
+    <circle cx="430" cy="218" r="15" fill="#ffd166"/><text x="430" y="222" text-anchor="middle" fill="#231d05" font-size="11" font-weight="700">6</text>
+  </g>
+  <line x1="24" y1="330" x2="536" y2="330" stroke="#27303f" stroke-width="1"/>
+  <g font-family="-apple-system,Segoe UI,Arial,sans-serif" font-size="13" fill="#cdd6e2">
+    <circle cx="40" cy="352" r="7" fill="#5fc6e6"/><text x="54" y="356"><tspan font-weight="700" fill="#8fe0f5">1</tspan> &#8212; APL + EPB (de Quervain)</text>
+    <circle cx="40" cy="378" r="7" fill="#79d49b"/><text x="54" y="382"><tspan font-weight="700" fill="#9be4b5">2</tspan> &#8212; ECRL + ECRB</text>
+    <circle cx="40" cy="404" r="7" fill="#f3ad63"/><text x="54" y="408"><tspan font-weight="700" fill="#f7c389">3</tspan> &#8212; EPL (hooks around Lister tubercle)</text>
+    <circle cx="300" cy="352" r="7" fill="#b69cf0"/><text x="314" y="356"><tspan font-weight="700" fill="#c9b6f5">4</tspan> &#8212; EDC + EIP</text>
+    <circle cx="300" cy="378" r="7" fill="#e2737a"/><text x="314" y="382"><tspan font-weight="700" fill="#ec969b">5</tspan> &#8212; EDM</text>
+    <circle cx="300" cy="404" r="7" fill="#ffd166"/><text x="314" y="408"><tspan font-weight="700" fill="#ffd166">6</tspan> &#8212; ECU (ulnar groove)</text>
+  </g>
+</svg>'''
+
+SVG_ELBOW_UCL = '''<svg viewBox="0 0 540 350" role="img" aria-label="UCL anterior bundle and the T-sign" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Arial,sans-serif">
+  <text x="270" y="24" text-anchor="middle" fill="#9fb4c6" font-size="12.5" font-weight="700" letter-spacing=".5">MEDIAL ELBOW (coronal)</text>
+  <path d="M120 50 L 200 50 L 200 150 Q 200 185 165 188 L 120 188 Z" fill="#29323f" stroke="#47576c" stroke-width="2"/>
+  <text x="160" y="100" text-anchor="middle" fill="#8593a6" font-size="12">humerus</text>
+  <text x="150" y="205" text-anchor="middle" fill="#8593a6" font-size="10">medial epicondyle</text>
+  <circle cx="165" cy="185" r="7" fill="#3a4658"/>
+  <path d="M150 230 L 250 230 L 250 320 L 150 320 Z" fill="#29323f" stroke="#47576c" stroke-width="2"/>
+  <text x="200" y="300" text-anchor="middle" fill="#8593a6" font-size="12">ulna</text>
+  <circle cx="172" cy="234" r="7" fill="#3a4658"/>
+  <text x="120" y="250" text-anchor="middle" fill="#8593a6" font-size="9.5">sublime tubercle</text>
+  <path d="M165 188 L 172 234" stroke="#5fc6e6" stroke-width="9" stroke-linecap="round"/>
+  <text x="250" y="212" fill="#8fe0f5" font-size="12.5" font-weight="700">UCL anterior bundle</text>
+  <path d="M172 234 L 172 280" stroke="#ffd166" stroke-width="4" stroke-linecap="round"/>
+  <path d="M150 236 L 196 236" stroke="#ffd166" stroke-width="4" stroke-linecap="round"/>
+  <text x="300" y="270" fill="#ffd166" font-size="13" font-weight="800">T-sign</text>
+  <text x="300" y="288" fill="#cdd6e2" font-size="10.5">fluid tracking distal to the ligament</text>
+  <text x="300" y="303" fill="#cdd6e2" font-size="10.5">= partial undersurface tear</text>
+</svg>'''
+
 DIAGRAMS = {
+    "shoulder-rotator-interval": (SVG_SHOULDER_ROTATOR_INTERVAL,
+        "**Rotator interval.** The triangular gap between the **supraspinatus** (superior) and **subscapularis** (inferior); the **CHL + SGHL** form the pulley sling that stabilizes the long head of biceps (LHB) entering the groove."),
+    "shoulder-cuff-footprints": (SVG_SHOULDER_FOOTPRINTS,
+        "**Rotator cuff footprints.** Greater tuberosity facets — **supraspinatus** (superior), **infraspinatus** (middle), **teres minor** (inferior); **subscapularis** on the lesser tuberosity, with the bicipital groove between."),
+    "knee-meniscus-map": (SVG_KNEE_MENISCUS,
+        "**Meniscus map.** Medial and lateral menisci on the tibial plateau (anterior/posterior horns + roots). On sagittal, the body appears as a **bowtie** — ≥2 bowties = intact body; call a tear only when signal reaches a surface on ≥2 slices."),
+    "hip-alpha-angle": (SVG_HIP_ALPHA,
+        "**Alpha angle.** Fit a circle to the femoral head; the angle between the neck axis and the point where the head exits the circle (the cam bump). **α > 55° = cam morphology.**"),
+    "wrist-extensor-compartments": (SVG_WRIST_COMPARTMENTS,
+        "**Six dorsal extensor compartments**, counted radial→ulnar. **Lister tubercle** separates compartment 2 from 3; the EPL (3) hooks around it."),
+    "elbow-ucl-tsign": (SVG_ELBOW_UCL,
+        "**UCL anterior bundle** runs from the medial epicondyle to the **sublime tubercle**. Fluid tracking distal to the ligament = the **T-sign** of a partial undersurface tear."),
     "ankle-tendons-axial": (
         SVG_ANKLE_TENDONS_AXIAL,
         "**Ankle tendons in cross-section (axial).** Four groups wrap the joint: "
@@ -700,13 +882,29 @@ def best_review(concept: str, anchors: list):
 
 
 def inline(text: str) -> str:
-    """Escape, then apply **bold** and [placeholder] formatting."""
+    """Escape, then apply ==highlight==, **bold**, and [placeholder] formatting."""
     text = html.escape(text)
+    # ==highlight==  (before bold; non-greedy)
+    text = re.sub(r"==(.+?)==", r'<mark class="hl">\1</mark>', text)
     # bold
     text = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", text)
     # bracketed placeholders -> highlighted spans (handle nested-free [..])
     text = re.sub(r"\[([^\[\]]+?)\]", r'<span class="ph">[\1]</span>', text)
     return text
+
+
+def build_inline_toc(toc: list) -> str:
+    """Compact, collapsible 'On this page' TOC listing groups + h2 sections."""
+    items = [t for t in toc if t[0] in ("group", "h2")]
+    if len(items) < 3:
+        return ""
+    links = "".join(
+        '<a href="#%s" class="itoc-%s">%s</a>' % (sid, lvl, label) for (lvl, sid, label) in items
+    )
+    return (
+        '<details class="inline-toc" open><summary>On this page</summary>'
+        f'<div class="itoc-links">{links}</div></details>'
+    )
 
 
 def parse_table(rows: list[str]) -> str:
@@ -1001,6 +1199,14 @@ def build_doc(joint: str, kind: str = "cheatsheet") -> None:
             review_base = f"{joint}-mri-cheatsheet.html"
     title, body, toc, _anchors = md_to_html(md, review_base, review_anchors)
     toc_html = build_toc(toc)
+    # inject the inline "On this page" TOC just after the title banner / subtitle
+    itoc = build_inline_toc(toc)
+    if itoc:
+        m = re.search(r"</p>", body) if '<p class="subtitle">' in body[:400] else None
+        if m:
+            body = body[: m.end()] + "\n" + itoc + body[m.end():]
+        else:
+            body = re.sub(r"(</h1>)", r"\1\n" + itoc.replace("\\", "\\\\"), body, count=1)
     has_template = (ROOT / "templates" / f"{joint}.html").exists()
     has_cases = (ROOT / joint / f"{joint}-mri-cases.md").exists()
     page = f"""<!DOCTYPE html>
