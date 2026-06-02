@@ -185,6 +185,17 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 }
 @media print{ .diagram{ break-inside:avoid; } }
 
+/* "Review in cheat sheet" cross-link after each case */
+.review{ margin:10px 0 4px; }
+.review a{
+  display:inline-flex; align-items:center; gap:6px; max-width:100%;
+  text-decoration:none; font-size:13.5px; font-weight:650; line-height:1.3;
+  color:#9be4b5; border:1px solid rgba(121,212,155,0.45);
+  background:rgba(121,212,155,0.10); border-radius:999px; padding:5px 13px;
+}
+.review a:hover{ border-color:#9be4b5; color:#cdebd8; background:rgba(121,212,155,0.18); }
+@media print{ .review{ display:none; } }
+
 /* ── Table-of-contents drawer (overlay; never resizes the page) ── */
 .toc-toggle{
   display:inline-flex; align-items:center; gap:5px;
@@ -306,125 +317,155 @@ body.toc-open .toc-handle{ opacity:0; visibility:hidden; }
 <p><b>Clinical:</b> 47-year-old male recreational tennis player with insidious anterolateral shoulder pain and painful arc over 4 months.</p>
 <p class="f"><b>F:</b> On the oblique coronal and sagittal <b>fat-suppressed T2/PD</b> sequences, the <b>supraspinatus</b> tendon shows intermediate-grade intratendinous signal hyperintensity within the <b>critical zone</b> approximately 12 mm from the footprint, without fluid-bright signal and without a discrete fiber gap. The tendon is mildly thickened. The articular and bursal surfaces remain intact with a continuous footprint at the greater tuberosity. No subacromial-subdeltoid fluid. Mild <b>type II (curved) acromion</b>. Muscle bulk is preserved with <b>Goutallier 0</b>. Normal AC joint and glenohumeral cartilage.</p>
 <p class="i"><b>I:</b> Supraspinatus tendinosis without tear. No full- or partial-thickness defect.</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#supraspinatus-tendon">Review in cheat sheet: Supraspinatus tendon →</a></p>
 <h3 id="case-2-articular-side-partial-thickness-tear-pasta">Case 2 — Articular-side partial-thickness tear (PASTA)</h3>
 <p><b>Clinical:</b> 34-year-old female competitive swimmer with anterior pain on overhead reach and weakness in abduction.</p>
 <p class="f"><b>F:</b> Oblique coronal <b>fat-suppressed T2</b> images demonstrate a fluid-signal cleft along the <b>articular (undersurface)</b> fibers of the <b>distal supraspinatus</b> at the footprint, measuring ~5 mm in AP depth and involving roughly 40% of the ~11 mm tendon thickness, consistent with a <b>partial articular-sided tendon avulsion (PASTA)</b>. The bursal-side fibers and footprint cortex are intact. Minimal reactive marrow edema at the greater tuberosity. No tendon retraction; muscle bulk normal (<b>Goutallier 0</b>). Trace glenohumeral joint fluid.</p>
 <p class="i"><b>I:</b> Articular-side partial-thickness supraspinatus tear (PASTA), grade ~40% (intermediate-depth). No full-thickness component.</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#high-grade-pasta">Review in cheat sheet: High-grade PASTA →</a></p>
 <h3 id="case-3-bursal-side-partial-thickness-tear">Case 3 — Bursal-side partial-thickness tear</h3>
 <p><b>Clinical:</b> 58-year-old male warehouse worker with chronic impingement-type pain worse with overhead lifting.</p>
 <p class="f"><b>F:</b> Fluid-bright signal involves the <b>bursal-surface</b> fibers of the <b>supraspinatus</b> near the footprint, with focal fiber irregularity over a ~7 mm AP segment and depth involving ~30% of tendon thickness; the articular surface remains continuous. Associated <b>subacromial-subdeltoid bursal fluid</b> and reactive bursal thickening. <b>Type III (hooked) acromion</b> with a small enthesophyte and mild downsloping. Greater tuberosity cortical irregularity. <b>Goutallier 0–1</b>.</p>
 <p class="i"><b>I:</b> Bursal-side partial-thickness supraspinatus tear in the setting of subacromial impingement.</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#bursal-sided-partial-tear">Review in cheat sheet: Bursal-sided partial tear →</a></p>
 <h3 id="case-4-full-thickness-supraspinatus-tear-with-retraction-and-fatty-atrophy">Case 4 — Full-thickness supraspinatus tear with retraction and fatty atrophy</h3>
 <p><b>Clinical:</b> 64-year-old male, fall onto outstretched arm 6 weeks ago, now with weakness and positive drop-arm sign.</p>
 <p class="f"><b>F:</b> A <b>full-thickness tear</b> of the <b>supraspinatus</b> is present with a complete fluid-filled gap; the AP (coronal) tear dimension is ~18 mm and the retracted tendon stump lies at the level of the glenoid rim (<b>Patte stage 2</b>, <b>medial retraction ~22 mm</b>). The footprint is denuded. <b>Subacromial-subdeltoid and glenohumeral fluid</b>. The supraspinatus muscle belly shows <b>Goutallier grade 2</b> fatty infiltration with mild atrophy on the parasagittal <b>T1</b> images (positive tangent sign borderline). Infraspinatus intact.</p>
 <p class="i"><b>I:</b> Retracted full-thickness supraspinatus tear (~18 mm, Patte 2) with Goutallier 2 fatty atrophy. Repairable but at-risk myotendinous quality.</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#supraspinatus-tendon">Review in cheat sheet: Supraspinatus tendon →</a></p>
 <h3 id="case-5-massive-cuff-tear-with-superior-humeral-migration">Case 5 — Massive cuff tear with superior humeral migration</h3>
 <p><b>Clinical:</b> 73-year-old female with chronic shoulder pain, pseudoparalysis, and inability to actively elevate the arm.</p>
 <p class="f"><b>F:</b> Confluent <b>full-thickness tears</b> involve the <b>supraspinatus and infraspinatus</b> (≥2 tendons, AP width &gt;5 cm), with extensive medial retraction to the glenoid and beyond (<b>Patte 3</b>). The <b>acromiohumeral interval is narrowed to 4 mm</b> with superior subluxation of the humeral head and remodeling/concavity of the undersurface of the acromion (early <b>cuff-tear arthropathy / &quot;femoralization&quot;</b>). <b>Goutallier grade 3–4</b> fatty atrophy of supraspinatus and infraspinatus with positive <b>tangent sign</b>. Biceps long head is medially subluxed.</p>
 <p class="i"><b>I:</b> Massive (2-tendon) retracted rotator cuff tear with superior humeral migration and advanced fatty atrophy — features of early cuff-tear arthropathy, likely irreparable.</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#intact-cuff-repair">Review in cheat sheet: Intact cuff repair →</a></p>
 <h3 id="case-6-subscapularis-tear-with-biceps-medial-subluxation">Case 6 — Subscapularis tear with biceps medial subluxation</h3>
 <p><b>Clinical:</b> 52-year-old male, forced external rotation/abduction injury, with weakness on lift-off and belly-press.</p>
 <p class="f"><b>F:</b> The <b>upper subscapularis</b> demonstrates a full-thickness tear of the superior 1/3 with a ~9 mm fluid gap and medial fiber retraction; the lower fibers remain attached at the lesser tuberosity. The <b>medial sling (coracohumeral/superior glenohumeral ligaments)</b> is disrupted, and the <b>long head of biceps tendon is medially subluxed</b> out of the bicipital groove, lying over the torn subscapularis. Mild reactive marrow edema at the lesser tuberosity. <b>Goutallier 1</b> of subscapularis. Supraspinatus intact.</p>
 <p class="i"><b>I:</b> Partial (upper-third) subscapularis tear with medial sling disruption and medial subluxation of the long head of biceps.</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#subscapularis-biceps-pulley-and-long-head-biceps">Review in cheat sheet: Subscapularis, Biceps Pulley, and Long Head Biceps →</a></p>
 <h3 id="case-7-infraspinatus-tear">Case 7 — Infraspinatus tear</h3>
 <p><b>Clinical:</b> 60-year-old male laborer with posterolateral pain and external-rotation weakness.</p>
 <p class="f"><b>F:</b> Oblique coronal and sagittal <b>fat-suppressed T2</b> images show a high-grade partial- to small full-thickness tear of the <b>infraspinatus</b> at its footprint on the posterior facet of the greater tuberosity, with a ~6 mm fluid-signal defect and adjacent tendinosis. Posterosuperior footprint marrow edema. Supraspinatus shows coexistent tendinosis without full-thickness tear. <b>Goutallier 1</b> of infraspinatus; teres minor preserved. Mild posterior capsular fluid.</p>
 <p class="i"><b>I:</b> High-grade partial-thickness infraspinatus tear with adjacent supraspinatus tendinosis.</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#infraspinatus-tendon">Review in cheat sheet: Infraspinatus tendon →</a></p>
 <h3 id="case-8-calcific-tendinitis">Case 8 — Calcific tendinitis</h3>
 <p><b>Clinical:</b> 45-year-old female with acute, severe, non-traumatic shoulder pain and markedly restricted motion.</p>
 <p class="f"><b>F:</b> A rounded <b>hypointense (low signal on all sequences) calcific deposit</b> measuring ~12 mm is seen within the <b>supraspinatus</b> tendon near the footprint, with surrounding <b>fat-suppressed T2</b> hyperintense edema in the tendon and adjacent <b>subacromial-subdeltoid bursa</b> indicating the resorptive/inflammatory phase. No full-thickness tendon defect. Faint blooming is suggested; correlation with radiographs confirms amorphous calcific density. No osseous erosion.</p>
 <p class="i"><b>I:</b> Hydroxyapatite calcific tendinitis of the supraspinatus in the resorptive phase with reactive bursitis.</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#calcific-tendinitis">Review in cheat sheet: Calcific tendinitis →</a></p>
 <h2 id="biceps-labrum">Biceps &amp; Labrum</h2>
 <h3 id="case-9-long-head-of-biceps-tendinosis">Case 9 — Long head of biceps tendinosis</h3>
 <p><b>Clinical:</b> 49-year-old female with anterior shoulder pain localized to the bicipital groove, tender to palpation.</p>
 <p class="f"><b>F:</b> The <b>long head of the biceps (LHB)</b> tendon within the bicipital groove is thickened with intermediate intrasubstance signal on <b>fat-suppressed T2</b> but no fiber discontinuity. A small amount of fluid surrounds the tendon in the groove (tenosynovial fluid, communicating with the joint) without true effusion-out-of-proportion. The tendon remains seated in the groove; the transverse ligament is intact. No SLAP extension. Rotator cuff intact.</p>
 <p class="i"><b>I:</b> Long head of biceps tendinosis with mild tenosynovial fluid. No tear or dislocation.</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#long-head-of-biceps-tendon-lhbt">Review in cheat sheet: Long head of biceps tendon (LHBT) →</a></p>
 <h3 id="case-10-lhb-tear-and-dislocation">Case 10 — LHB tear and dislocation</h3>
 <p><b>Clinical:</b> 66-year-old male with a &quot;pop&quot; while lifting, anterior ecchymosis and a &quot;Popeye&quot; deformity developing.</p>
 <p class="f"><b>F:</b> The <b>bicipital groove is empty</b> of tendon; the <b>long head of biceps</b> is <b>medially dislocated</b>, displaced over a torn <b>subscapularis</b> insertion, with the medial sling disrupted. More distally the tendon shows discontinuity/retraction compatible with a high-grade/complete tear and distal bunching of the muscle. Fluid tracks along the groove. Associated upper subscapularis tearing. Supraspinatus tendinosis.</p>
 <p class="i"><b>I:</b> Long head of biceps dislocation with high-grade tear, associated with subscapularis insertional tear and medial sling disruption.</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#biceps-tenodesis-intact">Review in cheat sheet: Biceps tenodesis intact →</a></p>
 <h3 id="case-11-slap-ii-tear">Case 11 — SLAP II tear</h3>
 <p><b>Clinical:</b> 27-year-old male overhead baseball pitcher with deep posterior shoulder pain and loss of velocity; positive O&#x27;Brien.</p>
 <p class="f"><b>F:</b> On <b>fat-suppressed T2</b> and the <b>ABER/MR arthrogram</b> images, contrast/fluid signal undermines the <b>superior labrum</b> and extends both anterior and posterior to the biceps anchor, separating the labral-biceps complex from the superior glenoid (<b>SLAP type II</b>). The signal is laterally curved and extends &gt;2 mm medial to the glenoid rim, distinguishing it from a sublabral recess. The biceps anchor is detached. No paralabral cyst. Rotator cuff intact.</p>
 <p class="i"><b>I:</b> SLAP type II tear involving the biceps anchor (anteroposterior).</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#slap-type-ii">Review in cheat sheet: SLAP type II →</a></p>
 <h3 id="case-12-bankart-lesion-anteroinferior-labrum">Case 12 — Bankart lesion (anteroinferior labrum)</h3>
 <p><b>Clinical:</b> 21-year-old male rugby player after a traumatic anterior glenohumeral dislocation, now with apprehension.</p>
 <p class="f"><b>F:</b> <b>MR arthrogram</b> shows detachment/tear of the <b>anteroinferior labrum</b> at the 3–6 o&#x27;clock position with contrast insinuating between labrum and glenoid; the <b>scapular periosteum is disrupted</b> (classic soft-tissue <b>Bankart</b>). Associated impaction deformity of the posterosuperolateral humeral head (see Hill-Sachs). The anterior band of the <b>inferior glenohumeral ligament (IGHL)</b> complex is attached to the avulsed labral fragment. No osseous glenoid fragment on the GRE images.</p>
 <p class="i"><b>I:</b> Soft-tissue Bankart lesion (anteroinferior labral tear with periosteal disruption) following anterior dislocation.</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#bankart-family-lesions-anteroinferior-labrum">Review in cheat sheet: Bankart-family lesions (anteroinferior labrum) →</a></p>
 <h3 id="case-13-bony-bankart">Case 13 — Bony Bankart</h3>
 <p><b>Clinical:</b> 31-year-old male with recurrent anterior instability after multiple dislocations.</p>
 <p class="f"><b>F:</b> There is an <b>osseous Bankart</b> with a displaced bony fragment from the <b>anteroinferior glenoid rim</b> and a corresponding marginal defect; estimated glenoid bone loss ~18% of the inferior glenoid diameter on the en-face sagittal reformat. The attached anteroinferior labrum/IGHL is avulsed with the fragment. Marrow edema along the fracture margin indicates relative acuity. Engaging Hill-Sachs not demonstrated at neutral.</p>
 <p class="i"><b>I:</b> Bony Bankart lesion with ~18% anteroinferior glenoid bone loss — relevant to surgical planning (approaching critical bone loss).</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#bony-bankart">Review in cheat sheet: Bony Bankart →</a></p>
 <h3 id="case-14-hill-sachs-lesion">Case 14 — Hill-Sachs lesion</h3>
 <p><b>Clinical:</b> 24-year-old female after first-time anterior dislocation, reduced in the ED.</p>
 <p class="f"><b>F:</b> A wedge-shaped impaction fracture of the <b>posterosuperolateral humeral head</b> is seen on the superior axial sections (the <b>Hill-Sachs lesion</b>), measuring ~14 mm in width and ~7 mm in depth, with subchondral marrow edema indicating acuity. The defect lies above the level of the coracoid. Accompanying anteroinferior labral (Bankart) injury. No loose body.</p>
 <p class="i"><b>I:</b> Acute Hill-Sachs impaction fracture with associated anteroinferior labral injury (anterior instability complex).</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#on-track-hill-sachs">Review in cheat sheet: On-track Hill-Sachs →</a></p>
 <h3 id="case-15-alpsa-perthes-lesion">Case 15 — ALPSA / Perthes lesion</h3>
 <p><b>Clinical:</b> 29-year-old male with chronic anterior instability and recurrent subluxations after a remote dislocation.</p>
 <p class="f"><b>F:</b> <b>MR arthrogram</b> demonstrates an <b>anterior labroligamentous periosteal sleeve avulsion (ALPSA)</b>: the anteroinferior labrum is avulsed but the scapular periosteum remains <b>intact and stripped/displaced medially</b>, with the labroligamentous complex rolled medially and resynovialized/blunted along the glenoid neck. (In the <b>Perthes</b> variant the medially intact periosteum keeps the nondisplaced labrum reduced, requiring ABER views to show contrast undercutting.) No osseous fragment.</p>
 <p class="i"><b>I:</b> ALPSA lesion — medially displaced, healed-in anteroinferior labrum with intact periosteum; chronic anterior instability.</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#alpsa">Review in cheat sheet: ALPSA →</a></p>
 <h3 id="case-16-posterior-labral-tear-reverse-bankart">Case 16 — Posterior labral tear / reverse Bankart</h3>
 <p><b>Clinical:</b> 26-year-old male lineman with posterior shoulder pain after a posteriorly directed load; sense of instability.</p>
 <p class="f"><b>F:</b> Axial <b>MR arthrogram</b> images show a tear/detachment of the <b>posteroinferior labrum</b> (7–9 o&#x27;clock) with contrast undermining the labrum (<b>reverse Bankart</b>); the posterior band of the IGHL and posterior capsule are involved. A small impaction defect of the anteromedial humeral head (<b>reverse Hill-Sachs / McLaughlin</b>) is noted. No osseous posterior glenoid fragment. Posterior capsular redundancy.</p>
 <p class="i"><b>I:</b> Posterior labral tear (reverse Bankart) with reverse Hill-Sachs — posterior instability complex.</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#posterior-labral-tear-reverse-bankart">Review in cheat sheet: Posterior labral tear / reverse Bankart →</a></p>
 <h3 id="case-17-paralabral-cyst-with-spinoglenoid-notch-involvement">Case 17 — Paralabral cyst with spinoglenoid notch involvement</h3>
 <p><b>Clinical:</b> 38-year-old male volleyball player with vague posterior pain and external-rotation weakness; EMG suggested infraspinatus denervation.</p>
 <p class="f"><b>F:</b> A lobulated <b>T2-hyperintense, T1-hypointense paralabral (ganglion) cyst</b> measuring ~22 × 12 mm arises from a <b>posterosuperior labral tear</b> and extends into the <b>spinoglenoid notch</b>, compressing the <b>suprascapular nerve</b> distal to the supraspinatus branch. The <b>infraspinatus</b> muscle shows <b>T2 hyperintense edema-like denervation signal</b> with early fatty change (<b>Goutallier 1</b>); supraspinatus spared (lesion distal to its branch). Underlying posterosuperior labral tear confirmed.</p>
 <p class="i"><b>I:</b> Spinoglenoid notch paralabral cyst from a posterosuperior labral tear causing suprascapular neuropathy with isolated infraspinatus denervation.</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#paralabral-cyst-with-nerve-effect">Review in cheat sheet: Paralabral cyst with nerve effect →</a></p>
 <h2 id="impingement-ac-joint">Impingement &amp; AC Joint</h2>
 <h3 id="case-18-subacromial-subdeltoid-bursitis">Case 18 — Subacromial-subdeltoid bursitis</h3>
 <p><b>Clinical:</b> 41-year-old female with lateral shoulder pain and painful overhead activity; no trauma.</p>
 <p class="f"><b>F:</b> <b>Fat-suppressed T2</b> images show distension of the <b>subacromial-subdeltoid bursa</b> with fluid and synovial thickening, the bursa measuring up to ~4 mm in thickness, without an underlying full-thickness cuff defect. Mild supraspinatus tendinosis and a mildly downsloping <b>type II acromion</b>. No calcific deposit. Glenohumeral joint and labrum unremarkable.</p>
 <p class="i"><b>I:</b> Subacromial-subdeltoid bursitis with mild supraspinatus tendinosis; impingement-pattern changes.</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#subacromial-subdeltoid-bursitis">Review in cheat sheet: Subacromial-subdeltoid bursitis →</a></p>
 <h3 id="case-19-ac-joint-osteoarthritis-with-downward-osteophyte">Case 19 — AC joint osteoarthritis with downward osteophyte</h3>
 <p><b>Clinical:</b> 56-year-old male manual laborer with focal pain over the top of the shoulder, worse on cross-body adduction.</p>
 <p class="f"><b>F:</b> The <b>acromioclavicular joint</b> demonstrates capsular hypertrophy, subchondral cystic change and marginal osteophytes, with a <b>downward-projecting inferior osteophyte</b> that effaces the subacromial fat and impinges upon the <b>supraspinatus myotendinous junction</b>. Reactive marrow edema on both sides of the joint. Underlying supraspinatus bursal-surface fraying without full-thickness tear. Mild SASD bursal fluid.</p>
 <p class="i"><b>I:</b> AC joint osteoarthritis with an inferior osteophyte contributing to extrinsic supraspinatus impingement.</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#ac-arthrosis-active">Review in cheat sheet: AC arthrosis active →</a></p>
 <h3 id="case-20-os-acromiale">Case 20 — Os acromiale</h3>
 <p><b>Clinical:</b> 33-year-old male with chronic impingement symptoms refractory to therapy; tenderness over the acromion.</p>
 <p class="f"><b>F:</b> A well-corticated <b>unfused acromial ossification center (os acromiale)</b> is identified at the <b>meso-acromion</b> level on the axial images, with a synchondrosis showing mild <b>fat-suppressed T2</b> edema and adjacent subchondral cystic change suggesting instability/motion. The undersurface of the mobile fragment shows a small enthesophyte narrowing the subacromial space. Underlying supraspinatus bursal-side fraying. SASD bursal fluid.</p>
 <p class="i"><b>I:</b> Symptomatic (meso-) os acromiale with edema across the synchondrosis contributing to impingement.</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#os-acromiale">Review in cheat sheet: Os acromiale →</a></p>
 <h2 id="other">Other</h2>
 <h3 id="case-21-adhesive-capsulitis-frozen-shoulder">Case 21 — Adhesive capsulitis (frozen shoulder)</h3>
 <p><b>Clinical:</b> 53-year-old diabetic female with progressive global stiffness and night pain; markedly reduced passive external rotation.</p>
 <p class="f"><b>F:</b> <b>Fat-suppressed T2/post-contrast</b> images show thickening and edema/enhancement of the <b>axillary recess capsule and IGHL</b> (capsule &gt;4 mm) and soft-tissue thickening/edema in the <b>rotator interval</b> enveloping the coracohumeral ligament, with obliteration of the subcoracoid fat triangle. Reduced axillary recess volume. No significant joint effusion. Rotator cuff and labrum intact.</p>
 <p class="i"><b>I:</b> Findings characteristic of adhesive capsulitis (frozen shoulder), interval and axillary recess phenotype.</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#adhesive-capsulitis">Review in cheat sheet: Adhesive capsulitis →</a></p>
 <h3 id="case-22-quadrilateral-space-syndrome-teres-minor-denervation">Case 22 — Quadrilateral space syndrome / teres minor denervation</h3>
 <p><b>Clinical:</b> 36-year-old male overhead athlete with vague posterior shoulder pain and external-rotation weakness.</p>
 <p class="f"><b>F:</b> On parasagittal <b>T1 and fat-suppressed T2</b> images the <b>teres minor</b> shows isolated <b>T2 hyperintense denervation edema</b> with early fatty replacement, while deltoid, infraspinatus and supraspinatus are spared — implicating the <b>axillary nerve branch within the quadrilateral space</b>. Mild fibrous/vascular narrowing of the quadrilateral space is suggested; no discrete mass. Rotator cuff tendons intact.</p>
 <p class="i"><b>I:</b> Isolated teres minor denervation consistent with quadrilateral space syndrome (axillary nerve, posterior branch).</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#teres-minor">Review in cheat sheet: Teres minor →</a></p>
 <h3 id="case-23-greater-tuberosity-contusion-nondisplaced-fracture">Case 23 — Greater tuberosity contusion / nondisplaced fracture</h3>
 <p><b>Clinical:</b> 59-year-old female after a fall onto the shoulder, point tenderness over the greater tuberosity, intact active motion.</p>
 <p class="f"><b>F:</b> A <b>nondisplaced fracture line</b> through the <b>greater tuberosity</b> is seen as a hypointense line on T1 with surrounding extensive <b>fat-suppressed T2</b> marrow edema (bone contusion/trabecular microfracture pattern), without cortical step-off &gt;2 mm or fragment displacement. The overlying <b>supraspinatus/infraspinatus footprint</b> fibers are intact (no avulsion). Small reactive joint effusion and SASD fluid.</p>
 <p class="i"><b>I:</b> Nondisplaced greater tuberosity fracture with bone marrow edema; rotator cuff insertions intact.</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#greater-vs-lesser-tuberosity-facets">Review in cheat sheet: Greater vs lesser tuberosity facets →</a></p>
 <h3 id="case-24-postoperative-rotator-cuff-retear">Case 24 — Postoperative rotator cuff retear</h3>
 <p><b>Clinical:</b> 62-year-old male, 8 months after arthroscopic supraspinatus repair, with recurrent weakness and pain.</p>
 <p class="f"><b>F:</b> At the prior <b>supraspinatus</b> repair, susceptibility artifact from suture anchors is noted at the greater tuberosity. There is a recurrent <b>full-thickness fluid-signal gap</b> at the repaired footprint measuring ~10 mm AP with retraction of the tendon edge to the level of the humeral articular surface, indicating <b>retear (Sugaya type IV–V)</b>. Anchors appear seated without pullout. Progression of <b>Goutallier to grade 2</b> fatty atrophy compared with expected. SASD fluid.</p>
 <p class="i"><b>I:</b> Recurrent full-thickness supraspinatus tear at the repair site (retear) with interval progression of fatty atrophy.</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#postoperative-rotator-cuff">Review in cheat sheet: Postoperative Rotator Cuff →</a></p>
 <h3 id="case-25-internal-posterosuperior-impingement">Case 25 — Internal (posterosuperior) impingement</h3>
 <p><b>Clinical:</b> 25-year-old male throwing athlete with posterosuperior pain in the late-cocking (ABER) position; GIRD on exam.</p>
 <p class="f"><b>F:</b> <b>ABER MR arthrogram</b> images show contact-pattern changes of <b>posterosuperior impingement</b>: undersurface (articular-side) fraying/partial tear of the <b>posterior supraspinatus/anterior infraspinatus</b> fibers, fraying of the <b>posterosuperior labrum</b>, and a subcortical cyst/edema in the <b>posterosuperior greater tuberosity/humeral head</b>. Mild posterior capsular thickening. No full-thickness cuff tear.</p>
 <p class="i"><b>I:</b> Posterosuperior (internal) impingement of the throwing shoulder — articular-side cuff and posterosuperior labral changes.</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#internal-posterosuperior-impingement">Review in cheat sheet: Internal Posterosuperior Impingement →</a></p>
 <h3 id="case-26-glenohumeral-osteoarthritis">Case 26 — Glenohumeral osteoarthritis</h3>
 <p><b>Clinical:</b> 68-year-old female with chronic deep aching pain, stiffness, and crepitus; no instability.</p>
 <p class="f"><b>F:</b> Diffuse <b>glenohumeral cartilage loss</b> with joint-space narrowing, <b>marginal osteophytes</b> (notably an inferior humeral head &quot;goat&#x27;s beard&quot; osteophyte), subchondral cysts and sclerosis, and small intra-articular <b>loose bodies</b> are seen. Mild posterior glenoid wear (Walch B pattern) with slight posterior humeral subluxation. Rotator cuff is intact. Mild synovitis and effusion.</p>
 <p class="i"><b>I:</b> Primary glenohumeral osteoarthritis with posterior glenoid wear and loose bodies; cuff intact.</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#glenohumeral-oa">Review in cheat sheet: Glenohumeral OA →</a></p>
 <h3 id="case-27-hagl-lesion-humeral-avulsion-of-glenohumeral-ligament">Case 27 — HAGL lesion (humeral avulsion of glenohumeral ligament)</h3>
 <p><b>Clinical:</b> 28-year-old male after a hyperabduction/external-rotation injury with anterior instability but no labral findings clinically.</p>
 <p class="f"><b>F:</b> <b>MR arthrogram</b> shows extravasation of contrast at the <b>humeral attachment of the inferior glenohumeral ligament</b>, with the axillary pouch assuming a <b>&quot;J-shaped&quot; configuration</b> rather than the normal U, indicating a <b>HAGL</b> lesion. The anteroinferior labrum is intact (distinguishing from Bankart). No osseous fragment (i.e., not a BHAGL). Mild subscapularis strain.</p>
 <p class="i"><b>I:</b> HAGL lesion (humeral-sided avulsion of the inferior glenohumeral ligament); an instability cause with an intact labrum.</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#hagl-lesion">Review in cheat sheet: HAGL lesion →</a></p>
 <h3 id="case-28-glad-lesion-glenolabral-articular-disruption">Case 28 — GLAD lesion (glenolabral articular disruption)</h3>
 <p><b>Clinical:</b> 30-year-old male after a forced adduction injury; persistent anterior pain without frank instability.</p>
 <p class="f"><b>F:</b> <b>MR arthrogram</b> demonstrates a superficial tear of the <b>anteroinferior labrum</b> with an adjacent <b>articular cartilage flap/defect</b> of the anteroinferior glenoid (<b>GLAD</b>), with a small chondral fragment. The IGHL and periosteum remain intact and the labrum is not displaced, accounting for stability despite the chondral injury. Subchondral marrow edema beneath the chondral defect.</p>
 <p class="i"><b>I:</b> GLAD lesion — anteroinferior labral tear with associated glenoid chondral injury; typically stable.</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#anterior-glad">Review in cheat sheet: Anterior GLAD →</a></p>
 <h3 id="case-29-suprascapular-notch-ganglion">Case 29 — Suprascapular notch ganglion</h3>
 <p><b>Clinical:</b> 44-year-old male with deep aching shoulder pain and combined supraspinatus/infraspinatus weakness.</p>
 <p class="f"><b>F:</b> A multiloculated <b>paralabral/ganglion cyst</b> (~25 × 14 mm) tracks to the <b>suprascapular notch</b> proximal to the spinoglenoid notch, compressing the <b>suprascapular nerve</b> before its supraspinatus branch. Consequently <b>both supraspinatus and infraspinatus</b> show denervation edema-like <b>T2 hyperintensity</b> with early fatty change (<b>Goutallier 1</b>). Arises from a superior/posterosuperior labral tear. Cuff tendons intact.</p>
 <p class="i"><b>I:</b> Suprascapular notch ganglion causing suprascapular neuropathy with combined supraspinatus and infraspinatus denervation.</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#suprascapular-notch-suprascapular-nerve">Review in cheat sheet: Suprascapular notch (suprascapular nerve) →</a></p>
 <h3 id="case-30-cuff-tear-arthropathy-hamada-chronic-massive-tear">Case 30 — Cuff-tear arthropathy (Hamada) — chronic massive tear</h3>
 <p><b>Clinical:</b> 79-year-old female with long-standing pseudoparalysis, prior known massive cuff tear, now with grinding pain.</p>
 <p class="f"><b>F:</b> Chronic <b>massive full-thickness cuff tear</b> (supraspinatus + infraspinatus, with partial subscapularis involvement) with <b>Goutallier grade 4</b> fatty atrophy and positive tangent sign. The <b>acromiohumeral interval is obliterated (≤2 mm)</b> with acetabularization of the acromion and femoralization of the humeral head, glenohumeral cartilage loss and superior glenoid erosion — <b>cuff-tear arthropathy (Hamada grade 4)</b>. The deltoid is intact and hypertrophied (relevant to reverse arthroplasty candidacy).</p>
 <p class="i"><b>I:</b> End-stage cuff-tear arthropathy (Hamada 4) from a chronic massive irreparable cuff tear; deltoid intact.</p>
+<p class="review"><a href="shoulder-mri-cheatsheet.html#cuff-tear-arthropathy">Review in cheat sheet: Cuff tear arthropathy →</a></p>
 <button id="toc-handle" class="toc-handle" aria-label="Open table of contents" title="Contents">☰<span class="chev">›</span></button>
 <button id="to-top" class="to-top" aria-label="Back to top" title="Back to top (Home)">↑</button>
 <script>

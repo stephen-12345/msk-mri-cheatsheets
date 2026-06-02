@@ -204,6 +204,17 @@ tr:nth-child(even) td{background:rgba(255,255,255,0.015)}
 }
 @media print{ .diagram{ break-inside:avoid; } }
 
+/* "Review in cheat sheet" cross-link after each case */
+.review{ margin:10px 0 4px; }
+.review a{
+  display:inline-flex; align-items:center; gap:6px; max-width:100%;
+  text-decoration:none; font-size:13.5px; font-weight:650; line-height:1.3;
+  color:#9be4b5; border:1px solid rgba(121,212,155,0.45);
+  background:rgba(121,212,155,0.10); border-radius:999px; padding:5px 13px;
+}
+.review a:hover{ border-color:#9be4b5; color:#cdebd8; background:rgba(121,212,155,0.18); }
+@media print{ .review{ display:none; } }
+
 /* ── Table-of-contents drawer (overlay; never resizes the page) ── */
 .toc-toggle{
   display:inline-flex; align-items:center; gap:5px;
@@ -424,7 +435,18 @@ CALLOUT_TYPES = {
 }
 
 
-def render_callout(block: list[str]) -> str:
+def callout_meta(block: list[str]) -> tuple:
+    """Return (type_key, title) for a callout block, or (None, '')."""
+    for ln in block:
+        if ln.strip():
+            m = re.match(r"^\[!(\w+)\]\s*(.*)$", ln.strip())
+            if m:
+                return m.group(1).upper(), m.group(2).strip()
+            return None, ""
+    return None, ""
+
+
+def render_callout(block: list[str], cid: str | None = None) -> str:
     """Render a blockquote admonition block into a styled callout.
     block: lines already stripped of the leading '>' marker."""
     # detect [!TYPE] optional-title on the first non-empty line
@@ -476,7 +498,8 @@ def render_callout(block: list[str]) -> str:
         f'<span class="lbl">{html.escape(label)}</span>'
         f"{ttl}</div>"
     )
-    return f'<div class="callout {cls}">{head}{"".join(out)}</div>'
+    idattr = f' id="{cid}"' if cid else ""
+    return f'<div class="callout {cls}"{idattr}>{head}{"".join(out)}</div>'
 
 
 SVG_ANKLE_TENDONS_AXIAL = '''<svg viewBox="0 0 560 600" role="img" aria-label="Axial cross-section showing the arrangement of ankle tendons" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Arial,sans-serif">
@@ -592,6 +615,75 @@ def slugify(text: str, used: set) -> str:
     return sid
 
 
+REVIEW_STOP = set("""
+case tear tears torn sprain rupture ruptured tendinosis tendinopathy tenosynovitis
+paratenonitis peritendinitis bursitis fracture fractures contusion edema syndrome
+syndromes lesion lesions dysfunction impingement instability dislocation subluxation
+avulsion degeneration degenerative arthritis arthrosis osteoarthritis acute chronic
+partial complete full thickness high low grade mild moderate severe stable unstable
+with without and the of or a an is are non advanced early late primary secondary
+tendon tendons ligament ligaments joint joints bone bony marrow cartilage chondral
+sheath complex muscle insertion origin proximal distal anterior posterior medial
+lateral superior inferior central dorsal volar radial ulnar deep superficial mri
+normal sign type left right injury injuries pattern recess process body band
+""".split())
+
+REVIEW_SHORT_OK = {
+    "acl", "pcl", "mcl", "lcl", "ucl", "rcl", "lucl", "fhl", "fdl", "ptt", "ecu",
+    "ecrl", "ecrb", "apl", "epb", "epl", "edc", "eip", "slap", "tfcc", "olt", "sl",
+    "lt", "dip", "pip", "mcp", "mtp", "tmt", "druj", "fai", "avn", "ocd", "sonk",
+    "sifk", "hagl", "glad", "alpsa", "fdp", "fds", "ais", "aiis", "atfl", "cfl",
+    "ptfl", "spr", "pin", "ac", "lhb",
+}
+
+# expand common abbreviations <-> full terms so cases match cheat-sheet sections
+REVIEW_SYN = {
+    "acl": "cruciate", "pcl": "cruciate", "ucl": "collateral",
+    "atfl": "talofibular", "ptfl": "talofibular", "cfl": "calcaneofibular",
+    "tfcc": "fibrocartilage", "ptt": "tibialis", "fhl": "hallucis",
+    "fdl": "digitorum", "lhb": "biceps", "slap": "labrum", "olt": "osteochondral",
+    "ocd": "osteochondral", "avn": "necrosis",
+}
+
+
+def _rtoks(s: str) -> set:
+    s = s.lower().replace("(", " ").replace(")", " ")
+    out = set()
+    for t in re.split(r"[^a-z0-9]+", s):
+        if not t or t in REVIEW_STOP:
+            continue
+        if len(t) >= 4 or t in REVIEW_SHORT_OK:
+            out.add(t)
+            if t in REVIEW_SYN:
+                out.add(REVIEW_SYN[t])
+            # light stemming so tendinosis/tendinopathy and sesamoiditis/sesamoid match
+            for suf in ("opathy", "itis", "osis"):
+                if t.endswith(suf) and len(t) - len(suf) >= 4:
+                    out.add(t[: -len(suf)])
+                    break
+    return out
+
+
+def best_review(concept: str, anchors: list):
+    """Pick the best-matching cheat-sheet anchor (slug,label,kind) for a case concept."""
+    ct = _rtoks(concept)
+    if not ct or not anchors:
+        return None
+    kind_rank = {"dx": 0, "callout": 1, "head": 2}
+    best, best_key = None, (0,)
+    for slug, label, kind in anchors:
+        sc = len(ct & _rtoks(label))
+        if sc == 0:
+            continue
+        kr = kind_rank.get(kind, 3)
+        if kind == "dx" and label.strip().lower().startswith("normal"):
+            kr = 3   # deprioritize normal-template entries as review targets
+        key = (sc, -kr, -len(label))
+        if key > best_key:
+            best_key, best = key, (slug, label)
+    return best
+
+
 def inline(text: str) -> str:
     """Escape, then apply **bold** and [placeholder] formatting."""
     text = html.escape(text)
@@ -625,8 +717,11 @@ def parse_table(rows: list[str]) -> str:
     return "".join(out)
 
 
-def md_to_html(md: str) -> tuple[str, str, list]:
-    """Return (title, body_html, toc) where toc is a list of (level, id, label)."""
+def md_to_html(md: str, review_base: str | None = None, review_anchors: list | None = None):
+    """Return (title, body_html, toc, anchors).
+    toc = list of (level, id, label) for headings; anchors = (id,label,kind) for
+    headings + diagnoses + callouts. If review_base is given (cases mode), append a
+    'Review in cheat sheet' link after each case, pointing to the best-matching anchor."""
     lines = md.split("\n")
     title = ""
     out: list[str] = []
@@ -635,12 +730,28 @@ def md_to_html(md: str) -> tuple[str, str, list]:
     bullets: list[str] = []
     used_ids: set = set()
     toc: list = []
+    anchors: list = []
+    pending_review = [None]   # (slug, label) for the current case, flushed at its end
 
     def flush_bullets():
         nonlocal bullets
         if bullets:
             out.append("<ul>" + "".join(f"<li>{inline(b)}</li>" for b in bullets) + "</ul>")
             bullets = []
+
+    case_category = [""]
+
+    def flush_review():
+        if pending_review[0] is not None:
+            slug, label = pending_review[0]
+            if slug:
+                href = f"{review_base}#{slug}"
+                txt = f"Review in cheat sheet: {label} →"   # label already escaped by plain()
+            else:
+                href = review_base
+                txt = "Open this joint's cheat sheet →"
+            out.append(f'<p class="review"><a href="{href}">{txt}</a></p>')
+            pending_review[0] = None
 
     while i < n:
         line = lines[i]
@@ -669,7 +780,12 @@ def md_to_html(md: str) -> tuple[str, str, list]:
                     raw = raw[1:]                     # drop one space after '>'
                 block.append(raw)
                 i += 1
-            out.append(render_callout(block))
+            _, ctitle = callout_meta(block)
+            cid = None
+            if ctitle:
+                cid = slugify(ctitle, used_ids)
+                anchors.append((cid, plain(ctitle), "callout"))
+            out.append(render_callout(block, cid))
             continue
 
         # table block
@@ -697,25 +813,41 @@ def md_to_html(md: str) -> tuple[str, str, list]:
                     i += 1
             else:
                 # subsequent H1 = anatomical group divider
+                flush_review()
                 sid = slugify(text, used_ids)
                 out.append(f'<h2 class="group" id="{sid}">{inline(text)}</h2>')
                 toc.append(("group", sid, plain(text)))
+                anchors.append((sid, plain(text), "head"))
                 i += 1
             continue
         if stripped.startswith("### "):
             flush_bullets()
             htext = stripped[4:].strip()
+            # cases mode: a new "### Case N — concept" heading starts a new case;
+            # flush the PREVIOUS case's review link BEFORE emitting this heading
+            cm = re.match(r"^Case\s+\d+\s*[—\-:]\s*(.*)$", htext) if review_base else None
+            if cm:
+                flush_review()
             sid = slugify(htext, used_ids)
             out.append(f'<h3 id="{sid}">{inline(htext)}</h3>')
             toc.append(("h3", sid, plain(htext)))
+            anchors.append((sid, plain(htext), "head"))
+            if cm:
+                match = best_review(cm.group(1), review_anchors)
+                if not match and case_category[0]:
+                    match = best_review(case_category[0], review_anchors)
+                pending_review[0] = match if match else ("", "")
             i += 1
             continue
         if stripped.startswith("## "):
             flush_bullets()
+            flush_review()
             htext = stripped[3:].strip()
             sid = slugify(htext, used_ids)
             out.append(f'<h2 id="{sid}">{inline(htext)}</h2>')
             toc.append(("h2", sid, plain(htext)))
+            anchors.append((sid, plain(htext), "head"))
+            case_category[0] = htext
             i += 1
             continue
 
@@ -739,7 +871,9 @@ def md_to_html(md: str) -> tuple[str, str, list]:
         if stripped.startswith("**") and stripped.endswith("**") and stripped.count("**") == 2:
             flush_bullets()
             name = stripped[2:-2].strip()
-            out.append(f'<div class="dx">{inline(name)}</div>')
+            sid = slugify(name, used_ids)
+            anchors.append((sid, plain(name), "dx"))
+            out.append(f'<div class="dx" id="{sid}">{inline(name)}</div>')
             i += 1
             continue
 
@@ -749,7 +883,8 @@ def md_to_html(md: str) -> tuple[str, str, list]:
         i += 1
 
     flush_bullets()
-    return title, "\n".join(out), toc
+    flush_review()
+    return title, "\n".join(out), toc, anchors
 
 
 def build_toc(toc: list) -> str:
@@ -842,7 +977,13 @@ def build_doc(joint: str, kind: str = "cheatsheet") -> None:
         return
     out_path = ROOT / joint / f"{joint}-mri-{suffix}.html"
     md = md_path.read_text(encoding="utf-8")
-    title, body, toc = md_to_html(md)
+    review_base = review_anchors = None
+    if kind == "cases":
+        cheat_md_path = ROOT / joint / f"{joint}-mri-cheatsheet.md"
+        if cheat_md_path.exists():
+            _, _, _, review_anchors = md_to_html(cheat_md_path.read_text(encoding="utf-8"))
+            review_base = f"{joint}-mri-cheatsheet.html"
+    title, body, toc, _anchors = md_to_html(md, review_base, review_anchors)
     toc_html = build_toc(toc)
     has_template = (ROOT / "templates" / f"{joint}.html").exists()
     has_cases = (ROOT / joint / f"{joint}-mri-cases.md").exists()
