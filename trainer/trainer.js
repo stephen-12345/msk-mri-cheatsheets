@@ -58,10 +58,28 @@
     if (afterLvl > beforeLvl) setTimeout(function () { toast("⬆️ Level " + afterLvl + "!"); }, 250);
   }
 
-  function recordResult(q, passed) {
-    var r = store.results[q.id] || { seen: 0, pass: false };
-    r.seen += 1; r.pass = passed; store.results[q.id] = r; store.saveResults();
+  // ---------- SM-2 spaced repetition ----------
+  var DAY = 864e5;
+  function todayMid() { var d = new Date(); d.setHours(0, 0, 0, 0); return d.getTime(); }
+  function recordResult(q, passed, quality) {
+    var r = store.results[q.id] || { seen: 0, pass: false, ef: 2.5, reps: 0, interval: 0 };
+    r.seen += 1; r.pass = passed;
+    if (r.ef == null) r.ef = 2.5;
+    if (quality < 3) {            // lapse → relearn tomorrow
+      r.reps = 0; r.interval = 1;
+    } else {
+      r.reps = (r.reps || 0) + 1;
+      r.interval = r.reps === 1 ? 1 : r.reps === 2 ? 6 : Math.round((r.interval || 1) * r.ef);
+    }
+    r.ef = Math.max(1.3, r.ef + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02)));
+    r.due = todayMid() + r.interval * DAY;     // due at the start of the target day
+    r.q = quality;
+    store.results[q.id] = r; store.saveResults();
   }
+  // a card is "due" if scheduled on/before today, or a legacy miss with no schedule yet
+  function isDue(r) { return !!r && ((r.due && r.due <= todayMid()) || (r.pass === false && r.due == null)); }
+  function dueCount() { var n = 0; QS.forEach(function (q) { if (isDue(store.results[q.id])) n++; }); return n; }
+  function newCount() { var n = 0; QS.forEach(function (q) { if (!store.results[q.id]) n++; }); return n; }
 
   // ---------- build start screen ----------
   function joints() {
@@ -90,8 +108,11 @@
     if (sel.mode === "mcq") return pool.filter(function (q) { return q.type === "mcq"; });
     if (sel.mode === "cloze") return pool.filter(function (q) { return q.type === "cloze"; });
     if (sel.mode === "lightning") return pool.filter(function (q) { return q.type === "mcq" || q.type === "cloze"; });
-    if (sel.mode === "review") {
-      return pool.filter(function (q) { var r = store.results[q.id]; return r && r.pass === false; });
+    if (sel.mode === "srs") {
+      var due = pool.filter(function (q) { return isDue(store.results[q.id]); });
+      due.sort(function (a, b) { return (store.results[a.id].due || 0) - (store.results[b.id].due || 0); });
+      var fresh = pool.filter(function (q) { return !store.results[q.id]; });
+      return due.concat(fresh);   // due (most overdue first), then new cards to fill
     }
     return pool; // mixed, exam
   }
@@ -100,6 +121,7 @@
   function sessionLen(n) {
     if (sel.mode === "lightning") return Math.min(10, n);
     if (sel.mode === "exam") return Math.min(EXAM_LEN, n);
+    if (sel.mode === "srs") return Math.min(20, n);
     return Math.min(12, n);
   }
   function refreshCount() {
@@ -107,12 +129,25 @@
     var btn = $("startbtn"), note = $("countnote");
     if (n === 0) {
       btn.disabled = true;
-      note.textContent = sel.mode === "review" ? "No misses to review yet — go practice!" : "No questions match these filters.";
+      note.textContent = "No questions match these filters.";
     } else {
       btn.disabled = false;
       var len = sessionLen(n);
-      var extra = sel.mode === "exam" ? "  ·  12-min timed exam, graded" : "";
+      var extra = sel.mode === "exam" ? "  ·  12-min timed exam, graded"
+        : sel.mode === "srs" ? ("  ·  " + dueCount() + " due, " + newCount() + " new available")
+        : "";
       note.textContent = len + " question" + (len > 1 ? "s" : "") + " this session  ·  " + n + " available" + extra;
+    }
+  }
+  function updateDueBanner() {
+    var b = $("duebanner"); if (!b) return;
+    var due = dueCount();
+    if (due > 0) {
+      b.innerHTML = "🗓 <b>" + due + "</b> card" + (due > 1 ? "s" : "") + " due for review today — tap to start";
+      b.classList.add("active"); b.style.display = "";
+    } else {
+      b.innerHTML = "✓ All caught up on reviews — practice freely or learn new cards";
+      b.classList.remove("active"); b.style.display = "";
     }
   }
 
@@ -281,10 +316,14 @@
   }
   function norm(s) { return (s || "").toLowerCase().replace(/[.,;:]+$/, "").replace(/\s+/g, " ").trim(); }
 
+  function qualityOf(q, cov, passed) {
+    if (q.type === "dictate") return cov >= 0.85 ? 5 : cov >= 0.65 ? 4 : cov >= 0.4 ? 3 : cov >= 0.2 ? 2 : 1;
+    return passed ? 5 : 1;     // mcq / cloze
+  }
   function finishQuestion(gain, passed, cov) {
     var q = session.queue[session.i];
     addXP(gain, passed);
-    recordResult(q, passed);
+    recordResult(q, passed, qualityOf(q, cov, passed));
     session.answered += 1; session.totalCov += cov; if (passed) session.correct += 1;
     var last = session.i >= session.queue.length - 1;
     $("qactions").innerHTML = '<button class="btn primary" id="next">' + (last ? "See results" : "Next question →") + "</button>";
@@ -312,7 +351,7 @@
       "</div>" +
       '<div class="row"><button class="btn primary" id="again">Another session</button><button class="btn ghost" id="back">Change mode</button></div></div>';
     $("again").onclick = startSession;
-    $("back").onclick = function () { s.classList.add("hidden"); $("start").classList.remove("hidden"); refreshCount(); window.scrollTo(0, 0); };
+    $("back").onclick = function () { s.classList.add("hidden"); $("start").classList.remove("hidden"); refreshCount(); updateDueBanner(); window.scrollTo(0, 0); };
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
@@ -338,9 +377,17 @@
       refreshCount();
     });
     $("startbtn").onclick = startSession;
-    window.addEventListener("msk-synced", updateHUD);  // refresh HUD after cloud merge
+    var dueb = $("duebanner");
+    if (dueb) dueb.onclick = function () {
+      if (dueCount() === 0 && newCount() === 0) return;
+      sel.mode = "srs";
+      Array.prototype.forEach.call($("modes").children, function (x) { x.classList.toggle("sel", x.getAttribute("data-mode") === "srs"); });
+      startSession();
+    };
+    window.addEventListener("msk-synced", function () { updateHUD(); updateDueBanner(); });
     refreshCount();
     updateHUD();
+    updateDueBanner();
   }
 
   if (!QS.length) { document.querySelector("main").innerHTML = '<p style="padding:40px 0;color:#aab4c5">Question bank failed to load.</p>'; }

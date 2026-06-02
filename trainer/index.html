@@ -50,6 +50,10 @@ h1{font-size:24px; color:#fff; margin:22px 0 4px; letter-spacing:.2px;}
 .lede{color:var(--tx2); font-size:15px; margin-bottom:20px; line-height:1.5;}
 
 .section-label{font-size:12px; text-transform:uppercase; letter-spacing:1.2px; color:var(--tx3); font-weight:800; margin:20px 0 10px;}
+.duebanner{ width:100%; text-align:left; margin:6px 0 4px; padding:13px 16px; border-radius:11px; cursor:pointer; font-size:15px; font-family:inherit; border:1px solid var(--bdr); background:#0d141f; color:var(--tx2); }
+.duebanner.active{ border-color:#f3ad63; background:rgba(243,173,99,0.13); color:#ffe0c8; }
+.duebanner b{ color:#fff; font-size:1.1em; }
+.duebanner:active{ transform:scale(.995); }
 
 /* mode cards */
 .modes{display:grid; grid-template-columns:1fr 1fr; gap:11px;}
@@ -177,6 +181,8 @@ textarea:focus{outline:none; border-color:var(--teal);}
   <h1>Train your radiology vocabulary</h1>
   <p class="lede">Practice describing findings the way an expert MSK radiologist would. In <b>Dictate&nbsp;It</b>, you type your description and get scored on the expert <b>terms, measurements, and named signs</b> you used — then see the model dictation and what you missed.</p>
 
+  <button id="duebanner" class="duebanner" type="button" style="display:none"></button>
+
   <div class="section-label">Mode</div>
   <div class="modes" id="modes">
     <button class="mode sel" data-mode="dictate"><div class="ic">✍️</div><div class="nm">Dictate It</div><div class="ds">Type the findings; scored on expert term coverage</div></button>
@@ -185,7 +191,7 @@ textarea:focus{outline:none; border-color:var(--teal);}
     <button class="mode" data-mode="mixed"><div class="ic">🎲</div><div class="nm">Mixed</div><div class="ds">A bit of everything</div></button>
     <button class="mode" data-mode="lightning"><div class="ic">⚡</div><div class="nm">Lightning</div><div class="ds">10 rapid recognition questions</div></button>
     <button class="mode" data-mode="exam"><div class="ic">🎓</div><div class="nm">Timed Exam</div><div class="ds">15 questions, 12-min clock, letter grade</div></button>
-    <button class="mode" data-mode="review"><div class="ic">🔁</div><div class="nm">Review Misses</div><div class="ds">Resurface what you got wrong</div></button>
+    <button class="mode" data-mode="srs"><div class="ic">🗓</div><div class="nm">Due Today</div><div class="ds">Spaced-repetition review (SM-2) of cards that are due</div></button>
   </div>
 
   <div class="section-label">Region</div>
