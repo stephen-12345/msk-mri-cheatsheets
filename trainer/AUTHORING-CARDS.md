@@ -39,7 +39,7 @@ Each card is one object:
 | `impr`  | no  | The **Impression** line — renders next to a green **I:**. One concise diagnosis. |
 | `pearl` | no  | A teaching note — secondary signs, a grading system, a mimic, or a pitfall. Renders in a blue box with a 💡. |
 | `topic` | yes | Short label shown above the card (e.g. "Rotator cuff"). |
-| `joint` | yes | One of: `shoulder`, `knee`, `hip`, `ankle`, `foot`, `elbow`, `wrist`, `hand`, `general`. Drives the topic filter. |
+| `joint` | yes | One of: `shoulder`, `knee`, `hip`, `ankle`, `foot`, `elbow`, `wrist`, `hand`, `spine`, `tumor`, `general`. Drives the topic filter and the coverage heatmap. |
 
 ### Bracket placeholders
 

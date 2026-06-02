@@ -25,7 +25,8 @@
       best: +lget("mskt-best", 0) || 0,
       day: JSON.parse(lget("mskt-day", '{"last":"","count":0}')),
       results: JSON.parse(lget("mskt-results", "{}")),
-      flash: JSON.parse(lget("mskt-flash", "{}"))
+      flash: JSON.parse(lget("mskt-flash", "{}")),
+      flog: JSON.parse(lget("mskt-flash-log", "{}"))
     };
   }
   function saveLocal(d) {
@@ -34,6 +35,7 @@
     localStorage.setItem("mskt-day", JSON.stringify(d.day || { last: "", count: 0 }));
     localStorage.setItem("mskt-results", JSON.stringify(d.results || {}));
     localStorage.setItem("mskt-flash", JSON.stringify(d.flash || {}));
+    localStorage.setItem("mskt-flash-log", JSON.stringify(d.flog || {}));
   }
   function pickDay(a, b) {
     a = a || { last: "", count: 0 }; b = b || { last: "", count: 0 };
@@ -56,12 +58,17 @@
       var a = lf[id], c = f[id];
       if (!c || (a.seen || 0) >= (c.seen || 0)) f[id] = a;
     });
+    // activity log: take the max review count per day across devices
+    var fl = Object.assign({}, C.flog || {});
+    var llog = L.flog || {};
+    Object.keys(llog).forEach(function (day) { fl[day] = Math.max(llog[day] || 0, fl[day] || 0); });
     return {
       xp: Math.max(L.xp || 0, C.xp || 0),
       best: Math.max(L.best || 0, C.best || 0),
       day: pickDay(L.day, C.day),
       results: r,
       flash: f,
+      flog: fl,
       updated: Date.now()
     };
   }

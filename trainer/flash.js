@@ -9,6 +9,22 @@
   function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
   function store() { try { return JSON.parse(localStorage.getItem("mskt-flash") || "{}"); } catch (e) { return {}; } }
   function save(s) { localStorage.setItem("mskt-flash", JSON.stringify(s)); }
+  // ---- daily activity log (for streak calendar) ----
+  function dkey(d) { d = d || new Date(); return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate(); }
+  function activity() { try { return JSON.parse(localStorage.getItem("mskt-flash-log") || "{}"); } catch (e) { return {}; } }
+  function logActivity() { var a = activity(); a[dkey()] = (a[dkey()] || 0) + 1; localStorage.setItem("mskt-flash-log", JSON.stringify(a)); }
+  function streaks() {
+    var a = activity(), cur = 0, best = 0, total = 0;
+    Object.keys(a).forEach(function (k) { total += a[k]; });
+    var d = new Date(); d.setHours(0, 0, 0, 0);
+    if (!a[dkey(d)]) d = new Date(d.getTime() - DAY);   // today not done yet → count through yesterday
+    while (a[dkey(d)]) { cur++; d = new Date(d.getTime() - DAY); }
+    // longest run over all logged days
+    var days = Object.keys(a).map(function (k) { var p = k.split("-"); return new Date(+p[0], +p[1] - 1, +p[2]).getTime(); }).sort(function (x, y) { return x - y; });
+    var run = 0, prev = null;
+    days.forEach(function (t) { if (prev != null && t - prev === DAY) run++; else run = 1; if (run > best) best = run; prev = t; });
+    return { cur: cur, best: best, total: total, daysActive: days.length };
+  }
   function esc(t) { return (t || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
   // style bracketed [options] placeholders like the cheat sheet
   function ph(t) { return esc(t).replace(/\[([^\]]+)\]/g, '<span class="ph">[$1]</span>'); }
@@ -51,12 +67,13 @@
   function sessionCap() { return sel.size === "all" ? Infinity : sel.size; }
 
   // ---- start screen ----
+  var ORDER = ["shoulder", "knee", "hip", "ankle", "foot", "elbow", "wrist", "hand", "spine", "tumor", "general"];
+  var NAMES = { all: "All", shoulder: "Shoulder", knee: "Knee", hip: "Hip", ankle: "Ankle", foot: "Foot", elbow: "Elbow", wrist: "Wrist", hand: "Hand", spine: "Spine", tumor: "Tumor", general: "Core" };
   function topicChips() {
     var set = {}; FC.forEach(function (c) { set[c.joint] = 1; });
-    var order = ["all", "shoulder", "knee", "hip", "ankle", "foot", "elbow", "wrist", "hand", "general"];
-    var nm = { all: "All", shoulder: "Shoulder", knee: "Knee", hip: "Hip", ankle: "Ankle", foot: "Foot", elbow: "Elbow", wrist: "Wrist", hand: "Hand", general: "Core" };
+    var order = ["all"].concat(ORDER);
     $("topics").innerHTML = order.filter(function (j) { return j === "all" || set[j]; })
-      .map(function (j) { return '<button class="chip' + (j === "all" ? " sel" : "") + '" data-topic="' + j + '">' + nm[j] + "</button>"; }).join("");
+      .map(function (j) { return '<button class="chip' + (j === "all" ? " sel" : "") + '" data-topic="' + j + '">' + (NAMES[j] || j) + "</button>"; }).join("");
   }
   function refreshStart() {
     var due = dueCards().length, freshAvail = newCards().length;
@@ -74,6 +91,56 @@
     var due = FC.filter(function (c) { return isDue(store()[c.id]); }).length;
     var learned = Object.keys(store()).length;
     $("hudmeta").innerHTML = "🗓 <b>" + due + "</b> due · " + learned + "/" + FC.length + " seen";
+  }
+
+  // ---- stats screen: streak calendar + region heatmap ----
+  function showStats() {
+    var sk = streaks(), s = store();
+    var seen = Object.keys(s).length;
+    $("statkpis").innerHTML =
+      kpi('<span class="fire">' + sk.cur + "🔥</span>", "Day streak") +
+      kpi(sk.best, "Longest") +
+      kpi(sk.total, "Reviews") +
+      kpi(seen + "/" + FC.length, "Cards seen");
+    renderCalendar();
+    renderHeatmap(s);
+    $("start").classList.add("hidden"); $("study").classList.add("hidden"); $("summary").classList.add("hidden");
+    $("stats").classList.remove("hidden");
+    window.scrollTo(0, 0);
+  }
+  function kpi(n, l) { return '<div class="cell"><div class="n">' + n + '</div><div class="l">' + l + "</div></div>"; }
+  function renderCalendar() {
+    var a = activity(), WEEKS = 18;
+    var today = new Date(); today.setHours(0, 0, 0, 0);
+    // start on the Sunday that is (WEEKS-1) weeks before this week's Sunday
+    var start = new Date(today.getTime() - today.getDay() * DAY - (WEEKS - 1) * 7 * DAY);
+    var max = 0; Object.keys(a).forEach(function (k) { if (a[k] > max) max = a[k]; });
+    function lvl(n) { if (!n) return 0; if (max <= 1) return 4; var r = n / max; return r > 0.66 ? 4 : r > 0.33 ? 3 : r > 0.1 ? 2 : 1; }
+    var cells = "";
+    for (var w = 0; w < WEEKS; w++) {
+      for (var d = 0; d < 7; d++) {
+        var day = new Date(start.getTime() + (w * 7 + d) * DAY);
+        if (day > today) { cells += '<i class="future"></i>'; continue; }
+        var n = a[dkey(day)] || 0;
+        cells += '<i class="lv' + lvl(n) + '" title="' + dkey(day) + ": " + n + ' reviews"></i>';
+      }
+    }
+    $("calendar").innerHTML = cells;
+  }
+  function renderHeatmap(s) {
+    var by = {};
+    FC.forEach(function (c) { var j = c.joint; if (!by[j]) by[j] = { total: 0, seen: 0, rev: 0 }; by[j].total++; var r = s[c.id]; if (r) { by[j].seen++; by[j].rev += (r.seen || 0); } });
+    var html = "";
+    ORDER.forEach(function (j) {
+      if (!by[j]) return;
+      var t = by[j], pc = Math.round(t.seen / t.total * 100);
+      var q = pc === 0 ? 0 : pc < 34 ? 1 : pc < 67 ? 2 : 3;
+      html += '<div class="tile q' + q + '"><div class="rg">' + (NAMES[j] || j) + "</div>" +
+        '<div class="pc">' + pc + '%</div>' +
+        '<div class="sub">' + t.seen + "/" + t.total + " cards · " + t.rev + " reviews</div>" +
+        '<i class="fillbar" style="width:' + pc + '%"></i></div>';
+    });
+    $("heatmap").innerHTML = html;
   }
 
   // ---- session ----
@@ -131,6 +198,7 @@
     var c = sess.queue[sess.i], s = store();
     s[c.id] = schedule(s[c.id] || {}, g);
     save(s);
+    logActivity();
     if (g === 0) sess.again += 1;
     sess.done += 1;
     if (sess.i >= sess.queue.length - 1) finish();
@@ -193,6 +261,8 @@
       refreshStart();
     });
     $("startbtn").onclick = startSession;
+    $("statsbtn").onclick = showStats;
+    $("statsback").onclick = function () { $("stats").classList.add("hidden"); $("start").classList.remove("hidden"); refreshStart(); hud(); window.scrollTo(0, 0); };
     $("flipbtn").onclick = flip;
     $("grades").addEventListener("click", function (e) { var b = e.target.closest(".grade"); if (b) grade(+b.getAttribute("data-g")); });
     $("duebanner").onclick = function () { sel.topic = "all"; Array.prototype.forEach.call($("topics").children, function (x) { x.classList.toggle("sel", x.getAttribute("data-topic") === "all"); }); refreshStart(); startSession(); };

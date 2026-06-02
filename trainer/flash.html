@@ -73,6 +73,27 @@ h1{font-size:24px;color:#fff;margin:22px 0 6px}
 .btn.primary{background:linear-gradient(135deg,#11556f,#0b3a52);border:1px solid #2c6b86;color:#eaf8ff}
 .btn.ghost{background:#0d141f;border:1px solid var(--bdr);color:var(--tx2)}
 .hidden{display:none}
+/* stats */
+.statgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:6px 0 8px}
+.statgrid .cell{background:var(--panel);border:1px solid var(--bdr);border-radius:11px;padding:13px 10px;text-align:center}
+.statgrid .cell .n{font-size:24px;font-weight:800;color:#fff}
+.statgrid .cell .l{font-size:11px;color:var(--tx3);text-transform:uppercase;letter-spacing:.8px;margin-top:2px}
+.statgrid .cell .n .fire{color:var(--hard)}
+.cal-wrap{overflow-x:auto;padding:4px 0 2px}
+.cal{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,1fr);gap:3px;width:max-content}
+.cal i{width:13px;height:13px;border-radius:3px;background:#1a2230;display:block}
+.cal i.lv1{background:#173a4a}.cal i.lv2{background:#1f6f86}.cal i.lv3{background:#39a7c4}.cal i.lv4{background:#7fe0f5}
+.cal i.future{background:transparent}
+.cal-legend{display:flex;align-items:center;gap:4px;font-size:11.5px;color:var(--tx3);margin-top:8px}
+.cal-legend i{width:13px;height:13px;border-radius:3px;display:inline-block}
+.cal-legend i.lv0{background:#1a2230}.cal-legend i.lv1{background:#173a4a}.cal-legend i.lv2{background:#1f6f86}.cal-legend i.lv3{background:#39a7c4}.cal-legend i.lv4{background:#7fe0f5}
+.heat{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:9px;margin-top:4px}
+.heat .tile{border:1px solid var(--bdr);border-radius:11px;padding:12px 13px;position:relative;overflow:hidden;background:var(--panel)}
+.heat .tile .fillbar{position:absolute;left:0;bottom:0;height:3px;background:var(--teal)}
+.heat .tile .rg{font-weight:700;color:#fff;font-size:15px}
+.heat .tile .pc{font-size:22px;font-weight:800;margin-top:4px}
+.heat .tile .sub{font-size:12px;color:var(--tx3);margin-top:1px}
+.heat .tile.q0 .pc{color:var(--tx3)}.heat .tile.q1 .pc{color:#79a8c4}.heat .tile.q2 .pc{color:#39a7c4}.heat .tile.q3 .pc{color:#7fe0f5}
 @media(max-width:520px){.grade .g{font-size:14px}.fc-front{font-size:20px}}
 </style>
 </head>
@@ -80,6 +101,8 @@ h1{font-size:24px;color:#fff;margin:22px 0 6px}
 <div class="bar"><div class="wrap">
   <span class="title">🃏 MRI Flashcards</span>
   <span class="meta" id="hudmeta"></span>
+  <button class="home" id="statsbtn" type="button" style="cursor:pointer">📊 Stats</button>
+  <a class="home" href="diagnose.html">🔎 Diagnose</a>
   <button class="home" id="acct" type="button" style="cursor:pointer">☁︎ Sync</button>
   <a class="home" href="index.html">Trainer</a>
 </div></div>
@@ -131,6 +154,20 @@ h1{font-size:24px;color:#fff;margin:22px 0 6px}
 </section>
 
 <section id="summary" class="hidden"></section>
+
+<section id="stats" class="hidden">
+  <h1 style="display:flex;align-items:center;gap:10px">📊 Your progress
+    <button class="home" id="statsback" type="button" style="margin-left:auto;font-size:13px">← Back</button>
+  </h1>
+  <div class="statgrid" id="statkpis"></div>
+
+  <div class="section-label">Daily streak</div>
+  <div class="cal-wrap"><div class="cal" id="calendar"></div></div>
+  <div class="cal-legend">Less <i class="lv0"></i><i class="lv1"></i><i class="lv2"></i><i class="lv3"></i><i class="lv4"></i> More</div>
+
+  <div class="section-label">Coverage by region</div>
+  <div class="heat" id="heatmap"></div>
+</section>
 </main>
 
 <script src="flashcards.js"></script>

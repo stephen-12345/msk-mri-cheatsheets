@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diagnose It — MRI Findings</title>
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#0b3a52">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Diagnose It">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<style>
+:root{--bg:#0c0f15;--panel:#141925;--bdr:#27303f;--tx:#e6eaf2;--tx2:#aab4c5;--tx3:#7c8699;--teal:#5fc6e6;--green:#79d49b;--red:#e2737a;--amber:#f3ad63;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{background:var(--bg);color-scheme:dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--tx);font-size:17px;-webkit-font-smoothing:antialiased;min-height:100vh}
+.wrap{max-width:720px;margin:0 auto;padding:0 18px}
+button{font-family:inherit;cursor:pointer}
+a{color:var(--teal);text-decoration:none}
+.bar{position:sticky;top:0;z-index:10;background:rgba(12,15,21,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--bdr);padding:8px 0;padding-top:calc(8px + env(safe-area-inset-top,0px))}
+.bar .wrap{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.bar .title{font-weight:800;color:#fff;font-size:16px;margin-right:auto}
+.bar .meta{font-size:13px;color:var(--tx2)}.bar .meta b{color:#fff}
+.bar .home{font-size:13px;color:var(--tx2);border:1px solid var(--bdr);border-radius:999px;padding:4px 11px;background:#0d1a26}
+h1{font-size:24px;color:#fff;margin:22px 0 6px}
+.lede{color:var(--tx2);font-size:15px;margin-bottom:16px;line-height:1.5}
+.section-label{font-size:12px;text-transform:uppercase;letter-spacing:1.2px;color:var(--tx3);font-weight:800;margin:18px 0 9px}
+.chiprow{display:flex;flex-wrap:wrap;gap:7px}
+.chip{border:1px solid var(--bdr);background:#0d1a26;color:var(--tx2);border-radius:999px;padding:6px 13px;font-size:13.5px;font-weight:600}
+.chip.sel{border-color:var(--teal);background:rgba(95,198,230,.16);color:#cdeffb}
+.startbtn{display:block;width:100%;margin:18px 0 8px;padding:15px;border:none;border-radius:12px;background:linear-gradient(135deg,#11556f,#0b3a52);border:1px solid #2c6b86;color:#eaf8ff;font-size:17px;font-weight:800}
+.kbd{display:inline-block;border:1px solid var(--bdr);border-bottom-width:2px;border-radius:5px;padding:0 6px;background:#0d141f;color:var(--tx2);font-size:12px;font-weight:700}
+.hint{color:var(--tx3);font-size:12.5px;text-align:center;margin-top:6px}
+.qtop{display:flex;align-items:center;gap:10px;margin:14px 0 0;font-size:13px;color:var(--tx3)}
+.qtop .t{margin-left:auto;font-weight:700;color:var(--tx2)}
+.progbar{height:5px;background:#1a2230;border-radius:999px;overflow:hidden;margin:8px 0 0}
+.progbar>i{display:block;height:100%;background:var(--teal);width:0;transition:width .2s}
+.stem{background:var(--panel);border:1px solid var(--bdr);border-left:4px solid var(--amber);border-radius:13px;padding:18px 18px;margin:16px 0 14px}
+.stem .lab{font-size:11.5px;text-transform:uppercase;letter-spacing:1.2px;color:var(--amber);font-weight:800;margin-bottom:8px}
+.stem .find{font-size:18px;line-height:1.55;color:#fff}
+.opts{display:flex;flex-direction:column;gap:9px}
+.opt{display:flex;gap:11px;align-items:flex-start;text-align:left;border:1px solid var(--bdr);background:#0d141f;border-radius:11px;padding:13px 14px;color:var(--tx);font-size:15.5px;line-height:1.4}
+.opt .k{flex:none;width:22px;height:22px;border-radius:6px;background:#1a2230;color:var(--tx2);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+.opt.correct{border-color:var(--green);background:rgba(121,212,155,.14)}.opt.correct .k{background:var(--green);color:#06240f}
+.opt.wrong{border-color:var(--red);background:rgba(226,115,122,.14)}.opt.wrong .k{background:var(--red);color:#2a0708}
+.opt.dim{opacity:.5}
+.fb{margin-top:14px;padding:13px 15px;border-radius:11px;font-size:15px;line-height:1.5;display:none}
+.fb.show{display:block}
+.fb.ok{background:rgba(121,212,155,.12);border:1px solid rgba(121,212,155,.4)}
+.fb.no{background:rgba(226,115,122,.12);border:1px solid rgba(226,115,122,.4)}
+.fb .ent{font-weight:800;color:#fff}
+.next{display:block;width:100%;margin-top:13px;padding:13px;border:1px solid #2c6b86;border-radius:11px;background:rgba(95,198,230,.12);color:#cdeffb;font-size:16px;font-weight:800}
+.summary{text-align:center;padding:30px 10px}
+.summary .em{font-size:48px}.summary h2{color:#fff;font-size:24px;margin:8px 0}
+.summary .grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:18px 0}
+.summary .cell{background:var(--panel);border:1px solid var(--bdr);border-radius:11px;padding:14px}
+.summary .cell .n{font-size:26px;font-weight:800;color:#fff}.summary .cell .l{font-size:12px;color:var(--tx3);text-transform:uppercase;letter-spacing:1px}
+.row{display:flex;gap:10px;margin-top:14px}
+.btn{flex:1;padding:13px;border:none;border-radius:11px;font-size:16px;font-weight:800}
+.btn.primary{background:linear-gradient(135deg,#11556f,#0b3a52);border:1px solid #2c6b86;color:#eaf8ff}
+.btn.ghost{background:#0d141f;border:1px solid var(--bdr);color:var(--tx2)}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<div class="bar"><div class="wrap">
+  <span class="title">🔎 Diagnose It</span>
+  <span class="meta" id="hudmeta"></span>
+  <a class="home" href="flash.html">🃏 Flashcards</a>
+  <a class="home" href="index.html">Trainer</a>
+</div></div>
+
+<main class="wrap">
+<section id="start">
+  <h1>Read the findings — name the diagnosis</h1>
+  <p class="lede">You're shown a real MRI findings dictation. Pick the diagnosis it describes. Trains the recognition direction — turning report language back into a diagnosis. <span class="kbd">1</span>–<span class="kbd">4</span> to answer, <span class="kbd">Space</span> for next.</p>
+  <div class="section-label">Region</div>
+  <div class="chiprow" id="topics"></div>
+  <div class="section-label">How many</div>
+  <div class="chiprow" id="sizes">
+    <button class="chip" data-size="10">10</button>
+    <button class="chip sel" data-size="15">15</button>
+    <button class="chip" data-size="25">25</button>
+    <button class="chip" data-size="40">40</button>
+  </div>
+  <button class="startbtn" id="startbtn">Start</button>
+  <p class="hint" id="countnote"></p>
+</section>
+
+<section id="quiz" class="hidden">
+  <div class="qtop"><span id="qprog"></span><span id="qscore"></span><span class="t" id="qtimer">0:00</span></div>
+  <div class="progbar"><i id="qfill"></i></div>
+  <div class="stem"><div class="lab" id="stemtopic">Findings</div><div class="find" id="stemfind"></div></div>
+  <div class="opts" id="opts"></div>
+  <div class="fb" id="fb"></div>
+  <button class="next hidden" id="nextbtn">Next →</button>
+</section>
+
+<section id="summary" class="hidden"></section>
+</main>
+
+<script src="flashcards.js"></script>
+<script src="describe-cards.js"></script>
+<script src="diagnose.js"></script>
+<script src="firebase-config.js"></script>
+<script src="sync.js"></script>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}</script>
+</body>
+</html>
