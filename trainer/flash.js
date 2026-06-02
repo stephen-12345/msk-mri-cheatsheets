@@ -3,9 +3,10 @@
   "use strict";
   var FC = window.FLASHCARDS || [];
   var $ = function (id) { return document.getElementById(id); };
-  var DAY = 864e5, NEW_PER_DAY = 20;
+  var DAY = 864e5;
 
   function todayMid() { var d = new Date(); d.setHours(0, 0, 0, 0); return d.getTime(); }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
   function store() { try { return JSON.parse(localStorage.getItem("mskt-flash") || "{}"); } catch (e) { return {}; } }
   function save(s) { localStorage.setItem("mskt-flash", JSON.stringify(s)); }
   function esc(t) { return (t || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
@@ -33,8 +34,9 @@
   function dueCards() { var s = store(); return FC.filter(filtByTopic).filter(function (c) { return isDue(s[c.id]); }); }
   function newCards() { var s = store(); return FC.filter(filtByTopic).filter(function (c) { return !s[c.id]; }); }
 
-  var sel = { topic: "all" };
+  var sel = { topic: "all", size: 20, time: 0 };
   var sess = null, tickT = null;
+  function sessionCap() { return sel.size === "all" ? Infinity : sel.size; }
 
   // ---- start screen ----
   function topicChips() {
@@ -45,10 +47,12 @@
       .map(function (j) { return '<button class="chip' + (j === "all" ? " sel" : "") + '" data-topic="' + j + '">' + nm[j] + "</button>"; }).join("");
   }
   function refreshStart() {
-    var due = dueCards().length, fresh = Math.min(NEW_PER_DAY, newCards().length);
-    var total = due + fresh;
+    var due = dueCards().length, freshAvail = newCards().length;
+    var avail = due + freshAvail;
+    var total = Math.min(sessionCap(), avail);
     $("startbtn").disabled = total === 0;
-    $("countnote").textContent = total ? (total + " card" + (total > 1 ? "s" : "") + " this session  ·  " + due + " due, " + fresh + " new") : "Nothing due — switch topic or come back tomorrow.";
+    var timeNote = sel.time ? ("  ·  " + sel.time + "-min limit") : "";
+    $("countnote").textContent = total ? (total + " card" + (total > 1 ? "s" : "") + " this session  ·  " + due + " due, " + freshAvail + " new available" + timeNote) : "Nothing here — switch topic or come back tomorrow.";
     var b = $("duebanner"), allDue = FC.filter(function (c) { return isDue(store()[c.id]); }).length;
     if (allDue > 0) { b.innerHTML = "🗓 <b>" + allDue + "</b> card" + (allDue > 1 ? "s" : "") + " due across all topics — tap to start"; b.classList.add("active"); }
     else { b.innerHTML = "✓ No reviews due — learn new cards below"; b.classList.remove("active"); }
@@ -61,13 +65,16 @@
   }
 
   // ---- session ----
+  function fmtClock(s) { s = Math.max(0, s); return Math.floor(s / 60) + ":" + (s % 60 < 10 ? "0" : "") + (s % 60); }
   function startSession() {
+    var s0 = store();
     var due = dueCards();
-    due.sort(function (a, b) { return (store()[a.id].due || 0) - (store()[b.id].due || 0); });
-    var fresh = newCards().slice(0, NEW_PER_DAY);
+    due.sort(function (a, b) { return (s0[a.id].due || 0) - (s0[b.id].due || 0); });
+    var fresh = shuffle(newCards());           // scramble new cards so "All" isn't shoulder-first
     var queue = due.concat(fresh);
+    if (sel.size !== "all") queue = queue.slice(0, sel.size);
     if (!queue.length) return;
-    sess = { queue: queue, i: 0, t0: Date.now(), again: 0, done: 0 };
+    sess = { queue: queue, i: 0, t0: Date.now(), again: 0, done: 0, limit: sel.time * 60 };
     $("start").classList.add("hidden"); $("summary").classList.add("hidden"); $("study").classList.remove("hidden");
     if (tickT) clearInterval(tickT);
     tickT = setInterval(tick, 1000);
@@ -76,7 +83,14 @@
   function tick() {
     if (!sess) return;
     var s = Math.round((Date.now() - sess.t0) / 1000);
-    $("ctimer").textContent = Math.floor(s / 60) + ":" + (s % 60 < 10 ? "0" : "") + (s % 60);
+    if (sess.limit) {
+      var left = sess.limit - s;
+      $("ctimer").textContent = "⏱ " + fmtClock(left);
+      $("ctimer").style.color = left <= 30 ? "#e2737a" : "";
+      if (left <= 0) { finish(); return; }
+    } else {
+      $("ctimer").textContent = fmtClock(s);
+    }
   }
   function renderCard() {
     var c = sess.queue[sess.i];
@@ -152,6 +166,18 @@
       var b = e.target.closest(".chip"); if (!b) return;
       sel.topic = b.getAttribute("data-topic");
       Array.prototype.forEach.call($("topics").children, function (x) { x.classList.toggle("sel", x === b); });
+      refreshStart();
+    });
+    $("sizes").addEventListener("click", function (e) {
+      var b = e.target.closest(".chip"); if (!b) return;
+      var v = b.getAttribute("data-size"); sel.size = v === "all" ? "all" : +v;
+      Array.prototype.forEach.call($("sizes").children, function (x) { x.classList.toggle("sel", x === b); });
+      refreshStart();
+    });
+    $("times").addEventListener("click", function (e) {
+      var b = e.target.closest(".chip"); if (!b) return;
+      sel.time = +b.getAttribute("data-time");
+      Array.prototype.forEach.call($("times").children, function (x) { x.classList.toggle("sel", x === b); });
       refreshStart();
     });
     $("startbtn").onclick = startSession;

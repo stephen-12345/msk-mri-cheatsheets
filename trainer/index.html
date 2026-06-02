@@ -208,6 +208,24 @@ textarea:focus{outline:none; border-color:var(--teal);}
     <button class="chip" data-diff="3">Hard</button>
   </div>
 
+  <div class="section-label">How many questions</div>
+  <div class="chiprow" id="sizes">
+    <button class="chip sel" data-size="auto">Default</button>
+    <button class="chip" data-size="10">10</button>
+    <button class="chip" data-size="20">20</button>
+    <button class="chip" data-size="30">30</button>
+    <button class="chip" data-size="all">All</button>
+  </div>
+
+  <div class="section-label">Time limit</div>
+  <div class="chiprow" id="times">
+    <button class="chip sel" data-time="0">No limit</button>
+    <button class="chip" data-time="3">3 min</button>
+    <button class="chip" data-time="5">5 min</button>
+    <button class="chip" data-time="10">10 min</button>
+    <button class="chip" data-time="15">15 min</button>
+  </div>
+
   <button class="startbtn" id="startbtn">Start session</button>
   <p class="countnote" id="countnote"></p>
 </section>

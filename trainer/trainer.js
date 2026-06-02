@@ -29,7 +29,7 @@
   }
 
   // ---------- state ----------
-  var sel = { mode: "dictate", joint: "all", diff: 0 };
+  var sel = { mode: "dictate", joint: "all", diff: 0, size: "auto", time: 0 };
   var session = { queue: [], i: 0, correct: 0, totalCov: 0, answered: 0, xpStart: 0 };
 
   // ---------- helpers ----------
@@ -119,8 +119,11 @@
   var EXAM_LEN = 15, EXAM_SECONDS = 12 * 60;
 
   function sessionLen(n) {
+    if (sel.mode === "exam") return Math.min(EXAM_LEN, n);   // exam is a fixed format
+    if (sel.size === "all") return n;
+    if (typeof sel.size === "number") return Math.min(sel.size, n);
+    // "auto" — per-mode defaults
     if (sel.mode === "lightning") return Math.min(10, n);
-    if (sel.mode === "exam") return Math.min(EXAM_LEN, n);
     if (sel.mode === "srs") return Math.min(20, n);
     return Math.min(12, n);
   }
@@ -135,7 +138,7 @@
       var len = sessionLen(n);
       var extra = sel.mode === "exam" ? "  ·  12-min timed exam, graded"
         : sel.mode === "srs" ? ("  ·  " + dueCount() + " due, " + newCount() + " new available")
-        : "";
+        : (sel.time > 0 ? ("  ·  " + sel.time + "-min limit") : "");
       note.textContent = len + " question" + (len > 1 ? "s" : "") + " this session  ·  " + n + " available" + extra;
     }
   }
@@ -159,19 +162,21 @@
     // prioritise unseen questions
     pool.sort(function (a, b) { return ((store.results[a.id] ? 1 : 0) - (store.results[b.id] ? 1 : 0)); });
     var len = sessionLen(pool.length);
-    session = { queue: pool.slice(0, len), i: 0, correct: 0, totalCov: 0, answered: 0, xpStart: store.xp, exam: sel.mode === "exam" };
+    var exam = sel.mode === "exam";
+    var timed = exam || sel.time > 0;
+    session = { queue: pool.slice(0, len), i: 0, correct: 0, totalCov: 0, answered: 0, xpStart: store.xp, exam: exam, timed: timed };
     $("start").classList.add("hidden");
     $("summary").classList.add("hidden");
     $("quiz").classList.remove("hidden");
     if (examTimer) { clearInterval(examTimer); examTimer = null; }
-    if (session.exam) {
-      session.examEnd = Date.now() + EXAM_SECONDS * 1000;
-      examTimer = setInterval(tickExam, 1000);
+    if (timed) {
+      session.endAt = Date.now() + (exam ? EXAM_SECONDS : sel.time * 60) * 1000;
+      examTimer = setInterval(tickTimer, 1000);
     }
     renderQuestion();
   }
-  function tickExam() {
-    var left = Math.max(0, Math.round((session.examEnd - Date.now()) / 1000));
+  function tickTimer() {
+    var left = Math.max(0, Math.round((session.endAt - Date.now()) / 1000));
     var el = $("examtime");
     if (el) {
       var m = Math.floor(left / 60), s = left % 60;
@@ -189,8 +194,8 @@
     $("qtopic").textContent = q.topic || "";
     $("qdiff").textContent = ["", "Easy", "Medium", "Hard"][q.difficulty || 1];
     $("qprog").innerHTML = (session.i + 1) + " / " + session.queue.length +
-      (session.exam ? ' &nbsp; <span id="examtime" style="font-weight:700">⏱ --:--</span>' : "");
-    if (session.exam) tickExam();
+      (session.timed ? ' &nbsp; <span id="examtime" style="font-weight:700">⏱ --:--</span>' : "");
+    if (session.timed) tickTimer();
     $("qprogfill").style.width = (session.i / session.queue.length * 100) + "%";
     var tl = { dictate: "Dictate It", mcq: "Term Match", cloze: "Fill the Blank" }[q.type];
     var te = $("qtypelabel"); te.textContent = tl; te.className = "qtype " + q.type;
@@ -374,6 +379,19 @@
       var b = e.target.closest(".chip"); if (!b) return;
       sel.diff = +b.getAttribute("data-diff");
       Array.prototype.forEach.call($("diffs").children, function (x) { x.classList.toggle("sel", x === b); });
+      refreshCount();
+    });
+    $("sizes").addEventListener("click", function (e) {
+      var b = e.target.closest(".chip"); if (!b) return;
+      var v = b.getAttribute("data-size");
+      sel.size = (v === "auto" || v === "all") ? v : +v;
+      Array.prototype.forEach.call($("sizes").children, function (x) { x.classList.toggle("sel", x === b); });
+      refreshCount();
+    });
+    $("times").addEventListener("click", function (e) {
+      var b = e.target.closest(".chip"); if (!b) return;
+      sel.time = +b.getAttribute("data-time");
+      Array.prototype.forEach.call($("times").children, function (x) { x.classList.toggle("sel", x === b); });
       refreshCount();
     });
     $("startbtn").onclick = startSession;
