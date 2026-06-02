@@ -14,9 +14,10 @@
   function stats() { try { return JSON.parse(localStorage.getItem("mskt-dx") || '{"best":0,"n":0,"correct":0}'); } catch (e) { return { best: 0, n: 0, correct: 0 }; } }
   function saveStats(s) { localStorage.setItem("mskt-dx", JSON.stringify(s)); }
 
-  var sel = { topic: "all", size: 15 };
+  var sel = { topic: "all", size: 15, mode: "dx" };
   var sess = null, tickT = null;
   function pool() { return FC.filter(function (c) { return sel.topic === "all" || c.joint === sel.topic; }); }
+  function entity(c) { return c.front.replace(/^How would you describe (a |an |the )?/i, "").replace(/\?$/, ""); }
 
   function topicChips() {
     var set = {}; FC.forEach(function (c) { set[c.joint] = 1; });
@@ -31,20 +32,25 @@
   }
   function hud() { var s = stats(); var acc = s.n ? Math.round(s.correct / s.n * 100) : 0; $("hudmeta").innerHTML = "🏆 <b>" + s.best + "</b> best · " + acc + "% all-time"; }
 
+  // text shown as each option, by mode: dx -> the diagnosis (impr); describe -> the findings line
+  function optText(c) { return sel.mode === "describe" ? c.find : c.impr; }
   function buildQueue() {
     var p = shuffle(pool());
     var n = Math.min(sel.size, p.length);
     return p.slice(0, n).map(function (card) {
-      // distractors: prefer same joint, fall back to any; unique impr text
-      var used = {}; used[norm(card.impr)] = 1;
-      var same = shuffle(FC.filter(function (c) { return c.joint === card.joint && !used[norm(c.impr)]; }));
-      var any = shuffle(FC.filter(function (c) { return !used[norm(c.impr)]; }));
+      var correctText = optText(card);
+      var used = {}; used[norm(correctText)] = 1;
+      var same = shuffle(FC.filter(function (c) { return c.joint === card.joint && !used[norm(optText(c))]; }));
+      var any = shuffle(FC.filter(function (c) { return !used[norm(optText(c))]; }));
       var distract = [];
       [same, any].forEach(function (list) {
-        list.forEach(function (c) { var k = norm(c.impr); if (distract.length < 3 && !used[k]) { used[k] = 1; distract.push(c.impr); } });
+        list.forEach(function (c) { var t = optText(c), k = norm(t); if (distract.length < 3 && !used[k]) { used[k] = 1; distract.push(t); } });
       });
-      var opts = shuffle([card.impr].concat(distract));
-      return { card: card, opts: opts, answer: opts.indexOf(card.impr) };
+      var opts = shuffle([correctText].concat(distract));
+      var stem = sel.mode === "describe"
+        ? { label: "Diagnosis", html: esc(entity(card)) }
+        : { label: card.topic || "Findings", html: ph(card.find) };
+      return { card: card, opts: opts, answer: opts.indexOf(correctText), stem: stem };
     });
   }
 
@@ -62,8 +68,8 @@
     $("qprog").textContent = (sess.i + 1) + " / " + sess.queue.length;
     $("qscore").textContent = "✓ " + sess.correct;
     $("qfill").style.width = (sess.i / sess.queue.length * 100) + "%";
-    $("stemtopic").textContent = q.card.topic || "Findings";
-    $("stemfind").innerHTML = ph(q.card.find);
+    $("stemtopic").textContent = q.stem.label;
+    $("stemfind").innerHTML = q.stem.html;
     $("opts").innerHTML = q.opts.map(function (o, i) {
       return '<button class="opt" data-i="' + i + '"><span class="k">' + "ABCD".charAt(i) + "</span><span>" + esc(o) + "</span></button>";
     }).join("");
@@ -85,8 +91,10 @@
     if (correct) sess.correct += 1;
     var fb = $("fb");
     fb.className = "fb show " + (correct ? "ok" : "no");
-    fb.innerHTML = (correct ? "✓ Correct — " : "✗ ") + '<span class="ent">' + esc(q.card.front.replace(/^How would you describe (a |an |the )?/i, "").replace(/\?$/, "")) + "</span>" +
-      (q.card.pearl ? '<div style="margin-top:7px;color:var(--tx2)">💡 ' + ph(q.card.pearl) + "</div>" : "");
+    var head = sel.mode === "describe"
+      ? (correct ? "✓ Correct" : "✗ Not quite — the highlighted line is how you'd dictate it")
+      : (correct ? "✓ Correct — " : "✗ ") + '<span class="ent">' + esc(entity(q.card)) + "</span>";
+    fb.innerHTML = head + (q.card.pearl ? '<div style="margin-top:7px;color:var(--tx2)">💡 ' + ph(q.card.pearl) + "</div>" : "");
     // persist lifetime stats
     var s = stats(); s.n += 1; if (correct) s.correct += 1; saveStats(s);
     $("nextbtn").classList.remove("hidden"); $("nextbtn").focus();
@@ -123,6 +131,7 @@
 
   function init() {
     topicChips();
+    $("modes").addEventListener("click", function (e) { var b = e.target.closest(".chip"); if (!b) return; sel.mode = b.getAttribute("data-mode"); Array.prototype.forEach.call($("modes").children, function (x) { x.classList.toggle("sel", x === b); }); refreshStart(); });
     $("topics").addEventListener("click", function (e) { var b = e.target.closest(".chip"); if (!b) return; sel.topic = b.getAttribute("data-topic"); Array.prototype.forEach.call($("topics").children, function (x) { x.classList.toggle("sel", x === b); }); refreshStart(); });
     $("sizes").addEventListener("click", function (e) { var b = e.target.closest(".chip"); if (!b) return; sel.size = +b.getAttribute("data-size"); Array.prototype.forEach.call($("sizes").children, function (x) { x.classList.toggle("sel", x === b); }); refreshStart(); });
     $("startbtn").onclick = start;

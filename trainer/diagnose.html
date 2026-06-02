@@ -74,8 +74,13 @@ h1{font-size:24px;color:#fff;margin:22px 0 6px}
 
 <main class="wrap">
 <section id="start">
-  <h1>Read the findings — name the diagnosis</h1>
-  <p class="lede">You're shown a real MRI findings dictation. Pick the diagnosis it describes. Trains the recognition direction — turning report language back into a diagnosis. <span class="kbd">1</span>–<span class="kbd">4</span> to answer, <span class="kbd">Space</span> for next.</p>
+  <h1>Findings ⇄ Diagnosis</h1>
+  <p class="lede">Train both directions of report language. <span class="kbd">1</span>–<span class="kbd">4</span> to answer, <span class="kbd">Space</span> for next.</p>
+  <div class="section-label">Direction</div>
+  <div class="chiprow" id="modes">
+    <button class="chip sel" data-mode="dx">🔎 Findings → Diagnosis</button>
+    <button class="chip" data-mode="describe">✍️ Diagnosis → Findings</button>
+  </div>
   <div class="section-label">Region</div>
   <div class="chiprow" id="topics"></div>
   <div class="section-label">How many</div>
