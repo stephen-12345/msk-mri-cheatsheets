@@ -338,6 +338,7 @@
       refreshCount();
     });
     $("startbtn").onclick = startSession;
+    window.addEventListener("msk-synced", updateHUD);  // refresh HUD after cloud merge
     refreshCount();
     updateHUD();
   }

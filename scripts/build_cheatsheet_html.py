@@ -751,7 +751,70 @@ SVG_ELBOW_UCL = '''<svg viewBox="0 0 540 350" role="img" aria-label="UCL anterio
   <text x="300" y="303" fill="#cdd6e2" font-size="10.5">= partial undersurface tear</text>
 </svg>'''
 
+SVG_FINGER_PULLEYS = '''<svg viewBox="0 0 560 300" role="img" aria-label="Flexor pulley system of the finger" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Arial,sans-serif">
+  <text x="280" y="24" text-anchor="middle" fill="#9fb4c6" font-size="12.5" font-weight="700" letter-spacing=".5">FLEXOR PULLEY SYSTEM (lateral finger)</text>
+  <rect x="60" y="92" width="70" height="34" rx="8" fill="#29323f" stroke="#47576c" stroke-width="2"/><text x="95" y="114" text-anchor="middle" fill="#8593a6" font-size="11">MC</text>
+  <rect x="150" y="92" width="130" height="34" rx="8" fill="#29323f" stroke="#47576c" stroke-width="2"/><text x="215" y="114" text-anchor="middle" fill="#8593a6" font-size="11">proximal phalanx</text>
+  <rect x="300" y="92" width="95" height="34" rx="8" fill="#29323f" stroke="#47576c" stroke-width="2"/><text x="347" y="114" text-anchor="middle" fill="#8593a6" font-size="11">middle</text>
+  <rect x="415" y="92" width="70" height="34" rx="8" fill="#29323f" stroke="#47576c" stroke-width="2"/><text x="450" y="114" text-anchor="middle" fill="#8593a6" font-size="10">distal</text>
+  <path d="M70 175 Q 280 168 480 175" fill="none" stroke="#cdd6e2" stroke-width="7" stroke-linecap="round"/>
+  <text x="500" y="179" fill="#8593a6" font-size="10">flexor tendon</text>
+  <g font-weight="700" font-size="12">
+    <path d="M128 135 Q 140 158 128 180" fill="none" stroke="#5fc6e6" stroke-width="4"/><text x="120" y="205" text-anchor="middle" fill="#8fe0f5">A1</text>
+    <path d="M205 132 Q 215 156 205 178" fill="none" stroke="#f3ad63" stroke-width="6"/><text x="205" y="205" text-anchor="middle" fill="#f7c389">A2</text>
+    <path d="M285 135 Q 295 157 285 179" fill="none" stroke="#5fc6e6" stroke-width="4"/><text x="290" y="205" text-anchor="middle" fill="#8fe0f5">A3</text>
+    <path d="M345 134 Q 355 157 345 179" fill="none" stroke="#f3ad63" stroke-width="6"/><text x="350" y="205" text-anchor="middle" fill="#f7c389">A4</text>
+    <path d="M418 137 Q 426 158 418 179" fill="none" stroke="#5fc6e6" stroke-width="4"/><text x="425" y="205" text-anchor="middle" fill="#8fe0f5">A5</text>
+  </g>
+  <text x="280" y="245" text-anchor="middle" fill="#f7c389" font-size="12.5" font-weight="700">A2 (proximal phalanx) &amp; A4 (middle phalanx) = critical pulleys</text>
+  <text x="280" y="266" text-anchor="middle" fill="#cdd6e2" font-size="11.5">rupture → bowstringing = increased tendon–bone distance</text>
+</svg>'''
+
+SVG_FOOT_LISFRANC = '''<svg viewBox="0 0 540 360" role="img" aria-label="Lisfranc tarsometatarsal complex" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Arial,sans-serif">
+  <text x="270" y="24" text-anchor="middle" fill="#9fb4c6" font-size="12.5" font-weight="700" letter-spacing=".5">LISFRANC (tarsometatarsal) COMPLEX — dorsal</text>
+  <rect x="70" y="150" width="70" height="40" rx="6" fill="#29323f" stroke="#47576c" stroke-width="2"/><text x="105" y="175" text-anchor="middle" fill="#8593a6" font-size="11">C1</text>
+  <rect x="70" y="120" width="62" height="28" rx="6" fill="#29323f" stroke="#47576c" stroke-width="2"/><text x="101" y="139" text-anchor="middle" fill="#8593a6" font-size="10">C2</text>
+  <rect x="70" y="92" width="58" height="26" rx="6" fill="#29323f" stroke="#47576c" stroke-width="2"/><text x="99" y="110" text-anchor="middle" fill="#8593a6" font-size="10">C3</text>
+  <rect x="70" y="196" width="64" height="50" rx="6" fill="#29323f" stroke="#47576c" stroke-width="2"/><text x="102" y="225" text-anchor="middle" fill="#8593a6" font-size="10">cuboid</text>
+  <rect x="170" y="150" width="40" height="80" rx="6" fill="#29323f" stroke="#47576c" stroke-width="2"/><text x="190" y="250" text-anchor="middle" fill="#8593a6" font-size="11">M1</text>
+  <rect x="158" y="116" width="36" height="78" rx="6" fill="#3a4658" stroke="#6cc6e6" stroke-width="2"/><text x="176" y="250" text-anchor="middle" fill="#8593a6" font-size="11">M2</text>
+  <rect x="150" y="90" width="34" height="72" rx="6" fill="#29323f" stroke="#47576c" stroke-width="2"/><text x="167" y="250" text-anchor="middle" fill="#8593a6" font-size="11">M3</text>
+  <rect x="146" y="196" width="34" height="50" rx="6" fill="#29323f" stroke="#47576c" stroke-width="2"/><text x="163" y="262" text-anchor="middle" fill="#8593a6" font-size="11">M4</text>
+  <rect x="118" y="220" width="36" height="46" rx="6" fill="#29323f" stroke="#47576c" stroke-width="2"/><text x="136" y="280" text-anchor="middle" fill="#8593a6" font-size="11">M5</text>
+  <line x1="138" y1="168" x2="160" y2="150" stroke="#ffd166" stroke-width="6" stroke-linecap="round"/>
+  <text x="250" y="150" fill="#ffd166" font-size="13" font-weight="700">Lisfranc ligament</text>
+  <text x="250" y="168" fill="#cdd6e2" font-size="11">medial cuneiform (C1) → base of 2nd MT (M2)</text>
+  <text x="250" y="208" fill="#8fe0f5" font-size="11.5" font-weight="700">M2 base is recessed = keystone</text>
+  <text x="250" y="226" fill="#cdd6e2" font-size="11">align medial M2 with medial C2; medial M4 with medial cuboid</text>
+  <text x="250" y="250" fill="#f7c389" font-size="11">"fleck sign" = avulsion in the C1–M2 interval</text>
+</svg>'''
+
+SVG_SHOULDER_LABRAL_CLOCK = '''<svg viewBox="0 0 400 380" role="img" aria-label="Glenoid labral clock-face" xmlns="http://www.w3.org/2000/svg" font-family="-apple-system,Segoe UI,Arial,sans-serif">
+  <text x="200" y="22" text-anchor="middle" fill="#9fb4c6" font-size="12.5" font-weight="700">GLENOID CLOCK-FACE (right, en-face)</text>
+  <circle cx="200" cy="200" r="120" fill="#10161f" stroke="#3a4658" stroke-width="2"/>
+  <path d="M200 80 A120 120 0 0 1 200 80" fill="none"/>
+  <path d="M152 88 A120 120 0 0 1 248 88" fill="none" stroke="#b69cf0" stroke-width="9" stroke-linecap="round"/>
+  <path d="M 312 248 A120 120 0 0 0 200 320" fill="none" stroke="#5fc6e6" stroke-width="9" stroke-linecap="round"/>
+  <path d="M 320 200 A120 120 0 0 0 312 248" fill="none" stroke="#5fc6e6" stroke-width="9" stroke-linecap="round"/>
+  <line x1="80" y1="200" x2="320" y2="200" stroke="#4a5870" stroke-width="1" stroke-dasharray="5 5"/>
+  <text x="200" y="70" text-anchor="middle" fill="#c9b6f5" font-size="12" font-weight="700">12 — biceps anchor (SLAP)</text>
+  <text x="338" y="200" text-anchor="start" fill="#8593a6" font-size="12" font-weight="700">3</text>
+  <text x="200" y="345" text-anchor="middle" fill="#8593a6" font-size="12" font-weight="700">6</text>
+  <text x="50" y="200" text-anchor="start" fill="#8593a6" font-size="12" font-weight="700">9</text>
+  <text x="356" y="270" text-anchor="end" fill="#8fe0f5" font-size="11.5" font-weight="700">3–6 anteroinferior</text>
+  <text x="352" y="286" text-anchor="end" fill="#8fe0f5" font-size="11">= Bankart zone</text>
+  <text x="200" y="222" text-anchor="middle" fill="#7d8a9c" font-size="10">equator (3↔9)</text>
+  <text x="36" y="150" fill="#9fb4c6" font-size="11" font-weight="700">ANT →</text>
+  <text x="330" y="150" fill="#9fb4c6" font-size="11" font-weight="700">← POST</text>
+</svg>'''
+
 DIAGRAMS = {
+    "finger-flexor-pulleys": (SVG_FINGER_PULLEYS,
+        "**Flexor pulley system.** Annular pulleys A1–A5 hold the flexor tendons against the phalanges. **A2 (proximal phalanx) and A4 (middle phalanx) are the critical pulleys** — rupture causes bowstringing (increased tendon–bone distance), the climber's injury."),
+    "foot-lisfranc": (SVG_FOOT_LISFRANC,
+        "**Lisfranc complex.** The Lisfranc ligament runs from the medial cuneiform (C1) to the base of the 2nd metatarsal (M2), which is recessed as a keystone. Check medial-M2/medial-C2 alignment; a **fleck sign** (avulsion in the C1–M2 interval) signals injury."),
+    "shoulder-labral-clock": (SVG_SHOULDER_LABRAL_CLOCK,
+        "**Glenoid clock-face.** 12 o'clock = biceps anchor (**SLAP** lesions); the **3–6 o'clock anteroinferior** quadrant is the **Bankart** zone. Localize every labral finding to a clock position and state laterality."),
     "shoulder-rotator-interval": (SVG_SHOULDER_ROTATOR_INTERVAL,
         "**Rotator interval.** The triangular gap between the **supraspinatus** (superior) and **subscapularis** (inferior); the **CHL + SGHL** form the pulley sling that stabilizes the long head of biceps (LHB) entering the groove."),
     "shoulder-cuff-footprints": (SVG_SHOULDER_FOOTPRINTS,

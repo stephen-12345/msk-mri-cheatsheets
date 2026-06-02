@@ -166,6 +166,7 @@ textarea:focus{outline:none; border-color:var(--teal);}
   <span class="lvlbadge" id="lvl">Lv 1</span>
   <span class="xpwrap"><span class="xpbar"><i id="xpfill"></i></span><span class="xptext" id="xptext">0 XP</span></span>
   <span class="stat">🔥 <b id="streak">0</b></span>
+  <button class="home" id="acct" type="button" style="cursor:pointer">☁︎ Sync</button>
   <a class="home" href="../index.html">All regions</a>
 </div></div>
 
@@ -231,6 +232,8 @@ textarea:focus{outline:none; border-color:var(--teal);}
 
 <script src="questions.js"></script>
 <script src="trainer.js"></script>
+<script src="firebase-config.js"></script>
+<script src="sync.js"></script>
 <script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}</script>
 </body>
 </html>

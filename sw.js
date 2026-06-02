@@ -6,7 +6,7 @@
      - Other assets (CSS, JS, icons, PDFs, MD) -> CACHE-FIRST with runtime caching,
        so the app still works offline.
    Bump CACHE on each meaningful change to purge the old cache. */
-const CACHE = 'msk-mri-v9';
+const CACHE = 'msk-mri-v10';
 
 const SHELL = [
   './',
@@ -19,6 +19,8 @@ const SHELL = [
   'trainer/index.html',
   'trainer/trainer.js',
   'trainer/questions.js',
+  'trainer/firebase-config.js',
+  'trainer/sync.js',
   'templates/index.html',
   'templates/engine.js',
   'templates/ankle.html',

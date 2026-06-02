@@ -295,6 +295,8 @@ A rapid self-check on the tendons, pulleys, and ligaments that make or break han
 > - ==Mallet finger = terminal (distal) extensor tendon injury at the DIP; boutonnière = central slip injury at the PIP== — distinct levels, distinct deformities.
 > - Sagittal band rupture (typically radial, long finger) = **boxer's knuckle**, allowing extensor tendon subluxation at the MCP.
 
+{{diagram:finger-flexor-pulleys}}
+
 ### Rapid review
 > [!QUIZ] A rock climber has pain and a palpable cord along the volar finger; MRI shows increased tendon–bone distance. Which structures are torn and what is the sign?
 > Rupture of the ==A2 and/or A4 flexor pulleys==, the biomechanically critical pulleys. Loss of pulley restraint allows ==bowstringing== — increased flexor ==tendon–bone distance==, best measured on sagittal/axial images in flexion. The classic "climber's finger."

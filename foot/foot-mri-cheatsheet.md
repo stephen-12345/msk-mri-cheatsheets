@@ -298,6 +298,8 @@ A rapid self-check on the highest-yield forefoot and midfoot pitfalls — Lisfra
 > - Sesamoid: distinguish ==bipartite== (smooth corticated margins) from fracture (sharp, non-corticated, marrow edema).
 > - ==Navicular & Jones (5th MT zone 2) are high-risk stress fractures== — watershed perfusion, prone to nonunion.
 
+{{diagram:foot-lisfranc}}
+
 ### Rapid review
 
 > [!QUIZ] What are the imaging hallmarks of a Lisfranc injury, and which finding confirms instability?

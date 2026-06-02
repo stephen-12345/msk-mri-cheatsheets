@@ -6003,5 +6003,1116 @@ window.TRAINER_QUESTIONS = [
 ],
 "explain": "Because the proximal pole has a tenuous retrograde supply, an avascular proximal pole nonunion is unlikely to heal with a conventional graft or casting; a vascularized bone graft supplies blood flow for union.",
 "id": 140
+},
+{
+"type": "dictate",
+"joint": "shoulder",
+"topic": "Mimics",
+"difficulty": 2,
+"prompt": "On an MR arthrogram, how do you describe a smooth recess at the 11–1 o'clock superior labrum so it is NOT over-called as a SLAP tear?",
+"model": "There is a smooth, regular sublabral recess at the superior labrum at the 12 o'clock position, with contrast insinuating between the labrum and glenoid rim in a medially-oriented direction that follows the contour of the glenoid. The recess has smooth margins, extends less than a few millimeters, does not extend posterior to the biceps anchor, and shows no lateral or irregular extension into the labral substance. These features are consistent with a normal sublabral recess rather than a SLAP tear.",
+"keyterms": [
+{
+"label": "sublabral recess",
+"patterns": [
+"sublabral\\s+recess",
+"superior\\s+sulcus"
+],
+"why": "Names the normal variant at the biceps-labral anchor."
+},
+{
+"label": "smooth margins",
+"patterns": [
+"smooth",
+"regular",
+"well[-\\s]?defined"
+],
+"why": "Smooth contour favors a recess over a tear."
+},
+{
+"label": "medial orientation",
+"patterns": [
+"medial",
+"follows\\s+the\\s+(glenoid\\s+)?contour",
+"parallel"
+],
+"why": "Recesses point medially/parallel to glenoid; SLAP tears extend laterally."
+},
+{
+"label": "12 o'clock location",
+"patterns": [
+"12\\s*o.?clock",
+"11.*1\\s*o.?clock",
+"superior"
+],
+"why": "Recess is at the superior labrum; tears extend posterior to biceps anchor."
+},
+{
+"label": "no lateral extension",
+"patterns": [
+"no\\s+lateral",
+"not\\s+lateral",
+"does\\s+not\\s+extend\\s+lateral"
+],
+"why": "Lateral/irregular extension would suggest a true SLAP tear."
+},
+{
+"label": "small size",
+"patterns": [
+"less\\s+than|<\\s*\\d",
+"few\\s+millimeters|small"
+],
+"why": "A deep, wide cleft (>3-5 mm) is more concerning for a tear."
+},
+{
+"label": "biceps anchor",
+"patterns": [
+"biceps\\s+anchor",
+"biceps[-\\s]labral"
+],
+"why": "SLAP tears involve and extend posterior to the biceps anchor."
+}
+],
+"id": 141
+},
+{
+"type": "dictate",
+"joint": "shoulder",
+"topic": "Mimics",
+"difficulty": 2,
+"prompt": "How do you dictate an absent anterosuperior labrum with a cord-like middle glenohumeral ligament so it is not mistaken for a labral tear?",
+"model": "At the anterosuperior quadrant there is congenital absence of the anterosuperior labrum associated with a thickened, cord-like middle glenohumeral ligament. There is no labral tear elsewhere and the remainder of the labrum is intact. These findings represent a Buford complex, a normal anatomic variant, and should not be mistaken for an anterosuperior labral tear or detachment.",
+"keyterms": [
+{
+"label": "Buford complex",
+"patterns": [
+"buford"
+],
+"why": "Names the recognized variant: absent AS labrum + cord-like MGHL."
+},
+{
+"label": "cord-like MGHL",
+"patterns": [
+"cord[-\\s]?like",
+"thickened\\s+middle\\s+glenohumeral",
+"cord[-\\s]?like\\s+MGHL"
+],
+"why": "The hallmark thick cord-like middle glenohumeral ligament."
+},
+{
+"label": "middle glenohumeral ligament",
+"patterns": [
+"middle\\s+glenohumeral",
+"MGHL"
+],
+"why": "The ligament involved in the complex."
+},
+{
+"label": "anterosuperior absence",
+"patterns": [
+"absen\\w+\\s+(of\\s+the\\s+)?anterosuperior",
+"anterosuperior\\s+labr\\w+\\s+absen"
+],
+"why": "The labrum is congenitally absent, not torn."
+},
+{
+"label": "normal variant",
+"patterns": [
+"normal\\s+(anatomic\\s+)?variant",
+"not\\s+a\\s+tear",
+"should\\s+not\\s+be\\s+mistaken"
+],
+"why": "Calling it a tear and repairing it can worsen stability."
+},
+{
+"label": "anterosuperior quadrant",
+"patterns": [
+"anterosuperior\\s+quadrant",
+"1.*3\\s*o.?clock"
+],
+"why": "Location of the variant; pathology elsewhere is still real."
+}
+],
+"id": 142
+},
+{
+"type": "dictate",
+"joint": "shoulder",
+"topic": "Mimics",
+"difficulty": 2,
+"prompt": "How do you describe a focal contrast cleft at the anterosuperior labrum (1–3 o'clock) so it is not called a Bankart-type detachment?",
+"model": "There is a smooth focal separation of the anterosuperior labrum from the glenoid at the 1 to 3 o'clock position, communicating with the subscapularis recess, with smooth margins and an intact, normally-attached labrum below the equator. The anteroinferior labrum is intact. This represents a normal sublabral foramen rather than a labral tear or Bankart lesion.",
+"keyterms": [
+{
+"label": "sublabral foramen",
+"patterns": [
+"sublabral\\s+foramen",
+"sublabral\\s+hole"
+],
+"why": "Names the normal AS labral detachment variant."
+},
+{
+"label": "anterosuperior location",
+"patterns": [
+"anterosuperior",
+"1.*3\\s*o.?clock"
+],
+"why": "Foramen is confined to AS quadrant, above the equator."
+},
+{
+"label": "above the equator",
+"patterns": [
+"above\\s+the\\s+equator",
+"superior\\s+to\\s+the\\s+(glenoid\\s+)?equator",
+"not\\s+below"
+],
+"why": "Detachment below the equator/3 o'clock is pathologic."
+},
+{
+"label": "smooth margins",
+"patterns": [
+"smooth",
+"regular",
+"well[-\\s]?defined"
+],
+"why": "Smooth edges favor a variant over a tear."
+},
+{
+"label": "intact anteroinferior labrum",
+"patterns": [
+"anteroinferior\\s+labr\\w+\\s+(is\\s+)?intact",
+"inferior\\s+labrum\\s+intact"
+],
+"why": "A true Bankart involves the anteroinferior labrum."
+},
+{
+"label": "subscapularis recess",
+"patterns": [
+"subscapular\\w*\\s+recess",
+"communicat"
+],
+"why": "Foramen communicates with the subscapularis recess."
+}
+],
+"id": 143
+},
+{
+"type": "dictate",
+"joint": "shoulder",
+"topic": "Mimics",
+"difficulty": 1,
+"prompt": "How do you describe the bare area of the humeral head so it is not called a chondral defect or osteochondral lesion?",
+"model": "At the posterosuperolateral humeral head there is a normal bare area with mild cortical irregularity and thin overlying cartilage just above the level of the surgical neck. This is the normal bare area of the humeral head and should not be mistaken for a Hill-Sachs lesion or an osteochondral defect; it is well above the typical Hill-Sachs location and present bilaterally.",
+"keyterms": [
+{
+"label": "bare area",
+"patterns": [
+"bare\\s+area"
+],
+"why": "Names the normal cartilage-deficient zone."
+},
+{
+"label": "posterosuperolateral",
+"patterns": [
+"posterosuperolateral",
+"posterolateral\\s+humeral"
+],
+"why": "The bare area lies posterolaterally on the head."
+},
+{
+"label": "not Hill-Sachs",
+"patterns": [
+"not\\s+a\\s+Hill[-\\s]?Sachs",
+"Hill[-\\s]?Sachs",
+"above\\s+the\\s+typical"
+],
+"why": "Located above the true Hill-Sachs level."
+},
+{
+"label": "cortical irregularity",
+"patterns": [
+"cortical\\s+irregularity",
+"irregular\\w*",
+"groove"
+],
+"why": "Normal irregularity here mimics an impaction injury."
+},
+{
+"label": "normal variant",
+"patterns": [
+"normal",
+"physiologic",
+"should\\s+not\\s+be\\s+mistaken"
+],
+"why": "Bilateral and reproducible favors a normal finding."
+}
+],
+"id": 144
+},
+{
+"type": "dictate",
+"joint": "knee",
+"topic": "Mimics",
+"difficulty": 2,
+"prompt": "How do you describe the anterior transverse intermeniscal ligament so it is not called an anterior horn lateral meniscus tear?",
+"model": "There is a normal transverse (intermeniscal) ligament coursing anteriorly between the anterior horns of the medial and lateral menisci. At its insertion onto the anterior horn of the lateral meniscus there is a small cleft of fat/fluid signal at the ligament-meniscus junction, which is a normal pseudotear and should not be mistaken for an anterior horn tear. The ligament is followed on contiguous slices to confirm its course.",
+"keyterms": [
+{
+"label": "transverse ligament",
+"patterns": [
+"transverse\\s+(intermeniscal\\s+)?ligament",
+"intermeniscal\\s+ligament"
+],
+"why": "Names the structure crossing the anterior knee."
+},
+{
+"label": "pseudotear",
+"patterns": [
+"pseudo[-\\s]?tear",
+"pseudotear",
+"mimic"
+],
+"why": "The junctional cleft mimics an anterior horn tear."
+},
+{
+"label": "anterior horn lateral meniscus",
+"patterns": [
+"anterior\\s+horn.*lateral",
+"lateral\\s+meniscus\\s+anterior\\s+horn"
+],
+"why": "The classic site of the pseudotear."
+},
+{
+"label": "ligament-meniscus junction",
+"patterns": [
+"junction",
+"insertion",
+"attach\\w+"
+],
+"why": "The cleft is at the attachment, not within the meniscus."
+},
+{
+"label": "trace on contiguous slices",
+"patterns": [
+"contiguous\\s+slices",
+"adjacent\\s+slices",
+"followed|traced|track"
+],
+"why": "Tracing the ligament confirms the variant."
+},
+{
+"label": "normal",
+"patterns": [
+"normal",
+"not\\s+a\\s+tear"
+],
+"why": "Avoids over-calling a meniscal tear anteriorly."
+}
+],
+"id": 145
+},
+{
+"type": "dictate",
+"joint": "knee",
+"topic": "Mimics",
+"difficulty": 2,
+"prompt": "How do you describe the meniscofemoral ligaments near the posterior horn of the lateral meniscus so they are not called a tear?",
+"model": "There is a normal meniscofemoral ligament — the ligament of Humphrey anterior to the PCL and/or the ligament of Wrisberg posterior to the PCL — arising from the posterior horn of the lateral meniscus and inserting on the medial femoral condyle. A thin cleft of fluid signal between the ligament and the adjacent posterior horn is a normal pseudotear at the attachment and should not be mistaken for a posterior horn lateral meniscus tear.",
+"keyterms": [
+{
+"label": "meniscofemoral ligament",
+"patterns": [
+"meniscofemoral\\s+ligament"
+],
+"why": "The parent structure causing the pseudotear."
+},
+{
+"label": "Humphrey",
+"patterns": [
+"humphrey",
+"humphry"
+],
+"why": "Anterior meniscofemoral ligament, anterior to PCL."
+},
+{
+"label": "Wrisberg",
+"patterns": [
+"wrisberg"
+],
+"why": "Posterior meniscofemoral ligament, posterior to PCL."
+},
+{
+"label": "relation to PCL",
+"patterns": [
+"anterior\\s+to\\s+the\\s+PCL",
+"posterior\\s+to\\s+the\\s+PCL",
+"PCL"
+],
+"why": "Defines which ligament you are naming."
+},
+{
+"label": "posterior horn lateral meniscus",
+"patterns": [
+"posterior\\s+horn.*lateral",
+"lateral\\s+meniscus\\s+posterior\\s+horn"
+],
+"why": "Site where the pseudotear is over-called."
+},
+{
+"label": "pseudotear",
+"patterns": [
+"pseudo[-\\s]?tear",
+"pseudotear",
+"not\\s+a\\s+tear"
+],
+"why": "The junctional cleft mimics a tear."
+}
+],
+"id": 146
+},
+{
+"type": "dictate",
+"joint": "knee",
+"topic": "Mimics",
+"difficulty": 2,
+"prompt": "How do you describe the popliteomeniscal fascicles and popliteus hiatus so they are not over-called as a posterior horn lateral meniscus tear?",
+"model": "At the popliteus hiatus the popliteomeniscal fascicles are seen attaching the posterior horn of the lateral meniscus, with the popliteus tendon coursing through its sheath within the hiatus. The fluid-filled hiatus and the obliquely-oriented fascicles produce normal linear signal abutting the meniscus and should not be mistaken for a posterior horn tear. There is no meniscal substance signal reaching the articular surface and the meniscal contour is preserved.",
+"keyterms": [
+{
+"label": "popliteomeniscal fascicles",
+"patterns": [
+"popliteomeniscal\\s+fascicl\\w+",
+"popliteal\\s+fascicl\\w+"
+],
+"why": "Normal attachments that mimic a tear."
+},
+{
+"label": "popliteus hiatus",
+"patterns": [
+"popliteus\\s+hiatus",
+"popliteal\\s+hiatus"
+],
+"why": "Fluid-filled hiatus simulates a cleft."
+},
+{
+"label": "popliteus tendon",
+"patterns": [
+"popliteus\\s+tendon"
+],
+"why": "The tendon and its sheath occupy the hiatus."
+},
+{
+"label": "posterior horn lateral meniscus",
+"patterns": [
+"posterior\\s+horn.*lateral",
+"lateral\\s+meniscus\\s+posterior\\s+horn"
+],
+"why": "Classic over-call location."
+},
+{
+"label": "no surface extension",
+"patterns": [
+"does\\s+not\\s+reach\\s+the\\s+(articular\\s+)?surface",
+"no\\s+(signal|extension)\\s+to\\s+the\\s+surface",
+"contour\\s+(is\\s+)?preserved"
+],
+"why": "A true tear reaches an articular surface."
+},
+{
+"label": "normal",
+"patterns": [
+"normal",
+"not\\s+a\\s+tear"
+],
+"why": "Avoids over-calling."
+}
+],
+"id": 147
+},
+{
+"type": "dictate",
+"joint": "knee",
+"topic": "Mimics",
+"difficulty": 1,
+"prompt": "How do you describe meniscal flounce so it is not reported as a tear or displaced fragment?",
+"model": "There is a smooth, undulating fold of the free edge of the medial meniscus, with normal internal meniscal signal and intact margins. This is a meniscal flounce, a normal redundant folding of the meniscus seen in extension, and is not associated with an underlying tear; no surfacing signal or displaced fragment is identified.",
+"keyterms": [
+{
+"label": "meniscal flounce",
+"patterns": [
+"flounce"
+],
+"why": "Names the normal undulating fold."
+},
+{
+"label": "smooth undulation",
+"patterns": [
+"undulat\\w+",
+"fold",
+"wav\\w+",
+"ruffl\\w+"
+],
+"why": "Smooth folding distinguishes it from a tear."
+},
+{
+"label": "free edge",
+"patterns": [
+"free\\s+edge",
+"inner\\s+(free\\s+)?margin"
+],
+"why": "Flounce involves the inner free margin."
+},
+{
+"label": "medial meniscus",
+"patterns": [
+"medial\\s+meniscus"
+],
+"why": "Most commonly seen medially."
+},
+{
+"label": "no surfacing signal",
+"patterns": [
+"no\\s+surfac\\w+\\s+signal",
+"normal\\s+(internal\\s+)?signal",
+"intact"
+],
+"why": "Normal signal excludes a tear."
+},
+{
+"label": "not a tear",
+"patterns": [
+"not\\s+a\\s+tear",
+"normal"
+],
+"why": "Avoids over-calling a tear/fragment."
+}
+],
+"id": 148
+},
+{
+"type": "dictate",
+"joint": "ankle",
+"topic": "Mimics",
+"difficulty": 2,
+"prompt": "How do you describe a well-corticated ossicle behind the talus so it is not called a fracture (and distinguish it from a Stieda process)?",
+"model": "Posterior to the talus there is a well-corticated, rounded ossicle with smooth margins separated from the posterolateral talar process by a smooth corticated cleft, without marrow edema. This is consistent with an os trigonum (an unfused ossification center) rather than an acute fracture. A Stieda process would be an elongated posterolateral talar process in bony continuity with the talus; here the corticated separation favors an os trigonum, though it may become symptomatic in os trigonum syndrome.",
+"keyterms": [
+{
+"label": "os trigonum",
+"patterns": [
+"os\\s+trigonum"
+],
+"why": "Names the accessory ossicle behind the talus."
+},
+{
+"label": "well-corticated",
+"patterns": [
+"well[-\\s]?cortic\\w+",
+"corticated\\s+margins",
+"smooth\\s+cortex"
+],
+"why": "Corticated margins distinguish it from acute fracture."
+},
+{
+"label": "Stieda process",
+"patterns": [
+"stieda"
+],
+"why": "Elongated talar process in continuity—the key DDx."
+},
+{
+"label": "posterolateral talus",
+"patterns": [
+"posterolateral\\s+(talar|talus)\\s*(process)?",
+"posterior\\s+to\\s+the\\s+talus"
+],
+"why": "The relevant location."
+},
+{
+"label": "no marrow edema",
+"patterns": [
+"no\\s+marrow\\s+edema",
+"without\\s+edema",
+"no\\s+bone\\s+marrow\\s+edema"
+],
+"why": "Edema would suggest fracture or os trigonum syndrome."
+},
+{
+"label": "corticated cleft",
+"patterns": [
+"corticated\\s+(cleft|separation|synchondrosis)",
+"synchondrosis",
+"smooth\\s+(cleft|separation)"
+],
+"why": "A smooth synchondrosis favors a variant over a fracture line."
+}
+],
+"id": 149
+},
+{
+"type": "dictate",
+"joint": "foot",
+"topic": "Mimics",
+"difficulty": 2,
+"prompt": "How do you describe an accessory navicular at the PTT insertion so it is not over-called and the type is specified?",
+"model": "There is an accessory ossicle at the medial aspect of the navicular at the posterior tibial tendon insertion, separated from the navicular tuberosity by a corticated synchondrosis. This is a type II accessory navicular (os naviculare); a type I is a small separate sesamoid within the PTT, and a type III (cornuate navicular) is fused. Marrow edema across the synchondrosis would suggest a symptomatic/stressed synchondrosis rather than a normal incidental variant.",
+"keyterms": [
+{
+"label": "accessory navicular",
+"patterns": [
+"accessory\\s+navicular",
+"os\\s+naviculare",
+"os\\s+tibiale\\s+externum"
+],
+"why": "Names the variant at the PTT insertion."
+},
+{
+"label": "type II",
+"patterns": [
+"type\\s*(II|2)\\b"
+],
+"why": "Type II has a synchondrosis and is most often symptomatic."
+},
+{
+"label": "synchondrosis",
+"patterns": [
+"synchondrosis",
+"corticated\\s+(cleft|junction)",
+"cartilaginous\\s+junction"
+],
+"why": "The fibrocartilaginous junction defines type II."
+},
+{
+"label": "posterior tibial tendon",
+"patterns": [
+"posterior\\s+tibial\\s+tendon",
+"PTT"
+],
+"why": "The PTT inserts at/near the accessory navicular."
+},
+{
+"label": "marrow edema if symptomatic",
+"patterns": [
+"marrow\\s+edema",
+"edema\\s+across\\s+the\\s+synchondrosis",
+"stress"
+],
+"why": "Edema indicates a stressed/symptomatic synchondrosis."
+},
+{
+"label": "navicular tuberosity",
+"patterns": [
+"navicular\\s+tuberosity",
+"medial\\s+(aspect\\s+of\\s+the\\s+)?navicular"
+],
+"why": "Location of the ossicle."
+}
+],
+"id": 150
+},
+{
+"type": "dictate",
+"joint": "foot",
+"topic": "Mimics",
+"difficulty": 1,
+"prompt": "How do you describe the os peroneum so it is not mistaken for an avulsion fracture or intratendinous tear?",
+"model": "There is a well-corticated ossicle within the peroneus longus tendon at the level of the cuboid/calcaneocuboid groove, consistent with a normal os peroneum. It has smooth corticated margins without marrow edema or tendon fiber disruption. Migration, fragmentation, or a wide diastasis would raise concern for the painful os peroneum syndrome or peroneus longus tear.",
+"keyterms": [
+{
+"label": "os peroneum",
+"patterns": [
+"os\\s+peroneum"
+],
+"why": "Names the sesamoid in peroneus longus."
+},
+{
+"label": "peroneus longus",
+"patterns": [
+"peroneus\\s+longus"
+],
+"why": "The os peroneum lies within this tendon."
+},
+{
+"label": "cuboid groove",
+"patterns": [
+"cuboid",
+"calcaneocuboid",
+"cuboid\\s+(groove|tunnel)"
+],
+"why": "Typical location at the lateral cuboid."
+},
+{
+"label": "well-corticated",
+"patterns": [
+"well[-\\s]?cortic\\w+",
+"smooth\\s+cortex",
+"corticated\\s+margins"
+],
+"why": "Corticated favors a normal sesamoid over avulsion."
+},
+{
+"label": "no fiber disruption",
+"patterns": [
+"no\\s+(tendon\\s+)?fiber\\s+disruption",
+"intact\\s+tendon",
+"no\\s+tear"
+],
+"why": "Excludes intratendinous tear."
+},
+{
+"label": "os peroneum syndrome",
+"patterns": [
+"os\\s+peroneum\\s+syndrome",
+"migrat\\w+",
+"diastasis|fragment"
+],
+"why": "Migration/fragmentation indicates pathology."
+}
+],
+"id": 151
+},
+{
+"type": "dictate",
+"joint": "ankle",
+"topic": "Mimics",
+"difficulty": 3,
+"prompt": "How do you describe increased signal in the peroneal/posterior tibial tendons that is due to magic-angle so it is not called tendinosis or a tear?",
+"model": "There is mildly increased intratendinous signal in the peroneal tendons as they curve around the lateral malleolus, seen on the short-TE (T1/proton-density) sequence where the tendon lies near 55 degrees to the main magnetic field. The signal resolves on the long-TE (T2) sequence and there is no tendon thickening or fiber discontinuity. This is magic-angle artifact and should not be mistaken for tendinosis or a tear.",
+"keyterms": [
+{
+"label": "magic-angle",
+"patterns": [
+"magic[-\\s]?angle"
+],
+"why": "Names the artifact causing intratendinous signal."
+},
+{
+"label": "55 degrees",
+"patterns": [
+"55\\s*(degrees|°)",
+"fifty[-\\s]?five"
+],
+"why": "Signal peaks where the tendon is ~55° to B0."
+},
+{
+"label": "short-TE only",
+"patterns": [
+"short[-\\s]?TE",
+"T1|proton[-\\s]?density|PD",
+"low\\s+TE"
+],
+"why": "Artifact appears on short-TE sequences."
+},
+{
+"label": "resolves on T2",
+"patterns": [
+"resolves?\\s+on\\s+(the\\s+)?(long[-\\s]?TE|T2)",
+"long[-\\s]?TE",
+"disappears\\s+on\\s+T2"
+],
+"why": "Resolution on long-TE confirms artifact."
+},
+{
+"label": "curving tendon",
+"patterns": [
+"curv\\w+",
+"around\\s+the\\s+(lateral\\s+)?malleolus",
+"retromalleolar"
+],
+"why": "Curvature places fibers near 55°."
+},
+{
+"label": "no thickening or discontinuity",
+"patterns": [
+"no\\s+thickening",
+"no\\s+(fiber\\s+)?discontinuity",
+"normal\\s+caliber"
+],
+"why": "Real tendinosis/tear thickens or disrupts fibers."
+}
+],
+"id": 152
+},
+{
+"type": "dictate",
+"joint": "elbow",
+"topic": "Mimics",
+"difficulty": 2,
+"prompt": "How do you describe the pseudodefect of the capitellum so it is not called an osteochondral lesion?",
+"model": "At the posterolateral margin of the capitellum, at the junction of the capitellum and the lateral epicondyle, there is a normal abrupt change in contour (a groove between the articular capitellum and the non-articular lateral epicondyle) with intact overlying cartilage and no marrow edema. This is the normal pseudodefect of the capitellum and should not be mistaken for an osteochondral defect or osteochondritis dissecans, which characteristically involves the anterior/central capitellum.",
+"keyterms": [
+{
+"label": "pseudodefect of the capitellum",
+"patterns": [
+"pseudo[-\\s]?defect.*capitell\\w+",
+"capitell\\w+.*pseudo[-\\s]?defect"
+],
+"why": "Names the normal posterolateral contour change."
+},
+{
+"label": "posterolateral capitellum",
+"patterns": [
+"posterolateral\\s+capitell\\w+",
+"junction.*lateral\\s+epicondyle"
+],
+"why": "The pseudodefect lies posterolaterally."
+},
+{
+"label": "not OCD",
+"patterns": [
+"not\\s+(an\\s+)?(osteochondr\\w+|OCD)",
+"osteochondritis\\s+dissecans",
+"osteochondral\\s+(defect|lesion)"
+],
+"why": "True OCD involves anterior/central capitellum."
+},
+{
+"label": "intact cartilage",
+"patterns": [
+"intact\\s+(overlying\\s+)?cartilage",
+"cartilage\\s+(is\\s+)?intact"
+],
+"why": "Preserved cartilage favors a variant."
+},
+{
+"label": "no marrow edema",
+"patterns": [
+"no\\s+marrow\\s+edema",
+"without\\s+edema"
+],
+"why": "Edema would suggest a true osteochondral lesion."
+},
+{
+"label": "anterior/central is real",
+"patterns": [
+"anterior.*central",
+"central.*capitell\\w+",
+"mid[-\\s]?capitell\\w+"
+],
+"why": "Real OCD is anterior/central, not posterolateral."
+}
+],
+"id": 153
+},
+{
+"type": "dictate",
+"joint": "elbow",
+"topic": "Mimics",
+"difficulty": 2,
+"prompt": "How do you describe the trochlear groove/pseudodefect and normal trochlear notch so they are not called erosions?",
+"model": "There is a normal transverse trochlear groove (the bare area of the trochlear notch dividing it into anterior and posterior facets) with smooth corticated margins and intact adjacent cartilage. This is a normal anatomic bare area, not an erosion or osteochondral lesion. No marrow edema or subchondral cyst is present.",
+"keyterms": [
+{
+"label": "trochlear groove",
+"patterns": [
+"trochlear\\s+(groove|notch)",
+"transverse\\s+trochlear"
+],
+"why": "Names the normal bare area dividing the notch."
+},
+{
+"label": "bare area",
+"patterns": [
+"bare\\s+area"
+],
+"why": "Cartilage-deficient zone that mimics erosion."
+},
+{
+"label": "anterior and posterior facets",
+"patterns": [
+"anterior\\s+and\\s+posterior\\s+facet",
+"two\\s+facets",
+"facets"
+],
+"why": "The groove separates the two articular facets."
+},
+{
+"label": "smooth cortex",
+"patterns": [
+"smooth\\s+cortic\\w+",
+"corticated",
+"well[-\\s]?defined"
+],
+"why": "Smooth margins favor a variant over an erosion."
+},
+{
+"label": "not an erosion",
+"patterns": [
+"not\\s+an\\s+erosion",
+"no\\s+erosion",
+"not.*osteochondral"
+],
+"why": "Avoids over-calling inflammatory erosion."
+},
+{
+"label": "no marrow edema",
+"patterns": [
+"no\\s+marrow\\s+edema",
+"no\\s+subchondral\\s+(cyst|edema)"
+],
+"why": "Absence of edema/cyst supports normal."
+}
+],
+"id": 154
+},
+{
+"type": "dictate",
+"joint": "wrist",
+"topic": "Mimics",
+"difficulty": 2,
+"prompt": "How do you describe age-related central TFCC thinning so it is not over-called as a traumatic perforation?",
+"model": "There is thinning with intermediate signal at the central/radial portion of the triangular fibrocartilage articular disc, without fluid-signal full-thickness defect and with smooth margins. In a patient of this age, this is consistent with degenerative/age-related central TFCC thinning (a Palmer 2 degenerative spectrum / normal aging change) rather than an acute traumatic (Palmer 1) peripheral perforation; the peripheral/ulnar attachments are intact.",
+"keyterms": [
+{
+"label": "central TFCC thinning",
+"patterns": [
+"central\\s+TFCC",
+"central.*triangular\\s+fibrocartilage",
+"central\\s+disc"
+],
+"why": "Age-related thinning occurs centrally/radially."
+},
+{
+"label": "degenerative/age-related",
+"patterns": [
+"degenerative",
+"age[-\\s]?related",
+"aging"
+],
+"why": "Central thinning is degenerative, not traumatic."
+},
+{
+"label": "peripheral attachments intact",
+"patterns": [
+"peripher\\w+.*intact",
+"ulnar\\s+(attachment|insertion).*intact",
+"foveal\\s+attachment"
+],
+"why": "Traumatic tears typically affect the periphery."
+},
+{
+"label": "no full-thickness fluid defect",
+"patterns": [
+"no\\s+full[-\\s]?thickness",
+"no\\s+fluid[-\\s]?signal\\s+defect",
+"no\\s+perforation"
+],
+"why": "A discrete fluid-filled defect suggests a true tear."
+},
+{
+"label": "Palmer classification",
+"patterns": [
+"palmer",
+"class\\s*(1|2|I|II)"
+],
+"why": "Palmer 1 traumatic vs Palmer 2 degenerative."
+},
+{
+"label": "triangular fibrocartilage",
+"patterns": [
+"triangular\\s+fibrocartilage",
+"TFCC",
+"articular\\s+disc"
+],
+"why": "The structure in question."
+}
+],
+"id": 155
+},
+{
+"type": "mcq",
+"joint": "shoulder",
+"topic": "Mimics",
+"difficulty": 1,
+"prompt": "On MR arthrography, which feature most favors a normal sublabral recess over a SLAP tear?",
+"choices": [
+"Contrast extending laterally into the labral substance",
+"A smooth, medially-oriented cleft following the glenoid contour at 12 o'clock",
+"Extension posterior to the biceps anchor",
+"Irregular margins with a paralabral cyst"
+],
+"answer": 1,
+"explain": "A sublabral recess is smooth and medially oriented, paralleling the glenoid at the superior labrum. Lateral extension, posterior-to-anchor extension, irregular margins, or a paralabral cyst favor a true SLAP tear.",
+"id": 156
+},
+{
+"type": "mcq",
+"joint": "shoulder",
+"topic": "Mimics",
+"difficulty": 1,
+"prompt": "A Buford complex consists of which two findings?",
+"choices": [
+"Absent anteroinferior labrum and torn IGHL",
+"Cord-like middle glenohumeral ligament and congenital absence of the anterosuperior labrum",
+"Thickened biceps anchor and SLAP tear",
+"Sublabral foramen and a Bankart lesion"
+],
+"answer": 1,
+"explain": "A Buford complex is a cord-like MGHL with congenital absence of the anterosuperior labrum. Mistaking it for a tear and surgically repairing it can compromise motion/stability.",
+"id": 157
+},
+{
+"type": "mcq",
+"joint": "knee",
+"topic": "Mimics",
+"difficulty": 1,
+"prompt": "A cleft of signal at the anterior horn of the lateral meniscus that turns out to be normal is most often caused by the insertion of which structure?",
+"choices": [
+"Anterior cruciate ligament",
+"Transverse (intermeniscal) ligament",
+"Popliteus tendon",
+"Fabella"
+],
+"answer": 1,
+"explain": "The transverse intermeniscal ligament inserts on the anterior horn of the lateral meniscus, creating a junctional pseudotear. Tracing the ligament on contiguous slices confirms the variant.",
+"id": 158
+},
+{
+"type": "mcq",
+"joint": "knee",
+"topic": "Mimics",
+"difficulty": 2,
+"prompt": "The ligament of Humphrey and the ligament of Wrisberg are distinguished by their relationship to which structure?",
+"choices": [
+"The ACL",
+"The PCL",
+"The medial collateral ligament",
+"The patellar tendon"
+],
+"answer": 1,
+"explain": "Both are meniscofemoral ligaments from the posterior horn of the lateral meniscus to the medial femoral condyle. Humphrey runs anterior to the PCL; Wrisberg runs posterior to it. Both can mimic a posterior horn tear.",
+"id": 159
+},
+{
+"type": "mcq",
+"joint": "ankle",
+"topic": "Mimics",
+"difficulty": 1,
+"prompt": "What best distinguishes an os trigonum from a Stieda process?",
+"choices": [
+"An os trigonum is anterior to the talus",
+"A Stieda process is a separate ossicle with a corticated cleft",
+"An os trigonum is a separate ossicle, whereas a Stieda process is an elongated posterolateral talar process in bony continuity with the talus",
+"Only the os trigonum can ever be symptomatic"
+],
+"answer": 2,
+"explain": "An os trigonum is a separate, corticated ossicle (unfused ossification center); a Stieda process is an elongated posterolateral talar process continuous with the talus. Either can cause posterior impingement.",
+"id": 160
+},
+{
+"type": "mcq",
+"joint": "foot",
+"topic": "Mimics",
+"difficulty": 2,
+"prompt": "Which type of accessory navicular has a synchondrosis with the navicular and is most often symptomatic?",
+"choices": [
+"Type I (os tibiale externum within the PTT)",
+"Type II",
+"Type III (cornuate navicular)",
+"All types are fused"
+],
+"answer": 1,
+"explain": "Type II accessory navicular connects to the tuberosity via a fibrocartilaginous synchondrosis and is the type most prone to symptoms; marrow edema across the synchondrosis suggests it is the pain source.",
+"id": 161
+},
+{
+"type": "mcq",
+"joint": "general",
+"topic": "Mimics",
+"difficulty": 2,
+"prompt": "Magic-angle artifact in tendons is best characterized by which combination?",
+"choices": [
+"High signal on long-TE images that persists on all sequences",
+"Increased signal on short-TE (low-TE) images when the tendon lies near 55 degrees to B0, resolving on T2",
+"Signal only when the tendon is parallel to B0",
+"Tendon thickening with fiber disruption"
+],
+"answer": 1,
+"explain": "Magic-angle artifact produces increased intratendinous signal on short-TE (T1/PD) sequences when collagen fibers are oriented ~55 degrees to the main field; it resolves on long-TE (T2) images and lacks thickening or fiber disruption.",
+"id": 162
+},
+{
+"type": "mcq",
+"joint": "elbow",
+"topic": "Mimics",
+"difficulty": 2,
+"prompt": "The pseudodefect of the capitellum is located where, and how is it distinguished from osteochondritis dissecans?",
+"choices": [
+"Anterior capitellum; OCD is posterior",
+"Posterolateral capitellum at the capitellum-lateral epicondyle junction; true OCD involves the anterior/central capitellum",
+"Central capitellum; identical to OCD",
+"Radial head; OCD spares cartilage"
+],
+"answer": 1,
+"explain": "The pseudodefect is a normal contour change at the posterolateral capitellum (junction with the non-articular lateral epicondyle). OCD characteristically involves the anterior/central capitellum and shows marrow edema and cartilage abnormality.",
+"id": 163
+},
+{
+"type": "cloze",
+"joint": "hip",
+"topic": "Mimics",
+"difficulty": 2,
+"prompt": "A small subcortical lucency/cyst at the anterosuperior femoral head-neck junction, often associated with cam-type morphology, is called a herniation ___.",
+"answers": [
+"pit",
+"herniation pit"
+],
+"explain": "A herniation pit (fibrocystic change) is a well-corticated subcortical lucency at the anterosuperior head-neck junction; it can be incidental but is associated with FAI/cam morphology and should not be mistaken for an aggressive lesion.",
+"id": 164
+},
+{
+"type": "cloze",
+"joint": "hip",
+"topic": "Mimics",
+"difficulty": 2,
+"prompt": "A horizontal band of low T1 signal across the femoral neck representing the residuum of the growth plate is the physeal ___.",
+"answers": [
+"scar",
+"physeal scar",
+"physeal line"
+],
+"explain": "The physeal scar is the normal residual line of the closed growth plate, low signal on T1, and should not be mistaken for a fracture or sclerotic lesion.",
+"id": 165
+},
+{
+"type": "cloze",
+"joint": "general",
+"topic": "Mimics",
+"difficulty": 2,
+"prompt": "On T1-weighted images, normal hematopoietic (red) marrow should remain ___ to or higher than skeletal muscle/intervertebral disc; signal below this raises concern for marrow replacement.",
+"answers": [
+"isointense",
+"equal",
+"iso"
+],
+"explain": "Normal red marrow is isointense to or brighter than muscle on T1. Marrow that is hypointense to muscle/disc on T1 is the key flag for true marrow-replacing disease, helping distinguish normal red marrow reconversion from pathology.",
+"id": 166
+},
+{
+"type": "cloze",
+"joint": "wrist",
+"topic": "Mimics",
+"difficulty": 2,
+"prompt": "A persistent ___ artery accompanying a bifid median nerve in the carpal tunnel is a normal vascular variant that can be mistaken for a mass.",
+"answers": [
+"median",
+"persistent median"
+],
+"explain": "A persistent median artery often accompanies a bifid median nerve; on MR/US it is a normal tubular vascular structure and should not be mistaken for a ganglion or nerve sheath tumor.",
+"id": 167
+},
+{
+"type": "cloze",
+"joint": "elbow",
+"topic": "Mimics",
+"difficulty": 2,
+"prompt": "Using the CRITOE ossification order, an ossific fragment near the medial elbow in a child before the trochlea ossifies should raise concern for an avulsed medial ___ rather than a normal ossification center.",
+"answers": [
+"epicondyle",
+"epicondylar",
+"internal epicondyle"
+],
+"explain": "In CRITOE (Capitellum, Radial head, Internal/medial epicondyle, Trochlea, Olecranon, External/lateral epicondyle), the internal (medial) epicondyle ossifies before the trochlea. A 'trochlear' ossicle without a visible medial epicondyle suggests a displaced/avulsed medial epicondyle.",
+"id": 168
 }
 ];

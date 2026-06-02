@@ -633,6 +633,8 @@ Knowing the normal tendon insertions lets you localize a tear precisely and dist
 > [!QUIZ] On which tuberosity and facet does the supraspinatus insert, and where does subscapularis go?
 > Supraspinatus inserts on the ==superior facet of the greater tuberosity== (anterior footprint), while subscapularis inserts on the ==lesser tuberosity==. The intervening rotator interval transmits the biceps tendon between these two insertions.
 
+{{diagram:shoulder-labral-clock}}
+
 ### Rapid review
 Spaced-recall questions across the highest-yield shoulder topics — answer each before revealing.
 
