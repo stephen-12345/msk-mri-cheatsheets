@@ -24,7 +24,8 @@
       xp: +lget("mskt-xp", 0) || 0,
       best: +lget("mskt-best", 0) || 0,
       day: JSON.parse(lget("mskt-day", '{"last":"","count":0}')),
-      results: JSON.parse(lget("mskt-results", "{}"))
+      results: JSON.parse(lget("mskt-results", "{}")),
+      flash: JSON.parse(lget("mskt-flash", "{}"))
     };
   }
   function saveLocal(d) {
@@ -32,6 +33,7 @@
     localStorage.setItem("mskt-best", d.best || 0);
     localStorage.setItem("mskt-day", JSON.stringify(d.day || { last: "", count: 0 }));
     localStorage.setItem("mskt-results", JSON.stringify(d.results || {}));
+    localStorage.setItem("mskt-flash", JSON.stringify(d.flash || {}));
   }
   function pickDay(a, b) {
     a = a || { last: "", count: 0 }; b = b || { last: "", count: 0 };
@@ -47,11 +49,19 @@
       var a = lr[id], c = r[id];
       if (!c || (a.seen || 0) >= (c.seen || 0)) r[id] = { seen: Math.max(a.seen || 0, (c && c.seen) || 0), pass: a.pass };
     });
+    // flashcards: keep whichever copy has more reviews (higher seen) per card
+    var f = Object.assign({}, C.flash || {});
+    var lf = L.flash || {};
+    Object.keys(lf).forEach(function (id) {
+      var a = lf[id], c = f[id];
+      if (!c || (a.seen || 0) >= (c.seen || 0)) f[id] = a;
+    });
     return {
       xp: Math.max(L.xp || 0, C.xp || 0),
       best: Math.max(L.best || 0, C.best || 0),
       day: pickDay(L.day, C.day),
       results: r,
+      flash: f,
       updated: Date.now()
     };
   }

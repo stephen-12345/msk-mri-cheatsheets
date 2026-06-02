@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MRI Flashcards</title>
+<link rel="manifest" href="../manifest.webmanifest">
+<meta name="theme-color" content="#0b3a52">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Flashcards">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<style>
+:root{--bg:#0c0f15;--panel:#141925;--bdr:#27303f;--tx:#e6eaf2;--tx2:#aab4c5;--tx3:#7c8699;
+  --again:#e2737a;--hard:#f3ad63;--good:#79d49b;--easy:#5fc6e6;--teal:#5fc6e6;}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{background:var(--bg);color-scheme:dark}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",system-ui,sans-serif;background:var(--bg);color:var(--tx);font-size:17px;-webkit-font-smoothing:antialiased;min-height:100vh}
+.wrap{max-width:720px;margin:0 auto;padding:0 18px}
+button{font-family:inherit;cursor:pointer}
+a{color:var(--teal);text-decoration:none}
+.bar{position:sticky;top:0;z-index:10;background:rgba(12,15,21,0.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--bdr);padding:8px 0;padding-top:calc(8px + env(safe-area-inset-top,0px))}
+.bar .wrap{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.bar .title{font-weight:800;color:#fff;font-size:16px;margin-right:auto}
+.bar .meta{font-size:13px;color:var(--tx2)} .bar .meta b{color:#fff}
+.bar .home{font-size:13px;color:var(--tx2);border:1px solid var(--bdr);border-radius:999px;padding:4px 11px;background:#0d1a26}
+h1{font-size:24px;color:#fff;margin:22px 0 6px}
+.lede{color:var(--tx2);font-size:15px;margin-bottom:16px;line-height:1.5}
+.section-label{font-size:12px;text-transform:uppercase;letter-spacing:1.2px;color:var(--tx3);font-weight:800;margin:18px 0 9px}
+.chiprow{display:flex;flex-wrap:wrap;gap:7px}
+.chip{border:1px solid var(--bdr);background:#0d1a26;color:var(--tx2);border-radius:999px;padding:6px 13px;font-size:13.5px;font-weight:600}
+.chip.sel{border-color:var(--teal);background:rgba(95,198,230,0.16);color:#cdeffb}
+.duebanner{width:100%;text-align:left;margin:10px 0;padding:13px 16px;border-radius:11px;cursor:pointer;font-size:15px;font-family:inherit;border:1px solid var(--bdr);background:#0d141f;color:var(--tx2)}
+.duebanner.active{border-color:var(--hard);background:rgba(243,173,99,0.13);color:#ffe0c8}
+.duebanner b{color:#fff}
+.startbtn{display:block;width:100%;margin:18px 0 8px;padding:15px;border:none;border-radius:12px;background:linear-gradient(135deg,#11556f,#0b3a52);border:1px solid #2c6b86;color:#eaf8ff;font-size:17px;font-weight:800}
+.startbtn:disabled{opacity:.5}
+.hint{color:var(--tx3);font-size:12.5px;text-align:center;margin-top:6px}
+.kbd{display:inline-block;border:1px solid var(--bdr);border-bottom-width:2px;border-radius:5px;padding:0 6px;background:#0d141f;color:var(--tx2);font-size:12px;font-weight:700}
+/* card screen */
+.cardtop{display:flex;align-items:center;gap:10px;margin:14px 0 0;font-size:13px;color:var(--tx3)}
+.cardtop .t{margin-left:auto;font-weight:700;color:var(--tx2)}
+.progbar{height:5px;background:#1a2230;border-radius:999px;overflow:hidden;margin:8px 0 0}
+.progbar>i{display:block;height:100%;background:var(--teal);width:0;transition:width .2s}
+.flashcard{background:var(--panel);border:1px solid var(--bdr);border-radius:16px;padding:26px 22px;margin:16px 0;min-height:240px;display:flex;flex-direction:column}
+.fc-topic{font-size:11.5px;text-transform:uppercase;letter-spacing:1.2px;color:var(--teal);font-weight:800;margin-bottom:14px}
+.fc-front{font-size:23px;line-height:1.35;color:#fff;font-weight:700}
+.fc-div{border:none;border-top:1px dashed #2c3a48;margin:18px 0}
+.fc-back{font-size:17px;line-height:1.55;color:var(--tx)}
+.flip{display:block;width:100%;margin-top:auto;padding:14px;border:1px solid #2c6b86;border-radius:11px;background:rgba(95,198,230,0.12);color:#cdeffb;font-size:16px;font-weight:800}
+.grades{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:6px}
+.grade{border:1px solid var(--bdr);border-radius:11px;padding:11px 6px 9px;background:#0d141f;color:#fff;text-align:center;font-family:inherit}
+.grade .g{font-size:15px;font-weight:800}.grade .iv{font-size:11.5px;color:var(--tx3);margin-top:2px}.grade .k{font-size:10.5px;color:var(--tx3);margin-top:3px}
+.grade.again{border-color:rgba(226,115,122,.5)}.grade.again .g{color:var(--again)}
+.grade.hard{border-color:rgba(243,173,99,.5)}.grade.hard .g{color:var(--hard)}
+.grade.good{border-color:rgba(121,212,155,.5)}.grade.good .g{color:var(--good)}
+.grade.easy{border-color:rgba(95,198,230,.5)}.grade.easy .g{color:var(--easy)}
+.grade:active{transform:scale(.97)}
+.summary{text-align:center;padding:30px 10px}
+.summary .em{font-size:48px}.summary h2{color:#fff;font-size:24px;margin:8px 0}
+.summary .grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:18px 0}
+.summary .cell{background:var(--panel);border:1px solid var(--bdr);border-radius:11px;padding:14px}
+.summary .cell .n{font-size:26px;font-weight:800;color:#fff}.summary .cell .l{font-size:12px;color:var(--tx3);text-transform:uppercase;letter-spacing:1px}
+.row{display:flex;gap:10px;margin-top:14px}
+.btn{flex:1;padding:13px;border:none;border-radius:11px;font-size:16px;font-weight:800}
+.btn.primary{background:linear-gradient(135deg,#11556f,#0b3a52);border:1px solid #2c6b86;color:#eaf8ff}
+.btn.ghost{background:#0d141f;border:1px solid var(--bdr);color:var(--tx2)}
+.hidden{display:none}
+@media(max-width:520px){.grade .g{font-size:14px}.fc-front{font-size:20px}}
+</style>
+</head>
+<body>
+<div class="bar"><div class="wrap">
+  <span class="title">🃏 MRI Flashcards</span>
+  <span class="meta" id="hudmeta"></span>
+  <button class="home" id="acct" type="button" style="cursor:pointer">☁︎ Sync</button>
+  <a class="home" href="index.html">Trainer</a>
+</div></div>
+
+<main class="wrap">
+<section id="start">
+  <h1>MRI Terminology — Flashcards</h1>
+  <p class="lede">Rapid-fire spaced-repetition recall. <span class="kbd">Space</span> flips the card; grade with <span class="kbd">1</span> Again · <span class="kbd">2</span> Hard · <span class="kbd">3</span> Good · <span class="kbd">4</span> Easy — the button sets when you'll see it again.</p>
+  <button id="duebanner" class="duebanner" type="button" style="display:none"></button>
+  <div class="section-label">Topic</div>
+  <div class="chiprow" id="topics"></div>
+  <button class="startbtn" id="startbtn">Start reviewing</button>
+  <p class="hint" id="countnote"></p>
+</section>
+
+<section id="study" class="hidden">
+  <div class="cardtop"><span id="cprog"></span><span id="cagain"></span><span class="t" id="ctimer">0:00</span></div>
+  <div class="progbar"><i id="cprogfill"></i></div>
+  <div class="flashcard">
+    <div class="fc-topic" id="fctopic"></div>
+    <div class="fc-front" id="fcfront"></div>
+    <div id="fcbackwrap" class="hidden"><hr class="fc-div"><div class="fc-back" id="fcback"></div></div>
+    <button class="flip" id="flipbtn">Show answer &nbsp;<span class="kbd">Space</span></button>
+    <div class="grades hidden" id="grades">
+      <button class="grade again" data-g="0"><div class="g">Again</div><div class="iv" id="iv0"></div><div class="k">1</div></button>
+      <button class="grade hard" data-g="1"><div class="g">Hard</div><div class="iv" id="iv1"></div><div class="k">2</div></button>
+      <button class="grade good" data-g="2"><div class="g">Good</div><div class="iv" id="iv2"></div><div class="k">3 / Space</div></button>
+      <button class="grade easy" data-g="3"><div class="g">Easy</div><div class="iv" id="iv3"></div><div class="k">4</div></button>
+    </div>
+  </div>
+</section>
+
+<section id="summary" class="hidden"></section>
+</main>
+
+<script src="flashcards.js"></script>
+<script src="flash.js"></script>
+<script src="firebase-config.js"></script>
+<script src="sync.js"></script>
+<script>if('serviceWorker' in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('../sw.js').catch(function(){});});}</script>
+</body>
+</html>
