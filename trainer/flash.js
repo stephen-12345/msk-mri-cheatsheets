@@ -10,6 +10,18 @@
   function store() { try { return JSON.parse(localStorage.getItem("mskt-flash") || "{}"); } catch (e) { return {}; } }
   function save(s) { localStorage.setItem("mskt-flash", JSON.stringify(s)); }
   function esc(t) { return (t || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  // style bracketed [options] placeholders like the cheat sheet
+  function ph(t) { return esc(t).replace(/\[([^\]]+)\]/g, '<span class="ph">[$1]</span>'); }
+  // render a card's answer: structured F:/I:/pearl if present, else plain back text
+  function renderBack(c) {
+    if (c.find) {
+      var h = '<div class="fc-f"><span class="lab f">F:</span> ' + ph(c.find) + "</div>";
+      if (c.impr) h += '<div class="fc-f"><span class="lab i">I:</span> ' + ph(c.impr) + "</div>";
+      if (c.pearl) h += '<div class="fc-pearl">💡 ' + ph(c.pearl) + "</div>";
+      return h;
+    }
+    return esc(c.back);
+  }
 
   // ---- scheduler (Anki 4-button: 0 Again, 1 Hard, 2 Good, 3 Easy) ----
   function schedule(c, g) {
@@ -99,7 +111,7 @@
     $("cprogfill").style.width = (sess.i / sess.queue.length * 100) + "%";
     $("fctopic").textContent = c.topic || "";
     $("fcfront").textContent = c.front;
-    $("fcback").textContent = c.back;
+    $("fcback").innerHTML = renderBack(c);
     $("fcbackwrap").classList.add("hidden");
     $("grades").classList.add("hidden");
     $("flipbtn").classList.remove("hidden");
@@ -108,7 +120,7 @@
   }
   function flip() {
     var c = sess.queue[sess.i], rec = store()[c.id] || {};
-    $("fcback").textContent = c.back;
+    $("fcback").innerHTML = renderBack(c);
     $("fcbackwrap").classList.remove("hidden");
     $("flipbtn").classList.add("hidden");
     $("grades").classList.remove("hidden");
