@@ -1,0 +1,5683 @@
+window.TRAINER_QUESTIONS = [
+{
+"type": "dictate",
+"joint": "shoulder",
+"topic": "Rotator cuff",
+"difficulty": 2,
+"prompt": "Dictate the findings for a high-grade partial articular-sided (undersurface) supraspinatus tear, including how you quantify it.",
+"model": "There is a high-grade partial-thickness articular-surface (undersurface) tear of the distal supraspinatus tendon involving approximately 70% of the tendon thickness, measuring 9 mm in AP dimension, with mild fiber retraction at the greater tuberosity footprint, compatible with a PASTA lesion. No full-thickness tear and no muscle retraction.",
+"keyterms": [
+{
+"label": "articular-sided",
+"patterns": [
+"articular[ -]sided",
+"undersurface",
+"articular[ -]surface"
+],
+"why": "specifies which surface the partial tear involves (vs bursal-sided), which guides surgical approach"
+},
+{
+"label": "partial-thickness",
+"patterns": [
+"partial[ -]thickness"
+],
+"why": "distinguishes from a full-thickness tear, the key prognostic split"
+},
+{
+"label": "% of tendon thickness",
+"patterns": [
+"\\d+\\s*%",
+"percent"
+],
+"why": "quantify tear depth as a percentage of tendon thickness; >50% often changes management"
+},
+{
+"label": "AP/footprint measurement",
+"patterns": [
+"\\d+\\s*mm",
+"footprint",
+"greater tuberosity"
+],
+"why": "give a measurement and name the insertion site so the surgeon can plan repair"
+},
+{
+"label": "PASTA",
+"patterns": [
+"pasta"
+],
+"why": "named term for a Partial Articular Supraspinatus Tendon Avulsion"
+},
+{
+"label": "supraspinatus",
+"patterns": [
+"supraspinatus"
+],
+"why": "name the specific tendon involved"
+}
+],
+"id": 1
+},
+{
+"type": "dictate",
+"joint": "shoulder",
+"topic": "Impingement",
+"difficulty": 2,
+"prompt": "Describe subacromial (subacromial-subdeltoid) impingement using MRI terminology, including the structural contributors you grade.",
+"model": "There is a hooked (Bigliani type III) acromion with a downsloping lateral configuration and a spurring inferior acromioclavicular osteophyte projecting into the supraspinatus outlet, narrowing the subacromial space. Associated bursal-surface fraying of the distal supraspinatus and subacromial-subdeltoid bursal fluid are present, findings compatible with outlet (extrinsic) subacromial impingement.",
+"keyterms": [
+{
+"label": "acromial morphology / Bigliani",
+"patterns": [
+"bigliani",
+"hooked",
+"type\\s*(ii|iii|2|3)",
+"flat",
+"curved"
+],
+"why": "acromial shape (Bigliani I flat, II curved, III hooked) is the classic extrinsic contributor"
+},
+{
+"label": "AC osteophyte",
+"patterns": [
+"ac\\s*(joint)?\\s*osteophyte",
+"acromioclavicular\\s*osteophyte",
+"inferior\\s*osteophyte",
+"downward[ -]projecting"
+],
+"why": "inferiorly projecting AC joint osteophytes narrow the outlet and impinge the cuff"
+},
+{
+"label": "subacromial space / outlet narrowing",
+"patterns": [
+"subacromial\\s*space",
+"outlet",
+"narrow"
+],
+"why": "the supraspinatus outlet is the space being compromised"
+},
+{
+"label": "bursal-surface fraying",
+"patterns": [
+"bursal[ -]surface",
+"bursal[ -]sided",
+"fraying"
+],
+"why": "extrinsic impingement injures the bursal surface of the cuff first"
+},
+{
+"label": "SASD bursal fluid",
+"patterns": [
+"subacromial[ -]subdeltoid",
+"sasd",
+"subdeltoid",
+"bursal\\s*fluid",
+"bursitis"
+],
+"why": "subacromial-subdeltoid bursitis/fluid is the reactive marker of impingement"
+},
+{
+"label": "downsloping/lateral acromion",
+"patterns": [
+"downslop",
+"lateral\\s*acromi",
+"downward"
+],
+"why": "lateral downslope and acromial slope further reduce outlet height"
+}
+],
+"id": 2
+},
+{
+"type": "dictate",
+"joint": "shoulder",
+"topic": "Rotator cuff",
+"difficulty": 3,
+"prompt": "Dictate a full-thickness supraspinatus tear with retraction. Include dimensions and how you stage retraction.",
+"model": "There is a full-thickness tear of the supraspinatus tendon measuring 18 mm in the mediolateral (retraction) dimension and 14 mm in the AP dimension. The tendon stump is retracted to the level of the humeral head apex, corresponding to Patte stage 2 retraction. No significant muscle atrophy.",
+"keyterms": [
+{
+"label": "full-thickness",
+"patterns": [
+"full[ -]thickness"
+],
+"why": "defines a complete tear spanning articular to bursal surface"
+},
+{
+"label": "mediolateral/retraction dimension",
+"patterns": [
+"mediolateral",
+"retraction\\s*dimension",
+"medial[ -]to[ -]lateral"
+],
+"why": "ML dimension reflects how far the tendon has pulled back, key for repairability"
+},
+{
+"label": "AP dimension",
+"patterns": [
+"ap\\s*dimension",
+"anteroposterior",
+"\\d+\\s*mm"
+],
+"why": "AP width of the tear defines its size and which tendons are involved"
+},
+{
+"label": "Patte stage",
+"patterns": [
+"patte",
+"stage\\s*(1|2|3|i|ii|iii)"
+],
+"why": "Patte stages retraction in the coronal plane (1=near footprint, 2=humeral head, 3=glenoid)"
+},
+{
+"label": "retracted",
+"patterns": [
+"retract"
+],
+"why": "degree of retraction predicts whether a tension-free repair is possible"
+},
+{
+"label": "tendon stump",
+"patterns": [
+"stump",
+"tendon\\s*edge",
+"free\\s*edge"
+],
+"why": "locating the retracted stump is what you measure against"
+}
+],
+"id": 3
+},
+{
+"type": "dictate",
+"joint": "shoulder",
+"topic": "Rotator cuff",
+"difficulty": 3,
+"prompt": "Dictate the muscle quality of the supraspinatus in a chronic cuff tear, using the standard grading and the tangent sign.",
+"model": "The supraspinatus muscle belly demonstrates moderate fatty infiltration, Goutallier grade 3 with more fat than muscle. The muscle belly falls below the superior border of the scapula on the sagittal Y-view, indicating a positive tangent sign, consistent with significant muscle atrophy.",
+"keyterms": [
+{
+"label": "Goutallier grade",
+"patterns": [
+"goutallier",
+"grade\\s*(0|1|2|3|4)",
+"fuchs"
+],
+"why": "Goutallier (0-4) grades fatty infiltration, the strongest predictor of repair failure"
+},
+{
+"label": "fatty infiltration/atrophy",
+"patterns": [
+"fatty\\s*(infiltration|atrophy|degeneration)",
+"fat"
+],
+"why": "irreversible fatty change signals a chronic, often irreparable tear"
+},
+{
+"label": "tangent sign",
+"patterns": [
+"tangent\\s*sign"
+],
+"why": "muscle belly not crossing the line over the scapular spine on Y-view indicates atrophy"
+},
+{
+"label": "sagittal Y-view",
+"patterns": [
+"y[ -]view",
+"sagittal\\s*oblique",
+"scapular\\s*y",
+"most\\s*lateral"
+],
+"why": "the tangent and occupation ratio are assessed on the sagittal oblique Y-shaped image"
+},
+{
+"label": "supraspinatus muscle belly",
+"patterns": [
+"supraspinatus",
+"muscle\\s*belly"
+],
+"why": "specify the muscle being graded, as each cuff muscle is scored separately"
+}
+],
+"id": 4
+},
+{
+"type": "dictate",
+"joint": "shoulder",
+"topic": "Subscapularis",
+"difficulty": 3,
+"prompt": "Dictate a subscapularis tear with biceps instability, naming the supporting signs.",
+"model": "There is a full-thickness tear of the upper subscapularis tendon at the lesser tuberosity insertion with associated disruption of the medial sling (coracohumeral and superior glenohumeral ligaments), resulting in medial subluxation of the long head of the biceps tendon over the torn subscapularis. A comma sign is identified at the superolateral margin of the retracted subscapularis tendon.",
+"keyterms": [
+{
+"label": "subscapularis",
+"patterns": [
+"subscapularis",
+"lesser\\s*tuberosity"
+],
+"why": "name the tendon and its lesser tuberosity footprint"
+},
+{
+"label": "medial sling",
+"patterns": [
+"medial\\s*sling",
+"biceps\\s*sling",
+"pulley",
+"coracohumeral",
+"superior\\s*glenohumeral"
+],
+"why": "the CHL/SGHL sling stabilizes the biceps; its disruption permits dislocation"
+},
+{
+"label": "biceps medial subluxation/dislocation",
+"patterns": [
+"medial\\s*(subluxation|dislocation)",
+"medially\\s*(sublux|dislocat)",
+"biceps.*sublux"
+],
+"why": "biceps medial displacement is a strong indirect sign of subscapularis tear"
+},
+{
+"label": "long head of biceps",
+"patterns": [
+"long\\s*head.*biceps",
+"lhbt",
+"biceps\\s*tendon"
+],
+"why": "the LHB is the structure displaced, often over or under the subscapularis"
+},
+{
+"label": "comma sign",
+"patterns": [
+"comma\\s*sign"
+],
+"why": "comma-shaped tissue (medial sling fibers) marks the superolateral corner of a torn subscapularis"
+}
+],
+"id": 5
+},
+{
+"type": "dictate",
+"joint": "shoulder",
+"topic": "Biceps",
+"difficulty": 2,
+"prompt": "Dictate long head of biceps tendon dislocation out of the bicipital groove.",
+"model": "The long head of the biceps tendon is medially dislocated out of the bicipital groove, which lies empty, and comes to rest medial to the lesser tuberosity. There is associated tearing of the subscapularis fibers, and the displaced tendon shows intermediate signal in keeping with tendinosis.",
+"keyterms": [
+{
+"label": "long head of biceps",
+"patterns": [
+"long\\s*head.*biceps",
+"lhbt",
+"biceps\\s*tendon"
+],
+"why": "identify the specific tendon, distinct from the short head"
+},
+{
+"label": "empty groove sign",
+"patterns": [
+"empty\\s*(bicipital\\s*)?groove",
+"groove.*empty",
+"empty\\s*sulcus"
+],
+"why": "an empty bicipital groove is the cardinal sign of biceps dislocation"
+},
+{
+"label": "bicipital groove",
+"patterns": [
+"bicipital\\s*groove",
+"intertubercular",
+"biceps\\s*groove",
+"sulcus"
+],
+"why": "name the normal location the tendon has left"
+},
+{
+"label": "medial dislocation",
+"patterns": [
+"medial.*disloc",
+"dislocat.*medial",
+"medially\\s*displac"
+],
+"why": "the LHB typically dislocates medially, usually with a subscapularis injury"
+},
+{
+"label": "tendinosis",
+"patterns": [
+"tendinos",
+"tendinopathy",
+"intermediate\\s*signal"
+],
+"why": "describe the intrinsic tendon quality, as dislocated tendons are often degenerated"
+}
+],
+"id": 6
+},
+{
+"type": "dictate",
+"joint": "shoulder",
+"topic": "Labrum",
+"difficulty": 3,
+"prompt": "Dictate a SLAP II lesion on MR arthrography.",
+"model": "On MR arthrogram, contrast undercuts the superior labrum extending both anterior and posterior to the biceps anchor, with detachment of the biceps-labral complex from the superior glenoid, compatible with a SLAP type II lesion. The signal extends laterally and irregularly, distinguishing it from a smoothly contoured sublabral recess.",
+"keyterms": [
+{
+"label": "SLAP II",
+"patterns": [
+"slap\\s*(ii|2|type\\s*2)",
+"superior\\s*labr.*anterior.*posterior"
+],
+"why": "SLAP II is detachment of the biceps anchor; type matters for management"
+},
+{
+"label": "biceps anchor / biceps-labral complex",
+"patterns": [
+"biceps\\s*anchor",
+"biceps[ -]labral",
+"biceps\\s*root"
+],
+"why": "the SLAP II lesion is defined by detachment of the biceps anchor"
+},
+{
+"label": "superior labrum",
+"patterns": [
+"superior\\s*labr"
+],
+"why": "localizes the tear to the superior quadrant, above the equator"
+},
+{
+"label": "anterior to posterior",
+"patterns": [
+"anterior\\s*(to|and|&)?\\s*posterior",
+"ap\\s*extent"
+],
+"why": "SLAP = Superior Labrum Anterior to Posterior; the lesion straddles the biceps anchor"
+},
+{
+"label": "contrast undercutting / detachment",
+"patterns": [
+"undercut",
+"contrast\\s*extend",
+"detach",
+"fluid\\s*signal"
+],
+"why": "contrast tracking into the labral base indicates a true tear, not a recess"
+},
+{
+"label": "sublabral recess (distinguisher)",
+"patterns": [
+"sublabral\\s*recess",
+"sublabral\\s*sulcus",
+"normal\\s*variant"
+],
+"why": "the main pitfall; a smooth medially-oriented recess is normal, not a SLAP"
+}
+],
+"id": 7
+},
+{
+"type": "dictate",
+"joint": "shoulder",
+"topic": "Instability",
+"difficulty": 3,
+"prompt": "Dictate a bony Bankart lesion and estimate glenoid bone loss.",
+"model": "There is an anteroinferior glenoid rim fracture (osseous Bankart lesion) with an attached labral fragment. Using the best-fit circle method on the en-face sagittal image, the osseous defect represents approximately 22% glenoid bone loss, which approaches the critical threshold for soft-tissue stabilization alone.",
+"keyterms": [
+{
+"label": "bony/osseous Bankart",
+"patterns": [
+"bony\\s*bankart",
+"osseous\\s*bankart",
+"glenoid\\s*rim\\s*fracture"
+],
+"why": "a bony Bankart is a fracture of the anteroinferior glenoid, vs a soft-tissue Bankart"
+},
+{
+"label": "anteroinferior glenoid",
+"patterns": [
+"anteroinferior",
+"antero[ -]inferior",
+"anterior[ -]inferior\\s*glenoid",
+"3.*6\\s*o.?clock"
+],
+"why": "localizes the classic site of anterior instability injury"
+},
+{
+"label": "glenoid bone loss %",
+"patterns": [
+"\\d+\\s*%",
+"bone\\s*loss",
+"glenoid\\s*defect"
+],
+"why": "quantifying bone loss drives the choice between Bankart repair and Latarjet"
+},
+{
+"label": "best-fit circle method",
+"patterns": [
+"best[ -]fit\\s*circle",
+"circle\\s*method",
+"pico",
+"en[ -]face"
+],
+"why": "the standard quantification technique on the sagittal en-face glenoid view"
+},
+{
+"label": "critical threshold",
+"patterns": [
+"critical",
+"threshold",
+"20\\s*%",
+"25\\s*%",
+"subcritical"
+],
+"why": "~20-25% loss is the inflection point favoring bony augmentation (Latarjet)"
+}
+],
+"id": 8
+},
+{
+"type": "dictate",
+"joint": "shoulder",
+"topic": "Instability",
+"difficulty": 3,
+"prompt": "Dictate a Hill-Sachs lesion and comment on engagement.",
+"model": "There is a Hill-Sachs impaction fracture along the posterosuperior humeral head. It measures 18 mm in width and is relatively deep, and given its orientation it would be expected to engage the anterior glenoid rim in abduction and external rotation (off-track lesion).",
+"keyterms": [
+{
+"label": "Hill-Sachs",
+"patterns": [
+"hill[ -]sachs"
+],
+"why": "the named posterolateral humeral head impaction from anterior dislocation"
+},
+{
+"label": "posterosuperior/posterolateral location",
+"patterns": [
+"posterosuperior",
+"posterolateral",
+"postero[ -]superior",
+"postero[ -]lateral"
+],
+"why": "location confirms it is a true Hill-Sachs from anterior instability"
+},
+{
+"label": "engaging / off-track",
+"patterns": [
+"engag",
+"off[ -]track",
+"on[ -]track",
+"glenoid\\s*track"
+],
+"why": "engagement (off-track) predicts recurrent instability and need for remplissage"
+},
+{
+"label": "impaction fracture",
+"patterns": [
+"impaction",
+"compression\\s*fracture",
+"depression"
+],
+"why": "describes the mechanism: the humeral head impacts the glenoid rim"
+},
+{
+"label": "size/depth",
+"patterns": [
+"\\d+\\s*mm",
+"deep",
+"depth",
+"width"
+],
+"why": "larger/deeper lesions are more likely to engage and need addressing"
+}
+],
+"id": 9
+},
+{
+"type": "dictate",
+"joint": "shoulder",
+"topic": "Instability",
+"difficulty": 3,
+"prompt": "Dictate an ALPSA lesion and contrast it with a Perthes and a Bankart.",
+"model": "There is an anteroinferior labroligamentous avulsion that is medially displaced and rolled up onto the glenoid neck with an intact but stripped scapular periosteum, compatible with an ALPSA lesion. There is no displaced labral fragment as would be seen in a classic Bankart, and the labrum is not merely nondisplaced with intact periosteum as in a Perthes lesion.",
+"keyterms": [
+{
+"label": "ALPSA",
+"patterns": [
+"alpsa",
+"anterior\\s*labroligamentous\\s*periosteal\\s*sleeve"
+],
+"why": "Anterior Labroligamentous Periosteal Sleeve Avulsion - medially displaced, healed in malposition"
+},
+{
+"label": "intact/stripped periosteum",
+"patterns": [
+"intact\\s*periosteum",
+"periosteal\\s*sleeve",
+"stripped\\s*periosteum",
+"periosteum"
+],
+"why": "the key feature: the scapular periosteum stays intact but is stripped medially"
+},
+{
+"label": "medially displaced/rolled",
+"patterns": [
+"medially\\s*displac",
+"rolled",
+"medialized",
+"glenoid\\s*neck"
+],
+"why": "chronic medial displacement and synovialization distinguishes ALPSA from acute Bankart"
+},
+{
+"label": "Perthes (contrast)",
+"patterns": [
+"perthes"
+],
+"why": "Perthes = nondisplaced labrum with intact periosteum, can be occult without ABER views"
+},
+{
+"label": "Bankart (contrast)",
+"patterns": [
+"bankart"
+],
+"why": "classic Bankart has a torn periosteum and the labrum is not medially rolled"
+}
+],
+"id": 10
+},
+{
+"type": "dictate",
+"joint": "shoulder",
+"topic": "Instability",
+"difficulty": 3,
+"prompt": "Dictate a HAGL lesion and name the sign that helps you recognize it.",
+"model": "There is avulsion of the anterior band of the inferior glenohumeral ligament from its humeral attachment, with extravasation of joint fluid/contrast inferomedially producing a J-shaped configuration of the axillary pouch, the J-sign, compatible with a HAGL lesion. The glenoid labral attachment is intact.",
+"keyterms": [
+{
+"label": "HAGL",
+"patterns": [
+"hagl",
+"humeral\\s*avulsion.*glenohumeral"
+],
+"why": "Humeral Avulsion of the Glenohumeral Ligament - an easily missed cause of instability"
+},
+{
+"label": "inferior glenohumeral ligament",
+"patterns": [
+"inferior\\s*glenohumeral\\s*ligament",
+"ighl",
+"anterior\\s*band"
+],
+"why": "the IGHL complex (esp anterior band) is the primary anterior stabilizer in abduction"
+},
+{
+"label": "humeral avulsion",
+"patterns": [
+"humeral\\s*(side\\s*)?avuls",
+"humeral\\s*attachment",
+"humeral\\s*neck"
+],
+"why": "HAGL avulses at the humeral side, unlike Bankart which is glenoid-sided"
+},
+{
+"label": "J-sign",
+"patterns": [
+"j[ -]sign",
+"j[ -]shaped"
+],
+"why": "the normal U-shaped axillary recess becomes J-shaped when the IGHL detaches humerally"
+},
+{
+"label": "axillary pouch/recess",
+"patterns": [
+"axillary\\s*(pouch|recess)"
+],
+"why": "contrast leaking from the axillary pouch is what produces the J configuration"
+}
+],
+"id": 11
+},
+{
+"type": "dictate",
+"joint": "shoulder",
+"topic": "Calcific tendinitis",
+"difficulty": 2,
+"prompt": "Dictate calcific tendinitis of the supraspinatus in the resorptive phase.",
+"model": "There is a focus of hydroxyapatite calcific deposit within the distal supraspinatus tendon measuring 12 mm. Surrounding tendon and bursal edema with ill-defined margins indicates the resorptive (acute) phase, and there is reactive subacromial-subdeltoid bursitis.",
+"keyterms": [
+{
+"label": "calcific tendinitis/hydroxyapatite",
+"patterns": [
+"calcific",
+"hydroxyapatite",
+"calcium\\s*hydroxyapatite",
+"calcification",
+"calcific\\s*deposit"
+],
+"why": "name the disease and the responsible calcium hydroxyapatite deposit"
+},
+{
+"label": "resorptive phase",
+"patterns": [
+"resorptive",
+"resorption",
+"acute\\s*phase"
+],
+"why": "the resorptive phase is symptomatic with edema; formative phase is quiescent and dense"
+},
+{
+"label": "surrounding edema",
+"patterns": [
+"edema",
+"oedema",
+"ill[ -]defined",
+"fluffy",
+"perifocal"
+],
+"why": "edema and ill-defined margins signal active resorption, not the dense formative deposit"
+},
+{
+"label": "supraspinatus",
+"patterns": [
+"supraspinatus"
+],
+"why": "specify the tendon, as supraspinatus is the most common site"
+},
+{
+"label": "reactive bursitis",
+"patterns": [
+"bursitis",
+"bursal\\s*(edema|fluid)",
+"subacromial[ -]subdeltoid"
+],
+"why": "deposits can rupture into the bursa, causing reactive subacromial-subdeltoid bursitis"
+}
+],
+"id": 12
+},
+{
+"type": "dictate",
+"joint": "shoulder",
+"topic": "Adhesive capsulitis",
+"difficulty": 2,
+"prompt": "Dictate the MRI findings of adhesive capsulitis (frozen shoulder).",
+"model": "There is thickening and edema of the axillary recess and inferior glenohumeral ligament, with thickening of the capsule and soft-tissue edema obliterating the fat in the rotator interval and surrounding the coracohumeral ligament. These findings are compatible with adhesive capsulitis.",
+"keyterms": [
+{
+"label": "adhesive capsulitis",
+"patterns": [
+"adhesive\\s*capsulitis",
+"frozen\\s*shoulder"
+],
+"why": "name the clinical entity being described"
+},
+{
+"label": "axillary recess thickening/edema",
+"patterns": [
+"axillary\\s*recess",
+"inferior\\s*(capsule|recess)"
+],
+"why": "capsular thickening (>4 mm) and edema of the axillary recess is the hallmark"
+},
+{
+"label": "inferior glenohumeral ligament",
+"patterns": [
+"inferior\\s*glenohumeral\\s*ligament",
+"ighl"
+],
+"why": "the IGHL/axillary pouch is the most reliably thickened structure"
+},
+{
+"label": "rotator interval",
+"patterns": [
+"rotator\\s*interval"
+],
+"why": "soft-tissue edema/obliteration of rotator interval fat is a key early sign"
+},
+{
+"label": "coracohumeral ligament",
+"patterns": [
+"coracohumeral\\s*ligament",
+"chl"
+],
+"why": "thickening of the CHL within the rotator interval supports the diagnosis"
+},
+{
+"label": "capsular thickening",
+"patterns": [
+"capsul.*thick",
+"thick.*capsul",
+"\\d+\\s*mm"
+],
+"why": "abnormal capsular thickening is the underlying pathology of frozen shoulder"
+}
+],
+"id": 13
+},
+{
+"type": "dictate",
+"joint": "shoulder",
+"topic": "Denervation",
+"difficulty": 3,
+"prompt": "Dictate a paralabral cyst causing suprascapular nerve denervation, and localize the level of compression.",
+"model": "There is a paralabral cyst extending into the spinoglenoid notch in association with a posterosuperior labral tear. The infraspinatus muscle shows isolated edema/fatty change with sparing of the supraspinatus, localizing the suprascapular nerve compression to the spinoglenoid notch rather than the suprascapular notch.",
+"keyterms": [
+{
+"label": "suprascapular nerve",
+"patterns": [
+"suprascapular\\s*nerve"
+],
+"why": "name the nerve responsible for supraspinatus and infraspinatus innervation"
+},
+{
+"label": "spinoglenoid notch",
+"patterns": [
+"spinoglenoid\\s*notch"
+],
+"why": "compression here denervates infraspinatus only, sparing supraspinatus"
+},
+{
+"label": "suprascapular notch (contrast)",
+"patterns": [
+"suprascapular\\s*notch"
+],
+"why": "compression here denervates BOTH supraspinatus and infraspinatus, localizing more proximally"
+},
+{
+"label": "paralabral/ganglion cyst",
+"patterns": [
+"paralabral\\s*cyst",
+"ganglion",
+"spinoglenoid\\s*cyst"
+],
+"why": "paralabral cysts from labral tears are the classic compressive lesion"
+},
+{
+"label": "infraspinatus denervation pattern",
+"patterns": [
+"infraspinatus",
+"denervation",
+"muscle\\s*edema",
+"fatty\\s*(change|atrophy)"
+],
+"why": "the muscle edema/atrophy pattern tells you exactly where the nerve is pinched"
+}
+],
+"id": 14
+},
+{
+"type": "mcq",
+"joint": "shoulder",
+"topic": "Impingement",
+"difficulty": 2,
+"prompt": "In a 22-year-old overhead-throwing athlete with posterosuperior pain, MRI shows undersurface fraying of the posterior supraspinatus, a posterosuperior labral tear, and a posterosuperior humeral head subcortical cyst. What entity does this triad describe?",
+"choices": [
+"Outlet (subacromial) impingement",
+"Internal (posterosuperior) impingement",
+"Subcoracoid impingement",
+"Adhesive capsulitis"
+],
+"answer": 1,
+"explain": "This is internal/posterosuperior impingement, where the undersurface of the posterior cuff pinches against the posterosuperior glenoid labrum in abduction-external rotation, classically in throwers. Outlet impingement affects the bursal surface and acromion; subcoracoid impingement involves the subscapularis and a narrowed coracohumeral interval; adhesive capsulitis shows capsular thickening, not this triad.",
+"id": 15
+},
+{
+"type": "mcq",
+"joint": "shoulder",
+"topic": "Rotator cuff",
+"difficulty": 1,
+"prompt": "On the sagittal oblique Y-view, the supraspinatus muscle belly fails to cross a line drawn along the superior borders of the scapular spine and coracoid. This describes:",
+"choices": [
+"A positive tangent sign",
+"Goutallier grade 1",
+"A positive PASTA lesion",
+"The critical zone"
+],
+"answer": 0,
+"explain": "A positive tangent sign means the supraspinatus muscle belly does not cross the tangent line over the scapular spine, indicating atrophy. Goutallier grades fatty infiltration (not bulk by tangent); PASTA is a partial articular cuff tear; the critical zone is a hypovascular watershed region of the distal supraspinatus.",
+"id": 16
+},
+{
+"type": "mcq",
+"joint": "shoulder",
+"topic": "Instability",
+"difficulty": 2,
+"prompt": "An anteroinferior labral tear with medial displacement of the labroligamentous complex and an INTACT (but stripped) scapular periosteum, often chronic and synovialized, is best termed:",
+"choices": [
+"Classic Bankart lesion",
+"ALPSA lesion",
+"GLAD lesion",
+"SLAP lesion"
+],
+"answer": 1,
+"explain": "This is an ALPSA (Anterior Labroligamentous Periosteal Sleeve Avulsion): the periosteum stays intact and the labrum heals medially displaced. A classic Bankart has a disrupted periosteum and detached fragment; a GLAD is a labral tear with an articular cartilage defect without instability; a SLAP is a superior labral lesion.",
+"id": 17
+},
+{
+"type": "mcq",
+"joint": "shoulder",
+"topic": "Adhesive capsulitis",
+"difficulty": 2,
+"prompt": "Which combination of MRI findings is most specific for adhesive capsulitis?",
+"choices": [
+"Subacromial-subdeltoid bursal fluid and an acromial spur",
+"Thickening/edema of the axillary recess/IGHL plus obliteration of the rotator interval fat",
+"A paralabral cyst in the spinoglenoid notch",
+"A full-thickness supraspinatus tear with retraction"
+],
+"answer": 1,
+"explain": "Adhesive capsulitis is characterized by thickening and edema of the axillary recess/inferior glenohumeral ligament and soft-tissue edema obliterating rotator interval fat (with CHL thickening). SASD bursal fluid plus a spur suggests impingement; a spinoglenoid cyst causes denervation; a retracted cuff tear is a different entity.",
+"id": 18
+},
+{
+"type": "cloze",
+"joint": "shoulder",
+"topic": "Rotator cuff",
+"difficulty": 1,
+"prompt": "The hypovascular watershed region of the distal supraspinatus tendon, where most degenerative tears begin, is called the ___.",
+"answers": [
+"critical zone",
+"watershed zone"
+],
+"explain": "The critical zone is the relatively hypovascular segment of the distal supraspinatus near its insertion, a common site for degenerative tearing. Naming it shows you understand why tears localize there.",
+"id": 19
+},
+{
+"type": "cloze",
+"joint": "shoulder",
+"topic": "Instability",
+"difficulty": 2,
+"prompt": "A teres minor that is isolated in showing fatty atrophy/edema points to compression of the axillary nerve within the ___ space.",
+"answers": [
+"quadrilateral"
+],
+"explain": "Isolated teres minor denervation localizes to the quadrilateral space, where the axillary nerve travels (quadrilateral space syndrome). Recognizing isolated teres minor change as a localizing sign is an expert-level cue.",
+"id": 20
+},
+{
+"type": "cloze",
+"joint": "shoulder",
+"topic": "Subscapularis",
+"difficulty": 2,
+"prompt": "A curved band of medial sling fibers seen at the superolateral corner of a torn, retracted subscapularis tendon is known as the ___ sign.",
+"answers": [
+"comma"
+],
+"explain": "The comma sign is the comma-shaped tissue (medial sling/SGHL-CHL fibers) at the superolateral subscapularis margin, helping you find and identify a retracted subscapularis tear at surgery and on MRI.",
+"id": 21
+},
+{
+"type": "mcq",
+"joint": "knee",
+"topic": "Meniscus",
+"difficulty": 1,
+"prompt": "What is the standard MRI rule for confidently calling a meniscal tear?",
+"choices": [
+"Any increased intrameniscal signal on a single image",
+"Intrameniscal signal that unequivocally contacts an articular (meniscal) surface on at least two consecutive images",
+"Globular signal that does not reach a surface, seen on three images",
+"A morphologically normal meniscus with grade 2 signal"
+],
+"answer": 1,
+"explain": "A tear is called when surface-reaching (grade 3) signal contacts the superior or inferior articular surface (or free edge) on >=2 consecutive images (the 'two-slice-touch' rule). Grade 1 (globular) and grade 2 (linear, non-surfacing) signal represent intrasubstance/myxoid degeneration and are not tears.",
+"id": 22
+},
+{
+"type": "dictate",
+"joint": "knee",
+"topic": "Meniscus",
+"difficulty": 2,
+"prompt": "Dictate the findings for a radial tear at the medial meniscus body-posterior horn junction.",
+"model": "There is a vertically oriented radial tear at the junction of the body and posterior horn of the medial meniscus, with a truncated free edge and a ghost meniscus on the consecutive coronal images. There is associated medial meniscal extrusion measuring 4 mm.",
+"keyterms": [
+{
+"label": "radial tear",
+"patterns": [
+"radial"
+],
+"why": "a tear perpendicular to the long axis of the meniscus, extending from the free edge centrally"
+},
+{
+"label": "truncation sign",
+"patterns": [
+"truncat"
+],
+"why": "the free edge appears blunted/cut-off where the radial cleft crosses it"
+},
+{
+"label": "ghost meniscus / ghost sign",
+"patterns": [
+"ghost"
+],
+"why": "on the slice through the cleft the meniscus appears faint or absent, the classic radial-tear sign"
+},
+{
+"label": "meniscal extrusion",
+"patterns": [
+"extrus"
+],
+"why": "radial and root tears disrupt the hoop and let the meniscus subluxate (>=3 mm is significant)"
+},
+{
+"label": "body-posterior horn junction",
+"patterns": [
+"body[\\s-]?posterior",
+"junction"
+],
+"why": "localizes the tear precisely along the meniscus"
+},
+{
+"label": "measurement",
+"patterns": [
+"\\d\\s?mm"
+],
+"why": "quantifying extrusion adds clinical value (predicts osteoarthritis progression)"
+}
+],
+"id": 23
+},
+{
+"type": "dictate",
+"joint": "knee",
+"topic": "Meniscus",
+"difficulty": 3,
+"prompt": "Dictate a posterior medial meniscal root tear with secondary extrusion.",
+"model": "There is a complete radial tear of the posterior root of the medial meniscus at its tibial attachment, with a fluid-filled cleft and a positive ghost sign. There is grade-3 medial meniscal extrusion measuring 5 mm beyond the tibial margin, functionally equivalent to a total meniscectomy.",
+"keyterms": [
+{
+"label": "posterior root tear",
+"patterns": [
+"posterior root",
+"root tear",
+"root"
+],
+"why": "avulsion/radial tear at the tibial root attachment, biomechanically critical"
+},
+{
+"label": "tibial attachment",
+"patterns": [
+"tibial attach",
+"attachment",
+"insertion"
+],
+"why": "the root anchors the meniscus; tears here destroy hoop-stress function"
+},
+{
+"label": "ghost sign",
+"patterns": [
+"ghost"
+],
+"why": "the root is not visualized on the slice through the radial cleft"
+},
+{
+"label": "extrusion",
+"patterns": [
+"extrus"
+],
+"why": "root tears cause major extrusion, accelerating cartilage loss"
+},
+{
+"label": "functional meniscectomy",
+"patterns": [
+"meniscectomy",
+"functional"
+],
+"why": "a root tear leaves the meniscus mechanically incompetent, like having removed it"
+},
+{
+"label": "measurement",
+"patterns": [
+"\\d\\s?mm"
+],
+"why": "grading extrusion (>=3 mm significant) communicates severity"
+}
+],
+"id": 24
+},
+{
+"type": "dictate",
+"joint": "knee",
+"topic": "Meniscus",
+"difficulty": 3,
+"prompt": "Describe a displaced bucket-handle tear of the medial meniscus using MRI terminology, citing the classic signs.",
+"model": "There is a displaced bucket-handle tear of the medial meniscus. The torn inner fragment is displaced into the intercondylar notch, producing a double-PCL sign on the sagittal images, with an absent-bowtie sign and a correspondingly small, blunted residual meniscus. A flipped fragment also creates a double-anterior-horn appearance.",
+"keyterms": [
+{
+"label": "bucket-handle tear",
+"patterns": [
+"bucket[\\s-]?handle",
+"bucket"
+],
+"why": "a longitudinal vertical tear whose inner fragment displaces like a bucket handle"
+},
+{
+"label": "double-PCL sign",
+"patterns": [
+"double[\\s-]?pcl",
+"double posterior"
+],
+"why": "the displaced fragment lies anteroinferior to the PCL, mimicking a second PCL"
+},
+{
+"label": "fragment in the notch",
+"patterns": [
+"intercondylar notch",
+"notch",
+"fragment"
+],
+"why": "the displaced inner fragment migrates into the intercondylar notch"
+},
+{
+"label": "absent-bowtie sign",
+"patterns": [
+"absent[\\s-]?bow",
+"bowtie",
+"bow tie"
+],
+"why": "<2 contiguous sagittal slices show the normal bowtie body, indicating the body has displaced"
+},
+{
+"label": "double-anterior-horn sign",
+"patterns": [
+"double[\\s-]?anterior",
+"double anterior horn"
+],
+"why": "a fragment flipped anteriorly produces a second apparent anterior horn"
+},
+{
+"label": "displaced fragment",
+"patterns": [
+"displac",
+"flipped",
+"flip"
+],
+"why": "emphasizes the fragment has moved from its bed, a surgically relevant detail"
+}
+],
+"id": 25
+},
+{
+"type": "dictate",
+"joint": "knee",
+"topic": "Meniscus",
+"difficulty": 2,
+"prompt": "Dictate a stable horizontal (oblique) tear of the posterior horn of the medial meniscus with an associated parameniscal cyst.",
+"model": "There is a horizontal oblique tear of the posterior horn of the medial meniscus reaching the inferior articular surface, with an associated parameniscal cyst measuring 1.2 cm tracking along the posteromedial joint line. No meniscal extrusion or displaced fragment.",
+"keyterms": [
+{
+"label": "horizontal/oblique tear",
+"patterns": [
+"horizontal",
+"oblique"
+],
+"why": "a cleavage tear splitting the meniscus into superior and inferior leaves, common with degeneration"
+},
+{
+"label": "surface-reaching",
+"patterns": [
+"surface",
+"reach",
+"inferior articular",
+"superior articular"
+],
+"why": "specifying which surface the tear contacts confirms it meets tear criteria"
+},
+{
+"label": "parameniscal cyst",
+"patterns": [
+"parameniscal",
+"paramenisc",
+"cyst"
+],
+"why": "fluid decompressing through the tear collects adjacent to the meniscus"
+},
+{
+"label": "posterior horn",
+"patterns": [
+"posterior horn"
+],
+"why": "localizes the tear segment"
+},
+{
+"label": "no extrusion",
+"patterns": [
+"no extrus",
+"without extrus"
+],
+"why": "explicitly noting absence of extrusion characterizes a stable tear"
+}
+],
+"id": 26
+},
+{
+"type": "dictate",
+"joint": "knee",
+"topic": "Meniscus",
+"difficulty": 2,
+"prompt": "Dictate the findings of a ramp lesion.",
+"model": "There is a ramp lesion, seen as a vertical tear at the peripheral meniscocapsular junction of the posterior horn of the medial meniscus, with adjacent fluid signal and posteromedial tibial marrow edema. This finding is strongly associated with the ACL tear also present.",
+"keyterms": [
+{
+"label": "ramp lesion",
+"patterns": [
+"ramp"
+],
+"why": "a tear/disruption at the posteromedial meniscocapsular junction, often missed"
+},
+{
+"label": "meniscocapsular junction",
+"patterns": [
+"meniscocapsul",
+"capsular"
+],
+"why": "the lesion is at the peripheral attachment of the meniscus to the capsule"
+},
+{
+"label": "posterior horn medial meniscus",
+"patterns": [
+"posterior horn",
+"posteromedial"
+],
+"why": "the characteristic location of a ramp lesion"
+},
+{
+"label": "ACL association",
+"patterns": [
+"acl",
+"anterior cruciate"
+],
+"why": "ramp lesions are highly associated with ACL injuries and should be sought"
+},
+{
+"label": "marrow edema",
+"patterns": [
+"edema",
+"oedema",
+"contusion",
+"bruise"
+],
+"why": "posteromedial tibial edema is a secondary clue to a ramp lesion"
+}
+],
+"id": 27
+},
+{
+"type": "cloze",
+"joint": "knee",
+"topic": "Meniscus",
+"difficulty": 1,
+"prompt": "A discoid meniscus is suggested when >=3 contiguous 5 mm sagittal slices show a continuous meniscal body, i.e. an absent ___ pattern of slices, or a transverse meniscal width >15 mm on coronal images.",
+"answers": [
+"bowtie",
+"bow tie",
+"bow-tie"
+],
+"explain": "Normally only 2 contiguous sagittal slices show the bowtie body. >=3 contiguous bowtie slices (or coronal width >15 mm / >20% of tibial width) indicates a discoid meniscus, most often lateral.",
+"id": 28
+},
+{
+"type": "dictate",
+"joint": "knee",
+"topic": "Meniscus",
+"difficulty": 2,
+"prompt": "You see a band of low signal coursing from the posterior medial femoral condyle, anterior to the PCL, to the posterior horn of the lateral meniscus. Dictate this so it is NOT mistaken for a tear.",
+"model": "Note is made of a normal meniscofemoral ligament (ligament of Humphrey, anterior to the PCL), seen as a thin low-signal band coursing to the posterior horn of the lateral meniscus; this is a normal variant and should not be mistaken for a meniscal tear or loose fragment.",
+"keyterms": [
+{
+"label": "meniscofemoral ligament",
+"patterns": [
+"meniscofemoral"
+],
+"why": "normal ligaments connecting the lateral meniscus posterior horn to the femur"
+},
+{
+"label": "Humphrey vs Wrisberg",
+"patterns": [
+"humphrey",
+"wrisberg"
+],
+"why": "Humphrey lies anterior to the PCL, Wrisberg posterior; naming shows mastery"
+},
+{
+"label": "normal variant / mimic",
+"patterns": [
+"normal variant",
+"normal",
+"mimic",
+"pitfall"
+],
+"why": "explicitly labeling it normal prevents a false tear call"
+},
+{
+"label": "posterior horn lateral meniscus",
+"patterns": [
+"posterior horn",
+"lateral menisc"
+],
+"why": "the ligament inserts here, where the pseudotear cleft appears"
+},
+{
+"label": "not a tear",
+"patterns": [
+"not.*tear",
+"should not",
+"do not mistake"
+],
+"why": "closing the loop for the referring clinician"
+}
+],
+"id": 29
+},
+{
+"type": "cloze",
+"joint": "knee",
+"topic": "Meniscus",
+"difficulty": 2,
+"prompt": "A vertical longitudinal tear at the posterior medial meniscocapsular junction associated with ACL rupture is termed a ___ lesion.",
+"answers": [
+"ramp"
+],
+"explain": "The ramp lesion is a meniscocapsular/peripheral red-zone tear of the posterior horn of the medial meniscus, classically associated with ACL tears and best seen on fluid-sensitive sagittal images with posteromedial tibial edema.",
+"id": 30
+},
+{
+"type": "dictate",
+"joint": "knee",
+"topic": "ACL",
+"difficulty": 3,
+"prompt": "Dictate an acute complete ACL tear, including the secondary signs that support it.",
+"model": "The ACL fibers are discontinuous and not visualized in their expected course, consistent with an acute complete tear. Supporting secondary signs include the pivot-shift bone-contusion pattern with marrow edema in the lateral femoral condyle and posterolateral tibial plateau, anterior translation of the tibia with a positive anterior drawer/PCL buckling sign, and uncovering of the posterior horn of the lateral meniscus.",
+"keyterms": [
+{
+"label": "primary sign (fiber discontinuity)",
+"patterns": [
+"discontinu",
+"not visualized",
+"disrupt",
+"fibers"
+],
+"why": "the direct sign is non-visualization/discontinuity of the ACL fibers"
+},
+{
+"label": "pivot-shift contusion pattern",
+"patterns": [
+"pivot[\\s-]?shift",
+"kissing contusion",
+"bone contusion",
+"bone bruise"
+],
+"why": "the characteristic impaction bruise pattern of the ACL injury mechanism"
+},
+{
+"label": "lateral femoral condyle + posterolateral tibia",
+"patterns": [
+"lateral femoral condyle",
+"posterolateral tibia",
+"posterolateral plateau"
+],
+"why": "the specific paired contusion locations from the pivot-shift"
+},
+{
+"label": "anterior tibial translation",
+"patterns": [
+"anterior translat",
+"anterior drawer",
+"tibial translat"
+],
+"why": "the tibia subluxes anteriorly when the ACL is incompetent"
+},
+{
+"label": "PCL buckling",
+"patterns": [
+"pcl buckl",
+"buckl"
+],
+"why": "the PCL takes on a tighter curve as the tibia translates forward"
+},
+{
+"label": "uncovered posterior lateral meniscus",
+"patterns": [
+"uncover",
+"posterior horn.*lateral"
+],
+"why": "anterior tibial subluxation uncovers the posterior horn of the lateral meniscus"
+}
+],
+"id": 31
+},
+{
+"type": "mcq",
+"joint": "knee",
+"topic": "ACL",
+"difficulty": 2,
+"prompt": "Which lateral tibial-rim avulsion fracture is highly associated with an ACL tear and often co-exists with a ramp lesion?",
+"choices": [
+"Arcuate fracture",
+"Segond fracture",
+"Reverse Segond fracture",
+"Deep notch sign"
+],
+"answer": 1,
+"explain": "The Segond fracture is an avulsion of the lateral tibial rim (anterolateral ligament / lateral capsule), highly associated with ACL tears (and often medial meniscal injury). A reverse Segond (medial rim) associates with PCL injury; an arcuate fracture is a fibular styloid avulsion (PLC).",
+"id": 32
+},
+{
+"type": "dictate",
+"joint": "knee",
+"topic": "ACL",
+"difficulty": 2,
+"prompt": "Dictate ACL mucoid degeneration so it is not confused with a tear.",
+"model": "The ACL is diffusely thickened with increased intrasubstance T2 signal interdigitating between intact, taut fibers, producing a celery-stalk appearance, consistent with mucoid degeneration rather than a tear. There is no fiber discontinuity and no secondary signs of injury; an associated intraosseous ganglion at the tibial insertion is noted.",
+"keyterms": [
+{
+"label": "mucoid degeneration",
+"patterns": [
+"mucoid"
+],
+"why": "benign myxoid infiltration of the ACL, not a tear"
+},
+{
+"label": "celery-stalk sign",
+"patterns": [
+"celery"
+],
+"why": "the striated appearance of intact fibers separated by mucoid signal"
+},
+{
+"label": "intact fibers",
+"patterns": [
+"intact",
+"taut",
+"continu"
+],
+"why": "fibers remain continuous, distinguishing it from a tear"
+},
+{
+"label": "T2 hyperintensity",
+"patterns": [
+"t2",
+"increased signal",
+"hyperintens"
+],
+"why": "the mucoid material is bright on fluid-sensitive sequences"
+},
+{
+"label": "associated ganglion cyst",
+"patterns": [
+"ganglion",
+"cyst"
+],
+"why": "intraosseous/intraligamentous ganglia frequently accompany mucoid degeneration"
+},
+{
+"label": "no tear",
+"patterns": [
+"not.*tear",
+"no.*tear",
+"rather than"
+],
+"why": "the key clinical message is that this is not an acute tear"
+}
+],
+"id": 33
+},
+{
+"type": "dictate",
+"joint": "knee",
+"topic": "PCL/PLC",
+"difficulty": 2,
+"prompt": "Dictate an acute PCL tear and note the associated posterolateral corner sign you would search for.",
+"model": "The PCL is markedly thickened and edematous with increased intrasubstance T2 signal but intact, attenuated fibers, consistent with a high-grade interstitial sprain. An arcuate sign (avulsion fracture of the fibular styloid) is sought given the association with posterolateral corner injury.",
+"keyterms": [
+{
+"label": "PCL thickening/edema",
+"patterns": [
+"thicken",
+"edematous",
+"edema",
+"oedema"
+],
+"why": "acute PCL injury typically shows a thickened, high-signal but often still-continuous ligament"
+},
+{
+"label": "T2 signal",
+"patterns": [
+"t2",
+"increased signal",
+"hyperintens"
+],
+"why": "intrasubstance fluid signal marks the acute injury"
+},
+{
+"label": "interstitial/sprain grading",
+"patterns": [
+"interstit",
+"sprain",
+"partial",
+"high-grade"
+],
+"why": "PCL tears are often interstitial rather than completely discontinuous"
+},
+{
+"label": "arcuate sign",
+"patterns": [
+"arcuate"
+],
+"why": "fibular styloid avulsion, a marker of posterolateral corner injury"
+},
+{
+"label": "posterolateral corner",
+"patterns": [
+"posterolateral corner",
+"plc"
+],
+"why": "PLC injuries frequently accompany PCL tears and must be assessed"
+},
+{
+"label": "fibular styloid",
+"patterns": [
+"fibular styloid",
+"styloid"
+],
+"why": "the avulsed bony attachment site of the arcuate complex"
+}
+],
+"id": 34
+},
+{
+"type": "mcq",
+"joint": "knee",
+"topic": "MCL",
+"difficulty": 1,
+"prompt": "On MRI, a grade III (complete) MCL injury is best described as:",
+"choices": [
+"Periligamentous edema with an intact, normal-thickness ligament",
+"Partial-thickness fiber disruption with thickening and surrounding edema",
+"Complete discontinuity of the ligament fibers with a wavy/lax contour",
+"Low-signal thickening without edema (chronic)"
+],
+"answer": 2,
+"explain": "Grade I = periligamentous edema, intact fibers; grade II = partial fiber disruption/thickening; grade III = complete fiber discontinuity, often with a wavy lax contour and adjacent fluid. The superficial MCL most commonly tears proximally near the femoral attachment.",
+"id": 35
+},
+{
+"type": "dictate",
+"joint": "knee",
+"topic": "Cartilage",
+"difficulty": 2,
+"prompt": "Dictate a focal full-thickness cartilage defect of the medial femoral condyle using a recognized grading scheme.",
+"model": "There is a focal full-thickness (modified Outerbridge/ICRS grade 4) cartilage defect of the weight-bearing medial femoral condyle measuring 8 mm in width, extending to subchondral bone with underlying subchondral marrow edema and a small subchondral cyst. No intra-articular cartilage loose body identified.",
+"keyterms": [
+{
+"label": "full-thickness defect",
+"patterns": [
+"full[\\s-]?thickness",
+"grade 4",
+"grade iv"
+],
+"why": "grade 4 = defect extending to subchondral bone"
+},
+{
+"label": "Outerbridge/ICRS grading",
+"patterns": [
+"outerbridge",
+"icrs",
+"grade \\d"
+],
+"why": "naming a standardized grading system communicates severity precisely"
+},
+{
+"label": "subchondral bone exposure",
+"patterns": [
+"subchondral",
+"to bone",
+"bone exposed"
+],
+"why": "full-thickness loss exposes the subchondral plate"
+},
+{
+"label": "measurement",
+"patterns": [
+"\\d\\s?mm",
+"\\d\\s?cm"
+],
+"why": "defect size guides surgical options (e.g., microfracture vs graft)"
+},
+{
+"label": "subchondral edema/cyst",
+"patterns": [
+"marrow edema",
+"subchondral cyst",
+"cyst",
+"edema"
+],
+"why": "reactive marrow changes accompany cartilage loss"
+},
+{
+"label": "loose body search",
+"patterns": [
+"loose body",
+"loose",
+"intra-articular body"
+],
+"why": "a displaced cartilage fragment must be excluded"
+}
+],
+"id": 36
+},
+{
+"type": "dictate",
+"joint": "knee",
+"topic": "Osteochondral",
+"difficulty": 3,
+"prompt": "Dictate an unstable osteochondral lesion of the lateral femoral condyle.",
+"model": "There is an osteochondral lesion of the lateral femoral condyle with high-signal fluid undermining the osteochondral fragment on fluid-sensitive images and a surrounding rim of cystic change, findings indicating instability. The fragment remains in situ within its donor crater; no displaced intra-articular loose body is seen.",
+"keyterms": [
+{
+"label": "osteochondral lesion",
+"patterns": [
+"osteochondral",
+"ocd",
+"oc lesion"
+],
+"why": "injury involving both cartilage and underlying subchondral bone"
+},
+{
+"label": "fluid undermining",
+"patterns": [
+"undermin",
+"fluid.*beneath",
+"fluid.*fragment",
+"high.signal.*rim"
+],
+"why": "a T2-bright line beneath the fragment is the key instability sign"
+},
+{
+"label": "instability criteria",
+"patterns": [
+"unstabl",
+"instab"
+],
+"why": "distinguishing stable vs unstable changes management"
+},
+{
+"label": "subchondral cysts",
+"patterns": [
+"cyst"
+],
+"why": "cysts >5 mm beneath the lesion also suggest instability"
+},
+{
+"label": "in-situ vs displaced",
+"patterns": [
+"in situ",
+"in-situ",
+"crater",
+"donor",
+"displac"
+],
+"why": "states whether the fragment has separated from its bed"
+},
+{
+"label": "loose body",
+"patterns": [
+"loose body",
+"loose"
+],
+"why": "a freed fragment becomes an intra-articular loose body"
+}
+],
+"id": 37
+},
+{
+"type": "cloze",
+"joint": "knee",
+"topic": "Osteochondral",
+"difficulty": 2,
+"prompt": "A typically subchondral, geographic, diffuse marrow-edema lesion of the medial femoral condyle in an older patient with acute pain, without a discrete fracture line on radiographs, is best described as a subchondral ___ fracture (the entity formerly called SONK).",
+"answers": [
+"insufficiency"
+],
+"explain": "'Spontaneous osteonecrosis of the knee' (SONK) is now understood to represent a subchondral insufficiency fracture: a subchondral low-signal line with surrounding marrow edema, distinct from true AVN (which shows serpiginous double-line sign and is often bilateral/multifocal with risk factors).",
+"id": 38
+},
+{
+"type": "dictate",
+"joint": "knee",
+"topic": "Extensor mechanism",
+"difficulty": 2,
+"prompt": "Dictate a complete patellar tendon tear with patella alta.",
+"model": "There is a full-thickness tear of the patellar tendon at its proximal origin from the inferior pole of the patella, with fiber retraction, a fluid-filled gap, and resultant patella alta (Insall-Salvati ratio elevated at 1.5). A joint effusion and infrapatellar hematoma are present.",
+"keyterms": [
+{
+"label": "patellar tendon tear",
+"patterns": [
+"patellar tendon",
+"patellar tend"
+],
+"why": "identifies the injured structure and that it is the tendon below the patella"
+},
+{
+"label": "full-thickness/complete",
+"patterns": [
+"full[\\s-]?thickness",
+"complete",
+"retract"
+],
+"why": "distinguishes a complete rupture with retraction from a partial tear"
+},
+{
+"label": "inferior pole origin",
+"patterns": [
+"inferior pole",
+"proximal origin",
+"origin"
+],
+"why": "the patellar tendon most often tears proximally at the inferior patellar pole"
+},
+{
+"label": "patella alta",
+"patterns": [
+"patella alta",
+"alta",
+"high.riding"
+],
+"why": "loss of tendon restraint allows the patella to ride high"
+},
+{
+"label": "Insall-Salvati ratio",
+"patterns": [
+"insall",
+"salvati"
+],
+"why": "the standard ratio for quantifying patellar height (normal ~0.8-1.2)"
+},
+{
+"label": "fluid gap/hematoma",
+"patterns": [
+"gap",
+"hematoma",
+"haematoma",
+"fluid"
+],
+"why": "the tendinous gap fills with fluid/blood in an acute rupture"
+}
+],
+"id": 39
+},
+{
+"type": "dictate",
+"joint": "knee",
+"topic": "Patellar dislocation",
+"difficulty": 3,
+"prompt": "Dictate the findings of a transient lateral patellar dislocation.",
+"model": "Findings are consistent with a transient lateral patellar dislocation: there is a tear of the medial patellofemoral ligament at its patellar attachment, with the characteristic paired bone contusions involving the medial patellar facet and the anterolateral femoral condyle. A joint effusion and a chondral/osteochondral fragment from the medial patellar facet are noted.",
+"keyterms": [
+{
+"label": "transient lateral patellar dislocation",
+"patterns": [
+"lateral patellar disloc",
+"transient",
+"patellar disloc"
+],
+"why": "names the mechanism that self-reduces but leaves a classic imaging footprint"
+},
+{
+"label": "MPFL tear",
+"patterns": [
+"mpfl",
+"medial patellofemoral"
+],
+"why": "the primary medial restraint, torn during lateral dislocation"
+},
+{
+"label": "paired bone contusions",
+"patterns": [
+"bone contusion",
+"bone bruise",
+"contusion",
+"bruise"
+],
+"why": "the pathognomonic bruise pair confirms the diagnosis"
+},
+{
+"label": "medial patellar facet",
+"patterns": [
+"medial patellar facet",
+"medial patella",
+"medial facet"
+],
+"why": "the patella impacts here as it relocates"
+},
+{
+"label": "anterolateral femoral condyle",
+"patterns": [
+"anterolateral femoral condyle",
+"anterolateral.*condyle"
+],
+"why": "the lateral condyle is struck by the relocating patella"
+},
+{
+"label": "osteochondral fragment",
+"patterns": [
+"osteochondral",
+"chondral fragment",
+"loose body",
+"fragment"
+],
+"why": "a shear fragment from the medial facet is a frequent complication"
+}
+],
+"id": 40
+},
+{
+"type": "mcq",
+"joint": "knee",
+"topic": "Patellofemoral",
+"difficulty": 2,
+"prompt": "Which measurement and threshold is most commonly used to indicate a pathologically lateralized tibial tubercle predisposing to patellar maltracking?",
+"choices": [
+"TT-TG distance > 20 mm",
+"Sulcus angle < 120 degrees",
+"Insall-Salvati ratio < 0.8",
+"Patellar tilt angle < 5 degrees"
+],
+"answer": 0,
+"explain": "The tibial tubercle-trochlear groove (TT-TG) distance is abnormal when >20 mm (15-20 mm borderline), indicating lateralization of the tubercle and predisposition to lateral maltracking/dislocation. A sulcus angle >145 degrees suggests trochlear dysplasia, and an Insall-Salvati >1.2 indicates patella alta.",
+"id": 41
+},
+{
+"type": "dictate",
+"joint": "knee",
+"topic": "Patellofemoral",
+"difficulty": 2,
+"prompt": "Dictate trochlear dysplasia with the supporting measurements.",
+"model": "There is trochlear dysplasia with a shallow, flattened trochlea: the sulcus angle is increased at 150 degrees and trochlear depth is reduced at 2 mm, with a crossing sign on the lateral projection. The TT-TG distance is elevated at 22 mm and the Insall-Salvati ratio is 1.4, indicating patella alta; together these findings predispose to lateral patellar instability.",
+"keyterms": [
+{
+"label": "trochlear dysplasia",
+"patterns": [
+"trochlear dysplas",
+"dysplas",
+"shallow trochlea",
+"flattened"
+],
+"why": "an abnormally shallow trochlear groove, a key cause of patellar instability"
+},
+{
+"label": "sulcus angle",
+"patterns": [
+"sulcus angle",
+"sulcus"
+],
+"why": ">145 degrees indicates a flat/dysplastic trochlea"
+},
+{
+"label": "trochlear depth",
+"patterns": [
+"trochlear depth",
+"depth"
+],
+"why": "reduced depth (<3 mm) quantifies dysplasia"
+},
+{
+"label": "TT-TG distance",
+"patterns": [
+"tt[\\s-]?tg",
+"tubercle.trochlear",
+"tibial tubercle"
+],
+"why": ">20 mm indicates pathologic tubercle lateralization"
+},
+{
+"label": "Insall-Salvati / patella alta",
+"patterns": [
+"insall",
+"salvati",
+"patella alta",
+"alta"
+],
+"why": "patella alta (>1.2) reduces trochlear engagement and worsens instability"
+},
+{
+"label": "crossing sign",
+"patterns": [
+"crossing sign",
+"crossing"
+],
+"why": "the trochlear floor line crosses the anterior condylar margin, a dysplasia sign"
+}
+],
+"id": 42
+},
+{
+"type": "dictate",
+"joint": "knee",
+"topic": "Meniscus",
+"difficulty": 1,
+"prompt": "You see an undulating, wavy but smooth contour of the inferior surface of the medial meniscus body on a single image, with no surfacing signal. Dictate it correctly.",
+"model": "The medial meniscus demonstrates a meniscal flounce, an undulating wavy contour of the free edge without surface-reaching signal; this is a normal variant and does not represent a tear.",
+"keyterms": [
+{
+"label": "meniscal flounce",
+"patterns": [
+"flounce"
+],
+"why": "a normal wavy fold of the meniscal free edge, not a tear"
+},
+{
+"label": "normal variant",
+"patterns": [
+"normal variant",
+"normal",
+"variant"
+],
+"why": "explicitly labeling it benign prevents overcalling"
+},
+{
+"label": "no surfacing signal",
+"patterns": [
+"no surfac",
+"without surfac",
+"no.*tear",
+"does not represent"
+],
+"why": "absence of surface-reaching signal confirms it is not a tear"
+},
+{
+"label": "free edge contour",
+"patterns": [
+"free edge",
+"undulat",
+"wavy",
+"contour"
+],
+"why": "describes the morphology that defines a flounce"
+}
+],
+"id": 43
+},
+{
+"type": "mcq",
+"joint": "knee",
+"topic": "Meniscus mimics",
+"difficulty": 1,
+"prompt": "A linear cleft at the posterolateral lateral meniscus where vessels and the popliteus tendon course should NOT be called a tear because it represents:",
+"choices": [
+"A radial tear",
+"The popliteal hiatus with popliteomeniscal fascicles",
+"A displaced bucket-handle fragment",
+"A parameniscal cyst"
+],
+"answer": 1,
+"explain": "At the popliteal hiatus the popliteus tendon passes through the lateral meniscus, with superior and inferior popliteomeniscal fascicles creating a normal striated cleft that can mimic a tear. Recognizing this normal anatomy avoids a false-positive lateral meniscal tear call.",
+"id": 44
+},
+{
+"type": "cloze",
+"joint": "knee",
+"topic": "ACL",
+"difficulty": 2,
+"prompt": "The pivot-shift bone-contusion pattern of an acute ACL tear involves marrow edema in the ___ femoral condyle and the posterolateral tibial plateau.",
+"answers": [
+"lateral"
+],
+"explain": "The pivot-shift mechanism impacts the lateral femoral condyle (sulcus terminalis region) against the posterolateral tibial plateau, producing the characteristic 'kissing' contusion pair that is a strong secondary sign of an acute ACL tear.",
+"id": 45
+},
+{
+"type": "dictate",
+"joint": "knee",
+"topic": "ACL graft",
+"difficulty": 3,
+"prompt": "Dictate evaluation of an ACL reconstruction graft that appears intact but functionally lax.",
+"model": "The ACL reconstruction graft is intact and continuous with uniformly low signal, but it follows a slightly horizontal/posteriorly bowed course with mild anterior tibial translation and a positive PCL line, suggesting functional laxity rather than discrete tear. The femoral and tibial tunnels are appropriately positioned without osteolysis or a focal fluid-filled ganglion.",
+"keyterms": [
+{
+"label": "graft integrity",
+"patterns": [
+"graft",
+"intact",
+"continu"
+],
+"why": "first assess whether the graft fibers are continuous"
+},
+{
+"label": "graft signal",
+"patterns": [
+"low signal",
+"signal",
+"hyperintens"
+],
+"why": "a mature graft is low signal; increased signal can mean impingement or partial tear"
+},
+{
+"label": "graft obliquity/laxity",
+"patterns": [
+"horizontal",
+"bowed",
+"obliqu",
+"lax",
+"translat"
+],
+"why": "a horizontalized or bowed graft with anterior translation implies functional failure"
+},
+{
+"label": "tunnel position",
+"patterns": [
+"tunnel",
+"tunnels"
+],
+"why": "malpositioned tunnels predispose to graft failure or impingement"
+},
+{
+"label": "tunnel osteolysis/widening",
+"patterns": [
+"osteolysis",
+"widening",
+"ganglion"
+],
+"why": "tunnel widening or a ganglion signals complications"
+},
+{
+"label": "PCL line / Blumensaat",
+"patterns": [
+"pcl line",
+"blumensaat"
+],
+"why": "graft should parallel the Blumensaat line; deviation indicates malposition/laxity"
+}
+],
+"id": 46
+},
+{
+"type": "dictate",
+"joint": "hip",
+"topic": "FAI cam",
+"difficulty": 2,
+"prompt": "Dictate the findings for cam-type femoroacetabular impingement, including the measurement you'd report.",
+"model": "There is an osseous bump at the anterosuperior femoral head-neck junction with loss of the normal concave head-neck offset, consistent with cam-type morphology. The alpha angle measured on the oblique axial sequence is 68 degrees, abnormal and above the 55 degree threshold. There is associated anterosuperior chondrolabral junction signal abnormality with cartilage thinning and a small reactive subchondral cyst (herniation pit) within the head-neck junction. No subchondral marrow edema to suggest acute insufficiency fracture.",
+"keyterms": [
+{
+"label": "alpha angle",
+"patterns": [
+"alpha angle",
+"alpha"
+],
+"why": "the key measurement for cam morphology, abnormal when greater than 55 degrees"
+},
+{
+"label": "head-neck junction",
+"patterns": [
+"head[- ]neck",
+"head neck"
+],
+"why": "the site of the cam bump where the normal waist of the femur is lost"
+},
+{
+"label": "anterosuperior",
+"patterns": [
+"anterosuperior",
+"anteriosuperior"
+],
+"why": "the typical clock-face location of cam impingement (1-2 o'clock)"
+},
+{
+"label": "head-neck offset",
+"patterns": [
+"offset",
+"concav"
+],
+"why": "loss of the normal concave offset is the hallmark of cam morphology"
+},
+{
+"label": "cam morphology",
+"patterns": [
+"cam"
+],
+"why": "the specific FAI subtype caused by an aspherical femoral head"
+},
+{
+"label": "chondrolabral junction",
+"patterns": [
+"chondrolabral"
+],
+"why": "the cartilage-labrum interface that delaminates under cam shear stress"
+},
+{
+"label": "55 degree threshold",
+"patterns": [
+"55",
+"fifty[- ]five"
+],
+"why": "the accepted cutoff above which the alpha angle is considered abnormal"
+},
+{
+"label": "herniation pit",
+"patterns": [
+"herniation pit",
+"reactive.*cyst",
+"fibrocystic"
+],
+"why": "a reactive subchondral cyst at the head-neck junction associated with cam FAI"
+}
+],
+"id": 47
+},
+{
+"type": "dictate",
+"joint": "hip",
+"topic": "FAI pincer",
+"difficulty": 2,
+"prompt": "Dictate the findings for pincer-type femoroacetabular impingement, including the relevant angle and an associated radiographic sign.",
+"model": "There is acetabular overcoverage with a lateral center-edge angle of 43 degrees, exceeding the 40 degree threshold for pincer morphology. Findings of focal anterior overcoverage with a crossover sign are present, reflecting acetabular retroversion. The labrum is degenerated and intrasubstance with a small ganglion, and there is a contrecoup posteroinferior cartilage loss pattern. No cam bump; alpha angle is normal at 48 degrees.",
+"keyterms": [
+{
+"label": "lateral center-edge angle",
+"patterns": [
+"center[- ]edge",
+"LCEA",
+"CE angle"
+],
+"why": "quantifies acetabular coverage, greater than 40 degrees indicates pincer overcoverage"
+},
+{
+"label": "overcoverage",
+"patterns": [
+"overcoverage",
+"over[- ]coverage",
+"overcover"
+],
+"why": "excess acetabular coverage of the femoral head defines pincer FAI"
+},
+{
+"label": "crossover sign",
+"patterns": [
+"crossover",
+"cross[- ]over"
+],
+"why": "radiographic sign of acetabular retroversion contributing to focal pincer"
+},
+{
+"label": "retroversion",
+"patterns": [
+"retroversion",
+"retrovert"
+],
+"why": "posteriorly oriented acetabulum causing anterior pincer impingement"
+},
+{
+"label": "pincer morphology",
+"patterns": [
+"pincer"
+],
+"why": "the FAI subtype from acetabular-sided overcoverage"
+},
+{
+"label": "contrecoup",
+"patterns": [
+"contrecoup",
+"contre[- ]coup",
+"posteroinferior"
+],
+"why": "the posteroinferior cartilage damage pattern characteristic of pincer impingement"
+},
+{
+"label": "40 degree threshold",
+"patterns": [
+"40",
+"forty"
+],
+"why": "the LCEA cutoff above which overcoverage/pincer is diagnosed"
+}
+],
+"id": 48
+},
+{
+"type": "dictate",
+"joint": "hip",
+"topic": "Labral tear",
+"difficulty": 2,
+"prompt": "Dictate an acetabular labral tear using clock-face localization and note an associated cyst.",
+"model": "There is a tear at the anterosuperior acetabular labrum centered at the 12 to 1 o'clock position, manifest as linear high T2 signal extending to the articular surface at the chondrolabral junction. The tear is associated with a small adjacent paralabral cyst measuring 8 millimeters. There is early chondrolabral junction delamination with undermining of the adjacent acetabular cartilage. The remainder of the labrum is intact without detachment.",
+"keyterms": [
+{
+"label": "anterosuperior labrum",
+"patterns": [
+"anterosuperior",
+"12.*o.?clock",
+"1 o.?clock",
+"11.*o.?clock"
+],
+"why": "the most common location for acetabular labral tears"
+},
+{
+"label": "clock-face",
+"patterns": [
+"o.?clock",
+"clock"
+],
+"why": "the standardized localization system for describing labral pathology"
+},
+{
+"label": "chondrolabral junction",
+"patterns": [
+"chondrolabral"
+],
+"why": "the cartilage-labrum interface where most tears propagate"
+},
+{
+"label": "paralabral cyst",
+"patterns": [
+"paralabral",
+"para[- ]labral"
+],
+"why": "a cyst adjacent to a torn labrum, a secondary sign indicating a tear"
+},
+{
+"label": "delamination",
+"patterns": [
+"delaminat",
+"undermin"
+],
+"why": "separation of cartilage from subchondral bone adjacent to a chondrolabral tear"
+},
+{
+"label": "articular surface",
+"patterns": [
+"articular surface",
+"extend.*surface"
+],
+"why": "signal reaching the surface confirms a true tear versus degeneration"
+},
+{
+"label": "detachment",
+"patterns": [
+"detach"
+],
+"why": "distinguishing a tear from full labral detachment from the acetabular rim"
+}
+],
+"id": 49
+},
+{
+"type": "dictate",
+"joint": "hip",
+"topic": "AVN",
+"difficulty": 3,
+"prompt": "Dictate femoral head avascular necrosis including the characteristic signs, staging system, and the measurement you would report for prognosis.",
+"model": "There is a serpiginous geographic lesion in the anterosuperior weight-bearing portion of the right femoral head demonstrating the double-line sign on T2, with a peripheral low-signal rim and inner hyperintense granulation tissue. There is a subchondral crescent sign indicating subchondral fracture without articular collapse, consistent with ARCO stage 3A. The lesion involves approximately 35 percent of the weight-bearing surface and subtends a combined necrotic angle that places it in the medium-to-large range. No femoral head flattening to indicate collapse beyond 2 millimeters.",
+"keyterms": [
+{
+"label": "double-line sign",
+"patterns": [
+"double[- ]line",
+"double line"
+],
+"why": "pathognomonic for osteonecrosis: low-signal sclerotic rim with inner high-signal granulation tissue on T2"
+},
+{
+"label": "crescent sign",
+"patterns": [
+"crescent"
+],
+"why": "subchondral lucency/fracture indicating impending collapse, defines later ARCO stage"
+},
+{
+"label": "ARCO staging",
+"patterns": [
+"ARCO",
+"stage 3",
+"stage 2",
+"stage"
+],
+"why": "the standard staging system for osteonecrosis based on collapse and crescent"
+},
+{
+"label": "weight-bearing involvement",
+"patterns": [
+"weight[- ]bearing",
+"percent",
+"%",
+"necrotic angle"
+],
+"why": "the percentage of weight-bearing surface involved predicts risk of collapse"
+},
+{
+"label": "serpiginous",
+"patterns": [
+"serpiginous",
+"geographic"
+],
+"why": "describes the wavy demarcating margin of the necrotic segment"
+},
+{
+"label": "subchondral fracture",
+"patterns": [
+"subchondral fracture",
+"subchondral"
+],
+"why": "the crescent represents a subchondral fracture preceding collapse"
+},
+{
+"label": "collapse",
+"patterns": [
+"collapse",
+"flatten"
+],
+"why": "articular collapse is the key prognostic and staging determinant"
+}
+],
+"id": 50
+},
+{
+"type": "dictate",
+"joint": "hip",
+"topic": "Subchondral insufficiency fracture",
+"difficulty": 3,
+"prompt": "Dictate findings distinguishing a subchondral insufficiency fracture of the femoral head from transient bone marrow edema syndrome.",
+"model": "There is extensive bone marrow edema throughout the right femoral head and neck extending into the intertrochanteric region. Critically, there is a low-signal subchondral fracture line paralleling the articular surface in the superior weight-bearing femoral head with associated subchondral marrow edema, consistent with a subchondral insufficiency fracture rather than transient osteoporosis. The presence of the discrete subchondral fracture line distinguishes this from bone marrow edema syndrome, which shows edema without a fracture line. No double-line sign to suggest osteonecrosis.",
+"keyterms": [
+{
+"label": "subchondral fracture line",
+"patterns": [
+"fracture line",
+"subchondral fracture"
+],
+"why": "the presence of a low-signal subchondral line is what defines insufficiency fracture versus pure marrow edema"
+},
+{
+"label": "bone marrow edema",
+"patterns": [
+"marrow edema",
+"bone marrow"
+],
+"why": "the nonspecific finding common to both entities"
+},
+{
+"label": "transient osteoporosis",
+"patterns": [
+"transient osteoporosis",
+"transient",
+"edema syndrome",
+"BMES"
+],
+"why": "the self-limited diagnosis of exclusion when no fracture line is present"
+},
+{
+"label": "insufficiency fracture",
+"patterns": [
+"insufficiency"
+],
+"why": "fracture through abnormal/osteoporotic bone under normal stress"
+},
+{
+"label": "weight-bearing",
+"patterns": [
+"weight[- ]bearing",
+"superior"
+],
+"why": "the superior weight-bearing region is where insufficiency fractures occur"
+},
+{
+"label": "double-line sign",
+"patterns": [
+"double[- ]line"
+],
+"why": "its absence helps exclude osteonecrosis in the differential"
+}
+],
+"id": 51
+},
+{
+"type": "dictate",
+"joint": "hip",
+"topic": "Gluteal tendons",
+"difficulty": 2,
+"prompt": "Dictate a gluteus medius/minimus tear at the greater trochanter, using the rotator cuff analogy and noting muscle quality.",
+"model": "At the greater trochanter, there is a full-thickness tear of the gluteus medius tendon at its insertion on the lateral facet, with a fluid-filled gap and tendon retraction. The gluteus minimus tendon at the anterior facet shows intermediate-grade tendinosis and partial undersurface tearing. These represent the rotator cuff of the hip. There is moderate fatty atrophy of the gluteus medius muscle belly, Goutallier grade 2. Associated trochanteric bursal fluid is present.",
+"keyterms": [
+{
+"label": "gluteus medius",
+"patterns": [
+"gluteus medius",
+"glut.*medius",
+"g.?med"
+],
+"why": "the primary abductor tendon torn in greater trochanteric pain syndrome"
+},
+{
+"label": "gluteus minimus",
+"patterns": [
+"gluteus minimus",
+"glut.*minimus",
+"g.?min"
+],
+"why": "inserts on the anterior facet, the second component of the hip abductor cuff"
+},
+{
+"label": "rotator cuff of the hip",
+"patterns": [
+"rotator cuff of the hip",
+"rotator cuff"
+],
+"why": "the analogy describing the gluteal tendon complex at the trochanter"
+},
+{
+"label": "facet anatomy",
+"patterns": [
+"facet",
+"lateral facet",
+"anterior facet"
+],
+"why": "the greater trochanter facets are distinct insertion sites for medius and minimus"
+},
+{
+"label": "fatty atrophy",
+"patterns": [
+"fatty atrophy",
+"fatty infiltrat",
+"Goutallier"
+],
+"why": "muscle quality (graded like the shoulder) predicts repair outcome"
+},
+{
+"label": "trochanteric bursitis",
+"patterns": [
+"bursa",
+"bursal",
+"bursitis"
+],
+"why": "commonly accompanies gluteal tendinopathy in lateral hip pain"
+},
+{
+"label": "tendon retraction",
+"patterns": [
+"retract",
+"gap"
+],
+"why": "degree of retraction guides surgical planning in full-thickness tears"
+}
+],
+"id": 52
+},
+{
+"type": "dictate",
+"joint": "hip",
+"topic": "Athletic pubalgia",
+"difficulty": 3,
+"prompt": "Dictate findings of athletic pubalgia (sports hernia), naming the relevant aponeurosis and the characteristic sign.",
+"model": "At the pubic symphysis there is disruption of the rectus abdominis-adductor longus aponeurosis at its insertion on the anterior pubis, with a secondary cleft sign extending inferiorly from the symphyseal fibrocartilage on the symptomatic side. There is associated marrow edema at the pubic body and parasymphyseal bone stress. The findings are consistent with athletic pubalgia. The adductor longus origin shows tendinosis without full-thickness avulsion.",
+"keyterms": [
+{
+"label": "rectus-adductor aponeurosis",
+"patterns": [
+"rectus.*adductor",
+"aponeuros",
+"rectus abdominis"
+],
+"why": "the common rectus abdominis-adductor longus plate is the key structure in athletic pubalgia"
+},
+{
+"label": "secondary cleft sign",
+"patterns": [
+"secondary cleft",
+"cleft sign",
+"cleft"
+],
+"why": "abnormal fluid cleft extending from the symphysis indicating microtearing"
+},
+{
+"label": "athletic pubalgia",
+"patterns": [
+"athletic pubalgia",
+"sports hernia",
+"core muscle"
+],
+"why": "the clinical entity describing this groin injury complex"
+},
+{
+"label": "pubic symphysis",
+"patterns": [
+"symphysis",
+"parasymphys",
+"pubic"
+],
+"why": "the central anatomic focus of the injury"
+},
+{
+"label": "adductor longus",
+"patterns": [
+"adductor longus",
+"adductor"
+],
+"why": "shares the aponeurotic plate and is commonly co-injured"
+},
+{
+"label": "marrow edema",
+"patterns": [
+"marrow edema",
+"bone stress",
+"edema"
+],
+"why": "parasymphyseal stress edema supports the diagnosis"
+}
+],
+"id": 53
+},
+{
+"type": "dictate",
+"joint": "hip",
+"topic": "Hamstring avulsion",
+"difficulty": 2,
+"prompt": "Dictate a proximal hamstring origin avulsion, including the retraction measurement that guides management.",
+"model": "There is a full-thickness avulsion of the conjoint hamstring origin from the ischial tuberosity involving the semitendinosus and biceps femoris long head, with the semimembranosus partially involved. The tendon stump is retracted 4 centimeters distally with an intervening fluid-filled gap and surrounding hematoma. Retraction beyond 2 centimeters typically favors surgical repair. No sciatic nerve encasement by hematoma.",
+"keyterms": [
+{
+"label": "ischial tuberosity",
+"patterns": [
+"ischial tuberosity",
+"ischium",
+"ischial"
+],
+"why": "the bony origin of the proximal hamstring tendons"
+},
+{
+"label": "retraction",
+"patterns": [
+"retract",
+"\\d+ ?cm",
+"centimeter"
+],
+"why": "the measured tendon retraction in centimeters drives the surgical decision"
+},
+{
+"label": "conjoint tendon",
+"patterns": [
+"conjoint",
+"conjoined"
+],
+"why": "semitendinosus and biceps femoris long head share a conjoint origin"
+},
+{
+"label": "semimembranosus",
+"patterns": [
+"semimembranosus"
+],
+"why": "the separate anterolateral hamstring origin, important to assess involvement"
+},
+{
+"label": "avulsion",
+"patterns": [
+"avuls",
+"full[- ]thickness"
+],
+"why": "complete detachment from the ischium versus partial strain"
+},
+{
+"label": "sciatic nerve",
+"patterns": [
+"sciatic"
+],
+"why": "proximity to the retracted stump/hematoma is clinically important to report"
+}
+],
+"id": 54
+},
+{
+"type": "dictate",
+"joint": "hip",
+"topic": "Acetabular dysplasia",
+"difficulty": 2,
+"prompt": "Dictate findings of acetabular dysplasia and the measurement used to define undercoverage.",
+"model": "There is acetabular dysplasia with a shallow undercovered acetabulum; the lateral center-edge angle measures 18 degrees, below the 20 to 25 degree threshold indicating undercoverage. There is lateralization of the femoral head with increased load on the anterosuperior labrum, which is hypertrophied and degenerated with a small paralabral cyst. Early superolateral cartilage loss is present. Findings reflect the instability pattern of dysplasia rather than impingement.",
+"keyterms": [
+{
+"label": "lateral center-edge angle",
+"patterns": [
+"center[- ]edge",
+"LCEA",
+"CE angle"
+],
+"why": "LCEA below 20-25 degrees defines undercoverage/dysplasia"
+},
+{
+"label": "undercoverage",
+"patterns": [
+"undercoverage",
+"under[- ]coverage",
+"undercover",
+"shallow"
+],
+"why": "deficient acetabular coverage is the essence of dysplasia"
+},
+{
+"label": "dysplasia",
+"patterns": [
+"dysplasia",
+"dysplastic"
+],
+"why": "the diagnosis defined by inadequate acetabular containment"
+},
+{
+"label": "labral hypertrophy",
+"patterns": [
+"hypertroph",
+"degenerat"
+],
+"why": "the labrum hypertrophies to compensate for bony undercoverage"
+},
+{
+"label": "20 degree threshold",
+"patterns": [
+"20",
+"25",
+"twenty"
+],
+"why": "the LCEA cutoff range below which dysplasia is diagnosed"
+},
+{
+"label": "instability",
+"patterns": [
+"instabilit",
+"lateraliz"
+],
+"why": "dysplasia causes instability, the opposite mechanical problem from FAI"
+}
+],
+"id": 55
+},
+{
+"type": "dictate",
+"joint": "ankle",
+"topic": "Achilles paratenonitis",
+"difficulty": 3,
+"prompt": "Dictate Achilles tendon inflammation using the precise terminology, and explain why you do NOT call it tenosynovitis.",
+"model": "The Achilles tendon is surrounded by peritendinous edema and fluid within the paratenon, with thickening and enhancement of the paratenon, consistent with paratenonitis. Note that the Achilles tendon lacks a true synovial sheath and is invested only by the paratenon, so this is correctly termed paratenonitis (or paratendinitis) rather than tenosynovitis. The mid-substance tendon shows mild fusiform tendinosis but no discrete tear. There is no fluid distending a tendon sheath because none exists for the Achilles.",
+"keyterms": [
+{
+"label": "paratenonitis",
+"patterns": [
+"paratenonitis",
+"paratendinitis",
+"paratenon"
+],
+"why": "the correct term for Achilles peritendinous inflammation since it has only a paratenon"
+},
+{
+"label": "no synovial sheath",
+"patterns": [
+"no.*synovial",
+"lacks.*synovial",
+"without.*sheath",
+"no.*sheath"
+],
+"why": "the Achilles has no synovial sheath, which is why tenosynovitis is the wrong word"
+},
+{
+"label": "not tenosynovitis",
+"patterns": [
+"not.*tenosynovitis",
+"rather than tenosynovitis",
+"tenosynovitis"
+],
+"why": "contrasting the incorrect term teaches the key distinction"
+},
+{
+"label": "peritendinous edema",
+"patterns": [
+"peritendinous",
+"peri[- ]tendinous",
+"perit"
+],
+"why": "fluid/edema around the tendon is the imaging hallmark of paratenonitis"
+},
+{
+"label": "paratenon",
+"patterns": [
+"paratenon"
+],
+"why": "the loose connective tissue envelope that becomes inflamed in place of a sheath"
+},
+{
+"label": "tendinosis",
+"patterns": [
+"tendinosis",
+"tendinopathy"
+],
+"why": "intrasubstance degeneration that frequently coexists with paratenonitis"
+}
+],
+"id": 56
+},
+{
+"type": "dictate",
+"joint": "ankle",
+"topic": "Achilles tendinosis/tear",
+"difficulty": 2,
+"prompt": "Dictate mid-substance Achilles tendinosis with a partial tear, including the watershed location and the caliber measurement.",
+"model": "There is fusiform thickening of the Achilles tendon in the mid-substance watershed zone, approximately 4 centimeters above the calcaneal insertion, with an anteroposterior diameter of 11 millimeters, abnormal and above the normal 7 millimeter limit. Within this region there is an intrasubstance high-signal cleft involving approximately 40 percent of the cross-sectional area, consistent with a partial-thickness tear. The tendon remains in continuity without a full-thickness gap. The Kager fat pad shows reactive edema.",
+"keyterms": [
+{
+"label": "watershed zone",
+"patterns": [
+"watershed",
+"2.?6 ?cm",
+"2 to 6",
+"mid[- ]substance",
+"midsubstance"
+],
+"why": "the hypovascular zone 2-6 cm above the insertion where tendinosis and tears concentrate"
+},
+{
+"label": "AP diameter",
+"patterns": [
+"anteroposterior",
+"AP",
+"diameter",
+"7 ?mm",
+"caliber"
+],
+"why": "AP thickness greater than 7 mm indicates abnormal tendon thickening"
+},
+{
+"label": "fusiform thickening",
+"patterns": [
+"fusiform",
+"thicken"
+],
+"why": "the typical morphology of tendinosis as opposed to focal nodular change"
+},
+{
+"label": "partial-thickness tear",
+"patterns": [
+"partial",
+"intrasubstance",
+"cleft"
+],
+"why": "distinguishes a partial tear in continuity from a complete rupture"
+},
+{
+"label": "continuity",
+"patterns": [
+"continuity",
+"no.*gap",
+"in continuity"
+],
+"why": "absence of a gap confirms the tendon is not fully ruptured"
+},
+{
+"label": "Kager fat pad",
+"patterns": [
+"Kager",
+"kager",
+"pre[- ]Achilles fat"
+],
+"why": "the fat anterior to the Achilles that shows reactive edema in tendon pathology"
+}
+],
+"id": 57
+},
+{
+"type": "dictate",
+"joint": "ankle",
+"topic": "Insertional Achilles/Haglund",
+"difficulty": 2,
+"prompt": "Dictate insertional Achilles tendinopathy with associated Haglund deformity and bursitis.",
+"model": "At the Achilles insertion on the posterior calcaneus there is insertional tendinopathy with tendon thickening, intrasubstance signal, and insertional enthesophyte formation. There is a prominent posterosuperior calcaneal tuberosity (Haglund deformity) with reactive marrow edema. Fluid distends the retrocalcaneal bursa consistent with retrocalcaneal bursitis, and there is superficial Achilles bursitis posteriorly. These constitute the Haglund syndrome triad.",
+"keyterms": [
+{
+"label": "insertional tendinopathy",
+"patterns": [
+"insertional",
+"insertion"
+],
+"why": "degeneration at the calcaneal enthesis, distinct from mid-substance disease"
+},
+{
+"label": "Haglund deformity",
+"patterns": [
+"Haglund",
+"haglund",
+"posterosuperior.*tuberosity"
+],
+"why": "the prominent posterosuperior calcaneal tuberosity that mechanically irritates the tendon"
+},
+{
+"label": "retrocalcaneal bursitis",
+"patterns": [
+"retrocalcaneal"
+],
+"why": "inflammation of the bursa between the calcaneus and tendon, part of the syndrome"
+},
+{
+"label": "enthesophyte",
+"patterns": [
+"enthesophyte",
+"enthesis",
+"spur"
+],
+"why": "bony spur at the insertion characteristic of insertional disease"
+},
+{
+"label": "Haglund syndrome",
+"patterns": [
+"Haglund syndrome",
+"triad"
+],
+"why": "the triad of Haglund deformity, retrocalcaneal bursitis, and insertional tendinopathy"
+},
+{
+"label": "superficial bursitis",
+"patterns": [
+"superficial.*burs",
+"retro[- ]Achilles"
+],
+"why": "the additional bursa posterior to the tendon that can be inflamed"
+}
+],
+"id": 58
+},
+{
+"type": "dictate",
+"joint": "ankle",
+"topic": "Lateral ligament sprain",
+"difficulty": 2,
+"prompt": "Dictate a lateral ankle ligament sprain, naming the ligaments in order of injury frequency and grading the injury.",
+"model": "There is a grade III (complete) tear of the anterior talofibular ligament with fiber discontinuity and surrounding edema, and a grade II partial tear of the calcaneofibular ligament with thickening and periligamentous edema. The posterior talofibular ligament is intact. The injury pattern follows the expected sequence ATFL then CFL then PTFL. There is an associated anterolateral soft tissue contusion but no osteochondral lesion of the talar dome.",
+"keyterms": [
+{
+"label": "ATFL",
+"patterns": [
+"anterior talofibular",
+"ATFL"
+],
+"why": "the first and most commonly injured lateral ankle ligament"
+},
+{
+"label": "CFL",
+"patterns": [
+"calcaneofibular",
+"CFL"
+],
+"why": "the second ligament injured, signifying a more severe sprain"
+},
+{
+"label": "PTFL",
+"patterns": [
+"posterior talofibular",
+"PTFL"
+],
+"why": "the strongest and least commonly torn, injured only in severe trauma"
+},
+{
+"label": "grading I/II/III",
+"patterns": [
+"grade",
+"grade I",
+"grade II",
+"grade III"
+],
+"why": "sprains are graded I (stretch), II (partial), III (complete) to guide management"
+},
+{
+"label": "injury sequence",
+"patterns": [
+"ATFL.*CFL",
+"sequence",
+"order"
+],
+"why": "the predictable order ATFL>CFL>PTFL helps gauge severity"
+},
+{
+"label": "fiber discontinuity",
+"patterns": [
+"discontinu",
+"complete",
+"fiber"
+],
+"why": "frank fiber disruption defines a grade III complete tear"
+}
+],
+"id": 59
+},
+{
+"type": "dictate",
+"joint": "ankle",
+"topic": "Syndesmotic injury",
+"difficulty": 3,
+"prompt": "Dictate a high ankle (syndesmotic) injury, including the named ligaments, the diagnostic measurement and its location, and the associated proximal fracture to exclude.",
+"model": "There is a high ankle syndesmotic injury with a complete tear of the anterior inferior tibiofibular ligament and partial tear of the posterior inferior tibiofibular ligament, with interosseous membrane edema extending proximally. The tibiofibular clear space measures 8 millimeters on the axial image 1 centimeter above the tibial plafond, exceeding the 6 millimeter upper limit and indicating syndesmotic widening. Given the proximal interosseous involvement, attention to the proximal fibula is warranted to exclude a Maisonneuve fracture.",
+"keyterms": [
+{
+"label": "AITFL",
+"patterns": [
+"anterior inferior tibiofibular",
+"AITFL",
+"anteroinferior tibiofibular"
+],
+"why": "the most commonly injured syndesmotic ligament in high ankle sprains"
+},
+{
+"label": "tibiofibular clear space",
+"patterns": [
+"clear space",
+"tibiofibular clear"
+],
+"why": "the key measurement; greater than 6 mm indicates syndesmotic widening"
+},
+{
+"label": "6mm threshold",
+"patterns": [
+"6 ?mm",
+"6 millimeter",
+"six millimeter"
+],
+"why": "the upper normal limit for tibiofibular clear space"
+},
+{
+"label": "1cm above plafond",
+"patterns": [
+"1 ?cm above",
+"above.*plafond",
+"1 centimeter above"
+],
+"why": "the standardized level for measuring clear space, 1 cm above the plafond"
+},
+{
+"label": "Maisonneuve",
+"patterns": [
+"Maisonneuve",
+"maisonneuve"
+],
+"why": "a proximal fibular fracture associated with complete syndesmotic disruption"
+},
+{
+"label": "interosseous membrane",
+"patterns": [
+"interosseous"
+],
+"why": "proximal IOM extension indicates a more unstable injury"
+},
+{
+"label": "syndesmosis",
+"patterns": [
+"syndesmo",
+"high ankle"
+],
+"why": "the distal tibiofibular joint complex defining this injury type"
+}
+],
+"id": 60
+},
+{
+"type": "dictate",
+"joint": "ankle",
+"topic": "Peroneal split tear",
+"difficulty": 2,
+"prompt": "Dictate a peroneus brevis split tear, including the characteristic sign and an associated retinaculum finding.",
+"model": "At the level of the lateral malleolus the peroneus brevis tendon demonstrates a longitudinal split into two components with a boomerang or C-shaped configuration on axial images, the peroneus longus interposed within the cleft, consistent with a split tear. There is associated peroneal tenosynovitis with sheath fluid. The superior peroneal retinaculum is thickened but intact, with no tendon subluxation anterior to the fibula. A low-lying peroneus brevis muscle belly is noted as a predisposing factor.",
+"keyterms": [
+{
+"label": "peroneus brevis split",
+"patterns": [
+"brevis",
+"split tear",
+"split"
+],
+"why": "the brevis is the tendon that characteristically splits longitudinally"
+},
+{
+"label": "C/boomerang sign",
+"patterns": [
+"boomerang",
+"C[- ]shape",
+"C shaped",
+"chevron"
+],
+"why": "the axial morphology of the split brevis wrapping around the longus"
+},
+{
+"label": "superior peroneal retinaculum",
+"patterns": [
+"superior peroneal retinaculum",
+"SPR",
+"retinaculum"
+],
+"why": "the structure that, when torn, allows subluxation predisposing to splits"
+},
+{
+"label": "subluxation",
+"patterns": [
+"subluxat",
+"dislocat"
+],
+"why": "peroneal tendon subluxation anterior to the fibula is a key associated finding"
+},
+{
+"label": "tenosynovitis",
+"patterns": [
+"tenosynovitis",
+"sheath fluid"
+],
+"why": "peroneal tendons do have a synovial sheath, so tenosynovitis is the correct term here"
+},
+{
+"label": "peroneus longus",
+"patterns": [
+"longus"
+],
+"why": "the longus often becomes interposed within the brevis split"
+}
+],
+"id": 61
+},
+{
+"type": "dictate",
+"joint": "ankle",
+"topic": "OLT talar dome",
+"difficulty": 3,
+"prompt": "Dictate an osteochondral lesion of the talar dome, including the localization grid, the typical location/mechanism, and the instability criterion.",
+"model": "There is an osteochondral lesion of the talar dome in the medial-posterior quadrant (zone 4 of the 9-zone grid), demonstrating the cup-shaped morphology typical of atraumatic medial lesions. The overlying cartilage shows a fissure and there is high T2 signal undermining the osteochondral fragment with fluid encircling its base, an instability criterion indicating an unstable lesion. There is underlying subchondral cystic change. The lateral talar dome is normal, without the shallow wafer-shaped lateral-central pattern.",
+"keyterms": [
+{
+"label": "9-zone grid",
+"patterns": [
+"9[- ]zone",
+"nine[- ]zone",
+"zone \\d",
+"grid"
+],
+"why": "the standardized 3x3 grid for localizing talar dome lesions"
+},
+{
+"label": "medial-posterior",
+"patterns": [
+"medial[- ]posterior",
+"medial.*posterior",
+"posteromedial"
+],
+"why": "the atraumatic, deeper cup-shaped lesions occur medially and posteriorly"
+},
+{
+"label": "lateral-central",
+"patterns": [
+"lateral[- ]central",
+"lateral.*central",
+"anterolateral"
+],
+"why": "traumatic, shallow wafer-shaped lesions occur laterally"
+},
+{
+"label": "fluid undermining",
+"patterns": [
+"undermin",
+"fluid.*around",
+"encircl",
+"fluid.*base"
+],
+"why": "T2 fluid signal undermining the fragment is the key instability criterion"
+},
+{
+"label": "instability criteria",
+"patterns": [
+"unstable",
+"instabilit"
+],
+"why": "fluid rim, cysts, and displacement determine whether the fragment is unstable"
+},
+{
+"label": "cup vs wafer",
+"patterns": [
+"cup",
+"wafer"
+],
+"why": "medial lesions are cup-shaped/atraumatic, lateral are wafer-shaped/traumatic"
+},
+{
+"label": "subchondral cyst",
+"patterns": [
+"subchondral cyst",
+"cystic"
+],
+"why": "subchondral cysts beneath the lesion are a sign of chronicity/instability"
+}
+],
+"id": 62
+},
+{
+"type": "dictate",
+"joint": "foot",
+"topic": "Lisfranc injury",
+"difficulty": 3,
+"prompt": "Dictate a Lisfranc ligament injury, naming the key ligament, the diastasis you measure, and the characteristic fracture sign.",
+"model": "There is disruption of the Lisfranc ligament complex with a complete tear of the interosseous and plantar components extending between the medial cuneiform and the base of the second metatarsal. There is C1-M2 diastasis with widening of the interval and a small bony fleck avulsed from the second metatarsal base, the fleck sign. Disruption of the plantar component portends instability. There is associated marrow edema at the cuneiform and metatarsal bases without overt malalignment on these non-weight-bearing images.",
+"keyterms": [
+{
+"label": "Lisfranc ligament",
+"patterns": [
+"Lisfranc",
+"lisfranc"
+],
+"why": "the ligament between the medial cuneiform and second metatarsal base"
+},
+{
+"label": "C1-M2 diastasis",
+"patterns": [
+"C1[- ]M2",
+"cuneiform.*metatarsal",
+"diastasis",
+"first cuneiform"
+],
+"why": "widening between medial cuneiform and second metatarsal base is the key abnormality"
+},
+{
+"label": "plantar component",
+"patterns": [
+"plantar component",
+"plantar"
+],
+"why": "plantar ligament involvement is the most important predictor of instability"
+},
+{
+"label": "fleck sign",
+"patterns": [
+"fleck"
+],
+"why": "a small avulsion fragment in the Lisfranc interval indicating ligamentous avulsion"
+},
+{
+"label": "interosseous component",
+"patterns": [
+"interosseous"
+],
+"why": "one of the three components (dorsal, interosseous, plantar) of the ligament"
+},
+{
+"label": "instability",
+"patterns": [
+"instabilit",
+"unstable",
+"malalign"
+],
+"why": "the clinical concern that drives surgical fixation"
+}
+],
+"id": 63
+},
+{
+"type": "mcq",
+"joint": "hip",
+"topic": "FAI cam",
+"difficulty": 1,
+"prompt": "On MRI, what alpha angle value is the commonly accepted threshold above which cam-type femoroacetabular impingement is suggested?",
+"choices": [
+"Greater than 25 degrees",
+"Greater than 40 degrees",
+"Greater than 55 degrees",
+"Greater than 80 degrees"
+],
+"answer": 2,
+"explain": "An alpha angle greater than 55 degrees indicates loss of the normal femoral head-neck offset and supports cam morphology. 40 degrees is the LCEA pincer threshold; do not confuse the two.",
+"id": 64
+},
+{
+"type": "mcq",
+"joint": "ankle",
+"topic": "Achilles terminology",
+"difficulty": 2,
+"prompt": "Why is inflammation around the Achilles tendon correctly called paratenonitis rather than tenosynovitis?",
+"choices": [
+"The Achilles is too superficial to develop a synovial reaction",
+"The Achilles tendon has no true synovial sheath and is invested only by a paratenon",
+"Tenosynovitis is reserved for flexor tendons of the hand",
+"The Achilles never becomes inflamed, only degenerated"
+],
+"answer": 1,
+"explain": "The Achilles lacks a synovial sheath; it is surrounded only by the paratenon. Therefore peritendinous inflammation is paratenonitis (paratendinitis), not tenosynovitis. Tendons with true sheaths (e.g., peroneals, tibialis posterior) can get tenosynovitis.",
+"id": 65
+},
+{
+"type": "mcq",
+"joint": "ankle",
+"topic": "Syndesmosis",
+"difficulty": 2,
+"prompt": "At a level 1 cm above the tibial plafond, what tibiofibular clear space measurement suggests a syndesmotic injury?",
+"choices": [
+"Greater than 2 mm",
+"Greater than 6 mm",
+"Greater than 12 mm",
+"Greater than 20 mm"
+],
+"answer": 1,
+"explain": "A tibiofibular clear space greater than 6 mm measured 1 cm above the plafond indicates syndesmotic widening. Always check the proximal fibula for a Maisonneuve fracture when the syndesmosis is disrupted.",
+"id": 66
+},
+{
+"type": "mcq",
+"joint": "hip",
+"topic": "AVN",
+"difficulty": 1,
+"prompt": "Which MRI finding is considered the most specific sign of femoral head osteonecrosis?",
+"choices": [
+"Diffuse bone marrow edema",
+"The double-line sign",
+"A joint effusion",
+"Subchondral cystic change"
+],
+"answer": 1,
+"explain": "The double-line sign (peripheral low-signal sclerotic rim with inner high-signal granulation tissue on T2) is the most specific sign of osteonecrosis. The crescent sign indicates a subchondral fracture and impending collapse but is a later finding.",
+"id": 67
+},
+{
+"type": "cloze",
+"joint": "hip",
+"topic": "Gluteal tendons",
+"difficulty": 1,
+"prompt": "Because they are the major hip abductors that tear at the greater trochanter, the gluteus medius and minimus tendons are often called the ___ of the hip.",
+"answers": [
+"rotator cuff",
+"rotator cuff of the hip"
+],
+"explain": "The gluteus medius and minimus form the abductor tendon complex at the greater trochanter, analogous to the rotator cuff at the shoulder, and tear in a similar fashion.",
+"id": 68
+},
+{
+"type": "cloze",
+"joint": "ankle",
+"topic": "Lateral ligaments",
+"difficulty": 1,
+"prompt": "Lateral ankle ligaments are injured in a predictable sequence: the ___ tears first, followed by the calcaneofibular ligament, with the posterior talofibular ligament torn last.",
+"answers": [
+"anterior talofibular ligament",
+"ATFL",
+"anterior talofibular"
+],
+"explain": "The ATFL is the weakest and first to fail in inversion injury; CFL injury indicates a more severe sprain, and PTFL involvement signifies severe trauma.",
+"id": 69
+},
+{
+"type": "cloze",
+"joint": "foot",
+"topic": "Plantar fasciitis",
+"difficulty": 1,
+"prompt": "On MRI, plantar fasciitis is suggested when the proximal plantar fascia at its calcaneal origin is thickened beyond ___ mm with adjacent edema.",
+"answers": [
+"4",
+"greater than 4"
+],
+"explain": "Normal plantar fascia is roughly 3 mm thick; thickening greater than 4 mm at the calcaneal origin, often with perifascial and marrow edema, supports plantar fasciitis.",
+"id": 70
+},
+{
+"type": "dictate",
+"joint": "elbow",
+"topic": "UCL",
+"difficulty": 3,
+"prompt": "Dictate the findings for a partial undersurface (distal) tear of the UCL anterior bundle in an overhead thrower.",
+"model": "The anterior bundle of the ulnar collateral ligament demonstrates a partial-thickness undersurface tear at its distal attachment, with abnormal fluid signal tracking distal to the ligament along the medial margin of the sublime tubercle, producing a T-sign. The proximal humeral attachment is intact and the ligament is not completely disrupted. No full-thickness discontinuity. The flexor-pronator origin is intact. Findings are consistent with valgus instability of a throwing athlete.",
+"keyterms": [
+{
+"label": "anterior bundle",
+"patterns": [
+"anterior bundle",
+"anterior band"
+],
+"why": "the primary valgus stabilizer and functionally important component of the UCL"
+},
+{
+"label": "sublime tubercle",
+"patterns": [
+"sublime tubercle"
+],
+"why": "the ulnar attachment site of the anterior bundle where distal tears occur"
+},
+{
+"label": "T-sign",
+"patterns": [
+"t[- ]?sign"
+],
+"why": "fluid/contrast tracking distal to the ligament along the sublime tubercle = partial undersurface tear"
+},
+{
+"label": "undersurface/partial",
+"patterns": [
+"undersurface",
+"partial[- ]thickness",
+"partial tear"
+],
+"why": "distinguishes a partial tear from a complete rupture"
+},
+{
+"label": "distal attachment",
+"patterns": [
+"distal attachment",
+"distal",
+"sublime"
+],
+"why": "localizes the tear, which changes surgical planning"
+},
+{
+"label": "valgus instability",
+"patterns": [
+"valgus"
+],
+"why": "the clinical consequence of UCL insufficiency in throwers"
+},
+{
+"label": "flexor-pronator",
+"patterns": [
+"flexor[- ]pronator",
+"common flexor"
+],
+"why": "adjacent structure that should be assessed and reported as intact or torn"
+}
+],
+"id": 71
+},
+{
+"type": "dictate",
+"joint": "elbow",
+"topic": "UCL complete tear",
+"difficulty": 2,
+"prompt": "Dictate a complete full-thickness tear of the UCL anterior bundle at its proximal (humeral) origin.",
+"model": "There is a complete full-thickness tear of the anterior bundle of the ulnar collateral ligament at its proximal humeral origin from the medial epicondyle, with ligament discontinuity, wavy retracted fibers, and surrounding edema. Fluid fills the gap at the detachment site. The sublime tubercle attachment is intact distally. Findings indicate gross valgus instability; correlate for Tommy John reconstruction.",
+"keyterms": [
+{
+"label": "complete full-thickness tear",
+"patterns": [
+"complete",
+"full[- ]thickness"
+],
+"why": "distinguishes from a partial undersurface tear and changes management to reconstruction"
+},
+{
+"label": "proximal humeral origin",
+"patterns": [
+"proximal",
+"humeral origin",
+"medial epicondyle"
+],
+"why": "localizes the tear to the humeral attachment"
+},
+{
+"label": "anterior bundle",
+"patterns": [
+"anterior bundle",
+"anterior band"
+],
+"why": "the key valgus stabilizer of the UCL"
+},
+{
+"label": "discontinuity/retraction",
+"patterns": [
+"discontinu",
+"retract",
+"wavy"
+],
+"why": "morphologic signs of a complete rupture"
+},
+{
+"label": "valgus instability",
+"patterns": [
+"valgus"
+],
+"why": "functional result of complete UCL loss"
+},
+{
+"label": "Tommy John/reconstruction",
+"patterns": [
+"tommy john",
+"reconstruct"
+],
+"why": "the eponymous UCL reconstruction relevant to surgical correlation"
+}
+],
+"id": 72
+},
+{
+"type": "dictate",
+"joint": "elbow",
+"topic": "valgus extension overload",
+"difficulty": 3,
+"prompt": "Dictate findings of valgus extension overload syndrome in a pitcher with a posteromedial olecranon osteophyte.",
+"model": "There is a posteromedial olecranon osteophyte at the tip of the olecranon with adjacent subchondral marrow edema and chondral irregularity of the posteromedial trochlea, in keeping with valgus extension overload. The anterior bundle of the UCL shows attenuation/thickening consistent with chronic valgus stress. A small intra-articular loose body is noted in the posterior compartment. Findings reflect repetitive valgus and extension forces of throwing.",
+"keyterms": [
+{
+"label": "valgus extension overload",
+"patterns": [
+"valgus extension overload",
+"veo"
+],
+"why": "the syndrome name describing repetitive throwing impaction injury"
+},
+{
+"label": "posteromedial olecranon osteophyte",
+"patterns": [
+"posteromedial",
+"olecranon osteophyte",
+"olecranon spur"
+],
+"why": "the hallmark kissing osteophyte from posteromedial impaction"
+},
+{
+"label": "posteromedial trochlea",
+"patterns": [
+"trochlea"
+],
+"why": "the apposing articular surface that develops chondral injury"
+},
+{
+"label": "loose body",
+"patterns": [
+"loose bod",
+"intra-?articular bod"
+],
+"why": "a common associated finding requiring removal"
+},
+{
+"label": "UCL attenuation",
+"patterns": [
+"ucl",
+"anterior bundle",
+"collateral"
+],
+"why": "the underlying valgus laxity that drives the impaction"
+},
+{
+"label": "subchondral edema",
+"patterns": [
+"marrow edema",
+"subchondral",
+"bone edema"
+],
+"why": "indicates active stress response at the impaction site"
+}
+],
+"id": 73
+},
+{
+"type": "dictate",
+"joint": "elbow",
+"topic": "lateral epicondylitis",
+"difficulty": 2,
+"prompt": "Dictate a high-grade partial tear of the common extensor tendon origin in lateral epicondylitis (tennis elbow).",
+"model": "The common extensor tendon origin demonstrates marked tendinosis with thickening, intermediate signal, and a high-grade partial-thickness tear involving approximately 70 percent of the footprint at the lateral epicondyle, predominantly affecting the deep ECRB fibers. There is underlying lateral epicondyle marrow edema. The adjacent lateral ulnar collateral ligament is intact, so no associated posterolateral instability. Findings consistent with chronic lateral epicondylitis (tennis elbow).",
+"keyterms": [
+{
+"label": "common extensor tendon",
+"patterns": [
+"common extensor"
+],
+"why": "the lateral origin tendon affected in tennis elbow"
+},
+{
+"label": "ECRB",
+"patterns": [
+"ecrb",
+"extensor carpi radialis brevis"
+],
+"why": "the deep fibers most commonly involved in lateral epicondylitis"
+},
+{
+"label": "tendinosis",
+"patterns": [
+"tendinos"
+],
+"why": "degenerative thickening/signal that defines epicondylitis rather than acute tendinitis"
+},
+{
+"label": "footprint/grade",
+"patterns": [
+"footprint",
+"partial[- ]thickness",
+"\\d+ ?percent",
+"high[- ]grade"
+],
+"why": "quantifying tear depth/footprint guides surgical decision-making"
+},
+{
+"label": "lateral epicondyle",
+"patterns": [
+"lateral epicondyle"
+],
+"why": "the bony origin site"
+},
+{
+"label": "LUCL intact",
+"patterns": [
+"lateral ulnar collateral",
+"lucl"
+],
+"why": "must be assessed because deep tears can extend to the LUCL causing PLRI"
+}
+],
+"id": 74
+},
+{
+"type": "dictate",
+"joint": "elbow",
+"topic": "medial epicondylitis",
+"difficulty": 2,
+"prompt": "Dictate common flexor tendon tendinosis with a low-grade partial tear in medial epicondylitis (golfer's elbow).",
+"model": "The common flexor-pronator tendon origin at the medial epicondyle shows tendinosis with thickening and increased intrasubstance signal and a low-grade partial-thickness interstitial tear involving less than one-third of the footprint. No full-thickness tear or retraction. The underlying anterior bundle of the UCL is intact. The ulnar nerve in the cubital tunnel is normal in caliber and signal. Findings consistent with medial epicondylitis (golfer's elbow).",
+"keyterms": [
+{
+"label": "common flexor-pronator tendon",
+"patterns": [
+"common flexor",
+"flexor[- ]pronator"
+],
+"why": "the medial origin tendon involved in golfer's elbow"
+},
+{
+"label": "medial epicondyle",
+"patterns": [
+"medial epicondyle"
+],
+"why": "the bony origin site for the flexor-pronator mass"
+},
+{
+"label": "tendinosis",
+"patterns": [
+"tendinos"
+],
+"why": "degenerative process defining epicondylitis"
+},
+{
+"label": "partial-thickness/footprint",
+"patterns": [
+"partial[- ]thickness",
+"interstitial",
+"footprint",
+"one[- ]third"
+],
+"why": "grading depth and footprint of the tear"
+},
+{
+"label": "UCL assessment",
+"patterns": [
+"ucl",
+"anterior bundle",
+"collateral"
+],
+"why": "the UCL lies deep to the common flexor and is commonly co-injured"
+},
+{
+"label": "ulnar nerve",
+"patterns": [
+"ulnar nerve",
+"cubital tunnel"
+],
+"why": "the adjacent cubital tunnel nerve must be evaluated in medial-sided pain"
+}
+],
+"id": 75
+},
+{
+"type": "dictate",
+"joint": "elbow",
+"topic": "distal biceps tear",
+"difficulty": 3,
+"prompt": "Dictate a complete distal biceps tendon tear with retraction; comment on lacertus fibrosus and use FABS positioning.",
+"model": "On the FABS (flexion, abduction, supinated) view the distal biceps tendon is completely torn at its insertion on the radial tuberosity, with full-thickness discontinuity and proximal retraction of the tendon stump approximately 4 cm. The lacertus fibrosus is also torn, accounting for the degree of retraction. The bicipitoradial bursa is distended with fluid and surrounding hemorrhage. Findings indicate a complete distal biceps rupture; correlate clinically for surgical repair given retraction.",
+"keyterms": [
+{
+"label": "radial tuberosity",
+"patterns": [
+"radial tuberosity",
+"bicipital tuberosity"
+],
+"why": "the insertion site of the distal biceps tendon"
+},
+{
+"label": "FABS view",
+"patterns": [
+"fabs",
+"flexion[, ]?abduction[, ]?supinat"
+],
+"why": "the dedicated positioning that displays the distal biceps tendon along its length"
+},
+{
+"label": "lacertus fibrosus",
+"patterns": [
+"lacertus"
+],
+"why": "if intact it limits retraction; if torn the tendon retracts, affecting repair urgency"
+},
+{
+"label": "retraction",
+"patterns": [
+"retract"
+],
+"why": "quantifying retraction guides whether primary repair is feasible"
+},
+{
+"label": "complete/full-thickness",
+"patterns": [
+"complete",
+"full[- ]thickness",
+"rupture"
+],
+"why": "distinguishes from a partial tear"
+},
+{
+"label": "bicipitoradial bursa",
+"patterns": [
+"bicipitoradial bursa",
+"cubital bursa"
+],
+"why": "fluid here is a secondary sign of distal biceps pathology"
+}
+],
+"id": 76
+},
+{
+"type": "dictate",
+"joint": "elbow",
+"topic": "capitellar OCD",
+"difficulty": 3,
+"prompt": "Dictate an unstable osteochondritis dissecans of the capitellum, citing instability criteria, and contrast with the pseudodefect.",
+"model": "There is an osteochondritis dissecans lesion of the anterolateral capitellum measuring 9 by 7 mm. High T2 signal fluid undermines the osteochondral fragment, the overlying cartilage is disrupted, and a cyst is present beneath the fragment, all indicating an unstable lesion. A displaced intra-articular loose body is identified in the anterior recess. This is distinct from the normal pseudodefect of the capitellum, which is located posterolaterally at the capitellum-lateral epicondyle junction with normal cartilage. The anterolateral location and fragment make this true OCD rather than Panner disease.",
+"keyterms": [
+{
+"label": "osteochondritis dissecans",
+"patterns": [
+"osteochondritis dissecans",
+"ocd"
+],
+"why": "the diagnosis; a true osteochondral lesion of the adolescent/teen capitellum"
+},
+{
+"label": "capitellum (anterolateral)",
+"patterns": [
+"capitell",
+"anterolateral"
+],
+"why": "OCD characteristically involves the anterolateral capitellum"
+},
+{
+"label": "fluid undermining",
+"patterns": [
+"fluid undermin",
+"undermin",
+"high t2.*fragment",
+"cyst"
+],
+"why": "a key instability criterion predicting a detachable fragment"
+},
+{
+"label": "loose body",
+"patterns": [
+"loose bod",
+"intra-?articular bod"
+],
+"why": "presence indicates an unstable, displaced fragment"
+},
+{
+"label": "pseudodefect of capitellum",
+"patterns": [
+"pseudodefect"
+],
+"why": "normal posterolateral notch not to be mistaken for OCD"
+},
+{
+"label": "Panner disease",
+"patterns": [
+"panner"
+],
+"why": "the younger-child self-limited osteochondrosis without a fragment, the key differential"
+}
+],
+"id": 77
+},
+{
+"type": "dictate",
+"joint": "elbow",
+"topic": "LUCL / PLRI",
+"difficulty": 3,
+"prompt": "Dictate a tear of the lateral ulnar collateral ligament producing posterolateral rotatory instability.",
+"model": "The lateral ulnar collateral ligament is torn at its humeral origin from the lateral epicondyle with discontinuity and surrounding edema, and fails to course normally to the supinator crest of the ulna. The overlying common extensor origin is also abnormal. Findings indicate posterolateral rotatory instability (PLRI). Correlate with the lateral pivot-shift; the radial head may sublux posterolaterally relative to the capitellum.",
+"keyterms": [
+{
+"label": "lateral ulnar collateral ligament",
+"patterns": [
+"lateral ulnar collateral",
+"lucl"
+],
+"why": "the primary restraint against posterolateral rotatory instability"
+},
+{
+"label": "PLRI",
+"patterns": [
+"posterolateral rotatory instability",
+"plri"
+],
+"why": "the instability pattern resulting from LUCL insufficiency"
+},
+{
+"label": "supinator crest",
+"patterns": [
+"supinator crest"
+],
+"why": "the ulnar attachment site of the LUCL"
+},
+{
+"label": "lateral epicondyle origin",
+"patterns": [
+"lateral epicondyle",
+"humeral origin"
+],
+"why": "the common site of LUCL avulsion"
+},
+{
+"label": "pivot-shift",
+"patterns": [
+"pivot[- ]shift"
+],
+"why": "the clinical test that confirms PLRI"
+},
+{
+"label": "common extensor co-injury",
+"patterns": [
+"common extensor"
+],
+"why": "frequently torn together since they share the lateral epicondyle"
+}
+],
+"id": 78
+},
+{
+"type": "dictate",
+"joint": "wrist",
+"topic": "TFCC traumatic vs degenerative",
+"difficulty": 3,
+"prompt": "Dictate a traumatic peripheral foveal (Palmer 1B) TFCC tear with DRUJ instability, and contrast the terminology with a degenerative central tear.",
+"model": "There is a traumatic peripheral tear of the triangular fibrocartilage complex at the ulnar/foveal attachment, a Palmer class 1B injury, with fluid signal at the fovea and detachment of the deep radioulnar ligament fibers from the ulnar fovea, associated with distal radioulnar joint instability. The radial attachment and the central disc are intact. This is distinct from a degenerative (Palmer class 2) tear, which produces a central perforation of the articular disc, often with positive ulnar variance and ulnar impaction changes (lunate/ulnar head chondromalacia and subchondral cysts). Ulnar variance measures plus 2 mm.",
+"keyterms": [
+{
+"label": "foveal attachment",
+"patterns": [
+"fove"
+],
+"why": "the deep ulnar attachment whose disruption causes DRUJ instability"
+},
+{
+"label": "Palmer 1B / traumatic peripheral",
+"patterns": [
+"1b",
+"class 1",
+"palmer",
+"peripheral",
+"traumatic"
+],
+"why": "the classification term for a traumatic peripheral/ulnar-sided tear"
+},
+{
+"label": "DRUJ instability",
+"patterns": [
+"distal radioulnar",
+"druj",
+"instability"
+],
+"why": "the key clinical consequence distinguishing peripheral foveal tears"
+},
+{
+"label": "degenerative / class 2",
+"patterns": [
+"degenerat",
+"class 2",
+"central perforat",
+"central tear"
+],
+"why": "the contrasting non-traumatic central wear pattern"
+},
+{
+"label": "ulnar variance",
+"patterns": [
+"ulnar variance",
+"positive variance"
+],
+"why": "positive variance drives degenerative central tears and ulnar impaction"
+},
+{
+"label": "ulnar impaction",
+"patterns": [
+"ulnar impaction",
+"impaction"
+],
+"why": "the degenerative sequela of positive variance affecting lunate/ulna"
+},
+{
+"label": "radioulnar ligaments",
+"patterns": [
+"radioulnar ligament",
+"dorsal radioulnar",
+"volar radioulnar"
+],
+"why": "the deep dorsal/volar fibers at the fovea that stabilize the DRUJ"
+}
+],
+"id": 79
+},
+{
+"type": "dictate",
+"joint": "wrist",
+"topic": "scapholunate / DISI",
+"difficulty": 3,
+"prompt": "Dictate a complete tear of the dorsal scapholunate ligament with DISI deformity.",
+"model": "There is a complete tear of the dorsal band of the scapholunate interosseous ligament, the most biomechanically important component, with discontinuity and fluid filling the scapholunate interval, which is widened. The scaphoid is flexed (palmar-flexed) and the lunate is dorsally tilted, with a scapholunate angle of approximately 80 degrees, consistent with dorsal intercalated segment instability (DISI). Early findings of scapholunate advanced collapse are noted with radioscaphoid joint narrowing. The lunotriquetral ligament is intact.",
+"keyterms": [
+{
+"label": "dorsal band",
+"patterns": [
+"dorsal band",
+"dorsal scapholunate",
+"dorsal component"
+],
+"why": "the strongest, most important portion of the SL ligament"
+},
+{
+"label": "scapholunate interosseous ligament",
+"patterns": [
+"scapholunate",
+"sl ligament",
+"slil"
+],
+"why": "the named intrinsic ligament being assessed"
+},
+{
+"label": "DISI",
+"patterns": [
+"disi",
+"dorsal intercalated"
+],
+"why": "the carpal instability pattern produced by SL dissociation"
+},
+{
+"label": "scapholunate angle",
+"patterns": [
+"scapholunate angle",
+"\\d+ ?degrees"
+],
+"why": "angle >60-70 degrees confirms DISI"
+},
+{
+"label": "SL widening",
+"patterns": [
+"widen",
+"interval",
+"terry thomas",
+"gap"
+],
+"why": "the Terry-Thomas sign of SL diastasis"
+},
+{
+"label": "SLAC",
+"patterns": [
+"slac",
+"scapholunate advanced collapse"
+],
+"why": "the predictable degenerative progression from chronic SL dissociation"
+}
+],
+"id": 80
+},
+{
+"type": "dictate",
+"joint": "wrist",
+"topic": "scaphoid fracture / AVN",
+"difficulty": 3,
+"prompt": "Dictate a scaphoid waist fracture with proximal pole avascular necrosis.",
+"model": "There is a transverse fracture through the scaphoid waist. The proximal pole demonstrates diffusely decreased T1 signal with loss of normal marrow fat and decreased enhancement, consistent with avascular necrosis, attributable to disruption of the retrograde blood supply from the dorsal carpal branch of the radial artery. There is early fracture nonunion with a sclerotic margin and a small humpback deformity. No DISI as yet. Correlate for vascularized bone grafting.",
+"keyterms": [
+{
+"label": "scaphoid waist",
+"patterns": [
+"scaphoid waist",
+"waist"
+],
+"why": "the most common fracture site and watershed for vascular supply"
+},
+{
+"label": "proximal pole AVN",
+"patterns": [
+"proximal pole",
+"avascular necrosis",
+"avn",
+"osteonecrosis"
+],
+"why": "the proximal pole is at risk because of the retrograde supply"
+},
+{
+"label": "retrograde blood supply",
+"patterns": [
+"retrograde",
+"dorsal carpal branch",
+"radial artery"
+],
+"why": "the anatomy explaining why proximal fractures undergo AVN"
+},
+{
+"label": "T1 loss/enhancement",
+"patterns": [
+"t1",
+"decreased enhancement",
+"loss of.*fat",
+"marrow"
+],
+"why": "low T1 and non-enhancement are MRI signs of nonviable proximal pole"
+},
+{
+"label": "nonunion",
+"patterns": [
+"nonunion",
+"non[- ]union",
+"sclerotic"
+],
+"why": "a complication that follows missed/unstable scaphoid fractures"
+},
+{
+"label": "humpback deformity",
+"patterns": [
+"humpback"
+],
+"why": "the flexion deformity of scaphoid nonunion affecting alignment"
+}
+],
+"id": 81
+},
+{
+"type": "dictate",
+"joint": "wrist",
+"topic": "Kienbock",
+"difficulty": 2,
+"prompt": "Dictate Kienbock disease (lunate AVN) with negative ulnar variance.",
+"model": "The lunate demonstrates diffusely decreased T1 signal involving the entire bone with patchy T2 signal, consistent with avascular necrosis of the lunate (Kienbock disease). There is negative ulnar variance of approximately 2 mm. There is early loss of lunate height with subtle subchondral collapse but preserved carpal height (Lichtman stage II-IIIA). No fragmentation. Correlate clinically.",
+"keyterms": [
+{
+"label": "lunate AVN / Kienbock",
+"patterns": [
+"kienbock",
+"lunate.*avascular",
+"lunate.*necrosis"
+],
+"why": "the eponym for lunate osteonecrosis"
+},
+{
+"label": "negative ulnar variance",
+"patterns": [
+"negative ulnar variance",
+"negative variance"
+],
+"why": "the classic predisposing morphology in Kienbock"
+},
+{
+"label": "decreased T1 signal",
+"patterns": [
+"decreased t1",
+"low t1",
+"t1 signal"
+],
+"why": "the earliest and most sensitive MRI sign of lunate AVN"
+},
+{
+"label": "lunate collapse",
+"patterns": [
+"collapse",
+"loss of.*height",
+"fragmentation"
+],
+"why": "staging depends on lunate collapse and carpal height"
+},
+{
+"label": "Lichtman staging",
+"patterns": [
+"lichtman",
+"stage"
+],
+"why": "the staging system guiding treatment of Kienbock"
+}
+],
+"id": 82
+},
+{
+"type": "dictate",
+"joint": "wrist",
+"topic": "ECU subluxation",
+"difficulty": 2,
+"prompt": "Dictate an extensor carpi ulnaris subsheath tear with tendon subluxation.",
+"model": "There is a tear of the extensor carpi ulnaris subsheath at the ulnar groove, with the ECU tendon subluxed/dislocated medially out of the ulnar groove on the axial images. The tendon itself shows mild tendinosis with intrasubstance signal but no full-thickness split. Findings indicate ECU instability; dynamic correlation with supination/ulnar deviation is recommended. The TFCC is intact.",
+"keyterms": [
+{
+"label": "ECU subsheath",
+"patterns": [
+"subsheath",
+"ecu sheath",
+"fibro[- ]osseous"
+],
+"why": "the dedicated retinaculum whose tear allows ECU subluxation"
+},
+{
+"label": "ulnar groove",
+"patterns": [
+"ulnar groove",
+"groove"
+],
+"why": "the bony groove the ECU normally sits within"
+},
+{
+"label": "subluxation/dislocation",
+"patterns": [
+"sublux",
+"disloc"
+],
+"why": "the dynamic instability that is the key finding"
+},
+{
+"label": "ECU tendinosis",
+"patterns": [
+"tendinos",
+"intrasubstance"
+],
+"why": "commonly coexists and can progress to a split tear"
+},
+{
+"label": "supination provocation",
+"patterns": [
+"supinat",
+"dynamic",
+"ulnar deviation"
+],
+"why": "ECU subluxes in supination/ulnar deviation, so dynamic imaging helps"
+}
+],
+"id": 83
+},
+{
+"type": "dictate",
+"joint": "wrist",
+"topic": "de Quervain",
+"difficulty": 1,
+"prompt": "Dictate de Quervain tenosynovitis of the first extensor compartment.",
+"model": "The first extensor compartment tendons, the abductor pollicis longus and extensor pollicis brevis, demonstrate tenosynovitis with peritendinous fluid and edema and thickening of the overlying extensor retinaculum at the radial styloid, consistent with de Quervain tenosynovitis. There is an intracompartmental septum separating the APL and EPB subcompartments. Adjacent radial styloid periosteal edema is present.",
+"keyterms": [
+{
+"label": "first extensor compartment",
+"patterns": [
+"first.*compartment",
+"1st.*compartment",
+"first dorsal"
+],
+"why": "the location that defines de Quervain"
+},
+{
+"label": "abductor pollicis longus",
+"patterns": [
+"abductor pollicis longus",
+"apl"
+],
+"why": "one of the two tendons of the first compartment"
+},
+{
+"label": "extensor pollicis brevis",
+"patterns": [
+"extensor pollicis brevis",
+"epb"
+],
+"why": "the second first-compartment tendon, may have its own subcompartment"
+},
+{
+"label": "tenosynovitis",
+"patterns": [
+"tenosynovitis",
+"peritendinous"
+],
+"why": "the inflammatory process being described"
+},
+{
+"label": "intracompartmental septum",
+"patterns": [
+"septum",
+"subcompartment"
+],
+"why": "a septum predicts treatment failure if missed at injection"
+},
+{
+"label": "radial styloid",
+"patterns": [
+"radial styloid"
+],
+"why": "the bony landmark of the first compartment"
+}
+],
+"id": 84
+},
+{
+"type": "dictate",
+"joint": "wrist",
+"topic": "carpal tunnel",
+"difficulty": 2,
+"prompt": "Dictate MRI findings of carpal tunnel syndrome with median nerve abnormality.",
+"model": "The median nerve is enlarged and edematous at the level of the pisiform with increased T2 signal, and is flattened distally at the level of the hook of hamate, with a flattening ratio greater than 3 to 1. There is volar bowing of the flexor retinaculum. Mild tenosynovitis of the flexor tendons is present within the carpal tunnel. Findings are consistent with carpal tunnel syndrome (median neuropathy).",
+"keyterms": [
+{
+"label": "median nerve",
+"patterns": [
+"median nerve"
+],
+"why": "the compressed nerve in carpal tunnel syndrome"
+},
+{
+"label": "nerve flattening",
+"patterns": [
+"flatten",
+"flattening ratio"
+],
+"why": "distal flattening of the median nerve at the hamate is a key sign"
+},
+{
+"label": "retinacular bowing",
+"patterns": [
+"bowing",
+"volar bow",
+"retinacul"
+],
+"why": "volar bowing of the flexor retinaculum indicates raised tunnel pressure"
+},
+{
+"label": "T2 hyperintensity/swelling",
+"patterns": [
+"t2 signal",
+"edematous",
+"enlarged",
+"swelling"
+],
+"why": "proximal nerve swelling and signal change reflect entrapment neuropathy"
+},
+{
+"label": "pisiform/hamate levels",
+"patterns": [
+"pisiform",
+"hamate"
+],
+"why": "the standard proximal swelling/distal flattening reference levels"
+}
+],
+"id": 85
+},
+{
+"type": "dictate",
+"joint": "hand",
+"topic": "thumb UCL / Stener",
+"difficulty": 3,
+"prompt": "Dictate a complete thumb UCL tear at the MCP joint with a Stener lesion (skier's thumb).",
+"model": "There is a complete full-thickness tear of the ulnar collateral ligament of the thumb at the metacarpophalangeal joint, avulsed from its distal phalangeal-base attachment. The torn ligament is retracted and displaced superficial and proximal to the adductor aponeurosis, producing a Stener lesion with the characteristic yo-yo on a string appearance. Because the interposed aponeurosis prevents healing, surgical repair is required. Findings consistent with skier's (gamekeeper's) thumb.",
+"keyterms": [
+{
+"label": "thumb UCL",
+"patterns": [
+"ulnar collateral",
+"ucl"
+],
+"why": "the ligament torn in skier's/gamekeeper's thumb at the thumb MCP"
+},
+{
+"label": "Stener lesion",
+"patterns": [
+"stener"
+],
+"why": "interposition of the aponeurosis that mandates surgery"
+},
+{
+"label": "adductor aponeurosis",
+"patterns": [
+"adductor aponeurosis",
+"aponeurosis"
+],
+"why": "the structure that displaces over the torn ligament forming the Stener lesion"
+},
+{
+"label": "MCP joint",
+"patterns": [
+"metacarpophalangeal",
+"mcp",
+"mp joint"
+],
+"why": "the joint where the thumb UCL tear occurs"
+},
+{
+"label": "retracted/displaced",
+"patterns": [
+"retract",
+"displaced",
+"superficial"
+],
+"why": "proximal-superficial displacement defines the Stener configuration"
+},
+{
+"label": "skier's/gamekeeper's thumb",
+"patterns": [
+"skier",
+"gamekeeper"
+],
+"why": "the clinical eponyms for the injury mechanism"
+}
+],
+"id": 86
+},
+{
+"type": "dictate",
+"joint": "hand",
+"topic": "flexor pulley / bowstringing",
+"difficulty": 3,
+"prompt": "Dictate an A2 pulley rupture with bowstringing in a rock climber.",
+"model": "There is a full-thickness rupture of the A2 pulley at the base of the proximal phalanx, with bowstringing of the flexor tendons demonstrated by an increased tendon-to-bone distance of approximately 3 mm during flexion. The flexor digitorum profundus and superficialis tendons are intact but volarly displaced away from the phalanx. Edema surrounds the pulley remnants. Findings consistent with a climber's pulley injury.",
+"keyterms": [
+{
+"label": "A2 pulley",
+"patterns": [
+"a2 pulley",
+"a2",
+"a4 pulley",
+"a4"
+],
+"why": "the A2 (and A4) pulleys are the most biomechanically critical annular pulleys"
+},
+{
+"label": "bowstringing",
+"patterns": [
+"bowstring"
+],
+"why": "volar tendon displacement is the diagnostic sign of pulley rupture"
+},
+{
+"label": "tendon-bone distance",
+"patterns": [
+"tendon[- ]to[- ]bone",
+"tendon[- ]bone distance",
+"\\d+ ?mm"
+],
+"why": "the measured separation that quantifies bowstringing"
+},
+{
+"label": "flexor tendons FDP/FDS",
+"patterns": [
+"flexor digitorum profundus",
+"fdp",
+"superficialis",
+"fds"
+],
+"why": "the tendons held against bone by the pulleys"
+},
+{
+"label": "proximal phalanx",
+"patterns": [
+"proximal phalanx",
+"base of.*phalanx"
+],
+"why": "the A2 pulley origin location"
+},
+{
+"label": "climber's injury",
+"patterns": [
+"climb"
+],
+"why": "the classic mechanism of crimp-grip pulley rupture"
+}
+],
+"id": 87
+},
+{
+"type": "dictate",
+"joint": "hand",
+"topic": "FDP avulsion / jersey finger",
+"difficulty": 3,
+"prompt": "Dictate a flexor digitorum profundus avulsion (jersey finger), commenting on Leddy classification.",
+"model": "There is avulsion of the flexor digitorum profundus tendon from its insertion at the volar base of the distal phalanx of the ring finger, consistent with a jersey finger. The retracted tendon stump lies at the level of the proximal interphalangeal joint, retained by the vincula, with no associated bony fragment, in keeping with a Leddy and Packer type II injury. There is fluid and hemorrhage along the flexor sheath. Surgical correlation is advised given the degree of retraction.",
+"keyterms": [
+{
+"label": "FDP avulsion",
+"patterns": [
+"flexor digitorum profundus",
+"fdp"
+],
+"why": "the avulsed tendon in jersey finger"
+},
+{
+"label": "jersey finger",
+"patterns": [
+"jersey finger"
+],
+"why": "the eponym for FDP avulsion, classically the ring finger"
+},
+{
+"label": "distal phalanx base",
+"patterns": [
+"distal phalanx",
+"volar base"
+],
+"why": "the FDP insertion site that is avulsed"
+},
+{
+"label": "Leddy classification",
+"patterns": [
+"leddy",
+"packer",
+"type ii",
+"type 2",
+"type i",
+"type iii"
+],
+"why": "the classification graded by level of retraction and presence of a fragment"
+},
+{
+"label": "vincula",
+"patterns": [
+"vincul"
+],
+"why": "determine how far the tendon retracts and surgical urgency"
+},
+{
+"label": "retraction level",
+"patterns": [
+"retract",
+"proximal interphalangeal",
+"pip",
+"palm"
+],
+"why": "retraction level dictates classification and repair timing"
+}
+],
+"id": 88
+},
+{
+"type": "dictate",
+"joint": "hand",
+"topic": "central slip / boutonniere",
+"difficulty": 2,
+"prompt": "Dictate a central slip rupture at the PIP joint producing a boutonniere mechanism.",
+"model": "There is a full-thickness tear of the central slip of the extensor mechanism at its insertion on the dorsal base of the middle phalanx, with fluid filling the gap and adjacent soft-tissue edema. The lateral bands are intact but at risk of volar subluxation, which would produce a boutonniere deformity. The terminal tendon is intact. Findings consistent with a central slip injury.",
+"keyterms": [
+{
+"label": "central slip",
+"patterns": [
+"central slip"
+],
+"why": "the extensor component whose rupture causes boutonniere"
+},
+{
+"label": "middle phalanx base",
+"patterns": [
+"middle phalanx",
+"dorsal base"
+],
+"why": "the central slip insertion site"
+},
+{
+"label": "boutonniere",
+"patterns": [
+"boutonniere"
+],
+"why": "the resultant deformity from central slip loss and lateral band subluxation"
+},
+{
+"label": "lateral bands",
+"patterns": [
+"lateral band"
+],
+"why": "their volar subluxation produces the boutonniere posture"
+},
+{
+"label": "PIP joint",
+"patterns": [
+"proximal interphalangeal",
+"pip"
+],
+"why": "the joint where the central slip injury occurs"
+}
+],
+"id": 89
+},
+{
+"type": "mcq",
+"joint": "elbow",
+"topic": "PIN / arcade of Frohse",
+"difficulty": 2,
+"prompt": "A patient has a posterior interosseous nerve neuropathy without sensory loss. At which anatomic structure is the nerve most commonly entrapped?",
+"choices": [
+"Cubital tunnel retinaculum",
+"Arcade of Frohse at the proximal supinator",
+"Lacertus fibrosus",
+"Guyon canal"
+],
+"answer": 1,
+"explain": "The posterior interosseous nerve (deep motor branch of the radial nerve) is most commonly compressed at the arcade of Frohse, the fibrous proximal edge of the supinator muscle. Because the PIN is purely motor, there is no sensory loss. The cubital tunnel relates to the ulnar nerve, and Guyon canal also involves the ulnar nerve at the wrist.",
+"id": 90
+},
+{
+"type": "mcq",
+"joint": "elbow",
+"topic": "pseudodefect of capitellum",
+"difficulty": 2,
+"prompt": "On sagittal elbow MRI, an apparent notch at the posterolateral capitellum with normal overlying cartilage most likely represents:",
+"choices": [
+"Osteochondritis dissecans",
+"Pseudodefect of the capitellum",
+"Panner disease",
+"Occult fracture"
+],
+"answer": 1,
+"explain": "The pseudodefect of the capitellum is a normal groove at the junction of the posterolateral capitellum and lateral epicondyle, seen on posterior sagittal images. It has intact, normal cartilage and should not be mistaken for OCD, which involves the anterolateral capitellum with a fragment and/or fluid undermining.",
+"id": 91
+},
+{
+"type": "mcq",
+"joint": "wrist",
+"topic": "lunotriquetral / VISI",
+"difficulty": 2,
+"prompt": "A tear of the lunotriquetral interosseous ligament classically produces which carpal malalignment?",
+"choices": [
+"DISI (dorsal intercalated segment instability)",
+"VISI (volar intercalated segment instability)",
+"Ulnar translocation",
+"Axial instability"
+],
+"answer": 1,
+"explain": "Lunotriquetral ligament tears allow the lunate to follow the scaphoid into flexion, producing VISI (volar/palmar intercalated segment instability), where the lunate is volarly tilted. By contrast, scapholunate ligament tears produce DISI, where the lunate tilts dorsally.",
+"id": 92
+},
+{
+"type": "mcq",
+"joint": "wrist",
+"topic": "Guyon canal",
+"difficulty": 1,
+"prompt": "Compression of which nerve occurs in Guyon canal syndrome at the wrist?",
+"choices": [
+"Median nerve",
+"Ulnar nerve",
+"Posterior interosseous nerve",
+"Anterior interosseous nerve"
+],
+"answer": 1,
+"explain": "Guyon canal (the ulnar tunnel, bounded by the pisiform and hook of hamate) transmits the ulnar nerve and artery. Compression here, often from a hook of hamate fracture, ganglion, or repetitive trauma, causes ulnar neuropathy, distinct from carpal tunnel syndrome which involves the median nerve.",
+"id": 93
+},
+{
+"type": "cloze",
+"joint": "hand",
+"topic": "mallet finger",
+"difficulty": 1,
+"prompt": "Avulsion or rupture of the ___ tendon at the dorsal base of the distal phalanx produces a mallet finger.",
+"answers": [
+"terminal",
+"terminal extensor"
+],
+"explain": "The terminal extensor tendon inserts on the dorsal base of the distal phalanx. Its disruption (bony or tendinous) causes loss of DIP extension, the mallet finger deformity. This contrasts with central slip injury at the PIP, which causes boutonniere.",
+"id": 94
+},
+{
+"type": "cloze",
+"joint": "hand",
+"topic": "sagittal band / boxer's knuckle",
+"difficulty": 2,
+"prompt": "Tear of the ___ band over the MCP joint allows ulnar subluxation of the extensor tendon, an injury known as boxer's knuckle.",
+"answers": [
+"sagittal"
+],
+"explain": "The sagittal bands centralize the extensor digitorum tendon over the metacarpal head. A radial sagittal band tear (classically the long finger) allows ulnar subluxation of the extensor tendon into the intermetacarpal groove, the boxer's knuckle injury.",
+"id": 95
+},
+{
+"type": "cloze",
+"joint": "wrist",
+"topic": "SLAC vs SNAC",
+"difficulty": 2,
+"prompt": "Untreated scaphoid nonunion progresses to a predictable degenerative pattern called ___ wrist, the fracture-based analogue of SLAC.",
+"answers": [
+"SNAC",
+"scaphoid nonunion advanced collapse"
+],
+"explain": "SNAC (scaphoid nonunion advanced collapse) follows chronic scaphoid nonunion, whereas SLAC (scapholunate advanced collapse) follows chronic scapholunate ligament dissociation. Both progress in a predictable radioscaphoid-to-capitolunate sequence of arthrosis.",
+"id": 96
+},
+{
+"type": "dictate",
+"joint": "general",
+"topic": "Tendon lexicon",
+"difficulty": 2,
+"prompt": "How do you describe (and distinguish) tendinosis from a tendon tear using MRI signal terminology?",
+"model": "Tendinosis is intrasubstance intermediate signal on T1 and proton-density that does NOT become fluid-bright on fluid-sensitive T2 fat-saturated sequences, typically accompanied by fusiform thickening of the tendon and loss of the normal uniformly low (dark) signal. A tear, by contrast, shows fluid-bright signal - a fluid-signal cleft, gap, or fiber discontinuity that follows fluid on T2. So the discriminator is the T2 signal: intermediate and non-fluid means degeneration (tendinosis), whereas a focal fluid-bright defect means a tear. I always specify whether the abnormality is intrasubstance, partial-thickness, or full-thickness, and describe the caliber change.",
+"keyterms": [
+{
+"label": "intermediate signal / not fluid-bright",
+"patterns": [
+"intermediate",
+"not fluid[- ]bright",
+"non[- ]fluid",
+"does not become fluid",
+"without fluid"
+],
+"why": "tendinosis = intermediate intrasubstance signal that does NOT match fluid on T2"
+},
+{
+"label": "T2 / fluid-sensitive",
+"patterns": [
+"t2",
+"fluid[- ]sensitive",
+"proton[- ]?density",
+"\\bpd\\b",
+"fat[- ]sat"
+],
+"why": "the discriminating sequence is fluid-sensitive (T2/PD FS); fluid-bright defines a tear"
+},
+{
+"label": "fusiform thickening",
+"patterns": [
+"thicken",
+"fusiform",
+"caliber",
+"enlarge"
+],
+"why": "tendinosis enlarges/thickens the tendon; always describe caliber"
+},
+{
+"label": "fluid-bright cleft = tear",
+"patterns": [
+"fluid[- ]bright",
+"fluid[- ]signal",
+"fluid cleft",
+"gap",
+"discontinu"
+],
+"why": "a fluid-bright cleft/gap or fiber discontinuity on T2 indicates a tear"
+},
+{
+"label": "loss of normal low signal",
+"patterns": [
+"loss of (the )?normal",
+"normally (low|dark)",
+"low signal",
+"dark"
+],
+"why": "normal tendon is uniformly low signal; degeneration disrupts this"
+},
+{
+"label": "partial vs full thickness",
+"patterns": [
+"partial[- ]thickness",
+"full[- ]thickness",
+"intrasubstance"
+],
+"why": "experts always categorize tear depth, not just presence"
+}
+],
+"id": 97
+},
+{
+"type": "dictate",
+"joint": "general",
+"topic": "Partial-thickness tear measurement",
+"difficulty": 3,
+"prompt": "How would you describe a high-grade partial-thickness articular-sided tear of a tendon, including measurements (any tendon)?",
+"model": "I would dictate: there is a high-grade partial-thickness tear involving the articular surface of the tendon, with fluid-bright signal undermining the articular-sided fibers. I quantify it two ways: as a percentage of the tendon thickness involved - for example, fluid-signal defect involving the deep approximately 70% of the tendon thickness, consistent with high-grade - and in absolute terms, measuring the defect in the AP (anteroposterior) and craniocaudal/mediolateral dimensions in millimeters, e.g., the defect measures 8 mm craniocaudal by 4 mm AP. I specify the side involved - articular (deep, joint side), bursal (superficial), or interstitial (intrasubstance) - and note the intact remaining fibers and any tendon retraction. High-grade means greater than ~50% of thickness; calling it high-grade signals it is near full-thickness.",
+"keyterms": [
+{
+"label": "articular-sided (deep/joint side)",
+"patterns": [
+"articular[- ]sided",
+"articular surface",
+"deep",
+"joint[- ]side"
+],
+"why": "specify which surface: articular = deep/joint side"
+},
+{
+"label": "bursal vs interstitial sides",
+"patterns": [
+"bursal",
+"interstitial",
+"intrasubstance",
+"superficial"
+],
+"why": "the three partial-tear locations: articular, bursal, interstitial"
+},
+{
+"label": "% of tendon thickness",
+"patterns": [
+"\\d{1,3}\\s*%",
+"percent",
+"thickness",
+"high[- ]grade",
+">\\s*50"
+],
+"why": "quantify partial tears as a percentage of tendon thickness; >50% = high-grade"
+},
+{
+"label": "measurements in mm (2-3 dimensions)",
+"patterns": [
+"\\d+\\s*mm",
+"millimet",
+"\\bap\\b",
+"craniocaudal",
+"mediolateral",
+"dimension"
+],
+"why": "always give absolute size in mm in AP and craniocaudal/ML planes"
+},
+{
+"label": "fluid-bright defect",
+"patterns": [
+"fluid[- ]bright",
+"fluid[- ]signal",
+"fluid undermin",
+"fluid defect"
+],
+"why": "the tear is defined by fluid-signal involvement on T2"
+},
+{
+"label": "intact remaining fibers",
+"patterns": [
+"intact",
+"remaining fib",
+"residual",
+"preserved"
+],
+"why": "describe how much tendon is preserved to gauge severity"
+},
+{
+"label": "retraction",
+"patterns": [
+"retract",
+"stump",
+"gap"
+],
+"why": "note retraction if present - affects surgical planning"
+}
+],
+"id": 98
+},
+{
+"type": "dictate",
+"joint": "general",
+"topic": "Sheath terminology - tenosynovitis vs paratenonitis",
+"difficulty": 3,
+"prompt": "Explain the difference between tenosynovitis and paratenonitis, and when to use each term.",
+"model": "The distinction depends on the tendon's anatomy. Tendons that run through a true synovial-lined tendon sheath - such as the flexor and extensor tendons of the hand and foot, the tibialis posterior, the peroneals, and the long head of biceps - can develop tenosynovitis, which is fluid and/or synovial thickening WITHIN the tendon sheath, seen as a fluid-bright halo surrounding the tendon on axial T2. Tendons that do NOT have a synovial sheath but instead are invested by a paratenon - classically the Achilles and the patellar tendon - cannot have tenosynovitis; instead they develop paratenonitis (also called peritendinitis), which is edema and inflammation in the paratenon and peritendinous fat surrounding the tendon, without a discrete fluid-filled sheath. So I use tenosynovitis only for sheathed tendons and paratenonitis/peritendinitis for the Achilles and patellar tendons. A small physiologic amount of sheath fluid can be normal, especially around the ankle tendons, so I judge it as abnormal when circumferential or disproportionate.",
+"keyterms": [
+{
+"label": "synovial sheath = tenosynovitis",
+"patterns": [
+"sheath",
+"synovial",
+"tenosynovitis"
+],
+"why": "tenosynovitis requires a true synovial tendon sheath"
+},
+{
+"label": "sheathed tendon examples",
+"patterns": [
+"tibialis posterior",
+"perone",
+"flexor",
+"extensor",
+"long head of (the )?biceps",
+"biceps"
+],
+"why": "these run in sheaths and can get tenosynovitis"
+},
+{
+"label": "paratenon = paratenonitis",
+"patterns": [
+"paratenon",
+"paratenonitis",
+"peritendinitis",
+"peritendinous"
+],
+"why": "paratenon-invested tendons get paratenonitis, not tenosynovitis"
+},
+{
+"label": "Achilles & patellar = no sheath",
+"patterns": [
+"achilles",
+"patellar tendon"
+],
+"why": "the classic paratenon-only tendons lacking a synovial sheath"
+},
+{
+"label": "fluid-bright halo in sheath",
+"patterns": [
+"halo",
+"circumferential",
+"surround",
+"fluid (in|within) (the )?sheath"
+],
+"why": "tenosynovitis = fluid/synovium within and around the sheath on T2"
+},
+{
+"label": "physiologic sheath fluid pitfall",
+"patterns": [
+"physiologic",
+"small amount",
+"normal",
+"trace"
+],
+"why": "a little ankle sheath fluid can be normal; judge by amount/circumferentiality"
+}
+],
+"id": 99
+},
+{
+"type": "dictate",
+"joint": "general",
+"topic": "Tendinopathy umbrella term",
+"difficulty": 1,
+"prompt": "What does the term 'tendinopathy' encompass, and how does it relate to tendinosis and tendinitis?",
+"model": "Tendinopathy is the broad umbrella clinical term for any disorder of a tendon. It is deliberately nonspecific because imaging and histology usually show degeneration rather than true inflammation. Tendinosis refers specifically to the degenerative changes - mucoid/myxoid degeneration, intermediate intrasubstance signal, and thickening - without active inflammatory cells. Tendinitis (or tendonitis) implies an inflammatory process, which is histologically uncommon in chronic overuse tendons, so many radiologists avoid it and prefer tendinosis or the umbrella tendinopathy. On MRI I describe what I see - intermediate signal and thickening = tendinosis - and reserve tendinopathy as the inclusive descriptor when I do not want to imply a specific mechanism.",
+"keyterms": [
+{
+"label": "umbrella/nonspecific term",
+"patterns": [
+"umbrella",
+"broad",
+"nonspecific",
+"inclusive",
+"any disorder"
+],
+"why": "tendinopathy is the general term for any tendon disorder"
+},
+{
+"label": "tendinosis = degeneration",
+"patterns": [
+"tendinosis",
+"degener",
+"mucoid",
+"myxoid"
+],
+"why": "tendinosis specifies degenerative, non-inflammatory change"
+},
+{
+"label": "tendinitis implies inflammation (often avoided)",
+"patterns": [
+"tendinitis",
+"tendonitis",
+"inflammat"
+],
+"why": "tendinitis implies inflammation, histologically uncommon, often avoided"
+},
+{
+"label": "intermediate signal + thickening",
+"patterns": [
+"intermediate",
+"thicken",
+"signal"
+],
+"why": "the MRI hallmark of tendinosis described under tendinopathy"
+},
+{
+"label": "describe what you see",
+"patterns": [
+"describe what",
+"what (i|you) see",
+"imaging finding"
+],
+"why": "prefer describing the finding over implying a mechanism"
+}
+],
+"id": 100
+},
+{
+"type": "dictate",
+"joint": "general",
+"topic": "Fluid-sensitive sequences",
+"difficulty": 2,
+"prompt": "Compare T1, T2/PD fat-saturated, and STIR sequences - what does each show and when do you rely on each in MSK MRI?",
+"model": "T1 is my anatomy and marrow sequence: fat is bright, fluid is dark, and it best shows normal fatty marrow, fat planes, and marrow replacement - low T1 signal replacing the normal bright fatty marrow is the key sign of an infiltrative or marrow-replacing process like tumor or infection. T2 or proton-density with fat saturation is my pathology-detection sequence: fat is suppressed (dark) so that fluid and edema become conspicuously bright - fluid-bright - which is how I detect joint effusion, edema-like marrow signal, tears, and soft-tissue edema. STIR is an alternative fat-suppression technique that is more uniform and reliable on inhomogeneous fields or large fields of view; it suppresses fat by its short inversion time and is very sensitive to edema, but has lower signal-to-noise. So in practice: T1 for anatomy and marrow replacement, fluid-sensitive fat-sat T2/PD for edema and fluid, and STIR when fat-sat fails or I need maximal edema sensitivity.",
+"keyterms": [
+{
+"label": "T1 = anatomy/marrow, fat bright",
+"patterns": [
+"t1",
+"fat (is )?bright",
+"anatomy",
+"marrow"
+],
+"why": "T1: fat bright, fluid dark; best for anatomy and marrow"
+},
+{
+"label": "marrow replacement = low T1",
+"patterns": [
+"marrow[- ]?replac",
+"low t1",
+"replaces? (the )?(normal )?fat",
+"infiltrat"
+],
+"why": "loss of bright fatty T1 marrow signals tumor/infection"
+},
+{
+"label": "fluid-sensitive fat-sat T2/PD",
+"patterns": [
+"t2",
+"proton[- ]?density",
+"\\bpd\\b",
+"fat[- ]sat",
+"fluid[- ]sensitive"
+],
+"why": "fat-suppressed T2/PD makes fluid/edema bright for detection"
+},
+{
+"label": "fluid-bright / edema conspicuous",
+"patterns": [
+"fluid[- ]bright",
+"edema",
+"conspicu",
+"bright"
+],
+"why": "on fat-sat T2, fluid and edema are bright and conspicuous"
+},
+{
+"label": "STIR = robust fat suppression",
+"patterns": [
+"stir",
+"inversion",
+"uniform",
+"robust",
+"inhomogene"
+],
+"why": "STIR gives uniform fat suppression, useful when fat-sat fails"
+},
+{
+"label": "STIR lower SNR",
+"patterns": [
+"lower (signal|snr)",
+"signal[- ]to[- ]noise",
+"less signal"
+],
+"why": "STIR trades signal-to-noise for fat-suppression reliability"
+}
+],
+"id": 101
+},
+{
+"type": "dictate",
+"joint": "general",
+"topic": "Marrow edema terminology",
+"difficulty": 2,
+"prompt": "How do you describe and what do you call abnormal marrow signal, and why is 'edema-like signal' the preferred phrase?",
+"model": "Abnormal marrow shows low signal on T1 and high signal on fluid-sensitive sequences (T2 fat-sat or STIR). I describe it as edema-like marrow signal rather than simply 'marrow edema,' because the same imaging appearance is produced by many things - true edema, hyperemia, microtrabecular injury, inflammation, or neoplasm - and the term 'edema-like signal' acknowledges that the signal is nonspecific and does not commit to a single histology. The key discriminator from a marrow-replacing process is the T1: edema-like signal usually preserves some fatty marrow and is not as confluently dark on T1 as tumor, whereas marrow-replacing lesions show confluent low T1 that replaces the normal fat. I localize it (subchondral, metaphyseal), and look for an associated fracture line or cortical abnormality.",
+"keyterms": [
+{
+"label": "low T1 / high fluid-sensitive",
+"patterns": [
+"low (on )?t1",
+"high (on )?(t2|fluid|stir)",
+"fluid[- ]sensitive",
+"bright on (t2|stir)"
+],
+"why": "marrow edema = low T1, high T2/STIR signal"
+},
+{
+"label": "'edema-like signal' preferred term",
+"patterns": [
+"edema[- ]like",
+"oedema[- ]like",
+"bone marrow edema[- ]like"
+],
+"why": "'edema-like signal' acknowledges the appearance is nonspecific"
+},
+{
+"label": "nonspecific etiology",
+"patterns": [
+"nonspecific",
+"many (causes|things)",
+"hyperemia",
+"microtrabecular",
+"does not commit"
+],
+"why": "the signal has many causes; the term avoids implying one"
+},
+{
+"label": "T1 distinguishes from marrow replacement",
+"patterns": [
+"marrow[- ]?replac",
+"confluent",
+"preserves? (some )?fat",
+"t1"
+],
+"why": "replacement = confluent low T1; edema preserves some fat"
+},
+{
+"label": "localize: subchondral/metaphyseal",
+"patterns": [
+"subchondral",
+"metaphys",
+"localiz",
+"distribution"
+],
+"why": "location guides the differential"
+},
+{
+"label": "look for fracture line",
+"patterns": [
+"fracture line",
+"cortical",
+"associated"
+],
+"why": "a fracture line within edema changes the diagnosis"
+}
+],
+"id": 102
+},
+{
+"type": "dictate",
+"joint": "general",
+"topic": "Bone injury spectrum",
+"difficulty": 3,
+"prompt": "Distinguish bone contusion, stress reaction, stress fracture, insufficiency fracture, and complete fracture on MRI.",
+"model": "These form a spectrum and the key discriminators are the presence/absence of a fracture line and the underlying bone quality. A bone contusion (bone bruise) is reticulated edema-like marrow signal - low T1, high T2 fat-sat - from microtrabecular injury after impaction, with NO discrete fracture line and intact cortex. A stress reaction is periosteal and marrow edema from repetitive loading of normal bone, again WITHOUT a visible fracture line - it is the precursor on the continuum. A stress fracture is the next step: marrow edema PLUS a discrete low-signal fracture line; when this occurs in normal bone under abnormal/repetitive load it is a fatigue fracture, and when it occurs in abnormal (weakened/osteoporotic) bone under normal load it is an insufficiency fracture. A complete fracture is a fracture line traversing the entire bone, often with cortical disruption and possible displacement. So I always state: is there a fracture line, does it involve the cortex, and is the bone normal (fatigue) or weakened (insufficiency)?",
+"keyterms": [
+{
+"label": "contusion = reticulated edema, no line",
+"patterns": [
+"contusion",
+"bone bruise",
+"reticulat",
+"microtrabecular",
+"no (discrete )?fracture line"
+],
+"why": "bruise = marrow edema from microtrabecular injury, no fracture line"
+},
+{
+"label": "stress reaction = edema, no line",
+"patterns": [
+"stress reaction",
+"periosteal",
+"without (a )?(visible )?(fracture )?line",
+"precursor"
+],
+"why": "stress reaction = edema from repetitive load, no fracture line yet"
+},
+{
+"label": "stress fracture = edema + fracture line",
+"patterns": [
+"stress fracture",
+"fracture line",
+"low[- ]signal line"
+],
+"why": "stress fracture adds a discrete low-signal fracture line"
+},
+{
+"label": "fatigue vs insufficiency",
+"patterns": [
+"fatigue fracture",
+"insufficiency",
+"abnormal load",
+"weakened",
+"osteoporotic",
+"normal bone"
+],
+"why": "fatigue = normal bone/abnormal load; insufficiency = weak bone/normal load"
+},
+{
+"label": "complete fracture = full traverse + cortex",
+"patterns": [
+"complete fracture",
+"through(-| )out",
+"entire",
+"cortical disrupt",
+"displac"
+],
+"why": "complete fracture traverses the bone with cortical break"
+},
+{
+"label": "state fracture line presence",
+"patterns": [
+"fracture line",
+"cortex",
+"cortical"
+],
+"why": "the discriminator across the spectrum is the fracture line and cortex"
+}
+],
+"id": 103
+},
+{
+"type": "dictate",
+"joint": "general",
+"topic": "Cartilage lexicon",
+"difficulty": 3,
+"prompt": "Describe the vocabulary for chondral injury - fissuring, fibrillation, delamination, and full-thickness defect - and how depth is conveyed.",
+"model": "Cartilage abnormalities are described by surface integrity and depth. Fibrillation is fraying or irregularity of the articular surface - superficial roughening. A fissure is a vertical or oblique cleft extending into the cartilage from the surface, which I grade by depth: partial-thickness if it does not reach bone, full-thickness if it extends to the subchondral plate. Delamination is a horizontal cleavage at the cartilage-bone interface - the cartilage separates from subchondral bone, sometimes with fluid undercutting it, while the surface can look deceptively intact. A full-thickness chondral defect is loss of cartilage down to and exposing the subchondral bone - I use the phrase 'exposed subchondral bone.' I always state the surface/compartment involved, the depth (partial vs full thickness, or a percentage), the size in mm, and associated subchondral changes like marrow edema or subchondral cysts.",
+"keyterms": [
+{
+"label": "fibrillation = surface fraying",
+"patterns": [
+"fibrillat",
+"fray",
+"surface irregular",
+"roughen"
+],
+"why": "fibrillation = superficial surface fraying/irregularity"
+},
+{
+"label": "fissure = vertical cleft, graded by depth",
+"patterns": [
+"fissur",
+"cleft",
+"vertical",
+"oblique"
+],
+"why": "a fissure is a cleft graded partial vs full thickness by depth"
+},
+{
+"label": "delamination = horizontal cleavage",
+"patterns": [
+"delaminat",
+"horizontal",
+"cleavage",
+"undercut",
+"cartilage[- ]bone interface"
+],
+"why": "delamination = separation at the cartilage-bone interface"
+},
+{
+"label": "full-thickness defect / exposed bone",
+"patterns": [
+"full[- ]thickness",
+"exposed subchondral",
+"down to bone",
+"subchondral bone exposed"
+],
+"why": "full-thickness loss exposes subchondral bone"
+},
+{
+"label": "convey depth (partial vs full)",
+"patterns": [
+"partial[- ]thickness",
+"depth",
+"percent",
+"\\d{1,3}\\s*%",
+"reaches? (the )?bone"
+],
+"why": "depth (partial/full or %) is the core descriptor"
+},
+{
+"label": "location, size, associated subchondral change",
+"patterns": [
+"compartment",
+"surface",
+"\\d+\\s*mm",
+"subchondral (cyst|edema)",
+"size"
+],
+"why": "always state location, size, and subchondral findings"
+}
+],
+"id": 104
+},
+{
+"type": "dictate",
+"joint": "general",
+"topic": "Outerbridge / ICRS grading",
+"difficulty": 2,
+"prompt": "Walk through the modified Outerbridge / ICRS cartilage grading system, grades 0 through 4.",
+"model": "The modified Outerbridge (and the analogous ICRS) system grades cartilage from 0 to 4 by depth of involvement. Grade 0 is normal cartilage. Grade 1 is signal abnormality or softening with an intact surface - abnormal internal signal but no surface defect. Grade 2 is a superficial defect involving less than 50% of cartilage thickness - fibrillation/fissuring into the superficial half. Grade 3 is a deep defect involving more than 50% of thickness but not reaching the subchondral bone. Grade 4 is a full-thickness defect extending to and exposing the subchondral bone. It is a depth-based scale, so my dictation maps directly: surface intact = grade 1, less than half = 2, more than half = 3, down to bone = 4.",
+"keyterms": [
+{
+"label": "grade 0 normal",
+"patterns": [
+"grade 0",
+"normal cartilage"
+],
+"why": "baseline normal cartilage"
+},
+{
+"label": "grade 1 = signal/softening, intact surface",
+"patterns": [
+"grade 1",
+"soften",
+"intact surface",
+"internal signal"
+],
+"why": "grade 1 = abnormal signal/softening, surface intact"
+},
+{
+"label": "grade 2 = <50% thickness",
+"patterns": [
+"grade 2",
+"less than 50",
+"<\\s*50",
+"superficial",
+"fibrillat"
+],
+"why": "grade 2 = superficial defect <50% thickness"
+},
+{
+"label": "grade 3 = >50% not to bone",
+"patterns": [
+"grade 3",
+"more than 50",
+">\\s*50",
+"deep",
+"not (reaching|to) bone"
+],
+"why": "grade 3 = deep defect >50% but not exposing bone"
+},
+{
+"label": "grade 4 = full-thickness to bone",
+"patterns": [
+"grade 4",
+"full[- ]thickness",
+"subchondral bone",
+"exposes? bone"
+],
+"why": "grade 4 = full-thickness defect exposing subchondral bone"
+},
+{
+"label": "depth-based scale",
+"patterns": [
+"depth",
+"thickness",
+"based on depth"
+],
+"why": "the system is organized by depth of cartilage loss"
+}
+],
+"id": 105
+},
+{
+"type": "dictate",
+"joint": "general",
+"topic": "Ligament injury grading",
+"difficulty": 2,
+"prompt": "How do you grade a ligament sprain (I/II/III) on MRI and what descriptive terms apply to partial versus complete tears?",
+"model": "Ligament injury is graded I to III. Grade I is a sprain with periligamentous edema and intact, taut fibers - the ligament shows surrounding high T2 signal but the fibers are continuous and normal in thickness. Grade II is a partial tear: some fiber disruption with intrasubstance high signal, possible thickening, and fibers that may appear lax or partially discontinuous, but a portion remains intact. Grade III is a complete tear: full discontinuity of fibers, often with a wavy, lax, or retracted appearance and fluid filling the gap, plus periligamentous edema and sometimes a torn stump. I also localize the tear - midsubstance versus an avulsion at the bony attachment (which may take a bone fragment) - and describe whether fibers are taut, lax/wavy, or frankly discontinuous.",
+"keyterms": [
+{
+"label": "grade I = periligamentous edema, intact",
+"patterns": [
+"grade (1|i)\\b",
+"periligamentous",
+"intact",
+"taut",
+"sprain"
+],
+"why": "grade I = surrounding edema, fibers intact"
+},
+{
+"label": "grade II = partial tear",
+"patterns": [
+"grade (2|ii)\\b",
+"partial",
+"intrasubstance",
+"some fiber"
+],
+"why": "grade II = partial fiber disruption, some intact"
+},
+{
+"label": "grade III = complete tear/discontinuity",
+"patterns": [
+"grade (3|iii)\\b",
+"complete",
+"discontinu",
+"full"
+],
+"why": "grade III = complete fiber discontinuity"
+},
+{
+"label": "lax / wavy fibers",
+"patterns": [
+"lax",
+"wavy",
+"redundant",
+"retract"
+],
+"why": "complete tears show lax, wavy, or retracted fibers"
+},
+{
+"label": "periligamentous edema",
+"patterns": [
+"periligamentous",
+"surrounding (high )?signal",
+"edema"
+],
+"why": "periligamentous edema is a key sign across grades"
+},
+{
+"label": "avulsion vs midsubstance",
+"patterns": [
+"avulsion",
+"midsubstance",
+"mid[- ]substance",
+"attachment",
+"bony fragment"
+],
+"why": "localize: midsubstance vs bony avulsion"
+}
+],
+"id": 106
+},
+{
+"type": "dictate",
+"joint": "general",
+"topic": "Muscle strain grading",
+"difficulty": 2,
+"prompt": "Describe the MRI grading of a muscle strain (grades 1-3) and the descriptors you use, including the myotendinous junction.",
+"model": "Muscle strains are graded 1 to 3 and most occur at the myotendinous junction, the weak link. Grade 1 is a low-grade strain: feathery or interstitial edema-like high T2 signal tracking along muscle fibers and fascia, with no architectural disruption and minimal or no fiber loss - I often estimate it involves a small percentage of the cross-sectional area. Grade 2 is a partial tear: edema plus some fiber disruption, perifascial fluid, and partial loss of the muscle cross-section, frequently with a focal hematoma. Grade 3 is a complete tear/rupture with full-thickness fiber discontinuity, retraction, and often a large hematoma with the torn muscle ends. Descriptors I use: feathery edema, perifascial/fascial fluid, percentage of muscle cross-sectional area involved, location relative to the myotendinous junction, and retraction.",
+"keyterms": [
+{
+"label": "myotendinous junction",
+"patterns": [
+"myotendinous",
+"musculotendinous",
+"mtj"
+],
+"why": "strains classically occur at the myotendinous junction"
+},
+{
+"label": "grade 1 = feathery edema, no disruption",
+"patterns": [
+"grade 1",
+"feathery",
+"interstitial",
+"no (architectural )?disrupt"
+],
+"why": "grade 1 = feathery edema without fiber disruption"
+},
+{
+"label": "grade 2 = partial tear + fascial fluid",
+"patterns": [
+"grade 2",
+"partial",
+"perifascial",
+"fascial fluid",
+"fiber disrupt"
+],
+"why": "grade 2 = partial tear with perifascial fluid"
+},
+{
+"label": "grade 3 = complete rupture + retraction",
+"patterns": [
+"grade 3",
+"complete",
+"rupture",
+"retract",
+"discontinu"
+],
+"why": "grade 3 = complete rupture with retraction"
+},
+{
+"label": "% cross-sectional area",
+"patterns": [
+"cross[- ]section",
+"percent",
+"\\d{1,3}\\s*%",
+"csa"
+],
+"why": "quantify by percent of muscle cross-section involved"
+},
+{
+"label": "fascial / perifascial fluid & hematoma",
+"patterns": [
+"fascial fluid",
+"perifascial",
+"hematoma",
+"haematoma"
+],
+"why": "fascial fluid and hematoma indicate higher grade"
+}
+],
+"id": 107
+},
+{
+"type": "dictate",
+"joint": "general",
+"topic": "Denervation vs fatty atrophy",
+"difficulty": 2,
+"prompt": "How do you distinguish subacute denervation edema from chronic fatty atrophy of a muscle, and what does each imply?",
+"model": "These represent the time course of a muscle losing its nerve supply. Subacute denervation produces edema-like signal in the muscle - diffuse high signal on T2 fat-sat/STIR with preserved muscle bulk and no focal injury - distributed in a specific nerve or myotomal territory, which is the clue that it is neurogenic rather than traumatic. If denervation persists, it progresses to chronic changes: fatty infiltration and atrophy, seen as high T1 fatty replacement of the muscle with volume loss and decreased bulk. So subacute = bright on fluid-sensitive sequences with normal volume; chronic = fatty (bright on T1) with shrinkage. Recognizing a nerve-territory distribution lets me suggest a denervation etiology and point to the responsible nerve.",
+"keyterms": [
+{
+"label": "denervation edema = high T2/STIR, normal bulk",
+"patterns": [
+"denervation",
+"edema[- ]like",
+"high (t2|stir|signal)",
+"preserved (bulk|volume)",
+"subacute"
+],
+"why": "subacute denervation = diffuse muscle edema, bulk preserved"
+},
+{
+"label": "nerve/myotomal territory distribution",
+"patterns": [
+"nerve (territory|distribution)",
+"myotom",
+"territory",
+"innervat"
+],
+"why": "a nerve-territory distribution signals a neurogenic cause"
+},
+{
+"label": "chronic = fatty atrophy",
+"patterns": [
+"fatty (atrophy|infiltrat|replac)",
+"atrophy",
+"chronic",
+"volume loss"
+],
+"why": "chronic denervation = fatty atrophy and volume loss"
+},
+{
+"label": "fat is high T1",
+"patterns": [
+"high t1",
+"bright on t1",
+"t1 (bright|hyper)",
+"fat"
+],
+"why": "fatty replacement is bright on T1"
+},
+{
+"label": "time course / progression",
+"patterns": [
+"subacute",
+"chronic",
+"progress",
+"time course",
+"reversible"
+],
+"why": "edema (subacute) precedes fatty atrophy (chronic)"
+},
+{
+"label": "localize responsible nerve",
+"patterns": [
+"responsible nerve",
+"which nerve",
+"specific nerve",
+"point to"
+],
+"why": "distribution lets you name the affected nerve"
+}
+],
+"id": 108
+},
+{
+"type": "dictate",
+"joint": "general",
+"topic": "AVN / double-line sign",
+"difficulty": 2,
+"prompt": "Describe osteonecrosis on MRI including the double-line sign, and contrast it with subchondral insufficiency fracture.",
+"model": "Osteonecrosis (avascular necrosis) of an epiphysis shows a serpiginous or geographic peripheral rim demarcating a necrotic segment. The classic double-line sign on T2 is an outer low-signal rim (sclerotic reactive interface) with an inner high-signal line (hyperemic granulation tissue) - the two parallel lines bordering the infarcted marrow, which often retains fat signal centrally early on. Contrast this with a subchondral insufficiency fracture, which shows a subchondral low-signal line paralleling the articular surface with surrounding marrow edema, occurring in weakened bone (often elderly osteoporotic or post-meniscectomy knees), and is a fracture rather than primary infarction - though it can lead to secondary collapse. So the discriminators are the serpiginous double-line rim of AVN versus the subchondral fracture line and prominent edema of insufficiency fracture; both can progress to subchondral collapse.",
+"keyterms": [
+{
+"label": "osteonecrosis / AVN",
+"patterns": [
+"osteonecrosis",
+"avascular necrosis",
+"\\bavn\\b",
+"infarct"
+],
+"why": "AVN = avascular necrosis/infarction of marrow"
+},
+{
+"label": "double-line sign",
+"patterns": [
+"double[- ]line",
+"two (parallel )?lines"
+],
+"why": "the classic AVN sign on T2"
+},
+{
+"label": "outer low + inner high line",
+"patterns": [
+"outer low",
+"inner high",
+"sclerotic (rim|interface)",
+"granulation",
+"hyperemic"
+],
+"why": "outer dark sclerosis + inner bright granulation = double line"
+},
+{
+"label": "serpiginous/geographic rim",
+"patterns": [
+"serpiginous",
+"geographic",
+"rim",
+"demarcat"
+],
+"why": "AVN demarcates a serpiginous/geographic segment"
+},
+{
+"label": "subchondral insufficiency fracture",
+"patterns": [
+"subchondral (insufficiency )?fracture",
+"insufficiency fracture",
+"subchondral (low[- ]signal )?line"
+],
+"why": "SIF = subchondral fracture line in weakened bone"
+},
+{
+"label": "both can collapse",
+"patterns": [
+"collapse",
+"subchondral collapse",
+"articular collapse"
+],
+"why": "both AVN and SIF can progress to subchondral collapse"
+}
+],
+"id": 109
+},
+{
+"type": "dictate",
+"joint": "general",
+"topic": "Magic-angle artifact",
+"difficulty": 3,
+"prompt": "What is the magic-angle artifact, how does it mimic tendinosis, and how do you confirm it is artifact?",
+"model": "The magic-angle artifact is artifactual increased signal within a tendon or ligament on short-TE sequences - T1, proton-density, and gradient-echo - that occurs when the fibers are oriented approximately 55 degrees to the main magnetic field B0. At that angle, dipolar interactions are minimized, T2 lengthens, and the normally dark tendon shows spuriously increased intermediate signal, mimicking tendinosis or a partial tear. The way I confirm it is artifact rather than real pathology is to look at a long-TE sequence - a T2-weighted image: magic-angle signal disappears (the tendon goes dark again) on long-TE T2, whereas true tendinosis or a tear persists and tendinosis stays intermediate while a tear becomes fluid-bright. It is classically seen where curved tendons hit ~55 degrees - for example the supraspinatus near its insertion or the peroneal/posterior tibial tendons around the ankle.",
+"keyterms": [
+{
+"label": "~55 degrees to B0",
+"patterns": [
+"55",
+"magic angle",
+"fifty[- ]five",
+"angle to (the )?(main )?field",
+"b0"
+],
+"why": "the artifact peaks near 55 degrees to the main field"
+},
+{
+"label": "short-TE sequences (T1/PD/GRE)",
+"patterns": [
+"short[- ]?te",
+"low te",
+"t1",
+"proton[- ]?density",
+"\\bpd\\b",
+"gradient[- ]?echo",
+"\\bgre\\b"
+],
+"why": "the artifact appears on short-TE sequences"
+},
+{
+"label": "mimics tendinosis/partial tear",
+"patterns": [
+"mimic",
+"mimics tendinosis",
+"false",
+"artifactual (increased )?signal"
+],
+"why": "raised short-TE signal mimics tendinosis"
+},
+{
+"label": "confirm on long-TE T2 (disappears)",
+"patterns": [
+"long[- ]?te",
+"t2",
+"disappear",
+"resolves?",
+"goes (dark|away)"
+],
+"why": "on long-TE T2 the artifactual signal vanishes; pathology persists"
+},
+{
+"label": "curved tendon locations",
+"patterns": [
+"supraspinatus",
+"perone",
+"posterior tibial",
+"curved",
+"insertion"
+],
+"why": "occurs where curved tendons reach ~55 degrees"
+}
+],
+"id": 110
+},
+{
+"type": "dictate",
+"joint": "general",
+"topic": "Named grading systems",
+"difficulty": 3,
+"prompt": "Name the common MSK grading systems - Goutallier, Outerbridge, Patte, Palmer - and state when each is used.",
+"model": "These are eponymous grading systems each tied to a specific application. Goutallier grades fatty muscle degeneration/atrophy - originally the rotator cuff muscles - from 0 (no fat) to 4 (more fat than muscle); it is used to assess muscle quality and reparability, classically of the supraspinatus and infraspinatus. Outerbridge (modified for MRI) grades articular cartilage damage 0 to 4 by depth, as discussed. Patte grades the degree of rotator cuff tendon retraction in the coronal plane - stage 1 near the footprint, stage 2 to the humeral head level, stage 3 retracted to the glenoid. Palmer classifies triangular fibrocartilage complex (TFCC) lesions of the wrist - class 1 traumatic and class 2 degenerative, each subdivided. So: Goutallier for muscle fat, Outerbridge for cartilage, Patte for cuff retraction, Palmer for the TFCC.",
+"keyterms": [
+{
+"label": "Goutallier = fatty muscle atrophy",
+"patterns": [
+"goutallier",
+"fatty (muscle|infiltrat|atrophy|degener)",
+"muscle quality"
+],
+"why": "Goutallier grades fatty degeneration of muscle (e.g., cuff)"
+},
+{
+"label": "Outerbridge = cartilage depth",
+"patterns": [
+"outerbridge",
+"cartilage",
+"chondral"
+],
+"why": "Outerbridge grades articular cartilage by depth"
+},
+{
+"label": "Patte = cuff tendon retraction",
+"patterns": [
+"patte",
+"retraction",
+"coronal",
+"cuff retract"
+],
+"why": "Patte stages rotator cuff tendon retraction"
+},
+{
+"label": "Palmer = TFCC lesions",
+"patterns": [
+"palmer",
+"tfcc",
+"triangular fibrocartilage"
+],
+"why": "Palmer classifies TFCC tears (traumatic vs degenerative)"
+},
+{
+"label": "each tied to a specific use",
+"patterns": [
+"specific (use|application)",
+"tied to",
+"used (for|to)",
+"when (to use|each)"
+],
+"why": "each eponym applies to one anatomic/clinical question"
+}
+],
+"id": 111
+},
+{
+"type": "dictate",
+"joint": "general",
+"topic": "Structured lesion description",
+"difficulty": 2,
+"prompt": "What are the essential descriptors an MSK radiologist states for any lesion or abnormality, and why include relevant negatives?",
+"model": "For any abnormality I dictate a consistent set of descriptors: location (which bone/compartment, which surface or zone), size in three dimensions in millimeters, morphology (shape, margins, well- vs ill-defined), signal characteristics (on T1, on fluid-sensitive sequences, and after contrast if given), and the integrity/stability of the involved structure. I then state associated findings - effusion, marrow edema, soft-tissue changes - and, importantly, the relevant negatives: explicitly noting the absence of a fracture line, of full-thickness tear, of aggressive features, or of a fragment. Relevant negatives matter because they document that the pertinent differential considerations were actively assessed and excluded, they directly answer the clinical question, and they make the report defensible and useful to the referring surgeon. The framework is: location, size, morphology, signal, stability, associated findings, and relevant negatives.",
+"keyterms": [
+{
+"label": "location (surface/zone/compartment)",
+"patterns": [
+"location",
+"which (surface|zone|compartment|bone)",
+"surface",
+"compartment"
+],
+"why": "always anchor the finding to a precise location"
+},
+{
+"label": "size in 3 dimensions (mm)",
+"patterns": [
+"size",
+"three dimension",
+"\\d+\\s*mm",
+"measure",
+"dimension"
+],
+"why": "give size in mm, ideally three dimensions"
+},
+{
+"label": "morphology / margins",
+"patterns": [
+"morphology",
+"margin",
+"shape",
+"well[- ]defined",
+"ill[- ]defined"
+],
+"why": "describe shape and margins"
+},
+{
+"label": "signal characteristics",
+"patterns": [
+"signal",
+"t1",
+"t2",
+"fluid[- ]sensitive",
+"enhanc"
+],
+"why": "characterize signal on each sequence"
+},
+{
+"label": "stability / integrity",
+"patterns": [
+"stability",
+"integrity",
+"stable",
+"unstable"
+],
+"why": "state whether the structure/lesion is stable"
+},
+{
+"label": "associated findings",
+"patterns": [
+"associated",
+"effusion",
+"marrow edema",
+"soft[- ]tissue"
+],
+"why": "note secondary/associated findings"
+},
+{
+"label": "relevant negatives",
+"patterns": [
+"relevant negative",
+"pertinent negative",
+"no (evidence of|fracture|tear)",
+"absence of",
+"exclud"
+],
+"why": "relevant negatives show the differential was assessed"
+}
+],
+"id": 112
+},
+{
+"type": "mcq",
+"joint": "general",
+"topic": "Fluid-bright definition",
+"difficulty": 1,
+"prompt": "When a radiologist says a tendon defect is 'fluid-bright,' on which sequence is this signal characteristic assessed and what does it indicate?",
+"choices": [
+"High signal on T1, indicating fatty change",
+"High signal following fluid on T2/fluid-sensitive sequences, indicating a tear",
+"Low signal on T2, indicating normal tendon",
+"High signal on gradient-echo only, indicating magic angle"
+],
+"answer": 1,
+"explain": "'Fluid-bright' means the signal follows fluid (becomes bright) on T2/fluid-sensitive fat-sat sequences. In a tendon, a fluid-bright cleft indicates a tear, as opposed to the intermediate, non-fluid signal of tendinosis.",
+"id": 113
+},
+{
+"type": "mcq",
+"joint": "general",
+"topic": "Marrow replacement on T1",
+"difficulty": 2,
+"prompt": "Which finding most specifically suggests a marrow-replacing process (e.g., tumor or infection) rather than benign edema-like signal?",
+"choices": [
+"High signal on STIR",
+"Confluent low signal replacing the normal fatty marrow on T1",
+"A small joint effusion",
+"Periligamentous high T2 signal"
+],
+"answer": 1,
+"explain": "Confluent low T1 signal that replaces the normal bright fatty marrow is the hallmark of a marrow-replacing process. Edema-like signal is bright on fluid-sensitive sequences but typically preserves some fatty marrow on T1 and is not confluently dark.",
+"id": 114
+},
+{
+"type": "mcq",
+"joint": "general",
+"topic": "Sheath terminology",
+"difficulty": 2,
+"prompt": "Which tendon can develop true tenosynovitis (rather than paratenonitis)?",
+"choices": [
+"Achilles tendon",
+"Patellar tendon",
+"Tibialis posterior tendon",
+"Quadriceps tendon"
+],
+"answer": 2,
+"explain": "The tibialis posterior runs within a true synovial tendon sheath and can develop tenosynovitis. The Achilles and patellar tendons lack a synovial sheath (they have a paratenon), so they develop paratenonitis/peritendinitis instead.",
+"id": 115
+},
+{
+"type": "mcq",
+"joint": "general",
+"topic": "Stress fracture vs reaction",
+"difficulty": 2,
+"prompt": "What single feature distinguishes a stress fracture from a stress reaction on MRI?",
+"choices": [
+"The presence of marrow edema",
+"A discrete low-signal fracture line",
+"A joint effusion",
+"Periosteal thickening"
+],
+"answer": 1,
+"explain": "Both stress reaction and stress fracture show marrow/periosteal edema. The presence of a discrete low-signal fracture line is what defines a stress fracture; without a fracture line it is a stress reaction (the earlier point on the continuum).",
+"id": 116
+},
+{
+"type": "cloze",
+"joint": "general",
+"topic": "Outerbridge grade 4",
+"difficulty": 1,
+"prompt": "A modified Outerbridge grade 4 chondral lesion is a full-thickness defect that exposes the underlying ___ bone.",
+"answers": [
+"subchondral"
+],
+"explain": "Grade 4 is a full-thickness cartilage defect extending down to and exposing the subchondral bone.",
+"id": 117
+},
+{
+"type": "cloze",
+"joint": "general",
+"topic": "AVN double-line",
+"difficulty": 2,
+"prompt": "The classic MRI sign of osteonecrosis is the ___-line sign, with an outer low-signal (sclerotic) line and an inner high-signal (granulation tissue) line on T2.",
+"answers": [
+"double"
+],
+"explain": "The double-line sign - outer dark sclerotic rim and inner bright hyperemic granulation tissue - is the classic T2 appearance of osteonecrosis.",
+"id": 118
+},
+{
+"type": "cloze",
+"joint": "general",
+"topic": "Muscle strain location",
+"difficulty": 1,
+"prompt": "Most acute muscle strains occur at the ___ junction, where feathery edema-like signal tracks along the muscle fibers.",
+"answers": [
+"myotendinous",
+"musculotendinous"
+],
+"explain": "The myotendinous (musculotendinous) junction is the weakest link and the typical site of muscle strain, showing feathery edema on fluid-sensitive sequences.",
+"id": 119
+}
+];

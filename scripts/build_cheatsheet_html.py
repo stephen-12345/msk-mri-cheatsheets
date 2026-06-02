@@ -85,6 +85,7 @@ body{
 .topbar a.tmpl{border-color:rgba(244,168,106,0.55);background:rgba(244,168,106,0.12);color:#ffe0c8}
 .topbar a.cases{border-color:rgba(121,212,155,0.55);background:rgba(121,212,155,0.12);color:#bdeccf}
 .topbar a.obs{border-color:rgba(167,139,250,0.55);background:rgba(167,139,250,0.12);color:#cbbdf5}
+.topbar a.trainer{border-color:rgba(95,198,230,0.6);background:rgba(95,198,230,0.14);color:#cdeffb;font-weight:700}
 
 .fontctl{
   display:inline-flex; align-items:center; gap:4px;
@@ -970,6 +971,7 @@ def topbar(joint: str, title: str, has_template: bool, kind: str = "cheatsheet",
         '<button id="fs-inc" aria-label="Increase font size">A+</button>'
         "</span>"
     )
+    links.append('<a class="trainer" href="../trainer/index.html">🎯 Trainer</a>')
     toc_btn = (
         '<button id="toc-toggle" class="toc-toggle" title="Contents (c)" '
         'aria-label="Table of contents">☰ Contents</button>'
