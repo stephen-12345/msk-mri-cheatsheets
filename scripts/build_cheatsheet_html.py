@@ -26,9 +26,22 @@ from __future__ import annotations
 import html
 import re
 from pathlib import Path
+from urllib.parse import quote
 
 ROOT = Path("/Users/jarviscore/Downloads/msk-mri-dictation-cheatsheets-webapp")
 JOINTS = ["shoulder", "knee", "elbow", "hip", "ankle", "foot", "finger", "wrist"]
+
+# Obsidian deep-link target: the synced copies live in this vault/folder.
+OBSIDIAN_VAULT = "Obsidian Vault"
+OBSIDIAN_DIR = "Medical/Radiology/MSK/MRI Dictation Cheatsheets"
+
+
+def obsidian_uri(note: str) -> str:
+    """Build an obsidian://open deep link for a note (basename, no extension)."""
+    return (
+        "obsidian://open?vault=" + quote(OBSIDIAN_VAULT, safe="")
+        + "&file=" + quote(f"{OBSIDIAN_DIR}/{note}", safe="")
+    )
 
 CSS = """
 :root{
@@ -71,6 +84,7 @@ body{
 .topbar a:hover{border-color:var(--h3tx); color:#fff}
 .topbar a.tmpl{border-color:rgba(244,168,106,0.55);background:rgba(244,168,106,0.12);color:#ffe0c8}
 .topbar a.cases{border-color:rgba(121,212,155,0.55);background:rgba(121,212,155,0.12);color:#bdeccf}
+.topbar a.obs{border-color:rgba(167,139,250,0.55);background:rgba(167,139,250,0.12);color:#cbbdf5}
 
 .fontctl{
   display:inline-flex; align-items:center; gap:4px;
@@ -933,7 +947,7 @@ def topbar(joint: str, title: str, has_template: bool, kind: str = "cheatsheet",
             '<a href="../index.html">← All regions</a>',
             f'<a href="{joint}-mri-cheatsheet.html">Cheat sheet</a>',
             f'<a href="{joint}-mri-cases-dark.pdf">PDF (dark)</a>',
-            f'<a href="{joint}-mri-cases.md">Markdown</a>',
+            f'<a class="obs" href="{obsidian_uri(joint + "-mri-cases")}">⬡ Obsidian</a>',
         ]
         if has_template:
             links.insert(2, f'<a class="tmpl" href="../templates/{joint}.html">\U0001F4CB Dictation template</a>')
@@ -942,7 +956,7 @@ def topbar(joint: str, title: str, has_template: bool, kind: str = "cheatsheet",
             '<a href="../index.html">← All regions</a>',
             f'<a href="{joint}-mri-cheatsheet.pdf">PDF (print)</a>',
             f'<a href="{joint}-mri-cheatsheet-dark.pdf">PDF (dark)</a>',
-            f'<a href="{joint}-mri-cheatsheet.md">Markdown</a>',
+            f'<a class="obs" href="{obsidian_uri(joint + "-mri-cheatsheet")}">⬡ Obsidian</a>',
         ]
         if has_cases:
             links.insert(1, f'<a class="cases" href="{joint}-mri-cases.html">\U0001F4DA 30 cases</a>')
