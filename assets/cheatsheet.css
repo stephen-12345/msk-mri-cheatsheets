@@ -485,6 +485,8 @@ body.drawer-open{overflow:hidden;touch-action:none}
 }
 .tmpl-topbar .pill-link:hover{border-color:#8bdcf0;color:#fff;text-decoration:none}
 .tmpl-topbar .meta{font-size:12px;color:var(--muted);margin-left:auto}
+.homebtn{font-size:14px !important;font-weight:700 !important;color:#cde9f7 !important;border-color:#34506a !important;background:#0d1a26 !important}
+.homebtn:hover{border-color:#8bdcf0 !important;color:#fff !important}
 
 .tmpl-wrap{
   max-width:1400px; margin:0 auto; padding:18px;
