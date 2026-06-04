@@ -6,7 +6,7 @@
      - Other assets (CSS, JS, icons, PDFs, MD) -> CACHE-FIRST with runtime caching,
        so the app still works offline.
    Bump CACHE on each meaningful change to purge the old cache. */
-const CACHE = 'msk-mri-v24';
+const CACHE = 'msk-mri-v25';
 
 const SHELL = [
   './',

@@ -4,7 +4,7 @@ Copy-ready language. Replace bracketed text. Use as a workstation reference, not
 ## Core Measurements
 | System | Use |
 | --- | --- |
-| Modified Outerbridge / ICRS | Cartilage grading: 0 normal, 1 softening, 2 <50% depth, 3 >50% depth, 4 full-thickness loss. |
+| Modified Outerbridge / ICRS | Cartilage grading: 0 normal, 1 signal heterogeneity (surface intact), 2 <50% depth, 3 >50% depth, 4 full-thickness loss. |
 | Meniscal extrusion | >=3 mm beyond tibial margin is significant; associated with root tears and accelerated OA. |
 | ACL tunnel sizing | Femoral tunnel [X] mm, tibial tunnel [X] mm; report widening if >1 mm increase from baseline. |
 | TT-TG distance | Normal <15 mm, borderline 15-20 mm, abnormal >20 mm; relevant for patellar instability. |
@@ -19,7 +19,7 @@ Use this for any articular surface. Replace [surface/compartment] with the speci
 | Grade | MRI shorthand |
 | --- | --- |
 | 0 | Normal cartilage. |
-| 1 | Signal heterogeneity/softening or swelling; surface intact. |
+| 1 | Signal heterogeneity; surface intact. |
 | 2 | Superficial fissuring/fraying/partial-thickness defect <50% cartilage depth. |
 | 3 | Deep fissuring/partial-thickness defect >50% cartilage depth, not exposing bone. |
 | 4 | Full-thickness cartilage loss with exposed subchondral bone, often edema/cysts. |
@@ -28,8 +28,8 @@ Use this for any articular surface. Replace [surface/compartment] with the speci
 **F:** Articular cartilage of the [surface/compartment] is preserved in thickness and signal without focal fissuring, delamination, or subchondral marrow abnormality.
 **I:** No chondral defect of the [surface/compartment].
 
-**Grade 1 - chondral signal change / softening**
-**F:** Mild focal cartilage signal heterogeneity/softening of the [surface/compartment] with preserved cartilage thickness and intact articular surface. No subchondral marrow edema.
+**Grade 1 - chondral signal change**
+**F:** Mild focal cartilage signal heterogeneity of the [surface/compartment] with preserved cartilage thickness and intact articular surface. No subchondral marrow edema.
 **I:** Grade 1 chondromalacia of the [surface/compartment].
 
 **Grade 2 - superficial partial-thickness chondral loss**

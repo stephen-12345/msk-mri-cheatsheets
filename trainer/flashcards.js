@@ -239,7 +239,7 @@ window.FLASHCARDS = [
 },
 {
 "front": "Outerbridge grades",
-"back": "Cartilage grading: I softening, II fissures <50% depth, III fissures >50% depth, IV full-thickness with exposed bone.",
+"back": "Cartilage grading: I signal heterogeneity (surface intact), II fissures <50% depth, III fissures >50% depth, IV full-thickness with exposed bone.",
 "topic": "Cartilage",
 "joint": "knee",
 "id": "f35"
@@ -521,7 +521,7 @@ window.FLASHCARDS = [
 {"id":"f76","front":"UCL anterior bundle - primary function and tear sign?","back":"Primary valgus restraint of the elbow (the Tommy John ligament). Partial undersurface tears at the sublime tubercle show the T sign on MR arthrography.","topic":"Elbow ligaments","joint":"elbow"},
 {"id":"f77","front":"Modified Outerbridge grade 3 cartilage - definition?","back":"Fissuring and partial-thickness cartilage loss extending greater than 50% of the cartilage thickness but NOT reaching subchondral bone. ICRS grade 3 analog.","topic":"Cartilage","joint":"knee"},
 {"id":"f78","front":"Modified Outerbridge grade 4 cartilage - definition?","back":"Full-thickness cartilage loss down to / exposing subchondral bone, often with reactive marrow edema and subchondral cysts. ICRS grade 4 analog.","topic":"Cartilage","joint":"knee"},
-{"id":"f79","front":"Outerbridge grades 1 and 2 - definitions?","back":"Grade 1: softening / abnormal signal with intact surface. Grade 2: superficial fissuring/defect involving less than 50% of cartilage thickness.","topic":"Cartilage","joint":"knee"},
+{"id":"f79","front":"Outerbridge grades 1 and 2 - definitions?","back":"Grade 1: signal heterogeneity / abnormal signal with intact surface. Grade 2: superficial fissuring/defect involving less than 50% of cartilage thickness.","topic":"Cartilage","joint":"knee"},
 {"id":"f80","front":"What does MOCART assess?","back":"Magnetic resonance Observation of CArtilage Repair Tissue: degree of defect fill, integration at the border zone, surface congruity, repair tissue signal, and subchondral lamina/bone (edema, cysts).","topic":"Cartilage repair","joint":"knee"},
 {"id":"f81","front":"Cam FAI alpha angle threshold?","back":"Alpha angle greater than 55 degrees indicates cam morphology - an aspherical anterosuperior head-neck junction with loss of normal offset.","topic":"FAI","joint":"hip"},
 {"id":"f82","front":"Pincer FAI - imaging measure?","back":"Acetabular overcoverage; lateral center-edge angle greater than 40 degrees. Causes circumferential labral injury and posteroinferior contrecoup chondral damage.","topic":"FAI","joint":"hip"},

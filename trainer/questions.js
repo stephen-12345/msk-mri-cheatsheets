@@ -5020,7 +5020,7 @@ window.TRAINER_QUESTIONS = [
 "topic": "Outerbridge / ICRS grading",
 "difficulty": 2,
 "prompt": "Walk through the modified Outerbridge / ICRS cartilage grading system, grades 0 through 4.",
-"model": "The modified Outerbridge (and the analogous ICRS) system grades cartilage from 0 to 4 by depth of involvement. Grade 0 is normal cartilage. Grade 1 is signal abnormality or softening with an intact surface - abnormal internal signal but no surface defect. Grade 2 is a superficial defect involving less than 50% of cartilage thickness - fibrillation/fissuring into the superficial half. Grade 3 is a deep defect involving more than 50% of thickness but not reaching the subchondral bone. Grade 4 is a full-thickness defect extending to and exposing the subchondral bone. It is a depth-based scale, so my dictation maps directly: surface intact = grade 1, less than half = 2, more than half = 3, down to bone = 4.",
+"model": "The modified Outerbridge (and the analogous ICRS) system grades cartilage from 0 to 4 by depth of involvement. Grade 0 is normal cartilage. Grade 1 is signal heterogeneity with an intact surface - abnormal internal signal but no surface defect. Grade 2 is a superficial defect involving less than 50% of cartilage thickness - fibrillation/fissuring into the superficial half. Grade 3 is a deep defect involving more than 50% of thickness but not reaching the subchondral bone. Grade 4 is a full-thickness defect extending to and exposing the subchondral bone. It is a depth-based scale, so my dictation maps directly: surface intact = grade 1, less than half = 2, more than half = 3, down to bone = 4.",
 "keyterms": [
 {
 "label": "grade 0 normal",
@@ -5031,14 +5031,14 @@ window.TRAINER_QUESTIONS = [
 "why": "baseline normal cartilage"
 },
 {
-"label": "grade 1 = signal/softening, intact surface",
+"label": "grade 1 = signal heterogeneity, intact surface",
 "patterns": [
 "grade 1",
-"soften",
+"heterogen|soften",
 "intact surface",
 "internal signal"
 ],
-"why": "grade 1 = abnormal signal/softening, surface intact"
+"why": "grade 1 = signal heterogeneity, surface intact"
 },
 {
 "label": "grade 2 = <50% thickness",

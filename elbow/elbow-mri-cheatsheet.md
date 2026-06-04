@@ -18,7 +18,7 @@ Use this for any articular surface. Replace [surface/compartment] with the speci
 | Grade | MRI shorthand |
 | --- | --- |
 | 0 | Normal cartilage. |
-| 1 | Signal heterogeneity/softening or swelling; surface intact. |
+| 1 | Signal heterogeneity; surface intact. |
 | 2 | Superficial fissuring/fraying/partial-thickness defect <50% cartilage depth. |
 | 3 | Deep fissuring/partial-thickness defect >50% cartilage depth, not exposing bone. |
 | 4 | Full-thickness cartilage loss with exposed subchondral bone, often edema/cysts. |
@@ -27,8 +27,8 @@ Use this for any articular surface. Replace [surface/compartment] with the speci
 **F:** Articular cartilage of the [surface/compartment] is preserved in thickness and signal without focal fissuring, delamination, or subchondral marrow abnormality.
 **I:** No chondral defect of the [surface/compartment].
 
-**Grade 1 - chondral signal change / softening**
-**F:** Mild focal cartilage signal heterogeneity/softening of the [surface/compartment] with preserved cartilage thickness and intact articular surface. No subchondral marrow edema.
+**Grade 1 - chondral signal change**
+**F:** Mild focal cartilage signal heterogeneity of the [surface/compartment] with preserved cartilage thickness and intact articular surface. No subchondral marrow edema.
 **I:** Grade 1 chondromalacia of the [surface/compartment].
 
 **Grade 2 - superficial partial-thickness chondral loss**
