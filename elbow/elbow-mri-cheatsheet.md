@@ -11,167 +11,6 @@ Copy-ready language. Replace bracketed text. Use as a workstation reference, not
 | Carrying angle | Normal ~5-15 degrees valgus; assess on coronal images. |
 
 
-## How to Find It — Landmark-Based Identification
-
-This section trains you to locate and verify each elbow structure by anchoring to fixed bony landmarks, choosing the right plane/sequence, and recognizing the normal variants that masquerade as disease. Work plane-by-plane, but always cross-reference at least two planes before calling a tear.
-
-### Start With the Three Planes
-
-> [!PEARL] What each plane does best
-> Build a routine and use each plane for what it shows best.
->
-> - **Axial** — nerves (ulnar, median, radial/PIN), the radial tunnel, muscle bellies/denervation edema, and the cross-section of the distal biceps and triceps tendons
-> - **Coronal** — collateral ligaments (**UCL anterior band**, **RCL/LUCL**), common **extensor** and **flexor** origins, and the medial/lateral epicondyles
-> - **Sagittal** — articular cartilage of the **capitellum/trochlea**, **OCD** lesions, the distal biceps and triceps insertions, and anterior/posterior recess loose bodies
-
-> [!PEARL] Sequence logic
-> **Fluid-sensitive fat-saturated** sequences (T2 FS / PD FS / STIR) detect edema, tendon/ligament tears, marrow lesions, and denervation. **T1** shows anatomy, marrow fat, and fatty muscle atrophy. Tendons and ligaments are normally uniformly **low signal**; pathologic signal is intermediate-to-bright on fluid-sensitive images.
-
-### Medial Elbow — Common Flexor Origin and the UCL
-
-> [!LANDMARK] The medial epicondyle
-> The **medial epicondyle** is the anchor for everything medial: the **common flexor-pronator tendon** arises from its anterior aspect, the **UCL anterior band** arises just inferior to it, and the **ulnar nerve** runs in the retroepicondylar (cubital tunnel) groove just posterior to it.
-
-> [!FIND] Common flexor-pronator origin (medial epicondylitis / "golfer's elbow")
-> On **coronal** fluid-sensitive images, find the tendon arising from the **anterior medial epicondyle**.
->
-> - Normal tendon is thin and uniformly **low signal**
-> - Tendinosis = thickening with intermediate signal; tear = fluid-bright signal gap or fiber discontinuity
-> - Always interrogate the **underlying UCL** on the same images — medial epicondylitis and UCL injury frequently coexist
-
-> [!FIND] UCL anterior band — the functional stabilizer
-> On **coronal**, trace the band from the **medial epicondyle** to the **sublime tubercle** of the proximal ulna (medial coronoid margin). This is the primary restraint to valgus stress and the structure that fails in overhead throwers.
->
-> - Normal: taut, low-signal, fan-shaped band attaching right at the sublime tubercle
-> - The posterior band and transverse ligament are minor; the **anterior band** is what you must clear
-
-> [!PITFALL] The T-sign of partial UCL tear
-> A partial undersurface (deep) tear lets contrast or joint fluid track **between the distal UCL and the sublime tubercle**, outlining a "T" where the leaked fluid meets the joint line.
->
-> - Best seen on **coronal** MR arthrogram or with a joint effusion
-> - Do not mistake the normal **transverse synovial recess** at the sublime tubercle for a T-sign — a true T-sign requires fluid extending distal to the expected ligament attachment
-
-> [!PEARL] Distinguishing medial vs lateral epicondylitis
-> Same disease, opposite corners. **Medial epicondylitis** = common **flexor-pronator** origin off the **medial** epicondyle (golfer's/thrower's elbow); check the UCL and ulnar nerve next door. **Lateral epicondylitis** = common **extensor** origin off the **lateral** epicondyle (tennis elbow); check the LUCL/RCL next door. Localize the abnormal tendon to its epicondyle on coronal and the diagnosis names itself.
-
-### Lateral Elbow — Common Extensor Origin and the Lateral Ligament Complex
-
-> [!LANDMARK] The lateral epicondyle
-> The **lateral epicondyle** anchors the **common extensor tendon** anteriorly and the **lateral collateral ligament complex** (RCL deep to the extensor origin; LUCL coursing posteriorly). The radial nerve/PIN passes just anterior to the radiocapitellar joint.
-
-> [!FIND] Common extensor origin (lateral epicondylitis / "tennis elbow")
-> On **coronal**, find the tendon off the **anterior lateral epicondyle**; the **ECRB** contributes most and is the usual culprit.
->
-> - Tendinosis/tear shows thickening and increased signal at the origin
-> - When the extensor origin is torn, look one layer deeper — concurrent **RCL/LUCL** injury upgrades this from simple epicondylitis to potential instability
-
-> [!FIND] LUCL — the key to posterolateral stability
-> The **lateral ulnar collateral ligament (LUCL)** arises from the **lateral epicondyle**, arcs **posterior to the radial head**, and inserts on the **supinator crest (tubercle) of the ulna**. Because it sweeps obliquely and posteriorly, it is best followed on sequential **coronal** images (slightly posterior) — no single slice shows its whole course.
->
-> - Normal: thin, continuous low-signal band hugging the posterolateral radial head
-> - A torn or lax LUCL is the lesion of **posterolateral rotatory instability (PLRI)**
-
-> [!FIND] RCL and annular ligament
-> The **radial collateral ligament (RCL)** runs from the **lateral epicondyle** to blend with the **annular ligament**; the **annular ligament** encircles the **radial head/neck**, anchoring at the anterior and posterior margins of the radial (lesser sigmoid) notch.
->
-> - Find the annular ligament on **axial** as a thin low-signal ring around the radial head
-> - On coronal, the RCL is the more vertical component anterior to the obliquely posterior LUCL
-
-> [!PEARL] Posterolateral rotatory instability (PLRI)
-> PLRI is the most common pattern of chronic elbow instability and is driven by **LUCL insufficiency** (post-traumatic, prior lateral surgery, or chronic varus overload). On MRI, look for an attenuated, thickened, or discontinuous **LUCL** at or near its **epicondylar origin**, often with a lateral effusion. Correlate with a positive lateral pivot-shift clinically.
-
-### Anterior and Posterior Tendons — Biceps and Triceps
-
-> [!FIND] Distal biceps tendon and the radial tuberosity
-> Follow the tendon distally to its insertion on the **radial (bicipital) tuberosity**. Because it spirals, it is hard to capture on one slice — use the **axial** plane to trace it segment-by-segment, and add a **FABS view** (Flexed elbow, ABducted shoulder, forearm Supinated) when available to lay the tendon out in one long-axis image.
->
-> - Normal: continuous low-signal tendon to the tuberosity
-> - Look for fluid in the **bicipitoradial bursa** and marrow edema at the tuberosity with partial tears
-
-> [!PEARL] The lacertus fibrosus governs retraction
-> The **lacertus fibrosus** (bicipital aponeurosis) tethers the distal biceps to the forearm fascia. In a **complete distal biceps rupture**, an **intact lacertus** limits proximal retraction (tendon stays near the joint), while a **torn lacertus** allows marked proximal retraction. Report the retraction gap and lacertus status — both change the surgical plan.
-
-> [!FIND] Distal triceps tendon and the olecranon
-> On **sagittal** (and confirm on axial), find the tendon inserting on the **posterior olecranon**.
->
-> - Normal triceps insertion can have a small striated/feathery appearance — do not overcall this as a tear
-> - True tears show a fluid-filled gap and an avulsed fragment; partial tears commonly spare the deep fibers. Triceps rupture is associated with **olecranon bursitis** and systemic factors
-
-### Articular Cartilage, OCD, and the Pseudodefects
-
-> [!FIND] Capitellar and trochlear cartilage
-> Assess the **capitellum** and **trochlea** cartilage on **sagittal** (capitellum) and **coronal** (trochlea) fluid-sensitive images, scrolling through the entire convex surface.
->
-> - Normal cartilage is smooth and intermediate signal over low-signal subchondral bone
-> - Subchondral marrow edema, fissuring, or a focal defect flags chondral/osteochondral injury
-
-> [!FIND] Capitellar OCD vs Panner disease
-> **OCD of the capitellum** (adolescent throwers/gymnasts, repetitive radiocapitellar load) shows a focal subchondral lesion on the **anterolateral capitellum**, best on **sagittal** and **coronal**.
->
-> - Assess **stability**: high-signal fluid undercutting the fragment, cysts beneath it, or a displaced fragment indicate an **unstable** lesion
-> - **Panner disease** is the younger-child (typically [5–10] years) self-limited osteochondrosis of the entire capitellar ossification center — fragmentation/edema without a true detachable fragment, and it usually resolves with growth
-
-> [!PITFALL] Pseudodefect of the capitellum
-> At the **posterolateral capitellum**, the cartilage-covered articular surface ends abruptly and the bone steps down to the non-articular posterolateral margin, creating a notch that mimics an osteochondral lesion.
->
-> - It is **posterolateral** and best appreciated on **coronal/sagittal** at the junction of the capitellum and the lateral epicondyle
-> - True OCD is **anterolateral** with marrow edema; the pseudodefect has **normal adjacent marrow** and a smooth corticated margin
-
-> [!PITFALL] Trochlear groove pseudodefect (and the trochlear notch ridge)
-> A normal bare **transverse groove/ridge** divides the trochlear (semilunar) notch of the ulna into anterior (coronoid) and posterior (olecranon) facets; the non-cartilaginous central ridge can look like an erosion or osteochondral defect on **sagittal**.
->
-> - Recognize it as a **midline, symmetric, corticated** bare area — not focal, not edematous
-> - Do not call cartilage loss where cartilage is normally absent
-
-### Nerves — Where to Find Each and What It Supplies
-
-> [!FIND] Ulnar nerve in the cubital tunnel
-> On **axial**, find the **ulnar nerve** in the **retroepicondylar (condylar) groove**, just **posterior to the medial epicondyle**, deep to the cubital tunnel retinaculum (Osborne).
->
-> - Normal: round-oval, near-isointense to muscle, minimal T2 signal
-> - Cubital tunnel syndrome: nerve enlargement and **T2 hyperintensity**; denervates the **FCU**, ulnar half of **FDP**, and the ulnar-innervated intrinsic hand muscles
-
-> [!PITFALL] Ulnar nerve subluxation and "false" hyperintensity
-> Mild ulnar nerve **T2 hyperintensity can be a normal finding** at the elbow — judge it against frank enlargement and clinical symptoms before calling neuritis. Also scroll for **anterior subluxation/dislocation** of the nerve over the medial epicondyle in flexion (an anconeus epitrochlearis muscle or absent retinaculum predisposes).
-
-> [!FIND] Median nerve — pronator teres and the ligament of Struthers
-> Track the **median nerve** on **axial** as it dives **between the humeral and ulnar heads of the pronator teres**, then deep to the **FDS** arch.
->
-> - Entrapment points: the **ligament of Struthers** (from a **supracondylar process** of the distal humerus, when present) proximally, the **lacertus fibrosus**, the **pronator teres**, and the **FDS arcade**
-> - Pronator syndrome denervates median-innervated forearm flexors; isolated **AIN** involvement targets **FPL, pronator quadratus, and the radial half of FDP**
-
-> [!FIND] Radial nerve / PIN — radial tunnel and arcade of Frohse
-> On **axial**, find the **radial nerve** anterior to the lateral epicondyle; it divides into the superficial sensory branch and the deep motor branch (**PIN**). The PIN enters the **radial tunnel** and passes under the **arcade of Frohse** (the proximal tendinous edge of the **supinator**).
->
-> - The arcade of Frohse is the classic PIN compression point
-> - PIN syndrome denervates the **supinator** and the wrist/finger extensors (ECU, EDC, EDM, APL, etc.) while typically sparing the **ECRL**; look for fanned-out **T2 hyperintensity/edema across the extensor compartment** as the earliest sign
-
-> [!PEARL] Read denervation as a pattern
-> Muscle **edema** (fluid-sensitive bright) is subacute denervation; **fatty atrophy** (T1 bright) is chronic. The constellation of which muscles light up localizes the lesion better than visualizing the nerve itself — e.g., isolated FPL + pronator quadratus = AIN; whole extensor compartment = PIN.
-
-### Loose Bodies — Where They Hide
-
-> [!FIND] Search the recesses systematically
-> Intra-articular bodies collect in the dependent and capacious recesses — hunt each one deliberately.
->
-> - **Anterior**: coronoid (anterior) and radial (radiocapitellar) recesses — sagittal and axial
-> - **Posterior**: olecranon fossa recess — sagittal and axial
-> - A joint effusion improves conspicuity; loose bodies are low-signal filling defects (ossified bodies follow marrow signal, may show a fatty center)
-
-> [!PITFALL] Don't mistake normal for a loose body
-> Normal **synovial folds/plicae**, the **posterolateral plica**, and a prominent **fat pad** can mimic a body. Confirm a true loose body on **two planes** and look for it sitting freely within fluid rather than being tethered.
-
-### Pediatric Elbow — Ossification Order (CRITOE)
-
-> [!PEARL] CRITOE and why order matters
-> Ossification centers appear in a fixed sequence: **C**apitellum, **R**adial head, **I**nternal (medial) epicondyle, **T**rochlea, **O**lecranon, **E**xternal (lateral) epicondyle (rough ages ~[1, 3, 5, 7, 9, 11] years — the order is reliable, the ages approximate).
->
-> - The rule's clinical power: the **trochlea never ossifies before the internal (medial) epicondyle**
-> - So if you see a "trochlear" ossification center but **no medial epicondyle in place**, suspect an **avulsed/displaced medial epicondyle** that has migrated into the joint and is being mistaken for the trochlea
-
-> [!LANDMARK] Apply CRITOE on MRI and radiographs together
-> Use the sequence to decide whether an ossific density is a **normal center**, a **displaced apophysis**, or an **intra-articular fragment**. On MRI, unossified centers are cartilaginous (intermediate signal) and the apophyseal physes are normally open — do not mistake a normal physis for a fracture line.
-
 ## Modified Outerbridge Chondromalacia Grading - Copy-Ready
 
 Use this for any articular surface. Replace [surface/compartment] with the specific location: patellar median ridge, medial femoral condyle weightbearing surface, anterosuperior acetabulum, radiocapitellar joint, tibiotalar dome, first MTP joint, etc.
@@ -502,6 +341,169 @@ Use this for any articular surface. Replace [surface/compartment] with the speci
   - Sinus tract connecting abnormal marrow signal to skin surface.
   - Disappearance of subchondral cysts on sequential imaging.
   - Progressive marrow/soft tissue changes greater than expected on sequential imaging.
+
+
+## How to Find It — Landmark-Based Identification
+
+This section trains you to locate and verify each elbow structure by anchoring to fixed bony landmarks, choosing the right plane/sequence, and recognizing the normal variants that masquerade as disease. Work plane-by-plane, but always cross-reference at least two planes before calling a tear.
+
+### Start With the Three Planes
+
+> [!PEARL] What each plane does best
+> Build a routine and use each plane for what it shows best.
+>
+> - **Axial** — nerves (ulnar, median, radial/PIN), the radial tunnel, muscle bellies/denervation edema, and the cross-section of the distal biceps and triceps tendons
+> - **Coronal** — collateral ligaments (**UCL anterior band**, **RCL/LUCL**), common **extensor** and **flexor** origins, and the medial/lateral epicondyles
+> - **Sagittal** — articular cartilage of the **capitellum/trochlea**, **OCD** lesions, the distal biceps and triceps insertions, and anterior/posterior recess loose bodies
+
+> [!PEARL] Sequence logic
+> **Fluid-sensitive fat-saturated** sequences (T2 FS / PD FS / STIR) detect edema, tendon/ligament tears, marrow lesions, and denervation. **T1** shows anatomy, marrow fat, and fatty muscle atrophy. Tendons and ligaments are normally uniformly **low signal**; pathologic signal is intermediate-to-bright on fluid-sensitive images.
+
+### Medial Elbow — Common Flexor Origin and the UCL
+
+> [!LANDMARK] The medial epicondyle
+> The **medial epicondyle** is the anchor for everything medial: the **common flexor-pronator tendon** arises from its anterior aspect, the **UCL anterior band** arises just inferior to it, and the **ulnar nerve** runs in the retroepicondylar (cubital tunnel) groove just posterior to it.
+
+> [!FIND] Common flexor-pronator origin (medial epicondylitis / "golfer's elbow")
+> On **coronal** fluid-sensitive images, find the tendon arising from the **anterior medial epicondyle**.
+>
+> - Normal tendon is thin and uniformly **low signal**
+> - Tendinosis = thickening with intermediate signal; tear = fluid-bright signal gap or fiber discontinuity
+> - Always interrogate the **underlying UCL** on the same images — medial epicondylitis and UCL injury frequently coexist
+
+> [!FIND] UCL anterior band — the functional stabilizer
+> On **coronal**, trace the band from the **medial epicondyle** to the **sublime tubercle** of the proximal ulna (medial coronoid margin). This is the primary restraint to valgus stress and the structure that fails in overhead throwers.
+>
+> - Normal: taut, low-signal, fan-shaped band attaching right at the sublime tubercle
+> - The posterior band and transverse ligament are minor; the **anterior band** is what you must clear
+
+> [!PITFALL] The T-sign of partial UCL tear
+> A partial undersurface (deep) tear lets contrast or joint fluid track **between the distal UCL and the sublime tubercle**, outlining a "T" where the leaked fluid meets the joint line.
+>
+> - Best seen on **coronal** MR arthrogram or with a joint effusion
+> - Do not mistake the normal **transverse synovial recess** at the sublime tubercle for a T-sign — a true T-sign requires fluid extending distal to the expected ligament attachment
+
+> [!PEARL] Distinguishing medial vs lateral epicondylitis
+> Same disease, opposite corners. **Medial epicondylitis** = common **flexor-pronator** origin off the **medial** epicondyle (golfer's/thrower's elbow); check the UCL and ulnar nerve next door. **Lateral epicondylitis** = common **extensor** origin off the **lateral** epicondyle (tennis elbow); check the LUCL/RCL next door. Localize the abnormal tendon to its epicondyle on coronal and the diagnosis names itself.
+
+### Lateral Elbow — Common Extensor Origin and the Lateral Ligament Complex
+
+> [!LANDMARK] The lateral epicondyle
+> The **lateral epicondyle** anchors the **common extensor tendon** anteriorly and the **lateral collateral ligament complex** (RCL deep to the extensor origin; LUCL coursing posteriorly). The radial nerve/PIN passes just anterior to the radiocapitellar joint.
+
+> [!FIND] Common extensor origin (lateral epicondylitis / "tennis elbow")
+> On **coronal**, find the tendon off the **anterior lateral epicondyle**; the **ECRB** contributes most and is the usual culprit.
+>
+> - Tendinosis/tear shows thickening and increased signal at the origin
+> - When the extensor origin is torn, look one layer deeper — concurrent **RCL/LUCL** injury upgrades this from simple epicondylitis to potential instability
+
+> [!FIND] LUCL — the key to posterolateral stability
+> The **lateral ulnar collateral ligament (LUCL)** arises from the **lateral epicondyle**, arcs **posterior to the radial head**, and inserts on the **supinator crest (tubercle) of the ulna**. Because it sweeps obliquely and posteriorly, it is best followed on sequential **coronal** images (slightly posterior) — no single slice shows its whole course.
+>
+> - Normal: thin, continuous low-signal band hugging the posterolateral radial head
+> - A torn or lax LUCL is the lesion of **posterolateral rotatory instability (PLRI)**
+
+> [!FIND] RCL and annular ligament
+> The **radial collateral ligament (RCL)** runs from the **lateral epicondyle** to blend with the **annular ligament**; the **annular ligament** encircles the **radial head/neck**, anchoring at the anterior and posterior margins of the radial (lesser sigmoid) notch.
+>
+> - Find the annular ligament on **axial** as a thin low-signal ring around the radial head
+> - On coronal, the RCL is the more vertical component anterior to the obliquely posterior LUCL
+
+> [!PEARL] Posterolateral rotatory instability (PLRI)
+> PLRI is the most common pattern of chronic elbow instability and is driven by **LUCL insufficiency** (post-traumatic, prior lateral surgery, or chronic varus overload). On MRI, look for an attenuated, thickened, or discontinuous **LUCL** at or near its **epicondylar origin**, often with a lateral effusion. Correlate with a positive lateral pivot-shift clinically.
+
+### Anterior and Posterior Tendons — Biceps and Triceps
+
+> [!FIND] Distal biceps tendon and the radial tuberosity
+> Follow the tendon distally to its insertion on the **radial (bicipital) tuberosity**. Because it spirals, it is hard to capture on one slice — use the **axial** plane to trace it segment-by-segment, and add a **FABS view** (Flexed elbow, ABducted shoulder, forearm Supinated) when available to lay the tendon out in one long-axis image.
+>
+> - Normal: continuous low-signal tendon to the tuberosity
+> - Look for fluid in the **bicipitoradial bursa** and marrow edema at the tuberosity with partial tears
+
+> [!PEARL] The lacertus fibrosus governs retraction
+> The **lacertus fibrosus** (bicipital aponeurosis) tethers the distal biceps to the forearm fascia. In a **complete distal biceps rupture**, an **intact lacertus** limits proximal retraction (tendon stays near the joint), while a **torn lacertus** allows marked proximal retraction. Report the retraction gap and lacertus status — both change the surgical plan.
+
+> [!FIND] Distal triceps tendon and the olecranon
+> On **sagittal** (and confirm on axial), find the tendon inserting on the **posterior olecranon**.
+>
+> - Normal triceps insertion can have a small striated/feathery appearance — do not overcall this as a tear
+> - True tears show a fluid-filled gap and an avulsed fragment; partial tears commonly spare the deep fibers. Triceps rupture is associated with **olecranon bursitis** and systemic factors
+
+### Articular Cartilage, OCD, and the Pseudodefects
+
+> [!FIND] Capitellar and trochlear cartilage
+> Assess the **capitellum** and **trochlea** cartilage on **sagittal** (capitellum) and **coronal** (trochlea) fluid-sensitive images, scrolling through the entire convex surface.
+>
+> - Normal cartilage is smooth and intermediate signal over low-signal subchondral bone
+> - Subchondral marrow edema, fissuring, or a focal defect flags chondral/osteochondral injury
+
+> [!FIND] Capitellar OCD vs Panner disease
+> **OCD of the capitellum** (adolescent throwers/gymnasts, repetitive radiocapitellar load) shows a focal subchondral lesion on the **anterolateral capitellum**, best on **sagittal** and **coronal**.
+>
+> - Assess **stability**: high-signal fluid undercutting the fragment, cysts beneath it, or a displaced fragment indicate an **unstable** lesion
+> - **Panner disease** is the younger-child (typically [5–10] years) self-limited osteochondrosis of the entire capitellar ossification center — fragmentation/edema without a true detachable fragment, and it usually resolves with growth
+
+> [!PITFALL] Pseudodefect of the capitellum
+> At the **posterolateral capitellum**, the cartilage-covered articular surface ends abruptly and the bone steps down to the non-articular posterolateral margin, creating a notch that mimics an osteochondral lesion.
+>
+> - It is **posterolateral** and best appreciated on **coronal/sagittal** at the junction of the capitellum and the lateral epicondyle
+> - True OCD is **anterolateral** with marrow edema; the pseudodefect has **normal adjacent marrow** and a smooth corticated margin
+
+> [!PITFALL] Trochlear groove pseudodefect (and the trochlear notch ridge)
+> A normal bare **transverse groove/ridge** divides the trochlear (semilunar) notch of the ulna into anterior (coronoid) and posterior (olecranon) facets; the non-cartilaginous central ridge can look like an erosion or osteochondral defect on **sagittal**.
+>
+> - Recognize it as a **midline, symmetric, corticated** bare area — not focal, not edematous
+> - Do not call cartilage loss where cartilage is normally absent
+
+### Nerves — Where to Find Each and What It Supplies
+
+> [!FIND] Ulnar nerve in the cubital tunnel
+> On **axial**, find the **ulnar nerve** in the **retroepicondylar (condylar) groove**, just **posterior to the medial epicondyle**, deep to the cubital tunnel retinaculum (Osborne).
+>
+> - Normal: round-oval, near-isointense to muscle, minimal T2 signal
+> - Cubital tunnel syndrome: nerve enlargement and **T2 hyperintensity**; denervates the **FCU**, ulnar half of **FDP**, and the ulnar-innervated intrinsic hand muscles
+
+> [!PITFALL] Ulnar nerve subluxation and "false" hyperintensity
+> Mild ulnar nerve **T2 hyperintensity can be a normal finding** at the elbow — judge it against frank enlargement and clinical symptoms before calling neuritis. Also scroll for **anterior subluxation/dislocation** of the nerve over the medial epicondyle in flexion (an anconeus epitrochlearis muscle or absent retinaculum predisposes).
+
+> [!FIND] Median nerve — pronator teres and the ligament of Struthers
+> Track the **median nerve** on **axial** as it dives **between the humeral and ulnar heads of the pronator teres**, then deep to the **FDS** arch.
+>
+> - Entrapment points: the **ligament of Struthers** (from a **supracondylar process** of the distal humerus, when present) proximally, the **lacertus fibrosus**, the **pronator teres**, and the **FDS arcade**
+> - Pronator syndrome denervates median-innervated forearm flexors; isolated **AIN** involvement targets **FPL, pronator quadratus, and the radial half of FDP**
+
+> [!FIND] Radial nerve / PIN — radial tunnel and arcade of Frohse
+> On **axial**, find the **radial nerve** anterior to the lateral epicondyle; it divides into the superficial sensory branch and the deep motor branch (**PIN**). The PIN enters the **radial tunnel** and passes under the **arcade of Frohse** (the proximal tendinous edge of the **supinator**).
+>
+> - The arcade of Frohse is the classic PIN compression point
+> - PIN syndrome denervates the **supinator** and the wrist/finger extensors (ECU, EDC, EDM, APL, etc.) while typically sparing the **ECRL**; look for fanned-out **T2 hyperintensity/edema across the extensor compartment** as the earliest sign
+
+> [!PEARL] Read denervation as a pattern
+> Muscle **edema** (fluid-sensitive bright) is subacute denervation; **fatty atrophy** (T1 bright) is chronic. The constellation of which muscles light up localizes the lesion better than visualizing the nerve itself — e.g., isolated FPL + pronator quadratus = AIN; whole extensor compartment = PIN.
+
+### Loose Bodies — Where They Hide
+
+> [!FIND] Search the recesses systematically
+> Intra-articular bodies collect in the dependent and capacious recesses — hunt each one deliberately.
+>
+> - **Anterior**: coronoid (anterior) and radial (radiocapitellar) recesses — sagittal and axial
+> - **Posterior**: olecranon fossa recess — sagittal and axial
+> - A joint effusion improves conspicuity; loose bodies are low-signal filling defects (ossified bodies follow marrow signal, may show a fatty center)
+
+> [!PITFALL] Don't mistake normal for a loose body
+> Normal **synovial folds/plicae**, the **posterolateral plica**, and a prominent **fat pad** can mimic a body. Confirm a true loose body on **two planes** and look for it sitting freely within fluid rather than being tethered.
+
+### Pediatric Elbow — Ossification Order (CRITOE)
+
+> [!PEARL] CRITOE and why order matters
+> Ossification centers appear in a fixed sequence: **C**apitellum, **R**adial head, **I**nternal (medial) epicondyle, **T**rochlea, **O**lecranon, **E**xternal (lateral) epicondyle (rough ages ~[1, 3, 5, 7, 9, 11] years — the order is reliable, the ages approximate).
+>
+> - The rule's clinical power: the **trochlea never ossifies before the internal (medial) epicondyle**
+> - So if you see a "trochlear" ossification center but **no medial epicondyle in place**, suspect an **avulsed/displaced medial epicondyle** that has migrated into the joint and is being mistaken for the trochlea
+
+> [!LANDMARK] Apply CRITOE on MRI and radiographs together
+> Use the sequence to decide whether an ossific density is a **normal center**, a **displaced apophysis**, or an **intra-articular fragment**. On MRI, unossified centers are cartilaginous (intermediate signal) and the apophyseal physes are normally open — do not mistake a normal physis for a fracture line.
+
 
 ## Source Notes
 Built from the original elbow MRI cheat sheet, standard MSK MRI reporting conventions, review-level radiology references for UCL/lateral collateral injuries, capitellar OCD staging, cubital tunnel syndrome, and PIN entrapment. Expanded to match the depth of the shoulder cheat sheet with graded findings for all major structures. Use surgical correlation and local report conventions as needed.
