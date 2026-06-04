@@ -250,11 +250,35 @@ Search pattern: HAGL can occur with little/no labral tear. Check subscapularis a
 **F:** Focal delaminating chondral flap at the [anteroinferior/posterior/superior] glenoid measuring [X] mm with adjacent labral fraying/tear and trace subchondral marrow edema.
 **I:** Focal glenoid chondral flap/delamination with adjacent [labral tear].
 
-## SLAP / Posterior Labrum / Paralabral Cyst
+## SLAP Tears (Types I-VI) / Posterior Labrum / Paralabral Cyst
 
-**SLAP type II**
-**F:** Irregular laterally curved fluid-signal cleft undermines the superior labrum and extends posterior to the biceps anchor with detachment of the biceps-labral anchor from the supraglenoid tubercle.
-**I:** Type II SLAP tear with biceps-labral anchor detachment.
+Superior labrum anterior-to-posterior (SLAP) tears centered on the biceps-labral anchor. Snyder types I-IV; Maffet types V-VI extend the scheme. Best seen on the ABER and coronal-oblique fluid-sensitive/arthrographic sequences.
+
+**SLAP type I - degenerative fraying (anchor intact)**
+**F:** Fraying and intrasubstance increased signal at the free margin of the superior labrum without a fluid/contrast-signal cleft to the glenoid and without detachment of the biceps-labral anchor, which remains firmly attached to the supraglenoid tubercle. No displaced fragment.
+**I:** Type I SLAP - degenerative superior labral fraying with an intact biceps anchor (often an incidental/age-related finding).
+
+**SLAP type II - biceps-labral anchor detachment**
+**F:** Irregular, laterally curved fluid/contrast-signal cleft undermining the superior labrum and extending medial to the biceps anchor, with detachment of the biceps-labral complex from the supraglenoid tubercle. [Anterior / posterior / combined anteroposterior] extension. Signal is lateral to and irregular, exceeding a normal sublabral recess.
+**I:** Type II SLAP - detachment of the biceps-labral anchor from the superior glenoid ([anterior/posterior/combined] subtype).
+
+**SLAP type III - bucket-handle, anchor intact**
+**F:** Bucket-handle tear of the superior labrum with a displaced inner labral fragment into the joint/intercondylar notch region, while the peripheral labrum and the biceps-labral anchor remain attached to the glenoid. The biceps tendon itself is intact.
+**I:** Type III SLAP - bucket-handle superior labral tear with a displaced fragment and an intact biceps anchor.
+
+**SLAP type IV - bucket-handle extending into biceps tendon**
+**F:** Bucket-handle tear of the superior labrum with longitudinal extension into the long head of the biceps tendon, demonstrating an intrasubstance split of the biceps with a displaced labral fragment. The biceps anchor is variably involved/detached.
+**I:** Type IV SLAP - bucket-handle superior labral tear extending into the long head of the biceps tendon.
+
+**SLAP type V - type II + anteroinferior (Bankart) extension**
+**F:** Type II superior labral detachment of the biceps anchor that extends inferiorly and is contiguous with an anteroinferior labral (Bankart) tear, producing a continuous tear from the superior to the anteroinferior glenoid. [Associated Hill-Sachs / glenoid bone loss.]
+**I:** Type V SLAP - type II superior labral tear continuous with an anteroinferior (Bankart) lesion.
+
+**SLAP type VI - unstable flap + anchor separation**
+**F:** Unstable displaced labral flap arising from the superior labrum ([anterior/posterior]) with associated separation/detachment of the biceps-labral anchor from the supraglenoid tubercle. The flap is mobile/displaced.
+**I:** Type VI SLAP - unstable superior labral flap tear with separation of the biceps anchor.
+
+> [!PITFALL] Do not overcall a normal **sublabral recess/sulcus** as a type II SLAP. A recess is smoothly marginated, follows the glenoid contour, is **medial and oriented toward the head** (parallel to the glenoid), and does not extend laterally or posterior to the biceps anchor. A SLAP cleft is irregular, **laterally curved**, and extends posteriorly. Also distinguish the sublabral foramen and Buford complex (anterosuperior variants).
 
 **Posterior labral tear / reverse Bankart**
 **F:** Detachment of the posteroinferior labrum from the glenoid rim with [posterior capsular stripping/reverse bony Bankart fragment]. Mild posterior humeral head subluxation.
